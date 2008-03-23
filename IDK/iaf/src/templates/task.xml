@@ -1,0 +1,116 @@
+@@@program xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../plantilla.xsd"@@@
+@@@repeat altname="0" id="tasks"@@@
+  @@@saveto@@@
+  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeout@@@/v@@@/ingenias/jade/components/@@@v@@@tname@@@/v@@@Task.java@@@/file@@@
+  @@@text@@@
+
+/*
+    Copyright (C) 2005 Jorge Gomez Sanz
+
+    This file is part of INGENIAS Agent Framework, an agent infrastructure linked
+    to the INGENIAS Development Kit, and availabe at http://grasia.fdi.ucm.es/ingenias or
+    http://ingenias.sourceforge.net. 
+
+    INGENIAS Agent Framework is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    INGENIAS Agent Framework is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with INGENIAS Agent Framework; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*/
+
+
+package ingenias.jade.components;
+
+import java.util.*;
+import ingenias.jade.exception.*;
+import ingenias.jade.comm.*;
+import ingenias.jade.mental.*;
+import ingenias.editor.entities.*;
+
+
+
+public class @@@v@@@tname@@@/v@@@Task extends Task{
+
+ public @@@v@@@tname@@@/v@@@Task(String id){
+  super(id,"@@@v@@@tname@@@/v@@@");
+ }
+
+
+
+ public void execute() throws TaskException{
+
+@@@repeat altname="0" id="taskinputcard1"@@@
+        @@@v@@@mentalenttype@@@/v@@@  ei@@@v@@@mentalentname@@@/v@@@=(@@@v@@@mentalentname@@@/v@@@)this.getFirstInputOfType("@@@v@@@mentalentname@@@/v@@@");             
+@@@/repeat@@@
+
+@@@repeat altname="0" id="taskinputcardn"@@@
+        Collection<@@@v@@@mentalenttype@@@/v@@@>  ei@@@v@@@mentalentname@@@/v@@@=new Vector(this.getAllInputsOfType("@@@v@@@mentalentname@@@/v@@@"));             
+@@@/repeat@@@
+@@@repeat altname="0" id="taskinputcard0n"@@@
+        Collection<@@@v@@@mentalenttype@@@/v@@@>  ei@@@v@@@mentalentname@@@/v@@@=new Vector(this.getAllInputsOfType("@@@v@@@mentalentname@@@/v@@@"));             
+@@@/repeat@@@
+
+@@@repeat altname="0" id="expectedApplication"@@@			
+        @@@v@@@appName@@@/v@@@App ea@@@v@@@appName@@@/v@@@=(@@@v@@@appName@@@/v@@@App)this.getApplication("@@@v@@@appName@@@/v@@@");
+@@@/repeat@@@
+
+
+@@@repeat altname="0" id="interactioncontext"@@@
+        // This means that the task participates in the interaction @@@v@@@interid@@@/v@@@
+        RuntimeConversation  conversationContext@@@v@@@interid@@@/v@@@=this.getConversationContext();
+@@@/repeat@@@
+
+  		Vector<TaskOutput> outputs = this.getOutputs();
+  		TaskOutput defaultOutput= outputs.firstElement();
+  		
+  		@@@repeat altname="0" id="expectedoutputalternatives"@@@  	
+  		TaskOutput	outputs@@@v@@@alternativeid@@@/v@@@=findOutputAlternative("@@@v@@@alternativeid@@@/v@@@",
+  																			outputs);
+  		@@@repeat altname="0" id="expectedOutputMS"@@@
+		@@@v@@@outputtype@@@/v@@@ outputs@@@v@@@alternativeid@@@/v@@@@@@v@@@outputid@@@/v@@@=
+			(@@@v@@@outputtype@@@/v@@@)
+				outputs@@@v@@@alternativeid@@@/v@@@.getEntityByType("@@@v@@@outputid@@@/v@@@");
+		@@@/repeat@@@
+		@@@repeat altname="0" id="expectedOutputWF"@@@
+		@@@v@@@outputtype@@@/v@@@ outputs@@@v@@@alternativeid@@@/v@@@@@@v@@@outputid@@@/v@@@=
+			(@@@v@@@outputtype@@@/v@@@)
+				outputs@@@v@@@alternativeid@@@/v@@@.getEntityByType("@@@v@@@outputid@@@/v@@@");
+		@@@/repeat@@@
+		@@@/repeat@@@
+		
+        YellowPages yp=null; // only available for initiators of interactions
+@@@repeat altname="0" id="interactions"@@@
+		// This task can produce an interaction of type @@@v@@@interid@@@/v@@@ by working with its conversation object
+        
+        // To define manually who are the collaborator involved. Your selection will be verified
+        // in runtime. Pay attention to log messages to detect errors. You can use the yello pages
+        // service to locate other agents
+        yp=(YellowPages)this.getApplication("YellowPages");
+@@@repeat altname="0" id="interactionroles"@@@
+        //  Uncomment the following and write down a proper local id of the agent
+        // Find an agent playing the role "@@@v@@@irolename@@@/v@@@"
+      	//eo@@@v@@@interid@@@/v@@@.addCollaborators("Local ID of the collaborator");
+       	@@@/repeat@@@
+@@@/repeat@@@
+
+//#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
+@@@v@@@code@@@/v@@@
+//#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
+
+ }
+ 
+}
+
+ @@@/text@@@
+ @@@/saveto@@@
+ @@@/repeat@@@
+@@@/program@@@

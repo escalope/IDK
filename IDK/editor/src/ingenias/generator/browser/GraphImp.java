@@ -1,0 +1,193 @@
+/*
+    Copyright (C) 2002 Jorge Gomez Sanz
+    This file is part of INGENIAS IDE, a support tool for the INGENIAS
+    methodology, availabe at http://grasia.fdi.ucm.es/ingenias or
+    http://ingenias.sourceforge.net
+    INGENIAS IDE is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+    INGENIAS IDE is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with INGENIAS IDE; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+package ingenias.generator.browser;
+
+import ingenias.editor.Editor;
+import ingenias.editor.Model;
+import ingenias.editor.ModelJGraph;
+import ingenias.editor.entities.Entity;
+import ingenias.editor.entities.EnvironmentModelDataEntity;
+import ingenias.exception.InvalidGraph;
+import ingenias.exception.NullEntity;
+
+import java.util.*;
+
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+import javax.swing.JPanel;
+
+import org.jgraph.JGraph;
+import org.jgraph.graph.BasicMarqueeHandler;
+
+import java.awt.BorderLayout;
+
+class GraphImp
+    extends AttributedElementImp
+    implements Graph {
+
+  private ingenias.editor.ModelJGraph mjg;
+
+  GraphImp(ingenias.editor.ModelJGraph mjg) {
+    super(mjg.getProperties(), mjg);
+    this.mjg = mjg;
+  }
+
+  public String getName() {
+    return mjg.getID();
+  }
+
+  public String getType() {
+    String name = mjg.getClass().getName();
+    int endName = name.lastIndexOf("Model");
+    int startName = name.lastIndexOf(".") + 1;
+    name = name.substring(startName, endName);
+    return name;
+  }
+
+  public String[] getPath() {
+    try {
+      return ingenias.editor.GraphManager.getInstance().getModelPath(this.
+          getName());
+    }
+    catch (ingenias.exception.NotFound nf) {
+      nf.printStackTrace();
+    }
+    return null;
+
+  }
+
+  public GraphRelationship[] getRelationships() {
+    int max = mjg.getModel().getRootCount();
+    Vector v = new Vector();
+
+    boolean found = false;
+    int k = 0;
+    org.jgraph.graph.DefaultGraphCell dgc = null;
+    while (k < max) {
+      Object o = mjg.getModel().getRootAt(k);
+      if (org.jgraph.graph.DefaultGraphCell.class.isAssignableFrom(o.getClass())) {
+        dgc = (org.jgraph.graph.DefaultGraphCell) o;
+        if (ingenias.editor.entities.NAryEdgeEntity.class.isAssignableFrom(dgc.
+            getUserObject().getClass())) {
+          ingenias.editor.entities.NAryEdgeEntity ne =
+              (ingenias.editor.entities.NAryEdgeEntity) dgc.getUserObject();
+
+          v.add(new GraphRelationshipImp(ne, mjg));
+        }
+
+      }
+      k++;
+    }
+
+    GraphRelationship[] result = new GraphRelationship[v.size()];
+    for (k = 0; k < result.length; k++) {
+      result[k] = (GraphRelationship) v.elementAt(k);
+    }
+
+    return result;
+
+  }
+
+  public GraphEntity[] getEntities() throws NullEntity {
+    int max = mjg.getModel().getRootCount();
+    java.util.Vector v = new java.util.Vector();
+
+    boolean found = false;
+    int k = 0;
+    org.jgraph.graph.DefaultGraphCell dgc = null;
+    while (k < max) {
+      Object o = mjg.getModel().getRootAt(k);
+      if (o instanceof org.jgraph.graph.DefaultGraphCell) {
+        dgc = (org.jgraph.graph.DefaultGraphCell) o;
+        if (! (dgc.getUserObject()instanceof ingenias.editor.entities.
+               NAryEdgeEntity) &&
+            ! (dgc.getUserObject()instanceof ingenias.editor.entities.
+               RoleEntity)) {
+          ingenias.editor.entities.Entity ne =
+              (ingenias.editor.entities.Entity) dgc.getUserObject();
+          GraphEntity ge=null;
+		
+			ge = new GraphEntityImp(ne, mjg);
+		
+          if (!v.contains(ge)) {
+            v.add(ge);
+          }
+        }
+
+      }
+      k++;
+    }
+
+    GraphEntity[] result = new GraphEntity[v.size()];
+    Iterator it = v.iterator();
+    k = 0;
+    while (it.hasNext()) {
+      result[k] = (GraphEntity) it.next();
+      k++;
+    }
+//    System.err.println("terminado con" +result.length);
+    return result;
+  }
+
+  private void createSubFolders(File f) {
+    if (!f.exists()) {
+      createSubFolders(new File(f.getParent()));
+      try {
+        f.createNewFile();
+      }
+      catch (IOException ioe) {
+        ioe.printStackTrace();
+      }
+
+    }
+
+  }
+
+  public void generateImage(String filename) {
+    File target = new File(filename);
+    new File(target.getParent()).mkdirs();
+/*    if (!target.exists()) {
+      // Folders are missing
+      ingenias.editor.Log.getInstance().logERROR(
+          "Trying to save an image in " +
+          filename + " I found that the path was incorrect. Creating referred folders and trying again");
+      System.err.println(target.getParent());
+
+      this.createSubFolders(new File(target.getParent()));
+
+//        target.createNewFile();
+      javax.swing.JOptionPane.showMessageDialog(null, new javax.swing.JLabel(),
+                                                "na", 0);
+    }*/
+
+    JPanel temp=new JPanel(new BorderLayout());
+    temp.add(this.mjg,BorderLayout.CENTER);
+    this.mjg.setSelectionCells(new Object[0]);
+    ingenias.editor.export.Diagram2SVG.diagram2SVG(temp, target,"png");
+
+  }
+
+  public ingenias.editor.ModelJGraph getGraph() {
+    return this.mjg;
+  }
+  
+ 
+}

@@ -1,0 +1,195 @@
+
+@@@program xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../plantilla.xsd"@@@
+@@@repeat id="applications"@@@
+  @@@saveto@@@
+  @@@file overwrite="no"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeperm@@@/v@@@/ingenias/jade/components/@@@v@@@aname@@@/v@@@App.java@@@/file@@@
+  @@@text@@@
+
+/*
+    Copyright (C) 2005 Jorge Gomez Sanz
+
+    This file is part of INGENIAS Agent Framework, an agent infrastructure linked
+    to the INGENIAS Development Kit, and availabe at http://grasia.fdi.ucm.es/ingenias or
+    http://ingenias.sourceforge.net. 
+
+    INGENIAS Agent Framework is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    INGENIAS Agent Framework is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with INGENIAS Agent Framework; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*/
+
+
+package ingenias.jade.components;
+
+import java.util.*;
+import ingenias.jade.exception.*;
+
+
+
+
+public abstract class @@@v@@@aname@@@/v@@@App extends Application{
+
+ public @@@v@@@aname@@@/v@@@App(){
+  super();
+ }
+
+@@@repeat id="methods"@@@
+ public abstract @@@v@@@returntype@@@/v@@@ @@@v@@@mname@@@/v@@@(@@@repeat id="methodatts"@@@
+	@@@v@@@ptype@@@/v@@@ @@@v@@@pname@@@/v@@@
+@@@/repeat@@@);
+@@@/repeat@@@
+ 
+}
+
+ @@@/text@@@
+ @@@/saveto@@@
+
+ @@@saveto@@@
+  @@@file overwrite="no"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeperm@@@/v@@@/ingenias/jade/components/@@@v@@@aname@@@/v@@@AppImp.java@@@/file@@@
+  @@@text@@@
+
+/**
+ *
+ *
+ *  Description of the task /@@@v@@@tname@@@/v@@@
+ *
+ * 
+ *@author     Jorge J. Gomez
+ *@version    1.0
+ */
+
+package ingenias.jade.components;
+
+import java.util.*;
+import ingenias.jade.exception.*;
+
+
+
+public  class @@@v@@@aname@@@/v@@@AppImp extends @@@v@@@aname@@@/v@@@App{
+
+ public @@@v@@@aname@@@/v@@@AppImp(){
+  super();
+ }
+
+@@@repeat id="methods"@@@
+ public @@@v@@@returntype@@@/v@@@ @@@v@@@mname@@@/v@@@(@@@repeat id="methodatts"@@@
+	@@@v@@@ptype@@@/v@@@ @@@v@@@pname@@@/v@@@
+@@@/repeat@@@){
+//TODO: INSERT HERE YOUR CODE
+@@@v@@@returnstatement@@@/v@@@
+} 
+ @@@/repeat@@@
+}
+
+ @@@/text@@@
+ @@@/saveto@@@
+
+
+@@@saveto@@@
+  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeout@@@/v@@@/ingenias/jade/components/@@@v@@@aname@@@/v@@@Init.java@@@/file@@@
+  @@@text@@@
+
+/**
+ *
+ *
+ *  Description of the task /@@@v@@@tname@@@/v@@@
+ *
+ * 
+ *@author     Jorge J. Gomez
+ *@version    1.0
+ */
+
+package ingenias.jade.components;
+
+import java.util.*;
+import ingenias.jade.exception.*;
+import ingenias.jade.JADEAgent;
+
+public  class @@@v@@@aname@@@/v@@@Init {
+@@@repeat id="initialApplicationsSingleton"@@@
+ private static @@@v@@@aname@@@/v@@@AppImp instance = null;
+@@@/repeat@@@ 
+
+@@@repeat id="initialApplicationsIndividual"@@@
+ private static Vector<@@@v@@@aname@@@/v@@@AppImp> appsinitialised=new Vector<@@@v@@@aname@@@/v@@@AppImp>();
+@@@/repeat@@@ 
+
+
+ public static void initialize(@@@v@@@aname@@@/v@@@AppImp app){
+  @@@v@@@initcode@@@/v@@@
+ }
+
+ public static void shutdown(@@@v@@@aname@@@/v@@@AppImp app){
+  @@@v@@@shutdowncode@@@/v@@@
+ }
+
+public static void shutdown(){
+@@@repeat id="initialApplicationsSingleton"@@@
+   if (instance!=null){
+	shutdown(instance);
+   }
+@@@/repeat@@@
+@@@repeat id="initialApplicationsIndividual"@@@
+  for (int k=0;k<appsinitialised.size();k++){
+   shutdown(appsinitialised.elementAt(k));
+  }
+@@@/repeat@@@
+}
+
+
+@@@repeat id="initialApplicationsIndividual"@@@
+ public static Vector<@@@v@@@aname@@@/v@@@AppImp>  getAppsInitialised(){
+		return appsinitialised;
+ }
+  public static @@@v@@@aname@@@/v@@@App createInstance(){
+	@@@v@@@aname@@@/v@@@AppImp app=new @@@v@@@aname@@@/v@@@AppImp();
+    initialize(app);
+	appsinitialised.add(app);
+   return app;
+  }
+  public static @@@v@@@aname@@@/v@@@App createInstance(JADEAgent owner){
+	@@@v@@@aname@@@/v@@@AppImp app=new @@@v@@@aname@@@/v@@@AppImp();
+	app.registerOwner(owner);
+    initialize(app);
+	appsinitialised.add(app);
+   return app;
+  }
+@@@/repeat@@@
+@@@repeat id="initialApplicationsSingleton"@@@
+  public static @@@v@@@aname@@@/v@@@App getInstance(){
+   if (instance==null){
+	instance=new @@@v@@@aname@@@/v@@@AppImp();
+    initialize(instance);
+   }
+   return instance;
+  }
+    public static @@@v@@@aname@@@/v@@@App getInstance(JADEAgent owner){
+   if (instance==null){
+	instance=new @@@v@@@aname@@@/v@@@AppImp();
+	instance.registerOwner(owner);
+    initialize(instance);
+   }
+   if (instance.getOwner()==null)
+	 instance.registerOwner(owner);
+	 
+   return instance;
+  }
+@@@/repeat@@@
+}
+
+ @@@/text@@@
+ @@@/saveto@@@
+
+ @@@/repeat@@@
+
+@@@/program@@@

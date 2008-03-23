@@ -1,0 +1,115 @@
+<project name="ingenias" default="modiaf" basedir=".">
+	
+		
+	<property name="specfile" location=""/>
+	
+	<property name="mainP" location="project"/>		
+	
+	<property name="javac.optimize"           value="off"/>
+	<property name="javac.deprecation"        value="on"/>
+	<property name="javac.debug"              value="true"/>
+	
+	
+	<target name="init">
+		
+		<tstamp />
+		
+		
+	</target>
+	
+	<target name="compile">
+		<ant antfile="build.xml" target="compile"  dir="editor"/>
+		<ant antfile="build.xml" target="modules" dir="editor"/>
+		<ant antfile="build.xml" target="compile" dir="iaf"/>
+		<copy file="iaf/modiaf.jar" todir="workspace/cinema/lib"/>
+		<copy file="iaf/modiaf.jar" todir="workspace/requestExample/lib"/>
+		<copy file="iaf/modiaf.jar" todir="workspace/perceptionExample/lib"/>
+		<copy file="iaf/modiaf.jar" todir="workspace/testInteractions/lib"/>
+		<copy file="iaf/modiaf.jar" todir="workspace/testTasks/lib"/>			
+		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/cinema/lib"/>
+		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/requestExample/lib"/>
+		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/perceptionExample/lib"/>
+		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/testInteractions/lib"/>
+		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/testTasks/lib"/>		
+		<ant antfile="build.xml" target="compile" dir="workspace/cinema"/>
+		<ant antfile="build.xml" target="compile" dir="workspace/requestExample"/>
+		<ant antfile="build.xml" target="compile" dir="workspace/perceptionExample"/>
+		<ant antfile="build.xml" target="compile" dir="workspace/testInteractions"/>		
+		<ant antfile="build.xml" target="compile" dir="workspace/testTasks"/>	
+		
+	</target>
+	
+	<target name="runide">
+		
+		<ant antfile="build.xml" target="runide" dir="editor"/>
+		
+	</target>
+	
+	
+	<!-- ************************************** -->
+	<!--   MODULE INGENIAS AGENT FRAMEWORK      -->
+	<!-- ************************************** -->
+	
+	<!--   Creates an empty project    -->
+	
+	<target name="create">
+		
+		<mkdir dir="${mainP}" />
+		<mkdir dir="${mainP}/bin" />
+		<mkdir dir="${mainP}/lib" />
+		<copy file="iaf/modiaf.jar" todir="${mainP}/lib/"/>
+		<mkdir dir="${mainP}/spec" />
+		<mkdir dir="${mainP}/src" />
+		<mkdir dir="${mainP}/permsrc" />
+		<mkdir dir="${mainP}/gensrc" />
+		<mkdir dir="${mainP}/config" />
+		<mkdir dir="${mainP}/jade" />
+		
+		<java fork="true" failonerror="true" maxmemory="300m"
+		      classname="ingenias.genproject.ProjectGenerator">				
+			<arg value="${mainP}"/>
+			<classpath>
+				
+				<!--pathelement path="${classpath}" /-->
+				
+				<fileset dir=".">
+					
+					<include name="**/*.jar" />
+					
+				</fileset>
+				
+			</classpath>
+			
+		</java>
+		
+		
+		<copy file="iaf/generate.xml" todir="${mainP}/"/>		
+		<copy file="iaf/config/Properties.prop" todir="${mainP}/config"/>
+		<copy file="iaf/modiaf.jar" todir="${mainP}/lib"/>
+		<copy file="iaf/lib/Base64.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/commons-codec-1.3.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/ingeniaseditor.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/jdom.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/swixml.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/xercesImpl.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/http.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/iiop.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/ingeniaseditor.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/jade.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/junit.jar" todir="${mainP}/lib/"/>
+		<copy file="iaf/lib/jadeTools.jar" todir="${mainP}/lib/"/>	
+		<copy file="iaf/lib/jgraph.jar" todir="${mainP}/lib/"/>	
+		
+	</target>
+	
+	
+	<target name="clean">
+		
+		
+		<delete dir="${tmp}" />
+		
+		
+	</target>
+	
+</project>
+

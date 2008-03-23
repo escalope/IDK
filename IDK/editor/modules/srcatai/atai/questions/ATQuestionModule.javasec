@@ -1,0 +1,173 @@
+package atai.questions;
+
+import java.io.PrintWriter;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
+
+import atai.gui.ACLFrame;
+import atai.gui.QuestionPanel;
+
+import ingenias.editor.Log;
+import ingenias.editor.ProjectProperty;
+import ingenias.editor.extension.BasicToolImp;
+import ingenias.exception.CannotLoad;
+import ingenias.exception.DamagedFormat;
+import ingenias.exception.NotInitialised;
+import ingenias.exception.UnknowFormat;
+import ingenias.generator.browser.BrowserImp;
+
+public class ATQuestionModule extends BasicToolImp {
+	
+	private List<ATQuestionGraph> questions;
+	
+
+	/**
+	 * 
+	 */
+	public ATQuestionModule() {
+		super();
+		this.questions = new Vector<ATQuestionGraph>();
+	}
+
+
+
+	/**
+	 * @param file
+	 * @throws UnknowFormat
+	 * @throws DamagedFormat
+	 * @throws CannotLoad
+	 */
+	public ATQuestionModule(String file) throws UnknowFormat, DamagedFormat, CannotLoad {
+		super(file);
+		this.questions = new Vector<ATQuestionGraph>();
+	}
+
+
+	
+	/**
+	 * @return the questions
+	 */
+	public List<ATQuestionGraph> getQuestions() {
+		return questions;
+	}
+
+
+
+	/**
+	 * @param questions the questions to set
+	 */
+	public void setQuestions(List<ATQuestionGraph> questions) {
+		this.questions = questions;
+	}
+
+	
+	
+	/**
+	 * This module defines no properties
+	 * @return    Empty properties
+	 */
+	protected Vector<ProjectProperty> defaultProperties() {
+		Vector<ProjectProperty> result=new Vector<ProjectProperty>();		
+		return result;
+	}
+
+	
+	
+	/**
+	 * Gets the description of this module
+	 * @return    The description
+	 */
+	public String getDescription() {
+		return "This module generates a form to ask AT questionss. " +
+			"The result of the form adds new data to the specifications.";
+	}
+
+	
+	
+	/**
+	 * Gets the name of this module
+	 * @return    The name
+	 */
+	public String getName() {
+		return "AT Questions";
+	}
+
+	private void test(){
+		try {
+			Log.initInstance(new PrintWriter(System.out));
+			BrowserImp.initialise("examples/cinema-IAF.xml");
+			atai.questions.ATView.initializeBrowser(BrowserImp.getInstance());
+		} catch (UnknowFormat e) {
+			e.printStackTrace();
+		} catch (DamagedFormat e) {
+
+			e.printStackTrace();
+		} catch (CannotLoad e) {
+			e.printStackTrace();
+		} catch (NotInitialised e) {
+			e.printStackTrace();
+		}
+		ACLFrame qf=new ACLFrame();
+		Hashtable<String,ATRole> varMap=new Hashtable<String,ATRole>();
+		varMap.put("var1", ATRole.Activity);
+		varMap.put("var2", ATRole.Subject);
+		List<String> textQuestion=new Vector<String>();
+		textQuestion.add("una actividad");
+		textQuestion.add("var1");
+		textQuestion.add("es ejecutada por ");
+		textQuestion.add("var2");
+		List<Map<String,String>> potentialAnswers=new Vector<Map<String,String>>();
+		List<Map<String,String>> actualAnswers=new Vector<Map<String,String>>();
+		Hashtable<String,String> answer1=new Hashtable<String,String>();
+		answer1.put("var1", "act1");
+		answer1.put("var2", "paco");
+		Hashtable<String,String> answer2=new Hashtable<String,String>();
+		answer2.put("var1", "leches");
+		
+		potentialAnswers.add(answer1);
+		potentialAnswers.add(answer2);
+		ATQuestion atq=new ATQuestion("area 1", "aspect 1","q1","Esta es una descripción de prueba para ver qué tal funciona",varMap,textQuestion,potentialAnswers,actualAnswers);
+		ATQuestion atq2=new ATQuestion("area 2", "aspect 2","q2","Esta es una descripción distinta que sirve para verificar todo",varMap,textQuestion,potentialAnswers,actualAnswers);		qf.addQuestion(atq);
+		qf.addQuestion(atq2);
+		qf.setVisible(true);
+	}
+	
+	/**
+	 *  It creates stats of usage by traversing diagrams of your specification.
+	 *  Resulting report appears in standard output or in the IDE
+	 */
+	public void run() {
+		ACLFrame qf=new ACLFrame();
+		try {
+			for (int i = 0; i < this.getQuestions().size(); i++) {
+				ATQuestionGraph oneQuestion = this.getQuestions().get(i);
+				oneQuestion.setQuestionBrowser(this.getBrowser());
+				oneQuestion.solvePotentialAnswers();
+				qf.addQuestion(oneQuestion);
+			}
+			StringBuffer sb = new StringBuffer(); //// this.generateReport();
+			Log.getInstance().log("");
+			Log.getInstance().log("Statistics of usage of meta-model entities and relationships");
+			Log.getInstance().log("Name                                    Number of times it appears");
+			Log.getInstance().log("----                                    --------------------------");
+			Log.getInstance().log(sb.toString());
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public static void main(String args[]){
+		ATQuestionModule atq=new ATQuestionModule();
+		atq.test();
+	}
+
+
+
+
+}

@@ -1,0 +1,6683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project cid="0" version="1.1">
+<projectproperties>
+<projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="ext"  tooltip="Folder where the IDE will find its new modules" />
+<projectproperty id="jadeout" module="Ingenias Agent Framework generator"  name="JADE output folder" value="gensrc"  tooltip="The folder that will hold generated JADE agents" />
+<projectproperty id="proysrc" module="Ingenias Agent Framework generator"  name="Main source folder for the project" value="src"  tooltip="The folder containing the sources of the project" />
+<projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE output folder for applications" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
+<projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="../workspace/testInteractions"  tooltip="The folder that will contain the project for this development" />
+<projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="../workspace/testInteractions/html"  tooltip="The document folder that will contain HTML version of this specification" />
+ <openeddiagram>Agent description</openeddiagram> <openeddiagram>Interaction definition</openeddiagram> <openeddiagram>Protocol description</openeddiagram> <openeddiagram>Task code</openeddiagram> <openeddiagram>Time out generators</openeddiagram> <openeddiagram>Time out application deployment</openeddiagram> <openeddiagram>Timeout application component</openeddiagram> <openeddiagram>Timeout deployment testing</openeddiagram> <openeddiagram>Test and deployment settings</openeddiagram> <openeddiagram>Test components declaration</openeddiagram> <openeddiagram>selective and automatic partner selection deployment</openeddiagram> <openeddiagram>Launch tasks definition</openeddiagram> <openeddiagram>Protocol Tasks Description</openeddiagram></projectproperties>
+<leafpackages>
+   <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="deployment"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="deployment"/>
+    <package id="partner selection testing"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Protocol definition"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="launch tasks"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="deployment"/>
+    <package id="timout testing"/>
+   </path>
+   <path>
+    <package id="Project"/>
+   </path>
+</leafpackages>
+<objects>
+<object id="TestingInteraction" type="ingenias.editor.entities.TestingPackage">
+<objectproperty id="TestingDeployment">
+<object id="DemoDeployment" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Tests" collection="true">
+<object id="MultipleInteractionTest" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TestingSelectiveInteraction" type="ingenias.editor.entities.TestingPackage">
+<objectproperty id="TestingDeployment">
+<object id="DemoDeploymentSelective" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Tests" collection="true">
+<object id="SelectiveMultipleInteraction" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TestingTimeoutOneParticipant2" type="ingenias.editor.entities.TestingPackage">
+<objectproperty id="TestingDeployment">
+<object id="DeploymentForOneParticipant2Timeout" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Tests" collection="true">
+<object id="TimedOutCommunicationOneParticipant2" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TestingTimoutSendingInitiator" type="ingenias.editor.entities.TestingPackage">
+<objectproperty id="TestingDeployment">
+<object id="DeploymentForInitiatorSendingTimeout" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Tests" collection="true">
+<object id="TimedOutcommunicationInitiatorSending" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TestingTimoutTwoParticipant2" type="ingenias.editor.entities.TestingPackage">
+<objectproperty id="TestingDeployment">
+<object id="DeploymentForTwoParticipant2Timeout" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Tests" collection="true">
+<object id="TimedOutCommunicationBothParticipant2" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="InitialMSAgentA" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="InitialMSAgentASelective" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="InitialMSATimeout" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="0" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">testField</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="InitialFact" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="MultipleAnswer" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="0" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">testField</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="SingleQuestion" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="SingleAnswer" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="InitialQuestion" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="FailAllParticipant2" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="FailOneParticipan2" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="SenderFailure" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Conversation128" type="ingenias.editor.entities.Conversation">
+<objectproperty id="Interaction">
+<object id="IntExample" type="ingenias.editor.entities.Interaction">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Nature">coordination</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="CurrentContent" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="State"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="DemoGoal" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="DemoDeployment" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DemoDeploymentSelective" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DeploymentForOneParticipant2Timeout" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DeploymentForInitiatorSendingTimeout" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DeploymentForTwoParticipant2Timeout" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="264" type="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS">
+<objectproperty id="AgentTypeDeployed">
+<object id="ATimeOut" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState" collection="true">
+<object id="faillureoneparticipant" type="ingenias.editor.entities.MentalInstanceSpecification">
+<objectproperty id="InstanceType">
+<object id="FailOneParticipan2" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="SlotsValues" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DeploymentUnitByTypeEnumInitMS273" type="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS">
+<objectproperty id="AgentTypeDeployed">
+<object id="ATimeOut" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState" collection="true">
+<object id="faillure of all participant2" type="ingenias.editor.entities.MentalInstanceSpecification">
+<objectproperty id="InstanceType">
+<object id="FailAllParticipant2" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="SlotsValues" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DeploymentUnitByTypeEnumInitMS280" type="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS">
+<objectproperty id="AgentTypeDeployed">
+<object id="ATimeOut" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState" collection="true">
+<object id="sender failing fact" type="ingenias.editor.entities.MentalInstanceSpecification">
+<objectproperty id="InstanceType">
+<object id="SenderFailure" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="SlotsValues" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DeploymentUnitByType138" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="A" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DeploymentUnitByType140" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="B" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DeploymentUnitByType141" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="C" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">5</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DeploymentUnitByType170" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="ASelective" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="DeploymentUnitByType181" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="B" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">2</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TimeOut generator" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="GeneratingAnswerWithinMultipleDeliver" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="GeneratingForSingleReceiver" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="GeneratingAnswerWithinSimpleDeliver" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Launch conversation" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Launch conversation selecting partners" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Launch Conversation and Enable Participant2 timeouts" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Launch Conversation and Enable all participant2 timeouts" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Launch Conversation and Enable all initiator timeout" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="ATimeOut" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="A" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="B" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="C" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="ASelective" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Initiator" type="ingenias.editor.entities.Role">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Participant1" type="ingenias.editor.entities.Role">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Participant2" type="ingenias.editor.entities.Role">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="faillureoneparticipant" type="ingenias.editor.entities.MentalInstanceSpecification">
+<objectproperty id="InstanceType">
+<object id="FailOneParticipan2" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="SlotsValues" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="faillure of all participant2" type="ingenias.editor.entities.MentalInstanceSpecification">
+<objectproperty id="InstanceType">
+<object id="FailAllParticipant2" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="SlotsValues" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="sender failing fact" type="ingenias.editor.entities.MentalInstanceSpecification">
+<objectproperty id="InstanceType">
+<object id="SenderFailure" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="SlotsValues" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="IntExample" type="ingenias.editor.entities.Interaction">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Nature">coordination</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Multiple deliver" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="InitialQuestion" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Multiple retrieval" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="MultipleAnswer" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="0" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">testField</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Simple deliver" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="SingleQuestion" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Simple answer" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="SingleAnswer" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="MultipleInteractionTest" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="SelectiveMultipleInteraction" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TimedOutCommunicationOneParticipant2" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TimedOutcommunicationInitiatorSending" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TimedOutCommunicationBothParticipant2" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="GRASIA protocol" type="ingenias.editor.entities.GRASIASpecification">
+<objectproperty id="ModelThatContainsSpecification">
+<object id="0" type="ingenias.editor.entities.InteractionModelModelEntity">
+<mapproperties>
+<key id="ModelType">InteractionModel</key>
+<key id="ModelID">Protocol description</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent172" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Code">        outputsdefaultIntExample.addCollaborators(&quot;C_2&quot;);
+        outputsdefaultIntExample.addCollaborators(&quot;C_3&quot;);
+        outputsdefaultIntExample.addCollaborators(&quot;B_1&quot;);</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent191" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Code">        outputsdefaultIntExample.addCollaborators(&quot;C_2&quot;);
+        outputsdefaultIntExample.addCollaborators(&quot;C_3&quot;);
+        outputsdefaultIntExample.addCollaborators(&quot;B_1&quot;);	
+		eaTimeOut_generator.requestTaskFailure(&quot;GeneratingAnswerWithinMultipleDeliver&quot;,&quot;C_2&quot;);</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent218" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Language">Java</key>
+<key id="Code">
+        if (eaTimeOut_generator.mustFail(&quot;GeneratingAnswerWithinSimpleDeliver&quot;,getAgentID())){
+        		outputsdefault.removeEntity(outputsdefaultSingleAnswer);
+        }</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent220" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Language">Java</key>
+<key id="Code">
+        if (eaTimeOut_generator.mustFail(&quot;GeneratingAnswerWithinMultipleDeliver&quot;,getAgentID())){
+        	outputsdefault.removeEntity(outputsdefaultMultipleAnswer);
+        }</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent284" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Code">        outputsdefaultIntExample.addCollaborators(&quot;C_2&quot;);
+        outputsdefaultIntExample.addCollaborators(&quot;C_3&quot;);
+        outputsdefaultIntExample.addCollaborators(&quot;B_1&quot;);	
+		eaTimeOut_generator.requestTaskFailure(&quot;GeneratingAnswerWithinMultipleDeliver&quot;,&quot;C_2&quot;);
+		eaTimeOut_generator.requestTaskFailure(&quot;GeneratingAnswerWithinMultipleDeliver&quot;,&quot;C_3&quot;);</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent286" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Code">
+	
+        outputsdefaultIntExample.addCollaborators(&quot;C_2&quot;);
+        outputsdefaultIntExample.addCollaborators(&quot;C_3&quot;);
+        outputsdefaultIntExample.addCollaborators(&quot;B_1&quot;);	
+		eaTimeOut_generator.requestTaskFailure(&quot;GeneratingForSingleReceiver&quot;,&quot;ATimeOut_0&quot;);</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent290" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Code">
+        if (eaTimeOut_generator.mustFail(&quot;GeneratingForSingleReceiver&quot;,getAgentID())){
+        	outputsdefault.removeEntity(outputsdefaultSingleQuestion);
+        }</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="206" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="TimeOut generator" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">permoutput/ingenias/jade/components/TimeOut generatorApp.java</key>
+<key id="Pattern">Singleton</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="148" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="MultipleInteractionTest" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/test/MultipleInteractionTest.java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="178" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="MultipleInteractionTest" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/test/MultipleInter</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="179" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="SelectiveMultipleInteraction" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/tests/SelectiveMultipleInteraction.java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="185" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="TimedOutCommunicationOneParticipant2" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/test/TimedOutCommunicationOneParticipant2.java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="255" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="TimedOutCommunicationBothParticipant2" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/test/TimedOutCommunicationBothParticipant2.java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="260" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="TimedOutcommunicationInitiatorSending" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/test/TimedOutcommunicationInitiatorSending.java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent146" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="148" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="MultipleInteractionTest" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/test/MultipleInteractionTest.java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Language">Java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent176" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="179" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="SelectiveMultipleInteraction" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/tests/SelectiveMultipleInteraction.java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent184" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="185" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="TimedOutCommunicationOneParticipant2" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/test/TimedOutCommunicationOneParticipant2.java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent204" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="206" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="TimeOut generator" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">permoutput/ingenias/jade/components/TimeOut generatorApp.java</key>
+<key id="Pattern">Singleton</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent253" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="255" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="TimedOutCommunicationBothParticipant2" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/test/TimedOutCommunicationBothParticipant2.java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent254" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="260" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+<object id="TimedOutcommunicationInitiatorSending" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputjade/ingenias/test/TimedOutcommunicationInitiatorSending.java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objects>
+<relationships>
+<relationship id="295" type="ingenias.editor.entities.AHasMS">
+<object id="295" type="ingenias.editor.entities.AHasMS">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="ATimeOut" class="ingenias.editor.entities.Agent" roleName="AHasMSsource" type="ingenias.editor.entities.AHasMSsourceRole" dgcid="29815128">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InitialMSATimeout" class="ingenias.editor.entities.MentalState" roleName="AHasMStarget" type="ingenias.editor.entities.AHasMStargetRole" dgcid="8185586">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="85" type="ingenias.editor.entities.WFPlays">
+<object id="85" type="ingenias.editor.entities.WFPlays">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="C" class="ingenias.editor.entities.Agent" roleName="WFPlayssource" type="ingenias.editor.entities.WFPlayssourceRole" dgcid="30799968">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Participant2" class="ingenias.editor.entities.Role" roleName="WFPlaystarget" type="ingenias.editor.entities.WFPlaystargetRole" dgcid="26983592">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="166" type="ingenias.editor.entities.AHasMS">
+<object id="166" type="ingenias.editor.entities.AHasMS">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InitialMSAgentASelective" class="ingenias.editor.entities.MentalState" roleName="AHasMStarget" type="ingenias.editor.entities.AHasMStargetRole" dgcid="12987328">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ASelective" class="ingenias.editor.entities.Agent" roleName="AHasMSsource" type="ingenias.editor.entities.AHasMSsourceRole" dgcid="15543551">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="110" type="ingenias.editor.entities.AHasMS">
+<object id="110" type="ingenias.editor.entities.AHasMS">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InitialMSAgentA" class="ingenias.editor.entities.MentalState" roleName="AHasMStarget" type="ingenias.editor.entities.AHasMStargetRole" dgcid="22205438">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="A" class="ingenias.editor.entities.Agent" roleName="AHasMSsource" type="ingenias.editor.entities.AHasMSsourceRole" dgcid="26533207">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="209" type="ingenias.editor.entities.WFPlays">
+<object id="209" type="ingenias.editor.entities.WFPlays">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="ATimeOut" class="ingenias.editor.entities.Agent" roleName="WFPlayssource" type="ingenias.editor.entities.WFPlayssourceRole" dgcid="29815128">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="WFPlaystarget" type="ingenias.editor.entities.WFPlaystargetRole" dgcid="17175432">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="212" type="ingenias.editor.entities.GTPursues">
+<object id="212" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="4773710">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ATimeOut" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="29815128">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="84" type="ingenias.editor.entities.WFPlays">
+<object id="84" type="ingenias.editor.entities.WFPlays">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="B" class="ingenias.editor.entities.Agent" roleName="WFPlayssource" type="ingenias.editor.entities.WFPlayssourceRole" dgcid="2034214">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Participant1" class="ingenias.editor.entities.Role" roleName="WFPlaystarget" type="ingenias.editor.entities.WFPlaystargetRole" dgcid="16182360">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="164" type="ingenias.editor.entities.AContainsME">
+<object id="164" type="ingenias.editor.entities.AContainsME">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InitialMSAgentASelective" class="ingenias.editor.entities.MentalState" roleName="AContainsMEsource" type="ingenias.editor.entities.AContainsMEsourceRole" dgcid="12987328">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InitialFact" class="ingenias.editor.entities.FrameFact" roleName="AContainsMEtarget" type="ingenias.editor.entities.AContainsMEtargetRole" dgcid="4682751">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="83" type="ingenias.editor.entities.WFPlays">
+<object id="83" type="ingenias.editor.entities.WFPlays">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="WFPlaystarget" type="ingenias.editor.entities.WFPlaystargetRole" dgcid="11420072">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="A" class="ingenias.editor.entities.Agent" roleName="WFPlayssource" type="ingenias.editor.entities.WFPlayssourceRole" dgcid="26533207">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="124" type="ingenias.editor.entities.GTPursues">
+<object id="124" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="C" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="30799968">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="4139483">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="122" type="ingenias.editor.entities.GTPursues">
+<object id="122" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="A" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="26533207">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="4139483">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="162" type="ingenias.editor.entities.GTPursues">
+<object id="162" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="ASelective" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="15543551">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="17034072">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="155" type="ingenias.editor.entities.AContainsME">
+<object id="155" type="ingenias.editor.entities.AContainsME">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InitialMSAgentA" class="ingenias.editor.entities.MentalState" roleName="AContainsMEsource" type="ingenias.editor.entities.AContainsMEsourceRole" dgcid="22205438">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InitialFact" class="ingenias.editor.entities.FrameFact" roleName="AContainsMEtarget" type="ingenias.editor.entities.AContainsMEtargetRole" dgcid="5883912">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="165" type="ingenias.editor.entities.WFPlays">
+<object id="165" type="ingenias.editor.entities.WFPlays">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="WFPlaystarget" type="ingenias.editor.entities.WFPlaystargetRole" dgcid="15774039">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ASelective" class="ingenias.editor.entities.Agent" roleName="WFPlayssource" type="ingenias.editor.entities.WFPlayssourceRole" dgcid="15543551">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="123" type="ingenias.editor.entities.GTPursues">
+<object id="123" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="B" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="2034214">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="4139483">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="133" type="ingenias.editor.entities.GTSatisfies">
+<object id="133" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">NOICON</key>
+</mapproperties>
+</object>
+<role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="19462531">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch conversation" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="29735472">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="246" type="ingenias.editor.entities.WFUses">
+<object id="246" type="ingenias.editor.entities.WFUses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable all initiator timeout" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="20310282">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="29893636">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="239" type="ingenias.editor.entities.WFResponsable">
+<object id="239" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="ATimeOut" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="11296479">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch Conversation and Enable all participant2 timeouts" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="63113">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="217" type="ingenias.editor.entities.WFUses">
+<object id="217" type="ingenias.editor.entities.WFUses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="9451513">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch Conversation and Enable Participant2 timeouts" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="9168104">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="293" type="ingenias.editor.entities.WFProduces">
+<object id="293" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable all initiator timeout" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="20310282">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InitialQuestion" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="6850255">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="299" type="ingenias.editor.entities.GTCreates">
+<object id="299" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Conversation128" class="ingenias.editor.entities.Conversation" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="10796785">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch Conversation and Enable all participant2 timeouts" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="63113">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="174" type="ingenias.editor.entities.GTSatisfies">
+<object id="174" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch conversation selecting partners" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="14951251">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="14393893">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="127" type="ingenias.editor.entities.WFConsumes">
+<object id="127" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch conversation" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="29735472">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InitialFact" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="25878449">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="292" type="ingenias.editor.entities.WFProduces">
+<object id="292" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InitialQuestion" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="227663">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch Conversation and Enable all participant2 timeouts" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="63113">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="288" type="ingenias.editor.entities.WFConsumes">
+<object id="288" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable Participant2 timeouts" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="9168104">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="FailOneParticipan2" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="2129687">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="158" type="ingenias.editor.entities.WFResponsable">
+<object id="158" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch conversation selecting partners" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="14951251">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ASelective" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="16236504">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="237" type="ingenias.editor.entities.WFUses">
+<object id="237" type="ingenias.editor.entities.WFUses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="28935896">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch Conversation and Enable all participant2 timeouts" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="63113">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="126" type="ingenias.editor.entities.WFResponsable">
+<object id="126" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="A" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1803091">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch conversation" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="29735472">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="297" type="ingenias.editor.entities.GTCreates">
+<object id="297" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch conversation selecting partners" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="14951251">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Conversation128" class="ingenias.editor.entities.Conversation" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="504344">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="289" type="ingenias.editor.entities.WFResponsable">
+<object id="289" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable Participant2 timeouts" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="9168104">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ATimeOut" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="10154899">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="159" type="ingenias.editor.entities.WFConsumes">
+<object id="159" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch conversation selecting partners" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="14951251">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InitialFact" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="9298958">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="154" type="ingenias.editor.entities.WFProduces">
+<object id="154" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InitialQuestion" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="17239479">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch conversation" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="29735472">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="214" type="ingenias.editor.entities.WFProduces">
+<object id="214" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable Participant2 timeouts" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="9168104">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InitialQuestion" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="11135884">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="300" type="ingenias.editor.entities.GTCreates">
+<object id="300" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable all initiator timeout" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="20310282">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Conversation128" class="ingenias.editor.entities.Conversation" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="21288857">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="296" type="ingenias.editor.entities.GTCreates">
+<object id="296" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Conversation128" class="ingenias.editor.entities.Conversation" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="31903301">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch conversation" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="29735472">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="245" type="ingenias.editor.entities.WFResponsable">
+<object id="245" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable all initiator timeout" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="20310282">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ATimeOut" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="9359449">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="160" type="ingenias.editor.entities.WFProduces">
+<object id="160" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch conversation selecting partners" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="14951251">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InitialQuestion" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="13287519">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="213" type="ingenias.editor.entities.GTSatisfies">
+<object id="213" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="8577279">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch Conversation and Enable Participant2 timeouts" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="9168104">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="298" type="ingenias.editor.entities.GTCreates">
+<object id="298" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable Participant2 timeouts" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="9168104">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Conversation128" class="ingenias.editor.entities.Conversation" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="6391757">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="250" type="ingenias.editor.entities.WFConsumes">
+<object id="250" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable all initiator timeout" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="20310282">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="SenderFailure" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="33075547">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="236" type="ingenias.editor.entities.GTSatisfies">
+<object id="236" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="23751271">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch Conversation and Enable all participant2 timeouts" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="63113">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="247" type="ingenias.editor.entities.GTSatisfies">
+<object id="247" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable all initiator timeout" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="20310282">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="8582050">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="241" type="ingenias.editor.entities.WFConsumes">
+<object id="241" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="FailAllParticipant2" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="23383754">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch Conversation and Enable all participant2 timeouts" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="63113">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="196" type="ingenias.editor.entities.ApplicationBelongsTo">
+<object id="196" type="ingenias.editor.entities.ApplicationBelongsTo">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="30600921">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="B" class="ingenias.editor.entities.Agent" roleName="ApplicationBelongsTosource" type="ingenias.editor.entities.ApplicationBelongsTosourceRole" dgcid="17719750">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="197" type="ingenias.editor.entities.ApplicationBelongsTo">
+<object id="197" type="ingenias.editor.entities.ApplicationBelongsTo">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="C" class="ingenias.editor.entities.Agent" roleName="ApplicationBelongsTosource" type="ingenias.editor.entities.ApplicationBelongsTosourceRole" dgcid="3107709">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="30600921">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="195" type="ingenias.editor.entities.ApplicationBelongsTo">
+<object id="195" type="ingenias.editor.entities.ApplicationBelongsTo">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="A" class="ingenias.editor.entities.Agent" roleName="ApplicationBelongsTosource" type="ingenias.editor.entities.ApplicationBelongsTosourceRole" dgcid="7437558">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="30600921">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="198" type="ingenias.editor.entities.ApplicationBelongsTo">
+<object id="198" type="ingenias.editor.entities.ApplicationBelongsTo">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="ASelective" class="ingenias.editor.entities.Agent" roleName="ApplicationBelongsTosource" type="ingenias.editor.entities.ApplicationBelongsTosourceRole" dgcid="14068086">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="30600921">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="232" type="ingenias.editor.entities.ApplicationBelongsTo">
+<object id="232" type="ingenias.editor.entities.ApplicationBelongsTo">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="30600921">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ATimeOut" class="ingenias.editor.entities.Agent" roleName="ApplicationBelongsTosource" type="ingenias.editor.entities.ApplicationBelongsTosourceRole" dgcid="7999894">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="118" type="ingenias.editor.entities.WFConsumes">
+<object id="118" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="SingleQuestion" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="32787581">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingAnswerWithinSimpleDeliver" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="31237059">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="103" type="ingenias.editor.entities.WFResponsable">
+<object id="103" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">NOICON</key>
+</mapproperties>
+</object>
+<role idEntity="GeneratingForSingleReceiver" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="5607553">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="28741012">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="105" type="ingenias.editor.entities.WFResponsable">
+<object id="105" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">NOICON</key>
+</mapproperties>
+</object>
+<role idEntity="GeneratingAnswerWithinSimpleDeliver" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="31237059">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Participant1" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="16928928">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="135" type="ingenias.editor.entities.GTSatisfies">
+<object id="135" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">NOICON</key>
+</mapproperties>
+</object>
+<role idEntity="GeneratingAnswerWithinSimpleDeliver" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="31237059">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="33082794">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="117" type="ingenias.editor.entities.WFProduces">
+<object id="117" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="SingleQuestion" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="25311222">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingForSingleReceiver" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="5607553">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="200" type="ingenias.editor.entities.WFUses">
+<object id="200" type="ingenias.editor.entities.WFUses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="32919790">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingAnswerWithinMultipleDeliver" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="24892637">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="115" type="ingenias.editor.entities.WFConsumes">
+<object id="115" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="MultipleAnswer" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="23585264">
+<mapproperties>
+<key id="Cardinality">1..*</key>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingForSingleReceiver" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="5607553">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="134" type="ingenias.editor.entities.GTSatisfies">
+<object id="134" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">NOICON</key>
+</mapproperties>
+</object>
+<role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="28246735">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingAnswerWithinMultipleDeliver" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="24892637">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="132" type="ingenias.editor.entities.WFConsumes">
+<object id="132" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InitialQuestion" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="29392161">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingAnswerWithinMultipleDeliver" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="24892637">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="199" type="ingenias.editor.entities.WFUses">
+<object id="199" type="ingenias.editor.entities.WFUses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="32919790">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingAnswerWithinSimpleDeliver" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="31237059">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="120" type="ingenias.editor.entities.WFProduces">
+<object id="120" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GeneratingAnswerWithinSimpleDeliver" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="31237059">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="SingleAnswer" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="32335991">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="201" type="ingenias.editor.entities.WFUses">
+<object id="201" type="ingenias.editor.entities.WFUses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GeneratingForSingleReceiver" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="5607553">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="7164755">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="114" type="ingenias.editor.entities.WFProduces">
+<object id="114" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="MultipleAnswer" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="12829534">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingAnswerWithinMultipleDeliver" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="24892637">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="106" type="ingenias.editor.entities.WFResponsable">
+<object id="106" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">NOICON</key>
+</mapproperties>
+</object>
+<role idEntity="Participant2" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="6055733">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingAnswerWithinMultipleDeliver" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="24892637">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="136" type="ingenias.editor.entities.GTSatisfies">
+<object id="136" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">NOICON</key>
+</mapproperties>
+</object>
+<role idEntity="DemoGoal" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="12177314">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingForSingleReceiver" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="5607553">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="151" type="ingenias.editor.entities.UIPrecedes">
+<object id="151" type="ingenias.editor.entities.UIPrecedes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Simple answer" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedestarget" type="ingenias.editor.entities.UIPrecedestargetRole" dgcid="17295051">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Simple deliver" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedessource" type="ingenias.editor.entities.UIPrecedessourceRole" dgcid="18728104">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="98" type="ingenias.editor.entities.UIColaborates">
+<object id="98" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="22148114">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Simple answer" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="7767800">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="97" type="ingenias.editor.entities.UIInitiates">
+<object id="97" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Participant1" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="3376455">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Simple answer" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="7767800">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingAnswerWithinSimpleDeliver" class="ingenias.editor.entities.Task" roleName="UIExecutestarget" type="ingenias.editor.entities.UIExecutestargetRole" dgcid="6573314">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="152" type="ingenias.editor.entities.UIInitiates">
+<object id="152" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="22148114">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Multiple deliver" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="21077688">
+<mapproperties>
+<key id="Timeout"></key>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="150" type="ingenias.editor.entities.UIPrecedes">
+<object id="150" type="ingenias.editor.entities.UIPrecedes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Multiple retrieval" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedessource" type="ingenias.editor.entities.UIPrecedessourceRole" dgcid="5147443">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Simple deliver" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedestarget" type="ingenias.editor.entities.UIPrecedestargetRole" dgcid="18728104">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="90" type="ingenias.editor.entities.UIInitiates">
+<object id="90" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GeneratingAnswerWithinMultipleDeliver" class="ingenias.editor.entities.Task" roleName="UIExecutestarget" type="ingenias.editor.entities.UIExecutestargetRole" dgcid="24736886">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Multiple retrieval" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="30442761">
+<mapproperties>
+<key id="Timeout">1000</key>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Participant2" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="24786567">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="91" type="ingenias.editor.entities.UIColaborates">
+<object id="91" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="22148114">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Multiple retrieval" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="30442761">
+<mapproperties>
+<key id="Timeout">1000</key>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="149" type="ingenias.editor.entities.UIPrecedes">
+<object id="149" type="ingenias.editor.entities.UIPrecedes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Multiple retrieval" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedestarget" type="ingenias.editor.entities.UIPrecedestargetRole" dgcid="5147443">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Multiple deliver" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedessource" type="ingenias.editor.entities.UIPrecedessourceRole" dgcid="3685460">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="95" type="ingenias.editor.entities.UIColaborates">
+<object id="95" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Participant1" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="3376455">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Simple deliver" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="30957520">
+<mapproperties>
+<key id="Timeout">2000</key>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="93" type="ingenias.editor.entities.UIInitiates">
+<object id="93" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GeneratingForSingleReceiver" class="ingenias.editor.entities.Task" roleName="UIExecutestarget" type="ingenias.editor.entities.UIExecutestargetRole" dgcid="10907151">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="22148114">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Simple deliver" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="30957520">
+<mapproperties>
+<key id="Timeout">2000</key>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="88" type="ingenias.editor.entities.UIColaborates">
+<object id="88" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Multiple deliver" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="21077688">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Participant2" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="24786567">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="79" type="ingenias.editor.entities.IColaborates">
+<object id="79" type="ingenias.editor.entities.IColaborates">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Participant2" class="ingenias.editor.entities.Role" roleName="IColaboratestarget" type="ingenias.editor.entities.IColaboratestargetRole" dgcid="30190365">
+<mapproperties>
+<key id="Cardinality">1..*</key>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="IntExample" class="ingenias.editor.entities.Interaction" roleName="IColaboratessource" type="ingenias.editor.entities.IColaboratessourceRole" dgcid="18854877">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="77" type="ingenias.editor.entities.IInitiates">
+<object id="77" type="ingenias.editor.entities.IInitiates">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="IInitiatestarget" type="ingenias.editor.entities.IInitiatestargetRole" dgcid="9050572">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="IntExample" class="ingenias.editor.entities.Interaction" roleName="IInitiatessource" type="ingenias.editor.entities.IInitiatessourceRole" dgcid="18854877">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="78" type="ingenias.editor.entities.IColaborates">
+<object id="78" type="ingenias.editor.entities.IColaborates">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Participant1" class="ingenias.editor.entities.Role" roleName="IColaboratestarget" type="ingenias.editor.entities.IColaboratestargetRole" dgcid="13557727">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="IntExample" class="ingenias.editor.entities.Interaction" roleName="IColaboratessource" type="ingenias.editor.entities.IColaboratessourceRole" dgcid="18854877">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="81" type="ingenias.editor.entities.IHasSpec">
+<object id="81" type="ingenias.editor.entities.IHasSpec">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GRASIA protocol" class="ingenias.editor.entities.GRASIASpecification" roleName="IHasSpectarget" type="ingenias.editor.entities.IHasSpectargetRole" dgcid="189780">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="IntExample" class="ingenias.editor.entities.Interaction" roleName="IHasSpecsource" type="ingenias.editor.entities.IHasSpecsourceRole" dgcid="18854877">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="285" type="ingenias.editor.entities.CDUsesCode">
+<object id="285" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASCodeComponent284" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="8496976">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Launch Conversation and Enable all participant2 timeouts" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="26065559">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="173" type="ingenias.editor.entities.CDUsesCode">
+<object id="173" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch conversation selecting partners" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="327037">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASCodeComponent172" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="24187252">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="219" type="ingenias.editor.entities.CDUsesCode">
+<object id="219" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASCodeComponent218" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="1530205">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingAnswerWithinSimpleDeliver" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="16886422">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="192" type="ingenias.editor.entities.CDUsesCode">
+<object id="192" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable Participant2 timeouts" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="21966323">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASCodeComponent191" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="25812520">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="287" type="ingenias.editor.entities.CDUsesCode">
+<object id="287" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Launch Conversation and Enable all initiator timeout" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="19478221">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASCodeComponent286" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="12419189">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="291" type="ingenias.editor.entities.CDUsesCode">
+<object id="291" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASCodeComponent290" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="6047007">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingForSingleReceiver" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="9138591">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="221" type="ingenias.editor.entities.CDUsesCode">
+<object id="221" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASCodeComponent220" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="1396318">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GeneratingAnswerWithinMultipleDeliver" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="11159479">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="256" type="ingenias.editor.entities.UMLRealizes">
+<object id="256" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="TimedOutCommunicationBothParticipant2" class="ingenias.editor.entities.Test" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="24838562">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASComponent253" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="16527890">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="177" type="ingenias.editor.entities.UMLRealizes">
+<object id="177" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASComponent176" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="32017362">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="SelectiveMultipleInteraction" class="ingenias.editor.entities.Test" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="7879130">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="259" type="ingenias.editor.entities.UMLRealizes">
+<object id="259" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASComponent254" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="23555744">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="TimedOutcommunicationInitiatorSending" class="ingenias.editor.entities.Test" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="12839150">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="147" type="ingenias.editor.entities.UMLRealizes">
+<object id="147" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="MultipleInteractionTest" class="ingenias.editor.entities.Test" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="15060727">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASComponent146" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="15882140">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="186" type="ingenias.editor.entities.UMLRealizes">
+<object id="186" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="TimedOutCommunicationOneParticipant2" class="ingenias.editor.entities.Test" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="32536087">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASComponent184" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="5710566">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="205" type="ingenias.editor.entities.UMLRealizes">
+<object id="205" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASComponent204" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="9876711">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="TimeOut generator" class="ingenias.editor.entities.EnvironmentApplication" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="28584776">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="139" type="ingenias.editor.entities.DefinesDeployment">
+<object id="139" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DemoDeployment" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="32009957">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentUnitByType138" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="33105445">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="168" type="ingenias.editor.entities.DefinesDeployment">
+<object id="168" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentUnitByType141" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="21016611">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DemoDeploymentSelective" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="15256214">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="142" type="ingenias.editor.entities.DefinesDeployment">
+<object id="142" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DemoDeployment" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="32009957">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentUnitByType141" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="21016611">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="143" type="ingenias.editor.entities.DefinesDeployment">
+<object id="143" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DemoDeployment" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="32009957">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentUnitByType140" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="23200568">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="171" type="ingenias.editor.entities.DefinesDeployment">
+<object id="171" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentUnitByType170" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="12408358">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DemoDeploymentSelective" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="15256214">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="182" type="ingenias.editor.entities.DefinesDeployment">
+<object id="182" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentUnitByType181" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="29434087">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DemoDeploymentSelective" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="15256214">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="274" type="ingenias.editor.entities.DefinesDeployment">
+<object id="274" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentForTwoParticipant2Timeout" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="31074324">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentUnitByTypeEnumInitMS273" class="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="30074919">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="266" type="ingenias.editor.entities.DefinesDeployment">
+<object id="266" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentForOneParticipant2Timeout" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="115983">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="264" class="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="15968995">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="279" type="ingenias.editor.entities.DefinesDeployment">
+<object id="279" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentForInitiatorSendingTimeout" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="7039732">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentUnitByType141" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="27724164">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="272" type="ingenias.editor.entities.DefinesDeployment">
+<object id="272" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentForTwoParticipant2Timeout" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="31074324">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentUnitByType141" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="830992">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="263" type="ingenias.editor.entities.DefinesDeployment">
+<object id="263" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentUnitByType181" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="15574403">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentForOneParticipant2Timeout" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="115983">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="262" type="ingenias.editor.entities.DefinesDeployment">
+<object id="262" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentUnitByType141" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="10909449">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentForOneParticipant2Timeout" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="115983">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="278" type="ingenias.editor.entities.DefinesDeployment">
+<object id="278" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentUnitByType181" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="21485717">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentForInitiatorSendingTimeout" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="7039732">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="271" type="ingenias.editor.entities.DefinesDeployment">
+<object id="271" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentForTwoParticipant2Timeout" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="31074324">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentUnitByType181" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="17840202">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="282" type="ingenias.editor.entities.DefinesDeployment">
+<object id="282" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DeploymentUnitByTypeEnumInitMS280" class="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="8900773">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DeploymentForInitiatorSendingTimeout" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="7039732">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+</relationships>
+<models> 
+ <model id="Agent description" type="ingenias.editor.AgentModelModelJGraph">
+<object id="Agent description" type="ingenias.editor.entities.AgentModelDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="155" nid="2670921" type="AContainsME">
+
+	<connected id="22205438">
+
+
+	</connected>
+	<connected id="5883912">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="212" nid="14624958" type="GTPursues">
+
+	<connected id="29815128">
+
+
+	</connected>
+	<connected id="4773710">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="A" nid="26533207" type="Agent">
+
+	</node>
+			
+	<node id="InitialFact" nid="5883912" type="FrameFact">
+
+	</node>
+			
+	<node id="Initiator" nid="33238873" type="Role">
+
+	</node>
+			
+	<node id="83" nid="25483828" type="WFPlays">
+
+	<connected id="26533207">
+
+
+	</connected>
+	<connected id="11420072">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Participant2" nid="26983592" type="Role">
+
+	</node>
+			
+	<node id="165" nid="9284710" type="WFPlays">
+
+	<connected id="15543551">
+
+
+	</connected>
+	<connected id="15774039">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="B" nid="2034214" type="Agent">
+
+	</node>
+			
+	<node id="85" nid="29299589" type="WFPlays">
+
+	<connected id="30799968">
+
+
+	</connected>
+	<connected id="26983592">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Initiator" nid="12058323" type="Role">
+
+	</node>
+			
+	<node id="InitialMSAgentASelective" nid="12987328" type="MentalState">
+
+	</node>
+			
+	<node id="Initiator" nid="1633967" type="Role">
+
+	</node>
+			
+	<node id="166" nid="14466185" type="AHasMS">
+
+	<connected id="15543551">
+
+
+	</connected>
+	<connected id="12987328">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Participant1" nid="16182360" type="Role">
+
+	</node>
+			
+	<node id="DemoGoal" nid="4773710" type="Goal">
+
+	</node>
+			
+	<node id="123" nid="26970742" type="GTPursues">
+
+	<connected id="2034214">
+
+
+	</connected>
+	<connected id="4139483">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Initiator" nid="15774039" type="Role">
+
+	</node>
+			
+	<node id="DemoGoal" nid="4139483" type="Goal">
+
+	</node>
+			
+	<node id="InitialMSAgentA" nid="22205438" type="MentalState">
+
+	</node>
+			
+	<node id="ATimeOut" nid="29815128" type="Agent">
+
+	</node>
+			
+	<node id="122" nid="23291381" type="GTPursues">
+
+	<connected id="26533207">
+
+
+	</connected>
+	<connected id="4139483">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="164" nid="21615863" type="AContainsME">
+
+	<connected id="12987328">
+
+
+	</connected>
+	<connected id="4682751">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="162" nid="31266626" type="GTPursues">
+
+	<connected id="15543551">
+
+
+	</connected>
+	<connected id="17034072">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="ASelective" nid="15543551" type="Agent">
+
+	</node>
+			
+	<node id="209" nid="26024707" type="WFPlays">
+
+	<connected id="29815128">
+
+
+	</connected>
+	<connected id="17175432">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Initiator" nid="11420072" type="Role">
+
+	</node>
+			
+	<node id="84" nid="21304535" type="WFPlays">
+
+	<connected id="2034214">
+
+
+	</connected>
+	<connected id="16182360">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="C" nid="30799968" type="Agent">
+
+	</node>
+			
+	<node id="124" nid="18248183" type="GTPursues">
+
+	<connected id="30799968">
+
+
+	</connected>
+	<connected id="4139483">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="InitialFact" nid="4682751" type="FrameFact">
+
+	</node>
+			
+	<node id="110" nid="8037580" type="AHasMS">
+
+	<connected id="26533207">
+
+
+	</connected>
+	<connected id="22205438">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="InitialMSATimeout" nid="8185586" type="MentalState">
+
+	</node>
+			
+	<node id="Initiator" nid="10666036" type="Role">
+
+	</node>
+			
+	<node id="295" nid="13871620" type="AHasMS">
+
+	<connected id="29815128">
+
+
+	</connected>
+	<connected id="8185586">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DemoGoal" nid="17034072" type="Goal">
+
+	</node>
+			
+	<node id="Initiator" nid="17175432" type="Role">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node34">
+		<attr name="bounds">
+			<rectangle x="448" y="34" width="97" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node27">
+		<attr name="bounds">
+			<rectangle x="102" y="456" width="80" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="153" y="81" width="35" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="566" y="18" width="61" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="268" y="213" width="50" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node30">
+		<attr name="bounds">
+			<rectangle x="235" y="101" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="338" y="269" width="74" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node35">
+		<attr name="bounds">
+			<rectangle x="284" y="380" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="180" y="171" width="35" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node23">
+		<attr name="bounds">
+			<rectangle x="246" y="278" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="278" y="223" width="50" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="335" y="325" width="154" height="34"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="268" y="213" width="50" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node24">
+		<attr name="bounds">
+			<rectangle x="258" y="354" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node19">
+		<attr name="bounds">
+			<rectangle x="334" y="178" width="74" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="28" y="443" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node36">
+		<attr name="bounds">
+			<rectangle x="84" y="191" width="80" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="387" y="376" width="50" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="4" y="173" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node21">
+		<attr name="bounds">
+			<rectangle x="327" y="25" width="100" height="34"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="187" y="434" width="63" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node32">
+		<attr name="bounds">
+			<rectangle x="71" y="141" width="80" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node29">
+		<attr name="bounds">
+			<rectangle x="507" y="334" width="97" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node33">
+		<attr name="bounds">
+			<rectangle x="89" y="372" width="80" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="183" y="351" width="63" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node26">
+		<attr name="bounds">
+			<rectangle x="290" y="469" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="346" y="86" width="50" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node28">
+		<attr name="bounds">
+			<rectangle x="242" y="192" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="183" y="254" width="35" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node31">
+		<attr name="bounds">
+			<rectangle x="86" y="236" width="80" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="621" y="318" width="61" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node25">
+		<attr name="bounds">
+			<rectangle x="234" y="72" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node18">
+		<attr name="bounds">
+			<rectangle x="385" y="426" width="153" height="34"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="278" y="223" width="50" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node22">
+		<attr name="bounds">
+			<rectangle x="285" y="446" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="7" y="355" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="401" y="471" width="50" height="43"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Launch tasks definition" type="ingenias.editor.TasksAndGoalsModelModelJGraph">
+<object id="Launch tasks definition" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="launch tasks"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="Launch conversation" nid="29735472" type="Task">
+
+	</node>
+			
+	<node id="InitialQuestion" nid="6850255" type="FrameFact">
+
+	</node>
+			
+	<node id="159" nid="945718" type="WFConsumes">
+
+	<connected id="14951251">
+
+
+	</connected>
+	<connected id="9298958">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="158" nid="2659802" type="WFResponsable">
+
+	<connected id="16236504">
+
+
+	</connected>
+	<connected id="14951251">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="A" nid="1803091" type="Agent">
+
+	</node>
+			
+	<node id="236" nid="31932910" type="GTSatisfies">
+
+	<connected id="63113">
+
+
+	</connected>
+	<connected id="23751271">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="217" nid="10050515" type="WFUses">
+
+	<connected id="9168104">
+
+
+	</connected>
+	<connected id="9451513">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Conversation128" nid="504344" type="Conversation">
+
+	</node>
+			
+	<node id="TimeOut generator" nid="29893636" type="EnvironmentApplication">
+
+	</node>
+			
+	<node id="InitialQuestion" nid="11135884" type="FrameFact">
+
+	</node>
+			
+	<node id="160" nid="25133845" type="WFProduces">
+
+	<connected id="13287519">
+
+
+
+	</connected>
+	<connected id="14951251">
+
+
+	</connected>
+	</node>
+			
+	<node id="292" nid="1907959" type="WFProduces">
+
+	<connected id="227663">
+
+
+
+	</connected>
+	<connected id="63113">
+
+
+	</connected>
+	</node>
+			
+	<node id="FailAllParticipant2" nid="23383754" type="FrameFact">
+
+	</node>
+			
+	<node id="InitialFact" nid="9298958" type="FrameFact">
+
+	</node>
+			
+	<node id="FailOneParticipan2" nid="2129687" type="FrameFact">
+
+	</node>
+			
+	<node id="239" nid="22644461" type="WFResponsable">
+
+	<connected id="11296479">
+
+
+	</connected>
+	<connected id="63113">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DemoGoal" nid="19462531" type="Goal">
+
+	</node>
+			
+	<node id="296" nid="16584885" type="GTCreates">
+
+	<connected id="29735472">
+
+
+	</connected>
+	<connected id="31903301">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="293" nid="23518839" type="WFProduces">
+
+	<connected id="6850255">
+
+
+
+	</connected>
+	<connected id="20310282">
+
+
+	</connected>
+	</node>
+			
+	<node id="InitialFact" nid="25878449" type="FrameFact">
+
+	</node>
+			
+	<node id="298" nid="15779473" type="GTCreates">
+
+	<connected id="9168104">
+
+
+	</connected>
+	<connected id="6391757">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="ATimeOut" nid="10154899" type="Agent">
+
+	</node>
+			
+	<node id="DemoGoal" nid="14393893" type="Goal">
+
+	</node>
+			
+	<node id="133" nid="10968383" type="GTSatisfies">
+
+	<connected id="29735472">
+
+
+	</connected>
+	<connected id="19462531">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="SenderFailure" nid="33075547" type="FrameFact">
+
+	</node>
+			
+	<node id="Conversation128" nid="6391757" type="Conversation">
+
+	</node>
+			
+	<node id="InitialQuestion" nid="13287519" type="FrameFact">
+
+	</node>
+			
+	<node id="TimeOut generator" nid="9451513" type="EnvironmentApplication">
+
+	</node>
+			
+	<node id="245" nid="5363567" type="WFResponsable">
+
+	<connected id="9359449">
+
+
+	</connected>
+	<connected id="20310282">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Launch conversation selecting partners" nid="14951251" type="Task">
+
+	</node>
+			
+	<node id="ASelective" nid="16236504" type="Agent">
+
+	</node>
+			
+	<node id="ATimeOut" nid="9359449" type="Agent">
+
+	</node>
+			
+	<node id="297" nid="3507255" type="GTCreates">
+
+	<connected id="14951251">
+
+
+	</connected>
+	<connected id="504344">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="InitialQuestion" nid="227663" type="FrameFact">
+
+	</node>
+			
+	<node id="Launch Conversation and Enable all initiator timeout" nid="20310282" type="Task">
+
+	</node>
+			
+	<node id="247" nid="29593871" type="GTSatisfies">
+
+	<connected id="20310282">
+
+
+	</connected>
+	<connected id="8582050">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="237" nid="14126537" type="WFUses">
+
+	<connected id="63113">
+
+
+	</connected>
+	<connected id="28935896">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DemoGoal" nid="23751271" type="Goal">
+
+	</node>
+			
+	<node id="TimeOut generator" nid="28935896" type="EnvironmentApplication">
+
+	</node>
+			
+	<node id="DemoGoal" nid="8582050" type="Goal">
+
+	</node>
+			
+	<node id="Conversation128" nid="10796785" type="Conversation">
+
+	</node>
+			
+	<node id="154" nid="22679859" type="WFProduces">
+
+	<connected id="17239479">
+
+
+
+	</connected>
+	<connected id="29735472">
+
+
+	</connected>
+	</node>
+			
+	<node id="Launch Conversation and Enable Participant2 timeouts" nid="9168104" type="Task">
+
+	</node>
+			
+	<node id="288" nid="17807403" type="WFConsumes">
+
+	<connected id="9168104">
+
+
+	</connected>
+	<connected id="2129687">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Launch Conversation and Enable all participant2 timeouts" nid="63113" type="Task">
+
+	</node>
+			
+	<node id="ATimeOut" nid="11296479" type="Agent">
+
+	</node>
+			
+	<node id="289" nid="25552459" type="WFResponsable">
+
+	<connected id="10154899">
+
+
+	</connected>
+	<connected id="9168104">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="127" nid="11881958" type="WFConsumes">
+
+	<connected id="29735472">
+
+
+	</connected>
+	<connected id="25878449">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="241" nid="1078462" type="WFConsumes">
+
+	<connected id="63113">
+
+
+	</connected>
+	<connected id="23383754">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Conversation128" nid="21288857" type="Conversation">
+
+	</node>
+			
+	<node id="Conversation128" nid="31903301" type="Conversation">
+
+	</node>
+			
+	<node id="250" nid="28645750" type="WFConsumes">
+
+	<connected id="20310282">
+
+
+	</connected>
+	<connected id="33075547">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="126" nid="17910370" type="WFResponsable">
+
+	<connected id="1803091">
+
+
+	</connected>
+	<connected id="29735472">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="246" nid="17161959" type="WFUses">
+
+	<connected id="20310282">
+
+
+	</connected>
+	<connected id="29893636">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="InitialQuestion" nid="17239479" type="FrameFact">
+
+	</node>
+			
+	<node id="174" nid="32219268" type="GTSatisfies">
+
+	<connected id="14951251">
+
+
+	</connected>
+	<connected id="14393893">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DemoGoal" nid="8577279" type="Goal">
+
+	</node>
+			
+	<node id="214" nid="11954908" type="WFProduces">
+
+	<connected id="11135884">
+
+
+
+	</connected>
+	<connected id="9168104">
+
+
+	</connected>
+	</node>
+			
+	<node id="213" nid="18489763" type="GTSatisfies">
+
+	<connected id="9168104">
+
+
+	</connected>
+	<connected id="8577279">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="299" nid="27975987" type="GTCreates">
+
+	<connected id="63113">
+
+
+	</connected>
+	<connected id="10796785">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="300" nid="12527650" type="GTCreates">
+
+	<connected id="20310282">
+
+
+	</connected>
+	<connected id="21288857">
+
+
+
+	</connected>
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="184" y="80" width="128" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node23">
+		<attr name="bounds">
+			<rectangle x="346" y="819" width="93" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node48">
+		<attr name="bounds">
+			<rectangle x="452" y="228" width="98" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node43">
+		<attr name="bounds">
+			<rectangle x="68" y="223" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node29">
+		<attr name="bounds">
+			<rectangle x="22" y="72" width="35" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node58">
+		<attr name="bounds">
+			<rectangle x="149" y="607" width="87" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node36">
+		<attr name="bounds">
+			<rectangle x="152" y="435" width="62" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="542" y="261" width="69" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node25">
+		<attr name="bounds">
+			<rectangle x="190" y="1014" width="166" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="515" y="328" width="93" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node54">
+		<attr name="bounds">
+			<rectangle x="412" y="195" width="88" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node41">
+		<attr name="bounds">
+			<rectangle x="282" y="711" width="88" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="556" y="633" width="113" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node22">
+		<attr name="bounds">
+			<rectangle x="581" y="212" width="61" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="251" y="473" width="116" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node35">
+		<attr name="bounds">
+			<rectangle x="49" y="615" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="219" y="15" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node52">
+		<attr name="bounds">
+			<rectangle x="379" y="109" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node37">
+		<attr name="bounds">
+			<rectangle x="299" y="890" width="88" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="525" y="7" width="61" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node56">
+		<attr name="bounds">
+			<rectangle x="454" y="433" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="21" y="330" width="63" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node19">
+		<attr name="bounds">
+			<rectangle x="263" y="127" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node33">
+		<attr name="bounds">
+			<rectangle x="244" y="73" width="0" height="0"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node21">
+		<attr name="bounds">
+			<rectangle x="497" y="844" width="84" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="560" y="429" width="69" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="514" y="158" width="93" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="14" y="453" width="166" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node53">
+		<attr name="bounds">
+			<rectangle x="50" y="936" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="178" y="215" width="244" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="5" y="200" width="63" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="14" y="914" width="63" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node46">
+		<attr name="bounds">
+			<rectangle x="440" y="262" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="384" y="735" width="93" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="133" y="929" width="329" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node59">
+		<attr name="bounds">
+			<rectangle x="224" y="903" width="87" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node44">
+		<attr name="bounds">
+			<rectangle x="181" y="729" width="62" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node32">
+		<attr name="bounds">
+			<rectangle x="142" y="524" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="131" y="776" width="166" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="202" y="842" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node24">
+		<attr name="bounds">
+			<rectangle x="435" y="533" width="69" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node49">
+		<attr name="bounds">
+			<rectangle x="368" y="82" width="88" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node28">
+		<attr name="bounds">
+			<rectangle x="106" y="388" width="341" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node42">
+		<attr name="bounds">
+			<rectangle x="243" y="445" width="98" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node26">
+		<attr name="bounds">
+			<rectangle x="30" y="654" width="361" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node31">
+		<attr name="bounds">
+			<rectangle x="-21" y="548" width="63" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node47">
+		<attr name="bounds">
+			<rectangle x="79" y="369" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node40">
+		<attr name="bounds">
+			<rectangle x="369" y="54" width="98" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node60">
+		<attr name="bounds">
+			<rectangle x="424" y="655" width="98" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node18">
+		<attr name="bounds">
+			<rectangle x="568" y="932" width="69" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="525" y="102" width="69" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node57">
+		<attr name="bounds">
+			<rectangle x="378" y="898" width="98" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node45">
+		<attr name="bounds">
+			<rectangle x="67" y="93" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node34">
+		<attr name="bounds">
+			<rectangle x="253" y="986" width="62" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node30">
+		<attr name="bounds">
+			<rectangle x="513" y="57" width="93" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node39">
+		<attr name="bounds">
+			<rectangle x="254" y="189" width="87" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node27">
+		<attr name="bounds">
+			<rectangle x="223" y="286" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node50">
+		<attr name="bounds">
+			<rectangle x="403" y="367" width="88" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node55">
+		<attr name="bounds">
+			<rectangle x="215" y="354" width="87" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node38">
+		<attr name="bounds">
+			<rectangle x="307" y="607" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node51">
+		<attr name="bounds">
+			<rectangle x="476" y="948" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Time out generators" type="ingenias.editor.EnvironmentModelModelJGraph">
+<object id="Time out generators" type="ingenias.editor.entities.EnvironmentModelDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="B" nid="17719750" type="Agent">
+
+	</node>
+			
+	<node id="ASelective" nid="14068086" type="Agent">
+
+	</node>
+			
+	<node id="197" nid="9155699" type="ApplicationBelongsTo">
+
+	<connected id="3107709">
+
+
+	</connected>
+	<connected id="30600921">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="196" nid="17077864" type="ApplicationBelongsTo">
+
+	<connected id="17719750">
+
+
+	</connected>
+	<connected id="30600921">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="TimeOut generator" nid="30600921" type="EnvironmentApplication">
+
+	</node>
+			
+	<node id="C" nid="3107709" type="Agent">
+
+	</node>
+			
+	<node id="198" nid="17527898" type="ApplicationBelongsTo">
+
+	<connected id="14068086">
+
+
+	</connected>
+	<connected id="30600921">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="ATimeOut" nid="7999894" type="Agent">
+
+	</node>
+			
+	<node id="232" nid="32056073" type="ApplicationBelongsTo">
+
+	<connected id="7999894">
+
+
+	</connected>
+	<connected id="30600921">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="195" nid="29278064" type="ApplicationBelongsTo">
+
+	<connected id="7437558">
+
+
+	</connected>
+	<connected id="30600921">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="A" nid="7437558" type="Agent">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="194" y="0" width="35" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="602" y="80" width="63" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="370" y="76" width="151" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="190" y="76" width="151" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="239" y="121" width="166" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="527" y="9" width="35" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="428" y="114" width="151" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="275" y="231" width="63" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="239" y="189" width="151" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="73" y="98" width="151" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="22" y="56" width="35" height="57"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Protocol Tasks Description" type="ingenias.editor.TasksAndGoalsModelModelJGraph">
+<object id="Protocol Tasks Description" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Protocol definition"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="Participant1" nid="16928928" type="Role">
+
+	</node>
+			
+	<node id="120" nid="8716804" type="WFProduces">
+
+	<connected id="32335991">
+
+
+
+	</connected>
+	<connected id="31237059">
+
+
+	</connected>
+	</node>
+			
+	<node id="Initiator" nid="28741012" type="Role">
+
+	</node>
+			
+	<node id="106" nid="5393430" type="WFResponsable">
+
+	<connected id="6055733">
+
+
+	</connected>
+	<connected id="24892637">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="SingleAnswer" nid="32335991" type="FrameFact">
+
+	</node>
+			
+	<node id="MultipleAnswer" nid="12829534" type="FrameFact">
+
+	</node>
+			
+	<node id="DemoGoal" nid="12177314" type="Goal">
+
+	</node>
+			
+	<node id="118" nid="4620511" type="WFConsumes">
+
+	<connected id="31237059">
+
+
+	</connected>
+	<connected id="32787581">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GeneratingForSingleReceiver" nid="5607553" type="Task">
+
+	</node>
+			
+	<node id="SingleQuestion" nid="25311222" type="FrameFact">
+
+	</node>
+			
+	<node id="TimeOut generator" nid="7164755" type="EnvironmentApplication">
+
+	</node>
+			
+	<node id="GeneratingAnswerWithinMultipleDeliver" nid="24892637" type="Task">
+
+	</node>
+			
+	<node id="201" nid="2310353" type="WFUses">
+
+	<connected id="5607553">
+
+
+	</connected>
+	<connected id="7164755">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="199" nid="30491600" type="WFUses">
+
+	<connected id="31237059">
+
+
+	</connected>
+	<connected id="32919790">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="105" nid="11168957" type="WFResponsable">
+
+	<connected id="16928928">
+
+
+	</connected>
+	<connected id="31237059">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Participant2" nid="6055733" type="Role">
+
+	</node>
+			
+	<node id="DemoGoal" nid="28246735" type="Goal">
+
+	</node>
+			
+	<node id="136" nid="3472939" type="GTSatisfies">
+
+	<connected id="5607553">
+
+
+	</connected>
+	<connected id="12177314">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="134" nid="29903952" type="GTSatisfies">
+
+	<connected id="24892637">
+
+
+	</connected>
+	<connected id="28246735">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="200" nid="693498" type="WFUses">
+
+	<connected id="24892637">
+
+
+	</connected>
+	<connected id="32919790">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GeneratingAnswerWithinSimpleDeliver" nid="31237059" type="Task">
+
+	</node>
+			
+	<node id="117" nid="22827723" type="WFProduces">
+
+	<connected id="25311222">
+
+
+
+	</connected>
+	<connected id="5607553">
+
+
+	</connected>
+	</node>
+			
+	<node id="DemoGoal" nid="33082794" type="Goal">
+
+	</node>
+			
+	<node id="132" nid="13391437" type="WFConsumes">
+
+	<connected id="24892637">
+
+
+	</connected>
+	<connected id="29392161">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="InitialQuestion" nid="29392161" type="FrameFact">
+
+	</node>
+			
+	<node id="MultipleAnswer" nid="23585264" type="FrameFact">
+
+	</node>
+			
+	<node id="SingleQuestion" nid="32787581" type="FrameFact">
+
+	</node>
+			
+	<node id="103" nid="33467388" type="WFResponsable">
+
+	<connected id="28741012">
+
+
+	</connected>
+	<connected id="5607553">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="TimeOut generator" nid="32919790" type="EnvironmentApplication">
+
+	</node>
+			
+	<node id="115" nid="21413578" type="WFConsumes">
+
+	<connected id="5607553">
+
+
+	</connected>
+	<connected id="23585264">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="135" nid="24825825" type="GTSatisfies">
+
+	<connected id="31237059">
+
+
+	</connected>
+	<connected id="33082794">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="114" nid="25185515" type="WFProduces">
+
+	<connected id="12829534">
+
+
+
+	</connected>
+	<connected id="24892637">
+
+
+	</connected>
+	</node>
+			
+	<node id="Conversation128" nid="17144379" type="Conversation">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="27" y="258" width="74" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node28">
+		<attr name="bounds">
+			<rectangle x="412" y="300" width="88" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="37" y="147" width="50" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node31">
+		<attr name="bounds">
+			<rectangle x="156" y="469" width="0" height="0"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="524" y="295" width="85" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="581" y="450" width="98" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="210" y="75" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node18">
+		<attr name="bounds">
+			<rectangle x="404" y="256" width="98" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="158" y="152" width="177" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="507" y="161" width="95" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="36" y="18" width="166" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="207" y="452" width="250" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node29">
+		<attr name="bounds">
+			<rectangle x="150" y="98" width="62" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node27">
+		<attr name="bounds">
+			<rectangle x="226" y="315" width="62" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="124" y="282" width="0" height="0"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="31" y="447" width="74" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="343" y="382" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node32">
+		<attr name="bounds">
+			<rectangle x="244" y="138" width="0" height="0"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node25">
+		<attr name="bounds">
+			<rectangle x="351" y="442" width="0" height="0"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node23">
+		<attr name="bounds">
+			<rectangle x="258" y="405" width="62" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="148" y="270" width="241" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node22">
+		<attr name="bounds">
+			<rectangle x="377" y="172" width="88" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="237" y="204" width="65" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node26">
+		<attr name="bounds">
+			<rectangle x="412" y="424" width="98" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="526" y="373" width="93" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="512" y="74" width="203" height="63"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="518" y="225" width="95" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node19">
+		<attr name="bounds">
+			<rectangle x="122" y="169" width="0" height="0"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="165" y="332" width="166" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node24">
+		<attr name="bounds">
+			<rectangle x="374" y="132" width="98" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node21">
+		<attr name="bounds">
+			<rectangle x="268" y="262" width="0" height="0"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node30">
+		<attr name="bounds">
+			<rectangle x="475" y="466" width="88" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="389" y="17" width="69" height="54"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Protocol description" type="ingenias.editor.InteractionModelModelJGraph">
+<object id="Protocol description" type="ingenias.editor.entities.InteractionModelDataEntity">
+<objectproperty id="InteractionConsidered">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Protocol definition"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="98" nid="21999146" type="UIColaborates">
+
+	<connected id="7767800">
+
+
+	</connected>
+	<connected id="22148114">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Simple answer" nid="17295051" type="InteractionUnit">
+
+	</node>
+			
+	<node id="Participant2" nid="24786567" type="Role">
+
+	</node>
+			
+	<node id="152" nid="26103553" type="UIInitiates">
+
+	<connected id="21077688">
+
+
+	</connected>
+	<connected id="22148114">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GeneratingAnswerWithinSimpleDeliver" nid="6573314" type="Task">
+
+	</node>
+			
+	<node id="GeneratingAnswerWithinMultipleDeliver" nid="24736886" type="Task">
+
+	</node>
+			
+	<node id="Simple deliver" nid="30957520" type="InteractionUnit">
+
+	</node>
+			
+	<node id="95" nid="17560" type="UIColaborates">
+
+	<connected id="30957520">
+
+
+	</connected>
+	<connected id="3376455">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="90" nid="29844839" type="UIInitiates">
+
+	<connected id="24736886">
+
+
+
+	</connected>
+	<connected id="30442761">
+
+
+	</connected>
+	<connected id="24786567">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Participant1" nid="3376455" type="Role">
+
+	</node>
+			
+	<node id="Initiator" nid="22148114" type="Role">
+
+	</node>
+			
+	<node id="91" nid="16911608" type="UIColaborates">
+
+	<connected id="30442761">
+
+
+	</connected>
+	<connected id="22148114">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Multiple deliver" nid="21077688" type="InteractionUnit">
+
+	</node>
+			
+	<node id="151" nid="27759583" type="UIPrecedes">
+
+	<connected id="18728104">
+
+
+	</connected>
+	<connected id="17295051">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="93" nid="20843717" type="UIInitiates">
+
+	<connected id="10907151">
+
+
+
+	</connected>
+	<connected id="30957520">
+
+
+	</connected>
+	<connected id="22148114">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Simple answer" nid="7767800" type="InteractionUnit">
+
+	</node>
+			
+	<node id="Multiple retrieval" nid="30442761" type="InteractionUnit">
+
+	</node>
+			
+	<node id="Simple deliver" nid="18728104" type="InteractionUnit">
+
+	</node>
+			
+	<node id="97" nid="18565764" type="UIInitiates">
+
+	<connected id="6573314">
+
+
+
+	</connected>
+	<connected id="7767800">
+
+
+	</connected>
+	<connected id="3376455">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Multiple retrieval" nid="5147443" type="InteractionUnit">
+
+	</node>
+			
+	<node id="Multiple deliver" nid="3685460" type="InteractionUnit">
+
+	</node>
+			
+	<node id="GeneratingForSingleReceiver" nid="10907151" type="Task">
+
+	</node>
+			
+	<node id="149" nid="3181572" type="UIPrecedes">
+
+	<connected id="3685460">
+
+
+	</connected>
+	<connected id="5147443">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="150" nid="4067898" type="UIPrecedes">
+
+	<connected id="5147443">
+
+
+	</connected>
+	<connected id="18728104">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="88" nid="12168535" type="UIColaborates">
+
+	<connected id="21077688">
+
+
+	</connected>
+	<connected id="24786567">
+
+
+
+	</connected>
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="46" y="22" width="102" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="917" y="362" width="145" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="637" y="241" width="74" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="145" y="222" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="626" y="14" width="241" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="586" y="163" width="250" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="326" y="117" width="155" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node22">
+		<attr name="bounds">
+			<rectangle x="562" y="116" width="102" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node19">
+		<attr name="bounds">
+			<rectangle x="551" y="214" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="745" y="79" width="74" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="64" y="147" width="50" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="171" y="197" width="102" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="322" y="269" width="153" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="799" y="379" width="81" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node23">
+		<attr name="bounds">
+			<rectangle x="180" y="146" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="317" y="18" width="145" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="330" y="189" width="158" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="673" y="365" width="155" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="583" y="60" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="453" y="374" width="158" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="163" y="371" width="153" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="128" y="77" width="177" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node21">
+		<attr name="bounds">
+			<rectangle x="344" y="399" width="81" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node18">
+		<attr name="bounds">
+			<rectangle x="576" y="384" width="81" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node24">
+		<attr name="bounds">
+			<rectangle x="505" y="272" width="102" height="15"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Interaction definition" type="ingenias.editor.InteractionModelModelJGraph">
+<object id="Interaction definition" type="ingenias.editor.entities.InteractionModelDataEntity">
+<objectproperty id="InteractionConsidered">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Protocol definition"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="79" nid="22347204" type="IColaborates">
+
+	<connected id="30190365">
+
+
+
+	</connected>
+	<connected id="18854877">
+
+
+	</connected>
+	</node>
+			
+	<node id="78" nid="5696354" type="IColaborates">
+
+	<connected id="13557727">
+
+
+
+	</connected>
+	<connected id="18854877">
+
+
+	</connected>
+	</node>
+			
+	<node id="Participant2" nid="30190365" type="Role">
+
+	</node>
+			
+	<node id="Participant1" nid="13557727" type="Role">
+
+	</node>
+			
+	<node id="GRASIA protocol" nid="189780" type="GRASIASpecification">
+
+	</node>
+			
+	<node id="81" nid="13817256" type="IHasSpec">
+
+	<connected id="189780">
+
+
+
+	</connected>
+	<connected id="18854877">
+
+
+	</connected>
+	</node>
+			
+	<node id="IntExample" nid="18854877" type="Interaction">
+
+	</node>
+			
+	<node id="Initiator" nid="9050572" type="Role">
+
+	</node>
+			
+	<node id="77" nid="9499391" type="IInitiates">
+
+	<connected id="18854877">
+
+
+	</connected>
+	<connected id="9050572">
+
+
+
+	</connected>
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="331" y="159" width="93" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="229" y="177" width="93" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="449" y="207" width="74" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="250" y="238" width="74" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="521" y="62" width="102" height="93"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="379" y="98" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="223" y="76" width="79" height="69"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="81" y="175" width="50" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="143" y="147" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Task code" type="ingenias.editor.ComponentDiagramModelJGraph">
+<object id="Task code" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="INGENIASCodeComponent220" nid="1396318" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent290" nid="6047007" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent284" nid="8496976" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="GeneratingAnswerWithinMultipleDeliver" nid="11159479" type="Task">
+
+	</node>
+			
+	<node id="285" nid="5058362" type="CDUsesCode">
+
+	<connected id="26065559">
+
+
+	</connected>
+	<connected id="8496976">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="173" nid="33218410" type="CDUsesCode">
+
+	<connected id="327037">
+
+
+	</connected>
+	<connected id="24187252">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="219" nid="28229215" type="CDUsesCode">
+
+	<connected id="16886422">
+
+
+	</connected>
+	<connected id="1530205">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GeneratingAnswerWithinSimpleDeliver" nid="16886422" type="Task">
+
+	</node>
+			
+	<node id="Launch Conversation and Enable Participant2 timeouts" nid="21966323" type="Task">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent191" nid="25812520" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent218" nid="1530205" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="221" nid="1624110" type="CDUsesCode">
+
+	<connected id="11159479">
+
+
+	</connected>
+	<connected id="1396318">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="INGENIASCodeComponent172" nid="24187252" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="Launch Conversation and Enable all participant2 timeouts" nid="26065559" type="Task">
+
+	</node>
+			
+	<node id="287" nid="32386726" type="CDUsesCode">
+
+	<connected id="19478221">
+
+
+	</connected>
+	<connected id="12419189">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="192" nid="3969867" type="CDUsesCode">
+
+	<connected id="21966323">
+
+
+	</connected>
+	<connected id="25812520">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Launch conversation selecting partners" nid="327037" type="Task">
+
+	</node>
+			
+	<node id="Launch Conversation and Enable all initiator timeout" nid="19478221" type="Task">
+
+	</node>
+			
+	<node id="291" nid="20641515" type="CDUsesCode">
+
+	<connected id="9138591">
+
+
+	</connected>
+	<connected id="6047007">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GeneratingForSingleReceiver" nid="9138591" type="Task">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent286" nid="12419189" type="INGENIASCodeComponent">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="497" y="174" width="222" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="509" y="508" width="222" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="522" y="336" width="222" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="47" y="190" width="250" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="394" y="359" width="95" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="327" y="37" width="95" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="318" y="119" width="95" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="10" y="101" width="241" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="7" y="269" width="341" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="505" y="262" width="222" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="480" y="103" width="222" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="350" y="199" width="95" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="480" y="14" width="222" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="0" y="349" width="361" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node18">
+		<attr name="bounds">
+			<rectangle x="391" y="445" width="95" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="379" y="283" width="95" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="25" y="25" width="244" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="29" y="440" width="329" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node19">
+		<attr name="bounds">
+			<rectangle x="323" y="529" width="95" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="55" y="517" width="177" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="519" y="417" width="222" height="57"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Test components declaration" type="ingenias.editor.ComponentDiagramModelJGraph">
+<object id="Test components declaration" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="deployment"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="INGENIASComponent253" nid="16527890" type="INGENIASComponent">
+
+	</node>
+			
+	<node id="TimedOutcommunicationInitiatorSending" nid="12839150" type="Test">
+
+	</node>
+			
+	<node id="SelectiveMultipleInteraction" nid="7879130" type="Test">
+
+	</node>
+			
+	<node id="177" nid="14048028" type="UMLRealizes">
+
+	<connected id="7879130">
+
+
+	</connected>
+	<connected id="32017362">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="INGENIASComponent146" nid="15882140" type="INGENIASComponent">
+
+	</node>
+			
+	<node id="INGENIASComponent254" nid="23555744" type="INGENIASComponent">
+
+	</node>
+			
+	<node id="147" nid="18557563" type="UMLRealizes">
+
+	<connected id="15060727">
+
+
+	</connected>
+	<connected id="15882140">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="256" nid="23217431" type="UMLRealizes">
+
+	<connected id="24838562">
+
+
+	</connected>
+	<connected id="16527890">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="TimedOutCommunicationBothParticipant2" nid="24838562" type="Test">
+
+	</node>
+			
+	<node id="TimedOutCommunicationOneParticipant2" nid="32536087" type="Test">
+
+	</node>
+			
+	<node id="INGENIASComponent184" nid="5710566" type="INGENIASComponent">
+
+	</node>
+			
+	<node id="259" nid="32204010" type="UMLRealizes">
+
+	<connected id="12839150">
+
+
+	</connected>
+	<connected id="23555744">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="MultipleInteractionTest" nid="15060727" type="Test">
+
+	</node>
+			
+	<node id="INGENIASComponent176" nid="32017362" type="INGENIASComponent">
+
+	</node>
+			
+	<node id="186" nid="2546055" type="UMLRealizes">
+
+	<connected id="32536087">
+
+
+	</connected>
+	<connected id="5710566">
+
+
+
+	</connected>
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="410" y="394" width="839" height="72"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="24" y="506" width="260" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="36" y="194" width="174" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="270" y="206" width="65" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="377" y="49" width="601" height="72"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="445" y="482" width="827" height="72"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="244" y="68" width="65" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="319" y="425" width="65" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="26" y="415" width="266" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="40" y="307" width="262" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="407" y="289" width="831" height="72"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="332" y="516" width="65" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="29" y="55" width="147" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="394" y="176" width="662" height="72"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="333" y="319" width="65" height="15"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Test and deployment settings" type="ingenias.editor.DeployDiagramModelJGraph">
+<object id="Test and deployment settings" type="ingenias.editor.entities.DeployDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="deployment"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="TestingTimoutSendingInitiator" nid="19167430" type="TestingPackage">
+
+	</node>
+			
+	<node id="TestingTimoutTwoParticipant2" nid="5076836" type="TestingPackage">
+
+	</node>
+			
+	<node id="TestingSelectiveInteraction" nid="21122371" type="TestingPackage">
+
+	</node>
+			
+	<node id="TestingInteraction" nid="6947886" type="TestingPackage">
+
+	</node>
+			
+	<node id="TestingTimeoutOneParticipant2" nid="4270563" type="TestingPackage">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="215" y="273" width="357" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="13" y="174" width="358" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="53" y="66" width="276" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="454" y="65" width="222" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="420" y="172" width="356" height="70"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Timeout application component" type="ingenias.editor.ComponentDiagramModelJGraph">
+<object id="Timeout application component" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="deployment"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="205" nid="31108395" type="UMLRealizes">
+
+	<connected id="28584776">
+
+
+	</connected>
+	<connected id="9876711">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="INGENIASComponent204" nid="9876711" type="INGENIASComponent">
+
+	</node>
+			
+	<node id="TimeOut generator" nid="28584776" type="EnvironmentApplication">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="293" y="88" width="65" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="441" y="57" width="235" height="72"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="51" y="78" width="166" height="40"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="selective and automatic partner selection deployment" type="ingenias.editor.DeployDiagramModelJGraph">
+<object id="selective and automatic partner selection deployment" type="ingenias.editor.entities.DeployDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="deployment"/>
+    <package id="partner selection testing"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="143" nid="6895789" type="DefinesDeployment">
+
+	<connected id="23200568">
+
+
+	</connected>
+	<connected id="32009957">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentUnitByType181" nid="29434087" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="168" nid="21433535" type="DefinesDeployment">
+
+	<connected id="21016611">
+
+
+	</connected>
+	<connected id="15256214">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentUnitByType170" nid="12408358" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="142" nid="19199381" type="DefinesDeployment">
+
+	<connected id="21016611">
+
+
+	</connected>
+	<connected id="32009957">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentUnitByType141" nid="21016611" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="DemoDeploymentSelective" nid="15256214" type="DeploymentPackage">
+
+	</node>
+			
+	<node id="139" nid="28351009" type="DefinesDeployment">
+
+	<connected id="33105445">
+
+
+	</connected>
+	<connected id="32009957">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="182" nid="24285871" type="DefinesDeployment">
+
+	<connected id="29434087">
+
+
+	</connected>
+	<connected id="15256214">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentUnitByType140" nid="23200568" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="DemoDeployment" nid="32009957" type="DeploymentPackage">
+
+	</node>
+			
+	<node id="DeploymentUnitByType138" nid="33105445" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="171" nid="22941488" type="DefinesDeployment">
+
+	<connected id="12408358">
+
+
+	</connected>
+	<connected id="15256214">
+
+
+
+	</connected>
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="456" y="106" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="435" y="260" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="271" y="330" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="718" y="276" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="289" y="104" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="73" y="146" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="419" y="458" width="169" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="586" y="102" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="442" y="387" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="436" y="155" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="458" y="32" width="142" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="729" y="147" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="640" y="380" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Timeout deployment testing" type="ingenias.editor.DeployDiagramModelJGraph">
+<object id="Timeout deployment testing" type="ingenias.editor.entities.DeployDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="deployment"/>
+    <package id="timout testing"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="279" nid="786543" type="DefinesDeployment">
+
+	<connected id="27724164">
+
+
+	</connected>
+	<connected id="7039732">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentUnitByType141" nid="10909449" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="282" nid="12775489" type="DefinesDeployment">
+
+	<connected id="8900773">
+
+
+	</connected>
+	<connected id="7039732">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentUnitByType181" nid="21485717" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="DeploymentUnitByTypeEnumInitMS273" nid="30074919" type="DeploymentUnitByTypeEnumInitMS">
+
+	</node>
+			
+	<node id="264" nid="15968995" type="DeploymentUnitByTypeEnumInitMS">
+
+	</node>
+			
+	<node id="DeploymentUnitByType141" nid="27724164" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="DeploymentForTwoParticipant2Timeout" nid="31074324" type="DeploymentPackage">
+
+	</node>
+			
+	<node id="266" nid="22241049" type="DefinesDeployment">
+
+	<connected id="15968995">
+
+
+	</connected>
+	<connected id="115983">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentUnitByType181" nid="17840202" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="272" nid="16688184" type="DefinesDeployment">
+
+	<connected id="830992">
+
+
+	</connected>
+	<connected id="31074324">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentForOneParticipant2Timeout" nid="115983" type="DeploymentPackage">
+
+	</node>
+			
+	<node id="DeploymentUnitByType141" nid="830992" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="263" nid="6778181" type="DefinesDeployment">
+
+	<connected id="15574403">
+
+
+	</connected>
+	<connected id="115983">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentForInitiatorSendingTimeout" nid="7039732" type="DeploymentPackage">
+
+	</node>
+			
+	<node id="274" nid="6972849" type="DefinesDeployment">
+
+	<connected id="30074919">
+
+
+	</connected>
+	<connected id="31074324">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentUnitByType181" nid="15574403" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="262" nid="6980168" type="DefinesDeployment">
+
+	<connected id="10909449">
+
+
+	</connected>
+	<connected id="115983">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DeploymentUnitByTypeEnumInitMS280" nid="8900773" type="DeploymentUnitByTypeEnumInitMS">
+
+	</node>
+			
+	<node id="278" nid="7737192" type="DefinesDeployment">
+
+	<connected id="21485717">
+
+
+	</connected>
+	<connected id="7039732">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="271" nid="24517926" type="DefinesDeployment">
+
+	<connected id="17840202">
+
+
+	</connected>
+	<connected id="31074324">
+
+
+
+	</connected>
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="364" y="544" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="108" y="12" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="636" y="550" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="441" y="436" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="678" y="233" width="452" height="85"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="568" y="14" width="430" height="85"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="181" y="433" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="494" y="375" width="251" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="576" y="135" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="432" y="238" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="385" y="330" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="421" y="185" width="249" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="174" y="235" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="414" y="124" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="452" y="600" width="248" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="664" y="339" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="324" y="7" width="173" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="316" y="126" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="686" y="430" width="377" height="85"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node18">
+		<attr name="bounds">
+			<rectangle x="484" y="546" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node19">
+		<attr name="bounds">
+			<rectangle x="505" y="334" width="138" height="15"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Time out application deployment" type="ingenias.editor.DeployDiagramModelJGraph">
+<object id="Time out application deployment" type="ingenias.editor.entities.DeployDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="deployment"/>
+    <package id="timout testing"/>
+   </path>
+<gxl>
+
+	<graph>
+	</graph>
+
+
+	<layout>
+	</layout>
+</gxl> </model>
+</models>
+</project>

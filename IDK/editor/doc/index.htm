@@ -1,0 +1,1470 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title></title>
+  
+</head>
+<body>
+
+<h1>Introduction</h1>
+This editor implements an specification language for agents defined in the INGENIAS 
+Developmen Process. For a detailed review of INGENIAS, users can check <A href="http://grasia.fdi.ucm.es/ingenias">http://grasia.fdi.ucm.es/ingenias</A>. 
+INGENIAS defines a language and a development process as well. INGENIAS approach 
+relays on the widespread Unified Process. Now it is also supported with tools 
+that allow to generate code automatically and other useful processes, such as 
+specification verification. 
+<P> This tool will let you describe your Multi-Agent System with INGENIAS notation. 
+  Using diagrams similar to those of UML, a developer specifies different aspects 
+  of the system. Recognised aspects are: agent models, environment models, organization 
+  models, interaction models, and task and goal models.
+<h2>Launching the Editor</h2>
+<p>The Editor can be started from command line in several ways:</p>
+<p><i>java -jar lib\ingeniaseditor.jar</i></p>
+<p>This way of launching the editor is not advised when you plan to use modules 
+  that use external libraries, such as JADE libraries. In those cases, it is better 
+  to run it adding lib\ingeniaseditor.jar to your classpath as well as any other 
+  external libraries you may require and then using <i>ingenias.editor.IDE</i> 
+  as main class. This is what ANT can do for you using the <i>runide</i> task 
+  already codified in the <i>build.xml</i> file.</p>
+<p><i>ant runide</i></p>
+<p>Of course, this can be done also with conventional scripts, however it is not 
+  a good option if you work in several O.S., as in our case.</p>
+<h2>INGENIAS Editor</h2>
+This tool presents three sections to developers
+<ul>
+<li> Project View. On the top-left corner. It shows all existing diagrams within a package structure. Each diagram has its own icon.   
+<li> Objects View. On the bottom-left corner. It shows all existing objects in all diagrams indexed by their type. The tree in this view represents categories of entities in INGENIAS notation. Each object has its own icon. 
+<li> Diagram section. On the right. It presents a diagram to the user.
+<li> Tool bar. Over the diagram section. It shows editing actions and valid entities in current selected diagram. 
+<li> Main menu. Over the tool bar. Use this menu to save/load diagrams, edit project properties, generate documentation, or obtain this help.
+</ul>
+<h2>How do I ...</h2>
+<H3>Diagram Management</h3>
+<ul>
+<li> Create Diagrams. Click in the <b>Project view</b> over a folder with the right button of your mouse. A pop up menu will appear. Select the type of diagram and then choos a name. You cannot assign the same name to two diagrams or packages.
+<li> Create Packages. Click in the <b>Project view</b> over a folder with the right button of your mouse. A pop up menu will appear. Select <b>add package</b> and then choos a name. You cannot assign the same name to two diagrams or packages.
+<li> Change a package/diagram name. Click in the <b>Project view</b> over a folder with the right button of your mouse. A pop up menu will appear. Now there are two ways of renaming:
+  <ul>
+   <li> Select <b>rename</b> and then choose a name. You cannot assign the same name to two diagrams or packages. 
+i  <li> (Rnly for diagrams) Select <b>edit properties</B> and then change the id of the diagram. 
+  </ul>
+<li> Change the properties of a  diagram. Click in the <b>Project view</b> over a diagram with the right button of your mouse. A pop up menu will appear. Select <b>edit properties</b>. When you finish, press <b>close</b>.
+<li> Select a Diagram to work on it. Click twice in the <b>Project view</b> over a diagram.
+<li> Move a diagram to another package. Drag the diagram to the package folder and then drop it.
+<li> Save my work. To save, go to the main menu, File section, and select <b>save</b>. Select a name, and then  accept.
+<li> Load my work. To load, go to the main menu, File section, and select <b>load</b>. Select a name, and then  accept.
+</ul>
+<h3>Working with diagrams</h3>
+<ul>
+  <li> Create an entity in the diagram. There are several ways: 
+    <ul>
+      <li> Click in the tool bar in a button with the icon of the entity you want 
+        to create. The new entity will appear in the top-left corner of the diagram. 
+        If you do not know the meaning of the icons, just move your mouse pointer 
+        over the button and wait for a tool tip. You also can consult this help. 
+      <li> Press the right button of your mouse over the diagram. A pop up menu 
+        will appear. Select the type of entity. The new entity will appear where 
+        your mouse pointer was. 
+    </ul>
+  <li> Create a copy of an entity into this or other diagrams. Select the entities 
+    to copy (hold shitf key pressed and select entities or keep the left-button 
+    of your mouse pressed while surrounding the entities with the rectangle that 
+    will appear). Press in the tool bar over the <b>copy</B> icon. As an alternative, 
+    go to the main menu in the <b>Edit</B> section and select copy. After copying, 
+    just select <b>paste</B> in this or other diagrams. To select <b> paste</B> 
+    press the <b>paste</b> button in the tool bar or go to the edit menu. 
+  <li> Cut and paste some entities. Like in the previous action, select entities. 
+    Once selected, press over the <b>cut</b> button in the tool bar or in the 
+    edit menu. To paste, proceed as in copy. 
+  <li> Edit the properties of an entity. There are two ways: 
+    <ul>
+      <li> Double click over an entity. When you finish, press <b>close</b> 
+      <li> Left click over an entity. A pop up menu will appear. Select <b>edit</b>. 
+        When you finish, press <b>close</b> 
+    </ul>
+  <li> Request help about an entity. Left click over an entity. A pop up menu 
+    will appear. Select <b>Help</b>. 
+  <li> Connect several entities with a relationship. In INGENIAS, some relationships 
+    are nary. This means that some realtionship may connect more than two entities. 
+    There are two ways: 
+    <ul>
+      <li>Select the entities (select at least two entities). Left click over 
+        the diagram (NOT OVER AN ENTITY). A pop-up menu will appear. Select connect.A 
+        window will appear showing allowed relationships between selected entities. 
+        Select the one you prefer. Then another window will appear showing valid 
+        assignations of entities to the extreme of the selected relationship. 
+        Again, select the one you prefer. 
+      <li>Move your mouse over an entity until your mouse pointer becomes a hand. 
+        Then left click and drag to another entity. Following, release your mouse 
+        button. A window will appear showing allowed relationships between selected 
+        entities. Select the one you prefer. Then another window will appear showing 
+        valid assignations of entities to the extreme of the selected relationship. 
+        Again, select the one you prefer. 
+    </ul>
+  <li> Modifying a relationship properties. You can use the same method as in 
+    "Edit the properties of an entityx.". Just take into account that you must 
+    select or double click the label of the relationship. 
+  <li> Remove a relationship. Several alternatives: 
+    <ul>
+      <li>Select the relationship and then press <b>del</b> key. 
+      <li>Left Click over the relationship. Select remove. 
+    </ul>
+  <li> Layout relationships. Relationships can be considered as an special type 
+    of entity. However, laying out all relationships in a diagram can be annoying. 
+    To save effort, you can enable automatica layout of relationships selecting 
+    <b>automatic</b> in the <b>relationship layout</b> combo box in the tool bar. 
+    Automatic layout means that if you move an entity, the relationship will self-allocate 
+    in the middle of all involved entities. When you select automatic layout, 
+    existing relationships will not modify their allocation. Only when you try 
+    to move them or one of their connected entities. 
+  <li> Delete an entity from a diagram. This action does not imply that the entity 
+    itself is removed from the project. If the entity is still used in other diagrams, 
+    you can access it through the <b>Objects View</b> panel. When you delete the 
+    entity, if it is not used in any other diagram, the tool will ask to if you 
+    want to remove it from the database. This time no copy of the information 
+    is maintained. You can remove an entity as long as connected relationships 
+    maintain their consistency.If you are not allowed to remove an entity, a warning 
+    message will appear. If you still want to remove the entity, first try to 
+    remove edges connecting this entity with a relationship. If you still get 
+    warning messages, remove connected relationships. 
+  <li> Remove an entity from all diagrams. Look for the entity in the <b>Objects 
+    View</b>. Left click on it. In the pop-up menu that will appear, select <b>remove</b> 
+</ul>
+<h1>Dictionary of Entities</h1>
+  	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>PROLOGAgentDescription</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/fact.gif"></td>
+      <td valign="top" width="500">
+Provides an prolog based description of an agent. There is no syntax check here. This 
+means that we assume that you write down prolog code. This kind of descriptions is used 
+to represent conditions of goal satisfaction or failure, and interaction collaboration.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Initially use AgentDescription or 
+NaturalLanguageAgentDescription. As the development progresses, move 
+to GRASIAAgentDescription. 
+Use this element when you expect to use PROLOG as implementation language for the 
+control of your agent.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>AgentDescription</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/fact.gif"></td>
+      <td valign="top" width="500">
+Just indicates that in the future you should allocate here a more detailed description 
+of conditions of goal satisfaction or failure, or interaction collaboration, or agent requirements. 
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use this only in the initial stages of the development. As the development progresses, 
+move to GRASIAAgentDescription and others more specific.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>ShareTouple</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/iu.gif"></td>
+      <td valign="top" width="500">
+Indicates that in the implementation a shared touple communication techonology will be 
+used. Since interaction units transmit information from initiator to collaborators, this 
+interaction unit will be translated as 'leave in a shared tuple space the information 
+produced by this task and expect it to be read by collaborators'.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use this interaction unit when you intend to use JavaSpaces or other similar 
+techonologies to get in touch different agents
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Resource</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/resource.gif"></td>
+      <td valign="top" width="500">
+Describes a resource according to TAEMS notation. Opposite to TAEMS, there is no 
+distinction between consumable and non-consumable resources. 
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use this entity when you want to represent some non-functional requirements, like 'keep 
+the bandwidth usage between this value and this', or 'do not use more than X percent of 
+CPU time', or 'we require that at least X file descriptors be available'
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Slot</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/fact.gif"></td>
+      <td valign="top" width="500">
+It is a common slot used only in Frame Fact entity. Each slot could be understood as an 
+attribute in an object. 
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+It can be used only ni FrameFact entities
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>IUConcurrence</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/app.gif"></td>
+      <td valign="top" width="500">
+It is a container of interaction units. It represents a non-deterministic execution 
+order of a set of interaction units.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+You want to represent several possibly concurrent interaction units.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>MentalStateManager</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/man.gif"></td>
+      <td valign="top" width="500">
+An agent has a mental state upon which the agent takes decisions. This mental state is 
+an aggregate of mental entities (believes, facts, events, etc.). As an aggregate, the 
+mental state must be managed. Say that management of mental state consists of 
+determining how new mental entities are added, how to maintain consistency, and how to 
+remove entities. To specify these elements you can use description field of the entity 
+or also task and goal models. If you use task and goals models, you can detail which 
+management tasks exist and how they act. In these diagrams, tasks can be associated to 
+mental entities by other relationships different from consumes or produces. For 
+instance, you can say that a task create mental entities or removes mental entities 
+depending on certain conditions. To express these conditions, we use MentalStatePatterns.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use this entity to associate mental state  management concerns. In the initial stages, 
+just provide informal specifications. In advanced stages, use task and goals diagrams.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>EnvironmentApplication</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/appe.gif"></td>
+      <td valign="top" width="500">
+It represents and application that already exists in the environment that surrounds our 
+MAS. An Application is a wrapper of an element that it is not an agent, nor a resource. 
+You can configure methods in the application and relate this application with agents. 
+Applications define agents perception.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Identify these entities early in the beginning of the development. They correspond to 
+other systems that are already implemented and with which we will have to interact. The 
+level of detail can be increased in further stages by providing accurate descriptions of 
+the application's methods and events produced by the application
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>TextNote</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/text.gif"></td>
+      <td valign="top" width="500">
+A text note is simply an graphic object that shows text  explaining details of a diagram.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you want to clarify some aspect of a diagram
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>MentalState</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/mstate.gif"></td>
+      <td valign="top" width="500">
+A mental state represents the mental state of an agent in a certain moment. A 
+MentalState is an aggregate of mental entities. 
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you want to express what mental entities an agent is supposed to have at 
+activation at the beginning. This is expressed in an agent model by associating an agent 
+entity to a mental state. 
+Whenever you want to express a intermediate state of the agent. You also use an agent 
+model, but instead of an agent entity, you use an autonomous entity query. This entity 
+represent an instance of an agent in runtime. You can express the type of the agent, or 
+assume that its type is deduced from another diagram that contains a reference to this 
+one. See Autonomous Entity Query.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>AgentModelBelieve</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/bel.gif"></td>
+      <td valign="top" width="500">
+A believe expressed with an agent model. This entity is an encapsulation for agent 
+models taht express complex requirements
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you want to express a believes about other agent abilities or mental state. 
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>AutonomousEntityQuery</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/query.gif"></td>
+      <td valign="top" width="500">
+Represent an instance of an agent or a set of agents in runtime. We can refer to that 
+running instance in different ways: with identifiers, with query-like expressions, etc. 
+There are concretions of this entity to represent these different ways of referring to 
+agents
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you want to express a running instance of an agent without an special concern 
+of the type of agent. Use this entity in the initial stages and move to more concrete 
+entities as the development progresses. 
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Interaction</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/inter.gif"></td>
+      <td valign="top" width="500">
+Represents an interaction between two or more agents or roles. There can be only one 
+initiator and at least one collaborator. An interaction also details the goal that 
+pursues. This goal should be related with the goals of the participants.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you want to express interaction among agents. It can be used initially to just 
+state that there is an interaction and that it has a purpose. In advanced stages, this 
+entity can be further detailed by associating specification entities specialised in 
+different notations, like UML-collaboration diagrams.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>MentalStatePattern</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/spec.gif"></td>
+      <td valign="top" width="500">
+It is a description of what mental state is required from an agent or set of agents. You 
+can do this in many ways.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you want to express a mental state of an agent. 
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>ControlMentalEntity</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/goal.png"></td>
+      <td valign="top" width="500">
+Represents an entity used in decision processes
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use this entity from general mental management processes
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>SymbolicMentalStatePattern</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/spec.gif"></td>
+      <td valign="top" width="500">
+You express a mental state using common expressions. Depending on the language you use, 
+you can decide that you need a more specific type of SymbolicMentalStatePattern
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+If you want to use logics to express a mental state or some agent programming language. 
+Later on, you can substitute these units by more concrete entities.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>GRASIAMentalStatePattern</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/specgrasia.gif"></td>
+      <td valign="top" width="500">
+Describes an agent mental state using agent models. In these models you are expected to 
+have only an instance of AutonomousEntityQuery associated with a mental state, and this 
+mental state with required mental entities. Another alternative is to have a conditional 
+mental state entity that allows to express conditions over identified mental entities
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+If you have not decided yet what implementation language to use, this approach is the 
+perfect choice. Agent models can be translated with little effort to the implementation 
+language you decide.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Organization</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/org.gif"></td>
+      <td valign="top" width="500">
+An organization is a set of agents, roles and resources that get together to achieve one 
+or several goals. Inside an organization there are not other organizations, just groups. You can think of an organization as an enterprise. Internally it is composed by departments that may be restructured without affecting the external image of an enterprise.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use organizations as higher grouping elements. Identify them soon in the beginning. 
+Organizations may not be required if you have one or two agents. It is reccomendable to 
+use them when the number of agents, roles or resources becomes difficult to handle. 
+Refine organizations using groups. 
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>AgentComponent</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/agent.gif"></td>
+      <td valign="top" width="500">
+It represents any possible component of the agent. There is no compromise in the way 
+this component will appear in a final agent architecture. There is a compromise in that 
+the functionality determined by this component will appear in one or several elements of 
+the architecture.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use this entity to represent requirements in the architecture
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Compromise</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/comp.gif"></td>
+      <td valign="top" width="500">
+A compromise is an entity expressing that an agent has to execute a task due to a 
+request performed by other agent
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you want to register the need to execute tasks due to past requests of other 
+agents
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>TextUseCase</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/usecase.gif"></td>
+      <td valign="top" width="500">
+A text use case is an UML use case whose description is supplied as natural language text
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use text use cases as a first refinement of conventional UML use cases. Then move to 
+others like INGENIASUseCase
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>INGENIASUseCase</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/iusecase.gif"></td>
+      <td valign="top" width="500">
+This use case is configured with information about preconditions and postconditions, as 
+well as information of the different interactions that may appear
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+In later analysis to describe with detail what a use case consists of
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Role</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/role.gif"></td>
+      <td valign="top" width="500">
+A role is a self-contained grouping of functionalities. When an agent plays a role we 
+want to express that you have to to execute tasks associated to a role and participate 
+in the same interactions that role.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use roles when you find set of tasks that could be executed by different types of agents
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Goal</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/goal.png"></td>
+      <td valign="top" width="500">
+According to the BDI model, a goal is a desired state that an agent wants to reach. In 
+planning, a goal is represented by a world state. Here a goal is an entity by itself, 
+however can be related with a representation of the world state using satisfaction 
+relationships with tasks. This relationships contains references to descriptions of 
+mental states of agents, so they refer to the image of the world that agent have
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use goals to represent states of the world to achieve. These states of the world can be 
+represented by sets of mental entities associated to mental states. Tasks of the agents 
+should provide media to achieve goals. Also take into account that goals may fail. There 
+are also relationships that can represent this aspect
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>RemoteProcedureCall</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/iu.gif"></td>
+      <td valign="top" width="500">
+This is an classic technology. It consists on invoking methods on objects allocated on 
+other machines as if they were in the same local. It assumes that you have to produce an 
+interface for the remote object.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+This technology is one of the most widespread. Use it if you do not want specially 
+FIPA-like communication facilities.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>OrganizationGroup</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/orggroup.gif"></td>
+      <td valign="top" width="500">
+A group contains other groups, roles, agents, applications, or resources. It represents the structure of an organization. 
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you want to structure the elements inside an organization. If you have only one group, perhaps you do not need any organization.Groups, and organizations as well, are useful when the developer foresees a high number of agents that may be working together. You can think of an OrganizationGroup as departments of an enterprise
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>MentalStateProcessor</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/proc.gif"></td>
+      <td valign="top" width="500">
+The agent takes decisions basing upon its mental state. There is an entity that supports 
+management of the mental state of the agent (MentalStateManager) and this entity that 
+represents the decision capabilities of the agent. As the MentalStateManager you can 
+describe the MentalStateProcessor using tasks and goals diagrams
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+When you want to talk about decision procedures of the agent
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>AOPMentalStatePattern</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/spec.gif"></td>
+      <td valign="top" width="500">
+The mental state of the agent is expressed the Agent0 language
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+When the final implementation language it is Agent0
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Workflow</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/workflow.gif"></td>
+      <td valign="top" width="500">
+A workflow is an abstraction to a process that has been automatised using activities and 
+identifying their responsible.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use workflows to represent tasks executed in common by different agents or roles. The 
+workflow description can be complimented with interactions to determine in what moment a 
+task executes.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>MentalEntity</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/goal.png"></td>
+      <td valign="top" width="500">
+It is any element that may form part of the mental state of an agent
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use mental entities as joker to define high level mental state management functions or decision procedures
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Believe</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/bel.gif"></td>
+      <td valign="top" width="500">
+A believe is a set of asserts that are not certainties, just expectations
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use it to define what you expect from other agents
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>FrameFact</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/fact.gif"></td>
+      <td valign="top" width="500">
+It is a fact whose informatino is contained in its slots
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use this entity in advanced development stages where you can provide types for the 
+information collected. 
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Task</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/task.gif"></td>
+      <td valign="top" width="500">
+Tasks is the encapsulation of actions or non-distributable algorithms. Tasks can use 
+Applications and resources. Tasks generate changes in the mental state of the agent that 
+executes them. Changes consist of: (a) modifying, creating or destroying mental 
+entities; or (b) changes in the perception of the world by acting over applications 
+(applications act over the world producing events, that are perceived by the agent).  
+Though tasks can be also assigned to roles, at the end, it will belong to an agent.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you want to represent an activity or an ability associated to an agent or role. 
+You can use them also to express activities performed in a organization. Finally, you 
+can use them also to express management or decision taking activities.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>InternalApplication</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/appi.gif"></td>
+      <td valign="top" width="500">
+It is an application that will be developed for this system. 
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+You can use these entities as a representation of internal components of agents or components shared by several agents
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>GRASIAAgentDescription</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/fact.gif"></td>
+      <td valign="top" width="500">
+Contains a reference to an agent model. With this model you describe conditions of goal 
+satisfaction or failure, and interaction collaboration. Usually, this is achieved 
+associating mental states to an instance of ConcreteAgent or 
+AutonomousEntityQuery. This instance should be understood as the 
+executor of the task or the performer or colaborator in an interaction unit. You also 
+can use common associations in these diagrams to represent abilities required or other 
+qualities.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use GRASIAAgentDescription when you are in advanced development 
+stages. These descriptions are very detailed and should provide enough information for 
+most implementations.
+
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Agent</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/agent.gif"></td>
+      <td valign="top" width="500">
+An agent entity is an autonomous entity with identity, purposes and that performs 
+activities to achieve its goals.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you find an entity that behaves according to Newell's definition of an agent: 
+'a program at the knowledge level that processes knowledge and behaves according with 
+the rationality principle, i.e., that performs tasks only to achieve its goals'
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Application</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/app.gif"></td>
+      <td valign="top" width="500">
+An application is wraper to computational system entities. By 'computational', we mean 
+'having an interface and a concrete behavior'. 
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Whenever you have some system entity (physical) that you cannot categorize as an agent, 
+organization, or resource. Use this entity when you do not know from the beginning 
+further details of this entity.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>ApplicationEvent</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/eventa.gif"></td>
+      <td valign="top" width="500">
+It is an event produced by an application
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use it to define an agent's perception
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>GRASIASpecification</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/spec.gif"></td>
+      <td valign="top" width="500">
+A description of an interaction using GRASIA elements. This description allows to talk 
+about the technology used to transfer information from one agent to another, refer to 
+the mental conditions that must meet initator and collaborators at each step, what tasks 
+will be executed and when, and what is the execution order of the different 
+communication acts.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use this kind of diagrams in design to generate an accurate description of what kind of 
+interaction you wish. In the analysis just use UML Collaboration diagrams.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>InformationMentalEntity</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/goal.png"></td>
+      <td valign="top" width="500">
+An entity that contains information about the world. 
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use them to represent different aspects of the world's perception or agent state
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>IUIterate</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/app.gif"></td>
+      <td valign="top" width="500">
+It is a container of interaction units. It represents a repetitive execution of a set of interaction units. The loop finishes when the next interaction unit, to which IUITerate is connected, appears, or when the number of iterations is satisfied. The number of iterations is a parameter.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+You want to represent a loop with several interaction units. In the numberIterations field you can use notation from UML to represent the iteration
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>ConditionalMentalState</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/mstate.gif"></td>
+      <td valign="top" width="500">
+A mental state that adds extra information about what conditions must satisfy the 
+entities aggregated in a mental state. Entities in a mental state can be labeled. These 
+labels are used inside the mental state condition.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use conditional mental states at the design stage to determine what you require from 
+each mental entity at a certain moment 
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>AgentRequirementsQuery</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/query.gif"></td>
+      <td valign="top" width="500">
+Describes a running instance of an agent by any kind of 
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>GeneralEvent</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/event.gif"></td>
+      <td valign="top" width="500"></td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+<br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>ApplicationEventSlots</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/eventa.gif"></td>
+      <td valign="top" width="500">
+An application event that determines the information that transmits as slots
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use this in the early design to define exactly what information is required by tasks or 
+goals (information from satisfaction conditions) to process them.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>MessagePassing</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/iu.gif"></td>
+      <td valign="top" width="500"></td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+<br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>InteractionUnit</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/iu.gif"></td>
+      <td valign="top" width="500"></td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+<br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>ConcreteAgent</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/query.gif"></td>
+      <td valign="top" width="500"></td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+<br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>NaturalLanguageAgentDescription</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/fact.gif"></td>
+      <td valign="top" width="500">
+Provides an natural language description of an agent. This kind of descriptions is used 
+to represent conditions of goal satisfaction or failure, and interaction collaboration.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use this only in the initial stages of the development. As the development progresses, 
+move to GRASIAAgentDescription and others more specific.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>Fact</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/fact.gif"></td>
+      <td valign="top" width="500">
+Describes an information that the agent accepts as reliable. This general entity 
+contains this information in the description field.
+</td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+
+Use them to express past experience of the agent, information passed from task to task, 
+and other kind of information assumed as reliable by the agent.
+ <br>
+      </td>
+    </tr>
+           
+</table>
+	 	
+<table border="1" bgcolor="#ffff99" width="100%">
+   
+    <tr>
+      <td width="1"><b>ID</b></td>
+      <td>UMLSpecification</td>
+    </tr>
+	 <tr>
+      <td valign="middle" rowspan="2" colspan="1" align="center" width="80">
+<img src="file:images/spec.gif"></td>
+      <td valign="top" width="500"></td>
+    </tr>
+    <tr>
+      <td valign="top" width="500">                    
+      <h4>When to use ...</h4>
+<br>
+      </td>
+    </tr>
+           
+</table>
+		  
+
+
+<br>
+
+</body>
+</html>

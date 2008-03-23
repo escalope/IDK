@@ -1,0 +1,11 @@
+The current version incorporates several new features:
+
+- The editor can generate postcript captures of the files. Just choose the proper file format when saving the capture
+- There are important improvements in the performance of the editor in terms of speed and memory
+- The GUI has been modified to facilitate editing of entities. Among other changes, the edition dialogue now does not embedd other edition dialogs. When an entity contains references to another, the editing dialog will show the name of the entity and a button to open another different editing dialog. 
+- Also, the definition of links among entities is easier now. It saves some intermediate steps and speeds up the production of specifications.
+- Specification merge capabilities. Now you can mix two different specifications. This is useful to reuse results from different developments. 
+- The general structure of the IDK has been modified to give more relevance to the development with the INGENIAS Agent Framework. In concrete, the folder structure has changed, decoupling the editor from the INGENIAS Agent Framework. It also incorporates project creation scripts, so that users find easier to create their own MAS. The distribution comes with several examples of development
+- The INGENIAS Agent Framework has gone through major changes. Among the most important is the management of the mental state of the agents, the definition of agent specific debugging features, the possiblity of disabling GUIs, testing capabilities, and mental state garbage collector. For more details on the elements of the INGENIAS Agent Framework, it is recommended to read the development guide.
+
+- Tons of bugfixes

@@ -1,0 +1,270 @@
+
+@@@program xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../plantilla.xsd"@@@
+
+@@@repeat id="agentinteractionscols"@@@
+
+		@@@saveto@@@
+			@@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeout@@@/v@@@/ingenias/jade/smachines/@@@v@@@roleid@@@/v@@@@@@v@@@interactionid@@@/v@@@StateBehavior.java@@@/file@@@
+			@@@text@@@
+
+/*
+    Copyright (C) 2005 Jorge Gomez Sanz
+
+    This file is part of INGENIAS Agent Framework, an agent infrastructure linked
+    to the INGENIAS Development Kit, and availabe at http://grasia.fdi.ucm.es/ingenias or
+    http://ingenias.sourceforge.net. 
+
+    INGENIAS Agent Framework is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    INGENIAS Agent Framework is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with INGENIAS Agent Framework; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*/
+
+package ingenias.jade.smachines;
+
+import jade.core.Agent;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
+import jade.core.behaviours.*;
+
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+
+import jade.core.*;
+import jade.core.behaviours.*;
+
+import jade.domain.FIPAAgentManagement.*;
+import jade.domain.FIPAException;
+import jade.domain.DFService;
+ import jade.domain.FIPANames;
+import jade.lang.acl.ACLMessage;
+import java.util.*;
+import ingenias.jade.*;
+import ingenias.editor.entities.*;
+import ingenias.jade.comm.DefaultCommControl;
+import ingenias.jade.comm.StateBehavior;
+import ingenias.jade.comm.CommActCreator;
+import ingenias.jade.exception.NoAgentsFound;
+
+public class @@@v@@@roleid@@@/v@@@@@@v@@@interactionid@@@/v@@@StateBehavior extends StateBehavior{
+private MentalStateReader msr=null;
+  public @@@v@@@roleid@@@/v@@@@@@v@@@interactionid@@@/v@@@StateBehavior( String agentName,
+   			MentalStateReader msr,
+   			MentalStateUpdater msu,
+  			RuntimeConversation conv, String playedRole, 
+			DFAgentDescription[] actors, 
+			//DFAgentDescription[] playedRoles,
+			DefaultCommControl dcc, 
+			String protocol){
+    super(conv, playedRole,msu,actors,dcc,protocol,agentName);
+    this.msr=msr;
+    try {
+			if (IAFProperties.getGraphicsOn()){
+			    @@@repeat id="initialiseColaborator"@@@
+			      // States involved into colaborator initialization
+			      smf.add("disabled", "waiting for enable");
+			      smf.add("waiting for enable","@@@v@@@firstiu@@@/v@@@");
+			    @@@/repeat@@@
+			    @@@repeat id="initialiseInititator"@@@
+			      // States involved into interaction intiator    
+			      smf.add("disabled", "@@@v@@@firstiu@@@/v@@@");
+			    @@@/repeat@@@
+			    @@@repeat id="receiveaction"@@@
+			      // Receiving a message    
+			      smf.add("@@@v@@@iud@@@/v@@@", "waiting for @@@v@@@iud@@@/v@@@");
+			      
+			      // Next states after receiving "@@@v@@@iud@@@/v@@@"
+			      @@@repeat id="nextstates"@@@
+			       smf.add("waiting for @@@v@@@iud@@@/v@@@","@@@v@@@possibleiu@@@/v@@@");
+			      @@@/repeat@@@
+			    @@@/repeat@@@
+			    @@@repeat id="sendaction"@@@
+			     // States involved in message deliver
+			     @@@repeat id="nextstates"@@@
+			      smf.add("@@@v@@@iud@@@/v@@@", "@@@v@@@possibleiu@@@/v@@@");
+			      @@@/repeat@@@
+			    @@@/repeat@@@
+			
+			    this.updateStates(agentName);
+			}
+    } catch (ingenias.exception.CycleInProtocol cip){
+      cip.printStackTrace();
+    }
+    
+    this.addState("disabled");
+
+  }
+
+  public synchronized void action() {
+    boolean cond1 = true;
+    boolean cond2 = true;
+
+    @@@repeat id="initialiseColaborator"@@@
+    if (this.isState("disabled")){     
+     String[] options=new String[]{"@@@v@@@firstiu@@@/v@@@"};
+     CommActCreator.generateRWithoutCID((JADEAgent)myAgent,
+      "@@@v@@@interactionid@@@/v@@@","enable",options,this);
+      this.removeState("disabled");
+      
+     this.addState("waiting for enable");
+     @@@repeat id="sendaction"@@@
+     @@@repeat id="condfacts"@@@
+     this.getAgent().addDeletionLock("@@@v@@@type@@@/v@@@");
+     @@@/repeat@@@
+     @@@/repeat@@@
+     this.setRunning();   
+    }
+    @@@/repeat@@@
+
+    @@@repeat id="initialiseInititator"@@@
+    if (this.isState("disabled")){
+  	try {  	  
+      String[] options=new String[]{"@@@v@@@firstiu@@@/v@@@"};
+      AID[] actors=null;
+      Vector<AID> actorsv=new Vector<AID>();
+      Vector<String> rolesv=new Vector<String>();
+      @@@repeat id="receivers"@@@
+      actorsv.addAll(this.getActor("@@@v@@@receiver@@@/v@@@"));
+      {      
+       Vector<AID> receivers=this.getActor("@@@v@@@receiver@@@/v@@@");      
+       for (AID aid:receivers){
+        rolesv.add("@@@v@@@receiver@@@/v@@@");
+       }
+      }
+
+      @@@/repeat@@@
+      actors=new AID[actorsv.size()];
+      actorsv.toArray(actors);
+      CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
+       "enable","@@@v@@@interactionid@@@/v@@@",this.getAgentExternalDescription());
+      this.getDCC().notifyMessageSent("disabled",options,this);
+      this.setRunning();   
+      } catch (NoAgentsFound e) {
+      e.printStackTrace();
+  	}
+    }
+    @@@/repeat@@@
+
+
+  
+  @@@repeat id="receiveaction"@@@
+  // Receives a message and a synchronization command
+  if (this.isState("@@@v@@@iud@@@/v@@@") ) {  // State changed by other agent and upted
+    //in the parent class
+         
+      Vector options=new Vector();
+      @@@repeat id="nextstates"@@@
+      options.add("@@@v@@@possibleiu@@@/v@@@");
+      @@@/repeat@@@
+      String[] optionsA=new String[options.size()];
+      options.toArray(optionsA);
+      boolean allexist=true;
+      @@@repeat id="condfacts"@@@
+      MentalEntity @@@v@@@label@@@/v@@@=msr.getMentalEntity("@@@v@@@type@@@/v@@@");
+      allexist=allexist && (@@@v@@@label@@@/v@@@ !=null);
+      @@@/repeat@@@
+      int cardinality=1;
+      if ("@@@v@@@cardinality@@@/v@@@".equals("n")){
+         try{
+          Vector<AID> receivers=this.getActor("@@@v@@@senderactor@@@/v@@@");    
+          cardinality=receivers.size();          
+          } catch (NoAgentsFound ex) {
+                    ex.printStackTrace();
+                }   
+       
+      }
+      
+      if (allexist && @@@v@@@condition@@@/v@@@){     
+		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
+                        this.getConversationID(),"@@@v@@@iud@@@/v@@@",
+                   "@@@v@@@interactionid@@@/v@@@",optionsA,this,cardinality,@@@v@@@timeout@@@/v@@@));
+      }	 
+      this.removeState("@@@v@@@iud@@@/v@@@");
+      this.addState("waiting for @@@v@@@iud@@@/v@@@");
+  } 
+  @@@/repeat@@@
+  
+  
+  @@@repeat id="sendaction"@@@
+  // Sends a message and synchronization commands
+  if (this.isState("@@@v@@@iud@@@/v@@@")) {
+     
+     try {
+      AID[] actors=null;
+      Vector actorsv=new Vector();
+      Vector<String> rolesv=new Vector<String>();
+      @@@repeat id="receiver"@@@
+      {      
+       Vector<AID> receivers=this.getActor("@@@v@@@receiver@@@/v@@@");      
+       actorsv.addAll(receivers);
+       for (AID aid:receivers){
+        rolesv.add("@@@v@@@receiver@@@/v@@@");
+       }
+      }
+      @@@/repeat@@@
+      actors=new AID[actorsv.size()];
+      actorsv.toArray(actors);
+      Vector options=new Vector();
+      @@@repeat id="nextstates"@@@
+      options.add("@@@v@@@possibleiu@@@/v@@@");
+      @@@/repeat@@@
+      String[] optionsA=new String[options.size()];
+      options.toArray(optionsA);
+      if (this.getDCC().notifyMessageSent("@@@v@@@iud@@@/v@@@",optionsA,this)){
+           //If mental state conditions are met, the message is send and state changed
+            CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
+           "@@@v@@@iud@@@/v@@@","@@@v@@@interactionid@@@/v@@@",this.getContentForNextMessage());
+           getTimeout().stop();
+      } else {
+    	  if (getTimeout().isStarted() && getTimeout().isFinished()){
+    	    		 this.abortDueTimeout();   	        
+    	  } else  {
+    		  if (!getTimeout().isStarted())
+    		  getTimeout().start(@@@v@@@timeout@@@/v@@@);
+    	  }
+      }
+
+      } catch (NoAgentsFound e) {
+      e.printStackTrace();
+  	}
+  } 
+  @@@/repeat@@@
+   
+
+  @@@repeat id="endstate"@@@
+  // Finishes this state machine
+  if (this.isState("end@@@v@@@stateid@@@/v@@@")) {
+    this.setFinished(); // End of transitions
+    this.getDCC().removeDefaultLocks();
+  }
+  @@@/repeat@@@
+  
+  if (this.isState("ABORTED")) {	    
+	    this.getDCC().removeDefaultLocks();
+  }
+
+}
+
+
+}
+
+@@@/text@@@
+		@@@/saveto@@@
+
+
+@@@/repeat@@@
+
+@@@/program@@@

@@ -190,7 +190,7 @@ public abstract class ModelJGraph extends JGraph {
 						editDialog.getContentPane().add(main,BorderLayout.CENTER);						
 						editDialog.pack();						
 						String oldid=ent.getId();
-						editDialog.setLocation(ingenias.editor.widget.GraphicsUtils.getCenter(editDialog.getSize()));
+						editDialog.setLocation(ingenias.editor.widget.GraphicsUtils.getCenter(IDE.ide,editDialog.getSize()));
 						cancel.addActionListener(new ActionListener(){
 							public void actionPerformed(ActionEvent e) {
 								if (gep.isModified()){
@@ -211,6 +211,7 @@ public abstract class ModelJGraph extends JGraph {
 						accept.addActionListener(new ActionListener(){
 							public void actionPerformed(ActionEvent e) {
 								editDialog.setVisible(false);
+								gep.confirmActions();
 								graph.repaint();
 							};
 						});

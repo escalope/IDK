@@ -150,11 +150,12 @@ implements java.io.Serializable, ClipboardOwner
 	 */
 	public IDEAbs() {
 		super();
+		
+		
 		JFileChooser jfc = new JFileChooser();
 		File homedir = jfc.getCurrentDirectory();
 		new File(homedir.getPath() + "/.idk").mkdir();		
-		/*Splash s = new Splash(this);
-		s.show();*/
+
 		ide = this;
 		ids = new IDEState(null, this.rootObjetos, this.arbolObjetos,
 				this.rootProject, this.arbolProyectos);
@@ -188,6 +189,7 @@ implements java.io.Serializable, ClipboardOwner
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		//s.setVisible(false);
 		this.setVisible(true);
+		JOptionPane.setRootFrame(this);
 		this.currentFile = null;
 		HyperlinkListener diagramLocator = new HyperlinkListener(){
 			private String lastScrolledEntity="";
@@ -617,10 +619,10 @@ implements java.io.Serializable, ClipboardOwner
 
 
 	Point getCenter(Dimension size){
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension d = this.getSize();
 		Point result=new Point(
-				d.width / 2 - size.width / 2,
-				d.height / 2 - size.height / 2);
+				(d.width / 2 - size.width / 2)+this.getLocation().x,
+				(d.height / 2 - size.height / 2)+this.getLocation().y);
 		return result;
 	}
 
@@ -696,6 +698,7 @@ implements java.io.Serializable, ClipboardOwner
 			JGraph jg = ids.gm.getCurrent();
 			final javax.swing.tree.DefaultMutableTreeNode dmtn =
 				(javax.swing.tree.DefaultMutableTreeNode) tp.getLastPathComponent();
+			final IDEAbs ide=this;
 			if (dmtn != null && dmtn.getUserObject()instanceof Entity) {
 
 
@@ -718,9 +721,9 @@ implements java.io.Serializable, ClipboardOwner
 							public void actionPerformed(ActionEvent e) {
 
 								Entity sel = (Entity) dmtn.getUserObject();
-								ingenias.editor.editiondialog.GeneralEditionFrame jf = new ingenias.editor.editiondialog.GeneralEditionFrame(ids.editor, ids.om, null,
+								ingenias.editor.editiondialog.GeneralEditionFrame jf = new ingenias.editor.editiondialog.GeneralEditionFrame(ids.editor, ids.om, ide,
 										"Edit " + sel.getId(), sel);
-								Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+								
 								jf.setLocation(getCenter(jf.getSize()));
 								jf.pack();
 								jf.show();
@@ -737,7 +740,7 @@ implements java.io.Serializable, ClipboardOwner
 									javax.swing.tree.DefaultMutableTreeNode dmtn =
 										(javax.swing.tree.DefaultMutableTreeNode) tps[k].getLastPathComponent();
 									if (dmtn != null && dmtn.getUserObject()instanceof Entity) {
-										int result = JOptionPane.showConfirmDialog(null,
+										int result = JOptionPane.showConfirmDialog(ide,
 												"This will remove permanently " + tps[k].getLastPathComponent() +
 												". Are you sure?",
 												"removing package", JOptionPane.YES_NO_OPTION);
@@ -798,11 +801,9 @@ implements java.io.Serializable, ClipboardOwner
 	void properties_actionPerformed(ActionEvent e) {
 		PropertiesWindow pw = new PropertiesWindow(ids.prop);
 		pw.setSize(350, 300);
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		pw.setLocation(
-				d.width / 2 - pw.getSize().width / 2,
-				d.height / 2 - pw.getSize().height / 2);
-		pw.show();
+				
+		pw.setLocation(getCenter(pw.getSize()));
+		pw.setVisible(true);
 
 	}
 
@@ -881,7 +882,8 @@ implements java.io.Serializable, ClipboardOwner
 								return "xml";
 							}
 						});
-				jfc.showOpenDialog(null);
+				jfc.setLocation(getCenter(jfc.getSize()));
+				jfc.showOpenDialog(this);
 				final File input = jfc.getSelectedFile();
 				if (input != null && !input.isDirectory()) {
 					new Thread() {
@@ -912,12 +914,9 @@ implements java.io.Serializable, ClipboardOwner
 				JLabel jl = new JLabel(message);
 				jl.setFont(new java.awt.Font("Dialog", 1, 36));
 
-				jw.getContentPane().add(jl);
-				Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+				jw.getContentPane().add(jl);				
 				jw.pack();
-				jw.setLocation(
-						d.width / 2 - jw.getSize().width / 2,
-						d.height / 2 - jw.getSize().height / 2);
+				jw.setLocation(getCenter(jw.getSize()));
 
 				jw.setVisible(true);
 			}
@@ -969,6 +968,7 @@ implements java.io.Serializable, ClipboardOwner
 								}
 							});
 				}
+				jfc.setLocation(getCenter(jfc.getSize()));
 				jfc.showDialog(this, "Save");
 				File sel = jfc.getSelectedFile();
 				it = hs.iterator();
@@ -1021,6 +1021,7 @@ implements java.io.Serializable, ClipboardOwner
 			boolean invalidFolder = true;
 			File sel = null;
 			while (invalidFolder) {
+				jfc.setLocation(getCenter(jfc.getSize()));
 				jfc.showSaveDialog(this);
 				sel = jfc.getSelectedFile();
 
@@ -1195,19 +1196,20 @@ implements java.io.Serializable, ClipboardOwner
 				}
 				catch (ingenias.exception.UnknowFormat e1) {
 					Log.getInstance().logSYS(e1.getMessage());
-					JOptionPane.showMessageDialog(null,
+					
+					JOptionPane.showMessageDialog(ide,
 					"Failure loading: format unknown. See MESSAGES pane");
 
 				}
 				catch (ingenias.exception.DamagedFormat df) {
 					Log.getInstance().logSYS(df.getMessage());
-					JOptionPane.showMessageDialog(null,
+					JOptionPane.showMessageDialog(ide,
 					"Failure loading: some diagrams could not be loaded. See MESSAGES pane");
 
 				}
 				catch (ingenias.exception.CannotLoad cl) {
 					Log.getInstance().logSYS(cl.getMessage());
-					JOptionPane.showMessageDialog(null,
+					JOptionPane.showMessageDialog(ide,
 					"Failure loading: could not load anything. See MESSAGES pane");
 
 				}
@@ -1535,7 +1537,7 @@ implements java.io.Serializable, ClipboardOwner
 								return "xml";
 							}
 						});
-				jfc.showOpenDialog(null);
+				jfc.showOpenDialog(ide);
 				final File input = jfc.getSelectedFile();
 				if (input != null && !input.isDirectory()) {
 					new Thread() {
@@ -1597,21 +1599,21 @@ implements java.io.Serializable, ClipboardOwner
 				}
 				catch (ingenias.exception.UnknowFormat e1) {
 					Log.getInstance().logSYS(e1.getMessage());
-					JOptionPane.showMessageDialog(null,
+					JOptionPane.showMessageDialog(ide,
 					"Failure loading: format unknown. See MESSAGES pane");
 					jw.hide();
 
 				}
 				catch (ingenias.exception.DamagedFormat df) {
 					Log.getInstance().logSYS(df.getMessage());
-					JOptionPane.showMessageDialog(null,
+					JOptionPane.showMessageDialog(ide,
 					"Failure loading: some diagrams could not be loaded. See MESSAGES pane");
 					jw.hide();
 
 				}
 				catch (ingenias.exception.CannotLoad cl) {
 					Log.getInstance().logSYS(cl.getMessage());
-					JOptionPane.showMessageDialog(null,
+					JOptionPane.showMessageDialog(ide,
 					"Failure loading: could not load anything. See MESSAGES pane");
 					jw.hide();
 

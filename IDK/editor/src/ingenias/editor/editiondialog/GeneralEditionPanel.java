@@ -178,7 +178,7 @@ implements java.io.Serializable {
 
 				public void actionPerformed(ActionEvent e) {
 					om.removeEntity(result);
-					System.err.println("removing "+result);
+					//System.err.println("removing "+result);
 
 				}
 
@@ -1099,30 +1099,25 @@ implements java.io.Serializable {
 						public void actionPerformed(ActionEvent e) {
 							try {   
 								m.invoke(entity, paramVal);
-								System.err.println("setting old value "+getValue(entity.getClass(),cf));
+								//System.err.println("setting old value "+getValue(entity.getClass(),cf));
 							} catch (IllegalArgumentException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							} catch (IllegalAccessException e1) {} catch (InvocationTargetException e2) {
 								// TODO Auto-generated catch block
 								e2.printStackTrace();
-							} catch (NoSuchMethodException e3) {
-								// TODO Auto-generated catch block
-								e3.printStackTrace();
-							};}});
+							} ;}});
 
 					this.undo.add(new ActionListener(){
 						public void actionPerformed(ActionEvent e) {
 							try {   if (!value.equals(oldvalue))
 								undo.invoke(entity, new Object[]{oldvalue});
-							System.err.println("setting old value "+getValue(entity.getClass(),cf));
+							//System.err.println("setting old value "+getValue(entity.getClass(),cf));
 							} catch (IllegalArgumentException e1) {
 								e1.printStackTrace();
 							} catch (IllegalAccessException e1) {
 								e1.printStackTrace();
 							} catch (InvocationTargetException e1) {
-								e1.printStackTrace();
-							} catch (NoSuchMethodException e1) {
 								e1.printStackTrace();
 							}
 						}
@@ -1230,7 +1225,7 @@ implements java.io.Serializable {
 							undo.invoke(entity, new Object[]{((Entity)value).getId()});
 						else 
 							undo.invoke(entity, new Object[]{value.toString()});	
-						System.err.println("undoing adding "+value);
+						//System.err.println("undoing adding "+value);
 					} catch (IllegalArgumentException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -1285,7 +1280,7 @@ implements java.io.Serializable {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						m.invoke(entity, paramVal);
-						System.err.println("removing "+id);
+						//System.err.println("removing "+id);
 					} catch (IllegalArgumentException e1) {
 						e1.printStackTrace();
 					} catch (IllegalAccessException e1) {
@@ -1463,7 +1458,7 @@ implements java.io.Serializable {
 	}
 
 	public void undo(){
-		System.err.println(""+undo.size()+" actions to undo");
+		//System.err.println(""+undo.size()+" actions to undo");
 		/*Component[] comps=this.getComponents();
 		for (int k=0;k<comps.length;k++){
 			if (comps[k] instanceof GeneralEditionPanel){

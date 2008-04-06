@@ -22,8 +22,6 @@ package ingenias.editor;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-import javax.swing.plaf.metal.OceanTheme;
 import javax.swing.text.html.HTMLFrameHyperlinkEvent;
 import javax.swing.tree.*;
 import javax.swing.event.*;
@@ -68,9 +66,6 @@ public class IDE
    */
   public IDE() {
     super();
-
-
-
   }
 
   
@@ -78,6 +73,7 @@ public class IDE
   
 
 public void updateProjectsMenu(JMenu menu){
+	final IDE self=this;
    
    // Menu to add a EnvironmentModel model instance
 
@@ -100,7 +96,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -153,7 +149,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -206,7 +202,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -259,7 +255,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -312,7 +308,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -365,7 +361,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -418,7 +414,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -471,7 +467,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -524,7 +520,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -577,7 +573,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -650,6 +646,7 @@ public void updateProjectsMenu(JMenu menu){
      if (tp != null) {   
     DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) 
     tp.getLastPathComponent();
+    final IDE self=this;
     if (tp != null && dmtn.getUserObject()instanceof String) {
 
    
@@ -669,7 +666,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -719,7 +716,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -769,7 +766,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -819,7 +816,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -869,7 +866,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -919,7 +916,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -969,7 +966,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -1019,7 +1016,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -1069,7 +1066,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -1119,7 +1116,7 @@ public void updateProjectsMenu(JMenu menu){
               JOptionPane.QUESTION_MESSAGE);
           if (nombre != null && ids.gm.existsModel(nombre)) {
 
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(self,
                 "There exists a model with the same name. Please, select another",
                 "Warning",
                 JOptionPane.WARNING_MESSAGE);
@@ -1162,7 +1159,7 @@ public void updateProjectsMenu(JMenu menu){
         TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
         if (tp != null) {
           String nombre =
-              JOptionPane.showInputDialog(ids.editor,
+              JOptionPane.showInputDialog(self,
                                           "Type a new package's name",
                                           "New package",
                                           JOptionPane.QUESTION_MESSAGE);
@@ -1199,7 +1196,7 @@ public void updateProjectsMenu(JMenu menu){
               ModelDataEntity mde = ( (ModelJGraph) uo).getProperties();
 
               ingenias.editor.editiondialog.GeneralEditionFrame gef = new ingenias.
-	      editor.editiondialog.GeneralEditionFrame(ids.editor, ids.om, null,
+	      editor.editiondialog.GeneralEditionFrame(ids.editor, ids.om, self,
                                                   "Edit diagram properties",
                                                   mde);
               ModelJGraph mjg =
@@ -1211,7 +1208,7 @@ public void updateProjectsMenu(JMenu menu){
               duplicated =
                   GraphManager.getInstance().isDuplicated(mde.getId());
               if (duplicated) {
-                JOptionPane.showMessageDialog(null,
+                JOptionPane.showMessageDialog(self,
                     "There exists a model with the same name. Please, select another",
                     "Warning", JOptionPane.WARNING_MESSAGE);
               }
@@ -1236,7 +1233,7 @@ public void updateProjectsMenu(JMenu menu){
           DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
               getLastPathComponent();
           Object uo = dmtn.getUserObject();
-          String result = JOptionPane.showInputDialog(null,
+          String result = JOptionPane.showInputDialog(self,
               "Type in the new name", "New name", JOptionPane.QUESTION_MESSAGE);
           if (result != null && !result.equals("")) {
             if (String.class.isAssignableFrom(uo.getClass())) {
@@ -1245,7 +1242,7 @@ public void updateProjectsMenu(JMenu menu){
             }
             else {
               if (ids.gm.existsModel(result)) {
-                JOptionPane.showMessageDialog(null,
+                JOptionPane.showMessageDialog(self,
                     "There exists a model with the same name. Please, select another",
                     "Warning",
                     JOptionPane.WARNING_MESSAGE);
@@ -1268,7 +1265,7 @@ public void updateProjectsMenu(JMenu menu){
       public void actionPerformed(ActionEvent e) {
         TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
         if (tp != null) {
-          int result = JOptionPane.showConfirmDialog(null,
+          int result = JOptionPane.showConfirmDialog(self,
               "This will remove permanently " + tp.getLastPathComponent() +
               ". Are you sure?",
               "removing package", JOptionPane.YES_NO_OPTION);

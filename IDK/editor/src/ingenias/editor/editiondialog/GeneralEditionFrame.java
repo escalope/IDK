@@ -19,7 +19,7 @@
     along with INGENIAS IDE; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-*/
+ */
 
 package ingenias.editor.editiondialog;
 
@@ -34,75 +34,78 @@ import ingenias.editor.GraphManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.Serializable {
-  private JScrollPane mainscroll = new JScrollPane();
+	private JScrollPane mainscroll = new JScrollPane();
 
-  public GeneralEditionFrame(ingenias.editor.Editor editor,ingenias.editor.ObjectManager om,final Frame dialogOwner,String title,Entity ent) {
-    super(dialogOwner,title,true);
+	public GeneralEditionFrame(ingenias.editor.Editor editor,ingenias.editor.ObjectManager om,final Frame dialogOwner,String title,Entity ent) {
+		super(dialogOwner,title,true);
 
-    final JPanel main=new JPanel();
-    BorderLayout bl=new BorderLayout();
-    main.setLayout(bl);
-    this.getContentPane().add(main);
-    main.addContainerListener(new java.awt.event.ContainerAdapter(){
-      public void componentAdded(java.awt.event.ContainerEvent ce){
-        pack();
-      }
-    });
-    
-    final JDialog self=this;
-    final GeneralEditionPanel gep=new GeneralEditionPanel(editor,dialogOwner, om,ent);
-    main.add(mainscroll,BorderLayout.CENTER);
-    mainscroll.getViewport().add(gep,null);    
-    JButton cancel=new JButton("Cancel");
-    cancel.addActionListener(new java.awt.event.ActionListener(){
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        self.setVisible(false);
-        gep.undo();
-      }
-    });
-    
-    JButton accept=new JButton("Accept");
-    accept.addActionListener(new java.awt.event.ActionListener(){
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-    	  self.setVisible(false);
-          gep.confirmActions();
-      }
-    });
+		final JPanel main=new JPanel();
+		BorderLayout bl=new BorderLayout();
+		main.setLayout(bl);
+		this.getContentPane().add(main);
+		main.addContainerListener(new java.awt.event.ContainerAdapter(){
+			public void componentAdded(java.awt.event.ContainerEvent ce){
+				pack();
+			}
+		});
 
-    JPanel southButtons=new JPanel();
-    southButtons.add(accept);
-    southButtons.add(cancel);
-    main.add(southButtons,BorderLayout.SOUTH);
-    SwingUtilities.invokeLater(new Runnable(){
-    	  public void run(){
-    		  if (dialogOwner!=null)
-    		dialogOwner.requestFocusInWindow();
-    	    self.requestFocusInWindow();}});
+		final JDialog self=this;
+		final GeneralEditionPanel gep=new GeneralEditionPanel(editor,dialogOwner, om,ent);
+		main.add(mainscroll,BorderLayout.CENTER);
+		mainscroll.getViewport().add(gep,null);    
+		JButton cancel=new JButton("Cancel");
+		cancel.addActionListener(new java.awt.event.ActionListener(){
+			public void actionPerformed(java.awt.event.ActionEvent ae) {
+				self.setVisible(false);
+				gep.undo();
+			}
+		});
 
-  }
+		JButton accept=new JButton("Accept");
+		accept.addActionListener(new java.awt.event.ActionListener(){
+			public void actionPerformed(java.awt.event.ActionEvent ae) {
+				self.setVisible(false);
+				gep.confirmActions();
+			}
+		});
 
-  public void pack(){
-   super.pack();
-   final JDialog jd=this;
-   this.setSize(this.getSize().width+30,300);
-  
-  }
+		JPanel southButtons=new JPanel();
+		southButtons.add(accept);
+		southButtons.add(cancel);
+		main.add(southButtons,BorderLayout.SOUTH);
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				if (dialogOwner!=null)
+					dialogOwner.requestFocusInWindow();
+
+			}});
+		self.requestFocusInWindow();
+		setLocation(dialogOwner.getLocation().x+getSize().width/2,dialogOwner.getLocation().y+	getSize().height/2);
+
+	}
+
+	public void pack(){
+		super.pack();
+		final JDialog jd=this;
+		this.setSize(this.getSize().width+30,300);
+
+	}
 
 
-  public static void main(String args[]){
-	
-    System.err.println("hola");
-    ingenias.editor.entities.INGENIASCodeComponent a=new ingenias.editor.entities.INGENIASCodeComponent("mio");
-    a.setCode("hola que tal");
-    GraphManager.initInstance(new DefaultMutableTreeNode(),new DnDJTree());
+	public static void main(String args[]){
 
-    GeneralEditionFrame ge=new GeneralEditionFrame(null,ingenias.editor.ObjectManager.initialise(new DefaultMutableTreeNode(),new JTree()),null,"hola", a);
+		System.err.println("hola");
+		ingenias.editor.entities.INGENIASCodeComponent a=new ingenias.editor.entities.INGENIASCodeComponent("mio");
+		a.setCode("hola que tal");
+		GraphManager.initInstance(new DefaultMutableTreeNode(),new DnDJTree());
 
-    
-    ge.setVisible(true);
-    System.out.println(a.getDescription());
+		GeneralEditionFrame ge=new GeneralEditionFrame(null,ingenias.editor.ObjectManager.initialise(new DefaultMutableTreeNode(),new JTree()),null,"hola", a);
 
-    //System.out.println(a.getDescription());
 
-  }
+		ge.setVisible(true);
+		System.out.println(a.getDescription());
+
+		//System.out.println(a.getDescription());
+
+	}
 }

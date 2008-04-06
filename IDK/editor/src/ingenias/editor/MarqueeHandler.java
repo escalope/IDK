@@ -444,8 +444,8 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 						ingenias.editor.entities.Entity ent=((ingenias.editor.entities.Entity)dgc.getUserObject());
 						chw.setDescription(ent.getHelpDesc());
 						chw.setRec(ent.getHelpRecom());
-						chw.setSize(350,300);
-						chw.setLocation(GraphicsUtils.getCenter(chw.getSize()));
+						chw.setSize(350,300);						
+						chw.setLocation(GraphicsUtils.getCenter(IDE.ide,chw.getSize()));
 						chw.show();
 					}
 				});

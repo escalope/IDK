@@ -6,13 +6,21 @@ import javax.swing.*;
 public class GraphicsUtils {
 
 
-  public static Point getCenter(Dimension size){
+ public static Point getCenter(Dimension size){
   Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
   Point result=new Point(
   d.width / 2 - size.width / 2,
   d.height / 2 - size.height / 2);
   return result;
 }
+  
+ public static Point getCenter(JFrame parent, Dimension size){
+	  Dimension d = parent.getSize();
+	  Point result=new Point(parent.getLocation().x+
+	  d.width / 2 - size.width / 2,parent.getLocation().y+
+	  d.height / 2 - size.height / 2);
+	  return result;
+	} 
 
 public static JWindow showMessageWindow(String message, JWindow parent) {
    JWindow jw = new JWindow(parent);

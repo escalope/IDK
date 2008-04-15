@@ -2464,7 +2464,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Agent");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Agent is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Agent is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2478,7 +2478,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Organization");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Organization is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Organization is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2492,7 +2492,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "OrganizationGroup");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type OrganizationGroup is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type OrganizationGroup is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2506,7 +2506,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "OrganizationNetwork");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type OrganizationNetwork is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type OrganizationNetwork is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2520,7 +2520,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Role");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Role is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Role is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2534,7 +2534,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Resource");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Resource is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Resource is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2548,7 +2548,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Application");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Application is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Application is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2562,7 +2562,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "EnvironmentApplication");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type EnvironmentApplication is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type EnvironmentApplication is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2576,7 +2576,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "InternalApplication");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type InternalApplication is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type InternalApplication is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2590,7 +2590,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Task");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Task is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Task is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2604,7 +2604,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Plan");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Plan is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Plan is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2618,7 +2618,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Workflow");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Workflow is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Workflow is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2632,7 +2632,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Interaction");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Interaction is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Interaction is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2646,7 +2646,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Goal");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Goal is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Goal is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2660,7 +2660,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Fact");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Fact is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Fact is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2674,7 +2674,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "FrameFact");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type FrameFact is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type FrameFact is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2688,7 +2688,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "Believe");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Believe is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Believe is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2702,7 +2702,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "GeneralEvent");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type GeneralEvent is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type GeneralEvent is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2716,7 +2716,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "ApplicationEvent");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type ApplicationEvent is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type ApplicationEvent is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2730,7 +2730,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "ApplicationEventSlots");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type ApplicationEventSlots is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type ApplicationEventSlots is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2744,7 +2744,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "AutonomousEntityQuery");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type AutonomousEntityQuery is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type AutonomousEntityQuery is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2758,7 +2758,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "AgentRequirementsQuery");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type AgentRequirementsQuery is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type AgentRequirementsQuery is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2772,7 +2772,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "ConcreteAgent");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type ConcreteAgent is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type ConcreteAgent is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2786,7 +2786,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "TextNote");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type TextNote is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type TextNote is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2800,7 +2800,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "UMLComment");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type UMLComment is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type UMLComment is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2814,7 +2814,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "RoleWS");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type RoleWS is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type RoleWS is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2828,7 +2828,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "TaskWS");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type TaskWS is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type TaskWS is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2842,7 +2842,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "GoalStateWS");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type GoalStateWS is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type GoalStateWS is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2856,7 +2856,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "AgentWS");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type AgentWS is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type AgentWS is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2870,7 +2870,7 @@ public class OrganizationModelMarqueeHandler extends MarqueeHandler  implements 
 						getGraph().insert(pt, "WorkflowBox");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type WorkflowBox is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type WorkflowBox is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

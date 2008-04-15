@@ -1036,7 +1036,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Agent");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Agent is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Agent is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1050,7 +1050,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "AgentWS");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type AgentWS is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type AgentWS is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1064,7 +1064,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Role");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Role is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Role is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1078,7 +1078,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "RoleWS");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type RoleWS is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type RoleWS is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1092,7 +1092,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Task");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Task is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Task is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1106,7 +1106,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "TaskWS");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type TaskWS is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type TaskWS is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1120,7 +1120,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Goal");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Goal is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Goal is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1134,7 +1134,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Interaction");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Interaction is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Interaction is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1148,7 +1148,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "IUIterate");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type IUIterate is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type IUIterate is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1162,7 +1162,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "IUConcurrence");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type IUConcurrence is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type IUConcurrence is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1176,7 +1176,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "InteractionUnit");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type InteractionUnit is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type InteractionUnit is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1190,7 +1190,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "UMLSpecification");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type UMLSpecification is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type UMLSpecification is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1204,7 +1204,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "AUMLSpecification");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type AUMLSpecification is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type AUMLSpecification is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1218,7 +1218,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "GRASIASpecification");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type GRASIASpecification is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type GRASIASpecification is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1232,7 +1232,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "TextNote");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type TextNote is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type TextNote is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -1246,7 +1246,7 @@ public class InteractionModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "UMLComment");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type UMLComment is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type UMLComment is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

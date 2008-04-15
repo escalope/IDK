@@ -202,7 +202,7 @@ public class RelationshipManager implements java.io.Serializable {
 			JPanel temp = new JPanel();
 			temp.add(new JLabel("Select one of the following relationships"));
 			temp.add(pops);
-			int result = JOptionPane.showConfirmDialog(null, temp,
+			int result = JOptionPane.showConfirmDialog(IDE.ide, temp,
 					"Valid Relationships",
 					JOptionPane.OK_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE);
@@ -437,7 +437,7 @@ public class RelationshipManager implements java.io.Serializable {
 
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Assignation not allowed",
+					JOptionPane.showMessageDialog(IDE.ide, "Assignation not allowed",
 							"Warning",
 							JOptionPane.WARNING_MESSAGE);
 				}
@@ -447,7 +447,7 @@ public class RelationshipManager implements java.io.Serializable {
 		}
 		else 
 		{
-			JOptionPane.showMessageDialog(null, "Relationship not allowed", "Warning",
+			JOptionPane.showMessageDialog(IDE.ide, "Relationship not allowed", "Warning",
 					JOptionPane.WARNING_MESSAGE);
 		}
 		return nEdge;
@@ -516,7 +516,7 @@ public class RelationshipManager implements java.io.Serializable {
 				assignations);
 		if (displayedAssignations.length>1){
 		// Ask the user to select a role assignation.
-		String selectedOption = (String) JOptionPane.showInputDialog(null,
+		String selectedOption = (String) JOptionPane.showInputDialog(IDE.ide,
 				"Select one of the following assignations", "Valid Assignations",
 				JOptionPane.OK_CANCEL_OPTION, null,
 				displayedAssignations, displayedAssignations[0]);

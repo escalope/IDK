@@ -760,7 +760,7 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
    {}; // Just in case there is no allowed entity in the diagram
 
     if (vertex == null) {
-JOptionPane.showMessageDialog(this,
+JOptionPane.showMessageDialog(IDE.ide,
 		 "Object not allowed in this diagram "+this.getID()+":"+ 
 		 entity.getId()+":"+entity.getClass().getName()+
 		 this.getClass().getName(),"Warning", JOptionPane.WARNING_MESSAGE);    }

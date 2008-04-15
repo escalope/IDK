@@ -595,7 +595,7 @@ public class EnvironmentModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Agent");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Agent is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Agent is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -609,7 +609,7 @@ public class EnvironmentModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "OrganizationGroup");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type OrganizationGroup is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type OrganizationGroup is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -623,7 +623,7 @@ public class EnvironmentModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Resource");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Resource is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Resource is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -637,7 +637,7 @@ public class EnvironmentModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Application");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Application is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Application is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -651,7 +651,7 @@ public class EnvironmentModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "InternalApplication");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type InternalApplication is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type InternalApplication is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -665,7 +665,7 @@ public class EnvironmentModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "EnvironmentApplication");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type EnvironmentApplication is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type EnvironmentApplication is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -679,7 +679,7 @@ public class EnvironmentModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "ApplicationWS");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type ApplicationWS is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type ApplicationWS is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -693,7 +693,7 @@ public class EnvironmentModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "TextNote");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type TextNote is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type TextNote is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -707,7 +707,7 @@ public class EnvironmentModelMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "UMLComment");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type UMLComment is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type UMLComment is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

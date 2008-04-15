@@ -469,7 +469,7 @@ public class AUMLInteractionDiagramMarqueeHandler extends MarqueeHandler  implem
 						getGraph().insert(pt, "Protocol");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Protocol is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Protocol is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -483,7 +483,7 @@ public class AUMLInteractionDiagramMarqueeHandler extends MarqueeHandler  implem
 						getGraph().insert(pt, "SubProtocol");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type SubProtocol is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type SubProtocol is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -497,7 +497,7 @@ public class AUMLInteractionDiagramMarqueeHandler extends MarqueeHandler  implem
 						getGraph().insert(pt, "Lifeline");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Lifeline is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Lifeline is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -511,7 +511,7 @@ public class AUMLInteractionDiagramMarqueeHandler extends MarqueeHandler  implem
 						getGraph().insert(pt, "Column");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Column is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Column is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -525,7 +525,7 @@ public class AUMLInteractionDiagramMarqueeHandler extends MarqueeHandler  implem
 						getGraph().insert(pt, "AUMLPort");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type AUMLPort is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type AUMLPort is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -539,7 +539,7 @@ public class AUMLInteractionDiagramMarqueeHandler extends MarqueeHandler  implem
 						getGraph().insert(pt, "AUMLAlternativeBox");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type AUMLAlternativeBox is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type AUMLAlternativeBox is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -553,7 +553,7 @@ public class AUMLInteractionDiagramMarqueeHandler extends MarqueeHandler  implem
 						getGraph().insert(pt, "AUMLAlternativeRow");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type AUMLAlternativeRow is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type AUMLAlternativeRow is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -567,7 +567,7 @@ public class AUMLInteractionDiagramMarqueeHandler extends MarqueeHandler  implem
 						getGraph().insert(pt, "TextNote");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type TextNote is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type TextNote is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -581,7 +581,7 @@ public class AUMLInteractionDiagramMarqueeHandler extends MarqueeHandler  implem
 						getGraph().insert(pt, "UMLComment");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type UMLComment is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type UMLComment is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

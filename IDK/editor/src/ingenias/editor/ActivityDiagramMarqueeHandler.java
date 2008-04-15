@@ -595,7 +595,7 @@ public class ActivityDiagramMarqueeHandler extends MarqueeHandler  implements ja
 						getGraph().insert(pt, "InitialNode");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type InitialNode is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type InitialNode is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -609,7 +609,7 @@ public class ActivityDiagramMarqueeHandler extends MarqueeHandler  implements ja
 						getGraph().insert(pt, "DecisionNode");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type DecisionNode is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type DecisionNode is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -623,7 +623,7 @@ public class ActivityDiagramMarqueeHandler extends MarqueeHandler  implements ja
 						getGraph().insert(pt, "ForkNode");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type ForkNode is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type ForkNode is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -637,7 +637,7 @@ public class ActivityDiagramMarqueeHandler extends MarqueeHandler  implements ja
 						getGraph().insert(pt, "EndNode");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type EndNode is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type EndNode is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -651,7 +651,7 @@ public class ActivityDiagramMarqueeHandler extends MarqueeHandler  implements ja
 						getGraph().insert(pt, "Task");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Task is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Task is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -665,7 +665,7 @@ public class ActivityDiagramMarqueeHandler extends MarqueeHandler  implements ja
 						getGraph().insert(pt, "Role");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Role is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Role is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -679,7 +679,7 @@ public class ActivityDiagramMarqueeHandler extends MarqueeHandler  implements ja
 						getGraph().insert(pt, "WorkflowBox");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type WorkflowBox is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type WorkflowBox is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -693,7 +693,7 @@ public class ActivityDiagramMarqueeHandler extends MarqueeHandler  implements ja
 						getGraph().insert(pt, "UMLComment");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type UMLComment is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type UMLComment is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -707,7 +707,7 @@ public class ActivityDiagramMarqueeHandler extends MarqueeHandler  implements ja
 						getGraph().insert(pt, "TextNote");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type TextNote is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type TextNote is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

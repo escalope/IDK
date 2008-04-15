@@ -427,7 +427,7 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 						getGraph().insert(pt, "TestingPackage");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type TestingPackage is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type TestingPackage is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -441,7 +441,7 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 						getGraph().insert(pt, "DeploymentPackage");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type DeploymentPackage is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type DeploymentPackage is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -455,7 +455,7 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 						getGraph().insert(pt, "INGENIASComponent");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type INGENIASComponent is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type INGENIASComponent is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -469,7 +469,7 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 						getGraph().insert(pt, "Application");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Application is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Application is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -483,7 +483,7 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 						getGraph().insert(pt, "EnvironmentApplication");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type EnvironmentApplication is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type EnvironmentApplication is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -497,7 +497,7 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 						getGraph().insert(pt, "InternalApplication");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type InternalApplication is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type InternalApplication is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -511,7 +511,7 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 						getGraph().insert(pt, "UMLComment");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type UMLComment is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type UMLComment is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -525,7 +525,7 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 						getGraph().insert(pt, "DeploymentUnitByType");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type DeploymentUnitByType is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type DeploymentUnitByType is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -539,7 +539,7 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 						getGraph().insert(pt, "DeploymentUnitByTypeEnumInitMS");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type DeploymentUnitByTypeEnumInitMS is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type DeploymentUnitByTypeEnumInitMS is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

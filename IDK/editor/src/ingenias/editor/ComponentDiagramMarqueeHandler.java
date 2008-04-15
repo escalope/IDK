@@ -442,7 +442,7 @@ public class ComponentDiagramMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "INGENIASComponent");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type INGENIASComponent is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type INGENIASComponent is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -456,7 +456,7 @@ public class ComponentDiagramMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "INGENIASCodeComponent");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type INGENIASCodeComponent is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type INGENIASCodeComponent is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -470,7 +470,7 @@ public class ComponentDiagramMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Application");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Application is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Application is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -484,7 +484,7 @@ public class ComponentDiagramMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "EnvironmentApplication");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type EnvironmentApplication is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type EnvironmentApplication is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -498,7 +498,7 @@ public class ComponentDiagramMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "InternalApplication");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type InternalApplication is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type InternalApplication is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -512,7 +512,7 @@ public class ComponentDiagramMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Task");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Task is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Task is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -526,7 +526,7 @@ public class ComponentDiagramMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "Test");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type Test is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Test is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -540,7 +540,7 @@ public class ComponentDiagramMarqueeHandler extends MarqueeHandler  implements j
 						getGraph().insert(pt, "UMLComment");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Object type UMLComment is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type UMLComment is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

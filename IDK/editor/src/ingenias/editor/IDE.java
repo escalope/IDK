@@ -90,7 +90,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) _tp.
             getLastPathComponent();
         if (_tp!= null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -143,7 +143,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) _tp.
             getLastPathComponent();
         if (_tp!= null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -196,7 +196,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) _tp.
             getLastPathComponent();
         if (_tp!= null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -249,7 +249,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) _tp.
             getLastPathComponent();
         if (_tp!= null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -302,7 +302,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) _tp.
             getLastPathComponent();
         if (_tp!= null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -355,7 +355,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) _tp.
             getLastPathComponent();
         if (_tp!= null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -408,7 +408,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) _tp.
             getLastPathComponent();
         if (_tp!= null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -461,7 +461,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) _tp.
             getLastPathComponent();
         if (_tp!= null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -514,7 +514,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) _tp.
             getLastPathComponent();
         if (_tp!= null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -567,7 +567,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) _tp.
             getLastPathComponent();
         if (_tp!= null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -618,7 +618,7 @@ public void updateProjectsMenu(JMenu menu){
      TreePath _tp=tp;
 
           String nombre =
-              JOptionPane.showInputDialog(ids.editor,
+              JOptionPane.showInputDialog(IDE.ide,
                                           "Type a new package's name",
                                           "New package",
                                           JOptionPane.QUESTION_MESSAGE);
@@ -660,7 +660,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
             getLastPathComponent();
         if (tp != null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -710,7 +710,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
             getLastPathComponent();
         if (tp != null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -760,7 +760,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
             getLastPathComponent();
         if (tp != null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -810,7 +810,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
             getLastPathComponent();
         if (tp != null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -860,7 +860,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
             getLastPathComponent();
         if (tp != null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -910,7 +910,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
             getLastPathComponent();
         if (tp != null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -960,7 +960,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
             getLastPathComponent();
         if (tp != null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -1010,7 +1010,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
             getLastPathComponent();
         if (tp != null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -1060,7 +1060,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
             getLastPathComponent();
         if (tp != null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);
@@ -1110,7 +1110,7 @@ public void updateProjectsMenu(JMenu menu){
         DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
             getLastPathComponent();
         if (tp != null && dmtn.getUserObject()instanceof String) {
-          String nombre = JOptionPane.showInputDialog(ids.editor,
+          String nombre = JOptionPane.showInputDialog(IDE.ide,
               "Type graph name",
               "New graph",
               JOptionPane.QUESTION_MESSAGE);

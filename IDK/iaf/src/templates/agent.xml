@@ -97,7 +97,7 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 			RuntimeConversation expectedInt=null;
             ingenias.jade.components.Resource expectedResource=null;
 			ingenias.jade.components.Application expectedApp=null;        
-			boolean allEntitiesExist=true;		
+			boolean allEntitiesExist=false;		
 			TaskOutput to=null;
 			to=new TaskOutput("default");
   
@@ -110,10 +110,8 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 			    addExpectedInputs(tobject, "@@@v@@@entityidtodelete@@@/v@@@","1",expectedInput);
              	addConsumedInput(to,"@@@v@@@entityidtodelete@@@/v@@@",expectedInput);
 			 }
-             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-		} else {
-		allEntitiesExist=false;
-		}
+             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
+		} 
 	      @@@/repeat@@@
 		 tobject.addOutput(to);
      		   	
@@ -250,6 +248,44 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 	   Vector<String> nonExistingInputs=new Vector<String>();
 	   Vector<String> repeatedOutputs=new Vector<String>();
 	   boolean validConversationType=false;
+	   
+	   if (tobject.getType().equals("DeleteNonUsedEntitiesTask")){
+            Vector<MentalEntity> expectedInput=null;
+            RuntimeFact expectedOutput=null;
+            RuntimeEvent expectedOutputEvent=null;
+			RuntimeConversation expectedInt=null;
+            ingenias.jade.components.Resource expectedResource=null;
+			ingenias.jade.components.Application expectedApp=null;        
+			boolean allEntitiesExist=false;		
+			TaskOutput to=null;
+			to=new TaskOutput("default");
+			tobject.setConversationContext(conversation);
+  
+		@@@repeat id="deleteentity"@@@
+		if (this.getLM().canBeDeleted("@@@v@@@entityidtodelete@@@/v@@@")){
+             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"@@@v@@@entityidtodelete@@@/v@@@");             
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("@@@v@@@entityidtodelete@@@/v@@@");
+			 } else {
+			    addExpectedInputs(tobject, "@@@v@@@entityidtodelete@@@/v@@@","1",expectedInput);
+             	addConsumedInput(to,"@@@v@@@entityidtodelete@@@/v@@@",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
+		} 
+	      @@@/repeat@@@
+		 tobject.addOutput(to);
+     		   	
+	      initialised= allEntitiesExist;
+
+		  if (!allEntitiesExist){
+			StringBuffer nonexisting=new StringBuffer();
+			for (int j=0;j<nonExistingInputs.size();j++){
+				nonexisting.append(nonExistingInputs.elementAt(j).toString()+",");
+			}
+   		  }
+		  return initialised;
+	    }
+	    
 		@@@repeat id="convtask"@@@    
 
 		@@@repeat id="conversations"@@@    
@@ -396,6 +432,11 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 						MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal @@@v@@@tgoal@@@/v@@@",getLocalName()+"-"+tobject.getType());
 						tasks.add(tobject);
 					}
+					tobject=new DeleteNonUsedEntitiesTask("DeleteNonUsedEntitiesTask","DeleteNonUsedEntitiesTask");
+					canbescheduled=initialiseConversationalTask(conversations.elementAt(k),tobject);
+					 if (canbescheduled && IAFProperties.getGarbageCollectionEnabled()){			
+							tasks.add(tobject);
+					 }
 				}
 				// If a conversational initialization fails, a conventional one is tried
 	      }

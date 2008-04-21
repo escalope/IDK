@@ -152,7 +152,8 @@ public class DeploymentGenerator {
 						depl.add(agentsR);
 						agentsR.add(new Var("agentid", Utils
 								.replaceBadChars(atype.getID())
-								+ "_" + l));
+								+ "_" + l+Utils
+								.replaceBadChars(depunit.getID())));
 						agentsR.add(new Var("agenttype", Utils
 								.replaceBadChars(atype.getID())));
 					}
@@ -170,7 +171,8 @@ public class DeploymentGenerator {
 						depl.add(agentsR);
 						agentsR.add(new Var("agentid", Utils
 								.replaceBadChars(atype.getID())
-								+ "_" + l));
+								+ "_" + l+Utils
+								.replaceBadChars(depunit.getID())));
 						agentsR.add(new Var("agenttype", Utils
 								.replaceBadChars(atype.getID())));
 

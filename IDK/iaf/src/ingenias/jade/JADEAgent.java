@@ -369,7 +369,7 @@ abstract public class JADEAgent extends Agent{
 		for (int k = 0; k < roles.length; k++) {
 			try {
 				jade.domain.DFService.register(this,
-						roles[k]);
+						roles[k]);				
 			}
 			catch (FIPAException fe) {
 				if (! (fe.getMessage().toLowerCase().indexOf("already") >= 0)) {

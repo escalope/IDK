@@ -52,7 +52,7 @@ public class Utils {
 	 * @return A string without improper characters
 	 */
 	public static String replaceBadChars(String string){
-		return string.replace(' ','_').replace(',','_').replace('.','_');
+		return string.replace(' ','_').replace(',','_').replace('.','_').replace('-', '_');
 	}
 
 	/**

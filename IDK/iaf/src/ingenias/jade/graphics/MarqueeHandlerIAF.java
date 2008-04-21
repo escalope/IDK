@@ -25,6 +25,7 @@
 
 package ingenias.jade.graphics;
 import ingenias.editor.CellHelpWindow;
+import ingenias.editor.IDE;
 import ingenias.editor.cell.NAryEdge;
 import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.RoleEntity;
@@ -321,7 +322,7 @@ public abstract class MarqueeHandlerIAF extends BasicMarqueeHandler  implements 
 						chw.setDescription(ent.getHelpDesc());
 						chw.setRec(ent.getHelpRecom());
 						chw.setSize(350,300);
-						chw.setLocation(GraphicsUtils.getCenter(chw.getSize()));
+						chw.setLocation(GraphicsUtils.getCenter(IDE.ide,chw.getSize()));
 						chw.show();
 					}
 				});

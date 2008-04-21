@@ -154,7 +154,7 @@ public abstract class ModelJGraph extends JGraph {
 				editDialog = null;
 			}
 		}
-		protected boolean startEditing(Object cell, MouseEvent event) {
+		protected boolean startEditing(final Object cell, MouseEvent event) {
 			
 			completeEditing();
 			/*if (cell instanceof DefaultEdge){
@@ -167,145 +167,160 @@ public abstract class ModelJGraph extends JGraph {
 				editingComponent = cellEditor.getGraphCellEditorComponent(graph, cell,
 						graph.isCellSelected(cell));
 				if (cellEditor.isCellEditable(event)) {
-					JScrollPane jsp=new JScrollPane();
-					
-					JPanel south=new JPanel();
-					JButton accept=new JButton("Accept");					
-					JButton cancel=new JButton("Cancel");
-					south.add(accept);
-					south.add(cancel);
-					JPanel main=new JPanel();
-					main.setLayout(new BorderLayout());
-					main.add(south, BorderLayout.SOUTH);
-					final Entity ent=(Entity) ((DefaultGraphCell)cell).getUserObject();
-					final GeneralEditionPanel gep=new GeneralEditionPanel(null, IDE.ide, getOM(), ent);
-					jsp.getViewport().add(gep,null);
-					main.add(jsp, BorderLayout.CENTER);
-					
-					if (IDE.ide==null || IDE.ide.isEditPropertiesPopUp()){
-						editingCell = cell;
-						Dimension editorSize = editingComponent.getPreferredSize();
-						final JDialog editDialog=new JDialog(IDE.ide,true);
-						editDialog.getContentPane().setLayout(new BorderLayout());
-						editDialog.getContentPane().add(main,BorderLayout.CENTER);						
-						editDialog.pack();						
-						String oldid=ent.getId();
-						editDialog.setLocation(ingenias.editor.widget.GraphicsUtils.getCenter(IDE.ide,editDialog.getSize()));
-						cancel.addActionListener(new ActionListener(){
-							public void actionPerformed(ActionEvent e) {
-								if (gep.isModified()){
-									int result = JOptionPane.showConfirmDialog(IDE.ide,
-											"You will loose current changes. Do you want to continue (y/n)?",
-											"Warning", JOptionPane.YES_NO_OPTION,
-											JOptionPane.WARNING_MESSAGE);
-									if (result == JOptionPane.OK_OPTION){
-										gep.undo();		
-										editDialog.setVisible(false);
-									}
-								} else {								
-									editDialog.setVisible(false);
-								}
-								graph.repaint();
-							};
-						});
-						accept.addActionListener(new ActionListener(){
-							public void actionPerformed(ActionEvent e) {
-								editDialog.setVisible(false);
-								gep.confirmActions();
-								graph.repaint();
-							};
-						});
-						
-						
-						editDialog.setVisible(true);
-						if (cell instanceof NAryEdge){
-							RenderComponentManager.setRelationshipView(ent.getPrefs().getView(),ent,(DefaultGraphCell)cell,graph);
+					new Thread(){
+						public void run(){
+							JScrollPane jsp=new JScrollPane();
+							
+							JPanel south=new JPanel();
+							JButton accept=new JButton("Accept");					
+							JButton cancel=new JButton("Cancel");
+							south.add(accept);
+							south.add(cancel);
+							JPanel main=new JPanel();
+							main.setLayout(new BorderLayout());
+							main.add(south, BorderLayout.SOUTH);
+							final Entity ent=(Entity) ((DefaultGraphCell)cell).getUserObject();
+							final GeneralEditionPanel gep=new GeneralEditionPanel(null, IDE.ide, getOM(), ent);
+							jsp.getViewport().add(gep,null);
+							main.add(jsp, BorderLayout.CENTER);
+							
+							if (IDE.ide==null || IDE.ide.isEditPropertiesPopUp()){
+								createIndependentEditDialog(cell, accept, cancel, main,
+										ent, gep);
+								//System.err.println("Terminada edicion");
+							} else {
+								createEmbeddedEditDialog(accept, cancel, main, ent, gep);
+														
+							}
 						}
-						Vector result=getOM().findUserObject(ent.getId());
-						if (result.size()>1 ){							
-							JOptionPane.showMessageDialog(null,"There is already another entity with name "+ent.getId()+". I will restore old id","ERROR",JOptionPane.ERROR_MESSAGE);
-							ent.setId(oldid);
-						}
-						getOM().reload();
-						System.err.println("Terminada edicion");
-					} else {
-						final String proppaneltitle=ent.getType()+":"+ent.getId();
-						IDE.ide.addPropertiesPanel(proppaneltitle,main);   
-						IDE.ide.focusPropertiesPane(proppaneltitle);
-						cancel.addActionListener(new ActionListener(){
-							public void actionPerformed(ActionEvent e) {
-								if (gep.isModified()){
-									int result = JOptionPane.showConfirmDialog(IDE.ide,
-											"You will loose current changes. Do you want to continue (y/n)?",
-											"Warning", JOptionPane.YES_NO_OPTION,
-											JOptionPane.WARNING_MESSAGE);
-									if (result == JOptionPane.OK_OPTION){
-										gep.undo();												
-										IDE.ide.removePropertiesPane(proppaneltitle);
-									}
-								} else {
-									IDE.ide.removePropertiesPane(proppaneltitle);
-								}
-								graph.repaint();
-							};				
-						});
-						accept.addActionListener(new ActionListener(){
-							public void actionPerformed(ActionEvent e) {
-								graph.repaint();
-								gep.confirmActions();
-								IDE.ide.removePropertiesPane(proppaneltitle);								
-							};
-						});
-						
-						
-						
-					}
+					}.start();
 					
+					return true;
 					
 					// Add Editor Listener
-					if (cellEditorListener == null) {
-						cellEditorListener = createCellEditorListener();
-					}
-					if (cellEditor != null && cellEditorListener != null) {
-						cellEditor.addCellEditorListener(cellEditorListener);
-						
-					}
-					if (cellEditor.shouldSelectCell(event)) {
-						stopEditingInCompleteEditing = false;
-						try {
-							graph.setSelectionCell(cell);
-						}
-						catch (Exception e) {
-							System.err.println("Editing exception: " + e);
-						}
-						stopEditingInCompleteEditing = true;
-					}
-					
-					if (event instanceof MouseEvent) {
-						/* Find the component that will get forwarded all the
-						 mouse events until mouseReleased. */
-						Point componentPoint = SwingUtilities.convertPoint
-						(graph, new Point(event.getX(), event.getY()),
-								editingComponent);
-						/* Create an instance of BasicTreeMouseListener to handle
-						 passing the mouse/motion events to the necessary
-						 component. */
-						// We really want similiar behavior to getMouseEventTarget,
-						// but it is package private.
-						Component activeComponent = SwingUtilities.
-						getDeepestComponentAt(editingComponent,
-								componentPoint.x, componentPoint.y);
-						if (activeComponent != null) {
-							new MouseInputHandler(graph, activeComponent, event);
-						}
-					}
-					return true;
+//					if (cellEditorListener == null) {
+//						cellEditorListener = createCellEditorListener();
+//					}
+//					if (cellEditor != null && cellEditorListener != null) {
+//						cellEditor.addCellEditorListener(cellEditorListener);
+//						
+//					}
+//					if (cellEditor.shouldSelectCell(event)) {
+//						stopEditingInCompleteEditing = false;
+//						try {
+//							graph.setSelectionCell(cell);
+//						}
+//						catch (Exception e) {
+//							System.err.println("Editing exception: " + e);
+//						}
+//						stopEditingInCompleteEditing = true;
+//					}
+//					
+//					if (event instanceof MouseEvent) {
+//						/* Find the component that will get forwarded all the
+//						 mouse events until mouseReleased. */
+//						Point componentPoint = SwingUtilities.convertPoint
+//						(graph, new Point(event.getX(), event.getY()),
+//								editingComponent);
+//						/* Create an instance of BasicTreeMouseListener to handle
+//						 passing the mouse/motion events to the necessary
+//						 component. */
+//						// We really want similiar behavior to getMouseEventTarget,
+//						// but it is package private.
+//						Component activeComponent = SwingUtilities.
+//						getDeepestComponentAt(editingComponent,
+//								componentPoint.x, componentPoint.y);
+//						if (activeComponent != null) {
+//							new MouseInputHandler(graph, activeComponent, event);
+//						}
+//					}
+//					return true;
 				}
 				else {
 					editingComponent = null;
 				}
 			}
 			return false;
+		}
+
+		private void createEmbeddedEditDialog(JButton accept, JButton cancel,
+				JPanel main, final Entity ent, final GeneralEditionPanel gep) {
+			final String proppaneltitle=ent.getType()+":"+ent.getId();
+			IDE.ide.addPropertiesPanel(proppaneltitle,main);   
+			IDE.ide.focusPropertiesPane(proppaneltitle);
+			cancel.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					if (gep.isModified()){
+						int result = JOptionPane.showConfirmDialog(IDE.ide,
+								"You will loose current changes. Do you want to continue (y/n)?",
+								"Warning", JOptionPane.YES_NO_OPTION,
+								JOptionPane.WARNING_MESSAGE);
+						if (result == JOptionPane.OK_OPTION){
+							gep.undo();												
+							IDE.ide.removePropertiesPane(proppaneltitle);
+						}
+					} else {
+						IDE.ide.removePropertiesPane(proppaneltitle);
+					}
+					graph.repaint();
+				};				
+			});
+			accept.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					graph.repaint();
+					gep.confirmActions();
+					IDE.ide.removePropertiesPane(proppaneltitle);								
+				};
+			});
+		}
+
+		private void createIndependentEditDialog(Object cell, JButton accept,
+				JButton cancel, JPanel main, final Entity ent,
+				final GeneralEditionPanel gep) {
+			editingCell = cell;
+			Dimension editorSize = editingComponent.getPreferredSize();
+			final JDialog editDialog=new JDialog(IDE.ide,true);
+			editDialog.getContentPane().setLayout(new BorderLayout());
+			editDialog.getContentPane().add(main,BorderLayout.CENTER);						
+			editDialog.pack();						
+			String oldid=ent.getId();
+			editDialog.setLocation(ingenias.editor.widget.GraphicsUtils.getCenter(IDE.ide,editDialog.getSize()));
+			cancel.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					if (gep.isModified()){
+						int result = JOptionPane.showConfirmDialog(IDE.ide,
+								"You will loose current changes. Do you want to continue (y/n)?",
+								"Warning", JOptionPane.YES_NO_OPTION,
+								JOptionPane.WARNING_MESSAGE);
+						if (result == JOptionPane.OK_OPTION){
+							gep.undo();		
+							editDialog.setVisible(false);
+						}
+					} else {								
+						editDialog.setVisible(false);
+					}
+					graph.repaint();
+				};
+			});
+			accept.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					editDialog.setVisible(false);
+					gep.confirmActions();
+					graph.repaint();
+				};
+			});
+			
+			
+			editDialog.setVisible(true);
+			if (cell instanceof NAryEdge){
+				RenderComponentManager.setRelationshipView(ent.getPrefs().getView(),ent,(DefaultGraphCell)cell,graph);
+			}
+			/*Vector result=getOM().findUserObject(ent.getId());
+			if (result.size()>1 ){							
+				JOptionPane.showMessageDialog(null,"There is already another entity with name "+ent.getId()+". I will restore old id","ERROR",JOptionPane.ERROR_MESSAGE);
+				ent.setId(oldid);
+			}*/
+			getOM().reload();
 		}
 		
 	}

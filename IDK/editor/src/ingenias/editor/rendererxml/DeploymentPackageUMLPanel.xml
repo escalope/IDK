@@ -12,12 +12,12 @@
 ##collectionpanel Background="white" id="AgentsDeployed"#
 ##panel layout="FlowLayout(FlowLayout.LEFT,5,0)"  Background="white"   #
 ##iconlabel icon="images/attribute.gif" /#
+##label text="id:"/# 
+##label name="AgentsDeployed_Id"/#
 ##label text="type:"/# 
 ##label name="AgentsDeployed_AgentTypeDeployed"/#
 ##label text=" ninstances:"/# 
 ##label name="AgentsDeployed_NumberInstances"/#
-##label text=" initialMS:"/# 
-##label name="AgentsDeployed_InitialState"/#
 ##/panel#
 ##/collectionpanel#
 ##collectionpanel Background="white" id="Parameters"#

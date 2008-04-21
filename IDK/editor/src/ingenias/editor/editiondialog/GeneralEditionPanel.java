@@ -29,6 +29,7 @@ import javax.swing.border.*;
 import java.awt.event.*;
 
 import ingenias.editor.Editor;
+import ingenias.editor.IDE;
 import ingenias.editor.IDEState;
 import ingenias.editor.widget.*;
 import java.io.*;
@@ -315,7 +316,7 @@ implements java.io.Serializable {
 			OutputStreamWriter osw = new OutputStreamWriter(ba, "UTF16");
 			osw.write(text);
 			osw.close();
-//			System.err.println(new String(ba.toByteArray()));
+			//			System.err.println(new String(ba.toByteArray()));
 			return new String(ba.toByteArray());
 		}
 		catch (Exception uee) {
@@ -593,7 +594,7 @@ implements java.io.Serializable {
 		final Component[] oldComponents = np.getComponents();
 		delete.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				int result = JOptionPane.showConfirmDialog(null, "Do you really want to Unlink?","Unlink",
+				int result = JOptionPane.showConfirmDialog(ingenias.editor.IDE.ide, "Do you really want to Unlink?","Unlink",
 						JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE);
 				if (result == JOptionPane.OK_OPTION){
@@ -685,7 +686,7 @@ implements java.io.Serializable {
 							if (instances.size() > 0) {
 								javax.swing.JComboBox options = new javax.swing.JComboBox(
 										instanceIDS);
-								int result = JOptionPane.showConfirmDialog(null, options,
+								int result = JOptionPane.showConfirmDialog(IDE.ide, options,
 										"Select one", JOptionPane.NO_OPTION,
 										JOptionPane.QUESTION_MESSAGE);
 								if (result == JOptionPane.OK_OPTION &&
@@ -707,7 +708,7 @@ implements java.io.Serializable {
 								}
 							}
 							else {
-								JOptionPane.showMessageDialog(null,
+								JOptionPane.showMessageDialog(IDE.ide,
 										"There are no instances of " + type,
 										"Warning",
 										JOptionPane.WARNING_MESSAGE);
@@ -740,143 +741,174 @@ implements java.io.Serializable {
 		menu.add(
 				new AbstractAction("Add new element") {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							String type = cf.getType().getName();
-							Vector instClasses = om.getValidEntitiesClasses();
-							//sortClasses(instClasses);
-							Vector classesIDS = new Vector();
-							Vector validClasses = new Vector();
-							Enumeration enumeration = instClasses.elements();
-							Hashtable<String, Object> instanceIndex=new Hashtable<String, Object>();
-							while (enumeration.hasMoreElements()) {
-								Class o = (Class) enumeration.nextElement();
-								if (getCollectionType(cf).isAssignableFrom(o)) {
-									String etype = o.getName();
-									int index = etype.lastIndexOf(".");
-									String className = etype.substring(index + 1, etype.length());
-									classesIDS.add(className);
-									validClasses.add(o);
-									instanceIndex.put(className, o);
-								}
-							}
-							Collections.sort(classesIDS);
+						Runnable action=new Runnable(){
+							public void run(){
+								try {
+									String type = cf.getType().getName();
+									Vector instClasses = om.getValidEntitiesClasses();
+									//sortClasses(instClasses);
+									Vector classesIDS = new Vector();
+									Vector validClasses = new Vector();
+									Enumeration enumeration = instClasses.elements();
+									Hashtable<String, Object> instanceIndex=new Hashtable<String, Object>();
+									while (enumeration.hasMoreElements()) {
+										Class o = (Class) enumeration.nextElement();
+										if (getCollectionType(cf).isAssignableFrom(o)) {
+											String etype = o.getName();
+											int index = etype.lastIndexOf(".");
+											String className = etype.substring(index + 1, etype.length());
+											classesIDS.add(className);
+											validClasses.add(o);
+											instanceIndex.put(className, o);
+										}
+									}
+									Collections.sort(classesIDS);
 
-							if (classesIDS.size() > 0) {
-								javax.swing.JComboBox options = new javax.swing.JComboBox(
-										classesIDS);
-								int result = JOptionPane.showConfirmDialog(null, options,
-										"Select one", JOptionPane.NO_OPTION,
-										JOptionPane.QUESTION_MESSAGE);
-								if (result == JOptionPane.OK_OPTION &&
-										options.getSelectedIndex() >= 0) {
-									Class sclass = (Class) instanceIndex.get(
-											options.getSelectedItem());
-									Entity ent = null;
-									if (ModelEntity.class.isAssignableFrom(sclass)) {
-										ent = createModelEntity(sclass);
+									if (classesIDS.size() > 0) {
+										javax.swing.JComboBox options = new javax.swing.JComboBox(
+												classesIDS);
+										int result = JOptionPane.showConfirmDialog(IDE.ide, options,
+												"Select one", JOptionPane.NO_OPTION,
+												JOptionPane.QUESTION_MESSAGE);
+										if (result == JOptionPane.OK_OPTION &&
+												options.getSelectedIndex() >= 0) {
+											Class sclass = (Class) instanceIndex.get(
+													options.getSelectedItem());
+											Entity ent = null;
+											if (ModelEntity.class.isAssignableFrom(sclass)) {
+												ent = createModelEntity(sclass);
+											}
+											else {
+												ent = createEntity(sclass);
+											}
+											
+											
+											GeneralEditionFrame gef = new GeneralEditionFrame(editor, om, parentFrame,
+													"Editing", ent);
+											gef.pack();
+											gef.setVisible(true);
+											switch (gef.getStatus()){
+											case GeneralEditionFrame.ACCEPTED:
+												addValue(ent, cf);
+												lm.addElement(ent);
+												break;
+											case GeneralEditionFrame.CANCELLED:											
+												break;
+
+											}
+											
+										}
 									}
 									else {
-										ent = createEntity(sclass);
+										JOptionPane.showMessageDialog(IDE.ide,
+												"There are no valid classes assignable to " + type, "Warning",
+												JOptionPane.WARNING_MESSAGE);
 									}
-									addValue(ent, cf);
-									lm.addElement(ent);
-									GeneralEditionFrame gef = new GeneralEditionFrame(editor, om, parentFrame,
-											"Editing", ent);
-									gef.pack();
-									gef.show();
+
+								}
+								catch (Exception e1) {
+									e1.printStackTrace();
 								}
 							}
-							else {
-								JOptionPane.showMessageDialog(null,
-										"There are no valid classes assignable to " + type, "Warning",
-										JOptionPane.WARNING_MESSAGE);
-							}
+						};
+						new Thread(action).start();
 
-						}
-						catch (Exception e1) {
-							e1.printStackTrace();
-						}
 					}
 				});
 		menu.add(
 				new AbstractAction("Add existing element") {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							String type = getCollectionType(cf).getName();
-							Vector instances = om.getInstances(type);							
-							Vector instanceIDS = new Vector();
-							Enumeration enumeration = instances.elements();
-							Hashtable<String, Object> instanceIndex=new Hashtable<String, Object>();
-							while (enumeration.hasMoreElements()) {
-								Entity o = (Entity) enumeration.nextElement();
-								String etype = o.getClass().getName();
-								int index = etype.lastIndexOf(".");
-								String className = etype.substring(index + 1, etype.length());
-								instanceIDS.add(className + ":" + o.toString());
-								instanceIndex.put(className + ":" + o.toString(), o);
-							}
+						Runnable action=new Runnable(){
+							public void run(){
+								try {
+									String type = getCollectionType(cf).getName();
+									Vector instances = om.getInstances(type);							
+									Vector instanceIDS = new Vector();
+									Enumeration enumeration = instances.elements();
+									Hashtable<String, Object> instanceIndex=new Hashtable<String, Object>();
+									while (enumeration.hasMoreElements()) {
+										Entity o = (Entity) enumeration.nextElement();
+										String etype = o.getClass().getName();
+										int index = etype.lastIndexOf(".");
+										String className = etype.substring(index + 1, etype.length());
+										instanceIDS.add(className + ":" + o.toString());
+										instanceIndex.put(className + ":" + o.toString(), o);
+									}
 
-							Collections.sort(instanceIDS);
+									Collections.sort(instanceIDS);
 
-							if (instances.size() > 0) {
-								javax.swing.JComboBox options = new javax.swing.JComboBox(
-										instanceIDS);
-								int result = JOptionPane.showConfirmDialog(null, options,
-										"Select one", JOptionPane.NO_OPTION,
-										JOptionPane.QUESTION_MESSAGE);
-								if (result == JOptionPane.OK_OPTION &&
-										options.getSelectedIndex() >= 0) {
-									Entity ent = (Entity) instanceIndex.get(
-											options.getSelectedItem());
-									addValue(ent, cf);
-									lm.addElement(ent);
+									if (instances.size() > 0) {
+										javax.swing.JComboBox options = new javax.swing.JComboBox(
+												instanceIDS);
+										int result = JOptionPane.showConfirmDialog(IDE.ide, options,
+												"Select one", JOptionPane.NO_OPTION,
+												JOptionPane.QUESTION_MESSAGE);
+										if (result == JOptionPane.OK_OPTION &&
+												options.getSelectedIndex() >= 0) {
+											Entity ent = (Entity) instanceIndex.get(
+													options.getSelectedItem());
+											addValue(ent, cf);
+											lm.addElement(ent);
+										}
+									}
+									else {
+										JOptionPane.showMessageDialog(IDE.ide,
+												"There are no instances of " + type,
+												"Warning",
+												JOptionPane.WARNING_MESSAGE);
+									}
+
+								}
+								catch (Exception e1) {
+									e1.printStackTrace();
 								}
 							}
-							else {
-								JOptionPane.showMessageDialog(null,
-										"There are no instances of " + type,
-										"Warning",
-										JOptionPane.WARNING_MESSAGE);
-							}
+						};
+						new Thread(action).start();
 
-						}
-						catch (Exception e1) {
-							e1.printStackTrace();
-						}
 					}
 				});
 
 		menu.add(
 				new AbstractAction("Remove selected element") {
 					public void actionPerformed(ActionEvent e) {
-						int deletedIndex=jl.getSelectedIndices().length-1;
-						while (!jl.isSelectionEmpty()){
-							int[] genindex = jl.getSelectedIndices();
-							int index=genindex[deletedIndex];
-							deletedIndex=deletedIndex-1;
-							if (index > -1) {
-								try {
-									Class type = getCollectionType(cf);
-									Enumeration enumeration = getCollection(cf);
-									for (int k = 0; k < index; k++) {
-										enumeration.nextElement();
+						Runnable action=new Runnable(){
+							public void run(){
+								int deletedIndex=jl.getSelectedIndices().length-1;
+								while (!jl.isSelectionEmpty()){
+									int[] genindex = jl.getSelectedIndices();
+									int index=genindex[deletedIndex];
+									deletedIndex=deletedIndex-1;
+									if (index > -1) {
+										try {
+											Class type = getCollectionType(cf);
+											Enumeration enumeration = getCollection(cf);
+											Object o =null;
+											for (int k = 0; k <= index; k++) {
+												o=enumeration.nextElement();
+											}
+
+											
+											if (type.equals(java.lang.String.class)) {
+												removeValue(o.toString(), cf);
+											}
+											else {
+												ingenias.editor.entities.Entity en = (ingenias.editor.entities.
+														Entity) o;
+												removeValue(en.getId(), cf);
+											}
+
+											lm.remove(index);
+										}
+										catch (Exception e1) {
+											e1.printStackTrace();
+										}
 									}
-									Object o = enumeration.nextElement();
-									if (type.equals(java.lang.String.class)) {
-										removeValue(o.toString(), cf);
-									}
-									else {
-										ingenias.editor.entities.Entity en = (ingenias.editor.entities.
-												Entity) o;
-										removeValue(en.getId(), cf);
-									}
-									lm.remove(index);
-								}
-								catch (Exception e1) {
-									e1.printStackTrace();
 								}
 							}
-						}
+						};
+						new Thread(action).start();
+
 					}
 				}
 		);
@@ -884,14 +916,19 @@ implements java.io.Serializable {
 		menu.add(
 				new AbstractAction("Open selected element") {
 					public void actionPerformed(ActionEvent e) {
-						int index = jl.getSelectedIndex();
-						if (index > -1) {
-							Entity ent = (Entity) lm.get(index);
-//							System.err.println(ent.getClass());
-							JDialog jf = new GeneralEditionFrame(editor, om, parentFrame, "Edition", ent);
-							jf.pack();
-							jf.show();
-						}
+						Runnable action=new Runnable(){
+							public void run(){
+								int index = jl.getSelectedIndex();
+								if (index > -1) {
+									Entity ent = (Entity) lm.get(index);
+									//									System.err.println(ent.getClass());
+									JDialog jf = new GeneralEditionFrame(editor, om, parentFrame, "Edition", ent);
+									jf.pack();
+									jf.show();
+								}
+							}
+						};
+						new Thread(action).start();
 					}
 				}
 		);
@@ -943,8 +980,8 @@ implements java.io.Serializable {
 		final JList jl = new JList(dlm);
 		jl.setAutoscrolls(true);
 		jl.setAlignmentX(Component.LEFT_ALIGNMENT);
-//		jl.setPreferredSize(new Dimension(300, 100));
-//		main.add(jl,null);
+		//		jl.setPreferredSize(new Dimension(300, 100));
+		//		main.add(jl,null);
 		collection.getViewport().add(jl, null);
 		collection.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		final Field cf1 = cf;
@@ -1032,7 +1069,7 @@ implements java.io.Serializable {
 				result.add(current);
 			}
 		}
-//		Package.getPackage("ingenias.editor.entities").;
+		//		Package.getPackage("ingenias.editor.entities").;
 		return result;
 	}
 
@@ -1123,8 +1160,8 @@ implements java.io.Serializable {
 						}
 					});
 				} else {					
-					JOptionPane.showConfirmDialog(null,
-							"There is another entity with that ID", "Error", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(IDE.ide,
+							"There is another entity with that ID. Operation cancelled.", "Error", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 
@@ -1440,7 +1477,7 @@ implements java.io.Serializable {
 		catch (Exception e) {
 			e.printStackTrace();
 
-//			e.printStackTrace();
+			//			e.printStackTrace();
 			return new CustomJTextField();
 		}
 
@@ -1519,7 +1556,7 @@ implements java.io.Serializable {
 		catch (Exception e) {
 			e.printStackTrace();
 
-//			e.printStackTrace();
+			//			e.printStackTrace();
 			return defaultResult;
 		}
 

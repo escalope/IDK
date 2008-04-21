@@ -99,11 +99,11 @@ super.toMap(ht);
 }
 
 public String toString(){
-if (this.getAgentTypeDeployed()==null ||
-    this.getAgentTypeDeployed().toString().equals(""))
- return "Please, define the value of field AgentTypeDeployed";
+if (this.getId()==null ||
+    this.getId().toString().equals(""))
+ return "Please, define the value of field Id";
 else
- return this.getAgentTypeDeployed().toString();
+ return this.getId().toString();
 }
 
 }

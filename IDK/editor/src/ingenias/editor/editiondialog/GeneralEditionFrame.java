@@ -35,6 +35,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.Serializable {
 	private JScrollPane mainscroll = new JScrollPane();
+	public static final int CANCELLED=0;
+	public static final int ACCEPTED=1;
+	public static final int PROGRESSING=2;	
+	
+	private int status=PROGRESSING;
+
 
 	public GeneralEditionFrame(ingenias.editor.Editor editor,ingenias.editor.ObjectManager om,final Frame dialogOwner,String title,Entity ent) {
 		super(dialogOwner,title,true);
@@ -58,6 +64,7 @@ public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.
 			public void actionPerformed(java.awt.event.ActionEvent ae) {
 				self.setVisible(false);
 				gep.undo();
+				status=CANCELLED;
 			}
 		});
 
@@ -66,6 +73,7 @@ public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.
 			public void actionPerformed(java.awt.event.ActionEvent ae) {
 				self.setVisible(false);
 				gep.confirmActions();
+				status=ACCEPTED;
 			}
 		});
 
@@ -107,5 +115,9 @@ public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.
 
 		//System.out.println(a.getDescription());
 
+	}
+
+	public int getStatus() {
+		return status;
 	}
 }

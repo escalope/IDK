@@ -4914,7 +4914,7 @@ TODO
 			</graphics>
 		</object>
 		
-		<object id="DeploymentUnitByType" instanciable="yes" keyfield="AgentTypeDeployed" inherits="INGENIASObject" exampleid="myDeploymentUnit" package="Extension">
+		<object id="DeploymentUnitByType" instanciable="yes" keyfield="id" inherits="INGENIASObject" exampleid="myDeploymentUnit" package="Extension">
 			<description>
 A deploy unit is an entity that defines how many instances of agents will exist in the final system
 </description>
@@ -4984,7 +4984,7 @@ Each agent that should exist in the final system should appear in a deploy unit
 			</graphics>
 		</object>
 		
-		<object id="DeploymentUnitByTypeWithInitMS" instanciable="yes" keyfield="AgentTypeDeployed" inherits="DeploymentUnitByType" exampleid="myDeploymentUnit" package="Extension">
+		<object id="DeploymentUnitByTypeWithInitMS" instanciable="yes" keyfield="id" inherits="DeploymentUnitByType" exampleid="myDeploymentUnit" package="Extension">
 			<description>
 				A deploy unit is an entity that defines how many instances of agents will exist in the final system
 			</description>
@@ -5061,7 +5061,7 @@ Each agent that should exist in the final system should appear in a deploy unit
 		
 
 
-		<object id="DeploymentUnitByTypeEnumInitMS" instanciable="yes" keyfield="AgentTypeDeployed" inherits="DeploymentUnitByType" exampleid="myDeploymentUnit" package="Extension">
+		<object id="DeploymentUnitByTypeEnumInitMS" instanciable="yes" keyfield="id" inherits="DeploymentUnitByType" exampleid="myDeploymentUnit" package="Extension">
 			<description>
 				A deploy unit is an entity that defines how many instances of agents will exist in the final system
 			</description>
@@ -5219,12 +5219,12 @@ Each agent that should exist in the final system should appear in a deploy unit
 ##collectionpanel Background="white" id="AgentsDeployed"#
 ##panel layout="FlowLayout(FlowLayout.LEFT,5,0)"  Background="white"   #
 ##iconlabel icon="images/attribute.gif" /#
+##label text="id:"/# 
+##label name="AgentsDeployed_Id"/#
 ##label text="type:"/# 
 ##label name="AgentsDeployed_AgentTypeDeployed"/#
 ##label text=" ninstances:"/# 
 ##label name="AgentsDeployed_NumberInstances"/#
-##label text=" initialMS:"/# 
-##label name="AgentsDeployed_InitialState"/#
 ##/panel#
 ##/collectionpanel#
 ##collectionpanel Background="white" id="Parameters"#
@@ -5386,7 +5386,8 @@ Each agent that should exist in the final system should appear in a deploy unit
 					</views>										
 				</layout>
 			</graphics>
-		</object> 
+		</object>
+ 
 <object id="SlotValueSpecification" inherits="INGENIASObject" instanciable="yes" keyfield="Slot"
 	package="Extension">
 	<description>

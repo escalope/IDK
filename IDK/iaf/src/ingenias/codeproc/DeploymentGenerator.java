@@ -67,6 +67,7 @@ public class DeploymentGenerator {
 		Repeat depl = new Repeat("deploynode");
 		p.addRepeat(depl);
 		depl.add(new Var("port", "60000"));
+		depl.add(new Var("fedport", "60001"));
 		depl.add(new Var("memory", "128m"));
 		depl.add(new Var("node", "")); // To generate a default node
 		GraphEntity[] agents = Utils.generateEntitiesOfType("Agent");
@@ -122,6 +123,7 @@ public class DeploymentGenerator {
 		}
 
 		depl.add(new Var("port", port));
+		depl.add(new Var("fedport", ""+(new Integer(port)+1)));
 		depl.add(new Var("memory", memory));
 		System.err.println("adding memory "+memory);
 

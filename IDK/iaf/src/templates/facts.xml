@@ -61,6 +61,10 @@ public class @@@v@@@fname@@@/v@@@ extends ingenias.editor.entities.RuntimeFact{
    return "@@@v@@@fname@@@/v@@@";
   }
   
+  public String getParentType(){
+   return "RuntimeFact";
+  }
+  
    @@@repeat id="slot"@@@
 
    public void set@@@v@@@slotname@@@/v@@@(@@@v@@@slottype@@@/v@@@ value){

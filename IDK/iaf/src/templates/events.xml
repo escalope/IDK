@@ -62,6 +62,10 @@ public class @@@v@@@fname@@@/v@@@ extends ingenias.editor.entities.RuntimeEvent{
    return "@@@v@@@fname@@@/v@@@";
   }
   
+   public String getParentType(){
+   return "RuntimeEvent";
+  }
+  
    @@@repeat id="slot"@@@
 
    public void set@@@v@@@slotname@@@/v@@@(@@@v@@@slottype@@@/v@@@ value){

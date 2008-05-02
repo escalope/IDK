@@ -62,14 +62,16 @@ public class TaskExecutionModel {
 					}
 				}
 				//System.err.println("Executing task "+ctask.getID()+ " "+ctask.getType()+ " "+markConversationAsUsed.size());
-				markConversationAsUsed.remove(0);
-				if (ctask.getConversationContext()!=null){
-					msm.conversationAlreadyUsed(ctask.getConversationContext());
-				}
+				RuntimeConversation rc=null;
+									
+				removeMark();	
+												
 				msm.setModified();
 			}
 			//	wakeup();
 		}
+
+		
 	};
 
 	public TaskExecutionModel(String agentName){
@@ -90,7 +92,8 @@ public class TaskExecutionModel {
 	 * @param queues 
 	 * @param t
 	 */
-	public synchronized  void executeTask(final JADEAgent ja, TaskQueue queues, final MentalStateManager msm, final Task t){
+	public synchronized  void executeTask(final JADEAgent ja, final TaskQueue queues, final MentalStateManager cmsm, final Task t){
+
 		if (queues.reviewTaskToBeExecuted(t)){
 			try {
 				t.setAgentID(ja.getLocalName());				
@@ -119,43 +122,40 @@ public class TaskExecutionModel {
 
 			TaskOutput generatedOutput=t.getFinalOutput();
 
-			removeConsumedInputs(ja, msm, t, generatedOutput);
+			removeConsumedInputs(ja, cmsm, t, generatedOutput);
 
-			createNewEntities(ja, msm, t, t.getConversationContext(), generatedOutput, newInteractions);
-
-
-			/*Vector<TaskInput> cancelledConversations=t.getCancelledConversations();
-				for (TaskInput ei:cancelledConversations){
-					Conversation conv=(Conversation)ei.getValue();
-					Vector<StateBehavior> activeByType=ja.getCM().getActiveConversationsByType(conv.getInteraction().getId());
-					ja.getCM().abortConversationByType(conv.getInteraction().getId());
-					for (StateBehavior sb:activeByType){
-					 Vector<MentalEntity> entities = sb.getProducedEntities();
-					 for (MentalEntity me:entities)
-					  ja.getMSM().remove(me);
-					}
-
-				}*/
+			createNewEntities(ja, cmsm, t, t.getConversationContext(), generatedOutput, newInteractions);
 
 			// Interactions are launched at the end to ensure that they check
 			// the latest mental state
 
 			createNewInteractions(ja, t, newInteractions);
 
-			if (t.getConversationContext()!=null){
-				StateBehavior sb=ja.getCM().getStateMachine(t.getConversationContext());
-				if (sb!=null && sb.getFinished()){
-					ja.getMSM().remove(t.getConversationContext().getId());
-				}
-			}
+			/*if (t.getConversationContext()!=null){
+						StateBehavior sb=ja.getCM().getStateMachine(t.getConversationContext());
+						if (sb!=null && sb.getFinished()){
+							ja.getMSM().remove(t.getConversationContext().getId());
+						}
+					}*/
 			ja.getMSM().resizeAllMentalEntities();
 			MainInteractionManager.logMSP("Finished execution",ja.getLocalName(),t.getID(),t.getType());
 
 			ctask=t;
-			this.msm=msm;
-
-			markConversationAsUsed.add(true);
+			msm=cmsm;
+			markMentalStateAsChanged();
 		}
+	
+	
+	}
+
+	private synchronized void markMentalStateAsChanged() {
+		markConversationAsUsed.add(true);
+	}
+	
+	private synchronized void removeMark() {
+
+		markConversationAsUsed.remove(0);
+		
 	}
 
 	private void createNewInteractions(final JADEAgent ja, final Task t, Vector<RuntimeConversation> newInteractions) {
@@ -166,90 +166,31 @@ public class TaskExecutionModel {
 				@Override
 				public void action() {
 					try {
-						ActiveConversation actconv=null;
+						ActiveConversation newConversation=null;
 						Enumeration collaborators=current.getCollaboratorsElements();
 						if (collaborators!=null && collaborators.hasMoreElements()){
-							//Collaborators have been set
-							DFAgentDescription[] actors;
-							Vector<DFAgentDescription> descV=new Vector<DFAgentDescription>();
-							while (collaborators.hasMoreElements()){
-								String colLocalID=collaborators.nextElement().toString();
-								DFAgentDescription[] descr;
-								try {
-									descr = ja.getAM().getYellowPages().getAgentFromLocalID(colLocalID);
-									if (descr.length>0){
-										descV.add(descr[0]);											
-									}
-								} catch (FIPAException e) {
-									e.printStackTrace();
-									current.setAbortCode(IAFProperties.INTERNAL_FAILURE);
-									current.setState("ABORTED");
-								}
-
-							}
-							actors=descV.toArray(new DFAgentDescription[descV.size()]);
-							if (ja.getCM().verifyActors(current.getInteraction().getId(),actors)) {
-								actconv=ja.getCM().launchProtocolAsInitiator(
-										current.getInteraction().getId(),actors);
-								StackEntry se=new StackEntry("");
-								se.setOperation("Creation");
-								se.setPlace(t.getID()+":"+t.getType());
-								se.setResposible(ja.getLocalName());
-								se.setTime(""+new java.util.Date().getTime());
-								actconv.getConv().addStack(se);
-
-							} else {
-
-								MainInteractionManager.logMSP("ERROR intializing manually protocol "+
-										current.getInteraction().getId()+". Not all required collaborators" +
-										" where defined. Please, review code for task "+t.getID(),ja.getLocalName());
-								MainInteractionManager.logMSP("ERROR intializing manually protocol "+
-										current.getInteraction().getId()+". Not all required collaborators" +
-										" where defined. Please, review code for task "+t.getID(),ja.getLocalName(),t.getID(),t.getType());
-								current.setState("ABORTED");
-								current.setAbortCode(IAFProperties.NO_AGENTS_FOUND);
-							}
+							newConversation = createNewInteractionWithCollaboratorsSetByUser(
+									ja, t, current, newConversation, collaborators);
 						}
 						else {
-							// automatic selection of participants
-							actconv=ja.getCM().launchProtocolAsInitiator(current.getInteraction().getId(),
-									ja.getAM().getYellowPages());
-							StackEntry se=new StackEntry("");
-							se.setOperation("Creation");
-							se.setPlace(t.getID()+":"+t.getType());
-							se.setResposible(ja.getLocalName());
-							se.setTime(""+new java.util.Date().getTime());
-
-
-							actconv.getConv().addStack(se);
+							newConversation = createNewInteractionWithCollaboratorsAutomaticallySet(
+									ja, t, current);
 						}
-						if (actconv!=null){								
+						if (newConversation!=null){								
 							if (t.getConversationContext()!=null){
-								Enumeration enumEnt=t.getConversationContext().getCurrentContentElements();
-								while (enumEnt.hasMoreElements()){
-									MentalEntity nelement = (MentalEntity)enumEnt.nextElement();
-									if (!contains(actconv.getConv(),nelement))
-										actconv.getConv().addCurrentContent(nelement);        
-								}
-								enumEnt=current.getCurrentContentElements();
-								while (enumEnt.hasMoreElements()){
-									MentalEntity nelement = (MentalEntity)enumEnt.nextElement();
-									if (!contains(actconv.getConv(),nelement))
-										actconv.getConv().addCurrentContent(nelement);        
-								}
-								updateAncestorConversationOfDifferentType(actconv.getConv(),t.getConversationContext());
+								Enumeration enumEnt;
+								/*copyConversationContextContentToNewConversation(
+										t, newConversation);*/ // not necessary since the information is already 
+								// accesible from child conversations
+								copyContentFromTempConversationToNewConversation(
+										current, newConversation);
+								newConversation.getConv().setParentConversation(t.getConversationContext());
+								t.getConversationContext().addChildConversation(newConversation.getConv());
+								//updateAncestorConversationOfDifferentType(newConversation.getConv(),t.getConversationContext());
 							} else {
-								Enumeration enumEnt=current.getCurrentContentElements();
-								while (enumEnt.hasMoreElements()){
-									MentalEntity nelement = (MentalEntity)enumEnt.nextElement();
-									if (!contains(actconv.getConv(),nelement))
-										actconv.getConv().addCurrentContent(nelement);        
-								}
+								copyContentFromTempConversationToNewConversation(
+										current, newConversation);
 							}
-							/*Conversation conv=(Conversation)ja.getMSM().getMentalEntity(cid);
-							 for (MentalEntity s : assertedEntities){
-							 conv.addCurrentContent(s);
-							 }*/
 						} else {
 							//System.err.println("Un error "+cid+" in "+t.getID());
 						}
@@ -260,12 +201,106 @@ public class TaskExecutionModel {
 					}
 				}
 
+				private void copyContentFromTempConversationToNewConversation(
+						final RuntimeConversation current,
+						ActiveConversation newConversation) {
+					Enumeration enumEnt;
+					enumEnt=current.getCurrentContentElements();
+					while (enumEnt.hasMoreElements()){
+						MentalEntity nelement = (MentalEntity)enumEnt.nextElement();
+						if (!contains(newConversation.getConv(),nelement) && !(nelement instanceof RuntimeConversation))
+							newConversation.getConv().addCurrentContent(nelement);        
+					}
+				}
+
+				private void copyConversationContextContentToNewConversation(
+						final Task t, ActiveConversation newConversation) {
+					Enumeration enumEnt=t.getConversationContext().getCurrentContentElements();
+					while (enumEnt.hasMoreElements()){
+						MentalEntity nelement = (MentalEntity)enumEnt.nextElement();
+						if (!contains(newConversation.getConv(),nelement) && !(nelement instanceof RuntimeConversation))
+							newConversation.getConv().addCurrentContent(nelement);        
+					}
+				}
+
+				private ActiveConversation createNewInteractionWithCollaboratorsAutomaticallySet(
+						final JADEAgent ja, final Task t,
+						final RuntimeConversation current) throws NoAgentsFound {
+					ActiveConversation actconv;
+					// automatic selection of participants
+					actconv=ja.getCM().launchProtocolAsInitiator(current.getInteraction().getId(),
+							ja.getAM().getYellowPages());
+					StackEntry se=new StackEntry("");
+					se.setOperation("Creation");
+					se.setPlace(t.getID()+":"+t.getType());
+					se.setResposible(ja.getLocalName());
+					se.setTime(""+new java.util.Date().getTime());
+
+
+					actconv.getConv().addStack(se);
+					return actconv;
+				}
+
+				private ActiveConversation createNewInteractionWithCollaboratorsSetByUser(
+						final JADEAgent ja, final Task t,
+						final RuntimeConversation current,
+						ActiveConversation actconv, Enumeration collaborators)
+				throws NoAgentsFound {
+					//Collaborators have been set
+					DFAgentDescription[] actors;
+					Vector<DFAgentDescription> descV=new Vector<DFAgentDescription>();
+					while (collaborators.hasMoreElements()){
+						Object colLocalID=collaborators.nextElement();
+
+						if (colLocalID instanceof String){
+							DFAgentDescription[] descr;
+							try {
+								descr = ja.getAM().getYellowPages().getAgentFromLocalID((String)colLocalID);
+								if (descr.length>0){
+									descV.add(descr[0]);											
+								}
+							} catch (FIPAException e) {
+								e.printStackTrace();
+								current.setAbortCode(IAFProperties.INTERNAL_FAILURE);
+								current.setState("ABORTED");
+							}
+						} else {
+							if (colLocalID instanceof DFAgentDescription){
+								descV.add((DFAgentDescription)colLocalID);
+							}
+						}
+					}
+					actors=descV.toArray(new DFAgentDescription[descV.size()]);
+					if (ja.getCM().verifyActors(current.getInteraction().getId(),actors)) {
+						actconv=ja.getCM().launchProtocolAsInitiator(
+								current.getInteraction().getId(),actors);
+						StackEntry se=new StackEntry("");
+						se.setOperation("Creation");
+						se.setPlace(t.getID()+":"+t.getType());
+						se.setResposible(ja.getLocalName());
+						se.setTime(""+new java.util.Date().getTime());
+						actconv.getConv().addStack(se);
+
+					} else {
+
+						MainInteractionManager.logMSP("ERROR intializing manually protocol "+
+								current.getInteraction().getId()+". Not all required collaborators" +
+								" where defined. Please, review code for task "+t.getID(),ja.getLocalName());
+						MainInteractionManager.logMSP("ERROR intializing manually protocol "+
+								current.getInteraction().getId()+". Not all required collaborators" +
+								" where defined. Please, review code for task "+t.getID(),ja.getLocalName(),t.getID(),t.getType());
+						current.setState("ABORTED");
+						current.setAbortCode(IAFProperties.NO_AGENTS_FOUND);
+					}
+					return actconv;
+				}
+
 				private void updateAncestorConversationOfDifferentType(
 						RuntimeConversation current,
 						RuntimeConversation parent				) {
 					if (!parent.getInteraction().getId().equalsIgnoreCase(current.getInteraction().getId())){
 						if (!contains(current,parent))
-						 current.addCurrentContent(parent);
+							current.addCurrentContent(parent);
 					} else {
 						Enumeration<MentalEntity> content = parent.getCurrentContentElements();
 						while (content.hasMoreElements()){
@@ -297,17 +332,88 @@ public class TaskExecutionModel {
 
 	private void createNewEntities(final JADEAgent ja, MentalStateManager msm, final Task t, RuntimeConversation currentConv, 
 			TaskOutput generatedOutput, Vector<RuntimeConversation> newInteractions) {
-		HashSet<MentalEntity> newEntities = generatedOutput.getNewEntitiesMS();
 
-		final Vector<MentalEntity> assertedEntities=new Vector<MentalEntity>();
+
+
+		createNewEntitiesInAgentMentalState(ja, msm, t, generatedOutput,
+				newInteractions);
+
+		createNewEntitiesInConversationContext(ja, msm, t, currentConv,
+				generatedOutput, newInteractions);
+
+		if (currentConv!=null){
+			HashSet<MentalEntity> newEntities = generatedOutput.getNewEntitiesWF();
+
+			for (MentalEntity newEntity:newEntities){
+				hierarchicalConversationUpdate(newEntity, currentConv, currentConv.getInteraction().getId());
+			}
+		}
+
+
+	}
+
+	private void createNewEntitiesInConversationContext(final JADEAgent ja,
+			MentalStateManager msm, final Task t,
+			RuntimeConversation currentConv, TaskOutput generatedOutput,
+			Vector<RuntimeConversation> newInteractions) {
+		HashSet<MentalEntity> newEntities;
+		newEntities = generatedOutput.getNewEntitiesWF();
+
+		for (MentalEntity newEntity:newEntities){
+
+			if (newEntity instanceof RuntimeFact){ // Insert debugging stack data
+				insertDebuggingInformationIntoRuntimeFact(ja, t, newEntity);
+			}
+
+			if (currentConv!=null && !(newEntity instanceof RuntimeConversation)){
+				// insert new entity in created conversations and the current conversation
+				// child conversations can access the local information by chaining calls
+				// to references stored within their conversations
+				/*if (!newInteractions.isEmpty()){
+					for (RuntimeConversation conv:newInteractions){
+						conv.addCurrentContent(newEntity);
+					}
+				} */
+				currentConv.addCurrentContent(newEntity);
+				MainInteractionManager.logMSP("Produced entity "+newEntity.getId()+":"+newEntity.getType()+" and stored within conversation "+
+						currentConv.getConversationID(),ja.getLocalName(),t.getID(),t.getType());
+			} else {
+				if (currentConv==null && !(newEntity instanceof RuntimeConversation)){
+					// if there is no current conversation just add to created conversations
+					// or to the mental state
+					MainInteractionManager.logMSP("Produced entity "+newEntity.getId()+":"+newEntity.getType(),ja.getLocalName(),t.getID(),t.getType());
+					try {
+						if (!newInteractions.isEmpty()){
+							for (RuntimeConversation conv:newInteractions){
+								conv.addCurrentContent(newEntity);
+							}
+						} else
+							msm.addMentalEntity((MentalEntity)newEntity);
+					} catch (InvalidEntity e) {							
+						e.printStackTrace();
+					} //Adds a new fact to the mental state
+				}
+			}				
+		}
+	}
+
+	private void insertDebuggingInformationIntoRuntimeFact(final JADEAgent ja,
+			final Task t, MentalEntity newEntity) {
+		StackEntry se=new StackEntry("");
+		se.setOperation("Creation");
+		se.setPlace(t.getID()+":"+t.getType());
+		se.setResposible(ja.getLocalName());
+		se.setTime(""+new java.util.Date().getTime());
+		((RuntimeFact)newEntity).addStack(se);
+	}
+
+	private void createNewEntitiesInAgentMentalState(final JADEAgent ja,
+			MentalStateManager msm, final Task t, TaskOutput generatedOutput,
+			Vector<RuntimeConversation> newInteractions) {
+		HashSet<MentalEntity> newEntities = generatedOutput.getNewEntitiesMS();
 		for (MentalEntity newEntity:newEntities){		
 			if (newEntity instanceof RuntimeFact){
-				StackEntry se=new StackEntry("");
-				se.setOperation("Creation");
-				se.setPlace(t.getID()+":"+t.getType());
-				se.setResposible(ja.getLocalName());
-				se.setTime(""+new java.util.Date().getTime());
-				((RuntimeFact)newEntity).addStack(se);
+				insertDebuggingInformationIntoRuntimeFact(ja, t, newEntity);
 			}
 			if (newEntity instanceof RuntimeConversation){
 				RuntimeConversation conv=(RuntimeConversation) newEntity;
@@ -322,74 +428,30 @@ public class TaskExecutionModel {
 					} catch (InvalidEntity e) {							
 						e.printStackTrace();
 					} //Adds a new fact to the mental state
-					assertedEntities.add((MentalEntity)newEntity); // and to the produced conversations
 				}
 		}
-
-		newEntities = generatedOutput.getNewEntitiesWF();
-
-
-		for (MentalEntity newEntity:newEntities){
-
-
-			if (newEntity instanceof RuntimeFact){
-				StackEntry se=new StackEntry("");
-				se.setOperation("Creation");
-				se.setPlace(t.getID()+":"+t.getType());
-				se.setResposible(ja.getLocalName());
-				se.setTime(""+new java.util.Date().getTime());
-				((RuntimeFact)newEntity).addStack(se);
-
-				if (t.getConversationContext()!=null){
-					RuntimeConversation rc=t.getConversationContext();
-					hierarchicalConversationUpdate(newEntity, rc);
-				}
-			}
-
-
-
-			if (currentConv!=null && !(newEntity instanceof RuntimeConversation)){ 
-				if (!newInteractions.isEmpty()){
-					for (RuntimeConversation conv:newInteractions){
-						conv.addCurrentContent(newEntity);
-					}
-				} 
-				currentConv.addCurrentContent(newEntity);
-				assertedEntities.add((MentalEntity)newEntity); // and to the produced conversations
-				//System.err.println("Produced entity "+newEntity.getId()+":"+newEntity.getType()+" and stored within conversation "+
-				//		currentConv.getConversationID());
-				MainInteractionManager.logMSP("Produced entity "+newEntity.getId()+":"+newEntity.getType()+" and stored within conversation "+
-						currentConv.getConversationID(),ja.getLocalName(),t.getID(),t.getType());
-			} else {
-				if (currentConv==null && !(newEntity instanceof RuntimeConversation)){
-					MainInteractionManager.logMSP("Produced entity "+newEntity.getId()+":"+newEntity.getType(),ja.getLocalName(),t.getID(),t.getType());
-					try {
-						if (!newInteractions.isEmpty()){
-							for (RuntimeConversation conv:newInteractions){
-								conv.addCurrentContent(newEntity);
-							}
-						} else
-							msm.addMentalEntity((MentalEntity)newEntity);
-					} catch (InvalidEntity e) {							
-						e.printStackTrace();
-					} //Adds a new fact to the mental state
-					assertedEntities.add((MentalEntity)newEntity); // and to the produced conversations
-				}
-			}				
-		}
-
-
 	}
 
+	/**
+	 * Updates the hierarchy of conversations inserting copies of a produced mental entity.
+	 * If a sequence of several conversations of the same protocol are found, only the first one is
+	 * updated. This way, the last one will have access to the new information and, according to the
+	 * mental management schema, to the information of parent conversations. 
+	 * @param newEntity
+	 * @param rc
+	 * @param lastType
+	 */
+
 	private void hierarchicalConversationUpdate(MentalEntity newEntity,
-			RuntimeConversation rc) {
-		Enumeration<MentalEntity> content = rc.getCurrentContentElements();
-		while (content.hasMoreElements()){
-			MentalEntity next = content.nextElement();
-			if (next instanceof RuntimeConversation){
-				((RuntimeConversation)next).addCurrentContent(newEntity);
-				hierarchicalConversationUpdate(newEntity,(RuntimeConversation)next);
-			}
+			RuntimeConversation rc, String lastType) {
+
+		if (rc.getParentConversation()!=null){			
+
+			if (!(rc.getParentConversation().getInteraction().getId().equalsIgnoreCase(lastType)))
+				(rc.getParentConversation()).addCurrentContent(newEntity);
+			hierarchicalConversationUpdate(newEntity,rc.getParentConversation(),
+					rc.getParentConversation().getInteraction().getId());
+
 		}
 	}
 

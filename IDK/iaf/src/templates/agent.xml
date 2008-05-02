@@ -317,8 +317,9 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 			else
 				addExpectedInputs(tobject, "@@@v@@@mentalenmentalenttypetname@@@/v@@@", 
 				"@@@v@@@mentalentitycardinality@@@/v@@@", expectedInput);
+		    allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	     @@@/repeat@@@
-             
+            
 		@@@repeat id="consumedInput"@@@
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"@@@v@@@mentalenttype@@@/v@@@");
 			if (expectedInput.size()==0 && !("@@@v@@@mentalentitycardinality@@@/v@@@".equals("0..n")))

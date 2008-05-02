@@ -37,6 +37,7 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -77,7 +78,7 @@ public class ConversationManagement {
 		public boolean equals(Object obj) {
 			if (obj instanceof Pair) {
 				return ((Pair) obj).cid.equals(cid)
-						&& ((Pair) obj).playedRole.equals(playedRole);
+				&& ((Pair) obj).playedRole.equals(playedRole);
 			} else
 				return super.equals(obj);
 		}
@@ -85,25 +86,25 @@ public class ConversationManagement {
 
 	private int cid = 0; // a counter to store different conversation ids
 	private Vector<Pair> conversationIDs = new Vector<Pair>(); // The different
-																// conversations
-																// maintaind up
-																// to now
+	// conversations
+	// maintaind up
+	// to now
 	private Vector pendingMessages = new Vector(); // a list of messages not
-													// processed yet
+	// processed yet
 	protected Vector knownProtocols = new Vector(); // a list of protocols known
-													// by the agent
+	// by the agent
 	protected Hashtable<String, String> initiatorRoles = new Hashtable<String, String>();
 	private Vector<StateBehavior> smachines = new Vector<StateBehavior>();
 	private Hashtable<Pair, StateBehavior> activeMachines = new Hashtable<Pair, StateBehavior>(); // a
-																									// list
-																									// of
-																									// ongoing
-																									// conversations
+	// list
+	// of
+	// ongoing
+	// conversations
 	private Vector<DefaultCommControl> defaultControl = new Vector<DefaultCommControl>();
 	private JADEAgent agent = null; // the agent owning the conversations
 	private AgentProtocols ap = null; // An interface to create new
-										// conversations and perform interaction
-										// specific operations
+	// conversations and perform interaction
+	// specific operations
 
 	public ConversationManagement(JADEAgent agent, AgentProtocols ap) {
 		this.agent = agent;
@@ -146,8 +147,9 @@ public class ConversationManagement {
 	}
 
 	public String getCID() {
-		String id = this.agent.getName();
-		id = cid + " " + id;
+		String completeName=this.agent.getAID().getName();
+		String id = this.agent.getLocalName()+completeName.substring(completeName.indexOf("@")+1,completeName.indexOf("@")+4);
+		id = cid + "." + id+new Date().getTime();
 		cid = cid + 1;
 		return id;
 	}
@@ -322,7 +324,7 @@ public class ConversationManagement {
 	protected ActiveConversation launchProtocolAsCollaborator(String protocol,
 			String role, String cid, DFAgentDescription[] actors,
 			MentalStateReader msr, MentalStateUpdater msu, LocksRemover lr)
-			throws NoAgentsFound {
+	throws NoAgentsFound {
 		int tries = 10;
 		ActiveConversation aconv = null;
 		boolean continueInit = false;
@@ -368,7 +370,7 @@ public class ConversationManagement {
 			MentalStateReader msr, MentalStateUpdater msu, LocksRemover lr,
 			int tries, ActiveConversation aconv, boolean continueInit,
 			RuntimeConversation conv) throws NoAgentsFound {
-		
+
 		while (!continueInit) {
 			try {
 
@@ -391,7 +393,7 @@ public class ConversationManagement {
 			}
 		}
 		if (aconv!=null)
-		 MainInteractionManager.logInteraction("Protocol "+conv.getInteraction().getId()+" initialised", agent.getLocalName(), conv.getId());
+			MainInteractionManager.logInteraction("Protocol "+conv.getInteraction().getId()+" initialised", agent.getLocalName(), conv.getId());
 		else
 			MainInteractionManager.logInteraction("Protocol "+conv.getInteraction().getId()+" initialisation failed", agent.getLocalName(), conv.getId());
 		return aconv;
@@ -454,15 +456,15 @@ public class ConversationManagement {
 			}
 		}
 		if (!found) {
-			 enumeration = this.activeMachines.elements();
-				result = null;
-				while (!found && enumeration.hasMoreElements()) {
-					StateBehavior sm = (StateBehavior) enumeration.nextElement();
-					found = (conv.getPlayedRole()+"-"+sm.getConversationID()).equals(conv.getId());
-					if (found) {
-						result = sm;
-					}
+			enumeration = this.activeMachines.elements();
+			result = null;
+			while (!found && enumeration.hasMoreElements()) {
+				StateBehavior sm = (StateBehavior) enumeration.nextElement();
+				found = (conv.getPlayedRole()+"-"+sm.getConversationID()).equals(conv.getId());
+				if (found) {
+					result = sm;
 				}
+			}
 		}
 		return result;
 
@@ -482,8 +484,17 @@ public class ConversationManagement {
 		Vector<RuntimeConversation> conversations = agent.getMSM().getConversations();
 		for (int k = 0; k < conversations.size(); k++) {
 			if (typesOfConversation.contains(conversations.elementAt(k)
-					.getInteraction().getId()))
-				result.add(conversations.elementAt(k));
+					.getInteraction().getId())){ 
+
+				// inserts finished/aborted conversations at the end so they are considered
+				// the last
+				if	(conversations.elementAt(k).getState().equalsIgnoreCase("finished") || 
+						conversations.elementAt(k).getState().equalsIgnoreCase("aborted"))
+					result.add(result.size(),conversations.elementAt(k));
+				else
+					result.add(0,conversations.elementAt(k));
+			}
+
 		}
 		return result;
 	}
@@ -512,7 +523,7 @@ public class ConversationManagement {
 			if (convs.elementAt(k).getConversationID() != null
 					&& convs.elementAt(k).getConversationID().equals(
 							conversationID)
-					&& convs.elementAt(k).getPlayedRole().equals(rolePlayed))
+							&& convs.elementAt(k).getPlayedRole().equals(rolePlayed))
 				result = convs.elementAt(k);
 		}
 		return result;
@@ -557,7 +568,7 @@ public class ConversationManagement {
 	public void removedFinishedProtocols() {
 		if (getActiveMachines().size() > 0) {
 			Hashtable<String, StateBehavior> v = (Hashtable<String, StateBehavior>) activeMachines
-					.clone();
+			.clone();
 			Enumeration enumeration = v.elements();
 			while (enumeration.hasMoreElements()) {
 				StateBehavior sb = (StateBehavior) enumeration.nextElement();
@@ -621,7 +632,7 @@ public class ConversationManagement {
 	protected ActiveConversation launchProtocolAsInitiator(String protocol,
 			String role, YellowPages yp) throws NoAgentsFound {
 		DFAgentDescription[] actors = this.ap
-				.getInteractionActors(protocol, yp);
+		.getInteractionActors(protocol, yp);
 		return this.launchProtocolAsInitiator(protocol, role, actors,
 				this.agent.getMSM(), this.agent.getMSM(), this.agent.getLM());
 	};

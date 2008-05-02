@@ -715,7 +715,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				"GTSatisfies",
 		"GTSatisfiessource");
 		//System.err.println("Testing "+goal +" for agent "+
-//		agent+ " satisfying"+satisfyingTasks.size());
+		//		agent+ " satisfying"+satisfyingTasks.size());
 		Vector solvingTasks = new Vector();
 		enumeration = satisfyingTasks.elements();
 		while (enumeration.hasMoreElements()) {
@@ -978,7 +978,11 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 
 							expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getID())));
-							expectedInput.add(new Var("mentalenttype", Utils.replaceBadChars(fact.getID())));
+							if (!fact.getType().equalsIgnoreCase("conversation")) {
+								expectedInput.add(new Var("mentalenttype", Utils.replaceBadChars(fact.getID())));
+							} else {
+								expectedInput.add(new Var("mentalenttype", "RuntimeConversation"));
+							}
 
 							expectedInput.add(new Var("mentalentitycardinality", cardinality));
 							taskRepeat.add(expectedInput);
@@ -1285,15 +1289,15 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 					if (ge.getAttributeByName("Entity").getEntityValue().equals(appr)) {
 						if (ge.getAttributeByName("File").getSimpleValue() == null ||
 								ge.getAttributeByName("File").getSimpleValue().equals("")) {
-//							try {
-//							// this.getProperty("jadeproject").value+"/"+
-//							String path = getProperty("jadeperm").value + "/ingenias/jade/components/" + appr.getID() + "App.java";
-//							ge.setAttribute(new GraphAttributeImp("File", path, null));
-//							System.err.println("Fijado atributo .............." + appr.getID() + " a path " + path + " " + this.getProperties());
-//							} catch (InvalidAttribute e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//							}
+							//							try {
+							//							// this.getProperty("jadeproject").value+"/"+
+							//							String path = getProperty("jadeperm").value + "/ingenias/jade/components/" + appr.getID() + "App.java";
+							//							ge.setAttribute(new GraphAttributeImp("File", path, null));
+							//							System.err.println("Fijado atributo .............." + appr.getID() + " a path " + path + " " + this.getProperties());
+							//							} catch (InvalidAttribute e) {
+							//							// TODO Auto-generated catch block
+							//							e.printStackTrace();
+							//							}
 						}
 					}
 					k++;
@@ -1522,8 +1526,9 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				this.generateAgentTask(r, agent, task, apps, roles);
 				produced.addAll(new HashSet(getExpectedOutput(task)));
 				produced.addAll(new HashSet(getExpectedOutputCreated(task)));
-				consumed.addAll(new HashSet(this.getNonConsumableInput(task)));
-				consumed.addAll(this.getConsumedInputs(task));
+				consumed.addAll(new HashSet(this.getCompleteExpectedInput(task)));
+				System.err.println(task.getID()+" "+this.getCompleteExpectedInput(task));
+				//consumed.addAll(this.getConsumedInputs(task));
 			}
 			produced.removeAll(consumed);
 			HashSet<GraphEntity> removeConversations = new HashSet<GraphEntity>();
@@ -1536,19 +1541,19 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			if (produced.size() != 0) {
 				Log.getInstance().logWARNING("Agent " + agent.getID() + " does not use as input of any task the following entities :" + produced +
 				". This may end in a generation of garbage. To prevent this, a default task for the deletion of these entities has been produced.");
-						for (GraphEntity conv : produced) {
-						Repeat defaultDeleteTask = new Repeat("deleteentity");
-						defaultDeleteTask.add(new Var("entityidtodelete", Utils.replaceBadChars(conv.getID())));
-						defaultDeleteTask.add(new Var("entitytypetodelete", Utils.replaceBadChars(conv.getType())));
-						r.add(defaultDeleteTask);
-					}
-
-			} else		{
+				for (GraphEntity conv : produced) {
 					Repeat defaultDeleteTask = new Repeat("deleteentity");
-					defaultDeleteTask.add(new Var("entityidtodelete", "NONSENSEENTITY"));
-					defaultDeleteTask.add(new Var("entitytypetodelete", "NONSENSEENTITY"));
+					defaultDeleteTask.add(new Var("entityidtodelete", Utils.replaceBadChars(conv.getID())));
+					defaultDeleteTask.add(new Var("entitytypetodelete", Utils.replaceBadChars(conv.getType())));
 					r.add(defaultDeleteTask);
 				}
+
+			} else		{
+				Repeat defaultDeleteTask = new Repeat("deleteentity");
+				defaultDeleteTask.add(new Var("entityidtodelete", "NONSENSEENTITY"));
+				defaultDeleteTask.add(new Var("entitytypetodelete", "NONSENSEENTITY"));
+				r.add(defaultDeleteTask);
+			}
 
 		}
 	}
@@ -1700,16 +1705,16 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 * @return A list of entities that can act as input of the task
 	 * @throws NullEntity
 	 */
-	private Vector<GraphRole> getCompleteExpectedInput(GraphEntity task) throws NullEntity {
-		Vector<GraphRole> inputs = Utils.getRelatedElementsRolesVector(task,
+	private Vector<GraphEntity> getCompleteExpectedInput(GraphEntity task) throws NullEntity {
+		Vector<GraphEntity> inputs = Utils.getRelatedElementsVector(task,
 				"WFConsumes",
 		"WFConsumestarget");
 
-		Vector<GraphRole> inputs2 = Utils.getRelatedElementsRolesVector(task,
+		Vector<GraphEntity> inputs2 = Utils.getRelatedElementsVector(task,
 				"GTModifies",
 		"WFConsumestarget");
 
-		Vector<GraphRole> inputs3 = Utils.getRelatedElementsRolesVector(task,
+		Vector<GraphEntity> inputs3 = Utils.getRelatedElementsVector(task,
 				"Consumes",
 		"WFConsumestarget");
 

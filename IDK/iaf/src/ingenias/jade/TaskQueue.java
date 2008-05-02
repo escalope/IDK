@@ -102,10 +102,13 @@ public class TaskQueue {
 	 * @param t
 	 */
 	public synchronized void taskExecuted(Task t) {
+		
 		tqueue.remove(t);
 		if (graphics!=null)
 			graphics.removeTaskPanel(t);
 		manualExecQueue.remove(t);
+		if (t.getConversationContext()!=null)
+			this.msr.conversationAlreadyUsed(t.getConversationContext());
 		this.reviewScheduledTasks();
 
 	}
@@ -116,13 +119,14 @@ public class TaskQueue {
 	 * @param t
 	 */
 	public synchronized void scheduleTask(Task t) {
-		if (!tqueue.contains(t) && !manualExecQueue.contains(t)){
-			tqueue.add(t);
-			
+		if (!tqueue.contains(t) && !manualExecQueue.contains(t)){			
+			tqueue.add(t);			
 			MainInteractionManager.logMSP("Task "+t.getID()+" of type "+t.getType()+" was sucessfully scheduled. Other tasks are :"+tqueue, agentID.getLocalName());
+			if (t.getConversationContext()!=null){
+				msr.conversationIsInUse(t.getConversationContext());	
+			}
 		} else {
 			MainInteractionManager.logMSP("Task "+t.getID()+" of type "+t.getType()+" was already scheduled", agentID.getLocalName());
-
 		}
 	}
 
@@ -233,6 +237,8 @@ public class TaskQueue {
 				manualExecQueue.remove(nextTask);
 				if (graphics!=null)
 					graphics.removeTaskPanel(nextTask);
+				if (nextTask.getConversationContext()!=null)
+					this.msr.conversationAlreadyUsed(nextTask.getConversationContext());
 			}
 		}
 	}
@@ -330,7 +336,7 @@ public class TaskQueue {
 	 * @return A list of the missing elements.
 	 */
 	public Vector<MentalEntity> locateMissingItems(Task t) {
-		Vector<MentalEntity> inputs=new Vector<MentalEntity>(t.getInputs());
+		HashSet<MentalEntity> inputs=new HashSet<MentalEntity>(t.getInputs());
 		inputs.addAll(t.getExpectedConsumedInputs());
 		Vector<MentalEntity> missing=new  Vector<MentalEntity>();
 
@@ -342,12 +348,14 @@ public class TaskQueue {
 			}
 		}
 
-		for (int j=0;j<inputs.size() ;j++){								
-			MentalEntity me=inputs.elementAt(j);
+		for (MentalEntity element:inputs){											
 			try {
-				MentalEntity requiredEntity = this.msr.obtainConversationalMentalEntity(t.getConversationContext(),me.getId());
+				MentalEntity requiredEntity = this.msr.obtainConversationalMentalEntity(t.getConversationContext(),element.getId());
 			} catch (NotFound nf){
-				missing.add(me);
+				missing.add(element);
+				if (t.getConversationContext()!=null){
+					System.err.println("no encontrado "+element.getId()+" "+t.getConversationContext().getConversationID());
+				}
 			}
 		}
 

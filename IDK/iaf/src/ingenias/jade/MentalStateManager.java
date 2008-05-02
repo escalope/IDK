@@ -30,6 +30,7 @@ import java.awt.geom.Rectangle2D;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
@@ -53,6 +54,8 @@ import ingenias.editor.cell.RenderComponentManager;
 import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.FrameFact;
 import ingenias.editor.entities.MentalEntity;
+import ingenias.editor.entities.RuntimeEvent;
+import ingenias.editor.entities.RuntimeFact;
 import ingenias.editor.entities.StateGoal;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.editor.entities.ViewPreferences.ViewType;
@@ -112,7 +115,7 @@ MentalStateUpdater {
 	private Vector<GraphModelListener> changeListeners = new Vector<GraphModelListener>();
 	private String agentName = "";
 	private Hashtable<String, MentalEntity> state = new Hashtable<String, MentalEntity>();
-	private Vector<RuntimeConversation> conversationsInUse= new Vector<RuntimeConversation>();
+	private Vector<String> conversationsInUse= new Vector<String>();
 	private Vector<Boolean> graphModificationQueue=new Vector<Boolean>(); 
 	private Thread graphModificationThread=new Thread(){
 		public void run(){
@@ -131,30 +134,59 @@ MentalStateUpdater {
 				}
 			}
 		}};
+		private HashSet<String> conversationAlreadyProcessed= new HashSet<String>();
 
 		private class ConversationTracker implements Runnable{
-			private Hashtable<RuntimeConversation, Integer> timeout=new Hashtable<RuntimeConversation, Integer>(); 
+			private Hashtable<RuntimeConversation, Integer> timeout=new Hashtable<RuntimeConversation, Integer>();
+
+
+
 			public void run() {			
-//				int seconds=IAFProperties.getGarbageCollectionInterval();
+				//				int seconds=IAFProperties.getGarbageCollectionInterval();
 				while(true){
 					Vector<RuntimeConversation> convs = getConversations();
 					for (RuntimeConversation conv:convs){
-						if (conv.getState().equalsIgnoreCase("finished") || conv.getState().equalsIgnoreCase("aborted")){
-							if (timeout.containsKey(conv)){
-								timeout.put(conv, timeout.get(conv)+1);
+						if ((conv.getState().equalsIgnoreCase("finished") 
+								|| conv.getState().equalsIgnoreCase("aborted"))){
+							if (
+									!isConversationBeingUsedByATask(conv) 
+									&& !hasAnOngoingParentConversation(conv)
+									&&!hasAnOngoingChildConversation(conv)
+							){
+								if (timeout.containsKey(conv)){
+									timeout.put(conv, timeout.get(conv)+1);
+									/*if (agentName.startsWith("Mon"))
+										System.err.println(agentName+":::::::::::: marking "+conv.getId() +" with "+timeout.get(conv));*/
+								} else {
+									timeout.put(conv, 1);
+									/*	if (agentName.startsWith("Mon"))
+										System.err.println(agentName+":::::::::::: marking "+conv.getId());*/
+								}
 							} else {
-								timeout.put(conv, 1);
+								if (timeout.containsKey(conv)){
+									timeout.remove(conv);
+								}
 							}
 						}
+						/*if (agentName.startsWith("Mon")){
+							System.err.println(conv.getConversationID()+" "+ isConversationBeingUsedByATask(conv)+" :"+hasAnOngoingParentConversation(conv)
+									+":"+hasAnOngoingChildConversation(conv)+" "+conversationsInUse);
+						}*/
 					}
+
 					Enumeration<RuntimeConversation> ks = timeout.keys();
 					while (ks.hasMoreElements()){
 						RuntimeConversation conv=ks.nextElement();
 						if (timeout.get(conv)>IAFProperties.getGarbageCollectionInterval() 
-								&& !isConversationBeingUsed(conv) 
-								&& IAFProperties.getGarbageCollectionEnabled()){						
+								&& !isConversationBeingUsedByATask(conv) 
+								&& !hasAnOngoingParentConversation(conv)
+								&& !hasAnOngoingChildConversation(conv)
+								&& IAFProperties.getGarbageCollectionEnabled()){
+
 							remove(conv.getId());
 							timeout.remove(conv);
+							/*if (agentName.startsWith("Mon"))
+								System.err.println(agentName+":::::::::::: removing "+conv.getId());*/
 						}
 					}
 
@@ -168,10 +200,51 @@ MentalStateUpdater {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					//System.err.println(timeout);
 
 				}
 			}
 		}
+
+		/*public synchronized void updateFinishedConversations(){
+			Vector<RuntimeConversation> convs = getConversations();			
+			for (RuntimeConversation conv:convs){
+				if ((conv.getState().equalsIgnoreCase("finished") 
+						|| conv.getState().equalsIgnoreCase("aborted")) &&
+						!conversationAlreadyProcessed.contains(conv.getId()))
+				{
+					if (!isConversationBeingUsed(conv)){
+						Enumeration elements = conv.getCurrentContentElements();
+						while (elements.hasMoreElements()){
+							Object celement=elements.nextElement();
+							if (!(celement instanceof RuntimeConversation)){
+								hierarchicalConversationUpdate((MentalEntity) celement,
+										conv, conv.getId());
+							}
+						}
+						conversationAlreadyProcessed.add(conv.getId());
+					}
+				}
+			}
+		}*/
+
+		/*private void hierarchicalConversationUpdate(MentalEntity newEntity,
+				RuntimeConversation rc, String originalConversationid){
+			Enumeration<MentalEntity> content = rc.getCurrentContentElements();
+			boolean exit=false;
+			while (content.hasMoreElements() && !exit){
+				MentalEntity next = content.nextElement();
+				if (next instanceof RuntimeConversation){						
+					hierarchicalConversationUpdate(newEntity,(RuntimeConversation)next,originalConversationid);
+					exit=true;
+				}
+			}
+			if (!exit && !rc.getId().equalsIgnoreCase(originalConversationid)){				
+				rc.addCurrentContent(newEntity);
+			}
+		}*/
+
+
 
 		/**
 		 * It creates a new mental state manager. It requires an object IDEState to
@@ -206,16 +279,46 @@ MentalStateUpdater {
 		}
 
 		public synchronized void conversationAlreadyUsed(RuntimeConversation conv) {
-			conversationsInUse.remove(conv);
+			conversationsInUse.remove(conv.getId());
 		}
 
 		public synchronized void conversationIsInUse(RuntimeConversation conv) {
-			conversationsInUse.add(conv);
+			conversationsInUse.add(conv.getId());
 		}
 
-		public synchronized boolean isConversationBeingUsed(RuntimeConversation conv) {
-			// TODO Auto-generated method stub		
-			return conversationsInUse.contains(conv);
+		public synchronized boolean hasAnOngoingParentConversation(RuntimeConversation conv) {			
+
+			boolean found=false;			
+			if (conv.getParentConversation()!=null){
+				found= (!
+						(conv.getParentConversation().getState().equalsIgnoreCase("finished") ||
+								conv.getParentConversation().getState().equalsIgnoreCase("aborted"))
+				);
+				if (!found){
+					found=hasAnOngoingParentConversation(conv.getParentConversation());
+				} /*else {
+					System.err.println("encontrada "+conv.getParentConversation().getConversationID()+" "+conv.getParentConversation().getState());
+				}*/
+			}
+			return found;
+		}
+
+		public synchronized boolean hasAnOngoingChildConversation(RuntimeConversation conv) {			
+			Enumeration enumeration=conv.getChildConversationElements();
+			boolean found=false;
+			while (enumeration.hasMoreElements() && !found){
+				RuntimeConversation current=(RuntimeConversation)enumeration.nextElement();
+				if (current.getState().equalsIgnoreCase("finished") || 
+						current.getState().equalsIgnoreCase("aborted")){
+					found=hasAnOngoingChildConversation(current);	
+				} else
+					found=true;
+			}
+			return found;
+		}		
+
+		public synchronized boolean isConversationBeingUsedByATask(RuntimeConversation conv) {			
+			return  conversationsInUse.contains(conv.getId());
 		}
 
 		public  MentalStateManager(IDEState ids2, String name) {
@@ -361,7 +464,7 @@ MentalStateUpdater {
 		 */
 		public synchronized void remove(String id) {
 			try {
-				
+
 				final Entity ent = this.findEntity(id);
 				//System.err.println(this.agentName+":Borrado de "+ent);
 				state.remove(id);
@@ -410,68 +513,66 @@ MentalStateUpdater {
 		 * 
 		 * @param ent
 		 */
-		private void insertIntoDiagram(Entity ent) {
+		private void insertIntoDiagram(final Entity ent) {
 			if (amm!=null){
-				String superclass=ent.getClass().getSuperclass().getName().substring(ent.getClass().getSuperclass().getName().lastIndexOf(".")+1);
-				Dimension dim=RenderComponentManager.getSize(ent,superclass,ent.getPrefs().getView());
-				java.awt.Point j = ModelJGraph.findEmptyPlacePoint(dim,this.amm);
-				DefaultGraphCell dgc = this.amm.insertDuplicated(j, ent);
-				/*Map attrs = dgc.getAttributes();
-
-			String superclass=ent.getClass().getSuperclass().getName().substring(ent.getClass().getSuperclass().getName().lastIndexOf(".")+1);
-			Dimension dim=null;
-
-			if (superclass.equalsIgnoreCase("runtimeevent") || superclass.equalsIgnoreCase("runtimefact"))
-				dim=RenderComponentManager.getSize(ent,superclass,ent.getPrefs().getView());
-			else
-				dim=RenderComponentManager.getSize(ent,ent.getType(),ent.getPrefs().getView());
-
-			//System.err.println("Insertado ...."+superclass);
-
-			Rectangle2D bounds = GraphConstants.getBounds(attrs);
-			if (bounds == null)
-				bounds = new Rectangle(j.x, j.y, 200, 100);
-			else
-				bounds = new Rectangle(j.x, j.y, (int) Math.min(400, dim
-						.getWidth()), (int) Math.min(300, dim.getHeight()));
+				Runnable insert=new Runnable(){
+					public void run(){
+						String superclass=ent.getClass().getSuperclass().getName().substring(ent.getClass().getSuperclass().getName().lastIndexOf(".")+1);
+						Dimension dim=RenderComponentManager.getSize(ent,superclass,ent.getPrefs().getView());
+						java.awt.Point j = ModelJGraph.findEmptyPlacePoint(dim,amm);
+						DefaultGraphCell dgc = amm.insertDuplicated(j, ent);
+						resizeAllMentalEntities();
+					}
+				};
+				javax.swing.SwingUtilities.invokeLater(insert);
 
 
 
-			GraphConstants.setBounds(attrs, bounds);
-			Hashtable changes = new Hashtable();
-			changes.put(dgc, attrs);
-			// dgc.setAttributes(attrs);
-			this.amm.getModel().edit(changes, null, null, null);*/
 
-				resizeAllMentalEntities();
 			}
 		}
 
-		public void resizeAllMentalEntities() {
+		public void resizeAllMentalEntities() {			
 			if (amm!=null){
-				GraphModel gm=this.amm.getModel();
-				for (int k=0;k<gm.getRootCount();k++){
-					DefaultGraphCell dgc1 = (DefaultGraphCell) gm.getRootAt(k);
-					Object userobject=dgc1.getUserObject();
-					CellView currentview=amm.getGraphLayoutCache().getMapping(dgc1,false);	
-					Entity ent1=(Entity)dgc1.getUserObject();
-					if (ent1!=null &&
-							RenderComponentManager.retrievePanel(ent1.getType(),ent1.getPrefs().getView())!=null){
-						/*					Dimension dim1=RenderComponentManager.getSize(ent1,ent1.getType(),ent1.getPrefs().getView());
+				Runnable resize=new Runnable(){
+					public void run(){
+						GraphModel gm=amm.getModel();
+						for (int k=0;k<gm.getRootCount();k++){
+							DefaultGraphCell dgc1 = (DefaultGraphCell) gm.getRootAt(k);
+							Object userobject=dgc1.getUserObject();
+							CellView currentview=amm.getGraphLayoutCache().getMapping(dgc1,false);	
+							Entity ent1=(Entity)dgc1.getUserObject();
+							
+							String type="";
+							if (ent1 instanceof RuntimeFact){
+								type="RuntimeFact";
+							} else
+								if (ent1 instanceof RuntimeEvent){
+									type="RuntimeEvent";
+								} else
+									type=ent1.getType();
 
-					if (dim1!=null){
-						Map attributes=dgc1.getAttributes();
-						Rectangle2D loc=GraphConstants.getBounds(attributes);			  
-						loc.setRect(loc.getX(),loc.getY(),(int) Math.min(400, dim1
-								.getWidth()), (int) Math.min(300, dim1.getHeight()));						
-						GraphConstants.setBounds(attributes,loc);			  
-						Map nmap=new Hashtable();
-						nmap.put(dgc1,attributes);
-						amm.getModel().edit(nmap,null,null,null);
-						amm.repaint();	
-					}*/
+							if (ent1!=null &&
+									RenderComponentManager.retrievePanel(type,ent1.getPrefs().getView())!=null){
+								Dimension dim1=RenderComponentManager.getSize(ent1,type,ent1.getPrefs().getView());
+
+								if (dim1!=null){
+									Map attributes=dgc1.getAttributes();
+									Rectangle2D loc=GraphConstants.getBounds(attributes);			  
+									loc.setRect(loc.getX(),loc.getY(),(int) Math.min(400, dim1
+											.getWidth()), (int) Math.min(300, dim1.getHeight()));						
+									GraphConstants.setBounds(attributes,loc);			  
+									Map nmap=new Hashtable();
+									nmap.put(dgc1,attributes);
+									amm.getModel().edit(nmap,null,null,null);
+									amm.repaint();	
+								}
+							}
+						}		
 					}
-				}
+				};
+				javax.swing.SwingUtilities.invokeLater(resize);
+
 
 			}
 		}
@@ -484,33 +585,39 @@ MentalStateUpdater {
 		 * @param ent
 		 *            The entity to remove
 		 */
-		private void removeFromDiagram(Entity ent) {
+		private void removeFromDiagram(final Entity ent) {
 			//System.err.println("removing "+ent);
-			Entity result = null;
-			DefaultGraphCell cell = null;
-			boolean found = false;
 			if (amm!=null){
-				int before=amm.getModel().getRootCount();
-				for (int k = 0; k < amm.getModel().getRootCount() && !found; k++) {
-					cell = (DefaultGraphCell) amm.getModel().getRootAt(k);
-					Entity current = (Entity) cell.getUserObject();
-					if (current.getId().equals(ent.getId())) {
-						found = true;
-						result = current;
-					}
-				}
-				if (found){
-					this.amm.getModel().remove(new Object[] { cell });
-					//this.amm.getGraphLayoutCache().remove(new Object[] { cell },true,true);
-					this.amm.validate();
-					this.amm.repaint();
-				}else
-					System.err.println("Not found");
+				Runnable remove=new Runnable(){
+					public void run(){
+						Entity result = null;
+						DefaultGraphCell cell = null;
+						boolean found = false;
 
-				if (before<=amm.getModel().getRootCount()){
-					throw new RuntimeException();
-				}
-			}	
+						int before=amm.getModel().getRootCount();
+						for (int k = 0; k < amm.getModel().getRootCount() && !found; k++) {
+							cell = (DefaultGraphCell) amm.getModel().getRootAt(k);
+							Entity current = (Entity) cell.getUserObject();
+							if (current.getId().equals(ent.getId())) {
+								found = true;
+								result = current;
+							}
+						}
+						if (found){
+							amm.getModel().remove(new Object[] { cell });
+							//this.amm.getGraphLayoutCache().remove(new Object[] { cell },true,true);
+							amm.validate();
+							amm.repaint();
+						}
+
+						if (before<=amm.getModel().getRootCount()){
+							throw new RuntimeException();
+						}
+
+					}
+				};
+				javax.swing.SwingUtilities.invokeLater(remove);
+			}
 
 		}
 
@@ -520,7 +627,8 @@ MentalStateUpdater {
 				conv.addCurrentContent(me);
 			}
 
-			setModified();
+			resizeAllMentalEntities();
+			setModified();			
 
 		}
 
@@ -603,7 +711,8 @@ MentalStateUpdater {
 		public synchronized void setModified() {
 			modified = true;
 			graphModificationQueue.add(true);
-			
+
+
 			/*new Thread() {
 			public void run() {
 				for (int k = 0; k < changeListeners.size(); k++) {
@@ -650,11 +759,22 @@ MentalStateUpdater {
 			while (enumeration.hasMoreElements() && !found) {
 				me = (MentalEntity) enumeration.nextElement();
 				found = me.getId().equalsIgnoreCase(id);
+
+			}
+			if (!found && conv.getParentConversation()!=null){
+				try {
+					me=obtainConversationalMentalEntity(conv.getParentConversation(),
+							id);
+					found=true;
+				} catch (NotFound nf){
+
+				}
 			}
 			if (found)
 				return me;
-			else
+			else {
 				return  (MentalEntity) findEntity(id);
+			}
 
 
 		}
@@ -699,23 +819,31 @@ MentalStateUpdater {
 
 		public synchronized Vector<MentalEntity> obtainConversationalMentalEntityByType(
 				RuntimeConversation conv, String type) {
-			Vector<MentalEntity> result = new Vector<MentalEntity>();
+			HashSet<MentalEntity> result = new HashSet<MentalEntity>();
 			result.addAll(findEntityTypeInstances(type));
 			if (conv == null) {
 
-				return result;
+				return new Vector();
 			}
+
+
 
 			Enumeration enumeration = conv.getCurrentContentElements();
 			boolean found = false;
 			MentalEntity me = null;
+
 			while (enumeration.hasMoreElements()) {
 				me = (MentalEntity) enumeration.nextElement();
 				if (me.getType().equalsIgnoreCase(type))
-					result.add(me);
+					result.add(me);				
+
+			};
+
+			if (conv.getParentConversation()!=null){
+				result.addAll(obtainConversationalMentalEntityByType(conv.getParentConversation(), type));
 			}
 
-			return result;
+			return new Vector(result);
 		}
 
 		public synchronized static String generateMentalEntityID() {
@@ -727,12 +855,35 @@ MentalStateUpdater {
 			/*try {
 				System.err.println(this.agentName+":Borrado de conv "+conversationContext.getConversationID()+" the entity "+obtainConversationalMentalEntity(conversationContext, id));
 			} catch (NotFound e) {
-				
+
 				e.printStackTrace();
 			}*/
 			conversationContext.removeCurrentContentElement(id);
+			removeFromLowerConversation(conversationContext,id);
+			removeFromUpperConversation(conversationContext,id);
 
 
 		}
+
+		private void removeFromUpperConversation(
+				RuntimeConversation conversationContext, String id) {
+			conversationContext.removeCurrentContentElement(id);
+			if (conversationContext.getParentConversation()!=null){
+				removeFromUpperConversation(conversationContext.getParentConversation(), id);
+			}
+		}
+
+		private void removeFromLowerConversation(
+				RuntimeConversation conversationContext, String id) {
+			conversationContext.removeCurrentContentElement(id);
+			Enumeration<RuntimeConversation> enumeration = conversationContext.getChildConversationElements();
+			MentalEntity me = null;									
+			while (enumeration.hasMoreElements()) {								
+				removeFromLowerConversation(
+						enumeration.nextElement(), id);				
+			}
+		}
+
+
 
 }

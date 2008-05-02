@@ -49,7 +49,7 @@ public class @@@v@@@tname@@@/v@@@Task extends Task{
  public void execute() throws TaskException{
 
 @@@repeat altname="0" id="taskinputcard1"@@@
-        @@@v@@@mentalenttype@@@/v@@@  ei@@@v@@@mentalentname@@@/v@@@=(@@@v@@@mentalentname@@@/v@@@)this.getFirstInputOfType("@@@v@@@mentalentname@@@/v@@@");             
+        @@@v@@@mentalenttype@@@/v@@@  ei@@@v@@@mentalentname@@@/v@@@=(@@@v@@@mentalenttype@@@/v@@@)this.getFirstInputOfType("@@@v@@@mentalentname@@@/v@@@");             
 @@@/repeat@@@
 
 @@@repeat altname="0" id="taskinputcardn"@@@

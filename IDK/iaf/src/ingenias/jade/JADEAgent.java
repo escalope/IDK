@@ -492,6 +492,7 @@ abstract public class JADEAgent extends Agent{
 					completedLast = false;
 					//msp.wakeup(); // It tells the MSP to take a decision about task execution
 					msp.lifeCycle();
+					// information is uploaded to top level conversations
 					completedLast = true;
 					while (completedLast) {
 						try {

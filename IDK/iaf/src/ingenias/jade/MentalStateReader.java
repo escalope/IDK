@@ -48,4 +48,6 @@ public interface MentalStateReader {
 	public ingenias.editor.entities.StateGoal getGoal(String name);
 	public Entity findEntity(String id) throws NotFound;
 	public Vector<MentalEntity> findEntityTypeInstances(String type);
+	public void conversationAlreadyUsed(RuntimeConversation conv);
+	public void conversationIsInUse(RuntimeConversation conversationContext); 
 }

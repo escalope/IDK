@@ -44,7 +44,7 @@ public class Conversation extends InformationMentalEntity {
 
 
 
-  public TypedVector Collaborators=new TypedVector(java.lang.String.class);
+  public TypedVector Collaborators=new TypedVector(java.lang.Object.class);
 
   public TypedVector CurrentContent=new TypedVector(ingenias.editor.entities.MentalEntity.class);
 
@@ -124,15 +124,15 @@ public class Conversation extends InformationMentalEntity {
   public Class getCollaboratorsType(){
    return Collaborators.getType();
   }
-  public void addCollaborators(java.lang.String element){
+  public void addCollaborators(java.lang.Object element){
    this.Collaborators.add(element);
   }
 
-  public void insertCollaboratorsAt(int pos,java.lang.String element){
+  public void insertCollaboratorsAt(int pos,java.lang.Object element){
    this.Collaborators.insert(element,pos);
   }
 
-  public int containsCollaborators(java.lang.String element){
+  public int containsCollaborators(java.lang.Object element){
    return this.Collaborators.indexOf(element);
   }
 

@@ -183,13 +183,14 @@ public class GraphManager implements java.io.Serializable {
 	}
 	
 	
-	public DefaultGraphCell getCell(JGraph model, Object o){
+	public Vector<DefaultGraphCell> getCell(JGraph model, Object o){
 		Object[] roots=model.getRoots();
+		Vector<DefaultGraphCell> results=new Vector<DefaultGraphCell>();
 		for (int k=0;k<roots.length;k++){
 			if (((DefaultGraphCell)roots[k]).getUserObject() == o)
-				return (DefaultGraphCell)roots[k];
+				results.add((DefaultGraphCell)roots[k]);
 		}
-		return null;
+		return results;
 	}
 	
 	private void removeConnectedEdges(JGraph jg, DefaultGraphCell dgc){
@@ -245,14 +246,21 @@ public class GraphManager implements java.io.Serializable {
 		Enumeration enumeration=v.elements();
 		while (enumeration.hasMoreElements()){
 			JGraph jg=(JGraph)enumeration.nextElement();
-			DefaultGraphCell dgc=this.getCell(jg,ent);
-			if (dgc!=null){
-				Object[] cells={dgc};
+			
+			Vector<DefaultGraphCell> dgcs=this.getCell(jg,ent);
+			
+			if (!dgcs.isEmpty()){
+				Object[] cells=dgcs.toArray();
+			
+				//cells = ButtonToolBar.this.editor.graph.getDescendants(cells);
 				
-				removeConnectedEdges(jg,dgc);
-				dgc.removeAllChildren();
-				cells=jg.getDescendants(cells);
 				jg.getGraphLayoutCache().remove(cells,true,true);
+				jg.getModel().remove(cells);
+				
+				//removeConnectedEdges(jg,dgc);
+				//dgc.removeAllChildren();
+				//cells=jg.getDescendants(cells);
+				//jg.getGraphLayoutCache().remove(cells,true,true);
 				
 			}
 		}

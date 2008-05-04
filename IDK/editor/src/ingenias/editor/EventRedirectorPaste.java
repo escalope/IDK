@@ -41,8 +41,8 @@ implements java.io.Serializable {
 	 *@param  a  Description of Parameter
 	 * @param editor TODO
 	 */
-	public EventRedirectorPaste(Editor editor, Action a) {
-		super(editor,a);
+	public EventRedirectorPaste(Editor editor, Action a, ImageIcon icon) {
+		super(editor,a,icon);
 		
 	}
 	

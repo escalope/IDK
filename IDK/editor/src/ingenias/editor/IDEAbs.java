@@ -23,6 +23,7 @@ package ingenias.editor;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.text.html.HTMLFrameHyperlinkEvent;
 import javax.swing.tree.*;
 import javax.swing.event.*;
@@ -152,6 +153,8 @@ implements java.io.Serializable, ClipboardOwner
 		super();
 		
 		
+	
+		
 		JFileChooser jfc = new JFileChooser();
 		File homedir = jfc.getCurrentDirectory();
 		new File(homedir.getPath() + "/.idk").mkdir();		
@@ -184,9 +187,12 @@ implements java.io.Serializable, ClipboardOwner
 		update.start();
 		updateProjectsMenu(project);
 		setUnChanged();
+				
+		
 		this.validate();
 		this.pack();
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				
 		//s.setVisible(false);
 		this.setVisible(true);
 		JOptionPane.setRootFrame(this);
@@ -286,6 +292,8 @@ implements java.io.Serializable, ClipboardOwner
 					e1.printStackTrace();
 				}
 			}
+			
+			
 
 		};
 
@@ -743,11 +751,11 @@ implements java.io.Serializable, ClipboardOwner
 										int result = JOptionPane.showConfirmDialog(ide,
 												"This will remove permanently " + tps[k].getLastPathComponent() +
 												". Are you sure?",
-												"removing package", JOptionPane.YES_NO_OPTION);
+												"removing object", JOptionPane.YES_NO_OPTION);
 										if (result == JOptionPane.OK_OPTION) {											
 											Entity sel = (Entity) dmtn.getUserObject();
-											ids.gm.removeEntityFromAllGraphs(sel);
 											ids.om.removeEntity(sel);
+											ids.gm.removeEntityFromAllGraphs(sel);											
 											repaint();
 											setChanged(); 
 										}}
@@ -1192,6 +1200,8 @@ implements java.io.Serializable, ClipboardOwner
 						arbolProyectos.expandPath(new TreePath(npath.toArray()));				
 					}
 					restorePreferences();
+					
+					ids.editor.changeGraph((ModelJGraph)ids.editor.getGraph());
 
 				}
 				catch (ingenias.exception.UnknowFormat e1) {

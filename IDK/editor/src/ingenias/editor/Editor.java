@@ -254,6 +254,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		}
 
 		this.graphPanel.setSelectedIndex(this.graphPanel.indexOfTab(graph.getID()));
+		updateBars(graph);
 	}
 
 	public synchronized Vector<String> getOpenedDiagrams(){
@@ -354,6 +355,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 				newEntity.getPrefs().setView(ViewPreferences.ViewType.UML);
 			if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.INGENIAS)
 				newEntity.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+			System.err.println("----------------insertando ----------------");
 		}
 
 		IDE.setChanged();

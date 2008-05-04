@@ -602,6 +602,13 @@ public class AUMLInteractionDiagramModelJGraph extends ModelJGraph {
     // Insert the Vertex and its Attributes
     this.getModel().insert(new Object[] {vertex},attributes
                            , null, null, null);
+
+	Entity newEntity=(Entity) vertex.getUserObject();
+	if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.UML)
+		newEntity.getPrefs().setView(ViewPreferences.ViewType.UML);
+	if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.INGENIAS)
+		newEntity.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+
     return vertex;
   }
 

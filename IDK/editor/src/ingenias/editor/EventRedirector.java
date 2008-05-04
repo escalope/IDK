@@ -41,9 +41,10 @@ implements java.io.Serializable {
 	 *
 	 *@param  a  Description of Parameter
 	 * @param editor TODO
+	 * @param imageIcon 
 	 */
-	public EventRedirector(Editor editor, Action a) {
-		super("", (ImageIcon) a.getValue(Action.SMALL_ICON));
+	public EventRedirector(Editor editor, Action a, ImageIcon imageIcon) {
+		super("", imageIcon);		
 		this.editor = editor;
 		this.action = a;
 	}

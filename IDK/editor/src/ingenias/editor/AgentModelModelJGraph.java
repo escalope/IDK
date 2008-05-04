@@ -26,6 +26,7 @@
 package ingenias.editor;
 
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
@@ -41,6 +42,8 @@ import java.util.Map;
 import java.util.Hashtable;
 import java.util.ArrayList;
 import javax.swing.event.UndoableEditEvent;
+import javax.swing.plaf.FontUIResource;
+
 import org.jgraph.JGraph;
 import org.jgraph.graph.*;
 import org.jgraph.event.*;
@@ -594,7 +597,7 @@ public class AgentModelModelJGraph extends ModelJGraph {
     toolbar.add(jb);
 
     Image img_RoleWS =
-        ImageLoader.getImage("images/mrole.gif");
+        ImageLoader.getImage("images/mrolews.gif");
     undoIcon = new ImageIcon(img_RoleWS);
     Action RoleWS=
         new AbstractAction("", undoIcon) {
@@ -612,7 +615,7 @@ public class AgentModelModelJGraph extends ModelJGraph {
     toolbar.add(jb);
 
     Image img_TaskWS =
-        ImageLoader.getImage("images/mtask.gif");
+        ImageLoader.getImage("images/mtaskws.gif");
     undoIcon = new ImageIcon(img_TaskWS);
     Action TaskWS=
         new AbstractAction("", undoIcon) {
@@ -630,7 +633,7 @@ public class AgentModelModelJGraph extends ModelJGraph {
     toolbar.add(jb);
 
     Image img_GoalStateWS =
-        ImageLoader.getImage("images/mgoal.gif");
+        ImageLoader.getImage("images/mgoalstatews.png");
     undoIcon = new ImageIcon(img_GoalStateWS);
     Action GoalStateWS=
         new AbstractAction("", undoIcon) {
@@ -648,7 +651,7 @@ public class AgentModelModelJGraph extends ModelJGraph {
     toolbar.add(jb);
 
     Image img_AgentWS =
-        ImageLoader.getImage("images/magent.gif");
+        ImageLoader.getImage("images/magentws.gif");
     undoIcon = new ImageIcon(img_AgentWS);
     Action AgentWS=
         new AbstractAction("", undoIcon) {
@@ -1597,6 +1600,7 @@ public class AgentModelModelJGraph extends ModelJGraph {
 
     // Add a Bounds Attribute to the Map
     GraphConstants.setBounds(map, new Rectangle(point, size));
+    
 
     // Construct a Map from cells to Maps (for insert)
     Hashtable attributes = new Hashtable();
@@ -1605,6 +1609,13 @@ public class AgentModelModelJGraph extends ModelJGraph {
     // Insert the Vertex and its Attributes
     this.getModel().insert(new Object[] {vertex},attributes
                            , null, null, null);
+
+	Entity newEntity=(Entity) vertex.getUserObject();
+	if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.UML)
+		newEntity.getPrefs().setView(ViewPreferences.ViewType.UML);
+	if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.INGENIAS)
+		newEntity.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+	
     return vertex;
   }
 

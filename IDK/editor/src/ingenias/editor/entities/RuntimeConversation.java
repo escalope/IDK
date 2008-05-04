@@ -36,9 +36,13 @@ public class RuntimeConversation extends Conversation {
 
   public java.lang.Integer AbortCode;
 
+  public ingenias.editor.entities.RuntimeConversation ParentConversation;
+
 
 
   public TypedVector Stack=new TypedVector(ingenias.editor.entities.StackEntry.class);
+
+  public TypedVector ChildConversation=new TypedVector(ingenias.editor.entities.RuntimeConversation.class);
 
 
 
@@ -73,6 +77,15 @@ public class RuntimeConversation extends Conversation {
        public void setAbortCode(java.lang.Integer
 					AbortCode){
         this.AbortCode=AbortCode;
+      }
+
+
+      public ingenias.editor.entities.RuntimeConversation getParentConversation(){
+        return ParentConversation;
+      }
+       public void setParentConversation(ingenias.editor.entities.RuntimeConversation
+					ParentConversation){
+        this.ParentConversation=ParentConversation;
       }
 
 
@@ -116,6 +129,47 @@ public class RuntimeConversation extends Conversation {
     }
     if (found!=null)
      this.Stack.remove(found);
+  }
+
+
+  public void setChildConversation(TypedVector tv){
+    this.ChildConversation=tv;
+  }
+
+  public String getChildConversation(){
+   return ChildConversation.toString();
+  }
+
+  public Class getChildConversationType(){
+   return ChildConversation.getType();
+  }
+  public void addChildConversation(ingenias.editor.entities.RuntimeConversation element){
+   this.ChildConversation.add(element);
+  }
+
+  public void insertChildConversationAt(int pos,ingenias.editor.entities.RuntimeConversation element){
+   this.ChildConversation.insert(element,pos);
+  }
+
+  public int containsChildConversation(ingenias.editor.entities.RuntimeConversation element){
+   return this.ChildConversation.indexOf(element);
+  }
+
+
+  public Enumeration getChildConversationElements(){
+   return this.ChildConversation.elements();
+  }
+
+  public void removeChildConversationElement(String id){
+    Enumeration enumeration=this.getChildConversationElements();
+    ingenias.editor.entities.Entity found=null;
+    while (enumeration.hasMoreElements() && found==null){
+     ingenias.editor.entities.Entity ent=(ingenias.editor.entities.Entity)enumeration.nextElement();
+     if (ent.getId().equalsIgnoreCase(id))
+      found=ent;
+    }
+    if (found!=null)
+     this.ChildConversation.remove(found);
   }
 
 

@@ -607,7 +607,7 @@ implements java.io.Serializable {
 			}});
 		open.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {				
-				GeneralEditionFrame ndialog = new GeneralEditionFrame(editor,om,null,ent.getId()+":"+ent.getType(),ent);
+				GeneralEditionFrame ndialog = new GeneralEditionFrame(editor,om,parentFrame,ent.getId()+":"+ent.getType(),ent);
 				ndialog.pack();
 				ndialog.setModal(true);
 				ndialog.setVisible(true);
@@ -887,7 +887,6 @@ implements java.io.Serializable {
 											for (int k = 0; k <= index; k++) {
 												o=enumeration.nextElement();
 											}
-
 											
 											if (type.equals(java.lang.String.class)) {
 												removeValue(o.toString(), cf);

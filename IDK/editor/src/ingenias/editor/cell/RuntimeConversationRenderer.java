@@ -115,6 +115,20 @@ public class RuntimeConversationRenderer extends VertexRenderer implements CellV
           }
         }
 	
+        if (currentMap.get("ChildConversation")!=null && 
+            currentMap.get("ChildConversation") instanceof ingenias.editor.rendererxml.CollectionPanel) {
+          try {
+            ( (ingenias.editor.rendererxml.CollectionPanel) currentMap.get(
+                "ChildConversation")).setCollection("ChildConversation",ent.ChildConversation, ent.ChildConversation.getType());
+          }
+          catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+          }
+          catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+          }
+        }
+	
         if (currentMap.get("Collaborators")!=null && 
             currentMap.get("Collaborators") instanceof ingenias.editor.rendererxml.CollectionPanel) {
           try {

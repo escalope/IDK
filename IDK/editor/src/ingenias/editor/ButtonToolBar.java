@@ -129,15 +129,16 @@ class ButtonToolBar extends JToolBar {
 			action = this.editor.graph.getTransferHandler().getCopyAction();
 			img = ImageLoader.getImage("images/copy.gif");
 			action.putValue(Action.SMALL_ICON, new ImageIcon(img));
-			copy = new EventRedirector(this.editor, action);
+			copy = new EventRedirector(this.editor, action,new ImageIcon(img));
 			this.add(copy);
 
 
 			// Paste
 			action = this.editor.graph.getTransferHandler().getPasteAction();
-			img = ImageLoader.getImage("images/paste.gif");
+			img = java.awt.Toolkit.getDefaultToolkit().createImage("images/paste.gif");
+			
 			action.putValue(Action.SMALL_ICON, new ImageIcon(img));
-			paste = new EventRedirectorPaste(this.editor, action);
+			paste = new EventRedirectorPaste(this.editor, action,new ImageIcon(img));
 			this.add(paste);
 
 			// Cut

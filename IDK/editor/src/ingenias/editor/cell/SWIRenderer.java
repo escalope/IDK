@@ -22,6 +22,8 @@ public class SWIRenderer {
                                       ingenias.editor.rendererxml.JLabelIcon.class);
     swiengine.getTaglib().registerTag("collectionpanel",
                                       ingenias.editor.rendererxml.CollectionPanel.class);
+    swiengine.getTaglib().registerTag("label",
+    		 ingenias.editor.rendererxml.HTMLLabel.class);
     swiengine.getTaglib().registerTag("linepanel",
                                       ingenias.editor.rendererxml.LinePanel.class);
     swiengine.getTaglib().registerTag("htmllabel",

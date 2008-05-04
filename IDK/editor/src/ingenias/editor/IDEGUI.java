@@ -448,7 +448,7 @@ public class IDEGUI extends javax.swing.JFrame  {
 			}
 		}
 		{
-			jMenu3 = new JMenu();
+		/*	jMenu3 = new JMenu();
 			preferences.add(jMenu3);
 			jMenu3.setText("Relationships look and feel");
 			{
@@ -484,7 +484,7 @@ public class IDEGUI extends javax.swing.JFrame  {
 						fullinforelatsActionPerformed(evt);
 					}
 				});
-			}
+			}*/
 		}
 		jMenuBar1.add(file);
 		jMenuBar1.add(edit);
@@ -844,7 +844,7 @@ public class IDEGUI extends javax.swing.JFrame  {
 		//TODO add your code for searchField.keyTyped
 	}
 
-	public void labelsonlyActionPerformed(ActionEvent evt) {
+	/*public void labelsonlyActionPerformed(ActionEvent evt) {
 		System.out.println("labelsonly.actionPerformed, event=" + evt);
 		//TODO add your code for labelsonly.actionPerformed
 	}
@@ -857,7 +857,7 @@ public class IDEGUI extends javax.swing.JFrame  {
 	public void fullinforelatsActionPerformed(ActionEvent evt) {
 		System.out.println("fullinforelats.actionPerformed, event=" + evt);
 
-	}
+	}*/
 	
 	public void editPopUpProperties_selected() {
 		// TODO Auto-generated method stub

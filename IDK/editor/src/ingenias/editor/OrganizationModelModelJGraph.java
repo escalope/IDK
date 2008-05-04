@@ -558,7 +558,7 @@ public class OrganizationModelModelJGraph extends ModelJGraph {
     toolbar.add(jb);
 
     Image img_RoleWS =
-        ImageLoader.getImage("images/mrole.gif");
+        ImageLoader.getImage("images/mrolews.gif");
     undoIcon = new ImageIcon(img_RoleWS);
     Action RoleWS=
         new AbstractAction("", undoIcon) {
@@ -576,7 +576,7 @@ public class OrganizationModelModelJGraph extends ModelJGraph {
     toolbar.add(jb);
 
     Image img_TaskWS =
-        ImageLoader.getImage("images/mtask.gif");
+        ImageLoader.getImage("images/mtaskws.gif");
     undoIcon = new ImageIcon(img_TaskWS);
     Action TaskWS=
         new AbstractAction("", undoIcon) {
@@ -594,7 +594,7 @@ public class OrganizationModelModelJGraph extends ModelJGraph {
     toolbar.add(jb);
 
     Image img_GoalStateWS =
-        ImageLoader.getImage("images/mgoal.gif");
+        ImageLoader.getImage("images/mgoalstatews.png");
     undoIcon = new ImageIcon(img_GoalStateWS);
     Action GoalStateWS=
         new AbstractAction("", undoIcon) {
@@ -612,7 +612,7 @@ public class OrganizationModelModelJGraph extends ModelJGraph {
     toolbar.add(jb);
 
     Image img_AgentWS =
-        ImageLoader.getImage("images/magent.gif");
+        ImageLoader.getImage("images/magentws.gif");
     undoIcon = new ImageIcon(img_AgentWS);
     Action AgentWS=
         new AbstractAction("", undoIcon) {
@@ -2100,6 +2100,13 @@ public class OrganizationModelModelJGraph extends ModelJGraph {
     // Insert the Vertex and its Attributes
     this.getModel().insert(new Object[] {vertex},attributes
                            , null, null, null);
+
+	Entity newEntity=(Entity) vertex.getUserObject();
+	if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.UML)
+		newEntity.getPrefs().setView(ViewPreferences.ViewType.UML);
+	if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.INGENIAS)
+		newEntity.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+
     return vertex;
   }
 

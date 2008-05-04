@@ -61,7 +61,7 @@ public class NAryView
     //jta.setLocation(GraphConstants.getBounds(m).getLocation());
 
 
-     jta.setFont(GraphConstants.getFont(this.getAllAttributes()));
+     //jta.setFont(GraphConstants.getFont(this.getAllAttributes()));
     String text = ( (DefaultGraphCell) (this.getCell())).getUserObject().
         toString();
     if (text.equals("null") || text.length() == 0 ||

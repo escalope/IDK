@@ -87,7 +87,7 @@ public class ProjectTreeRenderer extends javax.swing.tree.DefaultTreeCellRendere
 	
  ImageIcon GoalIcon=new ImageIcon(ImageLoader.getImage("images/mgoal.gif"));
 	
- ImageIcon AgentWSIcon=new ImageIcon(ImageLoader.getImage("images/magent.gif"));
+ ImageIcon AgentWSIcon=new ImageIcon(ImageLoader.getImage("images/magentws.gif"));
 	
  ImageIcon FactIcon=new ImageIcon(ImageLoader.getImage("images/mfact.gif"));
 	
@@ -217,9 +217,9 @@ public class ProjectTreeRenderer extends javax.swing.tree.DefaultTreeCellRendere
 	
  ImageIcon INGENIASCodeComponentIcon=new ImageIcon(ImageLoader.getImage("images/miccomponent.gif"));
 	
- ImageIcon TaskWSIcon=new ImageIcon(ImageLoader.getImage("images/mtask.gif"));
+ ImageIcon TaskWSIcon=new ImageIcon(ImageLoader.getImage("images/mtaskws.gif"));
 	
- ImageIcon GoalStateWSIcon=new ImageIcon(ImageLoader.getImage("images/mgoal.gif"));
+ ImageIcon GoalStateWSIcon=new ImageIcon(ImageLoader.getImage("images/mgoalstatews.png"));
 	
  ImageIcon StateGoalIcon=new ImageIcon(ImageLoader.getImage("images/msgoal.gif"));
 	
@@ -229,7 +229,7 @@ public class ProjectTreeRenderer extends javax.swing.tree.DefaultTreeCellRendere
 	
  ImageIcon TaskIcon=new ImageIcon(ImageLoader.getImage("images/mtask.gif"));
 	
- ImageIcon RoleWSIcon=new ImageIcon(ImageLoader.getImage("images/mrole.gif"));
+ ImageIcon RoleWSIcon=new ImageIcon(ImageLoader.getImage("images/mrolews.gif"));
 	
  ImageIcon AUMLAlternativeBoxIcon=new ImageIcon(ImageLoader.getImage("images/altb.png"));
 	

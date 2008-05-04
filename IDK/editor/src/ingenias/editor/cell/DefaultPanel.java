@@ -21,9 +21,10 @@ public class DefaultPanel extends JPanel {
   }
 
   public void paint(Graphics graph){
-   graph.setXORMode(Color.WHITE);
+	 
+  // graph.setXORMode(Color.WHITE); // If activated, fonts are painted without anti-aliasing. They will look ugly.
    super.paint(graph);
-   graph.setPaintMode();
+ //  graph.setPaintMode();
 
   }
 

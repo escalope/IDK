@@ -404,9 +404,23 @@ public class ObjectSave extends ObjectSaveAbs{
            saveObject(nen.getInteraction(),os);
           os.write("</objectproperty>\n");
           
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("ParentConversation");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getParentConversation()!=null)
+           saveObject(nen.getParentConversation(),os);
+          os.write("</objectproperty>\n");
+          
           
           os.write("<objectproperty id=\"Stack\" collection=\"true\">\n");
              enumeration=nen.getStackElements();
+          while (enumeration.hasMoreElements()){
+            ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+           saveObject(next,os);
+          }
+          os.write("</objectproperty>\n");
+          
+          os.write("<objectproperty id=\"ChildConversation\" collection=\"true\">\n");
+             enumeration=nen.getChildConversationElements();
           while (enumeration.hasMoreElements()){
             ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
            saveObject(next,os);

@@ -33,8 +33,8 @@ implements java.io.Serializable {
 	 *@param  a  Description of Parameter
 	 * @param editor TODO
 	 */
-	public EventRedirectorCut(Editor editor, Action a) {
-		super(editor,a);
+	public EventRedirectorCut(Editor editor, Action a, ImageIcon icon) {
+		super(editor,a,icon);
 		
 	}
 

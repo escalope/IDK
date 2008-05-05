@@ -249,6 +249,7 @@ public class TaskExecutionModel {
 					//Collaborators have been set
 					DFAgentDescription[] actors;
 					Vector<DFAgentDescription> descV=new Vector<DFAgentDescription>();
+					String colaboratorsFound="";
 					while (collaborators.hasMoreElements()){
 						Object colLocalID=collaborators.nextElement();
 
@@ -257,7 +258,8 @@ public class TaskExecutionModel {
 							try {
 								descr = ja.getAM().getYellowPages().getAgentFromLocalID((String)colLocalID);
 								if (descr.length>0){
-									descV.add(descr[0]);											
+									descV.add(descr[0]);	
+									colaboratorsFound=colaboratorsFound+descr[0].getName().getLocalName();
 								}
 							} catch (FIPAException e) {
 								e.printStackTrace();
@@ -285,10 +287,10 @@ public class TaskExecutionModel {
 
 						MainInteractionManager.logMSP("ERROR intializing manually protocol "+
 								current.getInteraction().getId()+". Not all required collaborators" +
-								" where defined. Please, review code for task "+t.getID(),ja.getLocalName());
+								" where defined. Colaborators found "+colaboratorsFound+". Please, review code for task "+t.getID(),ja.getLocalName());
 						MainInteractionManager.logMSP("ERROR intializing manually protocol "+
 								current.getInteraction().getId()+". Not all required collaborators" +
-								" where defined. Please, review code for task "+t.getID(),ja.getLocalName(),t.getID(),t.getType());
+								" where defined. Colaborators found "+colaboratorsFound+". Please, review code for task "+t.getID(),ja.getLocalName(),t.getID(),t.getType());
 						current.setState("ABORTED");
 						current.setAbortCode(IAFProperties.NO_AGENTS_FOUND);
 					}

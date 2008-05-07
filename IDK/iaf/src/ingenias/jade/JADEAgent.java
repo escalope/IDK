@@ -150,6 +150,8 @@ abstract public class JADEAgent extends Agent{
 	private IDEState ids = null;
 	private boolean completedLast=false;
 
+	private static String synRegister="sinchronization of registering process";
+
 	public JADEAgent(AgentProtocols ap, CustomLocks cl){
 		super();
 
@@ -368,8 +370,13 @@ abstract public class JADEAgent extends Agent{
 		DFAgentDescription[] roles = this.getDescription();
 		for (int k = 0; k < roles.length; k++) {
 			try {
-				jade.domain.DFService.register(this,
-						roles[k]);				
+				synchronized(synRegister){
+					System.err.println("iniciando registro");
+					jade.domain.DFService.register(this,
+							roles[k]);		
+					System.err.println("registrado");
+				}
+
 			}
 			catch (FIPAException fe) {
 				if (! (fe.getMessage().toLowerCase().indexOf("already") >= 0)) {
@@ -379,8 +386,12 @@ abstract public class JADEAgent extends Agent{
 				}
 				else {
 					try {
-						jade.domain.DFService.register(this,
-								roles[k]);
+						synchronized(synRegister){
+							System.err.println("iniciando registro 2");
+							jade.domain.DFService.register(this,
+									roles[k]);		
+							System.err.println("registrado 2");
+						}
 					}
 					catch (FIPAException fe1) {
 						// No more exception should be produced

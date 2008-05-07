@@ -68,7 +68,7 @@ public class About extends JDialog  implements java.io.Serializable {
     jTextPane1.setEditable(false);
     jTextPane1.setText("<html><body>" +
     		"<Font color=\"#ffffcc\"><b><CENTER>INGENIAS Development Kit</CENTER><br>" +
-    		"Version 2.7 (Release Aranjuez)<p>developed by: <br>Jorge Gomez Sanz (jjgomez@sip.ucm.es)<br>Ruben Fuentes (ruben@sip.ucm.es)<br>Juan Pav&oacute;n (jpavon@sip.ucm.es)</b></font></body></html>");
+    		"Version 2.8 (Release Aranjuez)<p>developed by: <br>Jorge Gomez Sanz (jjgomez@sip.ucm.es)<br>Ruben Fuentes (ruben@sip.ucm.es)<br>Juan Pav&oacute;n (jpavon@sip.ucm.es)</b></font></body></html>");
     jPanel1.setLayout(borderLayout2);
     close.setText("Close");
     close.addActionListener(new About_close_actionAdapter(this));

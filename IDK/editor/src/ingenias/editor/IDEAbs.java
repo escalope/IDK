@@ -1200,8 +1200,8 @@ implements java.io.Serializable, ClipboardOwner
 						arbolProyectos.expandPath(new TreePath(npath.toArray()));				
 					}
 					restorePreferences();
-					
-					ids.editor.changeGraph((ModelJGraph)ids.editor.getGraph());
+					if (ids.editor.getGraph()!=null)
+					 ids.editor.changeGraph((ModelJGraph)ids.editor.getGraph());
 
 				}
 				catch (ingenias.exception.UnknowFormat e1) {

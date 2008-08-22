@@ -188,7 +188,7 @@ public class Codegen {
     Vector result = new Vector();
     //  Parse the Document
     //  and traverse the DOM
-    try {
+    try {    	
       //	parser.setIncludeIgnorableWhitespace(false);
       parser.parse(new org.xml.sax.InputSource(new java.io.
                                                StringBufferInputStream(target)));
@@ -197,6 +197,15 @@ public class Codegen {
     }
     catch (SAXException e) {
       e.printStackTrace();
+      System.err.println("Original text follows. Line numbers appear to the left:");
+      System.err.println("-------------------------------------------------------");
+      String[] lines = target.split("\n");
+      int counter=1;
+      for (String line:lines){
+    	  System.err.println(counter+":"+line);
+    	  counter++;
+      }
+      
     }
     catch (java.io.UTFDataFormatException formatEx) {
       ingenias.editor.Log.getInstance().logERROR(

@@ -19,42 +19,37 @@
     along with INGENIAS IDE; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-*/
+ */
 
 package ingenias.generator.datatemplate;
 
+import java.io.UnsupportedEncodingException;
+
 
 public class Var {
-  String id;
-  String value;
-  
+	String id;
+	String value;
+
 	/**
 	 * The id of the entity where the "value" comes from
 	 */
-	
+
 	public String entityID="";
-	
+
 	/**
 	 * The id of the attribute of the entity where  the "value" comes from
 	 */
-	
-	public String attID="";
-	
-  public Var(String id,String value){
-    this.id=id;
-     String s=null;
 
-    /*try {
-     s=ingenias.editor.entities.Entity.encodeutf8Text(value);
-     s=ingenias.generator.util.Conversor.replaceInvalidChar(s);
-    } catch (Exception e){
-      e.printStackTrace();
-    }*/
-    this.value=value;
-    if (value==null || id==null)
-  	  throw new RuntimeException("Null value when creating a VAR");
-  }
-  
+	public String attID="";
+
+	public Var(String id,String value){
+		this.id=id;
+
+		this.value=value;
+		if (value==null || id==null)
+			throw new RuntimeException("Null value when creating a VAR");
+	}
+
 	/**
 	 *  Constructor for the TemplateDataVar object with information about the origin 
 	 *  of the information. This is a information which is not always accesible. An
@@ -65,23 +60,30 @@ public class Var {
 	 *@param  id     Description of Parameter
 	 *@param  value  Description of Parameter
 	 */
-	public Var(String id, String value, String entityID, String attID) {
+	public Var(String id, String v, String entityID, String attID) {
 		this.id = id;
 		this.entityID=entityID;
 		this.attID=attID;
 
-              try {
-                //value=ingenias.generator.util.Conversor.replaceInvalidChar(value);
-		this.value = value;
-              } catch (Exception e){
-               e.printStackTrace();
-              }
-              if (value==null || id==null)
-            	  throw new RuntimeException("Null value when creating a VAR");
+		try {
+			//value=ingenias.generator.util.Conversor.replaceInvalidChar(value);
+			try {
+				v=ingenias.editor.entities.Entity.encodeutf8Text(v);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			this.value = v;
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		if (value==null || id==null)
+			throw new RuntimeException("Null value when creating a VAR");
 	}
 
-  public String toString(){
-    return "<v id=\""+id+"\" entityID=\""+ingenias.generator.util.Conversor.replaceInvalidChar(this.entityID)+"\" attID=\""+attID +"\" >"+
-    ingenias.generator.util.Conversor.replaceInvalidChar(value)+"</v>\n";
-  }
+	public String toString(){
+		String value="<v id=\""+id+"\" entityID=\""+ingenias.generator.util.Conversor.replaceInvalidChar(this.entityID)+"\" attID=\""+attID +"\" >"+
+		ingenias.generator.util.Conversor.replaceInvalidChar(this.value)+"</v>\n";
+		return value;
+		
+	}
 }

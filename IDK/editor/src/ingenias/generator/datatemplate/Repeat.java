@@ -45,7 +45,7 @@ public class Repeat {
   }
 
   public String toString(){
-    String result="<repeat id=\""+ingenias.generator.util.Conversor.replaceInvalidChar(id)+"\">\n";
+    String result="<repeat id=\""+ingenias.generator.util.Conversor.replaceInvalidCharsForID(id)+"\">\n";
     Enumeration enumeration=this.body.elements();
     while (enumeration.hasMoreElements()){
       Object elem=enumeration.nextElement();

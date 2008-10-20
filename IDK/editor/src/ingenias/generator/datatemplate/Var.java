@@ -64,24 +64,14 @@ public class Var {
 		this.id = id;
 		this.entityID=entityID;
 		this.attID=attID;
-
-		try {
-			//value=ingenias.generator.util.Conversor.replaceInvalidChar(value);
-			try {
-				v=ingenias.editor.entities.Entity.encodeutf8Text(v);
-			} catch (Exception e){
-				e.printStackTrace();
-			}
-			this.value = v;
-		} catch (Exception e){
-			e.printStackTrace();
-		}
+		
+		this.value = v;
 		if (value==null || id==null)
 			throw new RuntimeException("Null value when creating a VAR");
 	}
 
 	public String toString(){
-		String value="<v id=\""+id+"\" entityID=\""+ingenias.generator.util.Conversor.replaceInvalidChar(this.entityID)+"\" attID=\""+attID +"\" >"+
+		String value="<v id=\""+id+"\" entityID=\""+ingenias.generator.util.Conversor.replaceInvalidCharsForID(this.entityID)+"\" attID=\""+attID +"\" >"+
 		ingenias.generator.util.Conversor.replaceInvalidChar(this.value)+"</v>\n";
 		return value;
 		

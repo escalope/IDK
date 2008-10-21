@@ -109,11 +109,11 @@ return "";
   public static String encodeutf8Text(String text){
   try {
     java.io.ByteArrayOutputStream ba=new java.io.ByteArrayOutputStream();
-    OutputStreamWriter osw=new OutputStreamWriter(ba,"UTF8");
+    OutputStreamWriter osw=new OutputStreamWriter(ba,"UTF-8");
     osw.write(text);
     osw.close();
 
-    String s=new String(ba.toByteArray());
+    String s=new String(ba.toByteArray(),"UTF-8");
     s=text;
     s=ingenias.generator.util.Conversor.replaceInvalidChar(s);
 

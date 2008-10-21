@@ -1,5 +1,6 @@
 package ingenias.editor;
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.geom.Rectangle2D;
 import java.net.URL;
 import java.util.Map;
 import java.util.Hashtable;
@@ -25,6 +27,9 @@ import org.jgraph.event.*;
 import org.jgraph.plaf.basic.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.cell.*;
+import ingenias.editor.cell.auml.ColumnGroupCell;
+import ingenias.editor.cell.auml.LifelineGroupCell;
+import ingenias.editor.cell.auml.ProtocolGroupCell;
 import ingenias.editor.events.*;
 import java.util.*;
 public class AUMLInsertOperations {
@@ -47,7 +52,7 @@ public class AUMLInsertOperations {
 		    return result;
 		  }
 
-		  public void insert(Point point, String entity, ModelJGraph model) {
+		  public DefaultGraphCell insert(Point point, String entity, ModelJGraph model) {
 		    boolean canIInsert = true;
 		    // Create a Map that holds the attributes for the Vertex
 		    Map map = new Hashtable();
@@ -60,19 +65,40 @@ public class AUMLInsertOperations {
 
 		    if (entity.equalsIgnoreCase("Protocol")) {
 		      vertex = new
-		          ProtocolCell(IDEAbs.ide.ids.om.createProtocol("Protocol" + Editor.getNewId()));
+		          ProtocolCell(IDEAbs.ide.ids.om.createProtocol( Editor.getNewId("Protocol")));
+		      vertex.removeAllChildren();
 		      // Default Size for the new Vertex
 		      size = new Dimension(300, 250);
 		      // Add a Bounds Attribute to the Map
-		      GraphConstants.setBounds(map, new Rectangle(point, size));
+		      GraphConstants.setBounds(map, new Rectangle(new Point(0,0), size));
+		      GraphConstants.setSizeable(map, false);
+		      GraphConstants.setSelectable(map, false);
+		      //GraphConstants.setMoveable(map, false);
+		      
+		     // GraphConstants.setAbsolute(map, false);
 		      // Construct a Map from cells to Maps (for insert)
 		      Hashtable attributes = new Hashtable();
 		      // Associate the Vertex with its Attributes
 		      attributes.put(vertex, map);
+
+		      model.getModel().insert(attributes.keySet().toArray()
+                      , attributes
+                      , null, null, null); // To ensure that grouped object exist
+		      attributes=new Hashtable();
+		      ParentMap pm=new ParentMap();
+		      ProtocolGroupCell pgroup=new ProtocolGroupCell();
+		      pgroup.add(vertex);
+			  pm.addEntry(vertex,pgroup);
+			  Hashtable gatts= new Hashtable();
+			  GraphConstants.setBounds(gatts, new Rectangle(point, size));			  
+			  GraphConstants.setSizeable(gatts, false);
+			  
+			  
+		      attributes.put(pgroup,gatts);
 		      // Insert the Vertex and its Attributes
-		      model.getModel().insert(new Object[] {vertex}
+		      model.getModel().insert(attributes.keySet().toArray()
 		                             , attributes
-		                             , null, null, null);
+		                             , null, pm, null);
 
 		    }
 		    else
@@ -80,21 +106,30 @@ public class AUMLInsertOperations {
 		    if (entity.equalsIgnoreCase("Lifeline")) {
 		      Object[] selectedCells = model.getSelectionCells();
 		      canIInsert = (selectedCells.length == 1 && (
-		          selectedCells[0] instanceof ingenias.editor.cell.ProtocolCell));
+		          selectedCells[0] instanceof ingenias.editor.cell.auml.ProtocolGroupCell));
 		      if (canIInsert) {
-		        ProtocolCell protocolcell = (ingenias.editor.cell.
-		                                     ProtocolCell) selectedCells[0];
+		    	ProtocolGroupCell protocolGroupCell = ((ingenias.editor.cell.auml.ProtocolGroupCell) selectedCells[0]);
+		    	
+		        ProtocolCell protocolcell = (ProtocolCell) protocolGroupCell.getChildAt(0);
+		        
 		        Protocol selectedProtocol = ( (Protocol) protocolcell.getUserObject());
 		        int portCount = 1;
+		        int initialColHeight=20;
 
 		        if (selectedProtocol.getChildrenElements().hasMoreElements()) {
 		          Lifeline previousLL = (Lifeline) selectedProtocol.getChildrenElements().
 		              nextElement();
 		          portCount = countPorts( (Column) previousLL.getChildrenElements().
 		                                 nextElement());
+		          Column otherCol = (Column) previousLL.getChildrenElements().
+                  nextElement();
+		          DefaultGraphCell otherColCell = AUMLDiagramChangesManager.getCellFromUserObject(otherCol, model.getRoots());
+		          
+		          initialColHeight =(int) GraphConstants.getBounds(otherColCell.getAttributes()).getHeight();
+		          
 		        }
 
-		        Lifeline ll = IDEAbs.ide.ids.om.createLifeline("Lifeline" + Editor.getNewId());
+		        Lifeline ll = IDEAbs.ide.ids.om.createLifeline( Editor.getNewId("Lifeline"));
 
 		        ll.setParent(selectedProtocol);
 		        selectedProtocol.addChildren(ll);
@@ -102,8 +137,9 @@ public class AUMLInsertOperations {
 		        // constrained to a selected protocol
 		        vertex = new
 		            LifelineCell(ll);
+		        vertex.removeAllChildren();
 		        Hashtable attributes = new Hashtable();
-
+		        
 
 
 		        //Setting location and size attributes of lifeline, columns, and ports
@@ -113,7 +149,10 @@ public class AUMLInsertOperations {
 		            getAttributes()).getBounds();
 		        Point origPoint = new Point(protocolB.getLocation().x + 10,
 		                                    protocolB.getLocation().y + 40);
-		        this.createCol(portCount, ll,origPoint,size, attributes);
+		        
+		        ParentMap pm=new ParentMap();
+		        
+		        
 		        Object cell1 = model.getFirstCellForLocation(origPoint.x,
 		            origPoint.y + 2);
 		        Object cell2 = model.getFirstCellForLocation(origPoint.x + size.width,
@@ -140,6 +179,8 @@ public class AUMLInsertOperations {
 		                                                origPoint.y + 2);
 		          }
 		        }
+		        
+		        DefaultGraphCell colCell = this.createCol(portCount, (LifelineCell) vertex,ll,origPoint,size, attributes,initialColHeight,pm);
 
 		        GraphConstants.setBounds(map,
 		                                 new Rectangle(origPoint, size));
@@ -151,11 +192,48 @@ public class AUMLInsertOperations {
 
 		        // Associate the Vertex with its Attributes
 		        attributes.put(vertex, map);
-
+	        
+		        
 		        // Insert the Vertex and its Attributes
+		       
+		        LifelineGroupCell group=new LifelineGroupCell();
+		        		        
+		        
+		        pm.addEntry(group,protocolGroupCell)  ;     
+		        pm.addEntry(vertex, group);
+		        pm.addEntry(colCell, group);
+		        
+		        
+		        
+		        Hashtable groupatts=new Hashtable();
+		        
+		        GraphConstants.setBounds(groupatts,  new Rectangle(origPoint, size).union((Rectangle) GraphConstants.getBounds((Map) attributes.get(colCell))));
+		        GraphConstants.setChildrenSelectable(groupatts,  false);
+		       		        
+		        
+		        attributes.put(group,groupatts);		  
+		        
+		        
 		        model.getModel().insert(attributes.keySet().toArray()
-		                               , attributes
-		                               , null, null, null);
+                        , attributes
+                        , null,pm, null);
+		        
+		       attributes=new Hashtable();
+		       AttributeMap attsProt = protocolGroupCell.getAttributes();
+		       AttributeMap attsProtCell=protocolcell.getAttributes();
+		       
+		       Rectangle2D origLoc = GraphConstants.getBounds(attsProt);
+		       origLoc.setFrame(origLoc.getMinX(),origLoc.getMinY(), Math.max(origLoc.getWidth(),Math.abs(origLoc.getMinX()-origPoint.getX()-size.width)),origLoc.getHeight());		       
+		       
+		       GraphConstants.setBounds(attsProt,origLoc );
+		       GraphConstants.setBounds(attsProtCell,origLoc);
+		       attributes.put(protocolcell,attsProtCell);
+		       attributes.put( protocolGroupCell,attsProt);
+		       
+		        model.getModel().edit(attributes, null,null, null);
+		        model.getGraphLayoutCache().toFront(new Object[]{group});
+		        
+
 
 		      }
 		    }
@@ -163,7 +241,7 @@ public class AUMLInsertOperations {
 		    if (entity.equalsIgnoreCase("Column")) {
 		      // Cannot be inserted
 		      vertex = new
-		          ColumnCell(IDEAbs.ide.ids.om.createColumn("Column" + Editor.getNewId()));
+		          ColumnCell(IDEAbs.ide.ids.om.createColumn(Editor.getNewId("Column")));
 		      // Default Size for the new Vertex
 		      size = ColumnView.getSize();
 		      // Add a Bounds Attribute to the Map
@@ -174,7 +252,7 @@ public class AUMLInsertOperations {
 		    if (entity.equalsIgnoreCase("AUMLAlternativeBox")) {
 		      vertex = new
 		          AUMLAlternativeBoxCell(IDEAbs.ide.ids.om.createAUMLAlternativeBox(
-		          "AUMLAlternativeBox" + Editor.getNewId()));
+		         Editor.getNewId( "AUMLAlternativeBox")));
 		      // Default Size for the new Vertex
 		      size = AUMLAlternativeBoxView.getSize();
 		      // Add a Bounds Attribute to the Map
@@ -201,7 +279,7 @@ public class AUMLInsertOperations {
 		        AUMLAlternativeBox aab = (AUMLAlternativeBox) aabc.getUserObject();
 
 		        AUMLAlternativeRow aar = IDEAbs.ide.ids.om.createAUMLAlternativeRow(
-		            "AUMLAlternativeRow" + Editor.getNewId());
+		            Editor.getNewId("AUMLAlternativeRow"));
 
 		        AUMLAlternativeRowCell aarc = new AUMLAlternativeRowCell(aar);
 		        aarc.removeAllChildren();
@@ -217,7 +295,7 @@ public class AUMLInsertOperations {
 		        while (enume.hasMoreElements()) {
 
 		          Column existentColumn = (Column) enume.nextElement();
-		          Column col = IDEAbs.ide.ids.om.createColumn("column" + Editor.getNewId());
+		          Column col = IDEAbs.ide.ids.om.createColumn(Editor.getNewId("Column"));
 		          ColumnCell cc = new ColumnCell(col);
 		          cc.removeAllChildren();
 		          Lifeline ll = this.locateLifeline(existentColumn,model);
@@ -228,9 +306,9 @@ public class AUMLInsertOperations {
 		          col.setParent(ll);
 		          aar.addChildren(col);
 
-		          Point lastColPos = getLastColPos(aab, ll);
+		          Point lastColPos = getLastColPos(aab, ll,model);
 
-		          AUMLPort aumlp = IDEAbs.ide.ids.om.createAUMLPort("port" + Editor.getNewId());
+		          AUMLPort aumlp = IDEAbs.ide.ids.om.createAUMLPort(Editor.getNewId("port"));
 		          AUMLPortCell aumlpc = new AUMLPortCell(aumlp);
 		          col.addChildren(aumlp);
 		          aumlp.setParent(col);
@@ -258,13 +336,13 @@ public class AUMLInsertOperations {
 		        Map m = new Hashtable();
 		        GraphConstants.setBounds(m,
 		                                 this.computeAlternativeRowSize(aar,
-		            (ingenias.editor.Model)model.getModel()));
+		            model));
 		        newElements.put(aarc, m);
 		        newColumnsCell.add(aarc);
 
 		        size = AUMLAlternativeRowView.getSize();
 		        GraphConstants.setBounds(map, new Rectangle(point, size));
-
+		        
 		        model.getModel().insert(newColumnsCell.toArray()
 		                               , newElements
 		                               , null, null, null);
@@ -277,7 +355,7 @@ public class AUMLInsertOperations {
 		    if (entity.equalsIgnoreCase("TextNote")) {
 
 		      vertex = new
-		          TextNoteCell(IDEAbs.ide.ids.om.createTextNote("TextNote" + Editor.getNewId()));
+		          TextNoteCell(IDEAbs.ide.ids.om.createTextNote( Editor.getNewId("TextNote")));
 		      // Default Size for the new Vertex
 		      size = TextNoteView.getSize();
 		      // Add a Bounds Attribute to the Map
@@ -304,6 +382,7 @@ public class AUMLInsertOperations {
 		      GraphConstants.setBounds(map, new Rectangle(point, size));
 
 		    }
+		    return vertex;
 
 		  }
 
@@ -332,7 +411,7 @@ public class AUMLInsertOperations {
 		  }
 
 		  private Rectangle computeAlternativeRowSize(AUMLAlternativeRow ar,
-		                                              ingenias.editor.Model model) {
+		                                              JGraph model) {
 
 		    Enumeration enume = ar.getChildrenElements();
 		    Rectangle rect = new Rectangle();
@@ -343,7 +422,7 @@ public class AUMLInsertOperations {
 		    while (enume.hasMoreElements()) {
 		      Column col = (Column) enume.nextElement();
 		      ColumnCell cc = (ColumnCell) AUMLDiagramChangesManager.
-		          getCellFromUserObject(col);
+		          getCellFromUserObject(col, model.getRoots());
 		      if (cc != null && cc.getAttributes() != null &&
 		          GraphConstants.getBounds(cc.getAttributes()) != null) {
 		        Rectangle ccbounds =
@@ -359,36 +438,58 @@ public class AUMLInsertOperations {
 		    return rect;
 		  }
 
-		  private void createCol(int ports, Lifeline ll, Point origPoint,
-		                         Dimension size,
-		                         Hashtable modif) {
-		    Column col = IDEAbs.ide.ids.om.createColumn("column" + Editor.getNewId());
-		    col.setParent(ll);
-		    ll.addChildren(col);
+		  private ColumnGroupCell createCol(int ports, LifelineCell llc, Lifeline ll, Point origPoint,
+		                         Dimension size,Map attributes,
+		                         int initialColHeight, ParentMap pm) {
+		    Column col = IDEAbs.ide.ids.om.createColumn(Editor.getNewId("Column"));
+		    
 		    ColumnCell colcell = new ColumnCell(col);
 		    // to avoid drawing the column port
 		    colcell.removeAllChildren();
-
+		    ll.addChildren(col);
+		    col.setParent(ll);
+		    
+		    ColumnGroupCell cgc=new ColumnGroupCell(col.getId()); 
+		    
+	        pm.addEntry(colcell, cgc);
+	        Hashtable gmap=new Hashtable();
+	        GraphConstants.setBounds(gmap,new Rectangle(origPoint.x + 10 +
+                    (size.width / 2) - 15,
+                    origPoint.y + 10 +
+                    (int) size.getHeight(),
+                    30, initialColHeight));
+		    
+		    attributes.put(cgc, gmap);
+		    
 		    Map m1 = new Hashtable();
 		    GraphConstants.setBounds(m1,
 		                             new Rectangle(origPoint.x + 10 +
 		                                           (size.width / 2) - 15,
 		                                           origPoint.y + 10 +
 		                                           (int) size.getHeight(),
-		                                           30, 100));
+		                                           30, initialColHeight));
 
-		    modif.put(colcell, m1);
+		    attributes.put(colcell, m1);
 		    for (int k = 0; k < ports; k++) {
 
-		      AUMLPort port = IDEAbs.ide.ids.om.createAUMLPort("port" + Editor.getNewId());
+		      AUMLPort port = IDEAbs.ide.ids.om.createAUMLPort(Editor.getNewId("port"));
 		      port.setParent(col);
 		      col.addChildren(port);
 		      AUMLPortCell aumlport = new AUMLPortCell(port);
-
+		      
 		      Map m2 = new Hashtable();
+		      GraphConstants.setBounds(m2,
+                      new Rectangle(origPoint.x + 10 +
+                                    (size.width / 2) - 2,
+                                    origPoint.y + 10 +
+                                    (int) size.getHeight()+initialColHeight/(ports+1),
+                                    2, 2));
 
-		      modif.put(aumlport, m2);
+		      attributes.put(aumlport, m2);
+		      pm.addEntry(aumlport, cgc);
 		    }
+		    return cgc;
+		    
 
 		  }
 
@@ -401,7 +502,7 @@ public class AUMLInsertOperations {
 		    return result;
 		  }
 
-		  private Point getLastColPos(AUMLAlternativeBox ab, Lifeline ll) {
+		  private Point getLastColPos(AUMLAlternativeBox ab, Lifeline ll, JGraph model) {
 		    Enumeration enume = ab.getChildrenElements();
 		    Vector llcols = this.getLifelineCols(ll);
 		    Point result = new Point(0, 0);
@@ -412,7 +513,7 @@ public class AUMLInsertOperations {
 		        AUMLComponent component = (AUMLComponent) colsenum.nextElement();
 		        if (llcols.contains(component)) {
 		          DefaultGraphCell dgc = (DefaultGraphCell) ingenias.editor.events.
-		              AUMLDiagramChangesManager.getCellFromUserObject(component);
+		              AUMLDiagramChangesManager.getCellFromUserObject(component, model.getRoots());
 		          if (dgc != null) {
 		            Rectangle rect = GraphConstants.getBounds(dgc.getAttributes()).
 		                getBounds();

@@ -120,6 +120,27 @@ public class Conversor {
 		
 	}
 	
+	public static String replaceInvalidCharsForID(String text) {
+		String s = text;
+		try {
+			s =s.replaceAll("&", "");
+			s = s.replaceAll("<", "");
+			s =  s.replaceAll(">", "");
+			s =  s.replaceAll("\"", "");
+			s =  s.replaceAll("'", "");
+			/*s =  s.replaceAll("�", "&nacute;");
+			 s =  s.replaceAll("�", "&aacute;");
+			 s =  s.replaceAll("�", "&eacute;");
+			 s =  s.replaceAll("�", "&iacute;");
+			 s =  s.replaceAll("�", "&oacute;");
+			 s =  s.replaceAll("�", "&uacute;");*/
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return s;
+	}
+	
 	public static String replaceInvalidChar(String text) {
 		String s = text;
 		try {

@@ -1381,6 +1381,9 @@ implements java.io.Serializable, ClipboardOwner
 		try {
 			JGraph graph = this.ids.editor.getGraph();
 			if (graph != null) {
+
+
+
 				BufferedImage im = new BufferedImage(graph.getPreferredSize().width,
 						graph.getPreferredSize().height,
 						BufferedImage.TYPE_INT_ARGB);
@@ -1394,6 +1397,11 @@ implements java.io.Serializable, ClipboardOwner
 //				Enable the buffer again
 				graph.setDoubleBuffered(true);
 				g.dispose();
+				
+		        // Work around a Sun bug that causes a hang in "sun.awt.image.ImageRepresentation.reconstruct".
+		       
+				
+				
 
 				ClipImage ci = new ClipImage(im);
 				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ci, this);

@@ -918,6 +918,33 @@ public class AgentModelMarqueeHandler extends MarqueeHandler  implements java.io
 			
                   
 			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.MentalInstanceSpecification")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.MentalInstanceSpecification")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
     		      
 			
 		  
@@ -1946,6 +1973,20 @@ public class AgentModelMarqueeHandler extends MarqueeHandler  implements java.io
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(IDE.ide, "Object type AgentWS is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+
+		// Insert an object of type MentalInstanceSpecification
+		nobjects.add(
+			new AbstractAction("Insert MentalInstanceSpecification") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						getGraph().insert(pt, "MentalInstanceSpecification");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(IDE.ide, "Object type MentalInstanceSpecification is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

@@ -42,7 +42,6 @@ import org.jgraph.graph.*;
 import org.jgraph.*;
 import org.jgraph.event.*;
 
-import com.oy.shared.lm.graph.bo.GraphBean;
 
 import ingenias.editor.ModelJGraph;
 import ingenias.editor.ObservableModel;

@@ -149,6 +149,8 @@ public class AgentModelPanel extends JGraph {
 
  entities.add("AgentWS");
 
+ entities.add("MentalInstanceSpecification");
+
    return entities;
   }
 
@@ -435,6 +437,15 @@ public class AgentModelPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("MentalInstanceSpecification")) {
+    MentalInstanceSpecification nentity=new MentalInstanceSpecification(Editor.getNewId("MentalInstanceSpecification"));
+      DefaultGraphCell vertex = new
+          MentalInstanceSpecificationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
 	  throw new ingenias.exception.InvalidEntity("Entity type "+entity+" is not allowed in this diagram"); 
   }
   
@@ -592,6 +603,11 @@ public class AgentModelPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("AgentWS")) {
       return AgentWSView.getSize((AgentWS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("MentalInstanceSpecification")) {
+      return MentalInstanceSpecificationView.getSize((MentalInstanceSpecification)entity);      
     }
     else
 
@@ -859,6 +875,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new AgentWSCell( (AgentWS) entity);
       // Default Size for the new Vertex with the new entity within
       size = AgentWSView.getSize((AgentWS) entity);
+    }
+    else
+
+    if (entity.getClass().equals(MentalInstanceSpecification.class)) {
+      vertex = new MentalInstanceSpecificationCell( (MentalInstanceSpecification) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = MentalInstanceSpecificationView.getSize((MentalInstanceSpecification) entity);
     }
     else
 

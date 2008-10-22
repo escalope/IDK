@@ -577,10 +577,39 @@ public class AUMLInteractionDiagramModelJGraph extends ModelJGraph {
 
   public DefaultGraphCell insert(Point point, String entity) throws InvalidEntity {
   // CellView information is not available after creating the cell.
-	  
-	  return new AUMLInsertOperations().insert(point,entity,this);
 
-  
+    // Create a Map that holds the attributes for the Vertex
+    Map map = new Hashtable();
+    // Snap the Point to the Grid
+    point = convert(this.snap(new Point(point)));
+
+    // Construct Vertex with no Label
+    DefaultGraphCell vertex;
+    Dimension size;
+
+    vertex=this.createCell(entity);
+    size=this.getDefaultSize((Entity)vertex.getUserObject());
+
+
+
+    // Add a Bounds Attribute to the Map
+    GraphConstants.setBounds(map, new Rectangle(point, size));
+
+    // Construct a Map from cells to Maps (for insert)
+    Hashtable attributes = new Hashtable();
+    // Associate the Vertex with its Attributes
+    attributes.put(vertex, map);
+    // Insert the Vertex and its Attributes
+    this.getModel().insert(new Object[] {vertex},attributes
+                           , null, null, null);
+
+	Entity newEntity=(Entity) vertex.getUserObject();
+	if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.UML)
+		newEntity.getPrefs().setView(ViewPreferences.ViewType.UML);
+	if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.INGENIAS)
+		newEntity.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+
+    return vertex;
   }
 
   

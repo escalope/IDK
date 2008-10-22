@@ -324,6 +324,33 @@ public class BasicDeployDiagramMarqueeHandler extends MarqueeHandler  implements
 			
                   
 			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.DeploymentUnitByTypeMSEntity")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.DeploymentUnitByTypeMSEntity")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
     		      
 			
 		  

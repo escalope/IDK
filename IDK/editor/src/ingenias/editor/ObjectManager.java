@@ -253,6 +253,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode TaskNode=new javax.swing.tree.DefaultMutableTreeNode(" Task");
 
+  public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeMSEntityNode=new javax.swing.tree.DefaultMutableTreeNode(" DeploymentUnitByTypeMSEntity");
+
   public javax.swing.tree.DefaultMutableTreeNode RoleWSNode=new javax.swing.tree.DefaultMutableTreeNode(" RoleWS");
 
   public javax.swing.tree.DefaultMutableTreeNode AUMLAlternativeBoxNode=new javax.swing.tree.DefaultMutableTreeNode(" AUMLAlternativeBox");
@@ -510,6 +512,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
      GeneralEventNode.add(ApplicationEventNode);
 
      AgentComponentNode.add(TaskNode);
+
+     DeploymentUnitByTypeNode.add(DeploymentUnitByTypeMSEntityNode);
 
      RoleNode.add(RoleWSNode);
 
@@ -1915,6 +1919,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return o;
   }
   
+  public DeploymentUnitByTypeMSEntity createDeploymentUnitByTypeMSEntity(String id){
+    DeploymentUnitByTypeMSEntity object=new     DeploymentUnitByTypeMSEntity(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    DeploymentUnitByTypeMSEntityNode.insert(nn, DeploymentUnitByTypeMSEntityNode.getChildCount());
+    nn.setParent(DeploymentUnitByTypeMSEntityNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getDeploymentUnitByTypeMSEntity(String object){
+    Object o=findUserObject(DeploymentUnitByTypeMSEntityNode,object);
+    return o;
+  }
+  
   public RoleWS createRoleWS(String id){
     RoleWS object=new     RoleWS(id);
     DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
@@ -2171,6 +2190,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     result.add(ApplicationEvent.class);
 
     result.add(Task.class);
+
+    result.add(DeploymentUnitByTypeMSEntity.class);
 
     result.add(RoleWS.class);
 

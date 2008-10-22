@@ -59,6 +59,8 @@ this.addClass("AContainsMEsource","ingenias.editor.entities.MentalState");
      
 this.addClass("AContainsMEtarget","ingenias.editor.entities.MentalEntity");
      
+this.addClass("AContainsMEtarget","ingenias.editor.entities.MentalInstanceSpecification");
+     
     
     // Add ports for every role.
     // Roles are obtained from the static roleData.

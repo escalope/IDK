@@ -302,6 +302,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
    	if (en.getClass().equals(ingenias.editor.entities.Task.class))
 	  return  new ingenias.editor.cell.TaskCell((Task)en);
 
+   	if (en.getClass().equals(ingenias.editor.entities.DeploymentUnitByTypeMSEntity.class))
+	  return  new ingenias.editor.cell.DeploymentUnitByTypeMSEntityCell((DeploymentUnitByTypeMSEntity)en);
+
    	if (en.getClass().equals(ingenias.editor.entities.RoleWS.class))
 	  return  new ingenias.editor.cell.RoleWSCell((RoleWS)en);
 

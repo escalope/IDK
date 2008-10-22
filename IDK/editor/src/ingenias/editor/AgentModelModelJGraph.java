@@ -26,7 +26,6 @@
 package ingenias.editor;
 
 import java.awt.*;
-
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
@@ -42,8 +41,6 @@ import java.util.Map;
 import java.util.Hashtable;
 import java.util.ArrayList;
 import javax.swing.event.UndoableEditEvent;
-import javax.swing.plaf.FontUIResource;
-
 import org.jgraph.JGraph;
 import org.jgraph.graph.*;
 import org.jgraph.event.*;
@@ -668,6 +665,24 @@ public class AgentModelModelJGraph extends ModelJGraph {
     jb.setToolTipText("AgentWS");
     toolbar.add(jb);
 
+    Image img_MentalInstanceSpecification =
+        ImageLoader.getImage("images/miusecase.gif");
+    undoIcon = new ImageIcon(img_MentalInstanceSpecification);
+    Action MentalInstanceSpecification=
+        new AbstractAction("", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "MentalInstanceSpecification");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    MentalInstanceSpecification.setEnabled(true);
+    jb = new JButton(MentalInstanceSpecification);
+    jb.setToolTipText("MentalInstanceSpecification");
+    toolbar.add(jb);
+
 
   }
 
@@ -771,6 +786,8 @@ public class AgentModelModelJGraph extends ModelJGraph {
  entities.add("GoalStateWS");
 
  entities.add("AgentWS");
+
+ entities.add("MentalInstanceSpecification");
 
    return entities;
   }
@@ -1417,6 +1434,15 @@ public class AgentModelModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("MentalInstanceSpecification")) {
+    MentalInstanceSpecification nentity=getOM().createMentalInstanceSpecification( Editor.getNewId("MentalInstanceSpecification"));
+      DefaultGraphCell vertex = new
+          MentalInstanceSpecificationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
 	  throw new ingenias.exception.InvalidEntity("Entity type "+entity+" is not allowed in this diagram"); 
   }
   
@@ -1577,6 +1603,11 @@ public class AgentModelModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("MentalInstanceSpecification")) {
+      return MentalInstanceSpecificationView.getSize((MentalInstanceSpecification)entity);      
+    }
+    else
+
     throw new ingenias.exception.InvalidEntity("Entity type "+entity+" is not allowed in this diagram"); 
 	    
   }
@@ -1600,7 +1631,6 @@ public class AgentModelModelJGraph extends ModelJGraph {
 
     // Add a Bounds Attribute to the Map
     GraphConstants.setBounds(map, new Rectangle(point, size));
-    
 
     // Construct a Map from cells to Maps (for insert)
     Hashtable attributes = new Hashtable();
@@ -1615,7 +1645,7 @@ public class AgentModelModelJGraph extends ModelJGraph {
 		newEntity.getPrefs().setView(ViewPreferences.ViewType.UML);
 	if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.INGENIAS)
 		newEntity.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-	
+
     return vertex;
   }
 
@@ -1851,6 +1881,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new AgentWSCell( (AgentWS) entity);
       // Default Size for the new Vertex with the new entity within
       size = AgentWSView.getSize((AgentWS) entity);
+    }
+    else
+
+    if (entity.getClass().equals(MentalInstanceSpecification.class)) {
+      vertex = new MentalInstanceSpecificationCell( (MentalInstanceSpecification) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = MentalInstanceSpecificationView.getSize((MentalInstanceSpecification) entity);
     }
     else
 

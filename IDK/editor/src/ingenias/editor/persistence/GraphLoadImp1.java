@@ -452,6 +452,9 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.Task)
 	  return  new ingenias.editor.cell.TaskCell((Task)en);
 
+   	if (en instanceof ingenias.editor.entities.DeploymentUnitByTypeMSEntity)
+	  return  new ingenias.editor.cell.DeploymentUnitByTypeMSEntityCell((DeploymentUnitByTypeMSEntity)en);
+
    	if (en instanceof ingenias.editor.entities.RoleWS)
 	  return  new ingenias.editor.cell.RoleWSCell((RoleWS)en);
 

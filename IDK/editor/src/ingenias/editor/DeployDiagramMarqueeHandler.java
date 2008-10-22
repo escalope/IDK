@@ -324,6 +324,33 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 			
                   
 			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.DeploymentUnitByTypeMSEntity")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.DeploymentUnitByTypeMSEntity")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
     		      
 			
 		  
@@ -540,6 +567,20 @@ public class DeployDiagramMarqueeHandler extends MarqueeHandler  implements java
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(IDE.ide, "Object type DeploymentUnitByTypeEnumInitMS is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+
+		// Insert an object of type DeploymentUnitByTypeMSEntity
+		nobjects.add(
+			new AbstractAction("Insert DeploymentUnitByTypeMSEntity") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						getGraph().insert(pt, "DeploymentUnitByTypeMSEntity");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(IDE.ide, "Object type DeploymentUnitByTypeMSEntity is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

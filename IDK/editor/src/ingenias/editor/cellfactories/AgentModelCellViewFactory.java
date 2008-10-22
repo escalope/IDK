@@ -202,6 +202,10 @@ public AgentModelCellViewFactory() {}
            return new AgentWSView(v);
    }
 
+   if (userObject.getClass().equals(MentalInstanceSpecification.class)){
+           return new MentalInstanceSpecificationView(v);
+   }
+
 
    // Diagram Relationships start here
 

@@ -269,6 +269,24 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     jb.setToolTipText("DeploymentUnitByTypeEnumInitMS");
     toolbar.add(jb);
 
+    Image img_DeploymentUnitByTypeMSEntity =
+        ImageLoader.getImage("images/mimtypedepl.gif");
+    undoIcon = new ImageIcon(img_DeploymentUnitByTypeMSEntity);
+    Action DeploymentUnitByTypeMSEntity=
+        new AbstractAction("", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "DeploymentUnitByTypeMSEntity");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    DeploymentUnitByTypeMSEntity.setEnabled(true);
+    jb = new JButton(DeploymentUnitByTypeMSEntity);
+    jb.setToolTipText("DeploymentUnitByTypeMSEntity");
+    toolbar.add(jb);
+
 
   }
 
@@ -304,6 +322,8 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
  entities.add("DeploymentUnitByType");
 
  entities.add("DeploymentUnitByTypeEnumInitMS");
+
+ entities.add("DeploymentUnitByTypeMSEntity");
 
    return entities;
   }
@@ -500,6 +520,15 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("DeploymentUnitByTypeMSEntity")) {
+    DeploymentUnitByTypeMSEntity nentity=getOM().createDeploymentUnitByTypeMSEntity( Editor.getNewId("DeploymentUnitByTypeMSEntity"));
+      DefaultGraphCell vertex = new
+          DeploymentUnitByTypeMSEntityCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
 	  throw new ingenias.exception.InvalidEntity("Entity type "+entity+" is not allowed in this diagram"); 
   }
   
@@ -547,6 +576,11 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
 
     if (entity.getType().equalsIgnoreCase("DeploymentUnitByTypeEnumInitMS")) {
       return DeploymentUnitByTypeEnumInitMSView.getSize((DeploymentUnitByTypeEnumInitMS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("DeploymentUnitByTypeMSEntity")) {
+      return DeploymentUnitByTypeMSEntityView.getSize((DeploymentUnitByTypeMSEntity)entity);      
     }
     else
 
@@ -669,6 +703,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new DeploymentUnitByTypeEnumInitMSCell( (DeploymentUnitByTypeEnumInitMS) entity);
       // Default Size for the new Vertex with the new entity within
       size = DeploymentUnitByTypeEnumInitMSView.getSize((DeploymentUnitByTypeEnumInitMS) entity);
+    }
+    else
+
+    if (entity.getClass().equals(DeploymentUnitByTypeMSEntity.class)) {
+      vertex = new DeploymentUnitByTypeMSEntityCell( (DeploymentUnitByTypeMSEntity) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = DeploymentUnitByTypeMSEntityView.getSize((DeploymentUnitByTypeMSEntity) entity);
     }
     else
 

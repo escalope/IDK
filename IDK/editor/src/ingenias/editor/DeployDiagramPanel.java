@@ -105,6 +105,8 @@ public class DeployDiagramPanel extends JGraph {
 
  entities.add("DeploymentUnitByTypeEnumInitMS");
 
+ entities.add("DeploymentUnitByTypeMSEntity");
+
    return entities;
   }
 
@@ -193,6 +195,15 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("DeploymentUnitByTypeMSEntity")) {
+    DeploymentUnitByTypeMSEntity nentity=new DeploymentUnitByTypeMSEntity(Editor.getNewId("DeploymentUnitByTypeMSEntity"));
+      DefaultGraphCell vertex = new
+          DeploymentUnitByTypeMSEntityCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
 	  throw new ingenias.exception.InvalidEntity("Entity type "+entity+" is not allowed in this diagram"); 
   }
   
@@ -240,6 +251,11 @@ public class DeployDiagramPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("DeploymentUnitByTypeEnumInitMS")) {
       return DeploymentUnitByTypeEnumInitMSView.getSize((DeploymentUnitByTypeEnumInitMS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("DeploymentUnitByTypeMSEntity")) {
+      return DeploymentUnitByTypeMSEntityView.getSize((DeploymentUnitByTypeMSEntity)entity);      
     }
     else
 
@@ -353,6 +369,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new DeploymentUnitByTypeEnumInitMSCell( (DeploymentUnitByTypeEnumInitMS) entity);
       // Default Size for the new Vertex with the new entity within
       size = DeploymentUnitByTypeEnumInitMSView.getSize((DeploymentUnitByTypeEnumInitMS) entity);
+    }
+    else
+
+    if (entity.getClass().equals(DeploymentUnitByTypeMSEntity.class)) {
+      vertex = new DeploymentUnitByTypeMSEntityCell( (DeploymentUnitByTypeMSEntity) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = DeploymentUnitByTypeMSEntityView.getSize((DeploymentUnitByTypeMSEntity) entity);
     }
     else
 

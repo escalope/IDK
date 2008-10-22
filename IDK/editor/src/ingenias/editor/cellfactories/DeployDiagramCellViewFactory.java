@@ -114,6 +114,10 @@ public DeployDiagramCellViewFactory() {}
            return new DeploymentUnitByTypeEnumInitMSView(v);
    }
 
+   if (userObject.getClass().equals(DeploymentUnitByTypeMSEntity.class)){
+           return new DeploymentUnitByTypeMSEntityView(v);
+   }
+
 
    // Diagram Relationships start here
 

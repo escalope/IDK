@@ -1150,6 +1150,19 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+        if (en instanceof ingenias.editor.entities.DeploymentUnitByTypeMSEntity){
+          ingenias.editor.entities.DeploymentUnitByTypeMSEntity nen=(ingenias.editor.entities.DeploymentUnitByTypeMSEntity)en;
+	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("InitialState");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getInitialState()!=null)
+           saveObject(nen.getInitialState(),os);
+          os.write("</objectproperty>\n");
+          
+          
+        }
+        
         if (en instanceof ingenias.editor.entities.RoleWS){
           ingenias.editor.entities.RoleWS nen=(ingenias.editor.entities.RoleWS)en;
 	  String _name;

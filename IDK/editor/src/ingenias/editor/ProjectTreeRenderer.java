@@ -229,6 +229,8 @@ public class ProjectTreeRenderer extends javax.swing.tree.DefaultTreeCellRendere
 	
  ImageIcon TaskIcon=new ImageIcon(ImageLoader.getImage("images/mtask.gif"));
 	
+ ImageIcon DeploymentUnitByTypeMSEntityIcon=new ImageIcon(ImageLoader.getImage("images/mimtypedepl.gif"));
+	
  ImageIcon RoleWSIcon=new ImageIcon(ImageLoader.getImage("images/mrolews.gif"));
 	
  ImageIcon AUMLAlternativeBoxIcon=new ImageIcon(ImageLoader.getImage("images/altb.png"));
@@ -503,6 +505,9 @@ public class ProjectTreeRenderer extends javax.swing.tree.DefaultTreeCellRendere
 	
         if (node.getUserObject().getClass().equals(Task.class))
           return TaskIcon;
+	
+        if (node.getUserObject().getClass().equals(DeploymentUnitByTypeMSEntity.class))
+          return DeploymentUnitByTypeMSEntityIcon;
 	
         if (node.getUserObject().getClass().equals(RoleWS.class))
           return RoleWSIcon;

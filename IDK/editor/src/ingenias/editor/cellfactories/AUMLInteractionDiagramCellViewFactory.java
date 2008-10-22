@@ -76,7 +76,7 @@ public AUMLInteractionDiagramCellViewFactory() {}
     Object userObject = ( (DefaultGraphCell) v).getUserObject();
 
    // Diagram Objects start here
-  if (userObject!=null){
+
 
    if (userObject.getClass().equals(Protocol.class)){
            return new ProtocolView(v);
@@ -128,10 +128,9 @@ public AUMLInteractionDiagramCellViewFactory() {}
    if (v.getClass().equals(AUMLUseProtocolEdge.class)){
            return new AUMLUseProtocolView(v);
    }
-  }
- 
 
-    return new org.jgraph.graph.compound.CompoundVertexView(v);
+
+    return null;
   }
 
   protected EdgeView createEdgeView(Object v) {

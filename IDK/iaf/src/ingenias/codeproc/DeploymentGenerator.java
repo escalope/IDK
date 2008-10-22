@@ -133,15 +133,15 @@ public class DeploymentGenerator {
 
 
 			HashSet<GraphEntity> depunits = new HashSet<GraphEntity> (Utils
-			.getRelatedElementsVector(deploymentPack,
-					"DefinesDeployment",
-			"DefinesDeploymentsource"));
+					.getRelatedElementsVector(deploymentPack,
+							"DefinesDeployment",
+					"DefinesDeploymentsource"));
 			GraphCollection dplPackCol = deploymentPack.getAttributeByName("AgentsDeployed").getCollectionValue();
 			for (int k=0;k<dplPackCol.size();k++){
 				depunits.add(dplPackCol.getElementAt(k));
 			}
 			System.err.println("Deployment units "+depunits);
-			
+
 			for (GraphEntity depunit : depunits) {
 				if (depunit.getType().equals("DeploymentUnitByType")) {
 					GraphEntity atype = depunit.getAttributeByName(
@@ -160,73 +160,11 @@ public class DeploymentGenerator {
 								.replaceBadChars(atype.getID())));
 					}
 				}
-				if (depunit.getType().equals(
-				"DeploymentUnitByTypeEnumInitMS")) {
-					System.err.println("by enum");
-					GraphEntity atype = depunit.getAttributeByName(
-					"AgentTypeDeployed").getEntityValue();
-					int ninstances = Integer.parseInt(depunit
-							.getAttributeByName("NumberInstances")
-							.getSimpleValue());
-					for (int l = 0; l < ninstances; l++) {
-						Repeat agentsR = new Repeat("agents");
-						depl.add(agentsR);
-						agentsR.add(new Var("agentid", Utils
-								.replaceBadChars(atype.getID())
-								+ "_" + l+Utils
-								.replaceBadChars(depunit.getID())));
-						agentsR.add(new Var("agenttype", Utils
-								.replaceBadChars(atype.getID())));
-
-						GraphCollection mentalSpecCollection = depunit
-						.getAttributeByName("InitialState")
-						.getCollectionValue();
-						for (int m = 0; m < mentalSpecCollection.size(); m++) {
-							GraphEntity mInstance = mentalSpecCollection
-							.getElementAt(m);
-							GraphEntity mInstanceType = mInstance
-							.getAttributeByName("InstanceType")
-							.getEntityValue();
-							GraphCollection slotValues = mInstance
-							.getAttributeByName("SlotsValues")
-							.getCollectionValue();
-							Repeat mentalentitiesR = new Repeat(
-							"initialentities");
-							agentsR.add(mentalentitiesR);
-							mentalentitiesR.add(new Var(
-									"mentalentityname",
-									Utils.replaceBadChars(mInstanceType
-											.getID())));
-							mentalentitiesR.add(new Var(
-									"mentalentitytype",
-									Utils.replaceBadChars(mInstanceType
-											.getType())));
-							for (int n = 0; n < slotValues.size(); n++) {
-								Repeat slotvaluesR = new Repeat(
-								"slotvalue");
-								mentalentitiesR.add(slotvaluesR);
-
-								GraphEntity slotValueSpec = slotValues
-								.getElementAt(n);
-								GraphEntity slot = slotValueSpec
-								.getAttributeByName("Slot")
-								.getEntityValue();
-								String value = slotValueSpec
-								.getAttributeByName(
-								"Value")
-								.getSimpleValue();
-								slotvaluesR.add(new Var("slotname",
-										Utils.replaceBadChars(slot
-												.getAttributeByName(
-												"Name")
-												.getSimpleValue())));
-								slotvaluesR.add(new Var("slotvalue",
-										value));
-
-							}
-
-						}
-					}
+				if (depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeMSEntity")) {
+					processDeploymentUnitByTypeMSEntity(depl, depunit);
+				}
+				if (depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeEnumInitMS")) {
+					processDeploymentUnitBypeEnumInitMS(depl, depunit);
 				}
 			}
 
@@ -240,4 +178,118 @@ public class DeploymentGenerator {
 		return nagents;
 	}
 
+	private static void processDeploymentUnitBypeEnumInitMS(Repeat depl,
+			GraphEntity depunit) throws NullEntity, NotFound {
+		System.err.println("by enum");
+		GraphEntity atype = depunit.getAttributeByName(
+		"AgentTypeDeployed").getEntityValue();
+		int ninstances = Integer.parseInt(depunit
+				.getAttributeByName("NumberInstances")
+				.getSimpleValue());
+		for (int l = 0; l < ninstances; l++) {
+			Repeat agentsR = new Repeat("agents");
+			depl.add(agentsR);
+			agentsR.add(new Var("agentid", Utils
+					.replaceBadChars(atype.getID())
+					+ "_" + l+Utils
+					.replaceBadChars(depunit.getID())));
+			agentsR.add(new Var("agenttype", Utils
+					.replaceBadChars(atype.getID())));
+
+			GraphCollection mentalSpecCollection = depunit
+			.getAttributeByName("InitialState")
+			.getCollectionValue();
+			for (int m = 0; m < mentalSpecCollection.size(); m++) {
+				GraphEntity mInstance = mentalSpecCollection
+				.getElementAt(m);
+				processMentalInstance(agentsR, mInstance);
+
+			}
+		}
+	}
+
+	private static void processDeploymentUnitByTypeMSEntity(Repeat depl,
+			GraphEntity depunit) throws NullEntity, NotFound {
+		System.err.println("by ms entity");
+		GraphEntity atype = depunit.getAttributeByName(
+		"AgentTypeDeployed").getEntityValue();
+		int ninstances = Integer.parseInt(depunit
+				.getAttributeByName("NumberInstances")
+				.getSimpleValue());
+		for (int l = 0; l < ninstances; l++) {
+			Repeat agentsR = new Repeat("agents");
+			depl.add(agentsR);
+			agentsR.add(new Var("agentid", Utils
+					.replaceBadChars(atype.getID())
+					+ "_" + l+Utils
+					.replaceBadChars(depunit.getID())));
+			agentsR.add(new Var("agenttype", Utils
+					.replaceBadChars(atype.getID())));
+
+			GraphEntity mentalEntity = depunit
+			.getAttributeByName("InitialState")
+			.getEntityValue();
+			Vector<GraphEntity> containedElements = Utils.getRelatedElementsVector(mentalEntity,"acontainsme","acontainsmetarget");
+			for (GraphEntity ge:containedElements){
+				if (ge.getType().equalsIgnoreCase("MentalInstanceSpecification")){									 								
+					GraphEntity mInstance = ge;
+					processMentalInstance(agentsR,
+							mInstance);
+				}
+			}
+
+		}
+	}
+
+
+
+	private static void processMentalInstance(Repeat agentsR,
+			GraphEntity mInstance) throws NullEntity, NotFound {
+		GraphEntity mInstanceType = mInstance
+		.getAttributeByName("InstanceType")
+		.getEntityValue();
+		GraphCollection slotValues = mInstance
+		.getAttributeByName("SlotsValues")
+		.getCollectionValue();
+		Repeat mentalentitiesR = new Repeat(
+		"initialentities");
+		agentsR.add(mentalentitiesR);
+		mentalentitiesR.add(new Var(
+				"mentalentityname",
+				Utils.replaceBadChars(mInstanceType
+						.getID())));
+		mentalentitiesR.add(new Var(
+				"mentalentitytype",
+				Utils.replaceBadChars(mInstanceType
+						.getType())));
+		processSlotValues(slotValues,
+				mentalentitiesR);
+	}
+
+	private static void processSlotValues(GraphCollection slotValues,
+			Repeat mentalentitiesR) throws NullEntity, NotFound {
+		for (int n = 0; n < slotValues.size(); n++) {
+			Repeat slotvaluesR = new Repeat(
+			"slotvalue");
+			mentalentitiesR.add(slotvaluesR);
+
+			GraphEntity slotValueSpec = slotValues
+			.getElementAt(n);
+			GraphEntity slot = slotValueSpec
+			.getAttributeByName("Slot")
+			.getEntityValue();
+			String value = slotValueSpec
+			.getAttributeByName(
+			"Value")
+			.getSimpleValue();
+			slotvaluesR.add(new Var("slotname",
+					Utils.replaceBadChars(slot
+							.getAttributeByName(
+							"Name")
+							.getSimpleValue())));
+			slotvaluesR.add(new Var("slotvalue",
+					value));
+
+		}
+	}
 }

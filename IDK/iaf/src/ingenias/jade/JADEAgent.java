@@ -67,6 +67,8 @@ import ingenias.jade.graphics.MainInteractionManager;
 import javax.swing.*;
 
 import ingenias.jade.components.*;
+import ingenias.testing.DebugUtils;
+
 import java.awt.event.*;
 
 import java.awt.*;
@@ -138,7 +140,7 @@ abstract public class JADEAgent extends Agent{
 
 
 	private MentalStateManager msm=null;
-	private AgentGraphics graphics=null;
+	private transient AgentGraphics graphics=null;
 	private ingenias.jade.MentalStateProcessor msp=null;
 
 	private boolean agentInitialised=false;
@@ -294,6 +296,7 @@ abstract public class JADEAgent extends Agent{
 		} catch (InvalidEntity e) {			
 			e.printStackTrace();
 		}
+		DebugUtils.logEvent("AgentInitialised", new String[]{getLocalName()});
 	}
 
 
@@ -371,10 +374,10 @@ abstract public class JADEAgent extends Agent{
 		for (int k = 0; k < roles.length; k++) {
 			try {
 				synchronized(synRegister){
-					System.err.println("iniciando registro");
+					//System.err.println("iniciando registro");
 					jade.domain.DFService.register(this,
 							roles[k]);		
-					System.err.println("registrado");
+					//System.err.println("registrado");
 				}
 
 			}
@@ -387,10 +390,10 @@ abstract public class JADEAgent extends Agent{
 				else {
 					try {
 						synchronized(synRegister){
-							System.err.println("iniciando registro 2");
+						//	System.err.println("iniciando registro 2");
 							jade.domain.DFService.register(this,
 									roles[k]);		
-							System.err.println("registrado 2");
+						//	System.err.println("registrado 2");
 						}
 					}
 					catch (FIPAException fe1) {

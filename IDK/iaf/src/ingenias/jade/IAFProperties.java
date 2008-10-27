@@ -54,6 +54,8 @@ public class IAFProperties {
 					System.getProperties().put("ingenias.jade.GarbageCollectionInterval", "10");
 				if (!System.getProperties().containsKey("ingenias.jade.GarbageCollectionEnabled"))
 					System.getProperties().put("ingenias.jade.GarbageCollectionEnabled", "true");
+				if (!System.getProperties().containsKey("ingenias.jade.IntrospectionOn"))
+					System.getProperties().put("ingenias.jade.IntrospectionOn", "false");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -64,6 +66,7 @@ public class IAFProperties {
 			System.getProperties().put("ingenias.jade.GUIOn", "true");
 			System.getProperties().put("ingenias.jade.GarbageCollectionInterval", "10");
 			System.getProperties().put("ingenias.jade.GarbageCollectionEnabled", "true");
+			System.getProperties().put("ingenias.jade.IntrospectionOn", "false");
 		}
 		System.err.println("fileon:"+getLogFileOn());
 	}
@@ -82,6 +85,15 @@ public class IAFProperties {
 	public static boolean getLogFileOn() {
 		return System.getProperties().get("ingenias.jade.LogFileOn").equals("true");
 	}
+	
+	public static boolean getIntrospection() {
+		return System.getProperties().get("ingenias.jade.IntrospectionOn").equals("true");
+	}
+	
+	public static void setIntrospection(boolean bool) {
+		System.getProperties().put("ingenias.jade.IntrospectionOn",""+bool);
+	}
+
 
 	public static int getGarbageCollectionInterval() {
 		return Integer.parseInt((String) System.getProperties().get("ingenias.jade.GarbageCollectionInterval"));

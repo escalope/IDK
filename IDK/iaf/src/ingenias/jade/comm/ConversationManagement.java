@@ -31,6 +31,7 @@ import ingenias.jade.MentalStateUpdater;
 import ingenias.jade.components.YellowPages;
 import ingenias.jade.exception.NoAgentsFound;
 import ingenias.jade.graphics.MainInteractionManager;
+import ingenias.testing.DebugUtils;
 
 import jade.core.Agent;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -239,7 +240,7 @@ public class ConversationManagement {
 			e.printStackTrace();
 		}
 		this.add(actconv.getSb());
-
+		DebugUtils.logEvent("StartingCollaboration", new String[]{protocol,actconv.getCid(),agent.getLocalName()});
 		return actconv;
 
 	}
@@ -272,6 +273,7 @@ public class ConversationManagement {
 		} catch (InvalidEntity e) {
 			e.printStackTrace();
 		}
+		DebugUtils.logEvent("CollaborationAccepted", new String[]{protocol,cid,agent.getLocalName()});
 		return actconv;
 	}
 
@@ -335,6 +337,7 @@ public class ConversationManagement {
 		conv.setPlayedRole(role);
 		aconv = launchProtocol(actors, msr, msu, lr, tries, aconv,
 				continueInit, conv);
+		DebugUtils.logEvent("CollaborationAccepted", new String[]{protocol,cid,agent.getLocalName()});
 		return aconv;
 	}
 

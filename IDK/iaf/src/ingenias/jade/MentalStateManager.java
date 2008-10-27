@@ -62,6 +62,7 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 import ingenias.exception.InvalidEntity;
 import ingenias.exception.NotFound;
 import ingenias.jade.graphics.AgentModelPanelIAF;
+import ingenias.testing.DebugUtils;
 import ingenias.testing.MSMRepository;
 
 /**
@@ -468,6 +469,7 @@ MentalStateUpdater {
 				final Entity ent = this.findEntity(id);
 				//System.err.println(this.agentName+":Borrado de "+ent);
 				state.remove(id);
+				DebugUtils.logEvent("MERemovedFromMentalState", new String[]{this.agentName,id});
 				this.setModified();
 				//System.err.println("Current MS "+this.agentName+" "+this.state);
 				if (amm!=null){
@@ -625,6 +627,7 @@ MentalStateUpdater {
 		throws ingenias.exception.InvalidEntity{
 			for (MentalEntity me:mes){
 				conv.addCurrentContent(me);
+				DebugUtils.logEvent("MEAddedToConversation", new String[]{this.agentName,me.getType(),me.getId(),conv.getInteraction().getId(),conv.getConversationID()});
 			}
 
 			resizeAllMentalEntities();
@@ -641,6 +644,7 @@ MentalStateUpdater {
 			mes.removeElementAt(0);
 			for (MentalEntity me:mes){
 				addMentalEntity(me);
+				DebugUtils.logEvent("MEAddedToMentalState", new String[]{this.agentName,me.getType(),me.getId()});
 			}
 			changeListeners=tlisteners;
 			addMentalEntity(firstEntity);		
@@ -671,6 +675,7 @@ MentalStateUpdater {
 					ingenias.jade.graphics.MainInteractionManager.logMSM(
 							"Added to mental state entity " + me.getId()
 							+ " of type " + me.getType(), this.agentName);
+					DebugUtils.logEvent("MEAddedToMentalState", new String[]{this.agentName,me.getType(),me.getId()});
 				}
 			} catch (SecurityException e) {
 				e.printStackTrace();
@@ -859,6 +864,7 @@ MentalStateUpdater {
 				e.printStackTrace();
 			}*/
 			conversationContext.removeCurrentContentElement(id);
+			DebugUtils.logEvent("MERemovedFromConversation", new String[]{this.agentName,id,conversationContext.getInteraction().getId(),conversationContext.getConversationID()});
 			removeFromLowerConversation(conversationContext,id);
 			removeFromUpperConversation(conversationContext,id);
 

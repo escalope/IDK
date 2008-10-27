@@ -97,19 +97,19 @@ public class YellowPages extends Application {
 		//while (result==null && k<500){
 			try {
 				AID dfName;
-				System.err.println("Try "+k+" looking for agent with localid "+localid);
+				//System.err.println("Try "+k+" looking for agent with localid "+localid);
 				result= jade.domain.DFService.search(ja, new DFAgentDescription(), 
 						searchcons);
 				if (result!=null){
 				
 				Vector<DFAgentDescription> descriptors=new Vector<DFAgentDescription>();
 				for (DFAgentDescription desc:result){
-					System.err.println("found "+desc.getName().getLocalName());
+					//System.err.println("found "+desc.getName().getLocalName());
 					if (desc.getName().getLocalName().equalsIgnoreCase(localid)){
 						descriptors.add(desc);
 					}
 				}
-				System.err.println("found "+descriptors);
+				//System.err.println("found "+descriptors);
 				result=descriptors.toArray(new DFAgentDescription[descriptors.size()]);
 				// Lower values than 20 seconds timeout lead to null values returned. See ingenias.testing.TestJadeDFSearch
 				}
@@ -118,7 +118,7 @@ fe.printStackTrace();
 			}
 			k=k+1;
 		//} 
-		System.err.println("found "+result);
+		//System.err.println("found "+result);
 		return result;
 	}
 

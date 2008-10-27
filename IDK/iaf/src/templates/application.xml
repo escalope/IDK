@@ -36,8 +36,13 @@ import ingenias.jade.exception.*;
 
 
 
+@@@repeat id="initialApplicationsSingleton"@@@
+public abstract class @@@v@@@aname@@@/v@@@App extends MultipleOwnersApplication{
+@@@/repeat@@@
 
+@@@repeat id="initialApplicationsIndividual"@@@
 public abstract class @@@v@@@aname@@@/v@@@App extends Application{
+@@@/repeat@@@
 
  public @@@v@@@aname@@@/v@@@App(){
   super();
@@ -118,7 +123,10 @@ import ingenias.jade.JADEAgent;
 public  class @@@v@@@aname@@@/v@@@Init {
 @@@repeat id="initialApplicationsSingleton"@@@
  private static @@@v@@@aname@@@/v@@@AppImp instance = null;
-@@@/repeat@@@ 
+@@@/repeat@@@
+
+private static java.lang.String semaphore="@@@v@@@aname@@@/v@@@";
+ 
 
 @@@repeat id="initialApplicationsIndividual"@@@
  private static Vector<@@@v@@@aname@@@/v@@@AppImp> appsinitialised=new Vector<@@@v@@@aname@@@/v@@@AppImp>();
@@ -134,6 +142,7 @@ public  class @@@v@@@aname@@@/v@@@Init {
  }
 
 public static void shutdown(){
+	synchronized (semaphore) {
 @@@repeat id="initialApplicationsSingleton"@@@
    if (instance!=null){
 	shutdown(instance);
@@ -144,6 +153,7 @@ public static void shutdown(){
    shutdown(appsinitialised.elementAt(k));
   }
 @@@/repeat@@@
+  }
 }
 
 
@@ -152,37 +162,46 @@ public static void shutdown(){
 		return appsinitialised;
  }
   public static @@@v@@@aname@@@/v@@@App createInstance(){
+  	synchronized (semaphore) {
 	@@@v@@@aname@@@/v@@@AppImp app=new @@@v@@@aname@@@/v@@@AppImp();
     initialize(app);
 	appsinitialised.add(app);
+	
    return app;
+   }
   }
   public static @@@v@@@aname@@@/v@@@App createInstance(JADEAgent owner){
+  	synchronized (semaphore) {
 	@@@v@@@aname@@@/v@@@AppImp app=new @@@v@@@aname@@@/v@@@AppImp();
 	app.registerOwner(owner);
     initialize(app);
 	appsinitialised.add(app);
+	
    return app;
+   }
   }
 @@@/repeat@@@
 @@@repeat id="initialApplicationsSingleton"@@@
   public static @@@v@@@aname@@@/v@@@App getInstance(){
+  	synchronized (semaphore) {
    if (instance==null){
 	instance=new @@@v@@@aname@@@/v@@@AppImp();
     initialize(instance);
    }
+   
    return instance;
+   }
   }
     public static @@@v@@@aname@@@/v@@@App getInstance(JADEAgent owner){
+    	synchronized (semaphore) {
    if (instance==null){
-	instance=new @@@v@@@aname@@@/v@@@AppImp();
-	instance.registerOwner(owner);
+	instance=new @@@v@@@aname@@@/v@@@AppImp();	
     initialize(instance);
-   }
-   if (instance.getOwner()==null)
-	 instance.registerOwner(owner);
-	 
+   } 
+	instance.registerMultipleOwners(owner);
+	
    return instance;
+   }
   }
 @@@/repeat@@@
 }

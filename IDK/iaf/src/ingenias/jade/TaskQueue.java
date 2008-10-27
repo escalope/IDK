@@ -30,6 +30,7 @@ import ingenias.jade.components.TaskInput;
 import ingenias.jade.components.Task;
 import ingenias.jade.graphics.AgentGraphics;
 import ingenias.jade.graphics.MainInteractionManager;
+import ingenias.testing.DebugUtils;
 
 import jade.core.AID;
 
@@ -119,7 +120,9 @@ public class TaskQueue {
 	 * @param t
 	 */
 	public synchronized void scheduleTask(Task t) {
-		if (!tqueue.contains(t) && !manualExecQueue.contains(t)){			
+		if (!tqueue.contains(t) && !manualExecQueue.contains(t)){
+			
+			DebugUtils.logEvent("TaskScheduled", new String[]{agentID.getLocalName(),t.getType(),t.getID(),t.getInputs().toString()});
 			tqueue.add(t);			
 			MainInteractionManager.logMSP("Task "+t.getID()+" of type "+t.getType()+" was sucessfully scheduled. Other tasks are :"+tqueue, agentID.getLocalName());
 			if (t.getConversationContext()!=null){
@@ -195,6 +198,7 @@ public class TaskQueue {
 		MainInteractionManager.logMSP("Aborting task " + t.getID(), agentID.getLocalName());
 		MainInteractionManager.logMSP("Aborting task " + t.getID(), agentID.getLocalName(),t.getID(),t.getType());
 		tqueue.remove(t); // Dequeue the task
+		DebugUtils.logEvent("TaskAborted", new String[]{agentID.getLocalName(),t.getType(),t.getID()});
 		MainInteractionManager.refresh();
 	}
 

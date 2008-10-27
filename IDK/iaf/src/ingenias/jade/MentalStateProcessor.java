@@ -39,6 +39,7 @@ import ingenias.jade.exception.NoAgentsFound;
 import ingenias.jade.exception.TaskException;
 import ingenias.jade.graphics.AgentGraphics;
 import ingenias.jade.graphics.MainInteractionManager;
+import ingenias.testing.DebugUtils;
 import ingenias.testing.MSMRepository;
 import ingenias.testing.MSPRepository;
 
@@ -46,6 +47,7 @@ import jade.core.AID;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.tools.logging.ontology.GetAllLoggers;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -213,7 +215,9 @@ public class MentalStateProcessor implements  LocksListener {
 					MainInteractionManager.logMSP("Aborting task "+nextTask.getID()+
 							" because there are not all required inputs, concretely "+missingitems+"  are missing",
 							this.ja.getAID().getLocalName(),nextTask.getID(), nextTask.getType());
-					queues.taskExecuted(nextTask);							
+					DebugUtils.logEvent("TaskAborted", new String[]{ja.getAID().getLocalName(),nextTask.getType(),nextTask.getID(),missingitems.toString()});
+					queues.taskExecuted(nextTask);
+					
 				} else
 				{
 					processTaskExecution(nextTask);

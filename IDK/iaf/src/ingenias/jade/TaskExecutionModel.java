@@ -43,6 +43,7 @@ import ingenias.jade.components.TaskInput;
 import ingenias.jade.components.TaskOutput;
 import ingenias.jade.exception.NoAgentsFound;
 import ingenias.jade.graphics.MainInteractionManager;
+import ingenias.testing.DebugUtils;
 
 public class TaskExecutionModel {
 	Vector<Boolean> markConversationAsUsed=new Vector<Boolean>();
@@ -98,6 +99,7 @@ public class TaskExecutionModel {
 			try {
 				t.setAgentID(ja.getLocalName());				
 				t.execute();
+				DebugUtils.logEvent("TaskExecuted", new String[]{ja.getAID().getLocalName(),t.getType(),t.getID()});
 				MainInteractionManager.logMSP("Execution finished ",ja.getLocalName(),t.getID(),t.getType());
 				//System.err.println(agentName+": Execution finished "+t.getID()+t.getType());
 			} catch (Throwable ex){

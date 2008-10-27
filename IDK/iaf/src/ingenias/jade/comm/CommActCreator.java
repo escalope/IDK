@@ -28,6 +28,7 @@ import ingenias.editor.entities.RuntimeFact;
 import ingenias.editor.entities.StackEntry;
 import ingenias.jade.JADEAgent;
 import ingenias.jade.graphics.MainInteractionManager;
+import ingenias.testing.DebugUtils;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -122,7 +123,7 @@ public class CommActCreator {
             Vector<String> roles, AID[] receiver,
             final String CID,
             final String seqcode,
-            String protocol,
+            final String protocol,
             java.io.Serializable content) {
         Vector acts = new Vector();
         
@@ -132,6 +133,7 @@ public class CommActCreator {
         for (AID creceiver:receiver){
         	receivers=receivers+creceiver.getName()+",";
         }
+        final String freceivers=receivers; 
         
 
         
@@ -169,7 +171,7 @@ public class CommActCreator {
 					@Override
 					public void action() {
 						 MainInteractionManager.logInteraction("Sent (content omitted) "+seqcode+":"+message2BSend,ag.getLocalName(),CID);
-		
+						 DebugUtils.logEvent("MessageSent", new String[]{protocol,CID,seqcode,ag.getLocalName(),freceivers});
 					}                	
                 };
                 jade.core.behaviours.SequentialBehaviour seb=new jade.core.behaviours.SequentialBehaviour(ag);
@@ -202,7 +204,7 @@ public class CommActCreator {
      * @return The new behaviors added.
      */
     public static Vector<jade.core.behaviours.SequentialBehaviour>  generateR(final Agent ag, final String CID, final String seqcode,
-            String protocol,
+            final String protocol,
             String[] options,
             StateBehavior sb,
             int multiple,
@@ -270,6 +272,7 @@ public class CommActCreator {
                 for (jade.core.behaviours.ReceiverBehaviour recB:receiverBehaviors){
                     try {                    	
                         received.add(recB.getMessage());
+                        DebugUtils.logEvent("MessageReceived", new String[]{protocol,CID,seqcode,recB.getMessage().getSender().getLocalName(),ag.getLocalName()});
                         MainInteractionManager.logInteraction("Received messages for "+CID+"("+seqcode+") from "+recB.getMessage().getSender().getLocalName(),ag.getLocalName(),CID);        
                         // OK. Message received within timeout.
                     } catch(ReceiverBehaviour.TimedOut rbte) {
@@ -361,6 +364,7 @@ public class CommActCreator {
             private boolean done = false;
             public void action() {
                 try {
+                	DebugUtils.logEvent("CollaborationRequestReceived", new String[]{protocol,seqcode,rec.getMessage().getSender().getLocalName(),ag.getLocalName()});
                 	MainInteractionManager.logInteraction("Received messages for protocol "+protocol+"("+seqcode+") from "+rec.getMessage().getSender().getLocalName(),ag.getLocalName(),protocol);
                     Vector<ACLMessage> messages=new Vector<ACLMessage>();
                     messages.add(rec.getMessage());

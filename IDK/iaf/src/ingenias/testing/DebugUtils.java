@@ -22,14 +22,55 @@
 */
 package ingenias.testing;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Enumeration;
 
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.editor.entities.RuntimeEvent;
 import ingenias.editor.entities.RuntimeFact;
 import ingenias.editor.entities.StackEntry;
+import ingenias.jade.IAFProperties;
 
 public class DebugUtils {
+	
+	private static FileOutputStream fos=null;
+	
+	public static void logEvent(String name,String[] fields){
+	 	if (fos==null && IAFProperties.getIntrospection()){
+	 		new File("logs").mkdir();
+	 		java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MMddyyHHmm");
+	 		Date d=new Date();	 		
+	 		try {
+				fos=new FileOutputStream("logs/logEvent"+df.format(d)+".log");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}	 		
+	 	}
+	 	
+	 	if (fos!=null){
+	 		java.util.Date cdate = new java.util.Date();			
+			java.text.SimpleDateFormat dflog = new java.text.SimpleDateFormat("HH:mm:ss:SS");			
+			String sbl = dflog.format(cdate);
+			String stringFields="";
+			for (int k=0;k<fields.length-1;k++){
+				stringFields=stringFields+fields[k].substring(0,Math.min(100,fields[k].length()))+"!";
+			}
+	 		String output=sbl+";"+name+";"+stringFields;
+	 		try {
+				fos.write(output.getBytes());
+				fos.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	 		
+	 	}
+		
+	}
 
 	public static void printStackTrace(RuntimeFact rf){
 		Enumeration enumeration=rf.getStackElements();

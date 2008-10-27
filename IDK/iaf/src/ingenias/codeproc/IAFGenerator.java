@@ -1248,7 +1248,9 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		} else {
 			Repeat internal = new Repeat("initialApplicationsIndividual");
 			appsr.add(internal);
-		}
+		}		
+		
+		
 		appsr.add(new Var("aname", Utils.replaceBadChars(app.getID())));
 		GraphCollection methods = app.getAttributeByName("methods").getCollectionValue();
 		for (int k = 0; k < methods.size(); k++) {
@@ -1405,7 +1407,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		}
 		apps = Utils.generateEntitiesOfType("EnvironmentApplication");
 		for (int k = 0; k < apps.length; k++) {
-			this.generateApp(p, apps[k], appcomponents);
+			this.generateApp(p, apps[k], appcomponents);			
 		}
 	}
 

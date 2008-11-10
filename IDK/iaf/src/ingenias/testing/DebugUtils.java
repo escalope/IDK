@@ -59,7 +59,8 @@ public class DebugUtils {
 			for (int k=0;k<fields.length-1;k++){
 				stringFields=stringFields+fields[k].substring(0,Math.min(100,fields[k].length()))+"!";
 			}
-	 		String output=sbl+";"+name+";"+stringFields;
+			stringFields=stringFields+fields[fields.length-1].substring(0,Math.min(100,fields[fields.length-1].length()));
+	 		String output=sbl+";"+name+";"+stringFields+"\n";
 	 		try {
 				fos.write(output.getBytes());
 				fos.flush();

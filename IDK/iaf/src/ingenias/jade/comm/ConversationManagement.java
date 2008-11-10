@@ -240,7 +240,7 @@ public class ConversationManagement {
 			e.printStackTrace();
 		}
 		this.add(actconv.getSb());
-		DebugUtils.logEvent("StartingCollaboration", new String[]{protocol,actconv.getCid(),agent.getLocalName()});
+		DebugUtils.logEvent("StartingCollaboration", new String[]{protocol,actconv.getCid(),agent.getLocalName(), role});
 		return actconv;
 
 	}
@@ -273,7 +273,7 @@ public class ConversationManagement {
 		} catch (InvalidEntity e) {
 			e.printStackTrace();
 		}
-		DebugUtils.logEvent("CollaborationAccepted", new String[]{protocol,cid,agent.getLocalName()});
+		DebugUtils.logEvent("CollaborationAccepted", new String[]{protocol,cid,agent.getLocalName(), requestedRole});
 		return actconv;
 	}
 
@@ -337,7 +337,7 @@ public class ConversationManagement {
 		conv.setPlayedRole(role);
 		aconv = launchProtocol(actors, msr, msu, lr, tries, aconv,
 				continueInit, conv);
-		DebugUtils.logEvent("CollaborationAccepted", new String[]{protocol,cid,agent.getLocalName()});
+		DebugUtils.logEvent("CollaborationAccepted", new String[]{protocol,cid,agent.getLocalName(),role});
 		return aconv;
 	}
 

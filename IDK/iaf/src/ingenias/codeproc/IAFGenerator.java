@@ -435,7 +435,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	private void generateTaskXML(Sequences p) throws Exception {
 		GraphEntity[] tasks = Utils.generateEntitiesOfType("Task");
 		for (int k = 0; k < tasks.length; k++) {
-			Repeat r = new Repeat("tasks");
+			Repeat r = new Repeat("tasks");			
 			this.generateTaskCode(tasks[k], r);
 			p.addRepeat(r);
 		}
@@ -573,7 +573,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 					this.generateAgentTask(satgoal, agent, task, agentApps, vectorPlayedRoles);
 					r.add(satgoal);
 				} else {
-
+					Vector<GraphEntity> roles=getRolesPlayedByAgentWhenExecutingTheTask(agent,task);
+					for (GraphEntity role:roles){
 					System.err.println("generar " + agent.getID());
 					Repeat convtask = new Repeat("convtask");
 					for (GraphEntity conv : ints) {
@@ -583,9 +584,11 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 					}
 					Repeat satgoal = new Repeat("satgoal");
 					satgoal.add(new Var("tgoal", Utils.replaceBadChars(goal.getID())));
-					this.generateAgentTask(satgoal, agent, task, agentApps, vectorPlayedRoles);
+					this.generateAgentConversationalTask(satgoal, agent, role,task, agentApps, vectorPlayedRoles);
+					
 					convtask.add(satgoal);
 					r.add(convtask);
+					}
 				}
 
 			}
@@ -613,6 +616,27 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			}
 		} /*else
                 javax.swing.JOptionPane.showMessageDialog(null,agent+" has no initial ms");*/
+	}
+	
+	
+
+	private Vector<GraphEntity> getRolesPlayedByAgentWhenExecutingTheTask(
+			GraphEntity agent, GraphEntity task) {
+		try {
+			Hashtable<GraphEntity, Vector<GraphEntity>> taskPerRole = getAgentTasksPerRole(agent);
+			Set<GraphEntity> rolesPlayed = taskPerRole.keySet();
+			Vector<GraphEntity> rolesToReturn=new Vector<GraphEntity>(); 
+			for (GraphEntity rol:rolesPlayed){
+				Vector<GraphEntity> tasks = taskPerRole.get(rol);
+				if (tasks.contains(task)){
+					rolesToReturn.add(rol);
+				}
+			}
+			return rolesToReturn;
+		} catch (NullEntity e) {			
+			e.printStackTrace();
+		}				
+		return null;
 	}
 
 	private boolean isConversational(GraphEntity task) throws NullEntity {
@@ -747,6 +771,19 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 
 		Repeat atask = new Repeat("agentTasks");
+		r.add(atask);
+		generateTaskCode(task, atask);
+
+		verifyAgentTasks(agent, task, agentApps, roles);
+
+	}
+	
+	private void generateAgentConversationalTask(Repeat r, GraphEntity agent, GraphEntity role,
+			GraphEntity task, HashSet agentApps, Vector<GraphEntity> roles) throws NullEntity, NotFound, NotInitialised {
+
+
+		Repeat atask = new Repeat("agentTasks");
+		r.add(new Var("roleconvtask",role.getID()));
 		r.add(atask);
 		generateTaskCode(task, atask);
 
@@ -1777,6 +1814,20 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		return new Vector(tasks);
 	}
 
+	private Hashtable<GraphEntity, Vector<GraphEntity>> getAgentTasksPerRole(GraphEntity agent) throws NullEntity {
+		Hashtable<GraphEntity, Vector<GraphEntity>>  taskPerRole=new Hashtable<GraphEntity, Vector<GraphEntity>>(); 
+		Vector rolesPlayed = Utils.getRelatedElementsVector(agent,
+				"WFPlays",
+		"WFPlaystarget");
+		HashSet tasks = new HashSet();
+		Enumeration enumeration = rolesPlayed.elements();
+		while (enumeration.hasMoreElements()) {
+			GraphEntity role = (GraphEntity) enumeration.nextElement();			
+			taskPerRole.put(role,this.getRoleTasks(role));			
+		}
+		return taskPerRole;
+	}
+	
 	/**
 	 * It extracts all the information required to define an agent. It takes into
 	 *  account the roles played by the agent to incorporate all the interactions

@@ -364,7 +364,7 @@ public class MentalStateProcessor implements  LocksListener {
 					nonactive.add(t);
 					StringBuffer missingitems=new StringBuffer();
 					for (int j=0;j<lockedInputs.size();j++){
-						missingitems.append(missing.elementAt(j).getId()+":"+missing.elementAt(j).getType()+",");
+						missingitems.append(lockedInputs.elementAt(j).getId()+":"+lockedInputs.elementAt(j).getType()+",");
 					}
 					MainInteractionManager.logMSP("Not considering task "+t.getID()+" because there are locks on required inputs, concretely "+missingitems+"  are locked. Involved interaction must finish first.",
 							ja.getLocalName(),t.getID(),t.getType());

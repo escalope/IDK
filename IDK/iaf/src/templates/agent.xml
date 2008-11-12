@@ -131,7 +131,7 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
          @@@repeat id="agentTasks"@@@         
          nonExistingInputs.clear();
   		 repeatedOutputs.clear();
-         if (tobject.getType().equals("@@@v@@@tname@@@/v@@@") && conversation.getPlayedRole().equals ("@@@v@@@roleconvtask@@@/v@@@")){
+         if (tobject.getType().equals("@@@v@@@tname@@@/v@@@") ){
             Vector<MentalEntity> expectedInput=null;
             RuntimeFact expectedOutput=null;
             RuntimeEvent expectedOutputEvent=null;
@@ -298,7 +298,7 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
          @@@repeat id="agentTasks"@@@
 	   	nonExistingInputs.clear();
   	   	repeatedOutputs.clear();
-       	if (tobject.getType().equals("@@@v@@@tname@@@/v@@@")){
+       	if (tobject.getType().equals("@@@v@@@tname@@@/v@@@") && conversation.getPlayedRole().equals ("@@@v@@@roleconvtask@@@/v@@@")){
 	        Vector<MentalEntity> expectedInput=null;
             
        	RuntimeFact expectedOutput=null;

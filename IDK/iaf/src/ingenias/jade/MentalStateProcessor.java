@@ -346,7 +346,7 @@ public class MentalStateProcessor implements  LocksListener {
 				Task t=(Task)tasks.elementAt(k);
 				t.setPursuedGoal(sg);
 				Vector<MentalEntity> missing=queues.locateMissingItems(t);
-				Vector<MentalEntity> lockedInputs=queues.getLockedConsumedInputs(t);
+				Vector<MentalEntity> lockedInputs=new Vector<MentalEntity>(queues.getLockedConsumedInputs(t));
 
 				if (missing.size()!=0){
 					nonactive.add(t);

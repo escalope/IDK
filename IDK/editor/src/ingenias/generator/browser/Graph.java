@@ -39,6 +39,10 @@ public interface Graph extends AttributedElement {
  public GraphRelationship[] getRelationships();
  // Obtains all existing entities in a diagram
  public GraphEntity[] getEntities()  throws NullEntity;
+ 
+//Obtains all existing entities in a diagram without eliminating duplicates
+ public GraphEntity[] getEntitiesWithDuplicates()  throws NullEntity;
+ 
  // Generates a PNG image of a diagram
  public void generateImage(String filename);
 

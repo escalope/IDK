@@ -33,11 +33,13 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import org.jgraph.JGraph;
 import org.jgraph.graph.BasicMarqueeHandler;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 
 class GraphImp
     extends AttributedElementImp
@@ -106,6 +108,49 @@ class GraphImp
 
   }
 
+  
+  public GraphEntity[] getEntitiesWithDuplicates()  throws NullEntity{ 
+	  int max = mjg.getModel().getRootCount();
+	    java.util.Vector v = new java.util.Vector();
+
+	    boolean found = false;
+	    int k = 0;
+	    org.jgraph.graph.DefaultGraphCell dgc = null;
+	    while (k < max) {
+	      Object o = mjg.getModel().getRootAt(k);
+	      if (o instanceof org.jgraph.graph.DefaultGraphCell) {
+	        dgc = (org.jgraph.graph.DefaultGraphCell) o;
+	        if (! (dgc.getUserObject()instanceof ingenias.editor.entities.
+	               NAryEdgeEntity) &&
+	            ! (dgc.getUserObject()instanceof ingenias.editor.entities.
+	               RoleEntity)) {
+	          ingenias.editor.entities.Entity ne =
+	              (ingenias.editor.entities.Entity) dgc.getUserObject();
+	          GraphEntity ge=null;
+			
+				ge = new GraphEntityImp(ne, dgc,mjg);
+			
+	          
+	            v.add(ge);
+	          
+	        }
+
+	      }
+	      k++;
+	    }
+
+	    GraphEntity[] result = new GraphEntity[v.size()];
+	    Iterator it = v.iterator();
+	    k = 0;
+	    while (it.hasNext()) {
+	      result[k] = (GraphEntity) it.next();
+	      k++;
+	    }
+//	    System.err.println("terminado con" +result.length);
+	    return result;  
+  }
+  
+  
   public GraphEntity[] getEntities() throws NullEntity {
     int max = mjg.getModel().getRootCount();
     java.util.Vector v = new java.util.Vector();
@@ -164,24 +209,17 @@ class GraphImp
   public void generateImage(String filename) {
     File target = new File(filename);
     new File(target.getParent()).mkdirs();
-/*    if (!target.exists()) {
-      // Folders are missing
-      ingenias.editor.Log.getInstance().logERROR(
-          "Trying to save an image in " +
-          filename + " I found that the path was incorrect. Creating referred folders and trying again");
-      System.err.println(target.getParent());
-
-      this.createSubFolders(new File(target.getParent()));
-
-//        target.createNewFile();
-      javax.swing.JOptionPane.showMessageDialog(null, new javax.swing.JLabel(),
-                                                "na", 0);
-    }*/
 
     JPanel temp=new JPanel(new BorderLayout());
-    temp.add(this.mjg,BorderLayout.CENTER);
-    this.mjg.setSelectionCells(new Object[0]);
-    ingenias.editor.export.Diagram2SVG.diagram2SVG(temp, target,"png");
+    
+    	ModelJGraph njg=this.mjg.cloneJGraph();
+    	
+    	 
+    	    temp.add(njg,BorderLayout.CENTER);
+    	    njg.setSelectionCells(new Object[0]);
+    	    ingenias.editor.export.Diagram2SVG.diagram2SVG(temp, target,"png");    	        	        
+ 		
+	
 
   }
 

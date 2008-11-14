@@ -34,11 +34,31 @@ import ingenias.editor.entities.*;
 import ingenias.exception.*;
 import ingenias.exception.NotFound;
 
-class GraphEntityImp extends AttributedElementImp implements GraphEntity{
+public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 	
+	public org.jgraph.graph.DefaultGraphCell getDgc() {
+		return dgc;
+	}
+
+	public void setDgc(org.jgraph.graph.DefaultGraphCell dgc) {
+		this.dgc = dgc;
+	}
+
 	private ingenias.editor.entities.Entity ent;
 	private ModelJGraph graph;
 	private org.jgraph.graph.DefaultGraphCell dgc;
+	
+	GraphEntityImp(ingenias.editor.entities.Entity ent,  org.jgraph.graph.DefaultGraphCell dgc,
+			ModelJGraph graph) throws NullEntity{
+		super(ent,graph);
+		if (ent==null) throw new ingenias.exception.NullEntity();
+		this.ent=ent;
+		this.graph=graph;
+		this.dgc=dgc;
+		if (graph==null){
+			throw new RuntimeException("Graph is null in entity "+ent+ " when creating a GraphEntityImp");
+		}
+	}
 	
 	GraphEntityImp(ingenias.editor.entities.Entity ent,
 			ModelJGraph graph) throws NullEntity{

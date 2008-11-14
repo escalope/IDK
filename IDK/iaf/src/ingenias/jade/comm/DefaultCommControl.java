@@ -128,9 +128,7 @@ public abstract class DefaultCommControl {
 	 *
 	 */
 	public void removeDefaultLocks(){
-		for (String lock: locksAccount){
-			this.getLR().removeDeletionLock(lock);
-		}
+		getLR().removeAllDeletionLocks();
 	}
 	
 	public void lockProcessed(String lock){

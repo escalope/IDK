@@ -35,6 +35,7 @@ public interface LocksWriter {
 	 * 
 	 * @param element The element to remove. Usually the id of the entity
 	 */
-	public  void addDeletionLock(String element);
+	public  void addDeletionLock(ingenias.editor.entities.MentalEntity element);
+	public  void addDeletionLockExpectedType(String type);
 
 }

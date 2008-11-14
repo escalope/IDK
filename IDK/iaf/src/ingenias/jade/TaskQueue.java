@@ -319,7 +319,13 @@ public class TaskQueue {
 		while (iteratorCons.hasNext() && !anyLocked) {
 			MentalEntity ei = null;
 			ei = iteratorCons.next();
-			anyLocked = anyLocked || !this.lm.canBeDeleted(ei.getType());
+			if (nextTask.getConversationContext()==null){
+			// it is a non conversational task	
+				anyLocked = anyLocked || !this.lm.canBeDeleted(ei);
+			} else {
+				// it is a conversational task
+			anyLocked = anyLocked || !this.lm.canBeDeleted(ei,nextTask.getConversationContext());
+			}
 			if (anyLocked)
 				lockedElements.add(ei);
 

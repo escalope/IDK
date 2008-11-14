@@ -56,11 +56,11 @@ import ingenias.exception.NotFound;
   @@@repeat id="sendaction"@@@
        // Facts that cannot be removed because they are part of guards
     @@@repeat id="condfacts"@@@
-    lw.addDeletionLock("@@@v@@@type@@@/v@@@");
+    lw.addDeletionLockExpectedType("@@@v@@@type@@@/v@@@");
      @@@/repeat@@@
     // Facts that cannot be removed because they must be sent
      @@@repeat id="mescontent"@@@
-     lw.addDeletionLock("@@@v@@@type@@@/v@@@");
+     lw.addDeletionLockExpectedType("@@@v@@@type@@@/v@@@");
      @@@/repeat@@@
     @@@/repeat@@@ 
     }
@@ -137,7 +137,7 @@ import ingenias.exception.NotFound;
 	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"@@@v@@@type@@@/v@@@");
 	   	   for (MentalEntity me:mfcontent)             
              sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLock("@@@v@@@type@@@/v@@@");
+	       getLR().removeDeletionLock(mfcontent);
 	       lockProcessed("@@@v@@@type@@@/v@@@");
            //MainInteractionManager.log("Removing lock @@@v@@@type@@@/v@@@",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             

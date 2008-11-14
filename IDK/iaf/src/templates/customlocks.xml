@@ -86,15 +86,15 @@
 			
 			public @@@v@@@agentid@@@/v@@@InteractionLocks(){};
 			
-			        public void addInteractionLocks(String interaction, LocksWriter lw){
+			        public void addInteractionLocks(String interaction, LocksWriter lw, String role){
                   @@@repeat id="interactionsColaborated"@@@                  
-                   if (interaction.equals("@@@v@@@interactionid@@@/v@@@") ){
+                   if (interaction.equals("@@@v@@@interactionid@@@/v@@@") && role.equals("@@@v@@@roleid@@@/v@@@") ){
                             @@@v@@@roleid@@@/v@@@@@@v@@@interactionid@@@/v@@@DefaultCommControl.addDefaultLocks(lw);
                    }
                   @@@/repeat@@@
 		           // Interactions in which this agent appears as initiator                  
                   @@@repeat id="interactions"@@@
-                  if (interaction.equals("@@@v@@@interactionid@@@/v@@@")){
+                  if (interaction.equals("@@@v@@@interactionid@@@/v@@@")&& role.equals("@@@v@@@roleid@@@/v@@@")){
                     @@@v@@@roleid@@@/v@@@@@@v@@@interactionid@@@/v@@@DefaultCommControl.addDefaultLocks(lw);
                   }
 				  @@@/repeat@@@

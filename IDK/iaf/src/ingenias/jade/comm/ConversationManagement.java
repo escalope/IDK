@@ -230,9 +230,9 @@ public class ConversationManagement {
 	public ActiveConversation launchProtocolAsInitiator(String protocol,
 			DFAgentDescription[] actors) throws NoAgentsFound {
 		String role = this.initiatorRoles.get(protocol);
+		
 		ActiveConversation actconv = this.launchProtocolAsInitiator(protocol,
-				role, actors, this.agent.getMSM(), this.agent.getMSM(),
-				this.agent.getLM());
+				role, actors, this.agent.getMSM(), this.agent.getMSM());
 		try {
 			this.agent.getMSM().addMentalEntity(actconv.getConv());
 		} catch (InvalidEntity e) {
@@ -265,8 +265,8 @@ public class ConversationManagement {
 			String requestedRole, String cid) throws NoAgentsFound {
 		ActiveConversation actconv = this.launchProtocolAsCollaborator(
 				protocol, requestedRole, cid, null, this.agent.getMSM(),
-				this.agent.getMSM(), this.agent.getLM());
-		this.agent.getLM().addInteractionLocks(protocol);
+				this.agent.getMSM());
+		
 		this.add(actconv.getSb());		
 		try {
 			this.agent.getMSM().addMentalEntity(actconv.getConv());
@@ -325,7 +325,7 @@ public class ConversationManagement {
 	 */
 	protected ActiveConversation launchProtocolAsCollaborator(String protocol,
 			String role, String cid, DFAgentDescription[] actors,
-			MentalStateReader msr, MentalStateUpdater msu, LocksRemover lr)
+			MentalStateReader msr, MentalStateUpdater msu)
 	throws NoAgentsFound {
 		int tries = 10;
 		ActiveConversation aconv = null;
@@ -335,7 +335,8 @@ public class ConversationManagement {
 		conv.setInteraction(new Interaction(protocol));
 		conv.setConversationID(cid);
 		conv.setPlayedRole(role);
-		aconv = launchProtocol(actors, msr, msu, lr, tries, aconv,
+	
+		aconv = launchProtocol(actors, msr, msu, tries, aconv,
 				continueInit, conv);
 		DebugUtils.logEvent("CollaborationAccepted", new String[]{protocol,cid,agent.getLocalName(),role});
 		return aconv;
@@ -370,16 +371,22 @@ public class ConversationManagement {
 	 * @throws NoAgentsFound
 	 */
 	private ActiveConversation launchProtocol(DFAgentDescription[] actors,
-			MentalStateReader msr, MentalStateUpdater msu, LocksRemover lr,
+			MentalStateReader msr, MentalStateUpdater msu, 
 			int tries, ActiveConversation aconv, boolean continueInit,
 			RuntimeConversation conv) throws NoAgentsFound {
-
+		
+		ConversationLocksManager clm=new ConversationLocksManager(this.agent.getLocalName(),this.agent.getCl(),conv);
+		clm.addInteractionLocks(conv.getInteraction().getId());
+		
+		
 		while (!continueInit) {
 			try {
 
 				aconv = this.ap.initialiseProtocols(agent.getName(), conv, msr,
-						msu, lr, actors);
+						msu, clm, actors);
 				continueInit = true;
+				this.agent.getLM().addConversationLocksManager(clm, conv);
+				
 			}
 
 			catch (ingenias.jade.exception.NoAgentsFound nf) {
@@ -423,7 +430,7 @@ public class ConversationManagement {
 	 */
 	protected ActiveConversation launchProtocolAsInitiator(String protocol,
 			String role, DFAgentDescription[] actors, MentalStateReader msr,
-			MentalStateUpdater msu, LocksRemover lr) throws NoAgentsFound {
+			MentalStateUpdater msu) throws NoAgentsFound {
 		int tries = 10;
 		ActiveConversation aconv = null;
 		boolean continueInit = false;
@@ -433,8 +440,9 @@ public class ConversationManagement {
 		conv.setInteraction(new Interaction(protocol));
 		conv.setConversationID(cid);
 		conv.setPlayedRole(role);
+	
 
-		aconv = launchProtocol(actors, msr, msu, lr, tries, aconv,
+		aconv = launchProtocol(actors, msr, msu,  tries, aconv,
 				continueInit, conv);
 		return aconv;
 	};
@@ -637,7 +645,7 @@ public class ConversationManagement {
 		DFAgentDescription[] actors = this.ap
 		.getInteractionActors(protocol, yp);
 		return this.launchProtocolAsInitiator(protocol, role, actors,
-				this.agent.getMSM(), this.agent.getMSM(), this.agent.getLM());
+				this.agent.getMSM(), this.agent.getMSM());
 	};
 
 	/*
@@ -716,5 +724,6 @@ public class ConversationManagement {
 		}
 		return result;
 	}
+	
 
 }

@@ -712,6 +712,10 @@ abstract public class JADEAgent extends Agent{
 
 	}
 
+	public CustomLocks getCl() {
+		return cl;
+	}
+
 	/**
 	 * To shutdown the agent, it deregisters itself from the address services
 	 * of the platform

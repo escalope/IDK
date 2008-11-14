@@ -64,15 +64,15 @@ public class TaskExecutionModel {
 				}
 				//System.err.println("Executing task "+ctask.getID()+ " "+ctask.getType()+ " "+markConversationAsUsed.size());
 				RuntimeConversation rc=null;
-									
+
 				removeMark();	
-												
+
 				msm.setModified();
 			}
 			//	wakeup();
 		}
 
-		
+
 	};
 
 	public TaskExecutionModel(String agentName){
@@ -146,24 +146,24 @@ public class TaskExecutionModel {
 			msm=cmsm;
 			markMentalStateAsChanged();
 		}
-	
-	
+
+
 	}
 
 	private synchronized void markMentalStateAsChanged() {
 		markConversationAsUsed.add(true);
 	}
-	
+
 	private synchronized void removeMark() {
 
 		markConversationAsUsed.remove(0);
-		
+
 	}
 
 	private void createNewInteractions(final JADEAgent ja, final Task t, Vector<RuntimeConversation> newInteractions) {
 		for (int k=0;k<newInteractions.size();k++){
 			final RuntimeConversation current=newInteractions.elementAt(k);
-			ja.getLM().addInteractionLocks(current.getInteraction().getId());
+			//ja.getLM().addInteractionLocks(current.getInteraction().getId());
 			ja.addBehaviour(new OneShotBehaviour(){
 				@Override
 				public void action() {
@@ -178,6 +178,7 @@ public class TaskExecutionModel {
 							newConversation = createNewInteractionWithCollaboratorsAutomaticallySet(
 									ja, t, current);
 						}
+
 						if (newConversation!=null){								
 							if (t.getConversationContext()!=null){
 								Enumeration enumEnt;
@@ -192,6 +193,12 @@ public class TaskExecutionModel {
 							} else {
 								copyContentFromTempConversationToNewConversation(
 										current, newConversation);
+							}
+							Enumeration<ingenias.editor.entities.Entity> ents=newConversation.getConv().getCurrentContentElements();
+							// after creating the new conversations, the conversation locks managers are properly initialised. Then
+							// the concrete locks to be added to these new conversations are processed.
+							while (ents.hasMoreElements()){								
+								ja.getLM().getCLM(newConversation.getConv()).addDeletionLock((MentalEntity)ents.nextElement());
 							}
 						} else {
 							//System.err.println("Un error "+cid+" in "+t.getID());
@@ -342,8 +349,11 @@ public class TaskExecutionModel {
 		createNewEntitiesInAgentMentalState(ja, msm, t, generatedOutput,
 				newInteractions);
 
+
+
 		createNewEntitiesInConversationContext(ja, msm, t, currentConv,
 				generatedOutput, newInteractions);
+
 
 		if (currentConv!=null){
 			HashSet<MentalEntity> newEntities = generatedOutput.getNewEntitiesWF();
@@ -381,6 +391,7 @@ public class TaskExecutionModel {
 				currentConv.addCurrentContent(newEntity);
 				MainInteractionManager.logMSP("Produced entity "+newEntity.getId()+":"+newEntity.getType()+" and stored within conversation "+
 						currentConv.getConversationID(),ja.getLocalName(),t.getID(),t.getType());
+				ja.getLM().getCLM(currentConv).addDeletionLock((MentalEntity)newEntity);// A lock is set on that entity
 			} else {
 				if (currentConv==null && !(newEntity instanceof RuntimeConversation)){
 					// if there is no current conversation just add to created conversations
@@ -389,7 +400,10 @@ public class TaskExecutionModel {
 					try {
 						if (!newInteractions.isEmpty()){
 							for (RuntimeConversation conv:newInteractions){
-								conv.addCurrentContent(newEntity);
+								conv.addCurrentContent(newEntity);	
+								// A lock is set on that entity
+								// provided that the concrete conversation locks manager is set to recognise that kind of entity
+								// this will be made on launching the task
 							}
 						} else
 							msm.addMentalEntity((MentalEntity)newEntity);
@@ -429,6 +443,11 @@ public class TaskExecutionModel {
 					MainInteractionManager.logMSP("Produced entity "+newEntity.getId()+":"+newEntity.getType(),ja.getLocalName(),t.getID(),t.getType());
 					try {
 						msm.addMentalEntity((MentalEntity)newEntity);
+						//ja.getLM().getGlm().addDeletionLock((MentalEntity)newEntity); // in case there are entities to be sent
+						if (t.getConversationContext()!=null){
+							ja.getLM().getCLM(t.getConversationContext()).addDeletionLock((MentalEntity)newEntity); // in case there are entities to be sent
+						}
+						
 					} catch (InvalidEntity e) {							
 						e.printStackTrace();
 					} //Adds a new fact to the mental state

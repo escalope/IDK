@@ -23,6 +23,8 @@
 
 package ingenias.jade.comm;
 
+import java.util.Vector;
+
 import ingenias.jade.graphics.MainInteractionManager;
 
 /**
@@ -37,7 +39,8 @@ public interface LocksRemover {
 	 * It removes a lock over an entity. Until all locks have been removed, the element will not be free
 	 * @param element The element to remove. Usually the id of the entity
 	 */
-	public    void removeDeletionLock(String element);
+	public    void removeDeletionLock(ingenias.editor.entities.MentalEntity element);
+	public    void removeDeletionLock(Vector<ingenias.editor.entities.MentalEntity> element);
 	
 	/**
 	 * It tells whether the element can be removed or not
@@ -45,5 +48,7 @@ public interface LocksRemover {
 	 * @param element The id of the element to remove. Usually the id of the entity
 	 * @return true if it can be deleted and false i.o.c
 	 */
-	public   boolean canBeDeleted(String element);
+	public   boolean canBeDeleted(ingenias.editor.entities.MentalEntity element);
+	public void removeAllDeletionLocks();
 }
+

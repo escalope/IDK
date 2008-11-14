@@ -40,6 +40,6 @@ public interface CustomLocks {
 	 *  
 	 * @param interaction The interaction whose locks have to be created
 	 */
-	public void addInteractionLocks(String interaction, LocksWriter lw);
+	public void addInteractionLocks(String interaction, LocksWriter lw,String role);
 
 }

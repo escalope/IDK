@@ -102,8 +102,8 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 			to=new TaskOutput("default");
   
 		@@@repeat id="deleteentity"@@@
-		if (this.getLM().canBeDeleted("@@@v@@@entityidtodelete@@@/v@@@")){
-             expectedInput=this.getMSM().getMentalEntityByType("@@@v@@@entityidtodelete@@@/v@@@");
+		expectedInput=this.getMSM().getMentalEntityByType("@@@v@@@entityidtodelete@@@/v@@@");
+		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
 				nonExistingInputs.add("@@@v@@@entityidtodelete@@@/v@@@");
 			 } else {
@@ -153,6 +153,7 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 	      @@@/repeat@@@
 	      
 		@@@repeat id="consumedInput"@@@
+		
              expectedInput=this.getMSM().getMentalEntityByType("@@@v@@@mentalenttype@@@/v@@@");
              if (expectedInput.size()==0 && !("@@@v@@@mentalentitycardinality@@@/v@@@".equals("0..n"))){
 				nonExistingInputs.add("@@@v@@@mentalenttype@@@/v@@@");
@@ -262,8 +263,8 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 			tobject.setConversationContext(conversation);
   
 		@@@repeat id="deleteentity"@@@
-		if (this.getLM().canBeDeleted("@@@v@@@entityidtodelete@@@/v@@@")){
-             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"@@@v@@@entityidtodelete@@@/v@@@");             
+		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"@@@v@@@entityidtodelete@@@/v@@@");
+		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
 				nonExistingInputs.add("@@@v@@@entityidtodelete@@@/v@@@");
 			 } else {

@@ -27,11 +27,8 @@ import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.jade.graphics.MainInteractionManager;
 
-import java.util.Collection;
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.Set;
 import java.util.Vector;
 /**
  * It handles locks on information entities stored in the Mental State Manager. When an entity is locked,
@@ -48,14 +45,10 @@ import java.util.Vector;
  * @author jj
  *
  */
-public class LocksManager implements LocksListener {	
-	private Hashtable<RuntimeConversation,ConversationLocksManager> convManagers=new Hashtable<RuntimeConversation,	ConversationLocksManager>();
-	GeneralLocksManager glm=null; 
-	public GeneralLocksManager getGlm() {
-		return glm;
-	}
+public class GeneralLocksManager implements LocksRemover, LocksWriter {
 
-
+	private Vector<ingenias.editor.entities.MentalEntity> cannotBeDeleted=new Vector<ingenias.editor.entities.MentalEntity>();
+	private Vector<String> cannotBeDeletedExpectedTypes=new Vector<String>();	
 	private String aname="";
 	private CustomLocks cl=null;
 	private Vector<LocksListener> listeners=new Vector<LocksListener>(); 
@@ -65,67 +58,75 @@ public class LocksManager implements LocksListener {
 	 * @param agentName The local name of the agent
 	 * @param cl The customLocks informing of locks to be added per interaction an agent knows
 	 */
-	public LocksManager(String agentName, CustomLocks cl){
+	public GeneralLocksManager(String agentName, CustomLocks cl){
 		this.aname=agentName;
 		this.cl=cl;
-		glm=new GeneralLocksManager(agentName,cl);
 	}
 	
 	
-	public void addConversationLocksManager(ConversationLocksManager clm, RuntimeConversation conversation){
-		convManagers.put(conversation,clm );
-		clm.register(this);
-	}
-	
-	
-	public  synchronized boolean canBeDeleted(ingenias.editor.entities.MentalEntity element, 
-			RuntimeConversation conversationContext){
-		if (conversationContext!=null && convManagers.containsKey(conversationContext)){
-			if (convManagers.get(conversationContext).canBeDeleted(element))
-				return canBeDeleted(element,conversationContext.getParentConversation());
-			else
-				return false;
-		}
-		return true;
-	}
 	/**
 	 * It tells if there is a lock over the element.
 	 * 
 	 */
 	public  synchronized boolean canBeDeleted(ingenias.editor.entities.MentalEntity element){		
-		Enumeration<ConversationLocksManager> managers = this.convManagers.elements();
-		boolean canBeDeleted=true;
-		while (managers.hasMoreElements() && canBeDeleted){
-			
-		 canBeDeleted=	canBeDeleted && managers.nextElement().canBeDeleted(element);
-		}
-		return canBeDeleted;
-		
+		return !this.cannotBeDeleted.contains(element);
 	}
 	
 	public  synchronized boolean canBeDeleted(Vector<ingenias.editor.entities.MentalEntity> elements){
 		//MainInteractionManager.log(this.cannotBeDeleted.toString(),
 		//		aname+"- checking deletion");
-		boolean result=true;
-		for (ingenias.editor.entities.MentalEntity entity:elements){
-			result=result && canBeDeleted(entity);
-		}
-		return result;
+		return !this.cannotBeDeleted.containsAll(elements);
 	}
+	
+	/**
+	 * It removes one lock associated to the element. There can be as many as needed.
+	 * An entity has as many locks as times the addDeletionLock has been invoked
+	 */
+	public  synchronized  void removeDeletionLock(ingenias.editor.entities.MentalEntity element){		
+		this.cannotBeDeleted.remove(element);
+		notifyChangeLocks();
+		MainInteractionManager.logMSM("Removed "+element+". Current lokcs:"+this.cannotBeDeleted.toString(),aname);
+	}
+	
+	/**
+	 * It adds a deletion lock over an entity. There can be several locks over the same
+	 * entity
+	 */
+	
+	public synchronized void addDeletionLockExpectedType(String type){
+		this.cannotBeDeletedExpectedTypes.add(type);		
+		MainInteractionManager.logMSM("Added "+type+".  Current locks:"+this.cannotBeDeleted.toString(),
+				aname);
 		
+	}
+	
+	public synchronized void addDeletionLock(ingenias.editor.entities.MentalEntity entity){
+		if (this.cannotBeDeletedExpectedTypes.contains(entity.getType())){
+			this.cannotBeDeleted.add(entity);
+			notifyChangeLocks();
+			MainInteractionManager.logMSM("Added "+entity+".  Current locks:"+this.cannotBeDeleted.toString(),
+					aname);
+		}		
+	}
+
+	
 	/**
 	 * It returns the list of locks currently known
 	 * @return
 	 */
 	public synchronized Vector<ingenias.editor.entities.Entity> getLocks(){
-		Vector<ingenias.editor.entities.Entity> locked= new Vector<ingenias.editor.entities.Entity>(this.glm.getLocks());
-		Collection<ConversationLocksManager> managers = this.convManagers.values();
-		for (ConversationLocksManager cm:managers){
-			locked.addAll(cm.getLocks());
-		}
-		return locked;
+		return new Vector<ingenias.editor.entities.Entity>(this.cannotBeDeleted);
 	}
 
+	/**
+	 * It adds all the locks an interaction requires. The number of locks is determined
+	 * by implementors of the interface CustomLocks with which this class is initialized.
+	 * 
+	 * @param interactionType The interaction whose locks has to be added
+	 */
+	public void addInteractionLocks(String interactionType) {
+		new Exception("Method deprecated").printStackTrace();
+	}
 	
 	public void register(LocksListener ll){
 		this.listeners.add(ll);
@@ -138,16 +139,15 @@ public class LocksManager implements LocksListener {
 	}
 
 
-	public void locksChanged() {
-		notifyChangeLocks();		
+	public void removeDeletionLock(Vector<MentalEntity> elements) {
+		for (MentalEntity me:elements){
+			removeDeletionLock(me);
+		}
 	}
-
-
-	public ConversationLocksManager getCLM(RuntimeConversation conv) {
-		return this.convManagers.get(conv);
+	
+	public void removeAllDeletionLocks() {
+		cannotBeDeleted.removeAllElements();
 		
 	}
-
-
 
 }

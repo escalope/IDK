@@ -27,7 +27,11 @@ import ingenias.exception.NotFound;
 import ingenias.exception.NullEntity;
 
 import java.util.*;
+import java.awt.geom.Rectangle2D;
 import java.io.*;
+
+import org.jgraph.graph.AttributeMap;
+import org.jgraph.graph.DefaultGraphCell;
 
 /**
  *  This class generates HTML documentation from a INGENIAS specification
@@ -136,55 +140,20 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	private void generateIndex(Sequences p) throws Exception {
 		
 		Graph[] gs = browser.getGraphs();
-		//creo un array para saber que modelos ya estan puestos
-		//en el indice. La inicializo a false todas porque aun no
-		//las he usado.
-		/*    boolean[] usados = new boolean[pg.length];
-		 for (int j = 0; j < usados.length; j++) {
-		 usados[j]=false;
-		 }*/
-		//numero de modelos usados ya
-//		int numUsados=0;
-		
+	
 		p.addVar(new Var("output",
 				( (ProjectProperty)this.getProperty("htmldoc")).
 				value));
+		System.err.println("output:"+( (ProjectProperty)this.getProperty("htmldoc")).
+				value);
 		Hashtable pathtable = new Hashtable();
 		
 		Hashtable paths = new Hashtable();
 		Hashtable depth = new Hashtable();
-		/*for (int k = 0; k < gs.length; k++) {
-		 String[] pathGraph = gs[k].getPath();
-		 String path = "";
-		 for (int j = 0; j < pathGraph.length; j++) {
-		 path = path + "/" + pathGraph[j];
-		 }
-		 Vector rows = new Vector();
-		 if (pathtable.containsKey(path)) {
-		 rows = (Vector) pathtable.get(path);
-		 }
-		 else {
-		 paths.put(path, rows);
-		 }
-		 Vector level = new Vector();
-		 if (depth.containsKey(new Integer(pathGraph.length))) {
-		 level = (Vector) depth.get(new Integer(pathGraph.length));
-		 }
-		 else {
-		 depth.put(new Integer(pathGraph.length), level);
-		 }
-		 level.add(gs[k]);
-		 rows.add(gs[k]);
-		 }
-		 
-		 Object[] rpaths = paths.keySet().toArray();
-		 Arrays.sort(rpaths);*/
+	
 		
 		Vector alreadyShown=new Vector();
 		for (int k = 0; k < gs.length; k++) {
-			//obtengo el nombre del paquete
-			//genero el paquete
-			//Vector graphs = (Vector) paths.get(rpaths[k]);
 			Repeat rp1=null;
 			String[] path=gs[k].getPath();
 			boolean already=true;
@@ -214,7 +183,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			Repeat rp2;
 			Graph g = gs[k];
 			rp2 = new Repeat("graph");
-			rp2.add(new Var("name", g.getName()));
+			rp2.add(new Var("name", ingenias.generator.util.Conversor.replaceInvalidCharsForID(g.getName())));
 			rp2.add(new Var("fname", this.toSafeName(g.getName())));
 			rp2.add(new Var("tipo", g.getType()));
 			rp2.add(new Var("image", toSafeName(g.getName()) + ".png"));
@@ -222,26 +191,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 					value + "/" + toSafeName(g.getName()) + ".png");
 			rp1.add(rp2);
 			
-			/*Enumeration enumeration = graphs.elements();
-			 while (enumeration.hasMoreElements()) {
-			 //a�ado el repeat de los graficos al repeat del paquete
-			  //primero a�ado el grafico que ya he encontrado
-			   Repeat rp2;
-			   Graph g = (Graph) enumeration.nextElement();
-			   rp2 = new Repeat("graph");
-			   rp2.add(new Var("name", g.getName()));
-			   rp2.add(new Var("fname", this.toSafeName(g.getName())));
-			   rp2.add(new Var("tipo", g.getType()));
-			   rp2.add(new Var("image", toSafeName(g.getName()) + ".png"));
-			   g.generateImage( ( (ProjectProperty)this.getProperties().get("htmldoc")).
-			   value + "/" + toSafeName(g.getName()) + ".png");
-			   rp1.add(rp2);
-			   }*/
-			
-			//Ahora tengo que encontrar el resto de graficos que tienen el mismo
-			//path asociado al que ya hemos usado, para meterlos en el mismo paquete.
-			
-			//a�ado el repeat del paquete
+		
 			
 		}
 		
@@ -258,6 +208,11 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		for (int k = 0; k < gs.length; k++) {
 			Graph g = gs[k];
 			Repeat r = new Repeat("graph1");
+			
+			
+									
+			
+			
 			p.addRepeat(r);
 			r.add(new Var("output",
 					( (ProjectProperty)this.getProperty("htmldoc")).
@@ -276,11 +231,35 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				nf.printStackTrace();
 			}
 			
-			GraphEntity[] ges = g.getEntities();
+			GraphEntity[] gesWithDups = g.getEntitiesWithDuplicates();
+			for (int j = 0; j < gesWithDups.length; j++) {
+				Repeat ens = new Repeat("mapentities");
+				GraphEntity ge = gesWithDups[j];				
+				GraphEntityImp gei = (ingenias.generator.browser.GraphEntityImp)ge;
+				DefaultGraphCell dgc1=gei.getDgc();
+				AttributeMap attributes = dgc1.getAttributes();
+				Rectangle2D bounds = org.jgraph.graph.GraphConstants.getBounds(attributes);
+				
+				ens.add(new Var("coordrect",""+(int)bounds.getMinX()+","+(int)bounds.getMinY()+","+(int)bounds.getMaxX()+","+(int)bounds.getMaxY()));
+				ens.add(new Var("link",""+ge.getID()));
+				r.add(ens);
+			}
+			
+			GraphEntity[] ges = g.getEntities();			
 			
 			for (int j = 0; j < ges.length; j++) {
 				Repeat ens = new Repeat("entities");
 				GraphEntity ge = ges[j];
+				
+				GraphEntityImp gei = (ingenias.generator.browser.GraphEntityImp)ge;
+				DefaultGraphCell dgc1=gei.getDgc();
+				AttributeMap attributes = dgc1.getAttributes();
+				Rectangle2D bounds = org.jgraph.graph.GraphConstants.getBounds(attributes);
+				
+				
+				ens.add(new Var("coordrect",""+(int)bounds.getMinX()+","+(int)bounds.getMinY()+","+(int)bounds.getMaxX()+","+(int)bounds.getMaxY()));
+				ens.add(new Var("link",""+ge.getID()));
+				
 				ens.add(new Var("name", ge.getID()));
 				ens.add(new Var("tipo", ge.getType()));
 				try {
@@ -324,6 +303,12 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				GraphRelationship[] gr = ge.getRelationships();
 				for (int i = 0; i < gr.length; i++) {
 					Repeat rels = new Repeat("relationship");
+					
+					Repeat meRel = new Repeat("mapentry");
+					rels.add(meRel);				
+					meRel.add(new Var("coordrect","0,0,115,33"));
+					meRel.add(new Var("link","#link"));
+					
 					rels.add(new Var("name", gr[i].getType()));
 					GraphRole[] groles = gr[i].getRoles();
 					for (int h = 0; h < groles.length; h++) {
@@ -339,58 +324,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		}
 	}
 	
-	/**
-	 *  Generates HTML pages to show diagrams.
-	 *
-	 *@exception  Exception  XML exception
-	 */
-	/*	private void generatePages() throws Exception {
-	 Graph[] gs = browser.getGraphs();
-	 Sequences p = new Sequences();
-	 for (int k = 0; k < gs.length; k++) {
-	 Graph g = gs[k];
-	 Repeat r = new Repeat("graph");
-	 r.add(new Var("output",outputPath));
-	 r.add(new Var("name", gs[k].getName()));
-	 r.add(new Var("image", gs[k].getName() + ".png"));
-	 try {
-	 r.add(new Var("description", gs[k].getAttributeByName("Description").getSimpleValue()));
-	 }
-	 catch (NotFound nf) {
-	 }
-	 GraphEntity[] ges = g.getEntities();
-	 for (int j = 0; j < ges.length; j++) {
-	 Repeat ens = new Repeat("entities");
-	 GraphEntity ge = ges[j];
-	 ens.add(new Var("name", ge.getID()));
-	 try {
-	 ens.add(new Var("description", ge.getAttributeByName("Description").getSimpleValue()));
-	 }
-	 catch (NotFound nf) {
-	 nf.printStackTrace();
-	 }
-	 GraphRelationship[] gr = ge.getRelationships();
-	 for (int i = 0; i < gr.length; i++) {
-	 Repeat rels = new Repeat("relationship");
-	 rels.add(new Var("name", gr[i].getType()));
-	 GraphRole[] groles = gr[i].getRoles();
-	 for (int h = 0; h < groles.length; h++) {
-	 Repeat rroles = new Repeat("roles");
-	 rroles.add(new Var("name", groles[h].getName()));
-	 rroles.add(new Var("player", groles[h].getPlayer().getID()));
-	 rels.add(rroles);
-	 }
-	 ens.add(rels);
-	 }
-	 r.add(ens);
-	 }
-	 p.addRepeat(r);
-	 }
-	 Codegen cg = new Codegen();
-	 // System.err.println(p);
-	  cg.apply(p.toString(), diagramTemplate);
-	  }
-	  */
+
 	
 	/**
 	 *  Generates HTMLdoc from a INGENIAS specification file (1st param), a diagram

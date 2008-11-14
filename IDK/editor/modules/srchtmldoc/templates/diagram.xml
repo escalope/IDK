@@ -13,7 +13,12 @@
 <H2>Description :</H2>
 @@@v@@@description@@@/v@@@ 
 <P>
-<div align="center"><img src="@@@v@@@image@@@/v@@@">
+<div align="center"><img src="@@@v@@@image@@@/v@@@" usemap="#mymap">
+<map name="mymap">
+  @@@repeat id="mapentities"@@@
+   <AREA SHAPE=rect COORDS="@@@v@@@coordrect@@@/v@@@" HREF="#@@@v@@@link@@@/v@@@">
+  @@@/repeat@@@
+</map>
 </P>
 <H2 align="left">Entities appearing in this diagram :</H2>
 	<TABLE BORDER="1" bgcolor="#FFFF00">
@@ -28,6 +33,7 @@
 	
 	 @@@repeat id="entities"@@@
 	<TR><TD valign="top">
+	<a name="@@@v@@@name@@@/v@@@"/>
 	  <strong> @@@v@@@name@@@/v@@@</strong><br>
 	</TD><TD valign="top">
 	<strong>@@@v@@@tipo@@@/v@@@</strong>

@@ -47,7 +47,7 @@ import ingenias.editor.entities.Entity;
 
 
 
-public class GeneralEventRenderer extends VertexRenderer implements CellViewRenderer, Serializable {
+public class CommunicationEventRenderer extends VertexRenderer implements CellViewRenderer, Serializable {
 
   
 	private static ViewPreferences.ViewType current = ViewPreferences.ViewType.INGENIAS;
@@ -60,12 +60,12 @@ public class GeneralEventRenderer extends VertexRenderer implements CellViewRend
 	index=ViewPreferences.ViewType.INGENIAS;
 	
 	index=ViewPreferences.ViewType.UML;
-	RenderComponentManager.loadRenderFile("GeneralEvent",
-	index,"/ingenias/editor/rendererxml/GeneralEventUMLPanel.xml");
+	RenderComponentManager.loadRenderFile("CommunicationEvent",
+	index,"/ingenias/editor/rendererxml/CommunicationEventUMLPanel.xml");
 	
 	index=ViewPreferences.ViewType.INGENIAS;
-	RenderComponentManager.loadRenderFile("GeneralEvent",
-	index,"/ingenias/editor/rendererxml/GeneralEventINGENIASPanel.xml");
+	RenderComponentManager.loadRenderFile("CommunicationEvent",
+	index,"/ingenias/editor/rendererxml/CommunicationEventINGENIASPanel.xml");
 	
     }
     catch (Exception ex) {
@@ -77,19 +77,19 @@ public class GeneralEventRenderer extends VertexRenderer implements CellViewRend
     /**
      * Constructs a renderer that may be used to render vertices.
      */
-    public GeneralEventRenderer() {
+    public CommunicationEventRenderer() {
     }
 
     public Dimension getSize() {
-    return RenderComponentManager.getSize("GeneralEvent",current);
+    return RenderComponentManager.getSize("CommunicationEvent",current);
     }
 
     public boolean supportsAttribute(Object key) {
     	return true;
         }
 
-  public static void setEntity(GeneralEvent ent){
-  Map currentMap=(Map)  RenderComponentManager.retrieveIDs("GeneralEvent",ent.getPrefs().getView());
+  public static void setEntity(CommunicationEvent ent){
+  Map currentMap=(Map)  RenderComponentManager.retrieveIDs("CommunicationEvent",ent.getPrefs().getView());
   
 		if (ent != null
 				&& currentMap.get("_attributes_") != null
@@ -103,6 +103,44 @@ public class GeneralEventRenderer extends VertexRenderer implements CellViewRend
 	
 
       
+      if (currentMap.get("InteractionUnit")!=null){
+	   if (ent!=null && ent.getInteractionUnit()!=null){
+		if (currentMap.get("InteractionUnit") instanceof javax.swing.JLabel){
+		((javax.swing.JLabel)( currentMap).get("InteractionUnit")).setText(ent.getInteractionUnit().toString());
+		} else {
+		 if (currentMap.get("InteractionUnit") instanceof javax.swing.text.JTextComponent)
+		 ((javax.swing.text.JTextComponent)( currentMap).get("InteractionUnit")).setText(ent.getInteractionUnit().toString());
+		
+	      } 
+	   } else  {
+	     if (currentMap.get("InteractionUnit") instanceof javax.swing.JLabel)
+	     ((javax.swing.JLabel)( currentMap).get("InteractionUnit")).setText("");
+	     else {
+		if (!(currentMap.get("InteractionUnit") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
+		((javax.swing.text.JTextComponent)( currentMap).get("InteractionUnit")).setText("");
+	     }
+         }
+	  }
+	   
+      if (currentMap.get("Interaction")!=null){
+	   if (ent!=null && ent.getInteraction()!=null){
+		if (currentMap.get("Interaction") instanceof javax.swing.JLabel){
+		((javax.swing.JLabel)( currentMap).get("Interaction")).setText(ent.getInteraction().toString());
+		} else {
+		 if (currentMap.get("Interaction") instanceof javax.swing.text.JTextComponent)
+		 ((javax.swing.text.JTextComponent)( currentMap).get("Interaction")).setText(ent.getInteraction().toString());
+		
+	      } 
+	   } else  {
+	     if (currentMap.get("Interaction") instanceof javax.swing.JLabel)
+	     ((javax.swing.JLabel)( currentMap).get("Interaction")).setText("");
+	     else {
+		if (!(currentMap.get("Interaction") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
+		((javax.swing.text.JTextComponent)( currentMap).get("Interaction")).setText("");
+	     }
+         }
+	  }
+	   
       if (currentMap.get("Id")!=null){
 	   if (ent!=null && ent.getId()!=null){
 		if (currentMap.get("Id") instanceof javax.swing.JLabel){
@@ -131,7 +169,7 @@ public class GeneralEventRenderer extends VertexRenderer implements CellViewRend
 			CellView view, boolean sel,
 			boolean focus, boolean preview)
 	{
-	return RenderComponentManager.retrievePanel("GeneralEvent",
+	return RenderComponentManager.retrievePanel("CommunicationEvent",
 	((Entity)((DefaultGraphCell)(view.getCell())).getUserObject()).getPrefs().getView());
 		
 	}
@@ -140,7 +178,7 @@ public class GeneralEventRenderer extends VertexRenderer implements CellViewRend
 	
 		current = ViewPreferences.ViewType.INGENIAS;
 	
-		return (JPanel) RenderComponentManager.retrievePanel("GeneralEvent",current);
+		return (JPanel) RenderComponentManager.retrievePanel("CommunicationEvent",current);
 	}
 	
 

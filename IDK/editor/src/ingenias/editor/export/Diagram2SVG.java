@@ -225,8 +225,10 @@ public class Diagram2SVG {
 				 createEPS(graph,output);
 				else 
 					createPNG(graph,output);
-			if (container!=null)
+			if (container!=null){
 			 container.add(graph);
+			 container.repaint();
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

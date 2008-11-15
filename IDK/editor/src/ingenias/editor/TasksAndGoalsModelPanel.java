@@ -89,6 +89,16 @@ public class TasksAndGoalsModelPanel extends JGraph {
 
  entities.add("Agent");
 
+ entities.add("AgentModelBelieve");
+
+ entities.add("ApplicationEvent");
+
+ entities.add("ApplicationEventSlots");
+
+ entities.add("Application");
+
+ entities.add("AgentWS");
+
  entities.add("Role");
 
  entities.add("Goal");
@@ -105,17 +115,11 @@ public class TasksAndGoalsModelPanel extends JGraph {
 
  entities.add("Believe");
 
- entities.add("AgentModelBelieve");
-
  entities.add("Compromise");
 
  entities.add("GeneralEvent");
 
- entities.add("ApplicationEvent");
-
- entities.add("ApplicationEventSlots");
-
- entities.add("Application");
+ entities.add("CommunicationEvent");
 
  entities.add("EnvironmentApplication");
 
@@ -137,8 +141,6 @@ public class TasksAndGoalsModelPanel extends JGraph {
 
  entities.add("GoalStateWS");
 
- entities.add("AgentWS");
-
  entities.add("ApplicationWS");
 
  entities.add("Interaction");
@@ -154,6 +156,51 @@ public class TasksAndGoalsModelPanel extends JGraph {
     Agent nentity=new Agent(Editor.getNewId("Agent"));
       DefaultGraphCell vertex = new
           AgentCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("AgentModelBelieve")) {
+    AgentModelBelieve nentity=new AgentModelBelieve(Editor.getNewId("AgentModelBelieve"));
+      DefaultGraphCell vertex = new
+          AgentModelBelieveCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ApplicationEvent")) {
+    ApplicationEvent nentity=new ApplicationEvent(Editor.getNewId("ApplicationEvent"));
+      DefaultGraphCell vertex = new
+          ApplicationEventCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ApplicationEventSlots")) {
+    ApplicationEventSlots nentity=new ApplicationEventSlots(Editor.getNewId("ApplicationEventSlots"));
+      DefaultGraphCell vertex = new
+          ApplicationEventSlotsCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Application")) {
+    Application nentity=new Application(Editor.getNewId("Application"));
+      DefaultGraphCell vertex = new
+          ApplicationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("AgentWS")) {
+    AgentWS nentity=new AgentWS(Editor.getNewId("AgentWS"));
+      DefaultGraphCell vertex = new
+          AgentWSCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -231,15 +278,6 @@ public class TasksAndGoalsModelPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("AgentModelBelieve")) {
-    AgentModelBelieve nentity=new AgentModelBelieve(Editor.getNewId("AgentModelBelieve"));
-      DefaultGraphCell vertex = new
-          AgentModelBelieveCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("Compromise")) {
     Compromise nentity=new Compromise(Editor.getNewId("Compromise"));
       DefaultGraphCell vertex = new
@@ -258,28 +296,10 @@ public class TasksAndGoalsModelPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("ApplicationEvent")) {
-    ApplicationEvent nentity=new ApplicationEvent(Editor.getNewId("ApplicationEvent"));
+    if (entity.equalsIgnoreCase("CommunicationEvent")) {
+    CommunicationEvent nentity=new CommunicationEvent(Editor.getNewId("CommunicationEvent"));
       DefaultGraphCell vertex = new
-          ApplicationEventCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("ApplicationEventSlots")) {
-    ApplicationEventSlots nentity=new ApplicationEventSlots(Editor.getNewId("ApplicationEventSlots"));
-      DefaultGraphCell vertex = new
-          ApplicationEventSlotsCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("Application")) {
-    Application nentity=new Application(Editor.getNewId("Application"));
-      DefaultGraphCell vertex = new
-          ApplicationCell(nentity);
+          CommunicationEventCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -375,15 +395,6 @@ public class TasksAndGoalsModelPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("AgentWS")) {
-    AgentWS nentity=new AgentWS(Editor.getNewId("AgentWS"));
-      DefaultGraphCell vertex = new
-          AgentWSCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("ApplicationWS")) {
     ApplicationWS nentity=new ApplicationWS(Editor.getNewId("ApplicationWS"));
       DefaultGraphCell vertex = new
@@ -409,6 +420,31 @@ public class TasksAndGoalsModelPanel extends JGraph {
     
     if (entity.getType().equalsIgnoreCase("Agent")) {
       return AgentView.getSize((Agent)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("AgentModelBelieve")) {
+      return AgentModelBelieveView.getSize((AgentModelBelieve)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ApplicationEvent")) {
+      return ApplicationEventView.getSize((ApplicationEvent)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ApplicationEventSlots")) {
+      return ApplicationEventSlotsView.getSize((ApplicationEventSlots)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Application")) {
+      return ApplicationView.getSize((Application)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("AgentWS")) {
+      return AgentWSView.getSize((AgentWS)entity);      
     }
     else
 
@@ -452,11 +488,6 @@ public class TasksAndGoalsModelPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("AgentModelBelieve")) {
-      return AgentModelBelieveView.getSize((AgentModelBelieve)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("Compromise")) {
       return CompromiseView.getSize((Compromise)entity);      
     }
@@ -467,18 +498,8 @@ public class TasksAndGoalsModelPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("ApplicationEvent")) {
-      return ApplicationEventView.getSize((ApplicationEvent)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("ApplicationEventSlots")) {
-      return ApplicationEventSlotsView.getSize((ApplicationEventSlots)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("Application")) {
-      return ApplicationView.getSize((Application)entity);      
+    if (entity.getType().equalsIgnoreCase("CommunicationEvent")) {
+      return CommunicationEventView.getSize((CommunicationEvent)entity);      
     }
     else
 
@@ -529,11 +550,6 @@ public class TasksAndGoalsModelPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("GoalStateWS")) {
       return GoalStateWSView.getSize((GoalStateWS)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("AgentWS")) {
-      return AgentWSView.getSize((AgentWS)entity);      
     }
     else
 
@@ -604,6 +620,41 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(AgentModelBelieve.class)) {
+      vertex = new AgentModelBelieveCell( (AgentModelBelieve) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AgentModelBelieveView.getSize((AgentModelBelieve) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ApplicationEvent.class)) {
+      vertex = new ApplicationEventCell( (ApplicationEvent) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ApplicationEventView.getSize((ApplicationEvent) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ApplicationEventSlots.class)) {
+      vertex = new ApplicationEventSlotsCell( (ApplicationEventSlots) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ApplicationEventSlotsView.getSize((ApplicationEventSlots) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Application.class)) {
+      vertex = new ApplicationCell( (Application) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ApplicationView.getSize((Application) entity);
+    }
+    else
+
+    if (entity.getClass().equals(AgentWS.class)) {
+      vertex = new AgentWSCell( (AgentWS) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AgentWSView.getSize((AgentWS) entity);
+    }
+    else
+
     if (entity.getClass().equals(Role.class)) {
       vertex = new RoleCell( (Role) entity);
       // Default Size for the new Vertex with the new entity within
@@ -660,13 +711,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(AgentModelBelieve.class)) {
-      vertex = new AgentModelBelieveCell( (AgentModelBelieve) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = AgentModelBelieveView.getSize((AgentModelBelieve) entity);
-    }
-    else
-
     if (entity.getClass().equals(Compromise.class)) {
       vertex = new CompromiseCell( (Compromise) entity);
       // Default Size for the new Vertex with the new entity within
@@ -681,24 +725,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(ApplicationEvent.class)) {
-      vertex = new ApplicationEventCell( (ApplicationEvent) entity);
+    if (entity.getClass().equals(CommunicationEvent.class)) {
+      vertex = new CommunicationEventCell( (CommunicationEvent) entity);
       // Default Size for the new Vertex with the new entity within
-      size = ApplicationEventView.getSize((ApplicationEvent) entity);
-    }
-    else
-
-    if (entity.getClass().equals(ApplicationEventSlots.class)) {
-      vertex = new ApplicationEventSlotsCell( (ApplicationEventSlots) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = ApplicationEventSlotsView.getSize((ApplicationEventSlots) entity);
-    }
-    else
-
-    if (entity.getClass().equals(Application.class)) {
-      vertex = new ApplicationCell( (Application) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = ApplicationView.getSize((Application) entity);
+      size = CommunicationEventView.getSize((CommunicationEvent) entity);
     }
     else
 
@@ -769,13 +799,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new GoalStateWSCell( (GoalStateWS) entity);
       // Default Size for the new Vertex with the new entity within
       size = GoalStateWSView.getSize((GoalStateWS) entity);
-    }
-    else
-
-    if (entity.getClass().equals(AgentWS.class)) {
-      vertex = new AgentWSCell( (AgentWS) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = AgentWSView.getSize((AgentWS) entity);
     }
     else
 

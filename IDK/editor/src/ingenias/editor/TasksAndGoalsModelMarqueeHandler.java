@@ -110,6 +110,141 @@ public class TasksAndGoalsModelMarqueeHandler extends MarqueeHandler  implements
 			
 			
 			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentModelBelieve")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentModelBelieve")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEvent")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEvent")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEventSlots")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEventSlots")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Application")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Application")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentWS")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentWS")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.Role")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -326,33 +461,6 @@ public class TasksAndGoalsModelMarqueeHandler extends MarqueeHandler  implements
 			
 			
 			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentModelBelieve")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentModelBelieve")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.Compromise")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -407,7 +515,7 @@ public class TasksAndGoalsModelMarqueeHandler extends MarqueeHandler  implements
 			
 			
 			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEvent")){
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.CommunicationEvent")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {				
@@ -419,61 +527,7 @@ public class TasksAndGoalsModelMarqueeHandler extends MarqueeHandler  implements
 			 }
 			
                   
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEvent")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEventSlots")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEventSlots")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.Application")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.Application")){
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.CommunicationEvent")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {				
@@ -744,33 +798,6 @@ public class TasksAndGoalsModelMarqueeHandler extends MarqueeHandler  implements
 			
                   
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.GoalStateWS")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentWS")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentWS")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {				
@@ -2038,6 +2065,76 @@ public class TasksAndGoalsModelMarqueeHandler extends MarqueeHandler  implements
 				}
 			});
 
+		// Insert an object of type AgentModelBelieve
+		nobjects.add(
+			new AbstractAction("Insert AgentModelBelieve") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						getGraph().insert(pt, "AgentModelBelieve");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(IDE.ide, "Object type AgentModelBelieve is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+
+		// Insert an object of type ApplicationEvent
+		nobjects.add(
+			new AbstractAction("Insert ApplicationEvent") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						getGraph().insert(pt, "ApplicationEvent");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(IDE.ide, "Object type ApplicationEvent is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+
+		// Insert an object of type ApplicationEventSlots
+		nobjects.add(
+			new AbstractAction("Insert ApplicationEventSlots") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						getGraph().insert(pt, "ApplicationEventSlots");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(IDE.ide, "Object type ApplicationEventSlots is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+
+		// Insert an object of type Application
+		nobjects.add(
+			new AbstractAction("Insert Application") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						getGraph().insert(pt, "Application");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(IDE.ide, "Object type Application is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+
+		// Insert an object of type AgentWS
+		nobjects.add(
+			new AbstractAction("Insert AgentWS") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						getGraph().insert(pt, "AgentWS");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(IDE.ide, "Object type AgentWS is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+
 		// Insert an object of type Role
 		nobjects.add(
 			new AbstractAction("Insert Role") {
@@ -2150,20 +2247,6 @@ public class TasksAndGoalsModelMarqueeHandler extends MarqueeHandler  implements
 				}
 			});
 
-		// Insert an object of type AgentModelBelieve
-		nobjects.add(
-			new AbstractAction("Insert AgentModelBelieve") {
-				public void actionPerformed(ActionEvent ev) {
-					try {
-						getGraph().insert(pt, "AgentModelBelieve");
-					} catch (InvalidEntity e) {						
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(IDE.ide, "Object type AgentModelBelieve is not allowed in this diagram",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-			});
-
 		// Insert an object of type Compromise
 		nobjects.add(
 			new AbstractAction("Insert Compromise") {
@@ -2192,43 +2275,15 @@ public class TasksAndGoalsModelMarqueeHandler extends MarqueeHandler  implements
 				}
 			});
 
-		// Insert an object of type ApplicationEvent
+		// Insert an object of type CommunicationEvent
 		nobjects.add(
-			new AbstractAction("Insert ApplicationEvent") {
+			new AbstractAction("Insert CommunicationEvent") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
-						getGraph().insert(pt, "ApplicationEvent");
+						getGraph().insert(pt, "CommunicationEvent");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(IDE.ide, "Object type ApplicationEvent is not allowed in this diagram",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-			});
-
-		// Insert an object of type ApplicationEventSlots
-		nobjects.add(
-			new AbstractAction("Insert ApplicationEventSlots") {
-				public void actionPerformed(ActionEvent ev) {
-					try {
-						getGraph().insert(pt, "ApplicationEventSlots");
-					} catch (InvalidEntity e) {						
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(IDE.ide, "Object type ApplicationEventSlots is not allowed in this diagram",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-			});
-
-		// Insert an object of type Application
-		nobjects.add(
-			new AbstractAction("Insert Application") {
-				public void actionPerformed(ActionEvent ev) {
-					try {
-						getGraph().insert(pt, "Application");
-					} catch (InvalidEntity e) {						
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(IDE.ide, "Object type Application is not allowed in this diagram",
+						JOptionPane.showMessageDialog(IDE.ide, "Object type CommunicationEvent is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2369,20 +2424,6 @@ public class TasksAndGoalsModelMarqueeHandler extends MarqueeHandler  implements
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(IDE.ide, "Object type GoalStateWS is not allowed in this diagram",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-			});
-
-		// Insert an object of type AgentWS
-		nobjects.add(
-			new AbstractAction("Insert AgentWS") {
-				public void actionPerformed(ActionEvent ev) {
-					try {
-						getGraph().insert(pt, "AgentWS");
-					} catch (InvalidEntity e) {						
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(IDE.ide, "Object type AgentWS is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

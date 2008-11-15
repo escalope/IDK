@@ -110,6 +110,141 @@ public class BasicTasksAndGoalsModelMarqueeHandler extends MarqueeHandler  imple
 			
 			
 			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentModelBelieve")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentModelBelieve")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEvent")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEvent")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEventSlots")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEventSlots")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Application")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Application")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentWS")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentWS")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				getGraph().repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.Role")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -326,33 +461,6 @@ public class BasicTasksAndGoalsModelMarqueeHandler extends MarqueeHandler  imple
 			
 			
 			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentModelBelieve")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentModelBelieve")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.Compromise")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -407,7 +515,7 @@ public class BasicTasksAndGoalsModelMarqueeHandler extends MarqueeHandler  imple
 			
 			
 			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEvent")){
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.CommunicationEvent")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {				
@@ -419,61 +527,7 @@ public class BasicTasksAndGoalsModelMarqueeHandler extends MarqueeHandler  imple
 			 }
 			
                   
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEvent")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEventSlots")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.ApplicationEventSlots")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.Application")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.Application")){
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.CommunicationEvent")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {				
@@ -744,33 +798,6 @@ public class BasicTasksAndGoalsModelMarqueeHandler extends MarqueeHandler  imple
 			
                   
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.GoalStateWS")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentWS")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {				
-		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
-				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
-				getGraph().repaint();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.AgentWS")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {				

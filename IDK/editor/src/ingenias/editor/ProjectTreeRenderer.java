@@ -189,7 +189,7 @@ public class ProjectTreeRenderer extends javax.swing.tree.DefaultTreeCellRendere
 	
  ImageIcon ProtocolIcon=new ImageIcon(ImageLoader.getImage("images/prot.png"));
 	
- ImageIcon MentalInstanceSpecificationIcon=new ImageIcon(ImageLoader.getImage("images/miusecase.gif"));
+ ImageIcon MentalInstanceSpecificationIcon=new ImageIcon(ImageLoader.getImage("images/mmispec.gif"));
 	
  ImageIcon ActionUMLIcon=new ImageIcon(ImageLoader.getImage("images/miusecase.gif"));
 	
@@ -216,6 +216,8 @@ public class ProjectTreeRenderer extends javax.swing.tree.DefaultTreeCellRendere
  ImageIcon MentalStateManagerIcon=new ImageIcon(ImageLoader.getImage("images/mman.gif"));
 	
  ImageIcon INGENIASCodeComponentIcon=new ImageIcon(ImageLoader.getImage("images/miccomponent.gif"));
+	
+ ImageIcon CommunicationEventIcon=new ImageIcon(ImageLoader.getImage("images/meventa.gif"));
 	
  ImageIcon TaskWSIcon=new ImageIcon(ImageLoader.getImage("images/mtaskws.gif"));
 	
@@ -487,6 +489,9 @@ public class ProjectTreeRenderer extends javax.swing.tree.DefaultTreeCellRendere
 	
         if (node.getUserObject().getClass().equals(INGENIASCodeComponent.class))
           return INGENIASCodeComponentIcon;
+	
+        if (node.getUserObject().getClass().equals(CommunicationEvent.class))
+          return CommunicationEventIcon;
 	
         if (node.getUserObject().getClass().equals(TaskWS.class))
           return TaskWSIcon;

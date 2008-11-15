@@ -434,6 +434,9 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.INGENIASCodeComponent)
 	  return  new ingenias.editor.cell.INGENIASCodeComponentCell((INGENIASCodeComponent)en);
 
+   	if (en instanceof ingenias.editor.entities.CommunicationEvent)
+	  return  new ingenias.editor.cell.CommunicationEventCell((CommunicationEvent)en);
+
    	if (en instanceof ingenias.editor.entities.TaskWS)
 	  return  new ingenias.editor.cell.TaskWSCell((TaskWS)en);
 

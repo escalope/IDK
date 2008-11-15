@@ -33,6 +33,10 @@ public class SWIRenderer {
     swiengine.getTaglib().registerTag("dashedpanel",
                                       ingenias.editor.rendererxml.
                                       DashedBorderPanel.class);
+    swiengine.getTaglib().registerTag("myeditor",
+            ingenias.editor.rendererxml.
+            MyEditorPane.class);
+    
     swiengine.getTaglib().registerTag("dashedverticallinepanel",
                                       ingenias.editor.rendererxml.DashedVerticalLinePanel.class);
     swiengine.getTaglib().registerTag("attributepanel",

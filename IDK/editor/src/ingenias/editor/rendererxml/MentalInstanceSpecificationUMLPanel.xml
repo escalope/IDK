@@ -9,6 +9,12 @@
 							##label id="Id"/#
 							##/panel#
 							##linepanel Background="white"/#
+							##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white"  #
+							##iconlabel icon="images/attribute.gif" /#
+							##label text="Entity:"/# 
+							##label text=":"/#
+							##label name="InstanceType"/# 
+							##/panel#
 							##collectionpanel Background="white" id="SlotsValues" #
 							##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white"  #
 							##iconlabel icon="images/attribute.gif" /#

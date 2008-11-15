@@ -37,7 +37,7 @@ import java.awt.image.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.net.URL;
-import java.util.Map;
+import java.util.*;
 import java.util.Hashtable;
 import java.util.ArrayList;
 import javax.swing.event.UndoableEditEvent;
@@ -787,6 +787,28 @@ JOptionPane.showMessageDialog(IDE.ide,
    return vertex;
 
   }
+
+
+ public synchronized JGraph cloneJGraph(){
+
+		
+
+		 ActivityDiagramModelJGraph jg=new  ActivityDiagramModelJGraph(
+				(ActivityDiagramDataEntity) this.mde,this.name,IDEAbs.ide.ids.om,
+				new Model(IDEAbs.ide.ids),new BasicMarqueeHandler()); 
+
+		this.setSelectionCells(getGraphLayoutCache().getCells(false,true,false,false));
+		Action copyaction =new EventRedirectorForGraphCopy(this,this.getTransferHandler().getCopyAction(),null	); 			
+		Action pasteaction =new EventRedirectorPasteForGraphCopy(jg,jg.getTransferHandler().getPasteAction(),null	);
+		copyaction.actionPerformed(new ActionEvent(this,0,"hello"));		
+		pasteaction.actionPerformed(new ActionEvent(this,0,"hello"));
+		jg.invalidate();
+		jg.doLayout();
+		
+		return jg;
+
+	}
+
 
   public String toString() {
     return this.getID();

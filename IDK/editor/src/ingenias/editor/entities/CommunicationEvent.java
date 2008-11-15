@@ -27,28 +27,39 @@ package ingenias.editor.entities;
 import java.util.*;
 import ingenias.editor.TypedVector;
 
-public class ApplicationEvent extends GeneralEvent {
+public class CommunicationEvent extends GeneralEvent {
 
 
-  public ingenias.editor.entities.Application Source;
+  public ingenias.editor.entities.InteractionUnit InteractionUnit;
+
+  public ingenias.editor.entities.Interaction Interaction;
 
 
 
 
 
-  public ApplicationEvent(String id) {
+  public CommunicationEvent(String id) {
     super(id);
-    this.setHelpDesc("<br>It is an event produced by an application<br>");
+    this.setHelpDesc("<br>It is an event produced within a communication<br>");
     this.setHelpRecom("");
   }
 
 
-      public ingenias.editor.entities.Application getSource(){
-        return Source;
+      public ingenias.editor.entities.InteractionUnit getInteractionUnit(){
+        return InteractionUnit;
       }
-       public void setSource(ingenias.editor.entities.Application
-					Source){
-        this.Source=Source;
+       public void setInteractionUnit(ingenias.editor.entities.InteractionUnit
+					InteractionUnit){
+        this.InteractionUnit=InteractionUnit;
+      }
+
+
+      public ingenias.editor.entities.Interaction getInteraction(){
+        return Interaction;
+      }
+       public void setInteraction(ingenias.editor.entities.Interaction
+					Interaction){
+        this.Interaction=Interaction;
       }
 
 

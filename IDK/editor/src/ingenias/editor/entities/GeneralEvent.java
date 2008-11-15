@@ -30,8 +30,6 @@ import ingenias.editor.TypedVector;
 public class GeneralEvent extends InformationMentalEntity {
 
 
-  public ingenias.editor.entities.Application Source;
-
 
 
 
@@ -41,15 +39,6 @@ public class GeneralEvent extends InformationMentalEntity {
     this.setHelpDesc("");
     this.setHelpRecom("");
   }
-
-
-      public ingenias.editor.entities.Application getSource(){
-        return Source;
-      }
-       public void setSource(ingenias.editor.entities.Application
-					Source){
-        this.Source=Source;
-      }
 
 
 

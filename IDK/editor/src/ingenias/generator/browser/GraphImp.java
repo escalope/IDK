@@ -42,190 +42,186 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 
 class GraphImp
-    extends AttributedElementImp
-    implements Graph {
+extends AttributedElementImp
+implements Graph {
 
-  private ingenias.editor.ModelJGraph mjg;
+	private ingenias.editor.ModelJGraph mjg;
 
-  GraphImp(ingenias.editor.ModelJGraph mjg) {
-    super(mjg.getProperties(), mjg);
-    this.mjg = mjg;
-  }
+	GraphImp(ingenias.editor.ModelJGraph mjg) {
+		super(mjg.getProperties(), mjg);
+		this.mjg = mjg;
+	}
 
-  public String getName() {
-    return mjg.getID();
-  }
+	public String getName() {
+		return mjg.getID();
+	}
 
-  public String getType() {
-    String name = mjg.getClass().getName();
-    int endName = name.lastIndexOf("Model");
-    int startName = name.lastIndexOf(".") + 1;
-    name = name.substring(startName, endName);
-    return name;
-  }
+	public String getType() {
+		String name = mjg.getClass().getName();
+		int endName = name.lastIndexOf("Model");
+		int startName = name.lastIndexOf(".") + 1;
+		name = name.substring(startName, endName);
+		return name;
+	}
 
-  public String[] getPath() {
-    try {
-      return ingenias.editor.GraphManager.getInstance().getModelPath(this.
-          getName());
-    }
-    catch (ingenias.exception.NotFound nf) {
-      nf.printStackTrace();
-    }
-    return null;
+	public String[] getPath() {
+		try {
+			return ingenias.editor.GraphManager.getInstance().getModelPath(this.
+					getName());
+		}
+		catch (ingenias.exception.NotFound nf) {
+			nf.printStackTrace();
+		}
+		return null;
 
-  }
+	}
 
-  public GraphRelationship[] getRelationships() {
-    int max = mjg.getModel().getRootCount();
-    Vector v = new Vector();
+	public GraphRelationship[] getRelationships() {
+		int max = mjg.getModel().getRootCount();
+		Vector v = new Vector();
 
-    boolean found = false;
-    int k = 0;
-    org.jgraph.graph.DefaultGraphCell dgc = null;
-    while (k < max) {
-      Object o = mjg.getModel().getRootAt(k);
-      if (org.jgraph.graph.DefaultGraphCell.class.isAssignableFrom(o.getClass())) {
-        dgc = (org.jgraph.graph.DefaultGraphCell) o;
-        if (ingenias.editor.entities.NAryEdgeEntity.class.isAssignableFrom(dgc.
-            getUserObject().getClass())) {
-          ingenias.editor.entities.NAryEdgeEntity ne =
-              (ingenias.editor.entities.NAryEdgeEntity) dgc.getUserObject();
+		boolean found = false;
+		int k = 0;
+		org.jgraph.graph.DefaultGraphCell dgc = null;
+		while (k < max) {
+			Object o = mjg.getModel().getRootAt(k);
+			if (org.jgraph.graph.DefaultGraphCell.class.isAssignableFrom(o.getClass())) {
+				dgc = (org.jgraph.graph.DefaultGraphCell) o;
+				if (ingenias.editor.entities.NAryEdgeEntity.class.isAssignableFrom(dgc.
+						getUserObject().getClass())) {
+					ingenias.editor.entities.NAryEdgeEntity ne =
+						(ingenias.editor.entities.NAryEdgeEntity) dgc.getUserObject();
 
-          v.add(new GraphRelationshipImp(ne, mjg));
-        }
+					v.add(new GraphRelationshipImp(ne, mjg));
+				}
 
-      }
-      k++;
-    }
+			}
+			k++;
+		}
 
-    GraphRelationship[] result = new GraphRelationship[v.size()];
-    for (k = 0; k < result.length; k++) {
-      result[k] = (GraphRelationship) v.elementAt(k);
-    }
+		GraphRelationship[] result = new GraphRelationship[v.size()];
+		for (k = 0; k < result.length; k++) {
+			result[k] = (GraphRelationship) v.elementAt(k);
+		}
 
-    return result;
+		return result;
 
-  }
+	}
 
-  
-  public GraphEntity[] getEntitiesWithDuplicates()  throws NullEntity{ 
-	  int max = mjg.getModel().getRootCount();
-	    java.util.Vector v = new java.util.Vector();
 
-	    boolean found = false;
-	    int k = 0;
-	    org.jgraph.graph.DefaultGraphCell dgc = null;
-	    while (k < max) {
-	      Object o = mjg.getModel().getRootAt(k);
-	      if (o instanceof org.jgraph.graph.DefaultGraphCell) {
-	        dgc = (org.jgraph.graph.DefaultGraphCell) o;
-	        if (! (dgc.getUserObject()instanceof ingenias.editor.entities.
-	               NAryEdgeEntity) &&
-	            ! (dgc.getUserObject()instanceof ingenias.editor.entities.
-	               RoleEntity)) {
-	          ingenias.editor.entities.Entity ne =
-	              (ingenias.editor.entities.Entity) dgc.getUserObject();
-	          GraphEntity ge=null;
-			
-				ge = new GraphEntityImp(ne, dgc,mjg);
-			
-	          
-	            v.add(ge);
-	          
-	        }
+	public GraphEntity[] getEntitiesWithDuplicates()  throws NullEntity{ 
+		int max = mjg.getModel().getRootCount();
+		java.util.Vector v = new java.util.Vector();
 
-	      }
-	      k++;
-	    }
+		boolean found = false;
+		int k = 0;
+		org.jgraph.graph.DefaultGraphCell dgc = null;
+		while (k < max) {
+			Object o = mjg.getModel().getRootAt(k);
+			if (o instanceof org.jgraph.graph.DefaultGraphCell) {
+				dgc = (org.jgraph.graph.DefaultGraphCell) o;
+				if (! (dgc.getUserObject()instanceof ingenias.editor.entities.
+						NAryEdgeEntity) &&
+						! (dgc.getUserObject()instanceof ingenias.editor.entities.
+								RoleEntity)) {
+					ingenias.editor.entities.Entity ne =
+						(ingenias.editor.entities.Entity) dgc.getUserObject();
+					GraphEntity ge=null;
 
-	    GraphEntity[] result = new GraphEntity[v.size()];
-	    Iterator it = v.iterator();
-	    k = 0;
-	    while (it.hasNext()) {
-	      result[k] = (GraphEntity) it.next();
-	      k++;
-	    }
-//	    System.err.println("terminado con" +result.length);
-	    return result;  
-  }
-  
-  
-  public GraphEntity[] getEntities() throws NullEntity {
-    int max = mjg.getModel().getRootCount();
-    java.util.Vector v = new java.util.Vector();
+					ge = new GraphEntityImp(ne, dgc,mjg);
 
-    boolean found = false;
-    int k = 0;
-    org.jgraph.graph.DefaultGraphCell dgc = null;
-    while (k < max) {
-      Object o = mjg.getModel().getRootAt(k);
-      if (o instanceof org.jgraph.graph.DefaultGraphCell) {
-        dgc = (org.jgraph.graph.DefaultGraphCell) o;
-        if (! (dgc.getUserObject()instanceof ingenias.editor.entities.
-               NAryEdgeEntity) &&
-            ! (dgc.getUserObject()instanceof ingenias.editor.entities.
-               RoleEntity)) {
-          ingenias.editor.entities.Entity ne =
-              (ingenias.editor.entities.Entity) dgc.getUserObject();
-          GraphEntity ge=null;
+
+					v.add(ge);
+
+				}
+
+			}
+			k++;
+		}
+
+		GraphEntity[] result = new GraphEntity[v.size()];
+		Iterator it = v.iterator();
+		k = 0;
+		while (it.hasNext()) {
+			result[k] = (GraphEntity) it.next();
+			k++;
+		}
+		//	    System.err.println("terminado con" +result.length);
+		return result;  
+	}
+
+
+	public GraphEntity[] getEntities() throws NullEntity {
+		int max = mjg.getModel().getRootCount();
+		java.util.Vector v = new java.util.Vector();
+
+		boolean found = false;
+		int k = 0;
+		org.jgraph.graph.DefaultGraphCell dgc = null;
+		while (k < max) {
+			Object o = mjg.getModel().getRootAt(k);
+			if (o instanceof org.jgraph.graph.DefaultGraphCell) {
+				dgc = (org.jgraph.graph.DefaultGraphCell) o;
+				if (! (dgc.getUserObject()instanceof ingenias.editor.entities.
+						NAryEdgeEntity) &&
+						! (dgc.getUserObject()instanceof ingenias.editor.entities.
+								RoleEntity)) {
+					ingenias.editor.entities.Entity ne =
+						(ingenias.editor.entities.Entity) dgc.getUserObject();
+					GraphEntity ge=null;
+
+					ge = new GraphEntityImp(ne, mjg);
+
+					if (!v.contains(ge)) {
+						v.add(ge);
+					}
+				}
+
+			}
+			k++;
+		}
+
+		GraphEntity[] result = new GraphEntity[v.size()];
+		Iterator it = v.iterator();
+		k = 0;
+		while (it.hasNext()) {
+			result[k] = (GraphEntity) it.next();
+			k++;
+		}
+		//    System.err.println("terminado con" +result.length);
+		return result;
+	}
+
+	private void createSubFolders(File f) {
+		if (!f.exists()) {
+			createSubFolders(new File(f.getParent()));
+			try {
+				f.createNewFile();
+			}
+			catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
+
+		}
+
+	}
+
+	public void generateImage(String filename) {
+		File target = new File(filename);
+		new File(target.getParent()).mkdirs();
+
+		JPanel temp=new JPanel(new BorderLayout());
+		JGraph njg=this.mjg.cloneJGraph();
+		temp.add(njg,BorderLayout.CENTER);
+		njg.setSelectionCells(new Object[0]);
+		ingenias.editor.export.Diagram2SVG.diagram2SVG(temp, target,"png");
 		
-			ge = new GraphEntityImp(ne, mjg);
-		
-          if (!v.contains(ge)) {
-            v.add(ge);
-          }
-        }
 
-      }
-      k++;
-    }
+	}
 
-    GraphEntity[] result = new GraphEntity[v.size()];
-    Iterator it = v.iterator();
-    k = 0;
-    while (it.hasNext()) {
-      result[k] = (GraphEntity) it.next();
-      k++;
-    }
-//    System.err.println("terminado con" +result.length);
-    return result;
-  }
+	public ingenias.editor.ModelJGraph getGraph() {
+		return this.mjg;
+	}
 
-  private void createSubFolders(File f) {
-    if (!f.exists()) {
-      createSubFolders(new File(f.getParent()));
-      try {
-        f.createNewFile();
-      }
-      catch (IOException ioe) {
-        ioe.printStackTrace();
-      }
 
-    }
-
-  }
-
-  public void generateImage(String filename) {
-    File target = new File(filename);
-    new File(target.getParent()).mkdirs();
-
-    JPanel temp=new JPanel(new BorderLayout());
-    
-    	ModelJGraph njg=this.mjg.cloneJGraph();
-    	
-    	 
-    	    temp.add(njg,BorderLayout.CENTER);
-    	    njg.setSelectionCells(new Object[0]);
-    	    ingenias.editor.export.Diagram2SVG.diagram2SVG(temp, target,"png");    	        	        
- 		
-	
-
-  }
-
-  public ingenias.editor.ModelJGraph getGraph() {
-    return this.mjg;
-  }
-  
- 
 }

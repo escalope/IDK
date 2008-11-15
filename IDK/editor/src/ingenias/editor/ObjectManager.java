@@ -239,6 +239,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode UMLClassifierNode=new javax.swing.tree.DefaultMutableTreeNode(" UMLClassifier");
 
+  public javax.swing.tree.DefaultMutableTreeNode CommunicationEventNode=new javax.swing.tree.DefaultMutableTreeNode(" CommunicationEvent");
+
   public javax.swing.tree.DefaultMutableTreeNode TaskWSNode=new javax.swing.tree.DefaultMutableTreeNode(" TaskWS");
 
   public javax.swing.tree.DefaultMutableTreeNode ObjectSlotNode=new javax.swing.tree.DefaultMutableTreeNode(" ObjectSlot");
@@ -498,6 +500,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
      AgentComponentNode.add(MentalStateManagerNode);
 
      INGENIASObjectNode.add(INGENIASCodeComponentNode);
+
+     GeneralEventNode.add(CommunicationEventNode);
 
      TaskNode.add(TaskWSNode);
 
@@ -1814,6 +1818,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return o;
   }
   
+  public CommunicationEvent createCommunicationEvent(String id){
+    CommunicationEvent object=new     CommunicationEvent(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    CommunicationEventNode.insert(nn, CommunicationEventNode.getChildCount());
+    nn.setParent(CommunicationEventNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getCommunicationEvent(String object){
+    Object o=findUserObject(CommunicationEventNode,object);
+    return o;
+  }
+  
   public TaskWS createTaskWS(String id){
     TaskWS object=new     TaskWS(id);
     DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
@@ -2176,6 +2195,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     result.add(INGENIASCodeComponent.class);
 
     result.add(UMLClassifier.class);
+
+    result.add(CommunicationEvent.class);
 
     result.add(TaskWS.class);
 

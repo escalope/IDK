@@ -82,6 +82,26 @@ public TasksAndGoalsModelCellViewFactory() {}
            return new AgentView(v);
    }
 
+   if (userObject.getClass().equals(AgentModelBelieve.class)){
+           return new AgentModelBelieveView(v);
+   }
+
+   if (userObject.getClass().equals(ApplicationEvent.class)){
+           return new ApplicationEventView(v);
+   }
+
+   if (userObject.getClass().equals(ApplicationEventSlots.class)){
+           return new ApplicationEventSlotsView(v);
+   }
+
+   if (userObject.getClass().equals(Application.class)){
+           return new ApplicationView(v);
+   }
+
+   if (userObject.getClass().equals(AgentWS.class)){
+           return new AgentWSView(v);
+   }
+
    if (userObject.getClass().equals(Role.class)){
            return new RoleView(v);
    }
@@ -114,10 +134,6 @@ public TasksAndGoalsModelCellViewFactory() {}
            return new BelieveView(v);
    }
 
-   if (userObject.getClass().equals(AgentModelBelieve.class)){
-           return new AgentModelBelieveView(v);
-   }
-
    if (userObject.getClass().equals(Compromise.class)){
            return new CompromiseView(v);
    }
@@ -126,16 +142,8 @@ public TasksAndGoalsModelCellViewFactory() {}
            return new GeneralEventView(v);
    }
 
-   if (userObject.getClass().equals(ApplicationEvent.class)){
-           return new ApplicationEventView(v);
-   }
-
-   if (userObject.getClass().equals(ApplicationEventSlots.class)){
-           return new ApplicationEventSlotsView(v);
-   }
-
-   if (userObject.getClass().equals(Application.class)){
-           return new ApplicationView(v);
+   if (userObject.getClass().equals(CommunicationEvent.class)){
+           return new CommunicationEventView(v);
    }
 
    if (userObject.getClass().equals(EnvironmentApplication.class)){
@@ -176,10 +184,6 @@ public TasksAndGoalsModelCellViewFactory() {}
 
    if (userObject.getClass().equals(GoalStateWS.class)){
            return new GoalStateWSView(v);
-   }
-
-   if (userObject.getClass().equals(AgentWS.class)){
-           return new AgentWSView(v);
    }
 
    if (userObject.getClass().equals(ApplicationWS.class)){

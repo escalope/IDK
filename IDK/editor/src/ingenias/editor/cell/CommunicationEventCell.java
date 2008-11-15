@@ -2,6 +2,9 @@
 /*
     Copyright (C) 2002 Jorge Gomez Sanz, Ruben Fuentes
 
+    Modifications over JGRAPH original code
+
+
     This file is part of INGENIAS IDE, a support tool for the INGENIAS
     methodology, availabe at http://grasia.fdi.ucm.es/ingenias or
     http://ingenias.sourceforge.net
@@ -22,56 +25,20 @@
 
 */
 
-package ingenias.editor.entities;
-
-import java.util.*;
-import ingenias.editor.TypedVector;
-
-public class ApplicationEvent extends GeneralEvent {
-
-
-  public ingenias.editor.entities.Application Source;
-
-
-
-
-
-  public ApplicationEvent(String id) {
-    super(id);
-    this.setHelpDesc("<br>It is an event produced by an application<br>");
-    this.setHelpRecom("");
+package ingenias.editor.cell;
+import org.jgraph.graph.*;
+import ingenias.editor.entities.*;
+public class CommunicationEventCell extends  DefaultGraphCell {
+  // Empty Constructor
+  public CommunicationEventCell(CommunicationEvent userObject) {
+    super(userObject); ////////// Por quç¯¯ne esto el ejemplo de JGraph.
+    // Add a Port
+    DefaultPort port = new DefaultPort(userObject);
+    this.add(port);
   }
-
-
-      public ingenias.editor.entities.Application getSource(){
-        return Source;
-      }
-       public void setSource(ingenias.editor.entities.Application
-					Source){
-        this.Source=Source;
-      }
-
-
-
-
-
-public void fromMap(Map ht){
-super.fromMap(ht);
-
-
-
-}
-public void toMap(Map ht){
-super.toMap(ht);
-
+  public String toString(){
+   return this.getUserObject().toString();
+  }
 }
 
-public String toString(){
-if (this.getId()==null ||
-    this.getId().toString().equals(""))
- return "Please, define the value of field Id";
-else
- return this.getId().toString();
-}
 
-}

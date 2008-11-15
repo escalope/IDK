@@ -76,7 +76,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 
 	protected ObjectManager om = null;
 
-//	public static final ingenias.editor.events.ChangeNARYEdgeLocation relationshipLocationListener=new ingenias.editor.events.ChangeNARYEdgeLocation();
+	//	public static final ingenias.editor.events.ChangeNARYEdgeLocation relationshipLocationListener=new ingenias.editor.events.ChangeNARYEdgeLocation();
 
 	protected JComponent modelToolBar = null;
 	protected ButtonToolBar commonButtons = null;
@@ -103,22 +103,22 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 			for (NAryEdgeEntity nedge:rels){
 				trels.add(nedge.getId());						
 			}
-			
-			
+
+
 			while (trels.contains(""+idCounter) || 
 					BrowserImp.getInstance().getState().om.findUserObject(""+idCounter).size()>0 ||
 					BrowserImp.getInstance().getState().gm.getModel(""+idCounter)!=null){
 				idCounter++;
 			}
 		} catch (NotInitialised e) {
-			
+
 			e.printStackTrace();
 		}
-		
 
-			return ""+idCounter;
+
+		return ""+idCounter;
 	}
-	
+
 	public static String getNewId(String fromID) {
 		idCounter=0;
 
@@ -153,7 +153,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		// Use Border Layout
 		setLayout(new BorderLayout());
 		// Construct the Graph
-//		graph = new JGraph(new Model(), new MarqueeHandler(this));
+		//		graph = new JGraph(new Model(), new MarqueeHandler(this));
 
 		// Construct Command History
 		//
@@ -256,6 +256,17 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		this.graphPanel.setSelectedIndex(this.graphPanel.indexOfTab(graph.getID()));
 		updateBars(graph);
 	}
+	
+
+	// This method can be invoked by pressing the project tree and the state
+	// change listener (when the tab changes)
+	public synchronized boolean isOpened(ModelJGraph graph) {
+
+		return 
+		(this.graphPanel.indexOfTab(graph.getID()) >= 0);
+	}
+
+
 
 	public synchronized Vector<String> getOpenedDiagrams(){
 		Vector<String> result=new Vector<String>();
@@ -300,8 +311,8 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		// Construct Panel
 		//
 		// Add a ToolBar
-//		gpan.setLayout(new GridLayout(1,1));
-//		gpan.add(graph);
+		//		gpan.setLayout(new GridLayout(1,1));
+		//		gpan.add(graph);
 		jp.validate();
 		if (this.getTopLevelAncestor()!=null){
 			this.getTopLevelAncestor().repaint();
@@ -309,8 +320,8 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		}
 		GraphLayoutCacheListener obs = new ingenias.editor.events.GraphViewChange( (Model) graph.
 				getModel());
-//		gpan.setLayout(new GridLayout(1,1));
-//		gpan.add(graph);
+		//		gpan.setLayout(new GridLayout(1,1));
+		//		gpan.add(graph);
 		if (graph != null) {
 			graph.getGraphLayoutCache().removeGraphLayoutCacheListener(obs);
 			graph.getGraphLayoutCache().addGraphLayoutCacheListener(obs);
@@ -376,8 +387,8 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		Map map = new Hashtable();
 		// Snap the Point to the Grid.
 		Point2D point = graph.snap(pt);
-//		GraphConstants.setFontSize(map, 12f);
-//		GraphConstants.setFontName(map, "monospaced");
+		//		GraphConstants.setFontSize(map, 12f);
+		//		GraphConstants.setFontName(map, "monospaced");
 		// Default Size for the new Vertex.
 		/*    Font f = GraphConstants.getFont(map);
 
@@ -531,13 +542,13 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	 */
 	public void valueChanged(GraphSelectionEvent e) {
 		// Group Button only Enabled if more than One Cell Selected
-//		group.setEnabled(graph.getSelectionCount() > 1);
+		//		group.setEnabled(graph.getSelectionCount() > 1);
 		// Update Button States based on Current Selection
 		boolean enabled = !graph.isSelectionEmpty();
 		this.commonButtons.getRemove().setEnabled(enabled);
-//		ungroup.setEnabled(enabled);
-//		tofront.setEnabled(enabled);
-//		toback.setEnabled(enabled);
+		//		ungroup.setEnabled(enabled);
+		//		tofront.setEnabled(enabled);
+		//		toback.setEnabled(enabled);
 		//copy.setEnabled(enabled);
 		//cut.setEnabled(enabled);
 	}
@@ -727,7 +738,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		}
 	}
 
-//	Funciones especificas del modelo
+	//	Funciones especificas del modelo
 
 	private JToolBar creaPaleta() {
 		if (graph != null) {
@@ -738,9 +749,9 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		}
 	}
 
-//	******************************************************************
-//	NUEVOS
-//	******************************************************************
+	//	******************************************************************
+	//	NUEVOS
+	//	******************************************************************
 
 	/*  Description of the Method
 	 *

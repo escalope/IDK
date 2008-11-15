@@ -796,12 +796,6 @@ public class ObjectSave extends ObjectSaveAbs{
           ingenias.editor.entities.GeneralEvent nen=(ingenias.editor.entities.GeneralEvent)en;
 	  String _name;
           
-          _name=ingenias.editor.entities.Entity.encodeutf8Text("Source");
-          os.write("<objectproperty id=\""+_name+"\">\n");
-          if (nen.getSource()!=null)
-           saveObject(nen.getSource(),os);
-          os.write("</objectproperty>\n");
-          
           
         }
         
@@ -1081,6 +1075,25 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+        if (en instanceof ingenias.editor.entities.CommunicationEvent){
+          ingenias.editor.entities.CommunicationEvent nen=(ingenias.editor.entities.CommunicationEvent)en;
+	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("InteractionUnit");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getInteractionUnit()!=null)
+           saveObject(nen.getInteractionUnit(),os);
+          os.write("</objectproperty>\n");
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("Interaction");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getInteraction()!=null)
+           saveObject(nen.getInteraction(),os);
+          os.write("</objectproperty>\n");
+          
+          
+        }
+        
         if (en instanceof ingenias.editor.entities.TaskWS){
           ingenias.editor.entities.TaskWS nen=(ingenias.editor.entities.TaskWS)en;
 	  String _name;
@@ -1139,6 +1152,12 @@ public class ObjectSave extends ObjectSaveAbs{
         if (en instanceof ingenias.editor.entities.ApplicationEvent){
           ingenias.editor.entities.ApplicationEvent nen=(ingenias.editor.entities.ApplicationEvent)en;
 	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("Source");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getSource()!=null)
+           saveObject(nen.getSource(),os);
+          os.write("</objectproperty>\n");
           
           
         }

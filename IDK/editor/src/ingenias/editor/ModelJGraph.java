@@ -65,7 +65,7 @@ import ingenias.editor.events.*;
 import ingenias.exception.InvalidEntity;
 
 
-public abstract class ModelJGraph extends JGraph {
+public abstract class ModelJGraph extends JGraph implements Cloneable{
 	protected Action undo, redo, remove, group, ungroup, tofront, toback,
 	cut, copy, paste;
 	protected JToolBar toolbar;
@@ -93,6 +93,8 @@ public abstract class ModelJGraph extends JGraph {
 		
 		// this.setTransferHandler(new RelationshipEntityTransferHandler());
 	}
+	
+	public abstract JGraph cloneJGraph();
 	
 	//
 	// Customizing In-Place Editing

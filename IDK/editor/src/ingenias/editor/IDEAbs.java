@@ -993,7 +993,9 @@ implements java.io.Serializable, ClipboardOwner
 					temp.add(this.ids.gm.getCurrent(), BorderLayout.CENTER);
 					ingenias.editor.export.Diagram2SVG.diagram2SVG(temp,
 							sel, selectedFormat);
+					temp.remove(this.ids.gm.getCurrent());
 					parent.add(this.ids.gm.getCurrent());
+					parent.repaint();
 					currentImageFolder = sel;
 				}
 			}

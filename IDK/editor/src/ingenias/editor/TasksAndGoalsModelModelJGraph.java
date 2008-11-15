@@ -37,7 +37,7 @@ import java.awt.image.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.net.URL;
-import java.util.Map;
+import java.util.*;
 import java.util.Hashtable;
 import java.util.ArrayList;
 import javax.swing.event.UndoableEditEvent;
@@ -123,6 +123,96 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     Agent.setEnabled(true);
     jb = new JButton(Agent);
     jb.setToolTipText("Agent");
+    toolbar.add(jb);
+
+    Image img_AgentModelBelieve =
+        ImageLoader.getImage("images/mabel.gif");
+    undoIcon = new ImageIcon(img_AgentModelBelieve);
+    Action AgentModelBelieve=
+        new AbstractAction("", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "AgentModelBelieve");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    AgentModelBelieve.setEnabled(true);
+    jb = new JButton(AgentModelBelieve);
+    jb.setToolTipText("AgentModelBelieve");
+    toolbar.add(jb);
+
+    Image img_ApplicationEvent =
+        ImageLoader.getImage("images/meventa.gif");
+    undoIcon = new ImageIcon(img_ApplicationEvent);
+    Action ApplicationEvent=
+        new AbstractAction("", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "ApplicationEvent");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    ApplicationEvent.setEnabled(true);
+    jb = new JButton(ApplicationEvent);
+    jb.setToolTipText("ApplicationEvent");
+    toolbar.add(jb);
+
+    Image img_ApplicationEventSlots =
+        ImageLoader.getImage("images/meventas.gif");
+    undoIcon = new ImageIcon(img_ApplicationEventSlots);
+    Action ApplicationEventSlots=
+        new AbstractAction("", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "ApplicationEventSlots");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    ApplicationEventSlots.setEnabled(true);
+    jb = new JButton(ApplicationEventSlots);
+    jb.setToolTipText("ApplicationEventSlots");
+    toolbar.add(jb);
+
+    Image img_Application =
+        ImageLoader.getImage("images/mapp.gif");
+    undoIcon = new ImageIcon(img_Application);
+    Action Application=
+        new AbstractAction("", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "Application");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    Application.setEnabled(true);
+    jb = new JButton(Application);
+    jb.setToolTipText("Application");
+    toolbar.add(jb);
+
+    Image img_AgentWS =
+        ImageLoader.getImage("images/magentws.gif");
+    undoIcon = new ImageIcon(img_AgentWS);
+    Action AgentWS=
+        new AbstractAction("", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "AgentWS");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    AgentWS.setEnabled(true);
+    jb = new JButton(AgentWS);
+    jb.setToolTipText("AgentWS");
     toolbar.add(jb);
 
     Image img_Role =
@@ -269,24 +359,6 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     jb.setToolTipText("Believe");
     toolbar.add(jb);
 
-    Image img_AgentModelBelieve =
-        ImageLoader.getImage("images/mabel.gif");
-    undoIcon = new ImageIcon(img_AgentModelBelieve);
-    Action AgentModelBelieve=
-        new AbstractAction("", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "AgentModelBelieve");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    AgentModelBelieve.setEnabled(true);
-    jb = new JButton(AgentModelBelieve);
-    jb.setToolTipText("AgentModelBelieve");
-    toolbar.add(jb);
-
     Image img_Compromise =
         ImageLoader.getImage("images/mcomp.gif");
     undoIcon = new ImageIcon(img_Compromise);
@@ -323,58 +395,22 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     jb.setToolTipText("GeneralEvent");
     toolbar.add(jb);
 
-    Image img_ApplicationEvent =
+    Image img_CommunicationEvent =
         ImageLoader.getImage("images/meventa.gif");
-    undoIcon = new ImageIcon(img_ApplicationEvent);
-    Action ApplicationEvent=
+    undoIcon = new ImageIcon(img_CommunicationEvent);
+    Action CommunicationEvent=
         new AbstractAction("", undoIcon) {
       public void actionPerformed(ActionEvent e) {
        try{
-        insert(new Point(0, 0), "ApplicationEvent");
+        insert(new Point(0, 0), "CommunicationEvent");
 	} catch (InvalidEntity e1) {			
 		e1.printStackTrace();
 	}
       }
     };
-    ApplicationEvent.setEnabled(true);
-    jb = new JButton(ApplicationEvent);
-    jb.setToolTipText("ApplicationEvent");
-    toolbar.add(jb);
-
-    Image img_ApplicationEventSlots =
-        ImageLoader.getImage("images/meventas.gif");
-    undoIcon = new ImageIcon(img_ApplicationEventSlots);
-    Action ApplicationEventSlots=
-        new AbstractAction("", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "ApplicationEventSlots");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    ApplicationEventSlots.setEnabled(true);
-    jb = new JButton(ApplicationEventSlots);
-    jb.setToolTipText("ApplicationEventSlots");
-    toolbar.add(jb);
-
-    Image img_Application =
-        ImageLoader.getImage("images/mapp.gif");
-    undoIcon = new ImageIcon(img_Application);
-    Action Application=
-        new AbstractAction("", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "Application");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    Application.setEnabled(true);
-    jb = new JButton(Application);
-    jb.setToolTipText("Application");
+    CommunicationEvent.setEnabled(true);
+    jb = new JButton(CommunicationEvent);
+    jb.setToolTipText("CommunicationEvent");
     toolbar.add(jb);
 
     Image img_EnvironmentApplication =
@@ -557,24 +593,6 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     jb.setToolTipText("GoalStateWS");
     toolbar.add(jb);
 
-    Image img_AgentWS =
-        ImageLoader.getImage("images/magentws.gif");
-    undoIcon = new ImageIcon(img_AgentWS);
-    Action AgentWS=
-        new AbstractAction("", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "AgentWS");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    AgentWS.setEnabled(true);
-    jb = new JButton(AgentWS);
-    jb.setToolTipText("AgentWS");
-    toolbar.add(jb);
-
     Image img_ApplicationWS =
         ImageLoader.getImage("images/mapp.gif");
     undoIcon = new ImageIcon(img_ApplicationWS);
@@ -683,6 +701,16 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
 
  entities.add("Agent");
 
+ entities.add("AgentModelBelieve");
+
+ entities.add("ApplicationEvent");
+
+ entities.add("ApplicationEventSlots");
+
+ entities.add("Application");
+
+ entities.add("AgentWS");
+
  entities.add("Role");
 
  entities.add("Goal");
@@ -699,17 +727,11 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
 
  entities.add("Believe");
 
- entities.add("AgentModelBelieve");
-
  entities.add("Compromise");
 
  entities.add("GeneralEvent");
 
- entities.add("ApplicationEvent");
-
- entities.add("ApplicationEventSlots");
-
- entities.add("Application");
+ entities.add("CommunicationEvent");
 
  entities.add("EnvironmentApplication");
 
@@ -730,8 +752,6 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
  entities.add("TaskWS");
 
  entities.add("GoalStateWS");
-
- entities.add("AgentWS");
 
  entities.add("ApplicationWS");
 
@@ -1406,6 +1426,51 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("AgentModelBelieve")) {
+    AgentModelBelieve nentity=getOM().createAgentModelBelieve( Editor.getNewId("AgentModelBelieve"));
+      DefaultGraphCell vertex = new
+          AgentModelBelieveCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ApplicationEvent")) {
+    ApplicationEvent nentity=getOM().createApplicationEvent( Editor.getNewId("ApplicationEvent"));
+      DefaultGraphCell vertex = new
+          ApplicationEventCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ApplicationEventSlots")) {
+    ApplicationEventSlots nentity=getOM().createApplicationEventSlots( Editor.getNewId("ApplicationEventSlots"));
+      DefaultGraphCell vertex = new
+          ApplicationEventSlotsCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Application")) {
+    Application nentity=getOM().createApplication( Editor.getNewId("Application"));
+      DefaultGraphCell vertex = new
+          ApplicationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("AgentWS")) {
+    AgentWS nentity=getOM().createAgentWS( Editor.getNewId("AgentWS"));
+      DefaultGraphCell vertex = new
+          AgentWSCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("Role")) {
     Role nentity=getOM().createRole( Editor.getNewId("Role"));
       DefaultGraphCell vertex = new
@@ -1478,15 +1543,6 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("AgentModelBelieve")) {
-    AgentModelBelieve nentity=getOM().createAgentModelBelieve( Editor.getNewId("AgentModelBelieve"));
-      DefaultGraphCell vertex = new
-          AgentModelBelieveCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("Compromise")) {
     Compromise nentity=getOM().createCompromise( Editor.getNewId("Compromise"));
       DefaultGraphCell vertex = new
@@ -1505,28 +1561,10 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("ApplicationEvent")) {
-    ApplicationEvent nentity=getOM().createApplicationEvent( Editor.getNewId("ApplicationEvent"));
+    if (entity.equalsIgnoreCase("CommunicationEvent")) {
+    CommunicationEvent nentity=getOM().createCommunicationEvent( Editor.getNewId("CommunicationEvent"));
       DefaultGraphCell vertex = new
-          ApplicationEventCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("ApplicationEventSlots")) {
-    ApplicationEventSlots nentity=getOM().createApplicationEventSlots( Editor.getNewId("ApplicationEventSlots"));
-      DefaultGraphCell vertex = new
-          ApplicationEventSlotsCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("Application")) {
-    Application nentity=getOM().createApplication( Editor.getNewId("Application"));
-      DefaultGraphCell vertex = new
-          ApplicationCell(nentity);
+          CommunicationEventCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1622,15 +1660,6 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("AgentWS")) {
-    AgentWS nentity=getOM().createAgentWS( Editor.getNewId("AgentWS"));
-      DefaultGraphCell vertex = new
-          AgentWSCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("ApplicationWS")) {
     ApplicationWS nentity=getOM().createApplicationWS( Editor.getNewId("ApplicationWS"));
       DefaultGraphCell vertex = new
@@ -1656,6 +1685,31 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     
     if (entity.getType().equalsIgnoreCase("Agent")) {
       return AgentView.getSize((Agent)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("AgentModelBelieve")) {
+      return AgentModelBelieveView.getSize((AgentModelBelieve)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ApplicationEvent")) {
+      return ApplicationEventView.getSize((ApplicationEvent)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ApplicationEventSlots")) {
+      return ApplicationEventSlotsView.getSize((ApplicationEventSlots)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Application")) {
+      return ApplicationView.getSize((Application)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("AgentWS")) {
+      return AgentWSView.getSize((AgentWS)entity);      
     }
     else
 
@@ -1699,11 +1753,6 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("AgentModelBelieve")) {
-      return AgentModelBelieveView.getSize((AgentModelBelieve)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("Compromise")) {
       return CompromiseView.getSize((Compromise)entity);      
     }
@@ -1714,18 +1763,8 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("ApplicationEvent")) {
-      return ApplicationEventView.getSize((ApplicationEvent)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("ApplicationEventSlots")) {
-      return ApplicationEventSlotsView.getSize((ApplicationEventSlots)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("Application")) {
-      return ApplicationView.getSize((Application)entity);      
+    if (entity.getType().equalsIgnoreCase("CommunicationEvent")) {
+      return CommunicationEventView.getSize((CommunicationEvent)entity);      
     }
     else
 
@@ -1776,11 +1815,6 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
 
     if (entity.getType().equalsIgnoreCase("GoalStateWS")) {
       return GoalStateWSView.getSize((GoalStateWS)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("AgentWS")) {
-      return AgentWSView.getSize((AgentWS)entity);      
     }
     else
 
@@ -1860,6 +1894,41 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(AgentModelBelieve.class)) {
+      vertex = new AgentModelBelieveCell( (AgentModelBelieve) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AgentModelBelieveView.getSize((AgentModelBelieve) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ApplicationEvent.class)) {
+      vertex = new ApplicationEventCell( (ApplicationEvent) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ApplicationEventView.getSize((ApplicationEvent) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ApplicationEventSlots.class)) {
+      vertex = new ApplicationEventSlotsCell( (ApplicationEventSlots) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ApplicationEventSlotsView.getSize((ApplicationEventSlots) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Application.class)) {
+      vertex = new ApplicationCell( (Application) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ApplicationView.getSize((Application) entity);
+    }
+    else
+
+    if (entity.getClass().equals(AgentWS.class)) {
+      vertex = new AgentWSCell( (AgentWS) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AgentWSView.getSize((AgentWS) entity);
+    }
+    else
+
     if (entity.getClass().equals(Role.class)) {
       vertex = new RoleCell( (Role) entity);
       // Default Size for the new Vertex with the new entity within
@@ -1916,13 +1985,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(AgentModelBelieve.class)) {
-      vertex = new AgentModelBelieveCell( (AgentModelBelieve) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = AgentModelBelieveView.getSize((AgentModelBelieve) entity);
-    }
-    else
-
     if (entity.getClass().equals(Compromise.class)) {
       vertex = new CompromiseCell( (Compromise) entity);
       // Default Size for the new Vertex with the new entity within
@@ -1937,24 +1999,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(ApplicationEvent.class)) {
-      vertex = new ApplicationEventCell( (ApplicationEvent) entity);
+    if (entity.getClass().equals(CommunicationEvent.class)) {
+      vertex = new CommunicationEventCell( (CommunicationEvent) entity);
       // Default Size for the new Vertex with the new entity within
-      size = ApplicationEventView.getSize((ApplicationEvent) entity);
-    }
-    else
-
-    if (entity.getClass().equals(ApplicationEventSlots.class)) {
-      vertex = new ApplicationEventSlotsCell( (ApplicationEventSlots) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = ApplicationEventSlotsView.getSize((ApplicationEventSlots) entity);
-    }
-    else
-
-    if (entity.getClass().equals(Application.class)) {
-      vertex = new ApplicationCell( (Application) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = ApplicationView.getSize((Application) entity);
+      size = CommunicationEventView.getSize((CommunicationEvent) entity);
     }
     else
 
@@ -2028,13 +2076,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(AgentWS.class)) {
-      vertex = new AgentWSCell( (AgentWS) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = AgentWSView.getSize((AgentWS) entity);
-    }
-    else
-
     if (entity.getClass().equals(ApplicationWS.class)) {
       vertex = new ApplicationWSCell( (ApplicationWS) entity);
       // Default Size for the new Vertex with the new entity within
@@ -2072,6 +2113,28 @@ JOptionPane.showMessageDialog(IDE.ide,
    return vertex;
 
   }
+
+
+ public synchronized JGraph cloneJGraph(){
+
+		
+
+		 TasksAndGoalsModelModelJGraph jg=new  TasksAndGoalsModelModelJGraph(
+				(TasksAndGoalsModelDataEntity) this.mde,this.name,IDEAbs.ide.ids.om,
+				new Model(IDEAbs.ide.ids),new BasicMarqueeHandler()); 
+
+		this.setSelectionCells(getGraphLayoutCache().getCells(false,true,false,false));
+		Action copyaction =new EventRedirectorForGraphCopy(this,this.getTransferHandler().getCopyAction(),null	); 			
+		Action pasteaction =new EventRedirectorPasteForGraphCopy(jg,jg.getTransferHandler().getPasteAction(),null	);
+		copyaction.actionPerformed(new ActionEvent(this,0,"hello"));		
+		pasteaction.actionPerformed(new ActionEvent(this,0,"hello"));
+		jg.invalidate();
+		jg.doLayout();
+		
+		return jg;
+
+	}
+
 
   public String toString() {
     return this.getID();

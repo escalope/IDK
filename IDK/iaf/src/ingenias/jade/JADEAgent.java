@@ -608,7 +608,7 @@ abstract public class JADEAgent extends Agent{
 					}	          
 
 					// To put back messages that can be processed by other behaviors
-					Iterator it=processed.iterator();
+					java.util.Iterator it=processed.iterator();
 					while (it.hasNext()){
 						ACLMessage nextM=(ACLMessage) it.next();
 						ja.postMessage(nextM);

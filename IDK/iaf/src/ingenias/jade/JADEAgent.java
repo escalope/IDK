@@ -46,6 +46,7 @@ import jade.domain.FIPAException;
 import jade.domain.DFService;
 import jade.domain.FIPANames;
 import jade.lang.acl.ACLMessage;
+import jade.util.leap.Iterator;
 import ingenias.jade.*;
 import java.util.*;
 
@@ -375,8 +376,14 @@ abstract public class JADEAgent extends Agent{
 			try {
 				synchronized(synRegister){
 					//System.err.println("iniciando registro");
+					Iterator services = roles[k].getAllServices();
+					while (services.hasNext()){
+						ServiceDescription service = (ServiceDescription)services.next();
+					DebugUtils.logEvent("RoleRegistered", new String[]{this.getAID().getLocalName(),service.getType()});
+					}
 					jade.domain.DFService.register(this,
 							roles[k]);		
+					
 					//System.err.println("registrado");
 				}
 

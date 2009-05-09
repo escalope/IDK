@@ -23,37 +23,14 @@
 
 package ingenias.generator.util;
 
-import ingenias.exception.*;
-import ingenias.editor.IDEState;
-import java.lang.reflect.*;
-import javax.swing.tree.*;
-import org.apache.xerces.parsers.DOMParser;
-import org.xml.sax.InputSource;
-import java.awt.Color;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.io.OutputStreamWriter;
-import java.io.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import java.util.*;
-import java.util.Map;
-import java.util.Hashtable;
-import java.util.ArrayList;
-import javax.xml.parsers.*;
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.w3c.dom.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.DOMImplementation;
-import ingenias.editor.entities.*;
-import ingenias.exception.*;
-import ingenias.editor.cell.*;
-import ingenias.editor.*;
-import javax.swing.*;
-import javax.swing.tree.*;
-import ingenias.exception.*;
+import java.io.FileInputStream;
+import java.io.PrintWriter;
 
-import java.io.*;
+import org.apache.xerces.parsers.DOMParser;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 public class ObtainInstantiationStructure {
 

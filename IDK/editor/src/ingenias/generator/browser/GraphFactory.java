@@ -182,7 +182,7 @@ public class GraphFactory {
 					new Model(ids),new BasicMarqueeHandler()});
 
 			ids.gm.addModel(new Object[]{"Project"}, name, ndiagram);	
-			GraphImp gimp=new GraphImp(ndiagram);
+			GraphImp gimp=new GraphImp(ndiagram,ids);
 
 			return gimp;
 		} catch (ClassNotFoundException e) {
@@ -292,7 +292,7 @@ public class GraphFactory {
 			} else
 				npath=path;
 			ids.gm.addModel(npath, name, ndiagram);	
-			GraphImp gimp=new GraphImp(ndiagram);
+			GraphImp gimp=new GraphImp(ndiagram,ids);
 
 			return gimp;
 		} catch (ClassNotFoundException e) {

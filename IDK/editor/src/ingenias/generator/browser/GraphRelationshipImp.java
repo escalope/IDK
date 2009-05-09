@@ -25,6 +25,7 @@ package ingenias.generator.browser;
 import java.util.*;
 import org.jgraph.graph.*;
 
+import ingenias.editor.IDEState;
 import ingenias.editor.ModelJGraph;
 import ingenias.editor.entities.*;
 
@@ -33,12 +34,14 @@ public class GraphRelationshipImp extends AttributedElementImp implements GraphR
 	private ingenias.editor.entities.NAryEdgeEntity rel;
 	private ModelJGraph graph;
 	private org.jgraph.graph.DefaultGraphCell dgc;
+	IDEState ids;
 	
-	GraphRelationshipImp(ingenias.editor.entities.NAryEdgeEntity rel,ModelJGraph graph){
+	GraphRelationshipImp(ingenias.editor.entities.NAryEdgeEntity rel,ModelJGraph graph, IDEState ids){
 		super(rel,graph);
 		this.rel=rel;
 		this.graph=graph;
 		dgc=this.getCell();
+		this.ids=ids;
 	}
 	
 	public ingenias.editor.entities.NAryEdgeEntity getNAryEdge(){
@@ -73,7 +76,7 @@ public class GraphRelationshipImp extends AttributedElementImp implements GraphR
 	}
 	
 	public Graph getGraph(){
-		return new GraphImp(this.graph);
+		return new GraphImp(this.graph, ids);
 	}
 	
 	public GraphRole[] getRoles(){

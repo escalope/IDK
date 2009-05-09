@@ -19,6 +19,7 @@
 package ingenias.generator.browser;
 
 import ingenias.editor.Editor;
+import ingenias.editor.IDEState;
 import ingenias.editor.Model;
 import ingenias.editor.ModelJGraph;
 import ingenias.editor.entities.Entity;
@@ -46,10 +47,12 @@ extends AttributedElementImp
 implements Graph {
 
 	private ingenias.editor.ModelJGraph mjg;
+	private IDEState ids;
 
-	GraphImp(ingenias.editor.ModelJGraph mjg) {
+	GraphImp(ingenias.editor.ModelJGraph mjg, IDEState ids) {
 		super(mjg.getProperties(), mjg);
 		this.mjg = mjg;
+		this.ids=ids;
 	}
 
 	public String getName() {
@@ -66,7 +69,7 @@ implements Graph {
 
 	public String[] getPath() {
 		try {
-			return ingenias.editor.GraphManager.getInstance().getModelPath(this.
+			return ids.gm.getModelPath(this.
 					getName());
 		}
 		catch (ingenias.exception.NotFound nf) {
@@ -92,7 +95,7 @@ implements Graph {
 					ingenias.editor.entities.NAryEdgeEntity ne =
 						(ingenias.editor.entities.NAryEdgeEntity) dgc.getUserObject();
 
-					v.add(new GraphRelationshipImp(ne, mjg));
+					v.add(new GraphRelationshipImp(ne, mjg,ids));
 				}
 
 			}
@@ -128,7 +131,7 @@ implements Graph {
 						(ingenias.editor.entities.Entity) dgc.getUserObject();
 					GraphEntity ge=null;
 
-					ge = new GraphEntityImp(ne, dgc,mjg);
+					ge = new GraphEntityImp(ne, dgc,mjg,ids);
 
 
 					v.add(ge);
@@ -211,7 +214,7 @@ implements Graph {
 		new File(target.getParent()).mkdirs();
 
 		JPanel temp=new JPanel(new BorderLayout());
-		JGraph njg=this.mjg.cloneJGraph();
+		JGraph njg=this.mjg.cloneJGraph(ids);
 		temp.add(njg,BorderLayout.CENTER);
 		njg.setSelectionCells(new Object[0]);
 		ingenias.editor.export.Diagram2SVG.diagram2SVG(temp, target,"png");

@@ -140,7 +140,7 @@ public class GraphRelationshipFactory {
 		boolean found=false;
 		DefaultGraphCell result=null;
 		while (result==null && k<graphs.size()){
-			result=findEntity(id,new GraphImp(graphs.elementAt(k)));
+			result=findEntity(id,new GraphImp(graphs.elementAt(k), ids));
 			k++;
 		}
 
@@ -416,7 +416,7 @@ public class GraphRelationshipFactory {
 					+relType+" does not exist");
 		}
 
-		return new GraphRelationshipImp((NAryEdgeEntity) nEdge.getUserObject(),graph); 
+		return new GraphRelationshipImp((NAryEdgeEntity) nEdge.getUserObject(),graph,ids); 
 	}
 
 

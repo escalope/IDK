@@ -28,6 +28,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 import org.jgraph.graph.*;
 
+import ingenias.editor.IDEState;
 import ingenias.editor.ModelJGraph;
 import ingenias.editor.TypedVector;
 import ingenias.editor.entities.*;
@@ -35,6 +36,8 @@ import ingenias.exception.*;
 import ingenias.exception.NotFound;
 
 public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
+	
+	private IDEState ids;
 	
 	public org.jgraph.graph.DefaultGraphCell getDgc() {
 		return dgc;
@@ -49,12 +52,13 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 	private org.jgraph.graph.DefaultGraphCell dgc;
 	
 	GraphEntityImp(ingenias.editor.entities.Entity ent,  org.jgraph.graph.DefaultGraphCell dgc,
-			ModelJGraph graph) throws NullEntity{
+			ModelJGraph graph, IDEState ids) throws NullEntity{
 		super(ent,graph);
 		if (ent==null) throw new ingenias.exception.NullEntity();
 		this.ent=ent;
 		this.graph=graph;
 		this.dgc=dgc;
+		this.ids=ids;
 		if (graph==null){
 			throw new RuntimeException("Graph is null in entity "+ent+ " when creating a GraphEntityImp");
 		}
@@ -150,7 +154,7 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 						ingenias.editor.entities.NAryEdgeEntity nary=
 							(ingenias.editor.entities.NAryEdgeEntity)extr.getUserObject();
 //						System.err.println("adding "+nary.getType());
-						v.add(new GraphRelationshipImp(nary,graph));
+						v.add(new GraphRelationshipImp(nary,graph,ids));
 					}
 					
 					
@@ -207,7 +211,7 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 		
 		GraphRelationship[] result=new GraphRelationship[v.size()];
 		for (int k=0;k<result.length;k++){
-			result[k]=new GraphRelationshipImp((NAryEdgeEntity)v.elementAt(k),graph);
+			result[k]=new GraphRelationshipImp((NAryEdgeEntity)v.elementAt(k),graph,ids);
 		}
 		
 		return result;

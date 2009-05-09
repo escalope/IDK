@@ -17,6 +17,7 @@
  */
 package ingenias.generator.browser;
 
+import ingenias.editor.GUIResources;
 import ingenias.editor.IDEState;
 import ingenias.exception.NullEntity;
 
@@ -39,11 +40,13 @@ public class BrowserImp implements Browser {
 	/**
 	 *  Constructor for the BrowserImp object
 	 */
-	private BrowserImp() {
+	/*private BrowserImp() {
 		ids=ingenias.editor.IDEAbs.ide.ids;
 				
-	}
-	private BrowserImp(IDEState ids) {
+	}*/
+	
+	
+	public BrowserImp(IDEState ids) {
 		this.ids=ids;
 				
 	}
@@ -58,9 +61,10 @@ public class BrowserImp implements Browser {
 	private BrowserImp(String file) throws ingenias.exception.UnknowFormat, ingenias.exception.DamagedFormat, ingenias.exception.CannotLoad{
 		
 		ingenias.editor.persistence.PersistenceManager p = new ingenias.editor.persistence.PersistenceManager();
-		ids = p.load(file);
-		ingenias.editor.GraphManager.updateCopy(ids.gm);
-		ingenias.editor.ObjectManager.updateCopy(ids.om);
+		IDEState ids=IDEState.emptyIDEState();
+		p.load(file, new GUIResources(),new Properties(),ids);
+		/*ingenias.editor.GraphManager.updateCopy(ids.gm);
+		ingenias.editor.ObjectManager.updateCopy(ids.om);*/
 		
                 this.currentProject=new File(file);
 	}
@@ -73,14 +77,14 @@ public class BrowserImp implements Browser {
 	 *@return    The graphs value
 	 */
 	public Graph[] getGraphs() {
-		ingenias.editor.GraphManager gm = ingenias.editor.GraphManager.getInstance();
+		ingenias.editor.GraphManager gm = ids.gm;
 		Vector models = gm.getUOModels();
 		Graph[] gs = new Graph[models.size()];
 		Iterator it = models.iterator();
 		int k = 0;
 		while (it.hasNext()) {
 			ingenias.editor.ModelJGraph model = (ingenias.editor.ModelJGraph) it.next();
-			gs[k] = new GraphImp(model);
+			gs[k] = new GraphImp(model,ids);
 			k++;
 		}
 
@@ -124,10 +128,10 @@ public class BrowserImp implements Browser {
 	 *@return     The graph value
 	 */
 	public Graph getGraph(String id) {
-		ingenias.editor.GraphManager gm = ingenias.editor.GraphManager.getInstance();
+		ingenias.editor.GraphManager gm = ids.gm;
 		ingenias.editor.ModelJGraph mg = (ingenias.editor.ModelJGraph) gm.getModel(id);
 		if (mg != null) {
-			return new GraphImp(mg);
+			return new GraphImp(mg, ids);
 		} else {
 			return null;
 		}
@@ -154,7 +158,7 @@ public class BrowserImp implements Browser {
 	 *@param  file           Description of Parameter
 	 *@exception  Exception  Description of Exception
 	 */
-	public static void initialise(String file) throws
+	public static Browser initialise(String file) throws
              ingenias.exception.UnknowFormat,
              ingenias.exception.DamagedFormat,
              ingenias.exception.CannotLoad {
@@ -162,6 +166,7 @@ public class BrowserImp implements Browser {
 		browser = new BrowserImp(IDEState.emptyIDEState());
 		
 		browser = new BrowserImp(file);
+		return browser;
                 
 	}
 
@@ -172,10 +177,24 @@ public class BrowserImp implements Browser {
 	 *
 	 *@exception  Exception  Description of Exception
 	 */
-	public static void initialise() {
+	/*public static void initialise() {
 		ingenias.editor.GraphManager.getInstance();
 		// To check if it is initialised
 		browser = new BrowserImp();
+		
+	}*/
+	
+
+	/**
+         *  Performs an empty initialisation. Only works when there is an already existing
+         *  instance of GraphManager
+	 *
+	 *@exception  Exception  Description of Exception
+	 */
+	public static void initialise(IDEState ids) {
+		
+		// To check if it is initialised
+		browser = new BrowserImp(ids);
 		
 	}
 	

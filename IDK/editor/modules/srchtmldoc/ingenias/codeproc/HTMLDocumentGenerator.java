@@ -67,8 +67,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 *@param  indexTemplate    Description of Parameter
 	 *@exception  Exception    Description of Exception
 	 */
-	public HTMLDocumentGenerator() throws Exception {
-		super();
+	public HTMLDocumentGenerator(Browser browser) throws Exception {
+		super(browser);
 		this.addTemplate("templates/index.xml");
 		this.addTemplate("templates/diagram.xml");
 	}
@@ -153,8 +153,10 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	
 		
 		Vector alreadyShown=new Vector();
+		float increment=25f/gs.length;		
 		for (int k = 0; k < gs.length; k++) {
 			Repeat rp1=null;
+			this.setProgress((int) (k*increment));
 			String[] path=gs[k].getPath();
 			boolean already=true;
 			while (already){
@@ -204,11 +206,11 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 */
 	private void generatePages(Sequences p) throws Exception {
 		Graph[] gs = browser.getGraphs();
-		
+		float increment=25f/gs.length;		
 		for (int k = 0; k < gs.length; k++) {
 			Graph g = gs[k];
 			Repeat r = new Repeat("graph1");
-			
+			this.setProgress(25+(int) (k*increment));
 			
 									
 			

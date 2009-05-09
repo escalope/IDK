@@ -27,6 +27,7 @@ import ingenias.exception.InvalidGraph;
 import ingenias.exception.NotFound;
 import ingenias.exception.NullEntity;
 import ingenias.exception.UnknowFormat;
+import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.Graph;
 import ingenias.generator.browser.GraphAttribute;
 import ingenias.generator.browser.GraphAttributeFactory;
@@ -41,8 +42,8 @@ public class AppLinker extends BasicToolImp {
 	private boolean parserAlreadyInitialized=false;
 	private JavaParser jp=null;
 
-	public AppLinker() {
-		super();
+	public AppLinker(Browser browser) {
+		super(browser);
 
 	}
 
@@ -197,7 +198,7 @@ public class AppLinker extends BasicToolImp {
 	 */
 	private void insertNewMethod(GraphFactory gf, GraphEntityFactory gef, GraphAttributeFactory  gaf, Graph g, GraphEntity ent, String mname, String result) throws InvalidGraph, InvalidEntity, InvalidAttribute, InvalidColection, NullEntity, NotFound {
 		if (!exists(ent,mname,result)){
-			String methodid=Editor.getNewId("Method");
+			String methodid=((ingenias.editor.Model)g.getGraph().getModel()).getNewId();
 			GraphEntity nmethod=gef.createEntity("Method",methodid,g);
 			Vector<GraphEntity> nv=new Vector<GraphEntity>(); 		
 			GraphAttribute att1=gaf.createAttribute("Name",mname,g);

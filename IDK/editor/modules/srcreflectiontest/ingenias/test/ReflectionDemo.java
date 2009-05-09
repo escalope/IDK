@@ -18,6 +18,7 @@ import ingenias.exception.InvalidGraph;
 import ingenias.exception.NotFound;
 import ingenias.exception.NotInitialised;
 import ingenias.exception.UnknowFormat;
+import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.Graph;
 import ingenias.generator.browser.GraphAttribute;
 import ingenias.generator.browser.GraphAttributeFactory;
@@ -29,8 +30,8 @@ import ingenias.generator.browser.GraphRelationshipFactory;
 
 public class ReflectionDemo extends BasicToolImp {
 
-	public ReflectionDemo() {
-		super();
+	public ReflectionDemo(Browser browser) {
+		super(browser);
 	}
 
 	public ReflectionDemo(String file) throws UnknowFormat, DamagedFormat,

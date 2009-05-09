@@ -45,8 +45,8 @@ public class ExampleReportGenerator extends ingenias.editor.extension.BasicToolI
 	 *  Initialises the class giving access to diagrams in run-time
 	 **/
 	
-	public ExampleReportGenerator() throws Exception {
-		super();
+	public ExampleReportGenerator(Browser browser) throws Exception {
+		super(browser);
 	}
 	
 	

@@ -50,8 +50,8 @@ public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 	 *  Initialises the class giving access to diagrams in run-time
 	 **/
 
-	public CodeUploader() throws Exception {
-		super();
+	public CodeUploader(Browser browser) throws Exception {
+		super(browser);
 	}
 
 
@@ -105,7 +105,7 @@ public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 							GraphAttributeFactory gaf = GraphAttributeFactory.createDefaultGraphFactory();
 							entity.setAttribute(gaf.createAttribute("Code", code,g));
 							System.err.println(entity.getAttributeByName("Code").getSimpleValue());
-							ingenias.editor.IDE.setChanged();
+							browser.getState().setChanged(true);														
 						}
 					}
 				}

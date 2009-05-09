@@ -30,6 +30,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -218,6 +219,47 @@ public class Codegen {
     }
     return result;
   }
+  
+  public static String encodeutf8Text(String text){
+	  try {
+	    java.io.ByteArrayOutputStream ba=new java.io.ByteArrayOutputStream();
+	    OutputStreamWriter osw=new OutputStreamWriter(ba,"UTF-8");
+	    osw.write(text);
+	    osw.close();
+
+	    String s=new String(ba.toByteArray(),"UTF-8");
+	    s=text;
+	    s=ingenias.generator.util.Conversor.replaceInvalidChar(s);
+
+//	    s=new RE("\\").subst(s,"#2f;#2f;");
+
+	    StringBuffer sb=new StringBuffer(s);
+
+	/*    int index=sb.toString().indexOf("&");
+	    while (index>=0){
+	      String temp=sb.toString();
+//	      System.err.println(index+":"+temp);
+
+	     if (!(temp.indexOf("&quot;",index)==index ||
+	        temp.indexOf("&apos;",index)==index ||
+	        temp.indexOf("&gt;",index)==index ||
+	        temp.indexOf("&lt;",index)==index ||
+	        temp.indexOf("&amp;",index)==index)){
+//	          System.err.println("deleting");
+	        sb.deleteCharAt(index);
+	        sb.insert(index,"&amp;");
+//	        System.err.println("after\n"+sb);
+	        } else
+	      index=sb.toString().indexOf("&",index+1);
+	    }
+	    s=sb.toString();
+	*/
+	    return  s;
+	  } catch (Exception uee){
+	    uee.printStackTrace();
+	  }
+	  return "";
+	}
 
 /**
    *  It transforms the XML representation of the instatiation data to Java in terms of TemplateDAtaRepeat and
@@ -270,7 +312,7 @@ public class Codegen {
                                 ". There must be only text withing <v> tags");
           }
 
-          value = ingenias.editor.entities.Entity.encodeutf8Text(node.
+          value = encodeutf8Text(node.
               getChildNodes().item(0).getNodeValue());
 
         }

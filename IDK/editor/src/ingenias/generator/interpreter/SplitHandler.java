@@ -112,6 +112,18 @@ public class SplitHandler {
 			return new StringBuffer(node.getNodeValue());
 		}
 	}
+	
+	  public static String decodeSpecialSymbols(String text){
+		  try {
+		  String s=text;
+		  s=ingenias.generator.util.Conversor.restoreInvalidChar(text);
+
+		  return  s;
+		} catch (Exception uee){
+		  uee.printStackTrace();
+		}
+		return "";
+		}
 
 
 	/**
@@ -182,7 +194,7 @@ public class SplitHandler {
 					FileOutputStream fos = new FileOutputStream(fid);
 					PrintWriter pw = new PrintWriter(fos);
                                         // converts any &lt;, &amp;, &gt; &quot; &apos to their original symbols
-					pw.print(ingenias.editor.entities.Entity.decodeSpecialSymbols(text.toString()));
+					pw.print(decodeSpecialSymbols(text.toString()));
 //					pw.print(text.replaceAll("&lt;","<").replaceAll("&gt;",">"));
 					pw.flush();
 					pw.close();

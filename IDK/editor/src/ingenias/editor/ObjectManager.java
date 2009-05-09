@@ -36,496 +36,719 @@ import ingenias.editor.entities.*;
 
 public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode implements java.io.Serializable {
 
-  GraphManager gm=null;
+ 
 
-  JTree arbolObjetos=null;
+ public  JTree arbolObjetos=null;
 
   javax.swing.tree.DefaultMutableTreeNode root=new javax.swing.tree.DefaultMutableTreeNode("SystemObjects");
 
 
 
 
-  public javax.swing.tree.DefaultMutableTreeNode DecisionNodeNode=new javax.swing.tree.DefaultMutableTreeNode(" DecisionNode");
+  public javax.swing.tree.DefaultMutableTreeNode DecisionNodeNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode FileSpecPatternMappingNode=new javax.swing.tree.DefaultMutableTreeNode(" FileSpecPatternMapping");
+  public javax.swing.tree.DefaultMutableTreeNode FileSpecPatternMappingNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode TestingPackageNode=new javax.swing.tree.DefaultMutableTreeNode(" TestingPackage");
+  public javax.swing.tree.DefaultMutableTreeNode TestingPackageNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode MethodParameterNode=new javax.swing.tree.DefaultMutableTreeNode(" MethodParameter");
+  public javax.swing.tree.DefaultMutableTreeNode MethodParameterNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode MentalStateNode=new javax.swing.tree.DefaultMutableTreeNode(" MentalState");
+  public javax.swing.tree.DefaultMutableTreeNode MentalStateNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode InternalApplicationNode=new javax.swing.tree.DefaultMutableTreeNode(" InternalApplication");
+  public javax.swing.tree.DefaultMutableTreeNode InternalApplicationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode FileSpecMappingNode=new javax.swing.tree.DefaultMutableTreeNode(" FileSpecMapping");
+  public javax.swing.tree.DefaultMutableTreeNode FileSpecMappingNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ParameterNode=new javax.swing.tree.DefaultMutableTreeNode(" Parameter");
+  public javax.swing.tree.DefaultMutableTreeNode ParameterNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode GoalNode=new javax.swing.tree.DefaultMutableTreeNode(" Goal");
+  public javax.swing.tree.DefaultMutableTreeNode GoalNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AgentWSNode=new javax.swing.tree.DefaultMutableTreeNode(" AgentWS");
+  public javax.swing.tree.DefaultMutableTreeNode AgentWSNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode FactNode=new javax.swing.tree.DefaultMutableTreeNode(" Fact");
+  public javax.swing.tree.DefaultMutableTreeNode FactNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AOPMentalStatePatternNode=new javax.swing.tree.DefaultMutableTreeNode(" AOPMentalStatePattern");
+  public javax.swing.tree.DefaultMutableTreeNode AOPMentalStatePatternNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ShareToupleNode=new javax.swing.tree.DefaultMutableTreeNode(" ShareTouple");
+  public javax.swing.tree.DefaultMutableTreeNode ShareToupleNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeWithInitMSNode=new javax.swing.tree.DefaultMutableTreeNode(" DeploymentUnitByTypeWithInitMS");
+  public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeWithInitMSNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode JoinNodeNode=new javax.swing.tree.DefaultMutableTreeNode(" JoinNode");
+  public javax.swing.tree.DefaultMutableTreeNode JoinNodeNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode SlotNode=new javax.swing.tree.DefaultMutableTreeNode(" Slot");
+  public javax.swing.tree.DefaultMutableTreeNode SlotNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode RuntimeEventNode=new javax.swing.tree.DefaultMutableTreeNode(" RuntimeEvent");
+  public javax.swing.tree.DefaultMutableTreeNode RuntimeEventNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode InitialNodeNode=new javax.swing.tree.DefaultMutableTreeNode(" InitialNode");
+  public javax.swing.tree.DefaultMutableTreeNode InitialNodeNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode MethodNode=new javax.swing.tree.DefaultMutableTreeNode(" Method");
+  public javax.swing.tree.DefaultMutableTreeNode MethodNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode TextUseCaseNode=new javax.swing.tree.DefaultMutableTreeNode(" TextUseCase");
+  public javax.swing.tree.DefaultMutableTreeNode TextUseCaseNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode RemoteProcedureCallNode=new javax.swing.tree.DefaultMutableTreeNode(" RemoteProcedureCall");
+  public javax.swing.tree.DefaultMutableTreeNode RemoteProcedureCallNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode MentalEntityNode=new javax.swing.tree.DefaultMutableTreeNode(" MentalEntity");
+  public javax.swing.tree.DefaultMutableTreeNode MentalEntityNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ResourceNode=new javax.swing.tree.DefaultMutableTreeNode(" Resource");
+  public javax.swing.tree.DefaultMutableTreeNode ResourceNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AgentModelBelieveNode=new javax.swing.tree.DefaultMutableTreeNode(" AgentModelBelieve");
+  public javax.swing.tree.DefaultMutableTreeNode AgentModelBelieveNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ActivityFinalNode=new javax.swing.tree.DefaultMutableTreeNode(" ActivityFinal");
+  public javax.swing.tree.DefaultMutableTreeNode ActivityFinalNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode INGENIASUseCaseNode=new javax.swing.tree.DefaultMutableTreeNode(" INGENIASUseCase");
+  public javax.swing.tree.DefaultMutableTreeNode INGENIASUseCaseNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode GRASIAAgentDescriptionNode=new javax.swing.tree.DefaultMutableTreeNode(" GRASIAAgentDescription");
+  public javax.swing.tree.DefaultMutableTreeNode GRASIAAgentDescriptionNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode TextNoteNode=new javax.swing.tree.DefaultMutableTreeNode(" TextNote");
+  public javax.swing.tree.DefaultMutableTreeNode TextNoteNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode RuntimeFactNode=new javax.swing.tree.DefaultMutableTreeNode(" RuntimeFact");
+  public javax.swing.tree.DefaultMutableTreeNode RuntimeFactNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ForkNodeNode=new javax.swing.tree.DefaultMutableTreeNode(" ForkNode");
+  public javax.swing.tree.DefaultMutableTreeNode ForkNodeNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode OrganizationNetworkNode=new javax.swing.tree.DefaultMutableTreeNode(" OrganizationNetwork");
+  public javax.swing.tree.DefaultMutableTreeNode OrganizationNetworkNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode UseCaseNode=new javax.swing.tree.DefaultMutableTreeNode(" UseCase");
+  public javax.swing.tree.DefaultMutableTreeNode UseCaseNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode MessagePassingNode=new javax.swing.tree.DefaultMutableTreeNode(" MessagePassing");
+  public javax.swing.tree.DefaultMutableTreeNode MessagePassingNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode SubProtocolNode=new javax.swing.tree.DefaultMutableTreeNode(" SubProtocol");
+  public javax.swing.tree.DefaultMutableTreeNode SubProtocolNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode RuntimeConversationNode=new javax.swing.tree.DefaultMutableTreeNode(" RuntimeConversation");
+  public javax.swing.tree.DefaultMutableTreeNode RuntimeConversationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode SlotValueSpecificationNode=new javax.swing.tree.DefaultMutableTreeNode(" SlotValueSpecification");
+  public javax.swing.tree.DefaultMutableTreeNode SlotValueSpecificationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode INGENIASObjectNode=new javax.swing.tree.DefaultMutableTreeNode(" INGENIASObject");
+  public javax.swing.tree.DefaultMutableTreeNode INGENIASObjectNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AUMLComponentNode=new javax.swing.tree.DefaultMutableTreeNode(" AUMLComponent");
+  public javax.swing.tree.DefaultMutableTreeNode AUMLComponentNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode NaturalLanguageAgentDescriptionNode=new javax.swing.tree.DefaultMutableTreeNode(" NaturalLanguageAgentDescription");
+  public javax.swing.tree.DefaultMutableTreeNode NaturalLanguageAgentDescriptionNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode OrganizationNode=new javax.swing.tree.DefaultMutableTreeNode(" Organization");
+  public javax.swing.tree.DefaultMutableTreeNode OrganizationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ConditionalMentalStateNode=new javax.swing.tree.DefaultMutableTreeNode(" ConditionalMentalState");
+  public javax.swing.tree.DefaultMutableTreeNode ConditionalMentalStateNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ApplicationWSNode=new javax.swing.tree.DefaultMutableTreeNode(" ApplicationWS");
+  public javax.swing.tree.DefaultMutableTreeNode ApplicationWSNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AUMLSpecificationNode=new javax.swing.tree.DefaultMutableTreeNode(" AUMLSpecification");
+  public javax.swing.tree.DefaultMutableTreeNode AUMLSpecificationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ApplicationNode=new javax.swing.tree.DefaultMutableTreeNode(" Application");
+  public javax.swing.tree.DefaultMutableTreeNode ApplicationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode DeploymentPackageNode=new javax.swing.tree.DefaultMutableTreeNode(" DeploymentPackage");
+  public javax.swing.tree.DefaultMutableTreeNode DeploymentPackageNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode PlanNode=new javax.swing.tree.DefaultMutableTreeNode(" Plan");
+  public javax.swing.tree.DefaultMutableTreeNode PlanNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode UMLComponentNode=new javax.swing.tree.DefaultMutableTreeNode(" UMLComponent");
+  public javax.swing.tree.DefaultMutableTreeNode UMLComponentNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AUMLPortNode=new javax.swing.tree.DefaultMutableTreeNode(" AUMLPort");
+  public javax.swing.tree.DefaultMutableTreeNode AUMLPortNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode INGENIASComponentNode=new javax.swing.tree.DefaultMutableTreeNode(" INGENIASComponent");
+  public javax.swing.tree.DefaultMutableTreeNode INGENIASComponentNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode OrganizationGroupNode=new javax.swing.tree.DefaultMutableTreeNode(" OrganizationGroup");
+  public javax.swing.tree.DefaultMutableTreeNode OrganizationGroupNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode IUConcurrenceNode=new javax.swing.tree.DefaultMutableTreeNode(" IUConcurrence");
+  public javax.swing.tree.DefaultMutableTreeNode IUConcurrenceNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeNode=new javax.swing.tree.DefaultMutableTreeNode(" DeploymentUnitByType");
+  public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode IUIterateNode=new javax.swing.tree.DefaultMutableTreeNode(" IUIterate");
+  public javax.swing.tree.DefaultMutableTreeNode IUIterateNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode InformationMentalEntityNode=new javax.swing.tree.DefaultMutableTreeNode(" InformationMentalEntity");
+  public javax.swing.tree.DefaultMutableTreeNode InformationMentalEntityNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AUMLAlternativeRowNode=new javax.swing.tree.DefaultMutableTreeNode(" AUMLAlternativeRow");
+  public javax.swing.tree.DefaultMutableTreeNode AUMLAlternativeRowNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ColumnNode=new javax.swing.tree.DefaultMutableTreeNode(" Column");
+  public javax.swing.tree.DefaultMutableTreeNode ColumnNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AutonomousEntityQueryNode=new javax.swing.tree.DefaultMutableTreeNode(" AutonomousEntityQuery");
+  public javax.swing.tree.DefaultMutableTreeNode AutonomousEntityQueryNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AUMLContainerNode=new javax.swing.tree.DefaultMutableTreeNode(" AUMLContainer");
+  public javax.swing.tree.DefaultMutableTreeNode AUMLContainerNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ConcreteAgentNode=new javax.swing.tree.DefaultMutableTreeNode(" ConcreteAgent");
+  public javax.swing.tree.DefaultMutableTreeNode ConcreteAgentNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode UMLCommentNode=new javax.swing.tree.DefaultMutableTreeNode(" UMLComment");
+  public javax.swing.tree.DefaultMutableTreeNode UMLCommentNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AgentRequirementsQueryNode=new javax.swing.tree.DefaultMutableTreeNode(" AgentRequirementsQuery");
+  public javax.swing.tree.DefaultMutableTreeNode AgentRequirementsQueryNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode UMLSpecificationNode=new javax.swing.tree.DefaultMutableTreeNode(" UMLSpecification");
+  public javax.swing.tree.DefaultMutableTreeNode UMLSpecificationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode BelieveNode=new javax.swing.tree.DefaultMutableTreeNode(" Believe");
+  public javax.swing.tree.DefaultMutableTreeNode BelieveNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode WorkflowBoxNode=new javax.swing.tree.DefaultMutableTreeNode(" WorkflowBox");
+  public javax.swing.tree.DefaultMutableTreeNode WorkflowBoxNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AgentComponentNode=new javax.swing.tree.DefaultMutableTreeNode(" AgentComponent");
+  public javax.swing.tree.DefaultMutableTreeNode AgentComponentNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode GRASIAMentalStatePatternNode=new javax.swing.tree.DefaultMutableTreeNode(" GRASIAMentalStatePattern");
+  public javax.swing.tree.DefaultMutableTreeNode GRASIAMentalStatePatternNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeEnumInitMSNode=new javax.swing.tree.DefaultMutableTreeNode(" DeploymentUnitByTypeEnumInitMS");
+  public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeEnumInitMSNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode Autonomous_entityNode=new javax.swing.tree.DefaultMutableTreeNode(" Autonomous_entity");
+  public javax.swing.tree.DefaultMutableTreeNode Autonomous_entityNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode GeneralEventNode=new javax.swing.tree.DefaultMutableTreeNode(" GeneralEvent");
+  public javax.swing.tree.DefaultMutableTreeNode GeneralEventNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode CompromiseNode=new javax.swing.tree.DefaultMutableTreeNode(" Compromise");
+  public javax.swing.tree.DefaultMutableTreeNode CompromiseNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode RoleNode=new javax.swing.tree.DefaultMutableTreeNode(" Role");
+  public javax.swing.tree.DefaultMutableTreeNode RoleNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ControlMentalEntityNode=new javax.swing.tree.DefaultMutableTreeNode(" ControlMentalEntity");
+  public javax.swing.tree.DefaultMutableTreeNode ControlMentalEntityNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode EnvironmentApplicationNode=new javax.swing.tree.DefaultMutableTreeNode(" EnvironmentApplication");
+  public javax.swing.tree.DefaultMutableTreeNode EnvironmentApplicationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ApplicationEventSlotsNode=new javax.swing.tree.DefaultMutableTreeNode(" ApplicationEventSlots");
+  public javax.swing.tree.DefaultMutableTreeNode ApplicationEventSlotsNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AgentDescriptionNode=new javax.swing.tree.DefaultMutableTreeNode(" AgentDescription");
+  public javax.swing.tree.DefaultMutableTreeNode AgentDescriptionNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode MentalStatePatternNode=new javax.swing.tree.DefaultMutableTreeNode(" MentalStatePattern");
+  public javax.swing.tree.DefaultMutableTreeNode MentalStatePatternNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ProtocolNode=new javax.swing.tree.DefaultMutableTreeNode(" Protocol");
+  public javax.swing.tree.DefaultMutableTreeNode ProtocolNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode MentalInstanceSpecificationNode=new javax.swing.tree.DefaultMutableTreeNode(" MentalInstanceSpecification");
+  public javax.swing.tree.DefaultMutableTreeNode MentalInstanceSpecificationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ActionUMLNode=new javax.swing.tree.DefaultMutableTreeNode(" ActionUML");
+  public javax.swing.tree.DefaultMutableTreeNode ActionUMLNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode StackEntryNode=new javax.swing.tree.DefaultMutableTreeNode(" StackEntry");
+  public javax.swing.tree.DefaultMutableTreeNode StackEntryNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode InteractionUnitNode=new javax.swing.tree.DefaultMutableTreeNode(" InteractionUnit");
+  public javax.swing.tree.DefaultMutableTreeNode InteractionUnitNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode GRASIASpecificationNode=new javax.swing.tree.DefaultMutableTreeNode(" GRASIASpecification");
+  public javax.swing.tree.DefaultMutableTreeNode GRASIASpecificationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode UMLClassNode=new javax.swing.tree.DefaultMutableTreeNode(" UMLClass");
+  public javax.swing.tree.DefaultMutableTreeNode UMLClassNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode MentalStateProcessorNode=new javax.swing.tree.DefaultMutableTreeNode(" MentalStateProcessor");
+  public javax.swing.tree.DefaultMutableTreeNode MentalStateProcessorNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode MergeNodeNode=new javax.swing.tree.DefaultMutableTreeNode(" MergeNode");
+  public javax.swing.tree.DefaultMutableTreeNode MergeNodeNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode EndNodeNode=new javax.swing.tree.DefaultMutableTreeNode(" EndNode");
+  public javax.swing.tree.DefaultMutableTreeNode EndNodeNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode FrameFactNode=new javax.swing.tree.DefaultMutableTreeNode(" FrameFact");
+  public javax.swing.tree.DefaultMutableTreeNode FrameFactNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode TestNode=new javax.swing.tree.DefaultMutableTreeNode(" Test");
+  public javax.swing.tree.DefaultMutableTreeNode TestNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode LifelineNode=new javax.swing.tree.DefaultMutableTreeNode(" Lifeline");
+  public javax.swing.tree.DefaultMutableTreeNode LifelineNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode SymbolicMentalStatePatternNode=new javax.swing.tree.DefaultMutableTreeNode(" SymbolicMentalStatePattern");
+  public javax.swing.tree.DefaultMutableTreeNode SymbolicMentalStatePatternNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode PROLOGAgentDescriptionNode=new javax.swing.tree.DefaultMutableTreeNode(" PROLOGAgentDescription");
+  public javax.swing.tree.DefaultMutableTreeNode PROLOGAgentDescriptionNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode InteractionNode=new javax.swing.tree.DefaultMutableTreeNode(" Interaction");
+  public javax.swing.tree.DefaultMutableTreeNode InteractionNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode SpecificationNode=new javax.swing.tree.DefaultMutableTreeNode(" Specification");
+  public javax.swing.tree.DefaultMutableTreeNode SpecificationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AgentNode=new javax.swing.tree.DefaultMutableTreeNode(" Agent");
+  public javax.swing.tree.DefaultMutableTreeNode AgentNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode MentalStateManagerNode=new javax.swing.tree.DefaultMutableTreeNode(" MentalStateManager");
+  public javax.swing.tree.DefaultMutableTreeNode MentalStateManagerNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode INGENIASCodeComponentNode=new javax.swing.tree.DefaultMutableTreeNode(" INGENIASCodeComponent");
+  public javax.swing.tree.DefaultMutableTreeNode INGENIASCodeComponentNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode UMLClassifierNode=new javax.swing.tree.DefaultMutableTreeNode(" UMLClassifier");
+  public javax.swing.tree.DefaultMutableTreeNode UMLClassifierNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode CommunicationEventNode=new javax.swing.tree.DefaultMutableTreeNode(" CommunicationEvent");
+  public javax.swing.tree.DefaultMutableTreeNode CommunicationEventNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode TaskWSNode=new javax.swing.tree.DefaultMutableTreeNode(" TaskWS");
+  public javax.swing.tree.DefaultMutableTreeNode TaskWSNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ObjectSlotNode=new javax.swing.tree.DefaultMutableTreeNode(" ObjectSlot");
+  public javax.swing.tree.DefaultMutableTreeNode ObjectSlotNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode GoalStateWSNode=new javax.swing.tree.DefaultMutableTreeNode(" GoalStateWS");
+  public javax.swing.tree.DefaultMutableTreeNode GoalStateWSNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode StateGoalNode=new javax.swing.tree.DefaultMutableTreeNode(" StateGoal");
+  public javax.swing.tree.DefaultMutableTreeNode StateGoalNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ConversationNode=new javax.swing.tree.DefaultMutableTreeNode(" Conversation");
+  public javax.swing.tree.DefaultMutableTreeNode ConversationNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode ApplicationEventNode=new javax.swing.tree.DefaultMutableTreeNode(" ApplicationEvent");
+  public javax.swing.tree.DefaultMutableTreeNode ApplicationEventNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode TaskNode=new javax.swing.tree.DefaultMutableTreeNode(" Task");
+  public javax.swing.tree.DefaultMutableTreeNode TaskNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeMSEntityNode=new javax.swing.tree.DefaultMutableTreeNode(" DeploymentUnitByTypeMSEntity");
+  public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeMSEntityNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode RoleWSNode=new javax.swing.tree.DefaultMutableTreeNode(" RoleWS");
+  public javax.swing.tree.DefaultMutableTreeNode RoleWSNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode AUMLAlternativeBoxNode=new javax.swing.tree.DefaultMutableTreeNode(" AUMLAlternativeBox");
+  public javax.swing.tree.DefaultMutableTreeNode AUMLAlternativeBoxNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode WorkflowNode=new javax.swing.tree.DefaultMutableTreeNode(" Workflow");
+  public javax.swing.tree.DefaultMutableTreeNode WorkflowNode=null;
 
-  public javax.swing.tree.DefaultMutableTreeNode UMLObjectNode=new javax.swing.tree.DefaultMutableTreeNode(" UMLObject");
+  public javax.swing.tree.DefaultMutableTreeNode UMLObjectNode=null;
 
 
-
-
-  private static ObjectManager om=null;
-
-
-  public static ObjectManager createIndependentCopy(GraphManager gm, javax.swing.tree.DefaultMutableTreeNode root,JTree arbolObjetos){
-    ObjectManager om=new ObjectManager(gm,root,arbolObjetos);
-    return om;
-  }
-
-  public static void updateCopy(ObjectManager copyom){
-    om=copyom;
-  }
 
   public static ObjectManager initialise(javax.swing.tree.DefaultMutableTreeNode root,JTree arbolObjetos){
-   om=new ObjectManager(GraphManager.getInstance(),root,arbolObjetos);
+  ObjectManager om=new ObjectManager(root,arbolObjetos);
    return om;
   }
 
-  public static ObjectManager getInstance(){
-    if (om!=null)
-     return om;
-    else
-     throw new RuntimeException("Trying to get an Object Manager "+
-      "instance without initialising it properly");
-  }
-
-  private ObjectManager(GraphManager g,javax.swing.tree.DefaultMutableTreeNode root,JTree arbolObjetos) {
+  private ObjectManager(javax.swing.tree.DefaultMutableTreeNode root,JTree arbolObjetos) {
      super("System Objects");
-     this.gm=g;
      this.root=root;
      this.arbolObjetos=arbolObjetos;
+
+  DecisionNodeNode=new javax.swing.tree.DefaultMutableTreeNode("DecisionNode");
+
+  FileSpecPatternMappingNode=new javax.swing.tree.DefaultMutableTreeNode("FileSpecPatternMapping");
+
+  TestingPackageNode=new javax.swing.tree.DefaultMutableTreeNode("TestingPackage");
+
+  MethodParameterNode=new javax.swing.tree.DefaultMutableTreeNode("MethodParameter");
+
+  MentalStateNode=new javax.swing.tree.DefaultMutableTreeNode("MentalState");
+
+  InternalApplicationNode=new javax.swing.tree.DefaultMutableTreeNode("InternalApplication");
+
+  FileSpecMappingNode=new javax.swing.tree.DefaultMutableTreeNode("FileSpecMapping");
+
+  ParameterNode=new javax.swing.tree.DefaultMutableTreeNode("Parameter");
+
+  GoalNode=new javax.swing.tree.DefaultMutableTreeNode("Goal");
+
+  AgentWSNode=new javax.swing.tree.DefaultMutableTreeNode("AgentWS");
+
+  FactNode=new javax.swing.tree.DefaultMutableTreeNode("Fact");
+
+  AOPMentalStatePatternNode=new javax.swing.tree.DefaultMutableTreeNode("AOPMentalStatePattern");
+
+  ShareToupleNode=new javax.swing.tree.DefaultMutableTreeNode("ShareTouple");
+
+  DeploymentUnitByTypeWithInitMSNode=new javax.swing.tree.DefaultMutableTreeNode("DeploymentUnitByTypeWithInitMS");
+
+  JoinNodeNode=new javax.swing.tree.DefaultMutableTreeNode("JoinNode");
+
+  SlotNode=new javax.swing.tree.DefaultMutableTreeNode("Slot");
+
+  RuntimeEventNode=new javax.swing.tree.DefaultMutableTreeNode("RuntimeEvent");
+
+  InitialNodeNode=new javax.swing.tree.DefaultMutableTreeNode("InitialNode");
+
+  MethodNode=new javax.swing.tree.DefaultMutableTreeNode("Method");
+
+  TextUseCaseNode=new javax.swing.tree.DefaultMutableTreeNode("TextUseCase");
+
+  RemoteProcedureCallNode=new javax.swing.tree.DefaultMutableTreeNode("RemoteProcedureCall");
+
+  MentalEntityNode=new javax.swing.tree.DefaultMutableTreeNode("MentalEntity");
+
+  ResourceNode=new javax.swing.tree.DefaultMutableTreeNode("Resource");
+
+  AgentModelBelieveNode=new javax.swing.tree.DefaultMutableTreeNode("AgentModelBelieve");
+
+  ActivityFinalNode=new javax.swing.tree.DefaultMutableTreeNode("ActivityFinal");
+
+  INGENIASUseCaseNode=new javax.swing.tree.DefaultMutableTreeNode("INGENIASUseCase");
+
+  GRASIAAgentDescriptionNode=new javax.swing.tree.DefaultMutableTreeNode("GRASIAAgentDescription");
+
+  TextNoteNode=new javax.swing.tree.DefaultMutableTreeNode("TextNote");
+
+  RuntimeFactNode=new javax.swing.tree.DefaultMutableTreeNode("RuntimeFact");
+
+  ForkNodeNode=new javax.swing.tree.DefaultMutableTreeNode("ForkNode");
+
+  OrganizationNetworkNode=new javax.swing.tree.DefaultMutableTreeNode("OrganizationNetwork");
+
+  UseCaseNode=new javax.swing.tree.DefaultMutableTreeNode("UseCase");
+
+  MessagePassingNode=new javax.swing.tree.DefaultMutableTreeNode("MessagePassing");
+
+  SubProtocolNode=new javax.swing.tree.DefaultMutableTreeNode("SubProtocol");
+
+  RuntimeConversationNode=new javax.swing.tree.DefaultMutableTreeNode("RuntimeConversation");
+
+  SlotValueSpecificationNode=new javax.swing.tree.DefaultMutableTreeNode("SlotValueSpecification");
+
+  INGENIASObjectNode=new javax.swing.tree.DefaultMutableTreeNode("INGENIASObject");
+
+  AUMLComponentNode=new javax.swing.tree.DefaultMutableTreeNode("AUMLComponent");
+
+  NaturalLanguageAgentDescriptionNode=new javax.swing.tree.DefaultMutableTreeNode("NaturalLanguageAgentDescription");
+
+  OrganizationNode=new javax.swing.tree.DefaultMutableTreeNode("Organization");
+
+  ConditionalMentalStateNode=new javax.swing.tree.DefaultMutableTreeNode("ConditionalMentalState");
+
+  ApplicationWSNode=new javax.swing.tree.DefaultMutableTreeNode("ApplicationWS");
+
+  AUMLSpecificationNode=new javax.swing.tree.DefaultMutableTreeNode("AUMLSpecification");
+
+  ApplicationNode=new javax.swing.tree.DefaultMutableTreeNode("Application");
+
+  DeploymentPackageNode=new javax.swing.tree.DefaultMutableTreeNode("DeploymentPackage");
+
+  PlanNode=new javax.swing.tree.DefaultMutableTreeNode("Plan");
+
+  UMLComponentNode=new javax.swing.tree.DefaultMutableTreeNode("UMLComponent");
+
+  AUMLPortNode=new javax.swing.tree.DefaultMutableTreeNode("AUMLPort");
+
+  INGENIASComponentNode=new javax.swing.tree.DefaultMutableTreeNode("INGENIASComponent");
+
+  OrganizationGroupNode=new javax.swing.tree.DefaultMutableTreeNode("OrganizationGroup");
+
+  IUConcurrenceNode=new javax.swing.tree.DefaultMutableTreeNode("IUConcurrence");
+
+  DeploymentUnitByTypeNode=new javax.swing.tree.DefaultMutableTreeNode("DeploymentUnitByType");
+
+  IUIterateNode=new javax.swing.tree.DefaultMutableTreeNode("IUIterate");
+
+  InformationMentalEntityNode=new javax.swing.tree.DefaultMutableTreeNode("InformationMentalEntity");
+
+  AUMLAlternativeRowNode=new javax.swing.tree.DefaultMutableTreeNode("AUMLAlternativeRow");
+
+  ColumnNode=new javax.swing.tree.DefaultMutableTreeNode("Column");
+
+  AutonomousEntityQueryNode=new javax.swing.tree.DefaultMutableTreeNode("AutonomousEntityQuery");
+
+  AUMLContainerNode=new javax.swing.tree.DefaultMutableTreeNode("AUMLContainer");
+
+  ConcreteAgentNode=new javax.swing.tree.DefaultMutableTreeNode("ConcreteAgent");
+
+  UMLCommentNode=new javax.swing.tree.DefaultMutableTreeNode("UMLComment");
+
+  AgentRequirementsQueryNode=new javax.swing.tree.DefaultMutableTreeNode("AgentRequirementsQuery");
+
+  UMLSpecificationNode=new javax.swing.tree.DefaultMutableTreeNode("UMLSpecification");
+
+  BelieveNode=new javax.swing.tree.DefaultMutableTreeNode("Believe");
+
+  WorkflowBoxNode=new javax.swing.tree.DefaultMutableTreeNode("WorkflowBox");
+
+  AgentComponentNode=new javax.swing.tree.DefaultMutableTreeNode("AgentComponent");
+
+  GRASIAMentalStatePatternNode=new javax.swing.tree.DefaultMutableTreeNode("GRASIAMentalStatePattern");
+
+  DeploymentUnitByTypeEnumInitMSNode=new javax.swing.tree.DefaultMutableTreeNode("DeploymentUnitByTypeEnumInitMS");
+
+  Autonomous_entityNode=new javax.swing.tree.DefaultMutableTreeNode("Autonomous_entity");
+
+  GeneralEventNode=new javax.swing.tree.DefaultMutableTreeNode("GeneralEvent");
+
+  CompromiseNode=new javax.swing.tree.DefaultMutableTreeNode("Compromise");
+
+  RoleNode=new javax.swing.tree.DefaultMutableTreeNode("Role");
+
+  ControlMentalEntityNode=new javax.swing.tree.DefaultMutableTreeNode("ControlMentalEntity");
+
+  EnvironmentApplicationNode=new javax.swing.tree.DefaultMutableTreeNode("EnvironmentApplication");
+
+  ApplicationEventSlotsNode=new javax.swing.tree.DefaultMutableTreeNode("ApplicationEventSlots");
+
+  AgentDescriptionNode=new javax.swing.tree.DefaultMutableTreeNode("AgentDescription");
+
+  MentalStatePatternNode=new javax.swing.tree.DefaultMutableTreeNode("MentalStatePattern");
+
+  ProtocolNode=new javax.swing.tree.DefaultMutableTreeNode("Protocol");
+
+  MentalInstanceSpecificationNode=new javax.swing.tree.DefaultMutableTreeNode("MentalInstanceSpecification");
+
+  ActionUMLNode=new javax.swing.tree.DefaultMutableTreeNode("ActionUML");
+
+  StackEntryNode=new javax.swing.tree.DefaultMutableTreeNode("StackEntry");
+
+  InteractionUnitNode=new javax.swing.tree.DefaultMutableTreeNode("InteractionUnit");
+
+  GRASIASpecificationNode=new javax.swing.tree.DefaultMutableTreeNode("GRASIASpecification");
+
+  UMLClassNode=new javax.swing.tree.DefaultMutableTreeNode("UMLClass");
+
+  MentalStateProcessorNode=new javax.swing.tree.DefaultMutableTreeNode("MentalStateProcessor");
+
+  MergeNodeNode=new javax.swing.tree.DefaultMutableTreeNode("MergeNode");
+
+  EndNodeNode=new javax.swing.tree.DefaultMutableTreeNode("EndNode");
+
+  FrameFactNode=new javax.swing.tree.DefaultMutableTreeNode("FrameFact");
+
+  TestNode=new javax.swing.tree.DefaultMutableTreeNode("Test");
+
+  LifelineNode=new javax.swing.tree.DefaultMutableTreeNode("Lifeline");
+
+  SymbolicMentalStatePatternNode=new javax.swing.tree.DefaultMutableTreeNode("SymbolicMentalStatePattern");
+
+  PROLOGAgentDescriptionNode=new javax.swing.tree.DefaultMutableTreeNode("PROLOGAgentDescription");
+
+  InteractionNode=new javax.swing.tree.DefaultMutableTreeNode("Interaction");
+
+  SpecificationNode=new javax.swing.tree.DefaultMutableTreeNode("Specification");
+
+  AgentNode=new javax.swing.tree.DefaultMutableTreeNode("Agent");
+
+  MentalStateManagerNode=new javax.swing.tree.DefaultMutableTreeNode("MentalStateManager");
+
+  INGENIASCodeComponentNode=new javax.swing.tree.DefaultMutableTreeNode("INGENIASCodeComponent");
+
+  UMLClassifierNode=new javax.swing.tree.DefaultMutableTreeNode("UMLClassifier");
+
+  CommunicationEventNode=new javax.swing.tree.DefaultMutableTreeNode("CommunicationEvent");
+
+  TaskWSNode=new javax.swing.tree.DefaultMutableTreeNode("TaskWS");
+
+  ObjectSlotNode=new javax.swing.tree.DefaultMutableTreeNode("ObjectSlot");
+
+  GoalStateWSNode=new javax.swing.tree.DefaultMutableTreeNode("GoalStateWS");
+
+  StateGoalNode=new javax.swing.tree.DefaultMutableTreeNode("StateGoal");
+
+  ConversationNode=new javax.swing.tree.DefaultMutableTreeNode("Conversation");
+
+  ApplicationEventNode=new javax.swing.tree.DefaultMutableTreeNode("ApplicationEvent");
+
+  TaskNode=new javax.swing.tree.DefaultMutableTreeNode("Task");
+
+  DeploymentUnitByTypeMSEntityNode=new javax.swing.tree.DefaultMutableTreeNode("DeploymentUnitByTypeMSEntity");
+
+  RoleWSNode=new javax.swing.tree.DefaultMutableTreeNode("RoleWS");
+
+  AUMLAlternativeBoxNode=new javax.swing.tree.DefaultMutableTreeNode("AUMLAlternativeBox");
+
+  WorkflowNode=new javax.swing.tree.DefaultMutableTreeNode("Workflow");
+
+  UMLObjectNode=new javax.swing.tree.DefaultMutableTreeNode("UMLObject");
+
+
+
+
 
 
      // 1st level nodes
 
-     root.add(ParameterNode);
+     addNodeInSortedOrder( root,ParameterNode);
 
-     root.add(INGENIASObjectNode);
+     addNodeInSortedOrder( root,INGENIASObjectNode);
 
-     root.add(UMLClassifierNode);
+     addNodeInSortedOrder( root,UMLClassifierNode);
 
-     root.add(UMLObjectNode);
+     addNodeInSortedOrder( root,UMLObjectNode);
 
 
      // 2nd and lower nodes
 
-     UMLObjectNode.add(DecisionNodeNode);
+    addNodeInSortedOrder( UMLObjectNode,DecisionNodeNode);
 
-     FileSpecMappingNode.add(FileSpecPatternMappingNode);
+    addNodeInSortedOrder( FileSpecMappingNode,FileSpecPatternMappingNode);
 
-     INGENIASObjectNode.add(TestingPackageNode);
+    addNodeInSortedOrder( INGENIASObjectNode,TestingPackageNode);
 
-     INGENIASObjectNode.add(MethodParameterNode);
+    addNodeInSortedOrder( INGENIASObjectNode,MethodParameterNode);
 
-     INGENIASObjectNode.add(MentalStateNode);
+    addNodeInSortedOrder( INGENIASObjectNode,MentalStateNode);
 
-     ApplicationNode.add(InternalApplicationNode);
+    addNodeInSortedOrder( ApplicationNode,InternalApplicationNode);
 
-     UMLClassifierNode.add(FileSpecMappingNode);
+    addNodeInSortedOrder( UMLClassifierNode,FileSpecMappingNode);
 
-     ControlMentalEntityNode.add(GoalNode);
+    addNodeInSortedOrder( ControlMentalEntityNode,GoalNode);
 
-     AgentNode.add(AgentWSNode);
+    addNodeInSortedOrder( AgentNode,AgentWSNode);
 
-     InformationMentalEntityNode.add(FactNode);
+    addNodeInSortedOrder( InformationMentalEntityNode,FactNode);
 
-     SymbolicMentalStatePatternNode.add(AOPMentalStatePatternNode);
+    addNodeInSortedOrder( SymbolicMentalStatePatternNode,AOPMentalStatePatternNode);
 
-     InteractionUnitNode.add(ShareToupleNode);
+    addNodeInSortedOrder( InteractionUnitNode,ShareToupleNode);
 
-     DeploymentUnitByTypeNode.add(DeploymentUnitByTypeWithInitMSNode);
+    addNodeInSortedOrder( DeploymentUnitByTypeNode,DeploymentUnitByTypeWithInitMSNode);
 
-     UMLObjectNode.add(JoinNodeNode);
+    addNodeInSortedOrder( UMLObjectNode,JoinNodeNode);
 
-     INGENIASObjectNode.add(SlotNode);
+    addNodeInSortedOrder( INGENIASObjectNode,SlotNode);
 
-     GeneralEventNode.add(RuntimeEventNode);
+    addNodeInSortedOrder( GeneralEventNode,RuntimeEventNode);
 
-     UMLObjectNode.add(InitialNodeNode);
+    addNodeInSortedOrder( UMLObjectNode,InitialNodeNode);
 
-     INGENIASObjectNode.add(MethodNode);
+    addNodeInSortedOrder( INGENIASObjectNode,MethodNode);
 
-     UseCaseNode.add(TextUseCaseNode);
+    addNodeInSortedOrder( UseCaseNode,TextUseCaseNode);
 
-     InteractionUnitNode.add(RemoteProcedureCallNode);
+    addNodeInSortedOrder( InteractionUnitNode,RemoteProcedureCallNode);
 
-     INGENIASObjectNode.add(MentalEntityNode);
+    addNodeInSortedOrder( INGENIASObjectNode,MentalEntityNode);
 
-     AgentComponentNode.add(ResourceNode);
+    addNodeInSortedOrder( AgentComponentNode,ResourceNode);
 
-     BelieveNode.add(AgentModelBelieveNode);
+    addNodeInSortedOrder( BelieveNode,AgentModelBelieveNode);
 
-     UMLObjectNode.add(ActivityFinalNode);
+    addNodeInSortedOrder( UMLObjectNode,ActivityFinalNode);
 
-     UseCaseNode.add(INGENIASUseCaseNode);
+    addNodeInSortedOrder( UseCaseNode,INGENIASUseCaseNode);
 
-     AgentDescriptionNode.add(GRASIAAgentDescriptionNode);
+    addNodeInSortedOrder( AgentDescriptionNode,GRASIAAgentDescriptionNode);
 
-     UMLObjectNode.add(TextNoteNode);
+    addNodeInSortedOrder( UMLObjectNode,TextNoteNode);
 
-     FactNode.add(RuntimeFactNode);
+    addNodeInSortedOrder( FactNode,RuntimeFactNode);
 
-     UMLObjectNode.add(ForkNodeNode);
+    addNodeInSortedOrder( UMLObjectNode,ForkNodeNode);
 
-     OrganizationGroupNode.add(OrganizationNetworkNode);
+    addNodeInSortedOrder( OrganizationGroupNode,OrganizationNetworkNode);
 
-     UMLObjectNode.add(UseCaseNode);
+    addNodeInSortedOrder( UMLObjectNode,UseCaseNode);
 
-     InteractionUnitNode.add(MessagePassingNode);
+    addNodeInSortedOrder( InteractionUnitNode,MessagePassingNode);
 
-     AUMLContainerNode.add(SubProtocolNode);
+    addNodeInSortedOrder( AUMLContainerNode,SubProtocolNode);
 
-     ConversationNode.add(RuntimeConversationNode);
+    addNodeInSortedOrder( ConversationNode,RuntimeConversationNode);
 
-     INGENIASObjectNode.add(SlotValueSpecificationNode);
+    addNodeInSortedOrder( INGENIASObjectNode,SlotValueSpecificationNode);
 
-     INGENIASObjectNode.add(AUMLComponentNode);
+    addNodeInSortedOrder( INGENIASObjectNode,AUMLComponentNode);
 
-     AgentDescriptionNode.add(NaturalLanguageAgentDescriptionNode);
+    addNodeInSortedOrder( AgentDescriptionNode,NaturalLanguageAgentDescriptionNode);
 
-     Autonomous_entityNode.add(OrganizationNode);
+    addNodeInSortedOrder( Autonomous_entityNode,OrganizationNode);
 
-     MentalStateNode.add(ConditionalMentalStateNode);
+    addNodeInSortedOrder( MentalStateNode,ConditionalMentalStateNode);
 
-     ApplicationNode.add(ApplicationWSNode);
+    addNodeInSortedOrder( ApplicationNode,ApplicationWSNode);
 
-     SpecificationNode.add(AUMLSpecificationNode);
+    addNodeInSortedOrder( SpecificationNode,AUMLSpecificationNode);
 
-     AgentComponentNode.add(ApplicationNode);
+    addNodeInSortedOrder( AgentComponentNode,ApplicationNode);
 
-     INGENIASObjectNode.add(DeploymentPackageNode);
+    addNodeInSortedOrder( INGENIASObjectNode,DeploymentPackageNode);
 
-     TaskNode.add(PlanNode);
+    addNodeInSortedOrder( TaskNode,PlanNode);
 
-     UMLClassifierNode.add(UMLComponentNode);
+    addNodeInSortedOrder( UMLClassifierNode,UMLComponentNode);
 
-     AUMLComponentNode.add(AUMLPortNode);
+    addNodeInSortedOrder( AUMLComponentNode,AUMLPortNode);
 
-     UMLComponentNode.add(INGENIASComponentNode);
+    addNodeInSortedOrder( UMLComponentNode,INGENIASComponentNode);
 
-     INGENIASObjectNode.add(OrganizationGroupNode);
+    addNodeInSortedOrder( INGENIASObjectNode,OrganizationGroupNode);
 
-     InteractionUnitNode.add(IUConcurrenceNode);
+    addNodeInSortedOrder( InteractionUnitNode,IUConcurrenceNode);
 
-     INGENIASObjectNode.add(DeploymentUnitByTypeNode);
+    addNodeInSortedOrder( INGENIASObjectNode,DeploymentUnitByTypeNode);
 
-     InteractionUnitNode.add(IUIterateNode);
+    addNodeInSortedOrder( InteractionUnitNode,IUIterateNode);
 
-     MentalEntityNode.add(InformationMentalEntityNode);
+    addNodeInSortedOrder( MentalEntityNode,InformationMentalEntityNode);
 
-     AUMLContainerNode.add(AUMLAlternativeRowNode);
+    addNodeInSortedOrder( AUMLContainerNode,AUMLAlternativeRowNode);
 
-     AUMLContainerNode.add(ColumnNode);
+    addNodeInSortedOrder( AUMLContainerNode,ColumnNode);
 
-     INGENIASObjectNode.add(AutonomousEntityQueryNode);
+    addNodeInSortedOrder( INGENIASObjectNode,AutonomousEntityQueryNode);
 
-     AUMLComponentNode.add(AUMLContainerNode);
+    addNodeInSortedOrder( AUMLComponentNode,AUMLContainerNode);
 
-     AutonomousEntityQueryNode.add(ConcreteAgentNode);
+    addNodeInSortedOrder( AutonomousEntityQueryNode,ConcreteAgentNode);
 
-     UMLObjectNode.add(UMLCommentNode);
+    addNodeInSortedOrder( UMLObjectNode,UMLCommentNode);
 
-     AutonomousEntityQueryNode.add(AgentRequirementsQueryNode);
+    addNodeInSortedOrder( AutonomousEntityQueryNode,AgentRequirementsQueryNode);
 
-     SpecificationNode.add(UMLSpecificationNode);
+    addNodeInSortedOrder( SpecificationNode,UMLSpecificationNode);
 
-     InformationMentalEntityNode.add(BelieveNode);
+    addNodeInSortedOrder( InformationMentalEntityNode,BelieveNode);
 
-     INGENIASObjectNode.add(WorkflowBoxNode);
+    addNodeInSortedOrder( INGENIASObjectNode,WorkflowBoxNode);
 
-     INGENIASObjectNode.add(AgentComponentNode);
+    addNodeInSortedOrder( INGENIASObjectNode,AgentComponentNode);
 
-     SymbolicMentalStatePatternNode.add(GRASIAMentalStatePatternNode);
+    addNodeInSortedOrder( SymbolicMentalStatePatternNode,GRASIAMentalStatePatternNode);
 
-     DeploymentUnitByTypeNode.add(DeploymentUnitByTypeEnumInitMSNode);
+    addNodeInSortedOrder( DeploymentUnitByTypeNode,DeploymentUnitByTypeEnumInitMSNode);
 
-     INGENIASObjectNode.add(Autonomous_entityNode);
+    addNodeInSortedOrder( INGENIASObjectNode,Autonomous_entityNode);
 
-     InformationMentalEntityNode.add(GeneralEventNode);
+    addNodeInSortedOrder( InformationMentalEntityNode,GeneralEventNode);
 
-     ControlMentalEntityNode.add(CompromiseNode);
+    addNodeInSortedOrder( ControlMentalEntityNode,CompromiseNode);
 
-     INGENIASObjectNode.add(RoleNode);
+    addNodeInSortedOrder( INGENIASObjectNode,RoleNode);
 
-     MentalEntityNode.add(ControlMentalEntityNode);
+    addNodeInSortedOrder( MentalEntityNode,ControlMentalEntityNode);
 
-     ApplicationNode.add(EnvironmentApplicationNode);
+    addNodeInSortedOrder( ApplicationNode,EnvironmentApplicationNode);
 
-     ApplicationEventNode.add(ApplicationEventSlotsNode);
+    addNodeInSortedOrder( ApplicationEventNode,ApplicationEventSlotsNode);
 
-     INGENIASObjectNode.add(AgentDescriptionNode);
+    addNodeInSortedOrder( INGENIASObjectNode,AgentDescriptionNode);
 
-     INGENIASObjectNode.add(MentalStatePatternNode);
+    addNodeInSortedOrder( INGENIASObjectNode,MentalStatePatternNode);
 
-     AUMLContainerNode.add(ProtocolNode);
+    addNodeInSortedOrder( AUMLContainerNode,ProtocolNode);
 
-     INGENIASObjectNode.add(MentalInstanceSpecificationNode);
+    addNodeInSortedOrder( INGENIASObjectNode,MentalInstanceSpecificationNode);
 
-     UMLObjectNode.add(ActionUMLNode);
+    addNodeInSortedOrder( UMLObjectNode,ActionUMLNode);
 
-     INGENIASObjectNode.add(StackEntryNode);
+    addNodeInSortedOrder( INGENIASObjectNode,StackEntryNode);
 
-     INGENIASObjectNode.add(InteractionUnitNode);
+    addNodeInSortedOrder( INGENIASObjectNode,InteractionUnitNode);
 
-     SpecificationNode.add(GRASIASpecificationNode);
+    addNodeInSortedOrder( SpecificationNode,GRASIASpecificationNode);
 
-     UMLClassifierNode.add(UMLClassNode);
+    addNodeInSortedOrder( UMLClassifierNode,UMLClassNode);
 
-     AgentComponentNode.add(MentalStateProcessorNode);
+    addNodeInSortedOrder( AgentComponentNode,MentalStateProcessorNode);
 
-     UMLObjectNode.add(MergeNodeNode);
+    addNodeInSortedOrder( UMLObjectNode,MergeNodeNode);
 
-     UMLObjectNode.add(EndNodeNode);
+    addNodeInSortedOrder( UMLObjectNode,EndNodeNode);
 
-     FactNode.add(FrameFactNode);
+    addNodeInSortedOrder( FactNode,FrameFactNode);
 
-     INGENIASObjectNode.add(TestNode);
+    addNodeInSortedOrder( INGENIASObjectNode,TestNode);
 
-     AUMLContainerNode.add(LifelineNode);
+    addNodeInSortedOrder( AUMLContainerNode,LifelineNode);
 
-     MentalStatePatternNode.add(SymbolicMentalStatePatternNode);
+    addNodeInSortedOrder( MentalStatePatternNode,SymbolicMentalStatePatternNode);
 
-     AgentDescriptionNode.add(PROLOGAgentDescriptionNode);
+    addNodeInSortedOrder( AgentDescriptionNode,PROLOGAgentDescriptionNode);
 
-     InteractionUnitNode.add(InteractionNode);
+    addNodeInSortedOrder( InteractionUnitNode,InteractionNode);
 
-     INGENIASObjectNode.add(SpecificationNode);
+    addNodeInSortedOrder( INGENIASObjectNode,SpecificationNode);
 
-     Autonomous_entityNode.add(AgentNode);
+    addNodeInSortedOrder( Autonomous_entityNode,AgentNode);
 
-     AgentComponentNode.add(MentalStateManagerNode);
+    addNodeInSortedOrder( AgentComponentNode,MentalStateManagerNode);
 
-     INGENIASObjectNode.add(INGENIASCodeComponentNode);
+    addNodeInSortedOrder( INGENIASObjectNode,INGENIASCodeComponentNode);
 
-     GeneralEventNode.add(CommunicationEventNode);
+    addNodeInSortedOrder( GeneralEventNode,CommunicationEventNode);
 
-     TaskNode.add(TaskWSNode);
+    addNodeInSortedOrder( TaskNode,TaskWSNode);
 
-     SlotNode.add(ObjectSlotNode);
+    addNodeInSortedOrder( SlotNode,ObjectSlotNode);
 
-     GoalNode.add(GoalStateWSNode);
+    addNodeInSortedOrder( GoalNode,GoalStateWSNode);
 
-     GoalNode.add(StateGoalNode);
+    addNodeInSortedOrder( GoalNode,StateGoalNode);
 
-     InformationMentalEntityNode.add(ConversationNode);
+    addNodeInSortedOrder( InformationMentalEntityNode,ConversationNode);
 
-     GeneralEventNode.add(ApplicationEventNode);
+    addNodeInSortedOrder( GeneralEventNode,ApplicationEventNode);
 
-     AgentComponentNode.add(TaskNode);
+    addNodeInSortedOrder( AgentComponentNode,TaskNode);
 
-     DeploymentUnitByTypeNode.add(DeploymentUnitByTypeMSEntityNode);
+    addNodeInSortedOrder( DeploymentUnitByTypeNode,DeploymentUnitByTypeMSEntityNode);
 
-     RoleNode.add(RoleWSNode);
+    addNodeInSortedOrder( RoleNode,RoleWSNode);
 
-     AUMLContainerNode.add(AUMLAlternativeBoxNode);
+    addNodeInSortedOrder( AUMLContainerNode,AUMLAlternativeBoxNode);
 
-     INGENIASObjectNode.add(WorkflowNode);
+    addNodeInSortedOrder( INGENIASObjectNode,WorkflowNode);
 
   }
+
+// Function is a contribution from Ike http://www.groupsrv.com/computers/about116987.html
+	private void addNodeInSortedOrder(DefaultMutableTreeNode parent,
+			DefaultMutableTreeNode child){
+		int n = parent.getChildCount();
+		if(n==0){
+			parent.add(child);
+			return;
+		}
+		DefaultMutableTreeNode node=null;
+		for(int i=0;i<n;i++){
+			node = (DefaultMutableTreeNode)parent.getChildAt(i);
+			if(node.toString().compareTo(child.toString())>0){
+				parent.insert(child, i);
+				return;
+			}
+		}
+		parent.add(child);
+		return;
+	}
+
 
   
   public DecisionNode createDecisionNode(String id){
@@ -2323,7 +2546,7 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
    return null;
   }
 
- private DefaultMutableTreeNode findNodeInTree(DefaultMutableTreeNode dtn,String name,String type){
+ public DefaultMutableTreeNode findNodeInTree(DefaultMutableTreeNode dtn,String name,String type){
  DefaultMutableTreeNode node= root.getFirstLeaf();
  while (node!=null){
     if (ingenias.editor.entities.Entity.class.isAssignableFrom(node.getUserObject().getClass())){
@@ -2387,75 +2610,10 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return result;
   }
 
-  public Entity convert(String objectid,String objecttype,Class newClassType)
-      throws java.lang.NoSuchMethodException,
-       java.lang.reflect.InvocationTargetException,
-       java.lang.IllegalAccessException,
-       java.lang.InstantiationException
-  {
 
-   DefaultMutableTreeNode oldnode=this.findNodeInTree(this.root,objectid,objecttype);
-   Log.getInstance().log("Finding "+objectid+":"+objecttype +oldnode);
-   Entity oldent=(Entity)oldnode.getUserObject();
+  
 
-   java.lang.reflect.Constructor cons=newClassType.getConstructor(new Class[] {String.class});
-   Entity newent=(Entity)cons.newInstance(new Object[]{oldent.getId()});
-   Log.getInstance().log("Replacing with "+objectid+":"+newent.getType());
-   this.transferFields(oldent,newent);
-   this.removeEntity(oldent);
-   try {
-     DefaultMutableTreeNode entnode = (DefaultMutableTreeNode)(this.getClass().getField(newent.getType() + "Node").get(this));
-     DefaultMutableTreeNode nn = new DefaultMutableTreeNode(newent);
-     entnode.insert(nn, entnode.getChildCount());
-     nn.setParent(entnode);
-   }catch (Exception e){
-     e.printStackTrace();
-     Log.getInstance().log(e.getMessage());
-   }
-
-//   oldnode.setUserObject(newent);
-   Vector v=this.getAllObjects();
-   this.replaceReferencesOM(v,oldent,newent);
-   this.replaceCellObjects(oldent,newent);
-
-   //this.updateCellViews();
-   this.reload();
-   Log.getInstance().log("Finished");
-   return newent;
-  };
-
-  private void replaceCellObjects(Entity oldent, Entity newent){
-   Vector graphs=GraphManager.getInstance().getUOModels();
-   Enumeration enumeration=graphs.elements();
-   while (enumeration.hasMoreElements()){
-    ModelJGraph mjg=(ModelJGraph)enumeration.nextElement();
-    for (int k=0;k<mjg.getModel().getRootCount();k++){
-      if (mjg.getModel().getRootAt(k) instanceof DefaultGraphCell){
-        DefaultGraphCell dgc=(DefaultGraphCell)mjg.getModel().getRootAt(k);
-        if (dgc.getUserObject().equals(oldent)){
-          dgc.setUserObject(newent);
-        } else {
-/*          if (dgc.getUserObject() instanceof ingenias.editor.entities.NAryEdgeEntity){
-            NAryEdgeEntity ne=(NAryEdgeEntity)dgc.getUserObject();
-            ne.setObject(oldent,newent); // changes the object iif it exists
-          }*/
-        }
-      } else {
-        System.err.println(mjg.getModel().getRootAt(k).getClass());
-      }
-
-    }
-    mjg.repaint();
-    mjg.revalidate();
-
-    for (int k=0;k<mjg.getGraphLayoutCache().getRoots().length;k++){
-      System.err.println(mjg.getGraphLayoutCache().getRoots()[k].getClass());
-    }
-
-   }
-  }
-
-  private void replaceReferencesOM(Vector entities,Entity oldent, Entity newent)
+  public void replaceReferencesOM(Vector entities,Entity oldent, Entity newent)
     throws java.lang.IllegalAccessException{
     Enumeration enumeration=entities.elements();
     while (enumeration.hasMoreElements()){
@@ -2485,7 +2643,7 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
    }
   }
 
-  private void transferFields(Entity source, Entity target)
+  public void transferFields(Entity source, Entity target)
    throws java.lang.NoSuchMethodException,
   java.lang.reflect.InvocationTargetException,
   java.lang.IllegalAccessException{
@@ -2569,7 +2727,16 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
       System.err.println(enumeration.nextElement());
     }
   }
+
+
+
+public void setRoot(javax.swing.tree.DefaultMutableTreeNode root) {
+	this.root = root;
 }
 
+public javax.swing.tree.DefaultMutableTreeNode getRoot() {
+	return root;
+}
+}
 
 		

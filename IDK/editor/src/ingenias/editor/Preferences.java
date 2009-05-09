@@ -7,19 +7,37 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Preferences {
-	enum DefaultRelationshipView {INGENIAS,UML};
-	enum EditPropertiesMode {POPUP,PANEL};
-	enum ModelingLanguage {UML,INGENIAS};
-	enum RelationshipLayout {AUTOMATIC,MANUAL};
-	enum RelationshipsLookAndFeel {LABELS,NOTHING,FULL};
-	
+	public String getSelectedFilter() {
+		return selectedFilter;
+	}
+
+	public void setSelectedFilter(String selectedFilter) {
+		this.selectedFilter = selectedFilter;
+	}
+
+	public boolean isFiltersEnabled() {
+		return filtersEnabled;
+	}
+
+	public void setFiltersEnabled(boolean filtersEnabled) {
+		this.filtersEnabled = filtersEnabled;
+	}
+
+	public enum DefaultRelationshipView {INGENIAS,UML};
+	public enum EditPropertiesMode {POPUP,PANEL};
+	public enum ModelingLanguage {UML,INGENIAS};
+	public enum RelationshipLayout {AUTOMATIC,MANUAL};
+	public enum RelationshipsLookAndFeel {LABELS,NOTHING,FULL};
+
 
 	private DefaultRelationshipView defaultRelationshipView=DefaultRelationshipView.INGENIAS;
 	private EditPropertiesMode editPropertiesMode=EditPropertiesMode.PANEL;
 	private RelationshipsLookAndFeel relationshipsLookAndFeel=RelationshipsLookAndFeel.NOTHING;
 	private ModelingLanguage modelingLanguage=ModelingLanguage.INGENIAS;
-	private RelationshipLayout relationshiplayout=RelationshipLayout.AUTOMATIC;
-	
+	private RelationshipLayout relationshiplayout=RelationshipLayout.AUTOMATIC;	
+	private String selectedFilter="";
+	private boolean filtersEnabled=false;
+
 
 	public String toXML(){
 		StringBuffer sb=new StringBuffer();
@@ -38,6 +56,11 @@ public class Preferences {
 		sb.append("<modeling>");
 		sb.append(modelingLanguage);
 		sb.append("</modeling>\n");
+		if (filtersEnabled){
+			sb.append("<selectedfilter>");
+			sb.append(selectedFilter);
+			sb.append("</selectedfilter>\n");
+		}
 		return sb.toString();
 	}
 
@@ -60,6 +83,10 @@ public class Preferences {
 			}
 			if (children.item(k).getNodeName().equalsIgnoreCase("modeling")){
 				prefs.modelingLanguage=ModelingLanguage.valueOf(children.item(k).getChildNodes().item(0).getNodeValue());
+			}
+			if (children.item(k).getNodeName().equalsIgnoreCase("selectedfilter")){
+				prefs.filtersEnabled=true;
+				prefs.selectedFilter=children.item(k).getChildNodes().item(0).getNodeValue();
 			}
 		}
 		return prefs;

@@ -17,51 +17,55 @@
  */
 package ingenias.editor.editiondialog;
 
-import javax.swing.*;
-import javax.swing.text.JTextComponent;
-import java.lang.reflect.*;
-
-import ingenias.editor.entities.*;
-import java.util.*;
-import java.awt.*;
-
-import javax.swing.border.*;
-import java.awt.event.*;
-
 import ingenias.editor.Editor;
-import ingenias.editor.IDE;
-import ingenias.editor.IDEState;
-import ingenias.editor.widget.*;
-import java.io.*;
-import java.awt.image.*;
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.event.*;
-import java.util.*;
+import ingenias.editor.entities.Entity;
+import ingenias.editor.entities.FrameFact;
+import ingenias.editor.entities.ModelEntity;
+import ingenias.editor.entities.NAryEdgeEntity;
+import ingenias.editor.entities.RoleEntity;
+import ingenias.editor.widget.CustomJTextField;
+import ingenias.editor.widget.Editable;
+import ingenias.editor.widget.EntityWidgetPreferences;
 
-import java.awt.*;
-import java.awt.image.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.net.URL;
-import java.util.Map;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.ArrayList;
-import javax.swing.event.UndoableEditEvent;
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.jgraph.event.*;
 import java.util.Vector;
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.jgraph.event.*;
-import org.jgraph.plaf.basic.*;
-import ingenias.editor.entities.*;
-import ingenias.editor.cell.*;
-//import ingenias.editor.auml.*;
-import ingenias.exception.*;
-import java.io.*;
+
+import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+import javax.swing.text.JTextComponent;
 
 /**
  *  Description of the Class
@@ -83,7 +87,9 @@ implements java.io.Serializable {
 	Vector<ActionListener> actionsForUpdatingEntities=new Vector<ActionListener>();
 	private Frame parentFrame=null;
 
+
 	private ingenias.editor.ObjectManager om = null;
+	private ingenias.editor.GraphManager gm = null;
 	public static Image delImage;
 	static {
 		try {
@@ -137,6 +143,97 @@ implements java.io.Serializable {
 	}
 
 	/**
+	 *Constructor for the GeneralEditionPanel object
+	 *
+	 * @param  ed   Description of the Parameter
+	 * @param  om   Description of the Parameter
+	 * @param  ent  Description of the Parameter
+	 */
+	public GeneralEditionPanel(Editor ed, Frame f, ingenias.editor.ObjectManager om,ingenias.editor.GraphManager gm,
+			Entity ent) {
+		super(new GridLayout(1, 1));
+		this.editor = ed;
+		this.om = om;
+		this.gm=gm;
+		this.parentFrame=f;
+		if (om==null)
+			throw new RuntimeException("OM is null");
+		Box main = Box.createVerticalBox();
+		this.setAlignmentX(Component.LEFT_ALIGNMENT);
+		this.add(main);
+
+		/*
+		 *  BoxLayout bl=new BoxLayout(this,BoxLayout.Y_AXIS);
+		 *  this.setLayout(bl);
+		 */
+		//  this.add(Box.createRigidArea(new Dimension(0,20)));
+
+		if (ModelEntity.class.isAssignableFrom(ent.getClass())) {
+			JPanel subpanel = null;
+			subpanel = this.createModelPanel( (ModelEntity) ent);
+			if (subpanel != null) {
+				subpanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+				main.add(subpanel);
+			}
+		}
+		else {
+
+			entity = ent;
+			Class entc = entity.getClass();
+			Field[] fs = entc.getFields();
+			try {
+				String[] preferredOrder = this.getPreferredOrder();
+				for (int k = 0; k < preferredOrder.length - 1; k++) {
+
+					final Field cf = entc.getField(preferredOrder[k]);
+					try {
+						JPanel subpanel = null;
+						if (! (
+								(RoleEntity.class.isAssignableFrom(entc) ||
+										NAryEdgeEntity.class.isAssignableFrom(entc)) &&
+										cf.getName().equalsIgnoreCase("id"))) {
+
+							if (cf.getType().isAssignableFrom("".getClass())) {
+								subpanel = this.createSimplePanel(cf, entc);
+							}
+							else {
+								Border border1;
+								TitledBorder border;
+								border1 = BorderFactory.createLineBorder(Color.black, 2);
+								border = new TitledBorder(border1, cf.getName());
+								if (!this.isCollectionType(cf)) {
+									this.getValue(entity.getClass(), cf);
+									subpanel = this.createSinglePanel(cf);
+								}
+								else {
+									subpanel = this.createCollectionPanel(cf);
+								}
+								if (subpanel != null) {
+									subpanel.setBorder(border);
+								}
+							}
+							if (subpanel != null) {
+								subpanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+								main.add(subpanel);
+							}
+						}
+					}
+					catch (NoSuchMethodException nsm) {
+						nsm.printStackTrace();
+					}
+					catch (Exception nsme) {
+						nsme.printStackTrace();
+					}
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	/**
 	 *  Description of the Method
 	 *
 	 * @param  type  Description of the Parameter
@@ -145,7 +242,7 @@ implements java.io.Serializable {
 	 */
 	private JPanel createSubPanel(Entity ent) {
 
-		GeneralEditionPanel gep = new GeneralEditionPanel(editor, parentFrame, om, (Entity) ent);
+		GeneralEditionPanel gep = new GeneralEditionPanel(editor, parentFrame, om,gm, (Entity) ent);
 
 		gep.setAlignmentX(Component.LEFT_ALIGNMENT);
 		return gep;
@@ -268,7 +365,9 @@ implements java.io.Serializable {
 		this.add(np);
 		np.setMinimumSize(new Dimension(cf.getName().length() * 10 + 30 * 10, 20));
 
-		jt.addFocusListener(
+		setValueFromTextField(jt,cf1);
+
+		/*		jt.addFocusListener(
 				new java.awt.event.FocusListener() {					
 					public void focusLost(java.awt.event.FocusEvent fe) {
 						if (fe.getID() == fe.FOCUS_LOST ) {		
@@ -298,7 +397,7 @@ implements java.io.Serializable {
 							setValue(jt.getText(), cf);
 						}
 					}
-				});
+				});*/
 
 		return np;
 	}
@@ -325,95 +424,7 @@ implements java.io.Serializable {
 		return "";
 	}
 
-	/**
-	 *Constructor for the GeneralEditionPanel object
-	 *
-	 * @param  ed   Description of the Parameter
-	 * @param  om   Description of the Parameter
-	 * @param  ent  Description of the Parameter
-	 */
-	public GeneralEditionPanel(Editor ed, Frame f, ingenias.editor.ObjectManager om,
-			Entity ent) {
-		super(new GridLayout(1, 1));
-		this.editor = ed;
-		this.om = om;
-		this.parentFrame=f;
-		if (om==null)
-			throw new RuntimeException("OM is null");
-		Box main = Box.createVerticalBox();
-		this.setAlignmentX(Component.LEFT_ALIGNMENT);
-		this.add(main);
 
-		/*
-		 *  BoxLayout bl=new BoxLayout(this,BoxLayout.Y_AXIS);
-		 *  this.setLayout(bl);
-		 */
-		//  this.add(Box.createRigidArea(new Dimension(0,20)));
-
-		if (ModelEntity.class.isAssignableFrom(ent.getClass())) {
-			JPanel subpanel = null;
-			subpanel = this.createModelPanel( (ModelEntity) ent);
-			if (subpanel != null) {
-				subpanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-				main.add(subpanel);
-			}
-		}
-		else {
-
-			entity = ent;
-			Class entc = entity.getClass();
-			Field[] fs = entc.getFields();
-			try {
-				String[] preferredOrder = this.getPreferredOrder();
-				for (int k = 0; k < preferredOrder.length - 1; k++) {
-
-					final Field cf = entc.getField(preferredOrder[k]);
-					try {
-						JPanel subpanel = null;
-						if (! (
-								(RoleEntity.class.isAssignableFrom(entc) ||
-										NAryEdgeEntity.class.isAssignableFrom(entc)) &&
-										cf.getName().equalsIgnoreCase("id"))) {
-
-							if (cf.getType().isAssignableFrom("".getClass())) {
-								subpanel = this.createSimplePanel(cf, entc);
-							}
-							else {
-								Border border1;
-								TitledBorder border;
-								border1 = BorderFactory.createLineBorder(Color.black, 2);
-								border = new TitledBorder(border1, cf.getName());
-								if (!this.isCollectionType(cf)) {
-									this.getValue(entity.getClass(), cf);
-									subpanel = this.createSinglePanel(cf);
-								}
-								else {
-									subpanel = this.createCollectionPanel(cf);
-								}
-								if (subpanel != null) {
-									subpanel.setBorder(border);
-								}
-							}
-							if (subpanel != null) {
-								subpanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-								main.add(subpanel);
-							}
-						}
-					}
-					catch (NoSuchMethodException nsm) {
-						nsm.printStackTrace();
-					}
-					catch (Exception nsme) {
-						nsme.printStackTrace();
-					}
-				}
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-	}
 
 	/**
 	 *  Description of the Method
@@ -439,8 +450,7 @@ implements java.io.Serializable {
 		JPanel middle = new JPanel(new BorderLayout());
 		Vector instancesName = this.getModelInstancesNames("ingenias.editor." +
 				cent.getModelType());
-		final Vector instances = ingenias.editor.GraphManager.getInstance().
-		getInstances("ingenias.editor." + cent.getModelType());
+		final Vector instances = gm.getInstances("ingenias.editor." + cent.getModelType());
 		final javax.swing.JComboBox jcb = new javax.swing.JComboBox(instancesName);
 		middle.add(jcb, BorderLayout.CENTER);
 		JButton selectValue = new JButton("Select one model");
@@ -466,9 +476,10 @@ implements java.io.Serializable {
 					public void actionPerformed(ActionEvent ae) {
 						if (cent.getModelID() != null && !cent.getModelID().equalsIgnoreCase("")) {
 							ingenias.editor.ModelJGraph mjg =
-								ingenias.editor.GraphManager.getInstance().getModel(cent.
+								gm.getModel(cent.
 										getModelID());
 							editor.changeGraph(mjg);
+							//updateButtonBars();
 						}
 					}
 				});
@@ -519,8 +530,7 @@ implements java.io.Serializable {
 		JPanel middle = new JPanel(new BorderLayout());
 		Vector instancesName = this.getModelInstancesNames("ingenias.editor." +
 				cent.getModelType());
-		final Vector instances = ingenias.editor.GraphManager.getInstance().
-		getInstances("ingenias.editor." + cent.getModelType());
+		final Vector instances = gm.getInstances("ingenias.editor." + cent.getModelType());
 		final javax.swing.JComboBox jcb = new javax.swing.JComboBox(instancesName);
 		middle.add(jcb, BorderLayout.CENTER);
 		JButton selectValue = new JButton("Select one model");
@@ -546,9 +556,10 @@ implements java.io.Serializable {
 					public void actionPerformed(ActionEvent ae) {
 						if (cent.getModelID() != null && !cent.getModelID().equalsIgnoreCase("")) {
 							ingenias.editor.ModelJGraph mjg =
-								ingenias.editor.GraphManager.getInstance().getModel(cent.
+								gm.getModel(cent.
 										getModelID());
 							editor.changeGraph(mjg);
+							//	 updateButtonBars();
 						}
 					}
 				});
@@ -567,7 +578,7 @@ implements java.io.Serializable {
 	 */
 	private Vector getModelInstancesNames(String type) {
 
-		Vector instances = ingenias.editor.GraphManager.getInstance().getInstances(
+		Vector instances = gm.getInstances(
 				type);
 		Vector instanceIDS = new Vector();
 		Enumeration enumeration = instances.elements();
@@ -594,7 +605,7 @@ implements java.io.Serializable {
 		final Component[] oldComponents = np.getComponents();
 		delete.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				int result = JOptionPane.showConfirmDialog(ingenias.editor.IDE.ide, "Do you really want to Unlink?","Unlink",
+				int result = JOptionPane.showConfirmDialog(parentFrame, "Do you really want to Unlink?","Unlink",
 						JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE);
 				if (result == JOptionPane.OK_OPTION){
@@ -607,7 +618,7 @@ implements java.io.Serializable {
 			}});
 		open.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {				
-				GeneralEditionFrame ndialog = new GeneralEditionFrame(editor,om,parentFrame,ent.getId()+":"+ent.getType(),ent);
+				GeneralEditionFrame ndialog = new GeneralEditionFrame(editor,om,gm,parentFrame,ent.getId()+":"+ent.getType(),ent);
 				ndialog.pack();
 				ndialog.setModal(true);
 				ndialog.setVisible(true);
@@ -686,7 +697,7 @@ implements java.io.Serializable {
 							if (instances.size() > 0) {
 								javax.swing.JComboBox options = new javax.swing.JComboBox(
 										instanceIDS);
-								int result = JOptionPane.showConfirmDialog(IDE.ide, options,
+								int result = JOptionPane.showConfirmDialog(parentFrame, options,
 										"Select one", JOptionPane.NO_OPTION,
 										JOptionPane.QUESTION_MESSAGE);
 								if (result == JOptionPane.OK_OPTION &&
@@ -708,7 +719,7 @@ implements java.io.Serializable {
 								}
 							}
 							else {
-								JOptionPane.showMessageDialog(IDE.ide,
+								JOptionPane.showMessageDialog(parentFrame,
 										"There are no instances of " + type,
 										"Warning",
 										JOptionPane.WARNING_MESSAGE);
@@ -767,7 +778,7 @@ implements java.io.Serializable {
 									if (classesIDS.size() > 0) {
 										javax.swing.JComboBox options = new javax.swing.JComboBox(
 												classesIDS);
-										int result = JOptionPane.showConfirmDialog(IDE.ide, options,
+										int result = JOptionPane.showConfirmDialog(parentFrame, options,
 												"Select one", JOptionPane.NO_OPTION,
 												JOptionPane.QUESTION_MESSAGE);
 										if (result == JOptionPane.OK_OPTION &&
@@ -781,26 +792,37 @@ implements java.io.Serializable {
 											else {
 												ent = createEntity(sclass);
 											}
-											
-											
-											GeneralEditionFrame gef = new GeneralEditionFrame(editor, om, parentFrame,
+
+
+											GeneralEditionFrame gef = new GeneralEditionFrame(editor, om,gm, parentFrame,
 													"Editing", ent);
 											gef.pack();
 											gef.setVisible(true);
+											final Entity ent1=ent;
 											switch (gef.getStatus()){
 											case GeneralEditionFrame.ACCEPTED:
 												addValue(ent, cf);
-												lm.addElement(ent);
+												SwingUtilities.invokeLater(new Runnable()
+												{
+													public void run()
+													{
+														lm.addElement(ent1);
+														refreshList(jl);	
+														System.out.println("Refreshed with "+ent1.toString());
+
+													}
+												});
+
 												break;
 											case GeneralEditionFrame.CANCELLED:											
 												break;
 
 											}
-											
+
 										}
 									}
 									else {
-										JOptionPane.showMessageDialog(IDE.ide,
+										JOptionPane.showMessageDialog(parentFrame,
 												"There are no valid classes assignable to " + type, "Warning",
 												JOptionPane.WARNING_MESSAGE);
 									}
@@ -811,7 +833,8 @@ implements java.io.Serializable {
 								}
 							}
 						};
-						new Thread(action).start();
+						SwingUtilities.invokeLater(action);
+						//new Thread(action).start();
 
 					}
 				});
@@ -840,7 +863,7 @@ implements java.io.Serializable {
 									if (instances.size() > 0) {
 										javax.swing.JComboBox options = new javax.swing.JComboBox(
 												instanceIDS);
-										int result = JOptionPane.showConfirmDialog(IDE.ide, options,
+										int result = JOptionPane.showConfirmDialog(parentFrame, options,
 												"Select one", JOptionPane.NO_OPTION,
 												JOptionPane.QUESTION_MESSAGE);
 										if (result == JOptionPane.OK_OPTION &&
@@ -848,11 +871,21 @@ implements java.io.Serializable {
 											Entity ent = (Entity) instanceIndex.get(
 													options.getSelectedItem());
 											addValue(ent, cf);
-											lm.addElement(ent);
+											final Entity ent1=ent;
+											SwingUtilities.invokeLater(new Runnable()
+											{
+												public void run()
+												{
+													lm.addElement(ent1);
+													System.out.println("Refreshed with "+ent1.toString());
+												}
+											});											
+											refreshList(jl);
+
 										}
 									}
 									else {
-										JOptionPane.showMessageDialog(IDE.ide,
+										JOptionPane.showMessageDialog(parentFrame,
 												"There are no instances of " + type,
 												"Warning",
 												JOptionPane.WARNING_MESSAGE);
@@ -874,37 +907,49 @@ implements java.io.Serializable {
 					public void actionPerformed(ActionEvent e) {
 						Runnable action=new Runnable(){
 							public void run(){
-								int deletedIndex=jl.getSelectedIndices().length-1;
-								while (!jl.isSelectionEmpty()){
-									int[] genindex = jl.getSelectedIndices();
-									int index=genindex[deletedIndex];
-									deletedIndex=deletedIndex-1;
-									if (index > -1) {
-										try {
-											Class type = getCollectionType(cf);
-											Enumeration enumeration = getCollection(cf);
-											Object o =null;
-											for (int k = 0; k <= index; k++) {
-												o=enumeration.nextElement();
-											}
-											
-											if (type.equals(java.lang.String.class)) {
-												removeValue(o.toString(), cf);
-											}
-											else {
-												ingenias.editor.entities.Entity en = (ingenias.editor.entities.
-														Entity) o;
-												removeValue(en.getId(), cf);
+								Object[] selectedValues=jl.getSelectedValues();
+
+								for (Object objectToDelete:selectedValues){									
+
+									try {
+										Class type = getCollectionType(cf);
+										Enumeration enumeration = getCollection(cf);
+										boolean found=false;
+										while(enumeration.hasMoreElements() && !found){
+											final Object currentObject=enumeration.nextElement();
+											if (currentObject.equals(objectToDelete)){													
+												SwingUtilities.invokeLater(new Runnable()
+												{
+													public void run()
+													{
+														lm.removeElement(currentObject);
+													}
+												});
+												if (type.equals(java.lang.String.class)) {
+													removeValue(currentObject.toString(), cf);
+												}
+												else {
+													ingenias.editor.entities.Entity en = (ingenias.editor.entities.
+															Entity) currentObject;														
+													removeValue(en.getId(), cf);
+													refreshList(jl);
+
+												}
 											}
 
-											lm.remove(index);
-										}
-										catch (Exception e1) {
-											e1.printStackTrace();
-										}
+										}																		
+
+
 									}
+									catch (Exception e1) {
+										e1.printStackTrace();
+									}
+
 								}
+
 							}
+
+
 						};
 						new Thread(action).start();
 
@@ -921,7 +966,7 @@ implements java.io.Serializable {
 								if (index > -1) {
 									Entity ent = (Entity) lm.get(index);
 									//									System.err.println(ent.getClass());
-									JDialog jf = new GeneralEditionFrame(editor, om, parentFrame, "Edition", ent);
+									JDialog jf = new GeneralEditionFrame(editor, om,gm, parentFrame, "Edition", ent);
 									jf.pack();
 									jf.show();
 								}
@@ -933,6 +978,20 @@ implements java.io.Serializable {
 		);
 
 		return menu;
+	}
+
+	private void refreshList(final JList jl) {
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				for (int k=0;k<jl.getModel().getSize();k++)
+					System.err.println(k+":"+jl.getModel().getElementAt(k));
+				jl.invalidate();
+				jl.repaint();	
+				parentFrame.repaint();
+			}
+		});
 	}
 
 	protected static void sortClasses(Vector instClasses) {
@@ -956,6 +1015,7 @@ implements java.io.Serializable {
 
 	}
 
+
 	/**
 	 *  Description of the Method
 	 *
@@ -963,7 +1023,7 @@ implements java.io.Serializable {
 	 * @return                            Description of the Return Value
 	 * @exception  NoSuchMethodException  Description of the Exception
 	 */
-	private JPanel createCollectionPanel(Field cf) throws NoSuchMethodException {
+	private JPanel createCollectionPanel(final Field cf) throws NoSuchMethodException {
 		JPanel main = new JPanel(new GridLayout());
 		main.setAlignmentX(Component.LEFT_ALIGNMENT);
 		JScrollPane collection = new JScrollPane();
@@ -977,6 +1037,7 @@ implements java.io.Serializable {
 			dlm.addElement(enumeration.nextElement());
 		}
 		final JList jl = new JList(dlm);
+		jl.setName("valueList"+cf.getName());
 		jl.setAutoscrolls(true);
 		jl.setAlignmentX(Component.LEFT_ALIGNMENT);
 		//		jl.setPreferredSize(new Dimension(300, 100));
@@ -989,6 +1050,7 @@ implements java.io.Serializable {
 					public void mouseClicked(MouseEvent e) {
 						if (SwingUtilities.isRightMouseButton(e)) {
 							JPopupMenu menu = createCollectionPopupmenu(jl, dlm, cf1);
+							menu.setName("listMenu"+cf.getName());
 							menu.show(e.getComponent(), e.getX(), e.getY());
 						}
 					}
@@ -1026,7 +1088,7 @@ implements java.io.Serializable {
 				if (subentity!=null){				
 					createReferencePanelToEntity(subpanel, subentity,cf);				    
 				} else { 
-					JPanel npanel= new GeneralEditionPanel(editor, parentFrame, om,
+					JPanel npanel= new GeneralEditionPanel(editor, parentFrame, om,gm,
 							(Entity)this.getValue(this.entity.
 									getClass(), cf));
 					subpanel.add(npanel,BorderLayout.CENTER);
@@ -1100,6 +1162,57 @@ implements java.io.Serializable {
 		return "";
 	}
 
+	private void setValueFromTextField(final Editable jt, final Field cf) {
+		try {
+
+			Class params[] = {
+					cf.getType()};
+
+			String mname = "set" +
+			cf.getName().substring(0, 1).toUpperCase() +
+			cf.getName().substring(1, cf.getName().length());
+			java.lang.reflect.Method[] mms = entity.getClass().getMethods();
+			for (int k = 0; k < mms.length; k++) {
+				Class[] c = mms[k].getParameterTypes();
+			}
+
+			final java.lang.reflect.Method m = entity.getClass().getMethod(mname, params);
+
+
+			final java.lang.reflect.Method undo=m;
+			final Object oldvalue=getValue(entity.getClass(),cf);
+			this.confirm.add(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					try {   
+						Vector<Entity> objectsWithSameID = om.findUserObject(jt.getText().toString());
+						if (
+								(cf.getName().equalsIgnoreCase("id") && 
+										(objectsWithSameID.size()==0||
+												(objectsWithSameID.size()==1 
+														&&  objectsWithSameID.contains(entity))))
+														|| !cf.getName().equalsIgnoreCase("id")){		
+							m.invoke(entity, new Object[]{jt.getText()});
+							System.out.println("setting value "+jt.getText()+" to field "+cf.getName());
+						} else {					
+							JOptionPane.showMessageDialog(parentFrame,
+									"There is another entity with that ID. Operation cancelled.", "Error", JOptionPane.WARNING_MESSAGE);
+						}
+						//System.err.println("setting old value "+getValue(entity.getClass(),cf));
+					} catch (IllegalArgumentException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IllegalAccessException e1) {} catch (InvocationTargetException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					} ;}});
+
+
+		}
+		catch (Exception iae) {
+			iae.printStackTrace();
+		}
+	}
+
 	/**
 	 *  Sets the value attribute of the GeneralEditionPanel object
 	 *
@@ -1135,6 +1248,7 @@ implements java.io.Serializable {
 						public void actionPerformed(ActionEvent e) {
 							try {   
 								m.invoke(entity, paramVal);
+								System.out.println("setting value "+value+" to field "+cf.getName());
 								//System.err.println("setting old value "+getValue(entity.getClass(),cf));
 							} catch (IllegalArgumentException e1) {
 								// TODO Auto-generated catch block
@@ -1159,36 +1273,10 @@ implements java.io.Serializable {
 						}
 					});
 				} else {					
-					JOptionPane.showMessageDialog(IDE.ide,
+					JOptionPane.showMessageDialog(parentFrame,
 							"There is another entity with that ID. Operation cancelled.", "Error", JOptionPane.WARNING_MESSAGE);
 				}
 			}
-
-
-
-
-			//System.err.println("setting old value "+getValue(entity.getClass(),cf));
-
-
-
-			/*this.confirm.add(new ActionListener(){
-
-				public void actionPerformed(ActionEvent e) {
-					try {   
-					if (!value.equals(oldvalue))
-						m.invoke(entity, paramVal);
-						System.err.println("setting old value "+getValue(entity.getClass(),cf));
-					} catch (IllegalArgumentException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IllegalAccessException e1) {} catch (InvocationTargetException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					} catch (NoSuchMethodException e3) {
-						// TODO Auto-generated catch block
-						e3.printStackTrace();
-					};}});*/
-
 
 		}
 		catch (Exception iae) {
@@ -1459,11 +1547,13 @@ implements java.io.Serializable {
 					className).newInstance();
 			Object widget = ep.getWidget(field);
 			if (widget == null) {
-				return new CustomJTextField();
+				CustomJTextField widget1=new CustomJTextField();
+				widget1.setName(field);
+				return widget1;
 			}
 			ingenias.editor.widget.Editable edit = (ingenias.editor.widget.Editable)
-			widget;
-
+			widget;			
+			edit.setName(field);
 			//((ConfigurableWidget)edit).setDefaultValues();
 			return edit;
 			//cparams).newInstance(cval);

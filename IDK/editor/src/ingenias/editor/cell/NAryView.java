@@ -64,8 +64,7 @@ public class NAryView
      //jta.setFont(GraphConstants.getFont(this.getAllAttributes()));
     String text = ( (DefaultGraphCell) (this.getCell())).getUserObject().
         toString();
-    if (text.equals("null") || text.length() == 0 ||
-        ingenias.editor.IDE.getRelationshipTyping()) {
+    if (text.equals("null") || text.length() == 0 ) {
       Class objectClass = ( (DefaultGraphCell) (this.getCell())).getUserObject().
           getClass();
       text = "<<" +

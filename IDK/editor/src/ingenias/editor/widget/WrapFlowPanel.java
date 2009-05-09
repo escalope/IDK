@@ -1,7 +1,6 @@
 package ingenias.editor.widget;
 
-import ingenias.editor.AgentModelModelJGraph;
-import ingenias.editor.DeployDiagramModelJGraph;
+import ingenias.editor.models.*;
 import ingenias.editor.IDEState;
 import ingenias.editor.Model;
 import ingenias.editor.cell.MentalInstanceSpecificationCell;
@@ -135,7 +134,10 @@ public class WrapFlowPanel extends JPanel  {
 		JFrame main=new JFrame();
 		IDEState empty = IDEState.emptyIDEState();
 		
-		AgentModelModelJGraph jg=new AgentModelModelJGraph(new AgentModelDataEntity("2"),"",empty.om, new Model(empty),new BasicMarqueeHandler());
+		AgentModelModelJGraph jg=new AgentModelModelJGraph(
+				new AgentModelDataEntity("2"),"",empty.om, 
+				new Model(empty),new BasicMarqueeHandler(), 
+				empty.prefs);
 		main.getContentPane().setLayout(new BorderLayout());
 		main.getContentPane().add(jg,BorderLayout.CENTER);
 		

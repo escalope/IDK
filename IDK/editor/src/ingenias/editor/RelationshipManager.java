@@ -202,7 +202,7 @@ public class RelationshipManager implements java.io.Serializable {
 			JPanel temp = new JPanel();
 			temp.add(new JLabel("Select one of the following relationships"));
 			temp.add(pops);
-			int result = JOptionPane.showConfirmDialog(IDE.ide, temp,
+			int result = JOptionPane.showConfirmDialog(null, temp,
 					"Valid Relationships",
 					JOptionPane.OK_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE);
@@ -337,7 +337,6 @@ public class RelationshipManager implements java.io.Serializable {
 	// 1 and it is NAryEdge => Connect the remaining GraphCells with that NAryEdge.
 	// other cases => Error unable to connect.
 	public static NAryEdge connect(Point pt, GraphCell[] selected, ModelJGraph graph) {
-		IDE.setChanged();
 		// Possible edges.
 		Object[] ops = graph.getPossibleRelationships(selected);
 		NAryEdge nEdge = null;
@@ -437,7 +436,7 @@ public class RelationshipManager implements java.io.Serializable {
 
 				}
 				else {
-					JOptionPane.showMessageDialog(IDE.ide, "Assignation not allowed",
+					JOptionPane.showMessageDialog(null, "Assignation not allowed",
 							"Warning",
 							JOptionPane.WARNING_MESSAGE);
 				}
@@ -447,7 +446,7 @@ public class RelationshipManager implements java.io.Serializable {
 		}
 		else 
 		{
-			JOptionPane.showMessageDialog(IDE.ide, "Relationship not allowed", "Warning",
+			JOptionPane.showMessageDialog(null, "Relationship not allowed", "Warning",
 					JOptionPane.WARNING_MESSAGE);
 		}
 		return nEdge;
@@ -516,7 +515,7 @@ public class RelationshipManager implements java.io.Serializable {
 				assignations);
 		if (displayedAssignations.length>1){
 		// Ask the user to select a role assignation.
-		String selectedOption = (String) JOptionPane.showInputDialog(IDE.ide,
+		String selectedOption = (String) JOptionPane.showInputDialog(null,
 				"Select one of the following assignations", "Valid Assignations",
 				JOptionPane.OK_CANCEL_OPTION, null,
 				displayedAssignations, displayedAssignations[0]);
@@ -543,7 +542,7 @@ public class RelationshipManager implements java.io.Serializable {
 	// not through the pop-up menu.
 	// Both source and target are not null.
   public static NAryEdge connect(Port source, Port target, ModelJGraph graph) {
-		IDE.setChanged();
+		;
 		// The general connect method only admits a GraphCell[] parameter.
 		GraphCell sourceGraphCell = (GraphCell)graph.getModel().getParent(
 				source);

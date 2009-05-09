@@ -24,6 +24,7 @@
  */
 
 package ingenias.editor;
+import ingenias.editor.CommonMenuEntriesActionFactory;
 import ingenias.editor.cell.NAryEdge;
 import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.RoleEntity;
@@ -71,7 +72,14 @@ import org.jgraph.plaf.basic.*;
 //MarqueeHandler that Connects Vertices and Displays PopupMenus
 
 
-public abstract class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Serializable {
+public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Serializable {
+
+
+	/*  public Preferences getPref() {
+		return pref;
+	}*/
+
+
 	// Holds the Start and the Current Point
 	/**
 	 *  Description of the Field
@@ -86,10 +94,18 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 
 	private ModelJGraph graph;
 
+	private Vector<AbstractAction> additionalActions=new Vector<AbstractAction>(); 
+	private CommonMenuEntriesActionFactory af;
+	private DiagramMenuEntriesActionsFactory daf;
 
-	public MarqueeHandler(ModelJGraph graph){
-
+	public MarqueeHandler(ModelJGraph graph, GUIResources resources, IDEState ids, DiagramMenuEntriesActionsFactory daf){
 		this.graph=graph;
+		this.af=new CommonMenuEntriesActionFactory(resources,ids);
+		this.daf=daf;
+	}
+
+	public void addContextualMenuAction(AbstractAction action){
+		additionalActions.add(action);
 	}
 
 
@@ -235,6 +251,7 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 	 *@param  e  Description of Parameter
 	 */
 	public void mousePressed(final MouseEvent e) {
+		
 		// If Right Mouse Button
 		if (SwingUtilities.isRightMouseButton(e)) {
 			// Scale From Screen to Model
@@ -243,8 +260,7 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 			Object cell = getGraph().getFirstCellForLocation(loc.x, loc.y);
 
 			JPopupMenu menu=new JPopupMenu();
-			if (cell!=null)
-				System.err.println(cell.getClass().getName());
+		
 			if (cell instanceof DefaultEdge){
 				menu.add("Relationship");
 				menu.addSeparator();
@@ -264,20 +280,25 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 						// Create PopupMenu for the Cell
 						menu.add("Entity");
 						menu.addSeparator();
-						addActionsToPopupMenu(menu,this.createBasicActions((DefaultGraphCell)cell));				
+						addActionsToPopupMenu(menu,af.createCellActions((DefaultGraphCell)cell, getGraph()));				
 						menu.addSeparator();
-						menu.add(createMenu("Views",this.createChangeViewActions((DefaultGraphCell)cell)));
-						menu.add(createMenu("Refinement",this.createRefinementActions((DefaultGraphCell)cell)));
+						menu.add(createMenu("Views",daf.createChangeViewActions((DefaultGraphCell)cell, getGraph())));
+						final ingenias.editor.entities.Entity ent=((ingenias.editor.entities.Entity)((DefaultGraphCell)cell).getUserObject());
+						Vector<AbstractAction> actions = af.createEntityActions(ent);
+						for (AbstractAction action:actions){
+							menu.add(action);
+						}                        
+						menu.add(createMenu("Refinement",af.createCellRefinementActions(ent)));
 					} else {
 						if (getGraph().getSelectionCells()!=null && getGraph().getSelectionCells().length>1){
 							GraphCell[] gc=new GraphCell[getGraph().getSelectionCells().length];
 							System.arraycopy(getGraph().getSelectionCells(),0,gc,0,gc.length);
-							addActionsToPopupMenu(menu,this.createDiagramIndependentActions(e.getPoint(),
-									gc));
+							addActionsToPopupMenu(menu,af.createDiagramIndependentActions(e.getPoint(),
+									gc, getGraph()));
 						}
-						addActionsToPopupMenu(menu,this.createDiagramOperations());
-
-						addActionsToPopupMenu(menu,this.createDiagramSpecificInsertActions(e.getPoint()));	
+						addActionsToPopupMenu(menu,af.createDiagramOperations(getGraph()));
+						menu.addSeparator();
+						addActionsToPopupMenu(menu,daf.createDiagramSpecificInsertActions(e.getPoint(),graph));	
 					}
 				}
 
@@ -294,6 +315,7 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 			firstPort = port;
 			// Consume Event
 			e.consume();
+		
 		}
 		else {
 			// Call Superclass
@@ -302,72 +324,25 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 		super.mousePressed(e);		
 	}
 
-	public void locateAndScrollToObject(IDEState ids, String id) {
-
-		TreePath foundpath=ids.gm.findModelTreePath(id);
-
-		if (foundpath!=null){
-
-			TreePath tp=(TreePath)foundpath;
-			ids.gm.arbolProyecto.expandPath(tp);	  
-			ids.gm.arbolProyecto.scrollPathToVisible(tp);
-			System.err.println("Scrolling to "+tp);
-			ids.gm.arbolProyecto.setSelectionPath(tp);
-
-
-		}
-
-
-	}
-
-
-	private Vector<AbstractAction> createDiagramOperations() {
-		Vector<AbstractAction> actions=new Vector<AbstractAction>();
-		actions.add(
-				new AbstractAction("Show in project view") {
-
-					public void actionPerformed(ActionEvent e) {
-						if (IDE.ide!=null)
-							locateAndScrollToObject(IDE.ide.ids,getGraph().getName());
-					}
-				});
-		return actions;	}
-
-
-	private Vector<AbstractAction> createDiagramIndependentActions(final Point point, final GraphCell[] selected) {
-		Vector<AbstractAction> actions=new Vector<AbstractAction>();
-		actions.add(
-				new AbstractAction("Connect") {
-
-					public void actionPerformed(ActionEvent e) {
-						new Thread(){
-							public void run(){
-								RelationshipManager.connect(point, selected,graph);		
-							}
-						}.start();
-					}
-				});
-		return actions;
-	}
-
 
 	private void createRelationshipMenu(JPopupMenu menu, NAryEdge nary) {
 		String typeOfRelationship=((ingenias.editor.entities.NAryEdgeEntity)nary.getUserObject()).getType();
 		Vector<String> roles=new Vector<String>(nary.getRoles());
-		addActionsToPopupMenu(menu,this.createBasicActions(nary));				
+		addActionsToPopupMenu(menu,af.createCellActions(nary, getGraph()));		
 		menu.addSeparator();
-		menu.add(createMenu("views",this.createChangeViewActions(nary)));
+		menu.add(createMenu("views",daf.createChangeViewActions(nary, graph)));
 
 		for (int k=0;k<roles.size();k++){
 			DefaultEdge[] edgesPerRole=nary.getRoleEdges(roles.elementAt(k));					
 			if (edgesPerRole.length>1){
 				for (int j=0;j<edgesPerRole.length;j++){
-					Vector<AbstractAction> edgeMenuActions = createEdgeActions(nary.getRoleEdges(roles.elementAt(k))[j]);
+					Vector<AbstractAction> edgeMenuActions = af.createEdgeActions(
+							nary.getRoleEdges(roles.elementAt(k))[j], getGraph());
 					menu.add(createMenu("role:"+roles.elementAt(k),edgeMenuActions));
 				}
 			} else {
 				if (edgesPerRole.length==1){
-					Vector<AbstractAction> edgeMenuActions = createEdgeActions(nary.getRoleEdges(roles.elementAt(k))[0]);
+					Vector<AbstractAction> edgeMenuActions = af.createEdgeActions(nary.getRoleEdges(roles.elementAt(k))[0], getGraph());
 					menu.add(createMenu("role:"+roles.elementAt(k),edgeMenuActions));
 				} 
 			}
@@ -375,8 +350,6 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 
 		}
 	}
-
-
 
 
 	private JMenu createMenu(String name, Vector<AbstractAction> actions) {
@@ -398,202 +371,6 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 	}
 
 
-	private Vector<AbstractAction> createEdgeActions(final DefaultEdge cell){
-		Vector<AbstractAction> actions=new Vector<AbstractAction>();
-		final RoleEntity re=(RoleEntity)(cell).getUserObject();
-		Field[] fs=re.getClass().getFields();
-		if (fs.length>1)
-			actions.add(
-					new AbstractAction("Edit") {
-						public void actionPerformed(ActionEvent e) {
-							System.err.println("clase cell"+cell.getClass()+" "+cell.getUserObject());
-							getGraph().startEditingAtCell(cell);
-
-						}
-					});
-		if (fs.length>1)
-			actions.add(
-					new AbstractAction("Hide fields") {
-
-						public void actionPerformed(ActionEvent e) {
-							re.hide();
-						}
-					});
-		for (int k=0;k<fs.length;k++){
-			if (!fs[k].getName().equalsIgnoreCase("id")){
-				final int j=k;
-				// Edit
-				actions.add(
-						new AbstractAction("Show field "+fs[k].getName()) {
-
-							public void actionPerformed(ActionEvent e) {
-								re.show(j);
-							}
-						});
-
-			}}
-		return actions;
-	}
-
-
-	private Vector<AbstractAction> createBasicActions(final DefaultGraphCell cell){
-		Vector<AbstractAction> actions=new Vector<AbstractAction>();
-//		Help
-
-		actions.add(
-				new AbstractAction("Help") {
-					public void actionPerformed(ActionEvent e) {
-						CellHelpWindow chw= new CellHelpWindow();
-						DefaultGraphCell dgc=(DefaultGraphCell)cell;
-						ingenias.editor.entities.Entity ent=((ingenias.editor.entities.Entity)dgc.getUserObject());
-						chw.setDescription(ent.getHelpDesc());
-						chw.setRec(ent.getHelpRecom());
-						chw.setSize(350,300);						
-						chw.setLocation(GraphicsUtils.getCenter(IDE.ide,chw.getSize()));
-						chw.show();
-					}
-				});
-
-
-
-		// Edit
-		actions.add(
-				new AbstractAction("Edit") {
-					public void actionPerformed(ActionEvent e) {
-						getGraph().startEditingAtCell(cell);
-
-					}
-				});
-
-//		Remove
-
-		/*actions.add(
-				new AbstractAction("Remove") {
-					public void actionPerformed(ActionEvent e) {
-						getGraph().setSelectionCells(new Object[]{cell});
-						editor.getCommonButtons().getRemove().actionPerformed(e);
-					}
-				});*/
-
-
-
-		final ingenias.editor.entities.Entity ent=((ingenias.editor.entities.Entity)cell.getUserObject());
-
-		actions.add(
-				new AbstractAction("Search occurrences") {				
-					public void actionPerformed(ActionEvent e) {
-						try{
-							StringBuffer result=new StringBuffer();
-							result.append("Diagrams found:<ul>");
-							Graph[] graphs=BrowserImp.getInstance().getGraphs();
-							for (int k=0;k<graphs.length;k++){
-								GraphEntity[] ges;
-								try { 
-									ges = graphs[k].getEntities();
-									boolean found=false;
-									for (int j=0;j<ges.length &&!found;j++){
-										found=ges[j].getID().equals(ent.getId());
-									}
-									if (found){
-
-										result.append("<li><a href=\"http://app/"+graphs[k].getName()+"/"+ent.getId()+"\">"+graphs[k].getName()+"</a>");
-									}
-								} catch (NullEntity e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-							}
-							result.append("</ul>");
-							IDE.ide.searchDiagramPanel.setText(result.toString());
-							IDE.ide.focusSearchPane();
-
-						} catch (NotInitialised e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						/*StringBuffer result=new StringBuffer();
-						result.append("Diagrams found:<ul>");
-						Graph[] graphs=null;
-						try {
-							graphs = BrowserImp.getInstance().getGraphs();
-						} catch (NotInitialised e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}
-						for (int k=0;k<graphs.length;k++){
-							GraphEntity[] ges;
-							try {
-								ges = graphs[k].getEntities();
-								boolean found=false;
-								for (int j=0;j<ges.length &&!found;j++){
-									found=ges[j].getID().equals(ent.getId());
-								}
-								if (found){
-									result.append("<li><a href=\"http://app/"+graphs[k].getName()+"\">"+graphs[k].getName()+"</a>");
-								}
-							} catch (NullEntity e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-						}
-						result.append("</ul>");*/
-
-
-					}
-				});			
-		return actions;
-	}
-
-	private Vector<AbstractAction> createRefinementActions(final DefaultGraphCell cell){
-		Vector<AbstractAction> actions=new Vector<AbstractAction>();
-		DefaultGraphCell dgc = (DefaultGraphCell) cell;
-		final ingenias.editor.entities.Entity ent=((ingenias.editor.entities.Entity)dgc.getUserObject());
-		Vector v=ObjectManager.getInheritors(ent.getClass());
-		if (v.size()>0){
-
-			for (int k = 0; k < v.size(); k++) {
-				final Class current = (Class) v.elementAt(k);
-				actions.add(new AbstractAction(current.getName().substring(current.getName().lastIndexOf(".")+1,current.getName().length())) {
-					public void actionPerformed(ActionEvent e) {
-						Log.getInstance().logERROR("Replacing");
-						try {
-							Vector<GraphRelationshipImp> rels = 
-								BrowserImp.getInstance().findEntity(ent.getId()).getAllRelationships();
-							Entity newent = ObjectManager.getInstance().convert(ent.getId(), ent.getType(),
-									current);
-							for (int j=0;j<rels.size();j++){
-								rels.elementAt(j).getNAryEdge().replace(ent.getId(),newent);
-							}
-							Vector<ModelJGraph> models = GraphManager.getInstance().getUOModels();
-							for (int j=0;j<models.size();j++){
-								GraphModel mjg = models.elementAt(j).getModel();
-								for (int l=0;l<mjg.getRootCount();l++){
-									if (((DefaultGraphCell)mjg.getRootAt(l)).getUserObject().equals(ent)){
-										((DefaultGraphCell)mjg.getRootAt(l)).setUserObject(newent);
-										Log.getInstance().logERROR("Replaced in model "+models.elementAt(j).getName());
-									}
-								}
-							}
-
-
-
-						}
-						catch (Exception e1) {
-							e1.printStackTrace();
-							Log.getInstance().log(e1.getMessage());
-						}
-					}
-				});
-			}
-		}
-
-
-		return actions;
-	}
-
-
-	abstract protected Vector<AbstractAction> createChangeViewActions(final DefaultGraphCell cell);
-	abstract protected Vector<AbstractAction> createDiagramSpecificInsertActions(Point pt);
 
 
 
@@ -642,27 +419,28 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 				firstPort != port) {
 			final PortView firstPortBackup=firstPort;
 			final PortView portBackup=port;
-			new Thread(){
+			Runnable connectThread=new Runnable(){
 				public void run(){
 					// Then Establish Connection
 					RelationshipManager.connect((Port) firstPortBackup.getCell(), (Port) portBackup.getCell(),graph);					
 				}
-			}.start();
+			};
+			SwingUtilities.invokeLater(connectThread);
 			// Consume Event
 			e.consume();
 			// Else Repaint the Graph
-		}
-		else {
-			if (getGraph()!=null)
-				getGraph().repaint();
 		}
 		// Reset Global Vars
 		firstPort = port = null;
 		start = current = null;
 		// Call Superclass
 		super.mouseReleased(e);
-		if (getGraph()!=null)
-			getGraph().repaint();
+		if (getGraph()!=null){
+			
+			getGraph().invalidate();
+			getGraph().revalidate();
+		   getGraph().repaint();
+		}
 	}
 
 
@@ -672,7 +450,7 @@ public abstract class MarqueeHandler extends BasicMarqueeHandler  implements jav
 	 *
 	 *@param  e  Description of Parameter
 	 */
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e) {		
 		// Check Mode and Find Port
 		if (e != null && getGraph()!=null && getSourcePortAt(e.getPoint()) != null &&
 				!e.isConsumed() && getGraph().isPortsVisible()) {

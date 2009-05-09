@@ -19,27 +19,27 @@
 
 package ingenias.editor;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.util.*;
+import ingenias.editor.cell.NAryEdge;
+import ingenias.editor.entities.NAryEdgeEntity;
+import ingenias.editor.events.AnyChangeListener;
+import ingenias.editor.events.EventRedirector;
+import ingenias.exception.NotInitialised;
+import ingenias.generator.browser.BrowserImp;
 
-import javax.swing.*;
-import javax.swing.event.CellEditorListener;
-import javax.swing.undo.*;
-import ingenias.editor.events.*;
-import ingenias.editor.entities.*;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Vector;
 
-import org.jgraph.graph.*;
-import org.jgraph.plaf.basic.BasicGraphUI;
-import org.jgraph.plaf.basic.BasicGraphUI.MouseInputHandler;
+import javax.swing.JOptionPane;
 
-import ingenias.editor.cell.*;
+import org.jgraph.graph.DefaultEdge;
+import org.jgraph.graph.DefaultGraphCell;
+import org.jgraph.graph.DefaultGraphModel;
+import org.jgraph.graph.DefaultPort;
+import org.jgraph.graph.Edge;
+import org.jgraph.graph.GraphCell;
+import org.jgraph.graph.Port;
 
 //
 // Custom Model
@@ -55,6 +55,7 @@ implements java.io.Serializable {
 	private IDEState ids=null;
 	private boolean messagesOn=true;
 	private boolean hardChange;
+	private int idCounter;
 
 	public Model(IDEState ids) {
 		this.ids=ids;
@@ -76,8 +77,47 @@ implements java.io.Serializable {
 		}
 
 	}
+	
+	public String getNewId() {
+		idCounter=0;
+
+		Vector<NAryEdgeEntity> rels;
+			rels = RelationshipManager.getRelationshipsVector(ids.gm);
+			HashSet<String> trels=new HashSet<String> ();
+			for (NAryEdgeEntity nedge:rels){
+				trels.add(nedge.getId());						
+			}
 
 
+			while (trels.contains(""+idCounter) || 
+					ids.om.findUserObject(""+idCounter).size()>0 ||
+					ids.gm.getModel(""+idCounter)!=null){
+				idCounter++;
+			}
+		
+		return ""+idCounter;
+	}
+
+	public String getNewId(String fromID) {
+		idCounter=0;
+
+		Vector<NAryEdgeEntity> rels = RelationshipManager.getRelationshipsVector(ids.gm);
+		Hashtable<String,NAryEdgeEntity> trels=new Hashtable<String,NAryEdgeEntity>();
+		for (NAryEdgeEntity nedge:rels){
+			if (nedge.getId().equals(fromID+idCounter))
+				idCounter++;
+		}
+
+		while (ids.om.findUserObject(fromID+idCounter).size()>0){
+			idCounter++;
+		}
+
+		while (ids.gm.getModel(fromID+idCounter)!=null){
+			idCounter++;
+		}
+
+		return fromID+idCounter;
+	}
 
 
 	// Override Superclass Method implements java.io.Serializable
@@ -150,7 +190,6 @@ implements java.io.Serializable {
 	}
 
 	public void defaultRemove(Object[] roots) {
-		IDE.setChanged();
 		super.remove(roots);
 	}
 
@@ -168,34 +207,9 @@ implements java.io.Serializable {
 							getUserObject();
 				if (!reviewed.contains(ent)) {
 					reviewed.add(ent);
-
-					int rep = ids.gm.repeatedInstanceInModels(ent.
-							getId());
 					
-
-					if (rep == 1 &&
-							!ids.om.findUserObject(ent.getId()).isEmpty() &&
-							// when we perform a remove all instances of an entity from all diagrams,
-							// this dialog is triggered. To avoid this situation, the existence of
-							// the entity in the object model is checked.
-							!ingenias.editor.entities.AUMLComponent.class.isAssignableFrom(ent.getClass())) { // Only one instance in all diagrams
-						if (this.getAskMessages()){
-							int res = JOptionPane.showConfirmDialog(null,
-									"Element " + ent.getId() +
-									" of type " + ent.getType() + " is no longer used." +
-									" Do you want to remove it from the objects database (y/n)?",
-									"Remove?",
-									JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-							if (res == JOptionPane.OK_OPTION) {
-								ids.om.removeEntity(ent);
-
-							}
-						}
-					}
-					if (rep <= 1 &&
-							ingenias.editor.entities.AUMLComponent.class.isAssignableFrom(ent.getClass())){
-						ids.om.removeEntity(ent);
-					}
+					ids.om.removeEntity(ent);
+										
 				}
 			}
 		}
@@ -260,7 +274,6 @@ implements java.io.Serializable {
 	}
 
 	public void remove(Object[] roots) {
-		IDE.setChanged();
 		// All operations are done with GraphCell[].
 
 

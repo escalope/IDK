@@ -53,7 +53,7 @@ public class ChangeNARYEdgeLocation
   }
 
   public void graphChanged(org.jgraph.event.GraphModelEvent gme) {
-    ingenias.editor.IDE.setChanged();
+    
    if (enabled && (gme.getChange().getInserted()==null
                     ||gme.getChange().getInserted().length==0 )) {
 	   

@@ -24,109 +24,141 @@
 package ingenias.editor;
 
 
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.border.*;
-import javax.swing.event.MenuKeyEvent;
-import javax.swing.event.MenuKeyListener;
-import java.awt.dnd.*;
 import ingenias.editor.widget.DnDJTree;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JEditorPane;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JProgressBar;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.JTree;
+import javax.swing.KeyStroke;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.MenuKeyEvent;
+import javax.swing.event.MenuKeyListener;
 
 
-public class IDEGUI extends javax.swing.JFrame  {
 
-	JMenuBar jMenuBar1 = new JMenuBar();
-	JMenu file = new JMenu();
-	JMenuItem save = new JMenuItem();
-	JMenuItem load = new JMenuItem();
-	ButtonGroup viewSelection= new ButtonGroup();
-	ButtonGroup relationshipSelection= new ButtonGroup();
-	ButtonGroup propertiesEditModeSelection= new ButtonGroup();	
+public abstract class IDEGUI extends javax.swing.JFrame  {
 
+	public static JPanel rightPanel=new JPanel();
+	JMenuItem about = new JMenuItem();
+	JTree arbolObjetos =new JTree();;
+	DnDJTree arbolProyectos = new DnDJTree();//rootProject);
+	Border borderForEntitiesView;
+	Border borderForProjectView;
 	BorderLayout borderLayout2 = new BorderLayout();
-	JSplitPane jSplitPane1 = new JSplitPane();
-	JSplitPane jSplitPane2 = new JSplitPane();
-	JScrollPane jScrollPane2 = new JScrollPane();
-	javax.swing.tree.DefaultMutableTreeNode rootProject=
-		new javax.swing.tree.DefaultMutableTreeNode("Project");
+	JPanel buttonModelPanel=new JPanel(new java.awt.BorderLayout());
+	JMenuItem clearMessages = new JMenuItem();	
 
-	JScrollPane jScrollPane1 = new JScrollPane();
-	JPanel jPanel1 = new JPanel();
-	javax.swing.tree.DefaultMutableTreeNode rootObjetos=
-		new javax.swing.tree.DefaultMutableTreeNode("System Objects");
-	JTree arbolObjetos = new JTree(rootObjetos);
+	JMenu menuCodeGenerator = new JMenu();
+	JMenuItem copy = new JMenuItem();
+	private JMenuItem copyImage = new JMenuItem();
+	JMenuItem cpClipboard = new JMenuItem();
+	JMenuItem delete = new JMenuItem();
 
-	BorderLayout gridLayout1 = new BorderLayout();
-	Border border1;
-	TitledBorder titledBorder1;
-	Border border2;
-	TitledBorder titledBorder2;
-	DnDJTree arbolProyectos = new   DnDJTree(jScrollPane2,rootProject);//rootProject);
-	private JRadioButtonMenuItem fullinforelats;
-	private JRadioButtonMenuItem labelsonly;
-	private JMenu jMenu3;
-	private JPanel jPanel2;
-	private JButton Search;
-	protected JTextField searchField;
-	private JPanel searchPanel;
-	protected JCheckBoxMenuItem editPopUpProperties;
-	protected JRadioButtonMenuItem editOnMessages;
-	private JMenu jMenu2;
-	private JMenu jMenu1;
-	private JMenuItem elimOverlap;
-	private JMenuItem importFile;
 	// GraphManager gm=GraphManager.initInstance(rootProject,arbolProyectos);
 	private JMenu edit = new JMenu();
-	private JMenuItem copyImage = new JMenuItem();
-	JMenuItem saveas = new JMenuItem();
-	JMenu help = new JMenu();
-	JMenuItem manual = new JMenuItem();
-	JMenuItem about = new JMenuItem();
-	JMenu project = new JMenu();
-	JMenuItem copy = new JMenuItem();
-	JMenuItem paste = new JMenuItem();
-	JMenuItem exit = new JMenuItem();
-	JSplitPane jSplitPane3 = new JSplitPane();
-	public static JPanel rightPanel=new JPanel();
-	JPanel pprin = new JPanel();
-	JScrollPane scrollLogs = new JScrollPane();
-	TitledBorder titledBorder3;
-	JPopupMenu messagesMenu = new JPopupMenu();
-	JMenuItem clearMessages = new JMenuItem();
-	JMenuItem forcegc = new JMenuItem();
-	public static JPanel buttonModelPanel=new JPanel(new java.awt.BorderLayout());
-	GridLayout gridLayout2 = new GridLayout();
-	JRadioButtonMenuItem noinformationrelats = new JRadioButtonMenuItem();
-	JMenu tools = new JMenu();
-	JMenu codeGenerator = new JMenu();
-	JMenu modules = new JMenu();
-	JMenuItem properties = new JMenuItem();
-	JTabbedPaneWithCloseIcons messagespane = new JTabbedPaneWithCloseIcons();
-	JScrollPane outputpane = new JScrollPane();
-	JTextPane moduleOutput = new JTextPane();
-	JScrollPane scrolloutput = new JScrollPane();
-	JTextPane moutput = new JTextPane();
-	JTextPane logs = new JTextPane();
-	JMenuItem newProject = new JMenuItem();
-	JMenuItem undo = new JMenuItem();
-	JMenuItem redo = new JMenuItem();
-	JMenuItem delete = new JMenuItem();
-	JMenuItem selectall = new JMenuItem();
-	JMenuItem cpClipboard = new JMenuItem();
-	JMenu preferences = new JMenu();
+	protected JCheckBoxMenuItem editOnMessages;
+	protected JCheckBoxMenuItem editPopUpProperties;
+	private JMenuItem elimOverlap;
 
-	JRadioButtonMenuItem  enableUMLView= new JRadioButtonMenuItem();
 	JRadioButtonMenuItem  enableINGENIASView= new JRadioButtonMenuItem();
-	JMenuItem  switchINGENIASView= new JMenuItem();
-	JMenuItem  switchUMLView= new JMenuItem();
+	JRadioButtonMenuItem  enableUMLView= new JRadioButtonMenuItem();
+	JMenuItem exit = new JMenuItem();
+	JMenu file = new JMenu();
+	JMenuItem forcegc = new JMenuItem();
+	private JRadioButtonMenuItem fullinforelats;
+	BorderLayout gridLayout1 = new BorderLayout();
+	GridLayout gridLayout2 = new GridLayout();
+	JMenu help = new JMenu();
+	private JMenuItem importFile;
+	private JMenu jMenu3;
+	JPanel jPanel1 = new JPanel();
+	private JPanel jPanel2;
+	JSplitPane jSplitPane1 = new JSplitPane();
+	JSplitPane splitPanelDiagramMessagesPaneSeparator = new JSplitPane();
+	private JRadioButtonMenuItem labelsonly;
+	JMenuItem load = new JMenuItem();
+	JTextPane logs = new JTextPane();
+	JMenuBar mainMenuBar = new JMenuBar();
+	JMenuItem manual = new JMenuItem();
+	JPopupMenu messagesMenu = new JPopupMenu();
+	JTabbedPaneWithCloseIcons messagespane = new JTabbedPaneWithCloseIcons();
+	private JMenu modelingLanguageNotationSwitchMenu;
+	JTextPane moduleOutput = new JTextPane();
+	JMenu menuModules = new JMenu();
+	JTextPane moutput = new JTextPane();
+	JMenuItem newProject = new JMenuItem();
+	JRadioButtonMenuItem noinformationrelats = new JRadioButtonMenuItem();
+	JScrollPane outputpane = new JScrollPane();
+	JMenuItem paste = new JMenuItem();
+	JPanel pprin = new JPanel();
+	JMenu preferences = new JMenu();
+	JMenu profiles=new JMenu();
+	JMenu project = new JMenu();
+	JMenuItem properties = new JMenuItem();
+	ButtonGroup propertiesEditModeSelection= new ButtonGroup();
+	private JMenu propertiesModeMenu;
+	JMenuItem redo = new JMenuItem();
+	ButtonGroup relationshipSelection= new ButtonGroup();
 	JMenuItem  resizeAll= new JMenuItem();
 	JMenuItem  resizeAllDiagrams= new JMenuItem();
+	javax.swing.tree.DefaultMutableTreeNode rootObjetos=
+		new javax.swing.tree.DefaultMutableTreeNode("System Objects");
+	javax.swing.tree.DefaultMutableTreeNode rootProject=
+		new javax.swing.tree.DefaultMutableTreeNode("Project");
+	JMenuItem save = new JMenuItem();
+	JMenuItem saveas = new JMenuItem();
+	JScrollPane scrollLogs = new JScrollPane();
+	JScrollPane scrolloutput = new JScrollPane();
+	JScrollPane scrollPaneForEntitiesView = new JScrollPane();
+	JScrollPane scrollPaneForProyectView = new JScrollPane();
+	private JButton Search;
+	JEditorPane searchDiagramPanel= new JEditorPane();
+	protected JTextField searchField;
+	private JPanel searchPanel;
+	JMenuItem selectall = new JMenuItem();
+	JSplitPane splitPaneSeparatingProjectsAndEntitiesView = new JSplitPane();
+	JMenuItem  switchINGENIASView= new JMenuItem();
+	JMenuItem  switchUMLView= new JMenuItem();
+	TitledBorder titleBoderForProjectView;
 
-	JEditorPane searchDiagramPanel= new JEditorPane();	
+	TitledBorder titledBorderForEntitiesView;
+	TitledBorder titledBorderForMessagesPane;
+	JMenu menuTools = new JMenu();
+	JMenuItem undo = new JMenuItem();
+	ButtonGroup viewSelection= new ButtonGroup();
+	JProgressBar pbar=new JProgressBar(1,100);
 
 	public IDEGUI() {
 		// To enable changes in cursor's shape
@@ -139,12 +171,126 @@ public class IDEGUI extends javax.swing.JFrame  {
 			e.printStackTrace();
 		}
 	}
+
+	void about_actionPerformed(ActionEvent e) {
+
+	}	
+
+	void arbolObjetos_mouseClicked(MouseEvent e) {
+
+	}
+
+	
+	void arbolProyectos_mouseClicked(MouseEvent e) {
+
+	}
+	
+	void arbolProyectos_mouseEntered(MouseEvent e) {
+
+	}
+	void arbolProyectos_mouseExited(MouseEvent e) {
+
+	}
+	void arbolProyectos_mousePressed(MouseEvent e) {
+
+	}
+	void arbolProyectos_mouseReleased(MouseEvent e) {
+
+	}
+	void capture_actionPerformed(ActionEvent e) {
+	}
+	public void changePropertiesPanel(String oldName,String nname){
+	 for (int k=0;k<messagespane.getTabCount();k++){
+		 if (messagespane.getTitleAt(k).equalsIgnoreCase(oldName)){
+			 messagespane.setTitleAt(k,nname);
+		 }
+	 }
+	}
+	void clearMessages_actionPerformed(ActionEvent e, JTextPane pane) {
+
+	}
+	void copy_actionPerformed(ActionEvent e) {
+
+	}
+
+	void cpClipboard_actionPerformed(ActionEvent e) {
+
+	}
+
+	void delete_actionPerformed(ActionEvent e) {
+
+	}
+
+	public void editOnMessages_selected() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void editPopUpProperties_selected() {
+		// TODO Auto-generated method stub
+		
+	};
+
+	void elimOverlapActionPerformed(ActionEvent evt) {
+		System.out.println("elimOverlap.actionPerformed, event=" + evt);
+		//TODO add your code for elimOverlap.actionPerformed
+	}
+
+	void elimOverlapKeyPressed(KeyEvent evt) {
+		System.out.println("elimOverlap.keyPressed, event=" + evt);
+		//TODO add your code for elimOverlap.keyPressed
+	}
+
+	void elimOverlapMenuKeyTyped(MenuKeyEvent evt) {
+		System.out.println("elimOverlap.menuKeyTyped, event=" + evt);
+		//TODO add your code for elimOverlap.menuKeyTyped
+	}
+
+	void enableINGENIASView_actionPerformed(ActionEvent e) {
+
+	}
+
+	void enableRelatinshipLabels_actionPerformed(ActionEvent e) {
+
+	}
+
+
+
+	void enableUMLView_actionPerformed(ActionEvent e) {
+
+	}
+
+
+	void exit_actionPerformed(ActionEvent e) {
+
+	}
+
+	void forcegc_actionPerformed(ActionEvent e) {
+
+	}
+
+
+	public JPanel getButtonModelPanel() {
+		return buttonModelPanel;
+	}
+
+	void importFileActionPerformed(ActionEvent evt) {
+		System.out.println("importFile.actionPerformed, event=" + evt);
+		//TODO add your code for importFile.actionPerformed
+	}
+
+	public boolean isEditPropertiesPopUp(){		 
+		return this.editPopUpProperties.isSelected();
+	}
+
+
+
 	private void jbInit() throws Exception {
-		border1 = BorderFactory.createLineBorder(Color.black,2);
-		titledBorder1 = new TitledBorder(border1,"Project view");
-		border2 = BorderFactory.createLineBorder(Color.black,2);
-		titledBorder2 = new TitledBorder(border2,"Entities view");
-		titledBorder3 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white,new Color(148, 145, 140)),"Messages");
+		borderForProjectView = BorderFactory.createLineBorder(Color.black,2);
+		titleBoderForProjectView = new TitledBorder(borderForProjectView,"Project view");
+		borderForEntitiesView = BorderFactory.createLineBorder(Color.black,2);
+		titledBorderForEntitiesView = new TitledBorder(borderForEntitiesView,"Entities view");
+		titledBorderForMessagesPane = new TitledBorder(BorderFactory.createEtchedBorder(Color.white,new Color(148, 145, 140)),"Messages");
 		this.getContentPane().setLayout(borderLayout2);
 		file.setText("File");
 		save.setEnabled(false);
@@ -161,7 +307,7 @@ public class IDEGUI extends javax.swing.JFrame  {
 			}
 		});
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		this.setJMenuBar(jMenuBar1);
+		this.setJMenuBar(mainMenuBar);
 		this.setTitle("INGENIAS Development Kit");
 		this.setSize(625, 470);
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -172,18 +318,18 @@ public class IDEGUI extends javax.swing.JFrame  {
 				this_windowClosing(e);
 			}
 		});
-		jSplitPane2.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		jSplitPane2.setBottomComponent(jScrollPane1);
-		jSplitPane2.setTopComponent(jScrollPane2);
+		splitPaneSeparatingProjectsAndEntitiesView.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		splitPaneSeparatingProjectsAndEntitiesView.setBottomComponent(scrollPaneForEntitiesView);
+		splitPaneSeparatingProjectsAndEntitiesView.setTopComponent(scrollPaneForProyectView);
 		jPanel1.setLayout(gridLayout1);
 		arbolObjetos.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				arbolObjetos_mouseClicked(e);
 			}
 		});
-		jScrollPane2.setAutoscrolls(true);
-		jScrollPane2.setBorder(titledBorder1);
-		jScrollPane1.setBorder(titledBorder2);
+		scrollPaneForProyectView.setAutoscrolls(true);
+		scrollPaneForProyectView.setBorder(titleBoderForProjectView);
+		scrollPaneForEntitiesView.setBorder(titledBorderForEntitiesView);
 		edit.setText("Edit");
 		copyImage.setText("Copy diagram as a file");
 		copyImage.addActionListener(new java.awt.event.ActionListener(){
@@ -229,13 +375,16 @@ public class IDEGUI extends javax.swing.JFrame  {
 				exit_actionPerformed(e);
 			}
 		});
-		jSplitPane3.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		jSplitPane3.setLastDividerLocation(150);
+		splitPanelDiagramMessagesPaneSeparator.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		splitPanelDiagramMessagesPaneSeparator.setLastDividerLocation(150);
 		pprin.setLayout(new BorderLayout());
+		pprin.setName("DiagramPane");
 		pprin.setPreferredSize(new Dimension(400, 300));
+		pprin.add(BorderLayout.SOUTH,pbar);
+		pbar.setVisible(false);
 		jSplitPane1.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
 
-		scrollLogs.setBorder(titledBorder3);
+		scrollLogs.setBorder(titledBorderForMessagesPane);
 		scrollLogs.addKeyListener(new java.awt.event.KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				jScrollPane3_keyPressed(e);
@@ -254,9 +403,11 @@ public class IDEGUI extends javax.swing.JFrame  {
 			}
 		});
 
-		tools.setText("Tools");
-		codeGenerator.setText("Code Generator");
-		modules.setText("Modules");
+		menuTools.setText("Tools");
+		menuCodeGenerator.setText("Code Generator");
+		profiles.setText("Profiles");
+		
+		menuModules.setText("Modules");
 		this.properties.setText("Properties");
 		properties.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -379,18 +530,18 @@ public class IDEGUI extends javax.swing.JFrame  {
 			elimOverlap.setText("Eliminate overlap");
 			elimOverlap.setAccelerator(KeyStroke.getKeyStroke("F3"));
 			elimOverlap.addMenuKeyListener(new MenuKeyListener() {
-				public void menuKeyTyped(MenuKeyEvent evt) {
-					elimOverlapMenuKeyTyped(evt);
+				public void menuKeyPressed(MenuKeyEvent evt) {
+					System.out.println("elimOverlap.menuKeyPressed, event="
+							+ evt);
+					//TODO add your code for elimOverlap.menuKeyPressed
 				}
 				public void menuKeyReleased(MenuKeyEvent evt) {
 					System.out.println("elimOverlap.menuKeyReleased, event="
 							+ evt);
 					//TODO add your code for elimOverlap.menuKeyReleased
 				}
-				public void menuKeyPressed(MenuKeyEvent evt) {
-					System.out.println("elimOverlap.menuKeyPressed, event="
-							+ evt);
-					//TODO add your code for elimOverlap.menuKeyPressed
+				public void menuKeyTyped(MenuKeyEvent evt) {
+					elimOverlapMenuKeyTyped(evt);
 				}
 			});
 			elimOverlap.addKeyListener(new KeyAdapter() {
@@ -405,26 +556,26 @@ public class IDEGUI extends javax.swing.JFrame  {
 			});
 		}
 		{
-			jMenu1 = new JMenu();
-			preferences.add(jMenu1);
-			jMenu1.setText("Modelling language");
-			jMenu1.add(enableINGENIASView);
+			modelingLanguageNotationSwitchMenu = new JMenu();
+			preferences.add(modelingLanguageNotationSwitchMenu);
+			modelingLanguageNotationSwitchMenu.setText("Modelling language");
+			modelingLanguageNotationSwitchMenu.add(enableINGENIASView);
 			
 			viewSelection.add(enableINGENIASView);
-			jMenu1.add(enableUMLView);
+			modelingLanguageNotationSwitchMenu.add(enableUMLView);
 			viewSelection.add(enableUMLView);
 			
 			enableINGENIASView.setSelected(true);
-			jMenu1.add(switchUMLView);
-			jMenu1.add(switchINGENIASView);
+			modelingLanguageNotationSwitchMenu.add(switchUMLView);
+			modelingLanguageNotationSwitchMenu.add(switchINGENIASView);
 		}
 		{
-			jMenu2 = new JMenu();
-			preferences.add(jMenu2);
-			jMenu2.setText("Edit Properties Mode");
+			propertiesModeMenu = new JMenu();
+			preferences.add(propertiesModeMenu);
+			propertiesModeMenu.setText("Edit Properties Mode");
 			{
 				editPopUpProperties = new JCheckBoxMenuItem();
-				jMenu2.add(editPopUpProperties);
+				propertiesModeMenu.add(editPopUpProperties);
 				editPopUpProperties
 				.setText("Edit Properties in a PopUp Window");
 				editPopUpProperties.setSelected(true);
@@ -436,8 +587,8 @@ public class IDEGUI extends javax.swing.JFrame  {
 				propertiesEditModeSelection.add(editPopUpProperties);
 			}
 			{
-				editOnMessages = new JRadioButtonMenuItem();
-				jMenu2.add(editOnMessages);
+				editOnMessages = new JCheckBoxMenuItem();
+				propertiesModeMenu.add(editOnMessages);
 				editOnMessages.setText("Edit Properties in Messages Panel");
 				propertiesEditModeSelection.add(editOnMessages);
 				editOnMessages.addActionListener(new ActionListener(){
@@ -447,51 +598,14 @@ public class IDEGUI extends javax.swing.JFrame  {
 				}	);
 			}
 		}
-		{
-		/*	jMenu3 = new JMenu();
-			preferences.add(jMenu3);
-			jMenu3.setText("Relationships look and feel");
-			{
-				labelsonly = new JRadioButtonMenuItem();				
-				jMenu3.add(labelsonly);
-				labelsonly.setText("Only labels");
-				relationshipSelection.add(labelsonly);
-				labelsonly.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						labelsonlyActionPerformed(evt);
-					}
-				});
-			}
-			{
-				noinformationrelats = new JRadioButtonMenuItem();
-				jMenu3.add(noinformationrelats);
-				noinformationrelats.setText("No information");
-				relationshipSelection.add(noinformationrelats);
-				noinformationrelats.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						noinformationrelatsActionPerformed(evt);
-					}
-				});
-			}
-			{
-				fullinforelats = new JRadioButtonMenuItem();
-				jMenu3.add(fullinforelats);				
-				fullinforelats.setText("Full information");
-				relationshipSelection.add(fullinforelats);
-				fullinforelats.setSelected(true);
-				fullinforelats.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						fullinforelatsActionPerformed(evt);
-					}
-				});
-			}*/
-		}
-		jMenuBar1.add(file);
-		jMenuBar1.add(edit);
-		jMenuBar1.add(project);
-		jMenuBar1.add(modules);
-		jMenuBar1.add(preferences);
-		jMenuBar1.add(help);
+		
+		mainMenuBar.add(file);
+		mainMenuBar.add(edit);
+		mainMenuBar.add(project);
+		mainMenuBar.add(menuModules);
+		mainMenuBar.add(profiles);
+		mainMenuBar.add(preferences);
+		mainMenuBar.add(help);
 		file.add(newProject);
 		file.add(load);
 		{
@@ -512,20 +626,20 @@ public class IDEGUI extends javax.swing.JFrame  {
 		rightPanel.setLayout(new BorderLayout());
 		rightPanel.add(buttonModelPanel, BorderLayout.WEST);
 		this.getContentPane().add(jSplitPane1, BorderLayout.CENTER);
-		rightPanel.add(jSplitPane3,BorderLayout.CENTER);
-		jSplitPane1.add(jSplitPane2, JSplitPane.LEFT);
-		jSplitPane2.add(jScrollPane2, JSplitPane.TOP);
+		rightPanel.add(splitPanelDiagramMessagesPaneSeparator,BorderLayout.CENTER);
+		jSplitPane1.add(splitPaneSeparatingProjectsAndEntitiesView, JSplitPane.LEFT);
+		splitPaneSeparatingProjectsAndEntitiesView.add(scrollPaneForProyectView, JSplitPane.TOP);
 		{
 			jPanel2 = new JPanel();
 			BorderLayout jPanel2Layout = new BorderLayout();
 			jPanel2.setLayout(jPanel2Layout);
-			jSplitPane2.add(jPanel2, JSplitPane.BOTTOM);
+			splitPaneSeparatingProjectsAndEntitiesView.add(jPanel2, JSplitPane.BOTTOM);
 			jPanel2.add(jPanel1, BorderLayout.SOUTH);
-			jPanel2.add(jScrollPane1, BorderLayout.CENTER);
+			jPanel2.add(scrollPaneForEntitiesView, BorderLayout.CENTER);
 		}
 		jSplitPane1.add(rightPanel, JSplitPane.RIGHT);
-		jSplitPane3.add(pprin, JSplitPane.TOP);
-		jSplitPane3.add(messagespane, JSplitPane.BOTTOM);
+		splitPanelDiagramMessagesPaneSeparator.add(pprin, JSplitPane.TOP);
+		splitPanelDiagramMessagesPaneSeparator.add(messagespane, JSplitPane.BOTTOM);
 		JScrollPane scrollSearchDiagram=new JScrollPane();
 		scrollSearchDiagram.getViewport().add(searchDiagramPanel,null);
 		searchDiagramPanel.setContentType("text/html");
@@ -549,6 +663,7 @@ public class IDEGUI extends javax.swing.JFrame  {
 				searchField = new JTextField();
 				searchPanel.add(searchField);
 				searchField.setColumns(15);
+			
 				searchField.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent evt) {
 						searchFieldKeyTyped(evt);
@@ -557,8 +672,8 @@ public class IDEGUI extends javax.swing.JFrame  {
 			}
 			{
 				Search = new JButton();
-				jScrollPane2.setViewportView(arbolProyectos);
-				jScrollPane1.setViewportView(arbolObjetos);
+				scrollPaneForProyectView.setViewportView(arbolProyectos);
+				scrollPaneForEntitiesView.setViewportView(arbolObjetos);
 				searchPanel.add(Search);
 
 				Search.setIcon(new ImageIcon("images/lense.png"));
@@ -586,103 +701,32 @@ public class IDEGUI extends javax.swing.JFrame  {
 		help.add(about);
 		help.add(forcegc);
 
-		modules.add(tools);
-		modules.add(codeGenerator);
+		menuModules.add(menuTools);
+		menuModules.add(menuCodeGenerator);
 		messagesMenu.add(this.clearMessages);
 		project.add(    this.properties);
 
 		project.addSeparator();
 		jSplitPane1.setDividerLocation(250);
-		jSplitPane2.setDividerLocation(250);
+		splitPaneSeparatingProjectsAndEntitiesView.setDividerLocation(250);
 		arbolProyectos.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				arbolProyectos_mouseClicked(e);
 			}
 		});
-		jSplitPane3.setDividerLocation(400);
+		splitPanelDiagramMessagesPaneSeparator.setDividerLocation(400);
 	}
-	public void switchUMLView_actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void switchINGENIASView_actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		System.err.println("ejec1");
-		
-	}
-	void arbolProyectos_mousePressed(MouseEvent e) {
-
-	}
-	void arbolProyectos_mouseReleased(MouseEvent e) {
-
-	}
-	void arbolProyectos_mouseEntered(MouseEvent e) {
-
-	}
-	void arbolProyectos_mouseExited(MouseEvent e) {
-
-	}
-	void arbolProyectos_mouseClicked(MouseEvent e) {
-
-	}
-
-	void arbolObjetos_mouseClicked(MouseEvent e) {
-
-	}
-
-	void save_actionPerformed(ActionEvent e) {
-
-	}
-
-	void load_actionPerformed(ActionEvent e) {
-
-	}
-
-
-	void capture_actionPerformed(ActionEvent e) {
-	};
-
-	void exit_actionPerformed(ActionEvent e) {
-
-	}
-
-	void saveas_actionPerformed(ActionEvent e) {
-
-	}
-
-	void this_windowClosed(WindowEvent e) {
-
-	}
-
-	void this_windowClosing(WindowEvent e) {
-
-	}
-
-	void manual_actionPerformed(ActionEvent e) {
-
-	}
-
-
-
-	void copy_actionPerformed(ActionEvent e) {
-
-	}
-
-
-	void paste_actionPerformed(ActionEvent e) {
-
-	}
-
-	void about_actionPerformed(ActionEvent e) {
-
-	}
-
-
 	void jScrollPane3_keyPressed(KeyEvent e) {
 		/*   System.err.println("pulsado");
 		 */
 	}
+	abstract void load_actionPerformed(ActionEvent e) ;
+	void logs_componentHidden(ComponentEvent e) {
 
+	}
+	void logs_componentMoved(ComponentEvent e) {
+
+	}
 	void logs_componentResized(ComponentEvent e) {
 //		System.err.println("pulsado");
 		Point p=new Point(0,(int)logs.getSize().getHeight());
@@ -691,31 +735,13 @@ public class IDEGUI extends javax.swing.JFrame  {
 		 p.y=p.y+10;
 		 scrollLogs.getViewport().setViewPosition(p);*/
 	}
-
-	void clearMessages_actionPerformed(ActionEvent e, JTextPane pane) {
-
-	}
-
-
-
-	void properties_actionPerformed(ActionEvent e) {
-
-	}
-	void logs_componentMoved(ComponentEvent e) {
-
-	}
 	void logs_componentShown(ComponentEvent e) {
 
 	}
-	void logs_componentHidden(ComponentEvent e) {
+	void logs_mouseClicked(MouseEvent e) {
 
 	}
-	void logs_mousePressed(MouseEvent e) {
 
-	}
-	void logs_mouseReleased(MouseEvent e) {
-
-	}
 	void logs_mouseEntered(MouseEvent e) {
 
 	}
@@ -723,10 +749,19 @@ public class IDEGUI extends javax.swing.JFrame  {
 
 	}
 
-	void moduleOutput_mouseClicked(MouseEvent e) {
+	void logs_mousePressed(MouseEvent e) {
 
 	}
-	void logs_mouseClicked(MouseEvent e) {
+
+	void logs_mouseReleased(MouseEvent e) {
+
+	}
+
+	void manual_actionPerformed(ActionEvent e) {
+
+	}
+
+	void moduleOutput_mouseClicked(MouseEvent e) {
 
 	}
 
@@ -734,104 +769,49 @@ public class IDEGUI extends javax.swing.JFrame  {
 
 	}
 
-	void undo_actionPerformed(ActionEvent e) {
+	void paste_actionPerformed(ActionEvent e) {
+
+	}
+
+	void properties_actionPerformed(ActionEvent e) {
 
 	}
 
 	void redo_actionPerformed(ActionEvent e) {
 
 	}
-
-	void delete_actionPerformed(ActionEvent e) {
-
-	}
-
-	void selectall_actionPerformed(ActionEvent e) {
-
-	}
-
-	void cpClipboard_actionPerformed(ActionEvent e) {
-
-	}
-
-	void forcegc_actionPerformed(ActionEvent e) {
-
-	}
-
-	void enableRelatinshipLabels_actionPerformed(ActionEvent e) {
-
-	}
-	void enableUMLView_actionPerformed(ActionEvent e) {
-
-	}
-
-	void enableINGENIASView_actionPerformed(ActionEvent e) {
-
+	public void replaceCurrentTrees(DnDJTree arbolProyecto, JTree arbolObjetos2){
+		this.arbolProyectos=arbolProyecto;
+		this.arbolObjetos=arbolObjetos2;
+		arbolObjetos.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				arbolObjetos_mouseClicked(e);
+			}
+		});
+		scrollPaneForProyectView.setViewportView(arbolProyectos);
+		scrollPaneForEntitiesView.setViewportView(arbolObjetos);
+		arbolProyectos.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				arbolProyectos_mouseClicked(e);
+			}
+		});
+		this.arbolProyectos.setCellRenderer(new ProjectTreeRenderer());
+		this.arbolObjetos.setCellRenderer(new ProjectTreeRenderer());
 	}
 
 	void resizeAll_actionPerformed(ActionEvent e) {
 
-	};
+	}
+
 	void resizeAllDiagrams_actionPerformed(ActionEvent e) {
 
+	};
+	void save_actionPerformed(ActionEvent e) {
+
 	}
 
-	void importFileActionPerformed(ActionEvent evt) {
-		System.out.println("importFile.actionPerformed, event=" + evt);
-		//TODO add your code for importFile.actionPerformed
-	}
+	void saveas_actionPerformed(ActionEvent e) {
 
-	void elimOverlapActionPerformed(ActionEvent evt) {
-		System.out.println("elimOverlap.actionPerformed, event=" + evt);
-		//TODO add your code for elimOverlap.actionPerformed
-	}
-
-	void elimOverlapKeyPressed(KeyEvent evt) {
-		System.out.println("elimOverlap.keyPressed, event=" + evt);
-		//TODO add your code for elimOverlap.keyPressed
-	}
-
-	void elimOverlapMenuKeyTyped(MenuKeyEvent evt) {
-		System.out.println("elimOverlap.menuKeyTyped, event=" + evt);
-		//TODO add your code for elimOverlap.menuKeyTyped
-	}
-
-
-
-	public void addPropertiesPanel(String name,JPanel jp){
-		if (this.messagespane.indexOfTab(name) < 0) {
-			//JScrollPane scrolledit=new JScrollPane();		 
-			//scrolledit.getViewport().removeAll();
-			//scrolledit.getViewport().add(jp,null);
-			messagespane.addTab(name,jp);
-		} else
-			this.messagespane.setSelectedIndex(this.messagespane.indexOfTab(name));
-	}
-	
-	public void changePropertiesPanel(String oldName,String nname){
-	 for (int k=0;k<messagespane.getTabCount();k++){
-		 if (messagespane.getTitleAt(k).equalsIgnoreCase(oldName)){
-			 messagespane.setTitleAt(k,nname);
-		 }
-	 }
-	}
-
-	public boolean isEditPropertiesPopUp(){		 
-		return this.editPopUpProperties.isSelected();
-	}
-
-	public void focusPropertiesPane(String name){
-		if (this.messagespane.indexOfTab(name) >= 0) 			  
-			this.messagespane.setSelectedIndex(this.messagespane.indexOfTab(name));
-	}
-
-	public void focusSearchPane(){		  			  
-		this.messagespane.setSelectedIndex(2);
-	}
-
-	public void removePropertiesPane(String name){
-		if (this.messagespane.indexOfTab(name) >= 0)
-			this.messagespane.removeTabAt(this.messagespane.indexOfTab(name));
 	}
 
 	public void SearchActionPerformed(ActionEvent evt) {
@@ -839,10 +819,38 @@ public class IDEGUI extends javax.swing.JFrame  {
 		//TODO add your code for Search.actionPerformed
 	}
 
-	public void searchFieldKeyTyped(KeyEvent evt) {
-		System.out.println("searchField.keyTyped, event=" + evt);
-		//TODO add your code for searchField.keyTyped
+	abstract public void searchFieldKeyTyped(KeyEvent evt);
+
+	void selectall_actionPerformed(ActionEvent e) {
+
 	}
+
+
+
+	
+	
+	public void setButtonModelPanel(JPanel buttonModelPanel) {
+		this.buttonModelPanel = buttonModelPanel;
+	}
+
+	public void switchINGENIASView_actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		System.err.println("ejec1");
+		
+	}
+
+
+
+
+
+	public void switchUMLView_actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+void this_windowClosed(WindowEvent e) {
+
+}
 
 	/*public void labelsonlyActionPerformed(ActionEvent evt) {
 		System.out.println("labelsonly.actionPerformed, event=" + evt);
@@ -859,13 +867,11 @@ public class IDEGUI extends javax.swing.JFrame  {
 
 	}*/
 	
-	public void editPopUpProperties_selected() {
-		// TODO Auto-generated method stub
-		
+	void this_windowClosing(WindowEvent e) {
+
 	};
-	public void editOnMessages_selected() {
-		// TODO Auto-generated method stub
-		
+	void undo_actionPerformed(ActionEvent e) {
+
 	};
 
 }

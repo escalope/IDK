@@ -18,7 +18,7 @@ public class StatsManager {
 				fos.write((""+ctime+","+(ctime-initTime)+","+question+"\n").getBytes());
 			}
 			fos.close();
-			new PersistenceManager().save(new File("logs/sessionSpecREG"+ctime+".xml"), IDE.ide.ids);
+	//		new PersistenceManager().save(new File("logs/sessionSpecREG"+ctime+".xml"), IDE.ide.ids);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -29,7 +29,7 @@ public class StatsManager {
 			FileOutputStream fos=new FileOutputStream("logs/sessionData"+ctime+".xml");
 			fos.write((""+ctime+","+(ctime-initTime)).getBytes());
 			fos.close();
-			new PersistenceManager().save(new File("logs/sessionSpec"+ctime+".xml"), IDE.ide.ids);
+		//	new PersistenceManager().save(new File("logs/sessionSpec"+ctime+".xml"), IDE.ide.ids);
 		} catch (IOException e) {
 			
 			e.printStackTrace();

@@ -18,6 +18,8 @@
 
 package ingenias.editor.extension;
 
+import ingenias.editor.ProgressListener;
+
 import java.util.Hashtable;
 
 
@@ -39,12 +41,22 @@ public interface BasicCodeGenerator extends BasicTool {
 	 */
 	public abstract boolean verify();
         
-        /**
+    /**
 	 * Similar to the run method but adapted to the needs of the 
 	 * INGENIAS Instances Editor
 	 *
 	 */
 	public Hashtable editorrun();
+	
+	
+	/**
+	 * It is used to inform of the progress. The actual progress is provided to the Progress Listener.
+	 * Other components will attend to these changes and update corresponding progress bars.
+	 * @param pl
+	 */
+	public void setProgressListener(ProgressListener pl);
+	
+	public void fatalError();
 
 
 }

@@ -22,6 +22,7 @@ package ingenias.editor;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.*;
+
 import java.awt.event.*;
 import java.util.*;
 
@@ -37,6 +38,7 @@ import javax.swing.event.UndoableEditEvent;
 import org.jgraph.JGraph;
 import org.jgraph.graph.*;
 import org.jgraph.event.*;
+
 import java.util.Vector;
 import org.jgraph.JGraph;
 import org.jgraph.graph.*;
@@ -47,6 +49,7 @@ import com.languageExplorer.widgets.ScrollableBar;
 
 import ingenias.editor.entities.*;
 import ingenias.editor.cell.*;
+import ingenias.editor.models.*;
 //import ingenias.editor.auml.*;
 import ingenias.exception.*;
 import ingenias.generator.browser.BrowserImp;
@@ -56,15 +59,23 @@ import java.awt.geom.*;
 
 public class Editor
 extends JPanel
-implements GraphSelectionListener, java.io.Serializable, KeyListener {
+implements GraphSelectionListener, java.io.Serializable {
+
+	/*public void setCommonButtons(ButtonToolBar commonButtons) {
+		this.commonButtons = commonButtons;
+	}*/
+
+	public JPanel getUpperSidePanel() {
+		return upperSidePanel;
+	}
 
 	// JGraph instance
 	/**
 	 *  Description of the Field
 	 */
-	protected ModelJGraph graph;
 
-	protected JTabbedPane graphPanel;
+
+	private JTabbedPane graphPanel;
 
 	// Undo Manager
 	/**
@@ -72,14 +83,14 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	 */
 	protected GraphUndoManager undoManager;
 
-	private JPanel gpan, jp;
+	private JPanel gpan, upperSidePanel;
 
 	protected ObjectManager om = null;
 
 	//	public static final ingenias.editor.events.ChangeNARYEdgeLocation relationshipLocationListener=new ingenias.editor.events.ChangeNARYEdgeLocation();
 
 	protected JComponent modelToolBar = null;
-	protected ButtonToolBar commonButtons = null;
+	//	protected ButtonToolBar commonButtons = null;
 
 	public static int idCounter = 0;
 
@@ -89,9 +100,21 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	public static final int NONE = 2;
 	public static final int CUT = 3;
 
+	private Preferences prefs;
+
 	private static int state = NONE;
 
 	private AUMLInsertOperations auml=new AUMLInsertOperations();
+
+	private GraphManager gm;
+
+	private Vector<GraphModelListener> graphModelListeners=new 
+	Vector<GraphModelListener>();
+
+
+	public void addGraphModelListener(GraphModelListener gl){
+		graphModelListeners.add(gl);
+	};
 
 	public static String getNewId() {
 		idCounter=0;
@@ -119,25 +142,12 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		return ""+idCounter;
 	}
 
-	public static String getNewId(String fromID) {
-		idCounter=0;
+	public JTabbedPane getGraphPanel(){
+		return graphPanel;
+	}
 
-		Vector<NAryEdgeEntity> rels = RelationshipManager.getRelationshipsVector(IDE.ide.ids.gm);
-		Hashtable<String,NAryEdgeEntity> trels=new Hashtable<String,NAryEdgeEntity>();
-		for (NAryEdgeEntity nedge:rels){
-			if (nedge.getId().equals(fromID+idCounter))
-				idCounter++;
-		}
-
-		while (IDE.ide.ids.om.findUserObject(fromID+idCounter).size()>0){
-			idCounter++;
-		}
-
-		while (IDE.ide.ids.gm.getModel(fromID+idCounter)!=null){
-			idCounter++;
-		}
-
-		return fromID+idCounter;
+	public void addTabSelectorChangeListener(javax.swing.event.ChangeListener cl){
+		graphPanel.addChangeListener(cl);
 	}
 
 	//
@@ -148,8 +158,14 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	/**
 	 *  Constructor for the Editor object
 	 */
-	public Editor(ObjectManager om) {
+	public Editor(ObjectManager om, GraphManager gm, Preferences prefs) {
 		this.om = om;
+		this.gm=gm;
+		this.prefs=prefs;
+		graphPanel = new JTabbedPaneWithCloseIcons();
+		System.err.println(graphPanel.getUI().getClass().getName());
+		//graphPanel.setUI(new JTabbedPaneWithCloseIconsUI());
+				graphPanel.setName("DiagramsPanel");		
 		// Use Border Layout
 		setLayout(new BorderLayout());
 		// Construct the Graph
@@ -170,56 +186,34 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 				// First Invoke Superclass
 				super.undoableEditHappened(e);
 				// Then Update Undo/Redo Buttons
-				updateHistoryButtons();
+				//updateHistoryButtons();
 			}
 		};
-
 
 		// Construct Panel
 		//
 		// Add a ToolBar
-		jp = new JPanel();
-		jp.setLayout(new GridLayout(1, 1));
-		commonButtons = createToolBar();
-		jp.add(commonButtons);
-		add(jp, BorderLayout.NORTH);
+		upperSidePanel = new JPanel();
+		upperSidePanel.setLayout(new GridLayout(1, 1));
+		//commonButtons = createToolBar();
+		//upperSidePanel.add(commonButtons);
+		add(upperSidePanel, BorderLayout.NORTH);
 		// Add the Graph as Center Component
-		graphPanel = new JTabbedPaneWithCloseIcons();
-		graphPanel.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
-		graphPanel.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent ce) {
+		this.addTabSelectorChangeListener(new ChangeListener(){
 
-				// Modifies the button bars when a new panel is selected
-				if ( (JScrollPane) graphPanel.getSelectedComponent() != null &&
-						( (JScrollPane) graphPanel.getSelectedComponent()).getViewport() != null &&
-						( (JScrollPane) graphPanel.getSelectedComponent()).getViewport().
-						getComponentCount() > 0) {
-					ModelJGraph mjg = (ModelJGraph)
-					( ( (JScrollPane) graphPanel.getSelectedComponent()).getViewport().
-							getComponent(0));
-					if (graphPanel.getTabCount() > 0) {
-						graph = mjg;
-						updateBars(mjg);
-					}
+			public void stateChanged(ChangeEvent e) {
+				if (graphPanel.getSelectedComponent()!=null){
+					graphPanel.getSelectedComponent().invalidate();
+					graphPanel.getSelectedComponent().validate();
+					graphPanel.getSelectedComponent().repaint();
 				}
+
 			}
+
 		});
-		KeyStroke copyshortcut=KeyStroke.getKeyStroke("control C");
-		this.registerKeyboardAction(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				commonButtons.copy.actionPerformed(e);
-
-			}
-		},copyshortcut,JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-		KeyStroke pasteshortcut=KeyStroke.getKeyStroke("control V");
-		this.registerKeyboardAction(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				commonButtons.paste.actionPerformed(e);
-
-			}
-		},pasteshortcut,JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
 		add(graphPanel, BorderLayout.CENTER);
+
+
 
 
 	}
@@ -227,7 +221,6 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	public void closeTab(String name) {
 		int size = graphPanel.getTabCount();
 		int k = 0;
-		boolean found = false;
 		String title = "";
 		while (k < size && !title.equals(name)) {
 			title = graphPanel.getTitleAt(k);
@@ -235,28 +228,58 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 				k++;
 			}
 		}
+		System.err.println("trying to remove "+k+" "+graphPanel.getTabCount());
 		if (k < size) {
-			graphPanel.remove(k);
+			graphPanel.removeTabAt(k);
+			System.err.println("Removed "+k+" "+graphPanel.getTabCount());
 		}
 	}
 
-	public JGraph getGraph() {
-		return this.graph;
+	public ModelJGraph getGraph() {
+		if (graphPanel.getTabCount()>0){
+			JScrollPane comp=(JScrollPane)(graphPanel.getComponentAt(graphPanel.getSelectedIndex()));
+			//System.err.println(comp);
+			/*if (comp!=null)
+			System.err.println("view:"+comp.getViewport().getView());*/
+			if (comp!=null && comp.getViewport().getView()!=null){
+				//System.err.println(comp.getViewport().getView().getClass().getName());
+				return (ModelJGraph)(comp.getViewport().getView());
+			} /*else {
+			throw new RuntimeException("getGraph returned a null object. This will cause bad behaviors");			
+		}
+		} else 
+			throw new RuntimeException("getGraph returned a null object because there is no graph stored in the editor. This will cause bad behaviors");*/
+		} 
+		return null;
 	}
 
 	// This method can be invoked by pressing the project tree and the state
 	// change listener (when the tab changes)
-	public synchronized void changeGraph(ModelJGraph graph1) {
-		this.graph = graph1;
+	public synchronized void changeGraph(ModelJGraph graph) {		
+		if (graph != null) {
+			graph.setPortsVisible(true);
 
-		if (this.graphPanel.indexOfTab(graph.getID()) < 0) {
-			this.graphPanel.addTab(graph.getID(), new JScrollPane(graph));
+			if (this.graphPanel.indexOfTab(graph.getID()) < 0) {
+				this.graphPanel.addTab(graph.getID(),  ProjectTreeRenderer.selectIconByUserObject(graph),new JScrollPane(graph));
+				graph.getModel().addGraphModelListener(new GraphModelListener(){
+					public void graphChanged(GraphModelEvent e) {
+						selectedGraphModelHasChanged(e);
+					}
+				});
+			}
 		}
 
 		this.graphPanel.setSelectedIndex(this.graphPanel.indexOfTab(graph.getID()));
 		updateBars(graph);
+
 	}
-	
+
+
+	protected void selectedGraphModelHasChanged(GraphModelEvent e) {
+		for (GraphModelListener gml:this.graphModelListeners){
+			gml.graphChanged(e);			
+		}
+	}
 
 	// This method can be invoked by pressing the project tree and the state
 	// change listener (when the tab changes)
@@ -276,26 +299,10 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		return result;
 	}
 
+
+
 	private void updateBars(ModelJGraph graph) {
 
-		if (this.modelToolBar != null) {
-			IDEGUI.buttonModelPanel.remove(modelToolBar);
-		}
-
-		if (this.commonButtons != null) {
-			jp.remove(commonButtons);
-
-		}
-		ButtonToolBar oldButtons = commonButtons;
-
-		modelToolBar = new ScrollableBar(creaPaleta(), ScrollableBar.VERTICAL);
-
-		commonButtons = this.createToolBar();
-
-		commonButtons.getJc().setSelectedIndex(oldButtons.getJc().getSelectedIndex());
-
-		jp.add(commonButtons);
-		IDEGUI.buttonModelPanel.add(modelToolBar, BorderLayout.CENTER);
 
 		// Add Listeners to Graph
 		//
@@ -306,14 +313,13 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		graph.getSelectionModel().addGraphSelectionListener(this);
 
 		// Listen for Delete Keystroke when the Graph has Focus
-		graph.addKeyListener(this);
 
 		// Construct Panel
 		//
 		// Add a ToolBar
 		//		gpan.setLayout(new GridLayout(1,1));
 		//		gpan.add(graph);
-		jp.validate();
+		upperSidePanel.validate();
 		if (this.getTopLevelAncestor()!=null){
 			this.getTopLevelAncestor().repaint();
 			this.getTopLevelAncestor().validate();
@@ -326,6 +332,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 			graph.getGraphLayoutCache().removeGraphLayoutCacheListener(obs);
 			graph.getGraphLayoutCache().addGraphLayoutCacheListener(obs);
 		}
+		this.invalidate();
 		this.validate();
 		repaint();
 		System.gc();
@@ -340,7 +347,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	 */
 	public boolean isGroup(Object cell) {
 		// Map the Cell to its View
-		CellView view = graph.getGraphLayoutCache().getMapping(cell, false);
+		CellView view = getGraph().getGraphLayoutCache().getMapping(cell, false);
 		if (view != null) {
 			return!view.isLeaf();
 		}
@@ -357,27 +364,25 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	 */
 	public void insert(Point point, String entity) throws InvalidEntity {
 		DefaultGraphCell newCell;
-		if (graph instanceof AUMLInteractionDiagramModelJGraph){
-			this.auml.insert(point, entity, graph);
-		} else {
-			newCell=graph.insert(point, entity);
-			Entity newEntity=(Entity) newCell.getUserObject();
-			if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.UML)
-				newEntity.getPrefs().setView(ViewPreferences.ViewType.UML);
-			if (IDE.ide!=null && IDE.ide.prefs.getModelingLanguage()==Preferences.ModelingLanguage.INGENIAS)
-				newEntity.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-			System.err.println("----------------insertando ----------------");
-		}
-
-		IDE.setChanged();
+		/*if (getGraph() instanceof AUMLInteractionDiagramModelJGraph){
+			this.auml.insert(point, entity, (ModelJGraph)getGraph(),ids);
+		} else {*/
+		System.err.println("----------------intentando insertando ----------------");
+		newCell=getGraph().insert(point, entity);
+		Entity newEntity=(Entity) newCell.getUserObject();
+		if (prefs.getModelingLanguage()==Preferences.ModelingLanguage.UML)
+			newEntity.getPrefs().setView(ViewPreferences.ViewType.UML);
+		if (prefs.getModelingLanguage()==Preferences.ModelingLanguage.INGENIAS)
+			newEntity.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+		System.err.println("----------------insertando ----------------");
+		//}		
 
 	}
 
 	public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.Entity
 			entity) {
 
-		IDE.setChanged();
-		return graph.insertDuplicated(point, entity);
+		return getGraph().insertDuplicated(point, entity);
 
 	}
 
@@ -386,7 +391,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		// Create a Map that holds the attributes for the NAryEdge Vertex.
 		Map map = new Hashtable();
 		// Snap the Point to the Grid.
-		Point2D point = graph.snap(pt);
+		Point2D point = getGraph().snap(pt);
 		//		GraphConstants.setFontSize(map, 12f);
 		//		GraphConstants.setFontName(map, "monospaced");
 		// Default Size for the new Vertex.
@@ -456,9 +461,9 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 					// Add to List of Groups
 					groups.add(cells[i]);
 					// Loop Children of Cell
-					for (int j = 0; j < graph.getModel().getChildCount(cells[i]); j++) {
+					for (int j = 0; j < getGraph().getModel().getChildCount(cells[i]); j++) {
 						// Get Child from Model
-						Object child = graph.getModel().getChild(cells[i], j);
+						Object child = getGraph().getModel().getChild(cells[i], j);
 						// If Not Port
 						if (! (child instanceof Port)) {
 							// Add to Children List
@@ -482,7 +487,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	 */
 	public void toFront(Object[] c) {
 		if (c != null && c.length > 0) {
-			graph.getGraphLayoutCache().toFront(graph.getGraphLayoutCache().getMapping(c));
+			getGraph().getGraphLayoutCache().toFront(getGraph().getGraphLayoutCache().getMapping(c));
 		}
 	}
 
@@ -492,11 +497,11 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	 *
 	 *@param  c  Description of Parameter
 	 */
-	public void toBack(Object[] c) {
+	/*public void toBack(Object[] c) {
 		if (c != null && c.length > 0) {
-			graph.getGraphLayoutCache().toBack(graph.getGraphLayoutCache().getMapping(c));
+			getGraph().getGraphLayoutCache().toBack(((JGraph)getGraph()).getMapping(c));
 		}
-	}
+	}*/
 
 	// Undo the last Change to the Model or the View
 	/**
@@ -504,13 +509,13 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	 */
 	public void undo() {
 		try {
-			undoManager.undo(graph.getGraphLayoutCache());
+			undoManager.undo(getGraph().getGraphLayoutCache());
 		}
 		catch (Exception ex) {
 			System.err.println(ex);
 		}
 		finally {
-			updateHistoryButtons();
+			//	updateHistoryButtons();
 		}
 	}
 
@@ -520,13 +525,13 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	 */
 	public void redo() {
 		try {
-			undoManager.redo(graph.getGraphLayoutCache());
+			undoManager.redo(getGraph().getGraphLayoutCache());
 		}
 		catch (Exception ex) {
 			System.err.println(ex);
 		}
 		finally {
-			updateHistoryButtons();
+			//	updateHistoryButtons();
 		}
 	}
 
@@ -544,8 +549,9 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		// Group Button only Enabled if more than One Cell Selected
 		//		group.setEnabled(graph.getSelectionCount() > 1);
 		// Update Button States based on Current Selection
-		boolean enabled = !graph.isSelectionEmpty();
-		this.commonButtons.getRemove().setEnabled(enabled);
+		boolean enabled = !getGraph().isSelectionEmpty();
+		/*	if (this.commonButtons!=null)
+		this.commonButtons.getRemove().setEnabled(enabled);*/
 		//		ungroup.setEnabled(enabled);
 		//		tofront.setEnabled(enabled);
 		//		toback.setEnabled(enabled);
@@ -553,50 +559,10 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		//cut.setEnabled(enabled);
 	}
 
-	//
-	// KeyListener for Delete KeyStroke
-	//
-	/**
-	 *  Description of the Method
-	 *
-	 *@param  e  Description of Parameter
-	 */
-	public void keyReleased(KeyEvent e) {
-	}
-
-	/**
-	 *  Description of the Method
-	 *
-	 *@param  e  Description of Parameter
-	 */
-	public void keyTyped(KeyEvent e) {
-	}
-
-	/**
-	 *  Description of the Method
-	 *
-	 *@param  e  Description of Parameter
-	 */
-	public void keyPressed(KeyEvent e) {
-		// Listen for Delete Key Press
-		if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-			// Execute Remove Action on Delete Key Press
-			this.commonButtons.getRemove().actionPerformed(null);
-		}
-	}
 
 	// End of Editor.MyMarqueeHandler
 
-	/**
-	 *  ToolBar
-	 *
-	 *@return    Description of the Returned Value
-	 */
-	public ButtonToolBar createToolBar() {
 
-		ButtonToolBar toolBar=new ButtonToolBar(this);
-		return toolBar;
-	}
 
 	// Returns the total number of cells in a graph
 	/**
@@ -614,11 +580,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	/**
 	 *  Description of the Method
 	 */
-	protected void updateHistoryButtons() {
-		// The View Argument Defines the Context
-		this.commonButtons.getUndo().setEnabled(undoManager.canUndo(graph.getGraphLayoutCache()));
-		this.commonButtons.getRedo().setEnabled(undoManager.canRedo(graph.getGraphLayoutCache()));
-	}
+
 
 	//
 	// Main
@@ -636,7 +598,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		// Set Close Operation to Exit
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Add an Editor Panel
-		frame.getContentPane().add(new Editor(null));
+		frame.getContentPane().add(new Editor(null,null,null));
 		// Fetch URL to Icon Resource
 		URL jgraphUrl =
 			Editor.class.getClassLoader().getResource("images/jgraph.gif");
@@ -657,9 +619,9 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 
 
 	private void hideRoleLabels() {
-		Object[] cells = this.graph.getSelectionCells();
+		Object[] cells = this.getGraph().getSelectionCells();
 		if (cells == null || cells.length == 0) {
-			cells = this.graph.getRoots();
+			cells = this.getGraph().getRoots();
 		}
 		for (int k = 0; k < cells.length; k++) {
 			Object gc = cells[k];
@@ -671,13 +633,13 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 				r.hide();
 			}
 		}
-		this.graph.repaint();
+		this.getGraph().repaint();
 	}
 
 	private void showRoleLabels() {
-		Object[] cells = this.graph.getSelectionCells();
+		Object[] cells = this.getGraph().getSelectionCells();
 		if (cells == null || cells.length == 0) {
-			cells = this.graph.getRoots();
+			cells = this.getGraph().getRoots();
 		}
 		for (int k = 0; k < cells.length; k++) {
 			Object gc = cells[k];
@@ -689,16 +651,19 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 			}
 		}
 
-		this.graph.repaint();
+		this.getGraph().repaint();
 	}
 
-	public JComboBox getJC(){
+	/*	public JComboBox getJC(){
+		if (this.commonButtons!=null)
 		return this.commonButtons.getJc();
-	}
+		else 
+			return null;
+	}*/
 
 	public void enableAutomaticLayout() {
-		if (this.graph!=null){
-			GraphModelListener[] gml = ( (DefaultGraphModel)this.graph.getModel()).
+		if (this.getGraph()!=null){
+			GraphModelListener[] gml = ( (DefaultGraphModel)this.getGraph().getModel()).
 			getGraphModelListeners();
 			for (int k = 0; k < gml.length; k++) {
 				if (ingenias.editor.events.ChangeNARYEdgeLocation.class.isAssignableFrom(
@@ -718,8 +683,8 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 	}
 
 	public void disableAutomaticLayout() {
-		if (this.graph!=null){
-			GraphModelListener[] gml = ( (DefaultGraphModel)this.graph.getModel()).
+		if (this.getGraph()!=null){
+			GraphModelListener[] gml = ( (DefaultGraphModel)this.getGraph().getModel()).
 			getGraphModelListeners();
 			for (int k = 0; k < gml.length; k++) {
 				if (ingenias.editor.events.ChangeNARYEdgeLocation.class.isAssignableFrom(
@@ -740,9 +705,9 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 
 	//	Funciones especificas del modelo
 
-	private JToolBar creaPaleta() {
-		if (graph != null) {
-			return graph.getPaleta();
+	public JToolBar creaPaleta() {
+		if (getGraph() != null) {
+			return getGraph().getPaleta();
 		}
 		else {
 			return new JToolBar();
@@ -789,7 +754,7 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		// Ports of argument vertexs.
 		Port[] ports = new Port[vertexList.length];
 		// Obtain the model.
-		GraphModel model = graph.getModel();
+		GraphModel model = getGraph().getModel();
 
 		// Iterate over all Objects.
 		for (int i = 0; i < vertexList.length; i++) {
@@ -817,125 +782,30 @@ implements GraphSelectionListener, java.io.Serializable, KeyListener {
 		return ports;
 	}
 
-	/**
-	 *  Description of the Method
-	 *
-	 *@param  pt             Description of Parameter
-	 *@param  selected       Description of Parameter
-	 *@param  selectedPorts  Description of Parameter
-	 */
-	/*  public NAryEdge connectSequence(Point pt, GraphCell[] selected,
-	 Map selectedPorts) {
-	 // Possible edges.
-	  Object[] ops = this.getRelacionesPosibles(selected);
-	  SequenceModelModelJGraph graph = (SequenceModelModelJGraph)this.graph;
-	  NAryEdge nEdge = null;
-	  if (ops.length > 0) {
-	  // sel can be:
-	   // >= 0   If the user selects a relationship and accepts it.
-	    // < 0    In other case.
-	     int sel = getSelectedRelationship(ops).intValue();
-	     if (sel >= 0) {
-	     // N-ary relationship.
-	      nEdge = (NAryEdge)this.getInstanciaNRelacion(ops[sel].toString(),
-	      selected);
-	      if (nEdge != null) {
-	      // All role assignations to classes are obtained.
-	       // Remove nEdge from selected if it is present.
-	        GraphCell[] selectedWithNoNAryEdge = nEdge.prepareSelected(selected);
-	        // The user selects a role assignation (List of Strings).
-	         java.util.List currentAssignation = this.selectAssignation(
-	         selectedWithNoNAryEdge, nEdge);
-	         if (currentAssignation != null) {
-	         // Connections that will be inserted into the Model.
-	          String[] selectedAssignation = new String[currentAssignation.size()];
-	          for (int i = 0; i < currentAssignation.size(); i++) {
-	          selectedAssignation[i] = (String) currentAssignation.get(i);
-	          }
-	          GraphCell[] newInserted = null;
-	          Port[] portsToConnect = this.getPorts(selectedWithNoNAryEdge,
-	          selectedPorts);
-	          // Revisar y actualizar barras.
-	           // Revisar newSelected.
-	            // Revisar Ports.
-	             if (this.graph instanceof SequenceModelModelJGraph) {
-	             newInserted = ( (SequenceModelModelJGraph)this.graph).updateBars(
-	             nEdge, selectedWithNoNAryEdge, portsToConnect);
-	             }
-	             try {
-	             // Auxiliary edges that will be inserted in the Model.
-	              DefaultEdge[] auxiliaryEdges = nEdge.connectionsEdges(
-	              selectedWithNoNAryEdge, selectedAssignation);
-	              ConnectionSet cs = nEdge.connections(selectedAssignation,
-	              auxiliaryEdges, portsToConnect);
-	              // Create a Map that holds the attributes for the NAryEdge Vertex.
-	               // Associate the NAryEdge Vertex with its Attributes.
-	                Hashtable attributes = this.nEdgeAttributes(nEdge, pt);
-	                // Atributes for the binary edges of this NAryEdge according to
-	                 // targets and sources.
-	                  Hashtable edgesAttributes = this.edgesAttributes(auxiliaryEdges,
-	                  selectedAssignation);
-	                  // Insert the Edge and its Attributes. The order matters.
-	                   graph.insert(new Object[] {nEdge}
-	                   , null, null, attributes);
-	                   ///////// Quiz�s haya que corregir los selectedWithNoNAryEdge con un graph.getModel().edit().
-	                    graph.insert( (Object[]) newInserted, null, null, null);
-	                    graph.insert( (Object[]) auxiliaryEdges, cs, null,
-	                    edgesAttributes);
-	                    // Update bars positions ///////////////////////////////////////
-	                     this.insertRelationshipInManager(nEdge, auxiliaryEdges,
-	                     selectedWithNoNAryEdge,
-	                     currentAssignation);
-	                     if (nEdge instanceof ingenias.editor.cell.SDivideActivationEdge) {
-	                     ingenias.editor.auml.cell.ActivationCell sourceac = (ingenias.
-	                     editor.auml.cell.ActivationCell) selected[0];
-	                     ingenias.editor.auml.cell.ActivationCell destac = (ingenias.
-	                     editor.auml.cell.ActivationCell) selected[1];
-	                     ingenias.editor.auml.cell.ActivationCell.divideBar(destac,
-	                     (Port) selectedPorts.get(sourceac), this.graph);
-	                     graph.setBarsPositions(newInserted, pt);
-	                     graph.updateBarsPositions();
-	                     //                                                 graph.updateObjectsAndPorts();
-	                      System.err.println("divides");
-	                      }
-	                      else {
-	                      if (nEdge instanceof ingenias.editor.cell.SCommunicatesEdge) {
-	                      graph.setBarsPositions(newInserted, pt);
-	                      graph.updateBarsPositions();
-	                      System.err.println("communicates");
-	                      }
-	                      }
-	                      ////////////////////////////
-	                       // New relationship is inserted also in the relationship manager.
-	                        //this.insertRelationshipInManager(nEdge, auxiliaryEdges, selected,currentAssignation);
-	                         ingenias.editor.events.ReallocateSequenceColumns.reallocatePorts(this.
-	                         graph);
-	                         } catch (WrongParameters wp){
-	                         Log.getInstance().logSYS("WARNING!!! INTERNAL ERROR. Cannot produce edges to"+
-	                         " connect these entities");
-	                         }
-	                         }
-	                         else {
-	                         JOptionPane.showMessageDialog(this, "Assignation not allowed",
-	                         "Warning",
-	                         JOptionPane.WARNING_MESSAGE);
-	                         }
-	                         }
-	                         }
-	                         }
-	                         else {
-	                         JOptionPane.showMessageDialog(this, "Relationship not allowed", "Warning",
-	                         JOptionPane.WARNING_MESSAGE);
-	                         }
-	                         return nEdge;
-	                         }*/
+
 
 	public void writeObject(ObjectOutputStream s) throws IOException {
 
 	}
 
-	public ButtonToolBar getCommonButtons() {
-		return commonButtons;
+	public void reloadDiagrams() {		
+		
+		JScrollPane comp=null;
+		for (int k=0;k<this.graphPanel.getTabCount();k++){
+			comp=(JScrollPane)(graphPanel.getComponentAt(k));
+			
+			if (comp!=null)
+				System.err.println(comp.getClass().getName());
+			if (comp!=null && comp.getViewport().getView()!=null){
+				//System.err.println(comp.getViewport().getView().getClass().getName());
+				ModelJGraph mjg=(ModelJGraph)(comp.getViewport().getView());
+				graphPanel.setTitleAt(k, mjg.getName())	;
+				System.err.println("cambiando titulo a "+mjg.getName());
+			} 
+		}
+		graphPanel.invalidate();
+		graphPanel.repaint();		
 	}
+
 
 }

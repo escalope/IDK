@@ -30,19 +30,13 @@ import org.xml.sax.InputSource;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.io.OutputStreamWriter;
 import java.io.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.*;
-import java.util.Map;
-import java.util.Hashtable;
-import java.util.ArrayList;
 import javax.xml.parsers.*;
 import org.jgraph.JGraph;
 import org.jgraph.graph.*;
 import org.w3c.dom.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.DOMImplementation;
 import ingenias.editor.entities.*;
 import ingenias.exception.*;
 import ingenias.editor.cell.*;
@@ -58,6 +52,7 @@ public interface GraphLoad {
 
 	/**
 	 *  Description of the Method
+	 * @param resources 
 	 *
 	 *@param  ed                             Description of Parameter
 	 *@param  om                             Description of Parameter
@@ -66,5 +61,5 @@ public interface GraphLoad {
 	 *@exception  CannotLoadDiagram          Description of Exception
 	 */
 	public void restoreModels(IDEState ids,
-			Document doc) throws CannotLoadDiagram;
+			GUIResources resources, Document doc) throws CannotLoadDiagram;
 }

@@ -19,6 +19,8 @@
 package ingenias.editor.extension;
 
 
+import ingenias.editor.GUIResources;
+import ingenias.editor.ProgressListener;
 import ingenias.exception.CannotLoad;
 import ingenias.exception.DamagedFormat;
 import ingenias.exception.NotInitialised;
@@ -43,36 +45,48 @@ import ingenias.generator.browser.*;
  */
 
 public abstract class BasicCodeGeneratorImp
-    extends BasicToolImp
-    implements BasicCodeGenerator {
+extends BasicToolImp
+implements BasicCodeGenerator {
+	
+	public boolean isError() {
+		return error;
+	}
 
-  Vector templates = new Vector();
+	public void setError(boolean error) {
+		this.error = error;
+	}
 
-  /**
-   *  Creates a code generator that reuses that reuses an existing browser
-   * directly. This constructor is invoked when launching a code generator
-   * from whithin the IDE.
-   */
-  public BasicCodeGeneratorImp() {
-    super();
-    
+	protected boolean error = false; // An error has been raised. It indicates the process should stop
 
-  }
+	Vector templates = new Vector();
 
-  /**
-   *  Creates a code generator that initialises from scratch a browser.
-   * This constructor is invoked when launching a stand alone version
-   */
+	private ProgressListener pl;
 
-  public BasicCodeGeneratorImp(String file) throws ingenias.exception.
-      UnknowFormat,
-      ingenias.exception.DamagedFormat,
-      ingenias.exception.CannotLoad {
-    super(file);   
-    templates = new Vector();
-  }
-  
-  public BasicCodeGeneratorImp(String file, String[] templateFileArray) throws UnknowFormat, DamagedFormat,
+	/**
+	 *  Creates a code generator that reuses that reuses an existing browser
+	 * directly. This constructor is invoked when launching a code generator
+	 * from whithin the IDE.
+	 */
+	public BasicCodeGeneratorImp(Browser browser) {
+		super(browser);
+
+
+	}
+
+	/**
+	 *  Creates a code generator that initialises from scratch a browser.
+	 * This constructor is invoked when launching a stand alone version
+	 */
+
+	public BasicCodeGeneratorImp(String file) throws ingenias.exception.
+	UnknowFormat,
+	ingenias.exception.DamagedFormat,
+	ingenias.exception.CannotLoad {
+		super(file);   
+		templates = new Vector();
+	}
+
+	public BasicCodeGeneratorImp(String file, String[] templateFileArray) throws UnknowFormat, DamagedFormat,
 	CannotLoad {
 		super(file);
 		try {
@@ -86,10 +100,10 @@ public abstract class BasicCodeGeneratorImp
 			e.printStackTrace();
 		}
 	}
-  
-  public BasicCodeGeneratorImp(String[] templateFileArray) throws UnknowFormat, DamagedFormat,
+
+	public BasicCodeGeneratorImp(String[] templateFileArray, Browser browser) throws UnknowFormat, DamagedFormat,
 	CannotLoad {
-		super();
+		super(browser);
 		try {
 			for (int k=0;k<templateFileArray.length;k++)
 				this.addTemplate(templateFileArray[k]);
@@ -101,166 +115,245 @@ public abstract class BasicCodeGeneratorImp
 			e.printStackTrace();
 		}
 	}
-  
-  
 
-  /**
-   *  Adds a new template to be processed with data from specification diagrams.
-   *
-   *@param  filePath  The path of the template in the deployment file
-   *@exception  java.io.FileNotFoundException The template was not found
-   */
-  public void addTemplate(String filePath) throws java.io.FileNotFoundException {
-    if (this.getClass().getClassLoader()instanceof java.net.URLClassLoader) {
-      java.net.URL baseURL = ( (java.net.URLClassLoader)this.getClass().
-                              getClassLoader()).findResource(filePath);
-      if (baseURL == null) {
-      	try {
-      		System.err.println("Loading.....");
-			new URL(filePath).openStream().close();
-			this.templates.add(new URL(filePath));
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			 throw new java.io.FileNotFoundException(filePath +
-	            " was not found in the classpath or current jar");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			 throw new java.io.FileNotFoundException(filePath +
-	            " was not found in the classpath or current jar");
+	/**
+	 *  Adds a new template to be processed with data from specification diagrams.
+	 *
+	 *@param  filePath  The path of the template in the deployment file
+	 *@exception  java.io.FileNotFoundException The template was not found
+	 */
+	public void addTemplate(String filePath, ClassLoader cl) throws java.io.FileNotFoundException {
+		if (cl instanceof java.net.URLClassLoader) {
+			System.err.println("Loding "+filePath);
+			java.net.URL baseURL = ((java.net.URLClassLoader)cl).getResource(filePath);
+			if (baseURL == null) {
+				try {
+					System.err.println("Loading.....");
+					new URL(filePath).openStream().close();
+					this.templates.add(new URL(filePath));
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					throw new java.io.FileNotFoundException(filePath +
+					" was not found in the classpath or current jar");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					throw new java.io.FileNotFoundException(filePath +
+					" was not found in the classpath or current jar");
+				}
+
+			}
+			else {
+				this.templates.add(baseURL);
+			}
+			//     System.err.println(baseURL);
 		}
-      
-       
-      }
-      else {
-        this.templates.add(baseURL);
-      }
-//     System.err.println(baseURL);
-    }
-    else {
-    	try {
-      		System.err.println("Loading.....");
-			new URL(filePath).openStream().close();
-			this.templates.add(new URL(filePath));
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			 throw new java.io.FileNotFoundException(filePath +
-	            " was not found in the classpath or current jar");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			 throw new java.io.FileNotFoundException(filePath +
-	            " was not found in the classpath or current jar");
+		else {
+			ClassLoader loader = cl;
+			try {
+				System.err.println("Loading..... from "+this.getClass().getClassLoader().getClass().getName());
+				//new URL(filePath).openStream().close();
+				if (loader.getResource(filePath)==null)
+					throw new IOException ();
+				this.templates.add(loader.getResource(filePath));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new java.io.FileNotFoundException(filePath +
+				" was not found in the classpath or current jar");
+			}
+			//throw new java.io.FileNotFoundException(filePath +
+			//    " was not found in the classpath or current jar");
 		}
-      //throw new java.io.FileNotFoundException(filePath +
-      //    " was not found in the classpath or current jar");
-    }
-  }
-
-  /**
-   *  Runs the code generator with the templates added
-   *
-   */
-  public final void run() {
-
-	  try {
-		setProperties(BrowserImp.getInstance().getState().prop);
-	} catch (NotInitialised e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
 	}
-	  
-      Sequences seq = this.generate();
-      if (templates.size() == 0) {
-        ingenias.editor.Log.getInstance().logERROR(
-            "No templates defined. Please check module " + this.getName() +
-            " implementation. It should use the method addTemplate");
+	
+	public void setProgressListener(ProgressListener pl){
+		this.pl=pl;
+	}
 
-      }
-      Enumeration enumeration = this.templates.elements();
-      while (enumeration.hasMoreElements()) {
-        java.net.URL temp = (java.net.URL) enumeration.nextElement();
-        try {
-          if (temp != null) {
-            InputStream is = temp.openStream();
-            ingenias.generator.interpreter.Codegen.applyArroba(seq.toString(),
-                is);
-          
-          }
-        
-        }        
-        catch (ingenias.exception.NotWellFormed nwf) {
-          ingenias.editor.Log.getInstance().logERROR("Template " + temp +
-              " is not well formed. Please run a XML parser on it");
-        }
-        catch (Exception e) {
-          ingenias.editor.Log.getInstance().logERROR("Error " +
-              e.getClass().getName() + ": "+Conversor.replaceInvalidChar(e.getMessage()).replace("\n","<br>")+". The trace is <br>" + Conversor.replaceInvalidChar(this.getTrace(e)).replace("\n","<br>"));
-        }
-       
-      }
-   
 
-  }
-  
-  
-  /**
-   *  Runs the code generator with the templates added
-   *
-   */
-  public final Hashtable editorrun() {
 
-	  Hashtable result=new Hashtable();
-  	  
-      Sequences seq = this.generate();
-      if (templates.size() == 0) {
-        ingenias.editor.Log.getInstance().logERROR(
-            "No templates defined. Please check module " + this.getName() +
-            " implementation. It should use the method addTemplate");
+	/**
+	 *  Adds a new template to be processed with data from specification diagrams.
+	 *
+	 *@param  filePath  The path of the template in the deployment file
+	 *@exception  java.io.FileNotFoundException The template was not found
+	 */
+	public void addTemplate(String filePath) throws java.io.FileNotFoundException {
+		if (this.getClass().getClassLoader()instanceof java.net.URLClassLoader) {
+			java.net.URL baseURL = ( (java.net.URLClassLoader)this.getClass().
+					getClassLoader()).findResource(filePath);
+			if (baseURL == null) {
+				try {
+					System.err.println("Loading.....");
+					new URL(filePath).openStream().close();
+					this.templates.add(new URL(filePath));
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					throw new java.io.FileNotFoundException(filePath +
+					" was not found in the classpath or current jar");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					throw new java.io.FileNotFoundException(filePath +
+					" was not found in the classpath or current jar");
+				}
 
-      }
-      Enumeration enumeration = this.templates.elements();
-      while (enumeration.hasMoreElements()) {
-        java.net.URL temp = (java.net.URL) enumeration.nextElement();
-        try {
-          if (temp != null) {
-            InputStream is = temp.openStream();
-            TemplateTree instancetags=ingenias.generator.interpreter.Codegen.applyArroba(seq.toString(),
-                is);
-            result.put(temp.toString(),instancetags);            
-          }
-        }
-        catch (ingenias.exception.NotWellFormed nwf) {
-          ingenias.editor.Log.getInstance().logERROR("Template " + temp +
-              " is not well formed. Please run a XML parser on it");
-        }
-        catch (Exception e) {
-          ingenias.editor.Log.getInstance().logERROR("Error " +
-              e.getClass().getName() + ". The trace is \n" + this.getTrace(e));
-        }
-      }
-      return result;
+			}
+			else {
+				this.templates.add(baseURL);
+			}
+			//     System.err.println(baseURL);
+		}
+		else {
+			ClassLoader loader = this.getClass().getClassLoader();
+			try {
+				System.err.println("Loading..... from "+this.getClass().getClassLoader().getClass().getName());
+				//new URL(filePath).openStream().close();
+				if (loader.getResource(filePath)==null)
+					throw new IOException ();
+				this.templates.add(loader.getResource(filePath));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new java.io.FileNotFoundException(filePath +
+				" was not found in the classpath or current jar");
+			}
+			//throw new java.io.FileNotFoundException(filePath +
+			//    " was not found in the classpath or current jar");
+		}
+	}
+	
+	public void setProgress(int progress){
+		if (pl!=null)
+			pl.setCurrentProgress(progress);
+	}
+	
+	
 
-  }
 
-  /**
-   *  Determines whether current diagrams contains the information this code
-   *  generator needs. When there are mistakes, the method uses the log
-   *  facilities to inform of errors.
-   *
-   *@return    true in case there is all the information it needs, false i.o.c.
-   */
-  public abstract boolean verify();
 
-  /**
-   *  Travel the diagram structure to obtain a Sequences instance with all the
-   *  information needed to perform code generation
-   *
-   *@return    Description of the Returned Value
-   */
+	/**
+	 *  Runs the code generator with the templates added
+	 *
+	 */
+	public final void run() {
 
-  abstract protected Sequences generate();
+		setProperties(browser.getState().prop);
+		
+		Sequences seq = this.generate();
+		if (templates.size() == 0) {
+			ingenias.editor.Log.getInstance().logERROR(
+					"No templates defined. Please check module " + this.getName() +
+			" implementation. It should use the method addTemplate");
+
+		}
+		Enumeration enumeration = this.templates.elements();
+		float increment=50f/this.templates.size();
+		int counter=0;
+		while (enumeration.hasMoreElements()) {
+			java.net.URL temp = (java.net.URL) enumeration.nextElement();
+			try {
+				if (temp != null) {
+					InputStream is = temp.openStream();
+					ingenias.generator.interpreter.Codegen.applyArroba(seq.toString(),
+							is);
+
+				}
+
+			}        
+			catch (ingenias.exception.NotWellFormed nwf) {
+				ingenias.editor.Log.getInstance().logERROR("Template " + temp +
+				" is not well formed. Please run a XML parser on it");
+			}
+			catch (Exception e) {
+				ingenias.editor.Log.getInstance().logERROR("Error " +
+						e.getClass().getName() + ": "+Conversor.replaceInvalidChar(e.getMessage()).replace("\n","<br>")+". The trace is <br>" + Conversor.replaceInvalidChar(this.getTrace(e)).replace("\n","<br>"));
+			}
+			counter++;
+			this.setProgress((int) (50+increment*counter));
+
+		}
+
+
+	}
+
+
+	/**
+	 *  Runs the code generator with the templates added
+	 *
+	 */
+	public final Hashtable editorrun() {
+
+		Hashtable result=new Hashtable();
+
+		Sequences seq = this.generate();
+		if (templates.size() == 0) {
+			ingenias.editor.Log.getInstance().logERROR(
+					"No templates defined. Please check module " + this.getName() +
+			" implementation. It should use the method addTemplate");
+
+		}
+		Enumeration enumeration = this.templates.elements();
+		float increment=50f/this.templates.size();
+		int counter=0;
+		while (enumeration.hasMoreElements()) {			
+			java.net.URL temp = (java.net.URL) enumeration.nextElement();
+			try {
+				if (temp != null) {
+					InputStream is = temp.openStream();
+					TemplateTree instancetags=ingenias.generator.interpreter.Codegen.applyArroba(seq.toString(),
+							is);
+					result.put(temp.toString(),instancetags);            
+				}
+			}
+			catch (ingenias.exception.NotWellFormed nwf) {
+				ingenias.editor.Log.getInstance().logERROR("Template " + temp +
+				" is not well formed. Please run a XML parser on it");
+			}
+			catch (Exception e) {
+				ingenias.editor.Log.getInstance().logERROR("Error " +
+						e.getClass().getName() + ". The trace is \n" + this.getTrace(e));
+			}
+			counter++;
+			this.setProgress((int) (50+increment*counter));
+		}
+		return result;
+
+	}
+
+	/**
+	 *  Determines whether current diagrams contains the information this code
+	 *  generator needs. When there are mistakes, the method uses the log
+	 *  facilities to inform of errors.
+	 *
+	 *@return    true in case there is all the information it needs, false i.o.c.
+	 */
+	
+
+	/**
+	 *  Travel the diagram structure to obtain a Sequences instance with all the
+	 *  information needed to perform code generation
+	 *
+	 *@return    Description of the Returned Value
+	 */
+
+	abstract protected Sequences generate();
+	
+	public boolean verify() {
+		error = false;
+		if (this.isError() != true) {
+			this.generate();
+		}
+
+		return this.isError() != true;
+	}
+	
+	public void fatalError(){
+	 this.setError(true);
+		new Exception("Fatal error triggered").printStackTrace();
+	}
 
 }

@@ -38,7 +38,7 @@ import java.util.zip.*;
 public class ModuleLoader
     extends URLClassLoader {
   private URL url;
-  private static Vector reviewedFiles = new Vector();
+  private Vector reviewedFiles = new Vector();
 
   /**
    *  Creates a new JarClassLoader for the specified url.
@@ -90,7 +90,7 @@ public class ModuleLoader
     }
   }
 
-  public static void updateStatus(String folder,Set currenttools, Set currentcg) {
+  public void updateStatus(String folder,Set currenttools, Set currentcg) {
     try {
       File f = new File(folder);
       if (f.isDirectory()) {
@@ -183,7 +183,7 @@ public class ModuleLoader
    *@exception  Exception  Description of Exception
    */
   public static void main(String args[]) throws Exception {
-    Set tools = new HashSet();
+  /*  Set tools = new HashSet();
     Set cg = new HashSet();
     cleanExtensionFolder();
     ModuleLoader.updateStatus("ext",tools, cg);
@@ -192,7 +192,7 @@ public class ModuleLoader
     Iterator it = tools.iterator();
     while (it.hasNext()) {
       System.err.println(it.next());
-    }
+    }*/
 
 //    ut.invokeClass("ingenias.codeproc.ExampleReportGenerator");
   }

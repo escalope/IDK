@@ -111,7 +111,7 @@ public class ComponentDiagramPanel extends JGraph {
   public DefaultGraphCell createCell(String entity) throws InvalidEntity{
   
     if (entity.equalsIgnoreCase("INGENIASComponent")) {
-    INGENIASComponent nentity=new INGENIASComponent(Editor.getNewId("INGENIASComponent"));
+    INGENIASComponent nentity=new INGENIASComponent(((Model)getModel()).getNewId("INGENIASComponent"));
       DefaultGraphCell vertex = new
           INGENIASComponentCell(nentity);
       // Default Size for the cell with the new entity
@@ -120,7 +120,7 @@ public class ComponentDiagramPanel extends JGraph {
     else
 
     if (entity.equalsIgnoreCase("INGENIASCodeComponent")) {
-    INGENIASCodeComponent nentity=new INGENIASCodeComponent(Editor.getNewId("INGENIASCodeComponent"));
+    INGENIASCodeComponent nentity=new INGENIASCodeComponent(((Model)getModel()).getNewId("INGENIASCodeComponent"));
       DefaultGraphCell vertex = new
           INGENIASCodeComponentCell(nentity);
       // Default Size for the cell with the new entity
@@ -129,7 +129,7 @@ public class ComponentDiagramPanel extends JGraph {
     else
 
     if (entity.equalsIgnoreCase("Application")) {
-    Application nentity=new Application(Editor.getNewId("Application"));
+    Application nentity=new Application(((Model)getModel()).getNewId("Application"));
       DefaultGraphCell vertex = new
           ApplicationCell(nentity);
       // Default Size for the cell with the new entity
@@ -138,7 +138,7 @@ public class ComponentDiagramPanel extends JGraph {
     else
 
     if (entity.equalsIgnoreCase("EnvironmentApplication")) {
-    EnvironmentApplication nentity=new EnvironmentApplication(Editor.getNewId("EnvironmentApplication"));
+    EnvironmentApplication nentity=new EnvironmentApplication(((Model)getModel()).getNewId("EnvironmentApplication"));
       DefaultGraphCell vertex = new
           EnvironmentApplicationCell(nentity);
       // Default Size for the cell with the new entity
@@ -147,7 +147,7 @@ public class ComponentDiagramPanel extends JGraph {
     else
 
     if (entity.equalsIgnoreCase("InternalApplication")) {
-    InternalApplication nentity=new InternalApplication(Editor.getNewId("InternalApplication"));
+    InternalApplication nentity=new InternalApplication(((Model)getModel()).getNewId("InternalApplication"));
       DefaultGraphCell vertex = new
           InternalApplicationCell(nentity);
       // Default Size for the cell with the new entity
@@ -156,7 +156,7 @@ public class ComponentDiagramPanel extends JGraph {
     else
 
     if (entity.equalsIgnoreCase("Task")) {
-    Task nentity=new Task(Editor.getNewId("Task"));
+    Task nentity=new Task(((Model)getModel()).getNewId("Task"));
       DefaultGraphCell vertex = new
           TaskCell(nentity);
       // Default Size for the cell with the new entity
@@ -165,7 +165,7 @@ public class ComponentDiagramPanel extends JGraph {
     else
 
     if (entity.equalsIgnoreCase("Test")) {
-    Test nentity=new Test(Editor.getNewId("Test"));
+    Test nentity=new Test(((Model)getModel()).getNewId("Test"));
       DefaultGraphCell vertex = new
           TestCell(nentity);
       // Default Size for the cell with the new entity
@@ -174,7 +174,7 @@ public class ComponentDiagramPanel extends JGraph {
     else
 
     if (entity.equalsIgnoreCase("UMLComment")) {
-    UMLComment nentity=new UMLComment(Editor.getNewId("UMLComment"));
+    UMLComment nentity=new UMLComment(((Model)getModel()).getNewId("UMLComment"));
       DefaultGraphCell vertex = new
           UMLCommentCell(nentity);
       // Default Size for the cell with the new entity

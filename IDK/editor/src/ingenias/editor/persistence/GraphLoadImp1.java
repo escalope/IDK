@@ -1026,7 +1026,7 @@ public class GraphLoadImp1
     return result;
   }
 
-  public void restoreModels(IDEState ids,
+  public void restoreModels(IDEState ids,GUIResources resources,
                             Document doc) throws CannotLoadDiagram {
     // For compatibility and in case a future different RM is needed
     RelationshipManager rm = new RelationshipManager();

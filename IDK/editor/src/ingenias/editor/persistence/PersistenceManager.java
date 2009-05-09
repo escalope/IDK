@@ -17,44 +17,54 @@ package ingenias.editor.persistence;
  *  along with INGENIAS IDE; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-import ingenias.exception.*;
-import ingenias.editor.IDEAbs;
+import ingenias.editor.Editor;
+import ingenias.editor.GUIResources;
+import ingenias.editor.GraphManager;
 import ingenias.editor.IDEState;
-import java.lang.reflect.*;
-import javax.swing.tree.*;
+import ingenias.editor.IDEUpdater;
+import ingenias.editor.ModelJGraph;
+import ingenias.editor.ObjectManager;
+import ingenias.editor.Preferences;
+import ingenias.editor.ProjectProperty;
+import ingenias.editor.RelationshipManager;
+import ingenias.editor.actions.HistoryManager;
+import ingenias.editor.editionmode.EmbeddedAndPopupCellEditor;
+import ingenias.editor.entities.NAryEdgeEntity;
+import ingenias.editor.widget.DnDJTree;
+import ingenias.exception.CannotLoad;
+import ingenias.exception.InvalidProjectProperty;
+import ingenias.exception.UnknowFormat;
+import ingenias.exception.VersionNotFound;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Properties;
+import java.util.Vector;
+
+import javax.swing.JFileChooser;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
 import org.apache.xerces.parsers.DOMParser;
-import org.apache.xerces.xni.parser.XMLInputSource;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import java.awt.Color;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.io.*;
-
-import javax.swing.tree.DefaultMutableTreeNode;
-import java.util.*;
-
-import javax.xml.parsers.*;
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.w3c.dom.*;
-
-import ingenias.editor.entities.*;
-import ingenias.editor.widget.DnDJTree;
-import ingenias.exception.*;
-import ingenias.editor.cell.*;
-import ingenias.editor.*;
-import javax.swing.*;
-import javax.swing.tree.*;
-import ingenias.exception.*;
-import ingenias.generator.browser.BrowserImp;
-
 
 /**
- *  Description of the Class
- *
- * @author     developer
- * @created    7 de agosto de 2003
+ * Description of the Class
+ * 
+ * @author developer
+ * @created 7 de agosto de 2003
  */
 public class PersistenceManager {
 
@@ -65,34 +75,42 @@ public class PersistenceManager {
 
 
 	/**
-	 *  Constructor for the PersistenceManager object
+	 * Constructor for the PersistenceManager object
 	 */
-	public PersistenceManager() { }
+	public PersistenceManager() {
+
+	}
+
+
 
 	/**
-	 *  Description of the Method
-	 *
-	 * @param  abs               Description of the Parameter
-	 * @exception  UnknowFormat  Description of the Exception
-	 * @exception  CannotLoad    Description of the Exception
+	 * Description of the Method
+	 * 
+	 * @param abs
+	 *            Description of the Parameter
+	 * @exception UnknowFormat
+	 *                Description of the Exception
+	 * @exception CannotLoad
+	 *                Description of the Exception
 	 */
-	public void restorePreferences(IDEAbs abs) throws UnknowFormat, CannotLoad {
+	public void restorePreferences(IDEState ids, GUIResources resources, IDEUpdater updater) throws UnknowFormat,
+	CannotLoad {
 		JFileChooser jfc = new JFileChooser();
 		File homedir = jfc.getCurrentDirectory();
 		String filename = homedir.getPath() + "/.idk/idkproperties.xml";
-		if (new File(filename).exists()){
+		if (new File(filename).exists()) {
 			try {
-
+				
 				DOMParser parser = new DOMParser();
 
-
-//				Parse the Document
-//				and traverse the DOM
-				parser.parse("file:"+filename);
+				// Parse the Document
+				// and traverse the DOM
+				parser.parse("file:" + filename);
 				Document doc = parser.getDocument();
 				NodeList nl = doc.getElementsByTagName("preferences");
-				Preferences prefs=Preferences.fromXML(nl.item(0));
-				abs.prefs=prefs;
+				Preferences prefs = Preferences.fromXML(nl.item(0));
+				ids.prefs = prefs;
+				ids.getLastFiles().clear();
 				nl = nl.item(0).getChildNodes();
 				for (int k = 0; k < nl.getLength(); k++) {
 					Node n = nl.item(k);
@@ -101,7 +119,8 @@ public class PersistenceManager {
 							Node file = n.getChildNodes().item(0);
 							if (file.getNodeType() == Node.TEXT_NODE) {
 								String path = file.getNodeValue();
-								abs.updateHistory(new File(path));
+								HistoryManager.updateHistory(new File(path), resources, ids,updater);						
+
 							} else
 								System.err.println(file.getNodeName());
 						}
@@ -111,60 +130,61 @@ public class PersistenceManager {
 							Node file = n.getChildNodes().item(0);
 							if (file.getNodeType() == Node.TEXT_NODE) {
 								String path = file.getNodeValue();
-								abs.updateHistory(new File(path));
+								HistoryManager.updateHistory(new File(path), resources, ids,updater);		
 							}
 						}
 					}
 
 				}
-//				deleteBadRelationships(gm);
+				// deleteBadRelationships(gm);
 			}
 			/*
-			 *  catch (java.io.FileNotFoundException fnf) {
-			 *  throw new CannotLoad("File " + filename + " not found");
-			 *  }
+			 * catch (java.io.FileNotFoundException fnf) { throw new
+			 * CannotLoad("File " + filename + " not found"); }
 			 */catch (java.io.IOException ioe) {
 
-				 throw new CannotLoad("File " + filename + " could not be loaded. " +
-						 ioe.getMessage());
+				 throw new CannotLoad("File " + filename
+						 + " could not be loaded. " + ioe.getMessage());
 			 } catch (org.xml.sax.SAXException se) {
 				 se.printStackTrace();
-				 throw new UnknowFormat("File " + filename + " is not valid xml." +
-						 se.getMessage());
+				 throw new UnknowFormat("File " + filename
+						 + " is not valid xml." + se.getMessage());
 			 }
 		}
 
 	}
 
-
 	/**
-	 *  Description of the Method
-	 *
-	 * @param  ide  Description of the Parameter
+	 * Description of the Method
+	 * 
+	 * @param ids
+	 *            Description of the Parameter
 	 */
-	public void savePreferences(IDEAbs ide) {
+	public void savePreferences(IDEState ids) {
 		try {
 			JFileChooser jfc = new JFileChooser();
 			File homedir = jfc.getCurrentDirectory();
 			String filename = homedir.getPath() + "/.idk/idkproperties.xml";
-			java.io.FileOutputStream fos =
-				new java.io.FileOutputStream(filename);
-			fos.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<preferences>\n".getBytes());
-			Vector v = ide.getLastFiles();
+			java.io.FileOutputStream fos = new java.io.FileOutputStream(
+					filename);
+			fos
+			.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<preferences>\n"
+					.getBytes());
+			Vector v = ids.getLastFiles();
+			//System.err.println("savingpreferences:"+v);
 			for (int k = 0; k < v.size(); k++) {
 				File current = (File) v.elementAt(k);
-				fos.write(("<lastfile>" +
-						ingenias.generator.util.Conversor.replaceInvalidChar(current.getPath()) + "</lastfile>\n").getBytes());
-
+				//System.err.println("saving:"+current);
+				fos.write(("<lastfile>" + ingenias.generator.util.Conversor.replaceInvalidChar(current.getPath()) + "</lastfile>\n").getBytes());
 			}
-			if (ide.currentImageFolder != null) {
-				fos.write(("<lastimage>" +
-						ingenias.generator.util.Conversor.replaceInvalidChar(
-								ide.currentImageFolder.getPath()
-						)+"</lastimage>\n").getBytes());
+			if (ids.getCurrentImageFolder() != null) {
+				fos.write(("<lastimage>"
+						+ ingenias.generator.util.Conversor
+						.replaceInvalidChar(ids.getCurrentImageFolder()
+								.getPath()) + "</lastimage>\n")
+								.getBytes());
 			}
-			fos.write(ide.prefs.toXML().getBytes());
-
+			fos.write(ids.prefs.toXML().getBytes());
 
 			fos.write("</preferences>".getBytes());
 
@@ -175,26 +195,28 @@ public class PersistenceManager {
 
 	}
 
-
 	/**
-	 *  Description of the Method
-	 *
-	 * @param  input                                 Description of Parameter
-	 * @return                                       Description of the Returned
-	 *      Value
-	 * @exception  ingenias.exception.UnknowFormat   Description of Exception
-	 * @exception  ingenias.exception.DamagedFormat  Description of Exception
-	 * @exception  CannotLoad                        Description of Exception
+	 * Description of the Method
+	 * 
+	 * @param input
+	 *            Description of Parameter
+	 * @return Description of the Returned Value
+	 * @exception ingenias.exception.UnknowFormat
+	 *                Description of Exception
+	 * @exception ingenias.exception.DamagedFormat
+	 *                Description of Exception
+	 * @exception CannotLoad
+	 *                Description of Exception
 	 */
-	public IDEState mergeFile(String input, IDEState ids) throws
-	ingenias.exception.UnknowFormat,
+	public IDEState mergeFile(String input, IDEState ids,GUIResources resources)
+	throws ingenias.exception.UnknowFormat,
 	ingenias.exception.DamagedFormat, CannotLoad {
 
 		try {
 
 			DOMParser parser = new DOMParser();
-//			Parse the Document
-//			and traverse the DOM
+			// Parse the Document
+			// and traverse the DOM
 			parser.parse(new InputSource(new FileInputStream(input)));
 
 			Document doc = parser.getDocument();
@@ -203,33 +225,39 @@ public class PersistenceManager {
 			NodeList nodesGLX = doc.getElementsByTagName("node");
 			NodeList models = doc.getElementsByTagName("model");
 
-			Vector<NAryEdgeEntity> rels = RelationshipManager.getRelationshipsVector(ids.gm);
-			Hashtable<String,NAryEdgeEntity> trels=new Hashtable<String,NAryEdgeEntity>();
-			for (NAryEdgeEntity nedge:rels){
+			Vector<NAryEdgeEntity> rels = RelationshipManager
+			.getRelationshipsVector(ids.gm);
+			Hashtable<String, NAryEdgeEntity> trels = new Hashtable<String, NAryEdgeEntity>();
+			for (NAryEdgeEntity nedge : rels) {
 				trels.put(nedge.getId(), nedge);
 			}
-			for (int k=0;k<reltags.getLength();k++){
-				String id=reltags.item(k).getAttributes().getNamedItem("id").getNodeValue();				
-				String nid=id;
-				while (trels.containsKey(nid) || ids.om.findUserObject(nid).size()>0){
-					nid=nid+"_";
+			for (int k = 0; k < reltags.getLength(); k++) {
+				String id = reltags.item(k).getAttributes().getNamedItem("id")
+				.getNodeValue();
+				String nid = id;
+				while (trels.containsKey(nid)
+						|| ids.om.findUserObject(nid).size() > 0) {
+					nid = nid + "_";
 				}
-				if (!id.equals(nid)){
-					reltags.item(k).getAttributes().getNamedItem("id").setNodeValue(nid);
-					renameNodes(nodesGLX,id,nid);
-					renameNodes(objects,id,nid);
+				if (!id.equals(nid)) {
+					reltags.item(k).getAttributes().getNamedItem("id")
+					.setNodeValue(nid);
+					renameNodes(nodesGLX, id, nid);
+					renameNodes(objects, id, nid);
 				}
 			}
-			for (int k=0;k<models.getLength();k++){
-				String id=models.item(k).getAttributes().getNamedItem("id").getNodeValue();				
-				String nid=id;
-				while (ids.gm.getModel(nid)!=null){
-					nid=nid+"_";
+			for (int k = 0; k < models.getLength(); k++) {
+				String id = models.item(k).getAttributes().getNamedItem("id")
+				.getNodeValue();
+				String nid = id;
+				while (ids.gm.getModel(nid) != null) {
+					nid = nid + "_";
 				}
-				if (!id.equals(nid)){
-					reltags.item(k).getAttributes().getNamedItem("id").setNodeValue(nid);
-					renameNodes(models,id,nid);
-					renameNodes(objects,id,nid);
+				if (!id.equals(nid)) {
+					reltags.item(k).getAttributes().getNamedItem("id")
+					.setNodeValue(nid);
+					renameNodes(models, id, nid);
+					renameNodes(objects, id, nid);
 				}
 			}
 
@@ -237,37 +265,41 @@ public class PersistenceManager {
 			try {
 				version = this.getVersion(doc);
 			} catch (VersionNotFound vnf) {
-				//	vnf.printStackTrace();
+				// vnf.printStackTrace();
 			}
 
 			this.setVersion(version);
-//			ol.restoreObject(ids.om, ids.gm, doc);
+			// ol.restoreObject(ids.om, ids.gm, doc);
 			restoreObjects(ids.om, ids.gm, doc);
 			rl.restoreRelationships(ids.om, ids.gm, doc);
 			try {
-				gl.restoreModels(ids, doc);
+				gl.restoreModels(ids, resources,doc);
 			} catch (ingenias.exception.CannotLoadDiagram cld) {
 				throw new ingenias.exception.DamagedFormat(cld.getMessage());
 			}
 
-			Vector<NAryEdgeEntity> rels1 = RelationshipManager.getRelationshipsVector(ids.gm);
-			HashSet<String> trels1=new HashSet<String>();
-			for (NAryEdgeEntity nedge:rels){
+			Vector<NAryEdgeEntity> rels1 = RelationshipManager
+			.getRelationshipsVector(ids.gm);
+			HashSet<String> trels1 = new HashSet<String>();
+			for (NAryEdgeEntity nedge : rels) {
 				trels1.add(nedge.getId());
 			}
-			int n=1;
-//			deleteBadRelationships(gm);
+			int n = 1;
+			// deleteBadRelationships(gm);
 
 		} catch (java.io.FileNotFoundException fnf) {
 			throw new CannotLoad("File " + input + " not found");
 		} catch (java.io.IOException ioe) {
-			throw new CannotLoad("File " + input + " could not be loaded. " +
-					ioe.getMessage());
+			throw new CannotLoad("File " + input + " could not be loaded. "
+					+ ioe.getMessage());
 		} catch (org.xml.sax.SAXException se) {
-			throw new UnknowFormat("File " + input + " is not valid xml." +
-					se.getMessage());
+			throw new UnknowFormat("File " + input + " is not valid xml."
+					+ se.getMessage());
 		} catch (UnknownVersion uv) {
-			throw new ingenias.exception.CannotLoad("File " + input + " version is not recognised. Try downloading a new version of the IDE in http://ingenias.sourceforge.net");
+			throw new ingenias.exception.CannotLoad(
+					"File "
+					+ input
+					+ " version is not recognised. Try downloading a new version of the IDE in http://ingenias.sourceforge.net");
 		} catch (ClassNotFoundException cnf) {
 			cnf.printStackTrace();
 
@@ -285,11 +317,14 @@ public class PersistenceManager {
 	}
 
 	private void renameNodes(NodeList nodesGLX, String id, String nid) {
-		for (int k=0;k<nodesGLX.getLength();k++){
-			if (nodesGLX.item(k).getAttributes()!=null && nodesGLX.item(k).getAttributes().getNamedItem("id")!=null){
-				String atid=nodesGLX.item(k).getAttributes().getNamedItem("id").getNodeValue();
-				if (atid.equals(id)){
-					nodesGLX.item(k).getAttributes().getNamedItem("id").setNodeValue(nid);
+		for (int k = 0; k < nodesGLX.getLength(); k++) {
+			if (nodesGLX.item(k).getAttributes() != null
+					&& nodesGLX.item(k).getAttributes().getNamedItem("id") != null) {
+				String atid = nodesGLX.item(k).getAttributes().getNamedItem(
+				"id").getNodeValue();
+				if (atid.equals(id)) {
+					nodesGLX.item(k).getAttributes().getNamedItem("id")
+					.setNodeValue(nid);
 				}
 			}
 
@@ -298,28 +333,31 @@ public class PersistenceManager {
 	}
 
 	/**
-	 *  Description of the Method
-	 *
-	 * @param  input                                 Description of Parameter
-	 * @return                                       Description of the Returned
-	 *      Value
-	 * @exception  ingenias.exception.UnknowFormat   Description of Exception
-	 * @exception  ingenias.exception.DamagedFormat  Description of Exception
-	 * @exception  CannotLoad                        Description of Exception
+	 * Description of the Method
+	 * 
+	 * @param input
+	 *            Description of Parameter
+	 * @return Description of the Returned Value
+	 * @exception ingenias.exception.UnknowFormat
+	 *                Description of Exception
+	 * @exception ingenias.exception.DamagedFormat
+	 *                Description of Exception
+	 * @exception CannotLoad
+	 *                Description of Exception
 	 */
-	public IDEState load(String input) throws
-	ingenias.exception.UnknowFormat,
+	public void load(String input,GUIResources resources, Properties oldProperties, IDEState ids)
+	throws ingenias.exception.UnknowFormat,
 	ingenias.exception.DamagedFormat, CannotLoad {
 
-		IDEState ids = IDEState.emptyIDEState();
+
 		RelationshipManager.clearRelationships();
 
 		try {
 
 			DOMParser parser = new DOMParser();
-//			Parse the Document
-//			and traverse the DOM
-			InputSource is=new InputSource(new FileInputStream(input));
+			// Parse the Document
+			// and traverse the DOM
+			InputSource is = new InputSource(new FileInputStream(input));
 			is.setEncoding("UTF-8");
 			parser.parse(is);
 
@@ -329,62 +367,86 @@ public class PersistenceManager {
 			try {
 				version = this.getVersion(doc);
 			} catch (VersionNotFound vnf) {
-				//	vnf.printStackTrace();
+				// vnf.printStackTrace();
 			}
 
 			this.setVersion(version);
 
-			this.defaultProperties(ids.prop);
-
-//			ol.restoreObject(ids.om, ids.gm, doc);
+			ids.prop.putAll(oldProperties);			
+			// ol.restoreObject(ids.om, ids.gm, doc);
 			restoreObjects(ids.om, ids.gm, doc);
 			rl.restoreRelationships(ids.om, ids.gm, doc);
 
 			try {
-				gl.restoreModels(ids, doc);
-				Vector<ModelJGraph> mjg=ids.gm.getUOModels();
-				for (int k=0;k<mjg.size();k++){
+				gl.restoreModels(ids, resources,doc);
+				Vector<ModelJGraph> mjg = ids.gm.getUOModels();
+				for (int k = 0; k < mjg.size(); k++) {
 					mjg.elementAt(k).setSelectionCells(new Object[0]);
+					mjg.elementAt(k).setUI(new EmbeddedAndPopupCellEditor(ids,resources));
 				}
 			} catch (ingenias.exception.CannotLoadDiagram cld) {
 				throw new ingenias.exception.DamagedFormat(cld.getMessage());
 			}
-
+			
 			NodeList leafpackages = doc.getElementsByTagName("leafpackages");
-			if (leafpackages!=null && leafpackages.getLength()>0){
+			if (leafpackages != null && leafpackages.getLength() > 0) {
 				NodeList paths = leafpackages.item(0).getChildNodes();
-				ids.gm.toExpad=new Vector<TreePath>();
-				for (int k=0;k<paths.getLength();k++){					
-					if (paths.item(k).getNodeName().equalsIgnoreCase("path")){
-						NodeList pathToAdd=paths.item(k).getChildNodes();
-						Vector<String> pathlist=new Vector<String>();
-						for (int j=0;j<pathToAdd.getLength();j++){							
-							if (pathToAdd.item(j).getNodeName().equalsIgnoreCase("package")){
-								String pname=pathToAdd.item(j).getAttributes().getNamedItem("id").getNodeValue();
-								ids.gm.addPackage(pathlist.toArray(),pname);
+				ids.gm.toExpad = new Vector<TreePath>();
+				for (int k = 0; k < paths.getLength(); k++) {
+					if (paths.item(k).getNodeName().equalsIgnoreCase("path")) {
+						NodeList pathToAdd = paths.item(k).getChildNodes();
+						Vector<String> pathlist = new Vector<String>();
+						for (int j = 0; j < pathToAdd.getLength(); j++) {
+							if (pathToAdd.item(j).getNodeName()
+									.equalsIgnoreCase("package")) {
+								String pname = pathToAdd.item(j)
+								.getAttributes().getNamedItem("id")
+								.getNodeValue();								
+								ids.gm.addPackage(pathlist.toArray(), pname);								
 								pathlist.add(pname);
+
 							}
 						}
-						TreePath tp=getPath(pathlist,ids.gm.arbolProyecto);
+						TreePath tp = getPath(pathlist, ids.gm.arbolProyecto).getParentPath();
 						ids.gm.toExpad.add(tp);
+						ids.gm.getArbolProyecto().expandPath(tp);	
 					}
-
 				}
+				System.err.println("A expandir "+	ids.gm.toExpad);
+				for (TreePath tp:ids.gm.toExpad){
+					Vector<Object> npath=new Vector<Object>(); 
+					if (tp!=null){
+						for (Object path:tp.getPath()){
+							npath.add(path);
+						}
+						npath.remove(0);
+						npath.insertElementAt(ids.gm.getArbolProyecto().getModel().getRoot(), 0);
+						System.err.println("path: "+npath);
+						ids.gm.getArbolProyecto().expandPath(new TreePath(npath.toArray()));	
+					}
+				}
+				resources.setCurrentProgress(90);
 			}
-			ids.gm.arbolProyecto.validate();
-			this.restoreProjectProperties(doc, ids); //It has to be done at this moment to open the different diagram tabs
-//			deleteBadRelationships(gm);
+		//	ids.gm.arbolProyecto.validate();
+			this.restoreProjectProperties(doc, ids); // It has to be done at
+			// this moment to open
+			// the different diagram
+			// tabs
+			// deleteBadRelationships(gm);
 
 		} catch (java.io.FileNotFoundException fnf) {
 			throw new CannotLoad("File " + input + " not found");
 		} catch (java.io.IOException ioe) {
-			throw new CannotLoad("File " + input + " could not be loaded. " +
-					ioe.getMessage());
+			throw new CannotLoad("File " + input + " could not be loaded. "
+					+ ioe.getMessage());
 		} catch (org.xml.sax.SAXException se) {
-			throw new UnknowFormat("File " + input + " is not valid xml." +
-					se.getMessage());
+			throw new UnknowFormat("File " + input + " is not valid xml."
+					+ se.getMessage());
 		} catch (UnknownVersion uv) {
-			throw new ingenias.exception.CannotLoad("File " + input + " version is not recognised. Try downloading a new version of the IDE in http://ingenias.sourceforge.net");
+			throw new ingenias.exception.CannotLoad(
+					"File "
+					+ input
+					+ " version is not recognised. Try downloading a new version of the IDE in http://ingenias.sourceforge.net");
 		} catch (ClassNotFoundException cnf) {
 			cnf.printStackTrace();
 
@@ -398,22 +460,22 @@ public class PersistenceManager {
 			ite.printStackTrace();
 		}
 
-		return ids;
 	}
 
-
 	private TreePath getPath(Vector<String> pathlist, DnDJTree arbolProyecto) {
-		DefaultMutableTreeNode node = (DefaultMutableTreeNode) arbolProyecto.getModel().getRoot();
+		DefaultMutableTreeNode node = (DefaultMutableTreeNode) arbolProyecto
+		.getModel().getRoot();
 		pathlist.remove(0);
-		Vector<TreeNode> tn=new Vector<TreeNode>();
+		Vector<TreeNode> tn = new Vector<TreeNode>();
 		tn.add(node);
-		for (String name:pathlist){
-			boolean found=false;
-			for (int k=0;k<node.getChildCount() && !found;k++){
-				DefaultMutableTreeNode child=(DefaultMutableTreeNode) node.getChildAt(k);
-				found=child.getUserObject().toString().equalsIgnoreCase(name);
-				if (found){
-					node=child;
+		for (String name : pathlist) {
+			boolean found = false;
+			for (int k = 0; k < node.getChildCount() && !found; k++) {
+				DefaultMutableTreeNode child = (DefaultMutableTreeNode) node
+				.getChildAt(k);
+				found = child.getUserObject().toString().equalsIgnoreCase(name);
+				if (found) {
+					node = child;
 					tn.add(node);
 				}
 			}
@@ -422,23 +484,26 @@ public class PersistenceManager {
 	}
 
 	/**
-	 *  Description of the Method
-	 *
-	 * @param  output                   Description of the Parameter
-	 * @param  ids                      Description of the Parameter
-	 * @exception  java.io.IOException  Description of Exception
+	 * Description of the Method
+	 * 
+	 * @param output
+	 *            Description of the Parameter
+	 * @param ids
+	 *            Description of the Parameter
+	 * @exception java.io.IOException
+	 *                Description of Exception
 	 */
 	public void save(File output, IDEState ids) throws java.io.IOException {
-		this.saveAllModels(ids.prop, ids.om, new RelationshipManager(), ids.gm,
-				output);
+		this.saveAllModels(ids, new RelationshipManager(), output);
 	}
 
-
 	/**
-	 *  Sets the version attribute of the PersistenceManager object
-	 *
-	 * @param  ver                 The new version value
-	 * @exception  UnknownVersion  Description of Exception
+	 * Sets the version attribute of the PersistenceManager object
+	 * 
+	 * @param ver
+	 *            The new version value
+	 * @exception UnknownVersion
+	 *                Description of Exception
 	 */
 	private void setVersion(String ver) throws UnknownVersion {
 		if (ver.equals("1.0")) {
@@ -447,8 +512,8 @@ public class PersistenceManager {
 			ol = new ObjectLoadImp1();
 			pl = new PropertyLoadImp1();
 		} else {
-			if (ver.equals("1.1")) {
-				gl = new GraphLoadImp2(); 
+			if (ver.equals("1.1") ||ver.equals("1.2")) {
+				gl = new GraphLoadImp2();
 				rl = new RelationshipLoadImp2();
 				ol = new ObjectLoadImp1();
 				pl = new PropertyLoadImp1();
@@ -457,68 +522,80 @@ public class PersistenceManager {
 				rl = new RelationshipLoadImp1();
 				ol = new ObjectLoadImp1();
 				pl = new PropertyLoadImp1();
-			}
+			} 
 		}
 
-//		throw new UnknownVersion();
+		// throw new UnknownVersion();
 	}
 
-
 	/**
-	 *  Gets the version attribute of the PersistenceManager object
-	 *
-	 * @param  doc                                     Description of Parameter
-	 * @return                                         The version value
-	 * @exception  ingenias.exception.VersionNotFound  Description of Exception
+	 * Gets the version attribute of the PersistenceManager object
+	 * 
+	 * @param doc
+	 *            Description of Parameter
+	 * @return The version value
+	 * @exception ingenias.exception.VersionNotFound
+	 *                Description of Exception
 	 */
-	private String getVersion(org.w3c.dom.Document doc) throws
-	ingenias.exception.VersionNotFound {
+	private String getVersion(org.w3c.dom.Document doc)
+	throws ingenias.exception.VersionNotFound {
 		try {
 			String version = "";
 			NodeList nl = doc.getElementsByTagName("project");
-			version = nl.item(0).getAttributes().getNamedItem("version").getNodeValue();
+			version = nl.item(0).getAttributes().getNamedItem("version")
+			.getNodeValue();
 			return version;
 		} catch (Exception e) {
 			throw new VersionNotFound(e.getMessage());
 		}
 	}
 
-
 	/**
-	 *  Description of the Method
-	 *
-	 * @param  doc   Description of Parameter
-	 * @param  ids  Description of Parameter
+	 * Description of the Method
+	 * 
+	 * @param doc
+	 *            Description of Parameter
+	 * @param ids
+	 *            Description of Parameter
 	 */
 	private void restoreProjectProperties(Document doc, IDEState ids) {
 		NodeList nl = doc.getElementsByTagName("project");
 		for (int k = 0; k < nl.getLength(); k++) {
 			Node current = nl.item(k);
 			if (current.getNodeName().equalsIgnoreCase("project")) {
-				String cid = current.getAttributes().getNamedItem("cid").getNodeValue();
+				String cid = current.getAttributes().getNamedItem("cid")
+				.getNodeValue();
 				Editor.idCounter = Integer.parseInt(cid);
 				NodeList nll = current.getChildNodes();
 				for (int l = 0; l < nll.getLength(); l++) {
 					current = nll.item(l);
-					if (current.getNodeName().equalsIgnoreCase("projectproperties")) {
+					if (current.getNodeName().equalsIgnoreCase(
+					"projectproperties")) {
 						NodeList nl1 = current.getChildNodes();
 						for (int j = 0; j < nl1.getLength(); j++) {
 							try {
 								if (nl1.item(j).getNodeName().equalsIgnoreCase(
 								"projectproperty")) {
-									ProjectProperty pp = ProjectProperty.fromXML(nl1.item(j));
-									ids.prop.put(pp.module+":"+pp.key, pp);		
+									ProjectProperty pp = ProjectProperty
+									.fromXML(nl1.item(j));
+									ids.prop.put(pp.module + ":" + pp.key, pp);
 								}
 							} catch (InvalidProjectProperty ipp) {
-								//	ipp.printStackTrace();
+								// ipp.printStackTrace();
 							}
-							if (nl1.item(j).getNodeName().equals("openeddiagram")) {
+							if (nl1.item(j).getNodeName().equals(
+							"openeddiagram")) {
 								if (nl1.item(j).getChildNodes().getLength() > 0) {
-									Node diagram = nl1.item(j).getChildNodes().item(0);
+									Node diagram = nl1.item(j).getChildNodes()
+									.item(0);
 									if (diagram.getNodeType() == Node.TEXT_NODE) {
-										String diagramT = diagram.getNodeValue();
-										if (ids.gm.getModel(diagramT)!=null)
-											ids.editor.changeGraph(ids.gm.getModel(diagramT));
+										String diagramT = diagram
+										.getNodeValue();
+										if (ids.gm.getModel(diagramT) != null){
+											ids.editor.changeGraph(ids.gm
+													.getModel(diagramT));
+
+										}
 									}
 								}
 							}
@@ -527,27 +604,33 @@ public class PersistenceManager {
 				}
 			}
 		}
-		
 
 	}
 
-
 	/**
-	 *  Description of the Method
-	 *
-	 * @param  om                             Description of Parameter
-	 * @param  gm                             Description of Parameter
-	 * @param  doc                            Description of Parameter
-	 * @exception  ClassNotFoundException     Description of Exception
-	 * @exception  NoSuchMethodException      Description of Exception
-	 * @exception  IllegalAccessException     Description of Exception
-	 * @exception  InstantiationException     Description of Exception
-	 * @exception  InvocationTargetException  Description of Exception
+	 * Description of the Method
+	 * 
+	 * @param om
+	 *            Description of Parameter
+	 * @param gm
+	 *            Description of Parameter
+	 * @param doc
+	 *            Description of Parameter
+	 * @exception ClassNotFoundException
+	 *                Description of Exception
+	 * @exception NoSuchMethodException
+	 *                Description of Exception
+	 * @exception IllegalAccessException
+	 *                Description of Exception
+	 * @exception InstantiationException
+	 *                Description of Exception
+	 * @exception InvocationTargetException
+	 *                Description of Exception
 	 */
-	private void restoreObjects(ObjectManager om,
-			GraphManager gm, Document doc) throws
-			ClassNotFoundException, NoSuchMethodException, IllegalAccessException,
-			InstantiationException, InvocationTargetException {
+	private void restoreObjects(ObjectManager om, GraphManager gm, Document doc)
+	throws ClassNotFoundException, NoSuchMethodException,
+	IllegalAccessException, InstantiationException,
+	InvocationTargetException {
 		NodeList nl = doc.getElementsByTagName("objects");
 		NodeList objects = nl.item(0).getChildNodes();
 		for (int k = 0; k < objects.getLength(); k++) {
@@ -558,110 +641,131 @@ public class PersistenceManager {
 		}
 	}
 
-
 	/**
-	 *  Description of the Method
-	 *
-	 * @param  prop                     Description of Parameter
-	 * @param  fos                      Description of Parameter
-	 * @exception  java.io.IOException  Description of Exception
+	 * Description of the Method
+	 * 
+	 * @param prop
+	 *            Description of Parameter
+	 * @param fos
+	 *            Description of Parameter
+	 * @exception java.io.IOException
+	 *                Description of Exception
 	 */
-	private void saveProjectProperties(Properties prop, OutputStreamWriter fos) throws
-	java.io.IOException {
-		fos.write(
-				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project cid=\"" +
-				Editor.idCounter + 
-		"\" version=\"1.1\">\n");
-		Enumeration ppenumeration = prop.elements();
+	private void saveProjectProperties(IDEState ids, OutputStreamWriter fos)
+	throws java.io.IOException {
+		fos.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project cid=\""
+				+ Editor.idCounter + "\" version=\"1.2\">\n");
+		Enumeration ppenumeration = ids.prop.elements();
 		fos.write(("<projectproperties>\n"));
 		while (ppenumeration.hasMoreElements()) {
 			ProjectProperty pp = (ProjectProperty) ppenumeration.nextElement();
 			fos.write(pp.toXML());
 		}
-		Vector<String> diagrams = IDE.ide.ids.editor.getOpenedDiagrams();
+		Vector<String> diagrams = ids.editor.getOpenedDiagrams();
 
-		for (String diagram:diagrams){
-			fos.write(" <openeddiagram>"+ingenias.generator.util.Conversor.replaceInvalidChar(diagram)+"</openeddiagram>");
+		for (String diagram : diagrams) {
+			fos.write(" <openeddiagram>"
+					+ ingenias.generator.util.Conversor
+					.replaceInvalidChar(diagram) + "</openeddiagram>");
 		}
 
 		fos.write(("</projectproperties>\n"));
 
 	}
 
-
 	/**
-	 *  Description of the Method
-	 *
-	 * @param  prop                     Description of Parameter
-	 * @param  leafpackages             Description of Parameter
-	 * @param  fos                      Description of Parameter
-	 * @exception  java.io.IOException  Description of Exception
+	 * Description of the Method
+	 * 
+	 * @param prop
+	 *            Description of Parameter
+	 * @param leafpackages
+	 *            Description of Parameter
+	 * @param fos
+	 *            Description of Parameter
+	 * @exception java.io.IOException
+	 *                Description of Exception
 	 */
-	private void saveProjectTree(Properties prop, Vector leafpackages,
+	private void saveProjectTree(IDEState ids, Vector leafpackages,
 			OutputStreamWriter fos) throws java.io.IOException {
-		TreePath parent=new TreePath(IDE.ide.ids.gm.root.getPath());
-		Enumeration<TreePath> leaf = IDE.ide.ids.gm.arbolProyecto.getExpandedDescendants(parent);
-		Enumeration enumerationPack = leafpackages.elements();
+		//System.err.println(ids.gm.arbolProyecto.getModel().getRoot().getClass().getName());
+		TreePath parent = new TreePath(((DefaultMutableTreeNode)ids.gm.arbolProyecto.getModel().getRoot()).getPath());
+		Enumeration<TreePath> leaf = ids.gm.arbolProyecto
+		.getExpandedDescendants(parent);
+		Vector<TreePath> expandedpaths=new Vector<TreePath>();
+		while (leaf!=null && leaf.hasMoreElements()){
+			expandedpaths.add(leaf.nextElement());
+		}
 
-		this.saveProjectProperties(prop, fos);
+		DefaultMutableTreeNode currentLeaf=((DefaultMutableTreeNode)ids.gm.arbolProyecto.getModel().getRoot()).getFirstLeaf();
+
+		Enumeration enumerationPack = leafpackages.elements();		
+
+		this.saveProjectProperties(ids, fos);
 
 		fos.write("<leafpackages>\n");
-		while (leaf !=null && leaf.hasMoreElements()) {
-			TreePath currentLeaf = leaf.nextElement();
-
-			fos.write("   <path>\n");
-			Object[] packPath =  currentLeaf.getPath();
-			for (int k = 0; k < packPath.length; k++) {
-				String packageName = packPath[k].toString();						
-				fos.write(("    <package id=\"" + packageName + "\"/>\n"));
+		while (currentLeaf != null) {
+			if (currentLeaf.getUserObject()!=null){
+				TreePath currentLeafPath = new TreePath(currentLeaf.getPath());
+				if (expandedpaths.contains(currentLeafPath)){
+					fos.write("   <path expanded=\"true\">\n");
+				} else
+					fos.write("   <path>\n");
+				Object[] packPath = currentLeafPath.getPath();
+				for (int k = 0; k < packPath.length; k++) {
+					String packageName = packPath[k].toString();
+					fos.write(("    <package id=\"" + packageName + "\"/>\n"));
+				}
+				fos.write("   </path>\n");				
 			}
-			fos.write("   </path>\n");
-
-		}
+			currentLeaf=currentLeaf.getNextLeaf();
+		}		
 		fos.write("</leafpackages>\n");
+
 
 	}
 
-
 	/**
-	 *  Description of the Method
-	 *
-	 * @param  prop                       Description of Parameter
-	 * @param  om                         Description of Parameter
-	 * @param  rm                         Description of Parameter
-	 * @param  gm                         Description of Parameter
-	 * @param  output                     Description of Parameter
-	 * @exception  IOException            Description of Exception
-	 * @exception  FileNotFoundException  Description of Exception
+	 * Description of the Method
+	 * 
+	 * @param prop
+	 *            Description of Parameter
+	 * @param om
+	 *            Description of Parameter
+	 * @param rm
+	 *            Description of Parameter
+	 * @param gm
+	 *            Description of Parameter
+	 * @param output
+	 *            Description of Parameter
+	 * @exception IOException
+	 *                Description of Exception
+	 * @exception FileNotFoundException
+	 *                Description of Exception
 	 */
-	private void saveAllModels(Properties prop, ObjectManager om,
-			RelationshipManager rm, GraphManager gm,
-			File output) throws IOException,
-			FileNotFoundException {
+	private void saveAllModels(IDEState ids, RelationshipManager rm, File output)
+	throws IOException, FileNotFoundException {
 		try {
-			RelationshipSave rs=new RelationshipSave();
-			ObjectSave objsave=new ObjectSave();
-			Vector models = gm.getModels();
-			//  Vector objects=om.getObjects();
+			RelationshipSave rs = new RelationshipSave();
+			ObjectSave objsave = new ObjectSave();
+			Vector<TreeNode[]> models = ids.gm.getModels();
+			// Vector objects=om.getObjects();
 			Enumeration enumeration = models.elements();
 			FileOutputStream os = new FileOutputStream(output);
-			OutputStreamWriter fos=new OutputStreamWriter(os,"UTF-8");
+			OutputStreamWriter fos = new OutputStreamWriter(os, "UTF-8");
 
+			this.saveProjectTree(ids, new Vector(), fos);
 
+			objsave.saveObjects(ids.om, ids.gm, fos);
 
-			this.saveProjectTree(prop, new Vector(), fos);
-
-			objsave.saveObjects(om, gm, fos);
-
-			rs.saveRelationships(rm, gm, fos);
+			rs.saveRelationships(rm, ids.gm, fos);
 
 			fos.write("<models> \n");
 			while (enumeration.hasMoreElements()) {
 				TreeNode[] modelPath = (TreeNode[]) enumeration.nextElement();
-				ModelJGraph model = (ModelJGraph) ((DefaultMutableTreeNode) modelPath[
-				                                                                      modelPath.length - 1]).getUserObject();
+				ModelJGraph model = (ModelJGraph) ((DefaultMutableTreeNode) modelPath[modelPath.length - 1])
+				.getUserObject();
 
-				GraphSave.saveModel(model, modelPath, fos); 
+				GraphSave.saveModel(model, modelPath, fos);
 
 			}
 
@@ -675,66 +779,45 @@ public class PersistenceManager {
 
 	}
 
-
 	/**
-	 *  Gets the gL attribute of the PersistenceManager class
-	 *
-	 * @return    The gL value
+	 * Gets the gL attribute of the PersistenceManager class
+	 * 
+	 * @return The gL value
 	 */
 	public static GraphLoad getGL() {
 		return gl;
 	}
 
-
 	/**
-	 *  Gets the oL attribute of the PersistenceManager class
-	 *
-	 * @return    The oL value
+	 * Gets the oL attribute of the PersistenceManager class
+	 * 
+	 * @return The oL value
 	 */
 	public static ObjectLoad getOL() {
 		return ol;
 	}
 
-
 	/**
-	 *  Gets the rL attribute of the PersistenceManager class
-	 *
-	 * @return    The rL value
+	 * Gets the rL attribute of the PersistenceManager class
+	 * 
+	 * @return The rL value
 	 */
 	public static RelationshipLoad getRL() {
 		return rl;
 	}
 
-
 	/**
-	 *  Gets the pL attribute of the PersistenceManager class
-	 *
-	 * @return    The pL value
+	 * Gets the pL attribute of the PersistenceManager class
+	 * 
+	 * @return The pL value
 	 */
 	public static PropertyLoad getPL() {
 		return pl;
 	}
 
 
-	/**
-	 *  Description of the Method
-	 *
-	 * @param  prop  Description of Parameter
-	 */
-	public static void defaultProperties(Properties prop) {
-		if (IDE.ide !=null && IDE.ide.ids!=null && IDE.ide.ids.prop!=null)
-			prop.putAll(IDE.ide.ids.prop);
-	}
 
 
-	/**
-	 *  The main program for the PersistenceManager class
-	 *
-	 * @param  args  The command line arguments
-	 */
-	public static void main(String[] args) {
-		PersistenceManager persistenceManager1 = new PersistenceManager();
-	}
+
 
 }
-

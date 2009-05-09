@@ -13,7 +13,11 @@ import java.awt.Point;
 import java.awt.datatransfer.*;
 import java.awt.Cursor;
 import java.io.*;
+
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
 import javax.swing.tree.*;
+
 import java.awt.Component;
 import org.jgraph.JGraph;
 import javax.swing.JViewport;
@@ -30,24 +34,38 @@ import java.util.*;
 public class DnDJTree extends JTree implements java.io.Serializable,
 DropTargetListener,DragSourceListener,DragGestureListener{
 
+	public JScrollPane getContainer() {
+		return container;
+	}
+	
+
+	public void setContainer(JScrollPane container) {
+		this.container = container;
+	}
+
 	DropTarget dropTarget=null;
 	DragSource dragSource=null;
-	JScrollPane jsp=null;
+	JScrollPane container=null;
 	Vector expansionPaths=new Vector();
 
 	boolean dragOn=false;
 
 	DefaultMutableTreeNode nodeInTransfer=null;
+	TreeNode root=null;
 
 	public DnDJTree(JScrollPane jsp,TreeNode tn) {
 		super(tn);
 		this.setAutoscrolls(true);
-		this.jsp=jsp;
+		this.container=jsp;
 		final JTree jt=this;
+		this.root=tn;
 		dropTarget=new DropTarget(this,this);
 		dragSource=new DragSource();
 		dragSource.createDefaultDragGestureRecognizer(this,
 				DnDConstants.ACTION_MOVE,this);
+		this.setEditable(true); 
+
+
 		this.addKeyListener(new KeyListener(){
 
 			public void keyPressed(KeyEvent e) {
@@ -56,12 +74,11 @@ DropTargetListener,DragSourceListener,DragGestureListener{
 			}
 
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			// Code added to make nodes go up and down among siblings
-			public void keyTyped(KeyEvent e) {
+			public void keyTyped(final KeyEvent e) {
 				if (e.getKeyChar()=='q' && jt.getSelectionPath()!=null){
 					DefaultMutableTreeNode node =
 						(DefaultMutableTreeNode)jt.getSelectionPath().getLastPathComponent();
@@ -86,8 +103,9 @@ DropTargetListener,DragSourceListener,DragGestureListener{
 					if (node.getParent()!=null){
 						int index=node.getParent().getIndex(node);
 						if (index<node.getParent().getChildCount()-1){
+							
 							DefaultMutableTreeNode parent=(DefaultMutableTreeNode)node.getParent();
-							node.removeFromParent();
+							node.removeFromParent();							
 							parent.insert(node, index+1);
 							node.setParent(parent);
 							storeTreeExpansionPaths();
@@ -99,10 +117,14 @@ DropTargetListener,DragSourceListener,DragGestureListener{
 					}
 				}
 
-			}
+			};
 		});
 
 
+	}
+
+	public TreeNode getRoot(){
+		return root;
 	}
 
 	public void storeTreeExpansionPaths(){
@@ -169,56 +191,81 @@ DropTargetListener,DragSourceListener,DragGestureListener{
 	 */
 
 
-	public void drop (DropTargetDropEvent event) {
-
+	public void drop (final DropTargetDropEvent event) {
+		this.getModel().addTreeModelListener(
+				new TreeModelListener() {
+					public void treeNodesChanged(TreeModelEvent evt) {
+						System.out.println("Tree Nodes Changed Event");
+						Object[] children = evt.getChildren();
+						int[] childIndices = evt.getChildIndices();
+						for (int i = 0; i < children.length; i++) {
+							System.out.println("Index " + childIndices[i] +
+									", changed value: " + children[0]);
+						}
+					}
+					public void treeStructureChanged(TreeModelEvent evt) {
+						System.out.println("Tree Structure Changed Event");
+					}
+					public void treeNodesInserted(TreeModelEvent evt) {
+						System.out.println("Tree Nodes Inserted Event");
+					} 
+					public void treeNodesRemoved(TreeModelEvent evt) {
+						System.out.println("Tree Nodes Removed Event");
+					}
+				}); 
 		try {
 			Transferable transferable = event.getTransferable();
-			DefaultMutableTreeNode target=this.findNode(event.getLocation());
-			// we accept only Strings
-			if (transferable.isDataFlavorSupported (DataFlavor.stringFlavor) &&
-					target!=null &&
-					!JGraph.class.isAssignableFrom(target.getUserObject().getClass()) &&
-					!this.nodeInTransfer.isNodeDescendant(target)){
+			DefaultMutableTreeNode target=findNode(event.getLocation());
+			DefaultTreeModel dtm=(DefaultTreeModel) this.getModel();
+			
+			if (target!=null){// There is a drop target 
+				// we accept only Strings
+				if (transferable.isDataFlavorSupported (DataFlavor.stringFlavor) &&
+						target!=null &&
+						!JGraph.class.isAssignableFrom(target.getUserObject().getClass()) &&
+						!nodeInTransfer.isNodeDescendant(target)){
 
-				event.acceptDrop(DnDConstants.ACTION_MOVE);
-				String s = (String)transferable.getTransferData ( DataFlavor.stringFlavor);
-				//           addElement( s );
-				this.nodeInTransfer.removeFromParent();
-				target.add( this.nodeInTransfer);
-				this.nodeInTransfer.setParent(target);
-				this.storeTreeExpansionPaths();
-				((DefaultTreeModel)this.getModel()).reload();
-				this.validate();
-				this.restoreTreeExpansionPath();
-				event.getDropTargetContext().dropComplete(true);
-				System.err.println("***********transferido");
-			}
-			else{ 
-				//Change the order
-
-				if (target.getParent()!=null){
 					event.acceptDrop(DnDConstants.ACTION_MOVE);
-					int index=target.getParent().getIndex(target);
-					event.getDropTargetContext().dropComplete(true);
-					if (index!=-1){
-						this.nodeInTransfer.removeFromParent();
-						((DefaultMutableTreeNode)target.getParent()).insert( this.nodeInTransfer, index);
-						this.nodeInTransfer.setParent((DefaultMutableTreeNode)(target.getParent()));
-						this.storeTreeExpansionPaths();
-						((DefaultTreeModel)this.getModel()).reload();
-						this.validate();
-						this.restoreTreeExpansionPath();
+					String s = (String)transferable.getTransferData ( DataFlavor.stringFlavor);
+					//           addElement( s );
+					dtm.removeNodeFromParent(nodeInTransfer);
+					dtm.insertNodeInto(nodeInTransfer, (MutableTreeNode) target, 0);
+					//nodeInTransfer.removeFromParent();
+					//target.add( nodeInTransfer);
+					//nodeInTransfer.setParent(target);
+					storeTreeExpansionPaths();
+					((DefaultTreeModel)getModel()).reload();
+					validate();
+					restoreTreeExpansionPath();
+					event.getDropTargetContext().dropComplete(true);	
+					dtm.nodeStructureChanged(target);
+				}
+				else{ 
+					//Change the order
+
+					if (target.getParent()!=null){
+						event.acceptDrop(DnDConstants.ACTION_MOVE);
+						int index=target.getParent().getIndex(target);
 						event.getDropTargetContext().dropComplete(true);
-					}
-				} else
-					event.rejectDrop();
+						if (index!=-1){
+							dtm.removeNodeFromParent(nodeInTransfer);
+							//nodeInTransfer.removeFromParent();
+							dtm.insertNodeInto(nodeInTransfer, (MutableTreeNode) target.getParent(), index);
+							//((DefaultMutableTreeNode)target.getParent()).insert( nodeInTransfer, index);							
+							//nodeInTransfer.setParent((DefaultMutableTreeNode)(target.getParent()));
+							storeTreeExpansionPaths();
+							((DefaultTreeModel)getModel()).reload();
+							validate();
+							restoreTreeExpansionPath();
+							event.getDropTargetContext().dropComplete(true);
+							dtm.nodeStructureChanged(target);
+						}
+					} else
+						event.rejectDrop();
 
-
-
-				System.err.println("Rechazado");
-				//
+				}
 			}
-//			this.setCursor(null);
+			//			this.setCursor(null);
 		}
 		catch (IOException exception) {
 			exception.printStackTrace();
@@ -230,6 +277,8 @@ DropTargetListener,DragSourceListener,DragGestureListener{
 
 			event.rejectDrop();
 		}
+
+
 	}
 
 	/**
@@ -315,19 +364,19 @@ DropTargetListener,DragSourceListener,DragGestureListener{
 
 	private void moveMouseWithDrag(Point p){
 
-		Rectangle visibleHeight=jsp.getViewport().getViewRect();
+		Rectangle visibleHeight=container.getViewport().getViewRect();
 
 		DefaultMutableTreeNode dmtn=this.findNode(p);
 
 		if (visibleHeight.height-p.y<40){
-			jsp.validate();
+			container.validate();
 
-			jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getValue()+10);
+			container.getVerticalScrollBar().setValue(container.getVerticalScrollBar().getValue()+10);
 		}
-		if ((p.y-visibleHeight.y<40) && (jsp.getVerticalScrollBar().getValue()>10)){
-			jsp.validate();
+		if ((p.y-visibleHeight.y<40) && (container.getVerticalScrollBar().getValue()>10)){
+			container.validate();
 
-			jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getValue()-10);
+			container.getVerticalScrollBar().setValue(container.getVerticalScrollBar().getValue()-10);
 		}
 
 

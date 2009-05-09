@@ -23,14 +23,19 @@
 
 package ingenias.editor.editiondialog;
 
-import javax.swing.*;
-import java.lang.reflect.*;
-import ingenias.editor.entities.*;
+import ingenias.editor.GraphManager;
+import ingenias.editor.entities.Entity;
 import ingenias.editor.widget.DnDJTree;
 
-import java.util.*;
-import java.awt.*;
-import ingenias.editor.GraphManager;
+import java.awt.BorderLayout;
+import java.awt.Frame;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.Serializable {
@@ -42,7 +47,7 @@ public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.
 	private int status=PROGRESSING;
 
 
-	public GeneralEditionFrame(ingenias.editor.Editor editor,ingenias.editor.ObjectManager om,final Frame dialogOwner,String title,Entity ent) {
+	public GeneralEditionFrame(ingenias.editor.Editor editor,ingenias.editor.ObjectManager om,GraphManager gm,final Frame dialogOwner,String title,final Entity ent) {
 		super(dialogOwner,title,true);
 
 		final JPanel main=new JPanel();
@@ -56,24 +61,26 @@ public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.
 		});
 
 		final JDialog self=this;
-		final GeneralEditionPanel gep=new GeneralEditionPanel(editor,dialogOwner, om,ent);
+		final GeneralEditionPanel gep=new GeneralEditionPanel(editor,dialogOwner, om,gm,ent);
 		main.add(mainscroll,BorderLayout.CENTER);
 		mainscroll.getViewport().add(gep,null);    
 		JButton cancel=new JButton("Cancel");
 		cancel.addActionListener(new java.awt.event.ActionListener(){
-			public void actionPerformed(java.awt.event.ActionEvent ae) {
-				self.setVisible(false);
+			public void actionPerformed(java.awt.event.ActionEvent ae) {				
 				gep.undo();
+				self.setVisible(false);
 				status=CANCELLED;
 			}
 		});
 
 		JButton accept=new JButton("Accept");
 		accept.addActionListener(new java.awt.event.ActionListener(){
-			public void actionPerformed(java.awt.event.ActionEvent ae) {
-				self.setVisible(false);
+			public void actionPerformed(java.awt.event.ActionEvent ae) {				
 				gep.confirmActions();
+				System.out.println("Changes applied "+ent);
+				self.setVisible(false);
 				status=ACCEPTED;
+				
 			}
 		});
 
@@ -107,7 +114,9 @@ public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.
 		a.setCode("hola que tal");
 		GraphManager.initInstance(new DefaultMutableTreeNode(),new DnDJTree());
 
-		GeneralEditionFrame ge=new GeneralEditionFrame(null,ingenias.editor.ObjectManager.initialise(new DefaultMutableTreeNode(),new JTree()),null,"hola", a);
+		GeneralEditionFrame ge=new GeneralEditionFrame(null,ingenias.editor.ObjectManager.initialise(new DefaultMutableTreeNode(),new JTree()),
+				ingenias.editor.GraphManager.initInstance(new DefaultMutableTreeNode(),new DnDJTree()),
+				null,"hola", a);
 
 
 		ge.setVisible(true);

@@ -280,7 +280,7 @@ public class GraphSave {
 					ingenias.editor.entities.Entity en = (ingenias.editor.entities.Entity)
 							userObject;
 					String _enid = en.encodeutf8Text(en.getId());
-
+					
 					// id and type are attributes in GXL, not children.
 					gxl = "\n\t<node id=\"" + _enid + "\" nid=\"" + vertex.hashCode() +
 							"\" type=\"" + en.getType() + "\">\n";
@@ -303,6 +303,7 @@ public class GraphSave {
 
 							}
 						}
+						System.err.println("-----------_"+_enid+" tipo "+en.getType());
 					}
 					// The other attributes.
 					gxl += "\n\t</node>";

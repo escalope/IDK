@@ -1,24 +1,24 @@
 /*
  Copyright (C) 2002 Jorge Gomez Sanz
- 
+
  This file is part of INGENIAS IDE, a support tool for the INGENIAS
  methodology, availabe at http://grasia.fdi.ucm.es/ingenias or
  http://ingenias.sourceforge.net
- 
+
  INGENIAS IDE is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
  (at your option) any later version.
- 
+
  INGENIAS IDE is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
- 
+
  You should have received a copy of the GNU General Public License
  along with INGENIAS IDE; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- 
+
  */
 
 package ingenias.editor;
@@ -29,43 +29,48 @@ import org.jgraph.graph.*;
 
 import javax.swing.tree.*;
 import javax.swing.JTree;
+
+import ingenias.editor.entities.NAryEdgeEntity;
 import ingenias.editor.widget.DnDJTree;
+import ingenias.exception.NotInitialised;
+import ingenias.generator.browser.BrowserImp;
 
 public class GraphManager implements java.io.Serializable {
 	public javax.swing.tree.DefaultMutableTreeNode root=null;
 	public DnDJTree arbolProyecto=null;
-	
-//	Hashtable models=new Hashtable();
+
+	//	Hashtable models=new Hashtable();
 	JGraph current;
 	public Vector<TreePath> toExpad=new Vector<TreePath>();
-	
+	private int idCounter;
+
 	private static GraphManager instance;
-	
-	
-	
+
+
+
 	public GraphManager(javax.swing.tree.DefaultMutableTreeNode root, DnDJTree arbolProyecto) {
 		this.root=root;
 		this.arbolProyecto=arbolProyecto;
 	}
-	
+
 	public void addModel(Object[]path, String nombre, JGraph model1){
-		
+
 		DefaultMutableTreeNode dmn=this.getPath(path);
 		if (dmn!=null){
-			
+
 			DefaultMutableTreeNode nn=new DefaultMutableTreeNode(model1);
 			dmn.insert(nn,dmn.getChildCount());
 			nn.setParent(dmn);
-//			this.models.put(pathToString(path)+","+nombre,model1);
+			//			this.models.put(pathToString(path)+","+nombre,model1);
 			this.reload();
-			
+
 		}
 	}
-	
+
 	public void addPackage(Object[]path, String nombre){
 		DefaultMutableTreeNode dmn=this.getPath(path);
-		
-		
+
+
 		boolean found=false;
 		if (dmn!=null && dmn.getChildCount()!=0){
 			DefaultMutableTreeNode node=(DefaultMutableTreeNode)dmn.getFirstChild();
@@ -77,25 +82,25 @@ public class GraphManager implements java.io.Serializable {
 						System.err.print("/"+path[k]);
 					}
 					System.err.println("/"+node.getUserObject().toString());*/
-					
+
 					found=true;
 				}
 				node=node.getNextSibling();
 			}
 		}
-		
+
 		if (!found && dmn!=null){
 			DefaultMutableTreeNode nn=new DefaultMutableTreeNode(nombre);
 			dmn.insert(nn,dmn.getChildCount());
 			nn.setParent(dmn);
 			this.reload();
-		
+
 		} else {		
 			//new Exception().printStackTrace();
 			//System.err.println("Package already exists "+found+" "+dmn);
 		}
 	}
-	
+
 	private String pathToString(Object[] path){
 		String cam="";
 		for (int k=0;k<path.length;k++){
@@ -103,11 +108,11 @@ public class GraphManager implements java.io.Serializable {
 		}
 		return cam;
 	}
-	
+
 	public void removeModel(String[]path){
-		
+
 	}
-	
+
 	public void removePackage(Object[]path){
 		DefaultMutableTreeNode dmn=this.getPath(path);
 		for (int k=0;k<path.length;k++){
@@ -120,16 +125,16 @@ public class GraphManager implements java.io.Serializable {
 		} else
 			System.err.println("null package");
 	}
-	
+
 	public DefaultMutableTreeNode getPath(Object[] path){
 		if (path.length==1)
 			return root;
 		return getPath(root,path,1);
 	}
-	
-	
-	
-	
+
+
+
+
 	private DefaultMutableTreeNode getPath(DefaultMutableTreeNode root,Object[] path, int index){
 		boolean found=false;
 		DefaultMutableTreeNode dm=null;
@@ -145,7 +150,7 @@ public class GraphManager implements java.io.Serializable {
 							((ModelJGraph)dm.getUserObject()).getName().equalsIgnoreCase(path[index].toString())){
 						found=true;
 					}
-					
+
 			}
 			if (found && index<path.length-1)
 				return getPath(dm,path,index+1);
@@ -155,7 +160,7 @@ public class GraphManager implements java.io.Serializable {
 				else return null;
 		} else return null;
 	}
-	
+
 	public ModelJGraph getModel(Object[]path){
 		DefaultMutableTreeNode dmtn=(DefaultMutableTreeNode)path[path.length-1];
 		if (!((dmtn).getUserObject() instanceof ModelJGraph))
@@ -168,21 +173,29 @@ public class GraphManager implements java.io.Serializable {
 		 else
 		 return null;*/
 	}
-	
+
 	public void setCurrent(JGraph jg){
 		this.current=jg;
-		
+
 	}
-	
+
 	public JGraph getCurrent(){
 		return current;
 	}
-	
+
 	public void reload(){
+		Enumeration expanded=arbolProyecto.getExpandedDescendants(new TreePath(root.getPath()));
 		((DefaultTreeModel)arbolProyecto.getModel()).reload();
+		while (expanded!=null && expanded.hasMoreElements()){
+			TreePath tp=(TreePath)expanded.nextElement();
+
+			arbolProyecto.expandPath(tp);
+		}
+
 	}
-	
-	
+
+
+
 	public Vector<DefaultGraphCell> getCell(JGraph model, Object o){
 		Object[] roots=model.getRoots();
 		Vector<DefaultGraphCell> results=new Vector<DefaultGraphCell>();
@@ -192,9 +205,9 @@ public class GraphManager implements java.io.Serializable {
 		}
 		return results;
 	}
-	
+
 	private void removeConnectedEdges(JGraph jg, DefaultGraphCell dgc){
-		
+
 		Vector removableEdges=new Vector();
 		for (int k=0;k<jg.getModel().getRootCount();k++){
 			Object o=jg.getModel().getRootAt(k);
@@ -203,12 +216,12 @@ public class GraphManager implements java.io.Serializable {
 				DefaultPort sourcePort =(DefaultPort)de.getSource();
 				DefaultPort targetPort =(DefaultPort)de.getTarget();
 				GraphCell sourceGraphCell=null;
-				
+
 				GraphCell targetGraphCell = null;
-				
+
 				sourceGraphCell = (GraphCell)sourcePort.getParent();
 				targetGraphCell = (GraphCell)targetPort.getParent();
-				
+
 				ingenias.editor.cell.NAryEdge ne=null;
 				GraphCell object=null;
 				if (sourceGraphCell!=null){
@@ -217,14 +230,14 @@ public class GraphManager implements java.io.Serializable {
 					} else
 						object= (GraphCell) sourceGraphCell;
 				}
-				
+
 				if (targetGraphCell!=null){
 					if (ingenias.editor.cell.NAryEdge.class.isAssignableFrom(targetGraphCell.getClass())){
 						ne = (ingenias.editor.cell.NAryEdge)targetGraphCell;
 					} else
 						object = (GraphCell) targetGraphCell;
 				}
-				
+
 				if (object == dgc){
 					GraphCell gc1[]={de};
 					GraphCell gc2[]={ne};
@@ -234,68 +247,85 @@ public class GraphManager implements java.io.Serializable {
 					else
 						jg.getGraphLayoutCache().remove(gc2,true,true);
 				}
-				
+
 			}
-			
+
 		}
-		
+
 	}
-	
+
 	public void removeEntityFromAllGraphs(Object ent){
 		Vector v=this.getUOModels();
 		Enumeration enumeration=v.elements();
 		while (enumeration.hasMoreElements()){
 			JGraph jg=(JGraph)enumeration.nextElement();
-			
+
 			Vector<DefaultGraphCell> dgcs=this.getCell(jg,ent);
-			
+
 			if (!dgcs.isEmpty()){
 				Object[] cells=dgcs.toArray();
-			
+
 				//cells = ButtonToolBar.this.editor.graph.getDescendants(cells);
-				
+
 				jg.getGraphLayoutCache().remove(cells,true,true);
 				jg.getModel().remove(cells);
-				
+
 				//removeConnectedEdges(jg,dgc);
 				//dgc.removeAllChildren();
 				//cells=jg.getDescendants(cells);
 				//jg.getGraphLayoutCache().remove(cells,true,true);
-				
+
 			}
 		}
 	}
-	
-	public Vector getModels(){
-		Vector result=new Vector();
-		javax.swing.tree.DefaultMutableTreeNode dfn=this.root.getFirstLeaf();
-		while (dfn!=null){
-			TreeNode[] path=dfn.getPath();
-			Object uo=((DefaultMutableTreeNode)(path[path.length-1])).getUserObject();
-			if (uo instanceof ModelJGraph)
-				result.add(path);
-			dfn=dfn.getNextLeaf();
+
+	public Vector<TreeNode[]> getModels(javax.swing.tree.DefaultMutableTreeNode root){
+		Vector<TreeNode[]> result=new Vector<TreeNode[]>();
+		if (root.getChildCount()>0){
+			javax.swing.tree.DefaultMutableTreeNode dfn=(DefaultMutableTreeNode) root.getFirstChild();
+			while (dfn!=null){
+				TreeNode[] path=dfn.getPath();
+				Object uo=((DefaultMutableTreeNode)(path[path.length-1])).getUserObject();
+				if (uo instanceof ModelJGraph)
+					result.add(path);
+				result.addAll(getModels(dfn));
+				dfn=dfn.getNextSibling();			
+			}		
 		}
 		return result;
 	}
-	
+
+	public Vector<TreeNode[]> getModels(){
+		return getModels(this.root);
+	}
+
+	public Vector<ModelJGraph> getUOModels(javax.swing.tree.DefaultMutableTreeNode root){
+		Vector result=new Vector();
+		int k=0;
+		while ( k<root.getChildCount()){
+			TreeNode dfn = root.getChildAt(k);
+			if (
+					((DefaultMutableTreeNode)dfn).getUserObject() instanceof ModelJGraph){
+				result.add(((DefaultMutableTreeNode)dfn).getUserObject());
+			};
+			result.addAll(getUOModels((DefaultMutableTreeNode) dfn));
+
+			dfn=root.getChildAt(k);
+			k=k+1;
+		}
+		return result;
+	}
+
 	public Vector<ModelJGraph> getUOModels(){
 		Vector result=new Vector();
-		javax.swing.tree.DefaultMutableTreeNode dfn=this.root.getFirstLeaf();
-		while (dfn!=null){
-			TreeNode[] path=dfn.getPath();
-			Object uo=((DefaultMutableTreeNode)(path[path.length-1])).getUserObject();
-			if (uo instanceof ModelJGraph)
-				result.add(uo);
-			dfn=dfn.getNextLeaf();
-		}
-		return result;
+		javax.swing.tree.DefaultMutableTreeNode dfn=this.root;
+		return getUOModels(this.root);
 	}
-	
+
 	public boolean isDuplicated(String id){
 		Enumeration enumeration=this.getUOModels().elements();
 		int found=0;
-		
+
 		while (enumeration.hasMoreElements() && found<2){
 			ModelJGraph mjg=(ModelJGraph)enumeration.nextElement();
 			if (mjg.getID().equalsIgnoreCase(id))
@@ -303,7 +333,7 @@ public class GraphManager implements java.io.Serializable {
 		}
 		return found>=2;
 	}
-	
+
 	public Vector<TreeNode[]> getLeafPackages(){
 		Vector result=new Vector();
 		javax.swing.tree.DefaultMutableTreeNode dfn=this.root.getFirstLeaf();
@@ -316,7 +346,7 @@ public class GraphManager implements java.io.Serializable {
 		}
 		return result;
 	}
-	
+
 	public boolean existsModel(String id){
 		Vector models=this.getUOModels();
 		Enumeration enumeration=models.elements();
@@ -328,37 +358,37 @@ public class GraphManager implements java.io.Serializable {
 		}
 		return found;
 	}
-	
+
 	public void createPath(Object[] path){
-		
-		
+
+
 	}
-	
-	public static GraphManager createIndependentCopy(javax.swing.tree.DefaultMutableTreeNode root, DnDJTree arbolProyecto){
+
+	/*public static GraphManager createIndependentCopy(javax.swing.tree.DefaultMutableTreeNode root, DnDJTree arbolProyecto){
 		GraphManager instance=new GraphManager(root,arbolProyecto);
 		return instance;
-	}
-	
-	public static void updateCopy(GraphManager copygm){
+	}*/
+
+	/*public static void updateCopy(GraphManager copygm){
 		instance=copygm;
-	}
-	
-	
-	
-	public static GraphManager getInstance(){
+	}*/
+
+
+
+	/*public static GraphManager getInstance(){
 		if (instance==null)
 			throw new RuntimeException("There is no graph manager instance initialized");
 		return instance;
-	}
-	
-	
-	
+	}*/
+
+
+
 	public static GraphManager initInstance(javax.swing.tree.DefaultMutableTreeNode root, DnDJTree arbolProyecto){
-		if (instance==null)
-			instance=new GraphManager(root,arbolProyecto);
+
+		GraphManager instance=new GraphManager(root,arbolProyecto);
 		return instance;
 	}
-	
+
 	private void findInstancesInTree(DefaultMutableTreeNode dtn,String type, Vector result){
 		Enumeration enumeration=this.getUOModels().elements();
 		while (enumeration.hasMoreElements()){
@@ -369,7 +399,7 @@ public class GraphManager implements java.io.Serializable {
 				result.add(model.getID());
 		}
 	}
-	
+
 	public Vector getInstances(String type){
 		int index=type.lastIndexOf(".");
 		String className=type.substring(index+1,type.length());
@@ -377,7 +407,7 @@ public class GraphManager implements java.io.Serializable {
 		this.findInstancesInTree(root,className,result);
 		return result;
 	}
-	
+
 	public String[] getModelPath(String id) throws ingenias.exception.NotFound{
 		String[] result=null;
 		boolean found=false;
@@ -389,7 +419,7 @@ public class GraphManager implements java.io.Serializable {
 			uo=((DefaultMutableTreeNode)(path[path.length-1])).getUserObject();
 			found= (uo instanceof ModelJGraph) &&
 			(((ModelJGraph)uo).getID().equals(id));
-			
+
 			dfn=dfn.getNextLeaf();
 		}
 		if (found){
@@ -400,8 +430,8 @@ public class GraphManager implements java.io.Serializable {
 		}
 		return result;
 	}
-	
-	
+
+
 	public ModelJGraph getModel(String id){
 		Enumeration enumeration=this.getUOModels().elements();
 		while (enumeration.hasMoreElements()){
@@ -411,7 +441,7 @@ public class GraphManager implements java.io.Serializable {
 		}
 		return null;
 	}
-	
+
 	public int repeatedInstanceInModels(String id){
 		int repeated=0;
 		Vector v=this.getUOModels();
@@ -424,26 +454,26 @@ public class GraphManager implements java.io.Serializable {
 					ingenias.editor.entities.Entity ent=(ingenias.editor.entities.Entity)((DefaultGraphCell)root).getUserObject();
 					if (ent.getId().equalsIgnoreCase(id)){
 						repeated++;
-						
+
 					}
 				}
 			}
 		}
 		return repeated;
 	}
-	
+
 	public TreePath findModelTreePath(String nameregexp){
 		TreePath found=null;
 		DefaultMutableTreeNode node= root.getFirstLeaf();
-		while (node!=null && found==null){
+		while (node!=null && found==null && node != root){
 			if (ModelJGraph.class.isAssignableFrom(node.getUserObject().getClass())){
 				ModelJGraph uo=(ModelJGraph)node.getUserObject();
 				if (nameregexp.toLowerCase().equals(uo.getName().toLowerCase()))              	
 					found=new TreePath(node.getPath());        
-				
+
 				node=node.getNextLeaf();       
 			}
-			
+
 		}
 		return found;
 	}
@@ -455,7 +485,9 @@ public class GraphManager implements java.io.Serializable {
 	public void setArbolProyecto(DnDJTree arbolProyecto) {
 		this.arbolProyecto = arbolProyecto;
 	}
-	
-	
-	
+
+
+
+
+
 }

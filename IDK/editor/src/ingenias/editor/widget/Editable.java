@@ -34,5 +34,6 @@ public interface Editable {
   public void addKeyListener(KeyListener ke);
   public void addFocusListener(FocusListener ke);
   public void setAlignmentX(float alig);
+  public void setName(String componentName);
 
 }

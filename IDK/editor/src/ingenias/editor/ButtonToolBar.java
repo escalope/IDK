@@ -3,8 +3,13 @@
  */
 package ingenias.editor;
 
+import ingenias.editor.entities.Entity;
+import ingenias.editor.events.*;
+import ingenias.generator.browser.Browser;
+
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -12,10 +17,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
-class ButtonToolBar extends JToolBar {
+import org.jgraph.JGraph;
+import org.jgraph.graph.DefaultGraphCell;
+
+public class ButtonToolBar extends JToolBar {
 	/**
 	 * 
 	 */
@@ -26,11 +35,17 @@ class ButtonToolBar extends JToolBar {
 	 *  Description of the Field
 	 */
 	protected Action undo, redo, remove, group, ungroup, tofront, toback,
-	cut, copy, paste;
+	cut;
+	protected EventRedirector copy;
+	protected EventRedirectorPaste paste;
+	private GraphManager gm;
+	protected ObjectManager om;
 
-	ButtonToolBar(Editor editor){
+	public ButtonToolBar(Editor editor, final GraphManager gm, final ObjectManager om){
 		this.editor = editor;
 		this.setFloatable(false);
+		this.gm=gm;
+		this.om=om;
 		JButton jb = null;
 		// Toggle Connect Mode
 		/*		Image img_connecton = ImageLoader.getImage("images/connecton.gif");
@@ -59,29 +74,12 @@ class ButtonToolBar extends JToolBar {
 
 		// Automatic layout
 
-		if (this.editor.graph != null) {
-			this.editor.graph.setPortsVisible(true);
 
-		}
 		JPanel jp = new JPanel();
 		jp.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 		jp.add(new JLabel("Relationship Layout"));
 		jp.add(jc);
-		jc.setAction(new AbstractAction("") {
-			private boolean enabled = true;
-			public void actionPerformed(ActionEvent e) {
-				if (jc.getSelectedIndex() == 0) {	
-					if (IDE.ide!=null)
-						IDE.ide.prefs.setRelationshiplayout(Preferences.RelationshipLayout.AUTOMATIC);
-					ButtonToolBar.this.editor.enableAutomaticLayout();
-				}
-				else {
-					if (IDE.ide!=null)
-						IDE.ide.prefs.setRelationshiplayout(Preferences.RelationshipLayout.MANUAL);
-					ButtonToolBar.this.editor.disableAutomaticLayout();
-				}
-			}
-		});
+
 		this.add(jp);
 
 		// Undo
@@ -106,7 +104,7 @@ class ButtonToolBar extends JToolBar {
 			new AbstractAction("", redoIcon) {
 
 			public void actionPerformed(ActionEvent e) {
-				if (ButtonToolBar.this.editor.graph != null) {
+				if (ButtonToolBar.this.editor.getGraph() != null) {
 					ButtonToolBar.this.editor.redo();
 				}
 			}
@@ -123,59 +121,83 @@ class ButtonToolBar extends JToolBar {
 		Action action;
 		Image img;
 
-		if (this.editor.graph != null) {
 
-			// Copy
-			action = this.editor.graph.getTransferHandler().getCopyAction();
-			img = ImageLoader.getImage("images/copy.gif");
-			action.putValue(Action.SMALL_ICON, new ImageIcon(img));
-			copy = new EventRedirector(this.editor, action,new ImageIcon(img));
-			this.add(copy);
+		JGraph jg=new JGraph();// fake graph to extract initial action handlers
+		// Copy
+		action = jg.getTransferHandler().getCopyAction();
+		img = ImageLoader.getImage("images/page_copy.png");
+		action.putValue(Action.SMALL_ICON, new ImageIcon(img));
+		copy = new EventRedirector(this.editor, action,new ImageIcon(img));
+		this.add(copy);						
+
+		// Paste
+		action = jg.getTransferHandler().getPasteAction();
+		img = ImageLoader.getImage("images/page_paste.png");		
+
+		action.putValue(Action.SMALL_ICON, new ImageIcon(img));
+		paste = new EventRedirectorPaste(this.editor, action,new ImageIcon(img));
+		this.add(paste);
 
 
-			// Paste
-			action = this.editor.graph.getTransferHandler().getPasteAction();
-			img = java.awt.Toolkit.getDefaultToolkit().createImage("images/paste.gif");
-			
-			action.putValue(Action.SMALL_ICON, new ImageIcon(img));
-			paste = new EventRedirectorPaste(this.editor, action,new ImageIcon(img));
-			this.add(paste);
-
-			// Cut
-			action = this.editor.graph.getTransferHandler().getCopyAction(); // cut is simulated
-			// with a copy and a delete when paste was performed.
-			// it was required this solution to prevent deleting from
-			// the ingenias model elements appearing only once.
-			/* img = ImageLoader.getImage("images/cut.gif");
+		// Cut
+		action = jg.getTransferHandler().getCopyAction(); // cut is simulated
+		// with a copy and a delete when paste was performed.
+		// it was required this solution to prevent deleting from
+		// the ingenias model elements appearing only once.
+		/* img = ImageLoader.getImage("images/cut.gif");
 			 action.putValue(Action.SMALL_ICON, new ImageIcon(img));
 			 cut = new EventRedirectorCut(Editor.this,action);
 			 this.add(cut);*/
-		}
+
 
 		// Remove
 		Image img_delete =
-			ImageLoader.getImage("images/delete.gif");
+			ImageLoader.getImage("images/bin.png");
 		ImageIcon removeIcon = new ImageIcon(img_delete);
 		remove =
 			new AbstractAction("", removeIcon) {
 
 			public void actionPerformed(ActionEvent e) {
-				if (ButtonToolBar.this.editor.graph != null) {
-					if (!ButtonToolBar.this.editor.graph.isSelectionEmpty()) {
+				if (ButtonToolBar.this.editor.getGraph() != null) {
+					if (!ButtonToolBar.this.editor.getGraph().isSelectionEmpty()) {
 						Object[] cells =
-							ButtonToolBar.this.editor.graph.getSelectionCells();						
+							ButtonToolBar.this.editor.getGraph().getSelectionCells();
+						Vector<Object> cellsToRemove=new Vector<Object>();
+						for (Object cell:cells){
+							if (cell instanceof DefaultGraphCell){
+								Entity ent=(Entity)((DefaultGraphCell)cell).getUserObject();								
+								int rep=gm.repeatedInstanceInModels(ent.getId());
+								if (rep==1){
+									int res = JOptionPane.showConfirmDialog(null,
+											"Element " + ent.getId() +
+											" of type " + ent.getType() + " is no longer used in other diagrams." +
+											" Do you want to remove it from the objects database (y/n)?",
+											"Remove?",
+											JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+									if (res == JOptionPane.OK_OPTION) {										
+										cellsToRemove.add(cell);
+									}									
+								} else {
+									cellsToRemove.add(cell);
+								}
+							} else {
+								cellsToRemove.add(cell);
+							}
+								
+						 
+						}
 						//cells = ButtonToolBar.this.editor.graph.getDescendants(cells);
-						ButtonToolBar.this.editor.graph.getGraphLayoutCache().remove(cells,true,true);
+						ButtonToolBar.this.editor.getGraph().getGraphLayoutCache().remove(cellsToRemove.toArray(),true,true);
 					}
 				}
 			}
 		};
-		remove.setEnabled(false);
+
 		this.add(remove);
 
 		// Zoom Std
 		this.addSeparator();
-		Image img_zoom = ImageLoader.getImage("images/zoom.gif");
+		Image img_zoom = ImageLoader.getImage("images/zoom.png");
 		ImageIcon zoomIcon = new ImageIcon(img_zoom);
 		this.add(
 				new AbstractAction("", zoomIcon) {
@@ -185,34 +207,34 @@ class ButtonToolBar extends JToolBar {
 					 *@param  e  Description of Parameter
 					 */
 					public void actionPerformed(ActionEvent e) {
-						if (ButtonToolBar.this.editor.graph != null) {
-							ButtonToolBar.this.editor.graph.setScale(1.0);
+						if (ButtonToolBar.this.editor.getGraph() != null) {
+							ButtonToolBar.this.editor.getGraph().setScale(1.0);
 						}
 					}
 				});
 		// Zoom In
 		Image img_zoomin =
-			ImageLoader.getImage("images/zoomin.gif");
+			ImageLoader.getImage("images/zoom_in.png");
 		ImageIcon zoomInIcon = new ImageIcon(img_zoomin);
 		this.add(
 				new AbstractAction("", zoomInIcon) {
 
 					public void actionPerformed(ActionEvent e) {
-						if (ButtonToolBar.this.editor.graph != null) {
-							ButtonToolBar.this.editor.graph.setScale(2 * ButtonToolBar.this.editor.graph.getScale());
+						if (ButtonToolBar.this.editor.getGraph() != null) {
+							ButtonToolBar.this.editor.getGraph().setScale(2 * ButtonToolBar.this.editor.getGraph().getScale());
 						}
 					}
 				});
 		// Zoom Out
 		Image img_zoomout =
-			ImageLoader.getImage("images/zoomout.gif");
+			ImageLoader.getImage("images/zoom_out.png");
 		ImageIcon zoomOutIcon = new ImageIcon(img_zoomout);
 		this.add(
 				new AbstractAction("", zoomOutIcon) {
 
 					public void actionPerformed(ActionEvent e) {
-						if (ButtonToolBar.this.editor.graph != null) {
-							ButtonToolBar.this.editor.graph.setScale(ButtonToolBar.this.editor.graph.getScale() / 2);
+						if (ButtonToolBar.this.editor.getGraph() != null) {
+							ButtonToolBar.this.editor.getGraph().setScale(ButtonToolBar.this.editor.getGraph().getScale() / 2);
 						}
 					}
 				});
@@ -282,7 +304,12 @@ class ButtonToolBar extends JToolBar {
 		 */
 	}
 
-	protected Action getUndo() {
+	public void updateActions(ModelJGraph graph){
+		copy.updateAction(graph.getTransferHandler().getCopyAction());
+		paste.updateAction(graph.getTransferHandler().getPasteAction());
+	}
+
+	public Action getUndo() {
 		return undo;
 	}
 
@@ -310,7 +337,7 @@ class ButtonToolBar extends JToolBar {
 		return paste;
 	}
 
-	protected Action getRedo() {
+	public Action getRedo() {
 		return redo;
 	}
 

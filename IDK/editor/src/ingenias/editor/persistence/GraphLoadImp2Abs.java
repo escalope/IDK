@@ -318,7 +318,7 @@ implements GraphLoad {
 
 			// Selected objects are reduced to those connected with nEdge.
 			GraphCell[] newSelected = this.getEntitiesAlreadyInsertedInRelationshipAndUpdateDGCIds(selected,nEdgeObject);
-//			String[] ids = nEdgeObject.getIds(); // ids change with previous method
+			//			String[] ids = nEdgeObject.getIds(); // ids change with previous method
 			// Role assignation to objects is obtained.
 			String[] selectedAssignation = new String[newSelected.length];
 			for (int i = 0; i < newSelected.length; i++) {
@@ -344,8 +344,8 @@ implements GraphLoad {
 							result + " in graph " + graph.getID());
 					nEdge.connectionsEdges(newSelected,
 							selectedAssignation);
-					
-					
+
+
 				} else {
 					//System.err.println("connecting "+auxiliaryEdges.length+ " "+newSelected.length+ "  "+selected.length);
 					Hashtable edgesAttributes = new Hashtable();
@@ -381,7 +381,7 @@ implements GraphLoad {
 					attributes.put(nEdge, eas);
 
 
-//////////			-----------------------------------//////////
+					//////////			-----------------------------------//////////
 
 					/*if (labels !=null && poslabels!=null){
 					Map attr = auxiliaryEdges[0].getAttributes();
@@ -414,7 +414,7 @@ implements GraphLoad {
 
 					}
 
-//////////			-----------------------------------//////////
+					//////////			-----------------------------------//////////
 					// Insert the Edge and its Attributes. The order matters.
 					if (auxiliaryEdges.length >= 2) {
 						graph.getModel().insert(new Object[] {nEdge},attributes,
@@ -436,562 +436,574 @@ implements GraphLoad {
 								result + " in graph " + graph.getID());
 					}
 				}
-			
-		}catch (WrongParameters wp){
-			Log.getInstance().logSYS(
-					"WARNING!!! Cannot produce edges for relationship " +
-					nEdgeObject.getId() + " of type " + nEdgeObject.getType());
-			wp.printStackTrace();
+
+			}catch (WrongParameters wp){
+				Log.getInstance().logSYS(
+						"WARNING!!! Cannot produce edges for relationship " +
+						nEdgeObject.getId() + " of type " + nEdgeObject.getType());
+				wp.printStackTrace();
+
+			}
 
 		}
-
 	}
-}
 
-/**
- *  Gets the modelPath attribute of the GraphLoad object
- *
- *@param  n   Description of Parameter
- *@param  gm  Description of Parameter
- *@return     The modelPath value
- */
-private Object[] getModelPath(Node n, GraphManager gm) {
-	Object[] opath = null;
-	Vector path = new Vector();
-	NodeList packages = n.getChildNodes();
-	for (int k = 0; k < packages.getLength(); k++) {
-		Node pack = packages.item(k);
-		if (pack.getNodeName().equalsIgnoreCase("path")) {
-			NodeList packs = pack.getChildNodes();
-			for (int j = 0; j < packs.getLength(); j++) {
-				Node npack = packs.item(j);
-				if (npack.getNodeName().equalsIgnoreCase("package")) {
-					String id = npack.getAttributes().getNamedItem("id").getNodeValue().
+	/**
+	 *  Gets the modelPath attribute of the GraphLoad object
+	 *
+	 *@param  n   Description of Parameter
+	 *@param  gm  Description of Parameter
+	 * @param modelIds 
+	 *@return     The modelPath value
+	 */
+	private Object[] getModelPath(Node n, GraphManager gm) {
+		Object[] opath = null;
+		Vector path = new Vector();
+		NodeList packages = n.getChildNodes();
+		for (int k = 0; k < packages.getLength(); k++) {
+			Node pack = packages.item(k);
+			if (pack.getNodeName().equalsIgnoreCase("path")) {
+				NodeList packs = pack.getChildNodes();
+				for (int j = 0; j < packs.getLength(); j++) {
+					Node npack = packs.item(j);
+					if (npack.getNodeName().equalsIgnoreCase("package")) {
+						String id = npack.getAttributes().getNamedItem("id").getNodeValue().
+						toString();
+						path.add(id);
+					}
+				}
+				for (int j = 1; j < path.size(); j++) {
+					opath = new Object[j];
+					for (int l = 0; l < j; l++) {
+						opath[l] = path.elementAt(l);
+					}
+					
+					gm.addPackage(opath, path.elementAt(j).toString());
+				}
+			}
+		}
+		return path.toArray();
+	}
+
+	/**
+	 *  Gets the graphCell attribute of the GraphLoad object
+	 *
+	 *@param  mj  Description of Parameter
+	 *@param  id  Description of Parameter
+	 *@return     The graphCell value
+	 */
+	private GraphCell getGraphCell(ModelJGraph mj, String id) {
+		for (int k = 0; k < mj.getModel().getRootCount(); k++) {
+			//		System.err.println("k:"+k+mj.getModel().getRootCount());
+			DefaultGraphCell dgc = (DefaultGraphCell) mj.getModel().getRootAt(k);
+			ingenias.editor.entities.Entity ent = (ingenias.editor.entities.Entity)
+			dgc.getUserObject();
+			if (ent.getId().equalsIgnoreCase(id)) {
+				return dgc;
+			}
+			//		System.err.println("Identiddad:"+ent.getId());
+		}
+		//	System.err.println("no pude encontrar " + id);
+		return null;
+	}
+
+	/**
+	 *  Gets the connectedEntities attribute of the GraphLoad object
+	 *
+	 *@param  n  Description of Parameter
+	 *@return    The connectedEntities value
+	 */
+	private Vector getConnectedEntities(Node n) {
+		Vector result = new Vector();
+		NodeList nl = n.getChildNodes();
+		for (int k = 0; k < nl.getLength(); k++) {
+			Node current = nl.item(k);
+			if (current.getNodeName().equalsIgnoreCase("connected")) {
+				String id = current.getAttributes().getNamedItem("id").getNodeValue();
+				result.add(id);
+				Hashtable hashAttr =new Hashtable();
+				retrieveNodeGenericAttributes(current, hashAttr);
+				result.add(hashAttr);
+			}
+		}
+		//System.err.println("connected to "+n.getAttributes().getNamedItem("id").getNodeValue()+" "+ result.size());
+		return result;
+	}
+
+	/**
+	 *  Description of the Method
+	 *
+	 *@param  ed                             Description of Parameter
+	 *@param  om                             Description of Parameter
+	 *@param  rm                             Description of Parameter
+	 *@param  gm                             Description of Parameter
+	 *@param  doc                            Description of Parameter
+	 *@exception  ClassNotFoundException     Description of Exception
+	 *@exception  IllegalAccessException     Description of Exception
+	 *@exception  InstantiationException     Description of Exception
+	 *@exception  NoSuchMethodException      Description of Exception
+	 *@exception  InvocationTargetException  Description of Exception
+	 */
+	public void restoreModels(IDEState ids,GUIResources resources,
+			Document doc) throws CannotLoadDiagram {
+		// For compatibility and in case a future different RM is needed
+		RelationshipManager rm = new RelationshipManager();
+		NodeList models = doc.getElementsByTagName("models").item(0).getChildNodes();
+		boolean allrecovered=true;
+		String failureMessage="";
+		float increment=60f/models.getLength();
+		float initialValue=resources.getProgressBarValue();
+		for (int k = 0; k < models.getLength(); k++) {
+			Node model = models.item(k);			
+			resources.setCurrentProgress((int)(initialValue+increment*k));
+			//System.err.println("Progreso "+resources.getProgressBarValue());
+			String id="";
+			String type="";
+			try {
+				if (model.getNodeName().equalsIgnoreCase("model")) {
+					id = model.getAttributes().getNamedItem("id").getNodeValue().
 					toString();
-					path.add(id);
+					Log.getInstance().logSYS("Loading model "+id);
+					type = model.getAttributes().getNamedItem("type").getNodeValue().
+					toString();
+					this.restoreModel(ids,resources,rm, model);
 				}
-			}
-			for (int j = 1; j < path.size(); j++) {
-				opath = new Object[j];
-				for (int l = 0; l < j; l++) {
-					opath[l] = path.elementAt(l);
-				}
-				gm.addPackage(opath, path.elementAt(j).toString());
+			} catch (Exception e){
+				allrecovered=false;
+				failureMessage=failureMessage+"\n Error loading model "+ id+
+				" of type "+type+". Original error message was \n "+e.getMessage();
+				e.printStackTrace();
 			}
 		}
+		if (!allrecovered)
+			throw new CannotLoadDiagram(failureMessage);
 	}
-	return path.toArray();
-}
 
-/**
- *  Gets the graphCell attribute of the GraphLoad object
- *
- *@param  mj  Description of Parameter
- *@param  id  Description of Parameter
- *@return     The graphCell value
- */
-private GraphCell getGraphCell(ModelJGraph mj, String id) {
-	for (int k = 0; k < mj.getModel().getRootCount(); k++) {
-//		System.err.println("k:"+k+mj.getModel().getRootCount());
-		DefaultGraphCell dgc = (DefaultGraphCell) mj.getModel().getRootAt(k);
-		ingenias.editor.entities.Entity ent = (ingenias.editor.entities.Entity)
-		dgc.getUserObject();
-		if (ent.getId().equalsIgnoreCase(id)) {
-			return dgc;
-		}
-//		System.err.println("Identiddad:"+ent.getId());
-	}
-//	System.err.println("no pude encontrar " + id);
-	return null;
-}
+	private void restoreModel(IDEState ids,GUIResources resources,RelationshipManager rm,
+			Node model) throws ClassNotFoundException,
+			IllegalAccessException, InstantiationException, NoSuchMethodException,
+			InvocationTargetException{
+		String id = model.getAttributes().getNamedItem("id").getNodeValue().
+		toString();
+		String type = model.getAttributes().getNamedItem("type").getNodeValue().
+		toString();
 
-/**
- *  Gets the connectedEntities attribute of the GraphLoad object
- *
- *@param  n  Description of Parameter
- *@return    The connectedEntities value
- */
-private Vector getConnectedEntities(Node n) {
-	Vector result = new Vector();
-	NodeList nl = n.getChildNodes();
-	for (int k = 0; k < nl.getLength(); k++) {
-		Node current = nl.item(k);
-		if (current.getNodeName().equalsIgnoreCase("connected")) {
-			String id = current.getAttributes().getNamedItem("id").getNodeValue();
-			result.add(id);
-			Hashtable hashAttr =new Hashtable();
-			retrieveNodeGenericAttributes(current, hashAttr);
-			result.add(hashAttr);
-		}
-	}
-	//System.err.println("connected to "+n.getAttributes().getNamedItem("id").getNodeValue()+" "+ result.size());
-	return result;
-}
 
-/**
- *  Description of the Method
- *
- *@param  ed                             Description of Parameter
- *@param  om                             Description of Parameter
- *@param  rm                             Description of Parameter
- *@param  gm                             Description of Parameter
- *@param  doc                            Description of Parameter
- *@exception  ClassNotFoundException     Description of Exception
- *@exception  IllegalAccessException     Description of Exception
- *@exception  InstantiationException     Description of Exception
- *@exception  NoSuchMethodException      Description of Exception
- *@exception  InvocationTargetException  Description of Exception
- */
-public void restoreModels(IDEState ids,
-		Document doc) throws CannotLoadDiagram {
-	// For compatibility and in case a future different RM is needed
-	RelationshipManager rm = new RelationshipManager();
-	NodeList models = doc.getElementsByTagName("models").item(0).getChildNodes();
-	boolean allrecovered=true;
-	String failureMessage="";
+		Object[] path = this.getModelPath(model, ids.gm);
 
-	for (int k = 0; k < models.getLength(); k++) {
-		Node model = models.item(k);
-		String id="";
-		String type="";
-		try {
-			if (model.getNodeName().equalsIgnoreCase("model")) {
-				id = model.getAttributes().getNamedItem("id").getNodeValue().
-				toString();
-				Log.getInstance().logSYS("Loading model "+id);
-				type = model.getAttributes().getNamedItem("type").getNodeValue().
-				toString();
-				this.restoreModel(ids,rm, model);
+		Node graph = null;
+		Node layout = null;
+		NodeList children = model.getChildNodes();
+		ModelDataEntity mde = null;
+
+		for (int j = 0; j < children.getLength(); j++) {
+
+			Node current = children.item(j);
+			if (current.getNodeName().equalsIgnoreCase("object")) {
+				mde = (ModelDataEntity) PersistenceManager.getOL().restoreObject(ids.om,ids.gm, current);
 			}
-		} catch (Exception e){
-			allrecovered=false;
-			failureMessage=failureMessage+"\n Error loading model "+ id+
-			" of type "+type+". Original error message was \n "+e.getMessage();
-			e.printStackTrace();
-		}
-	}
-	if (!allrecovered)
-		throw new CannotLoadDiagram(failureMessage);
-}
-
-private void restoreModel(IDEState ids,RelationshipManager rm,
-		Node model) throws ClassNotFoundException,
-		IllegalAccessException, InstantiationException, NoSuchMethodException,
-		InvocationTargetException{
-	String id = model.getAttributes().getNamedItem("id").getNodeValue().
-	toString();
-	String type = model.getAttributes().getNamedItem("type").getNodeValue().
-	toString();
-
-
-	Object[] path = this.getModelPath(model, ids.gm);
-
-	Node graph = null;
-	Node layout = null;
-	NodeList children = model.getChildNodes();
-	ModelDataEntity mde = null;
-
-	for (int j = 0; j < children.getLength(); j++) {
-
-		Node current = children.item(j);
-		if (current.getNodeName().equalsIgnoreCase("object")) {
-			mde = (ModelDataEntity) PersistenceManager.getOL().restoreObject(ids.om,ids.gm, current);
-		}
-		if (current.getNodeName().equalsIgnoreCase("gxl")) {
-			NodeList gxls = current.getChildNodes();
-			for (int l = 0; l < gxls.getLength(); l++) {
-				Node currentgxl = gxls.item(l);
-				if (currentgxl.getNodeName().equalsIgnoreCase("graph")) {
-					graph = currentgxl;
-				}
-				if (currentgxl.getNodeName().equalsIgnoreCase("layout")) {
-					layout = currentgxl;
+			if (current.getNodeName().equalsIgnoreCase("gxl")) {
+				NodeList gxls = current.getChildNodes();
+				for (int l = 0; l < gxls.getLength(); l++) {
+					Node currentgxl = gxls.item(l);
+					if (currentgxl.getNodeName().equalsIgnoreCase("graph")) {
+						graph = currentgxl;
+					}
+					if (currentgxl.getNodeName().equalsIgnoreCase("layout")) {
+						layout = currentgxl;
+					}
 				}
 			}
 		}
-	}
-	ModelJGraph mjg = null;
-
-	if (mde != null) {
+		ModelJGraph mjg = null;
 
 		int indmarquee=type.indexOf("ModelJGraph");
-		String marqueetype=type.substring(0,indmarquee)+"MarqueeHandler";
+		int inStartTypeTag=type.lastIndexOf(".");
+		type="ingenias.editor.models"+type.substring(inStartTypeTag,indmarquee)+"ModelJGraph";
 
-		Class[] conspar = {
-				mde.getClass(), String.class,ObjectManager.class, Model.class,BasicMarqueeHandler.class};
-		Object[] valpar = {
-				mde, id,ids.om,new Model(ids),new BasicMarqueeHandler()};
+		if (mde != null) {
+			indmarquee=type.indexOf("ModelJGraph");
+			inStartTypeTag=type.lastIndexOf(".");
+			String actionFactoryName="ingenias.editor.actions.diagram"+type.substring(inStartTypeTag,indmarquee)+"ActionsFactory";
 
-		Constructor cons= Class.forName(type).getConstructor(conspar);
-		mjg = (ModelJGraph) cons.newInstance(valpar);
+			Class[] consparFactory = {GUIResources.class, IDEState.class};		        
+			Object[] valparFactory = {resources,ids};
+			Class[] consparModel = {mde.getClass(), String.class,ObjectManager.class, Model.class,BasicMarqueeHandler.class, Preferences.class};      
+			Object[] valparModel = {mde,id,ids.om,new Model(ids),new BasicMarqueeHandler(), ids.prefs};		
 
-		Constructor consmarquee = Class.forName(marqueetype).getConstructor(new Class[]{ModelJGraph.class});
-		BasicMarqueeHandler marquee=(BasicMarqueeHandler) consmarquee.newInstance(new Object[]{mjg});
+			Constructor cons= Class.forName(type).getConstructor(consparModel);
+			mjg = (ModelJGraph) cons.newInstance(valparModel);
 
-		mjg.setMarqueeHandler(marquee);
-	}
-	else {
-		Class[] conspar = {
-				ids.editor.getClass()};
-		Object[] valpar = {
-				ids.editor};
-		Constructor cons = Class.forName(type).getConstructor(conspar);
-		mjg = (ModelJGraph) cons.newInstance(valpar);
-	}
+			Constructor consmarquee = Class.forName(actionFactoryName).getConstructor(consparFactory);
+			DiagramMenuEntriesActionsFactory actionFactory=(DiagramMenuEntriesActionsFactory) consmarquee.newInstance(valparFactory);
+			MarqueeHandler marquee=new MarqueeHandler(mjg,resources,ids,actionFactory);
+			mjg.setMarqueeHandler(marquee);
 
-	//mjg.setEditor(ids.editor);
-	//   mjg.setOM(ids.om);
-	//mjg.setId(id);
-	this.fromGXL(ids.om,rm, mjg, graph, layout);
-	ids.gm.addModel(path, id, mjg);
-	ids.editor.setEnabled(true);
-
-}
-
-
-/**
- *  Description of the Method
- *
- *@param  node                   Description of Parameter
- *@return                        Description of the Returned Value
- *@exception  WrongTypedDOMNode  Description of Exception
- */
-private Object[] GXL2Array(Node node) throws WrongTypedDOMNode {
-	//  System.err.println("init array");
-	if (node.getNodeName().equals("array")) {
-		try {
-			Vector children = new Vector();
-
-			// Obtain children
-			NodeList values = node.getChildNodes();
-			for (int k = 0; k < values.getLength(); k++) {
-				try {
-					children.add(GXL2Object(values.item(k)));
-				}
-				catch (WrongTypedDOMNode e) {
-					// It is not a valid child.
-				}
-			}
-			// System.err.println("retrieved array "+children.size());
-
-			// System.err.println("end array");
-			// Construct the Array
-			return children.toArray();
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-			throw new WrongTypedDOMNode(node.toString() +
-			"is a malformed representation of an Object[].");
+		else {
+			Class[] conspar = {
+					ids.editor.getClass()};
+			Object[] valpar = {
+					ids.editor};
+			Constructor cons = Class.forName(type).getConstructor(conspar);
+			mjg = (ModelJGraph) cons.newInstance(valpar);
 		}
-	}
-	else {
-		new WrongTypedDOMNode(node.toString() +
-		"does not represent an Object[]").printStackTrace();
-		throw new WrongTypedDOMNode(node.toString() +
-		"does not represent an Object[]");
-	}
-}
 
-/**
- *  Description of the Method
- *
- *@param  node                   Description of Parameter
- *@return                        Description of the Returned Value
- *@exception  WrongTypedDOMNode  Description of Exception
- */
-private List GXL2List(Node node) throws WrongTypedDOMNode {
-	if (node.getNodeName().equals("list")) {
-		try {
-			ArrayList children = new ArrayList();
+		//mjg.setEditor(ids.editor);
+		//   mjg.setOM(ids.om);
+		//mjg.setId(id);
+		this.fromGXL(ids.om,rm, mjg, graph, layout);
+		ids.gm.addModel(path, id, mjg);
+		ids.editor.setEnabled(true);
 
-			// Obtain children
-			NodeList values = node.getChildNodes();
-			int index = 0;
-			for (int k = 0; k < values.getLength(); k++) {
-				try {
-					Object child = GXL2Object(values.item(k));
-					children.add(index++, child);
-				}
-				catch (WrongTypedDOMNode e) {
-					// It is not a valid child.
-				}
-			}
-			// Construct the List
-			return ( (List) children);
-		}
-		catch (Exception e) {
-			throw new WrongTypedDOMNode(node.toString() +
-			"is a malformed representation of an List.");
-		}
 	}
-	else {
-		throw new WrongTypedDOMNode(node.toString() +
-		"does not represent an List");
-	}
-}
-
-/**
- *  Description of the Method
- *
- *@param  node                   Description of Parameter
- *@return                        Description of the Returned Value
- *@exception  WrongTypedDOMNode  Description of Exception
- */
-private Point2D.Double GXL2Point(Node node) throws WrongTypedDOMNode {
-	if (node.getNodeName().equals("point")) {
-		try {
-			// Obtain attributes
-			double x = (new Double(node.getAttributes().getNamedItem("x").
-					getNodeValue())).doubleValue();
-			double y = (new Double(node.getAttributes().getNamedItem("y").
-					getNodeValue())).doubleValue();
-			// Construct the Point
-			return new Point2D.Double(x, y);
-		}
-		catch (Exception e) {
-			throw new WrongTypedDOMNode(node.toString() +
-			"is a malformed representation of a java.awt.Point.");
-		}
-	}
-	else {
-		throw new WrongTypedDOMNode(node.toString() +
-		"does not represent a java.awt.Point.");
-	}
-}
-
-/**
- *  Description of the Method
- *
- *@param  node                   Description of Parameter
- *@return                        Description of the Returned Value
- *@exception  WrongTypedDOMNode  Description of Exception
- */
-private Rectangle GXL2Rectangle(Node node) throws WrongTypedDOMNode {
-	if (node.getNodeName().equals("rectangle")) {
-		try {
-			// Obtain attributes
-			int x = (new Integer(node.getAttributes().getNamedItem("x").
-					getNodeValue())).intValue();
-			int y = (new Integer(node.getAttributes().getNamedItem("y").
-					getNodeValue())).intValue();
-			int width = (new Integer(node.getAttributes().getNamedItem("width").
-					getNodeValue())).intValue();
-			int height = (new Integer(node.getAttributes().getNamedItem("height").
-					getNodeValue())).intValue();
-			// Construct the Rectangle
-			return new Rectangle(x, y, width, height);
-		}
-		catch (Exception e) {
-			throw new WrongTypedDOMNode(node.toString() +
-			"is a malformed representation of a java.awt.Rectangle.");
-		}
-	}
-	else {
-		throw new WrongTypedDOMNode(node.toString() +
-		"does not represent a java.awt.Rectangle.");
-	}
-}
 
 
-
-/**
- *  Description of the Method
- *
- *@param  node                   Description of Parameter
- *@return                        Description of the Returned Value
- *@exception  WrongTypedDOMNode  Description of Exception
- */
-private Object GXL2Object(Node node) throws WrongTypedDOMNode {
-	Object object = null;
-	//System.err.println("Procssing "+node.getNodeName());
-	if (node.getNodeName().equals("point")) {
-		object = GXL2Point(node);
-	}
-	else if (node.getNodeName().equals("rectangle")) {
-		object = GXL2Rectangle(node);
-	}
-	else if (node.getNodeName().equals("list")) {
-		object = GXL2List(node);
-	}
-	else if (node.getNodeName().equals("array")) {
-		object = GXL2Array(node);
-	}
-	else if (node.getNodeName().equals("string")) {
-		object = GXL2String(node);
-	}
-	else if (node.getNodeName().equals("attr")) {
-		NodeList values = node.getChildNodes();
-
-		for (int k = 0; k < values.getLength(); k++) {
+	/**
+	 *  Description of the Method
+	 *
+	 *@param  node                   Description of Parameter
+	 *@return                        Description of the Returned Value
+	 *@exception  WrongTypedDOMNode  Description of Exception
+	 */
+	private Object[] GXL2Array(Node node) throws WrongTypedDOMNode {
+		//  System.err.println("init array");
+		if (node.getNodeName().equals("array")) {
 			try {
-				Object objectAttr = GXL2Object(values.item(k));
-				if (object == null) {
-					object = objectAttr;
+				Vector children = new Vector();
+
+				// Obtain children
+				NodeList values = node.getChildNodes();
+				for (int k = 0; k < values.getLength(); k++) {
+					try {
+						children.add(GXL2Object(values.item(k)));
+					}
+					catch (WrongTypedDOMNode e) {
+						// It is not a valid child.
+					}
 				}
+				// System.err.println("retrieved array "+children.size());
+
+				// System.err.println("end array");
+				// Construct the Array
+				return children.toArray();
 			}
-			catch (WrongTypedDOMNode e) {
+			catch (Exception e) {
+				e.printStackTrace();
+				throw new WrongTypedDOMNode(node.toString() +
+				"is a malformed representation of an Object[].");
 			}
 		}
+		else {
+			new WrongTypedDOMNode(node.toString() +
+			"does not represent an Object[]").printStackTrace();
+			throw new WrongTypedDOMNode(node.toString() +
+			"does not represent an Object[]");
+		}
+	}
 
-		if (object == null) {
+	/**
+	 *  Description of the Method
+	 *
+	 *@param  node                   Description of Parameter
+	 *@return                        Description of the Returned Value
+	 *@exception  WrongTypedDOMNode  Description of Exception
+	 */
+	private List GXL2List(Node node) throws WrongTypedDOMNode {
+		if (node.getNodeName().equals("list")) {
+			try {
+				ArrayList children = new ArrayList();
+
+				// Obtain children
+				NodeList values = node.getChildNodes();
+				int index = 0;
+				for (int k = 0; k < values.getLength(); k++) {
+					try {
+						Object child = GXL2Object(values.item(k));
+						children.add(index++, child);
+					}
+					catch (WrongTypedDOMNode e) {
+						// It is not a valid child.
+					}
+				}
+				// Construct the List
+				return ( (List) children);
+			}
+			catch (Exception e) {
+				throw new WrongTypedDOMNode(node.toString() +
+				"is a malformed representation of an List.");
+			}
+		}
+		else {
+			throw new WrongTypedDOMNode(node.toString() +
+			"does not represent an List");
+		}
+	}
+
+	/**
+	 *  Description of the Method
+	 *
+	 *@param  node                   Description of Parameter
+	 *@return                        Description of the Returned Value
+	 *@exception  WrongTypedDOMNode  Description of Exception
+	 */
+	private Point2D.Double GXL2Point(Node node) throws WrongTypedDOMNode {
+		if (node.getNodeName().equals("point")) {
+			try {
+				// Obtain attributes
+				double x = (new Double(node.getAttributes().getNamedItem("x").
+						getNodeValue())).doubleValue();
+				double y = (new Double(node.getAttributes().getNamedItem("y").
+						getNodeValue())).doubleValue();
+				// Construct the Point
+				return new Point2D.Double(x, y);
+			}
+			catch (Exception e) {
+				throw new WrongTypedDOMNode(node.toString() +
+				"is a malformed representation of a java.awt.Point.");
+			}
+		}
+		else {
+			throw new WrongTypedDOMNode(node.toString() +
+			"does not represent a java.awt.Point.");
+		}
+	}
+
+	/**
+	 *  Description of the Method
+	 *
+	 *@param  node                   Description of Parameter
+	 *@return                        Description of the Returned Value
+	 *@exception  WrongTypedDOMNode  Description of Exception
+	 */
+	private Rectangle GXL2Rectangle(Node node) throws WrongTypedDOMNode {
+		if (node.getNodeName().equals("rectangle")) {
+			try {
+				// Obtain attributes
+				int x = (new Integer(node.getAttributes().getNamedItem("x").
+						getNodeValue())).intValue();
+				int y = (new Integer(node.getAttributes().getNamedItem("y").
+						getNodeValue())).intValue();
+				int width = (new Integer(node.getAttributes().getNamedItem("width").
+						getNodeValue())).intValue();
+				int height = (new Integer(node.getAttributes().getNamedItem("height").
+						getNodeValue())).intValue();
+				// Construct the Rectangle
+				return new Rectangle(x, y, width, height);
+			}
+			catch (Exception e) {
+				throw new WrongTypedDOMNode(node.toString() +
+				"is a malformed representation of a java.awt.Rectangle.");
+			}
+		}
+		else {
+			throw new WrongTypedDOMNode(node.toString() +
+			"does not represent a java.awt.Rectangle.");
+		}
+	}
+
+
+
+	/**
+	 *  Description of the Method
+	 *
+	 *@param  node                   Description of Parameter
+	 *@return                        Description of the Returned Value
+	 *@exception  WrongTypedDOMNode  Description of Exception
+	 */
+	private Object GXL2Object(Node node) throws WrongTypedDOMNode {
+		Object object = null;
+		//System.err.println("Procssing "+node.getNodeName());
+		if (node.getNodeName().equals("point")) {
+			object = GXL2Point(node);
+		}
+		else if (node.getNodeName().equals("rectangle")) {
+			object = GXL2Rectangle(node);
+		}
+		else if (node.getNodeName().equals("list")) {
+			object = GXL2List(node);
+		}
+		else if (node.getNodeName().equals("array")) {
+			object = GXL2Array(node);
+		}
+		else if (node.getNodeName().equals("string")) {
+			object = GXL2String(node);
+		}
+		else if (node.getNodeName().equals("attr")) {
+			NodeList values = node.getChildNodes();
+
+			for (int k = 0; k < values.getLength(); k++) {
+				try {
+					Object objectAttr = GXL2Object(values.item(k));
+					if (object == null) {
+						object = objectAttr;
+					}
+				}
+				catch (WrongTypedDOMNode e) {
+				}
+			}
+
+			if (object == null) {
+				throw new WrongTypedDOMNode(node.toString() +
+				"does not represent any valid Object.");
+			}
+			//		if (values.item(k).getNodeName().equals("string")) {
+			//		Node labelNode = values.item(k).getFirstChild();
+			//		if (labelNode != null)
+			//		object = (String) labelNode.getNodeValue();
+			//		}
+		}
+		else {
 			throw new WrongTypedDOMNode(node.toString() +
 			"does not represent any valid Object.");
 		}
-//		if (values.item(k).getNodeName().equals("string")) {
-//		Node labelNode = values.item(k).getFirstChild();
-//		if (labelNode != null)
-//		object = (String) labelNode.getNodeValue();
-//		}
-	}
-	else {
-		throw new WrongTypedDOMNode(node.toString() +
-		"does not represent any valid Object.");
+
+		return object;
 	}
 
-	return object;
-}
-
-private Object GXL2String(Node node) {
-	Node labelNode = node.getFirstChild();
-	if (labelNode != null) {
-		return (String) labelNode.getNodeValue();
+	private Object GXL2String(Node node) {
+		Node labelNode = node.getFirstChild();
+		if (labelNode != null) {
+			return (String) labelNode.getNodeValue();
+		}
+		return null;
 	}
-	return null;
-}
 
-private DefaultGraphCell[]
-                         getEntitiesAlreadyInsertedInRelationshipAndUpdateDGCIds(Object[] selected,
-                        		 ingenias.editor.entities.NAryEdgeEntity nEdgeObject) {
-	ingenias.editor.entities.NAryEdgeEntity ne = nEdgeObject;
-	String[] ids = nEdgeObject.getIds();
-	Vector newselectedv=new Vector();
+	private DefaultGraphCell[]
+	                         getEntitiesAlreadyInsertedInRelationshipAndUpdateDGCIds(Object[] selected,
+	                        		 ingenias.editor.entities.NAryEdgeEntity nEdgeObject) {
+		ingenias.editor.entities.NAryEdgeEntity ne = nEdgeObject;
+		String[] ids = nEdgeObject.getIds();
+		Vector<DefaultGraphCell> newselectedv=new Vector<DefaultGraphCell>();
 
+	//	System.err.println("connecting ..."+nEdgeObject.getType());
+		int i = 0;
+		for (int k = 0; k < ids.length; k++) {			
+		//	System.err.println("Looking for "+ids[k]);
+			for (int j = 0; j < selected.length; j++) {
+				Entity userObject = (ingenias.editor.entities.Entity) ( (DefaultGraphCell) selected[j]).getUserObject();			
+				try {
+					if (userObject != null &&
+							userObject.equals(nEdgeObject.getEntity(ids[k]))) {
+						nEdgeObject.updateCell(ids[k], "" + selected[j].hashCode());
+						// Old id's are prefixed "old" to avoid collision among old id's and new ones
+						newselectedv.add((DefaultGraphCell) selected[j]);
+				//		System.err.println("Found  "+ids[k]);
+						i++;
+					}
+				}
+				catch (NotFound nf) {
+				}
+				catch (AlreadyExists ae) {
+					Log.getInstance().logSYS("WARNING!!!! Relationship" +
+							nEdgeObject.getId() + " of type " +
+							nEdgeObject.getType() +
+							" already contains an id " +
+							selected[j].hashCode());
 
-	int i = 0;
-	for (int k = 0; k < ids.length; k++) {
-		for (int j = 0; j < selected.length; j++) {
-			Object userObject = ( (DefaultGraphCell) selected[j]).getUserObject();			
-			try {
-				if (userObject != null &&
-						userObject==nEdgeObject.getEntity(ids[k])) {
-					nEdgeObject.updateCell(ids[k], "" + selected[j].hashCode());
-					// Old id's are prefixed "old" to avoid collision among old id's and new ones
-					newselectedv.add(selected[j]);
-					i++;
 				}
 			}
-			catch (NotFound nf) {
-			}
-			catch (AlreadyExists ae) {
-				Log.getInstance().logSYS("WARNING!!!! Relationship" +
-						nEdgeObject.getId() + " of type " +
-						nEdgeObject.getType() +
-						" already contains an id " +
-						selected[j].hashCode());
-
-			}
 		}
+		ids = nEdgeObject.getIds();
+
+		// Number of ids in the relationship can be less than initial number
+		if (ids.length != i) {
+			throw new RuntimeException(
+					"INTERNAL ERROR!!! Length of ids connected in " +
+					nEdgeObject.getId() + " of type " + nEdgeObject.getType() +
+					" a relationship does not match selected default graph cell number. I had " +
+					ids.length + " elements to find and I found " + i);
+		}
+		DefaultGraphCell[] newSelected = new DefaultGraphCell[ids.length];
+		for (int k=0;k<newSelected.length;k++){
+			newSelected[k]=(DefaultGraphCell)newselectedv.elementAt(k);
+		}
+
+		return newSelected;
+
 	}
-	ids = nEdgeObject.getIds();
-
-	// Number of ids in the relationship can be less than initial number
-	if (ids.length != i) {
-		throw new RuntimeException(
-				"INTERNAL ERROR!!! Length of ids connected in " +
-				nEdgeObject.getId() + " of type " + nEdgeObject.getType() +
-				" a relationship does not match selected default graph cell number. I had " +
-				ids.length + " elements to find and I found " + i);
-	}
-	DefaultGraphCell[] newSelected = new DefaultGraphCell[ids.length];
-	for (int k=0;k<newSelected.length;k++){
-		newSelected[k]=(DefaultGraphCell)newselectedv.elementAt(k);
-	}
-
-	return newSelected;
-
-}
 
 
-//Fetch Cell Map from Node
-protected Hashtable getMap(Node node) {
+	//Fetch Cell Map from Node
+	protected Hashtable getMap(Node node) {
 
-	Hashtable hashAttr = new Hashtable();
+		Hashtable hashAttr = new Hashtable();
 
-	try {
-		// Common attributes
-		hashAttr.put(new String("id"),
-				node.getAttributes().getNamedItem("id").getNodeValue());
-		hashAttr.put(new String("type"),
-				node.getAttributes().getNamedItem("type").getNodeValue());
-		// Edge attributes
-		hashAttr.put("from",
-				node.getAttributes().getNamedItem("from").getNodeValue());
-		hashAttr.put("to", node.getAttributes().getNamedItem("to").getNodeValue());
-	}
-	catch (Exception e) {
-		// If the node is a vertex there is neither from nor to attributes.
-	}
-	// Node specific attributes
-	retrieveNodeGenericAttributes(node, hashAttr);
-	// System.err.println(node.getAttributes().getNamedItem("id").getNodeValue()+ " Retrieved "+hashAttr+ " "+hashAttr.size());
-//////////return (lab != null) ? lab : new String("");
-	return hashAttr;
-}
-
-private void retrieveNodeGenericAttributes(Node node, Hashtable hashAttr) {
-	NodeList children = node.getChildNodes();
-	for (int j = 0; j < children.getLength(); j++) {
-		Node attr = children.item(j);
 		try {
-			//  System.err.println("analizing "+attr.getAttributes().getNamedItem("name").getNodeValue());
-			Object object = GXL2Object(attr);
-			// System.err.println("analisys finished for "+attr.getAttributes().getNamedItem("name").getNodeValue());
-			hashAttr.put(attr.getAttributes().getNamedItem("name").getNodeValue(),
-					object);
-			// System.err.println("after analysis "+hashAttr+" and inserted "+attr.getAttributes().getNamedItem("name").getNodeValue());
+			// Common attributes
+			hashAttr.put(new String("id"),
+					node.getAttributes().getNamedItem("id").getNodeValue());
+			hashAttr.put(new String("type"),
+					node.getAttributes().getNamedItem("type").getNodeValue());
+			// Edge attributes
+			hashAttr.put("from",
+					node.getAttributes().getNamedItem("from").getNodeValue());
+			hashAttr.put("to", node.getAttributes().getNamedItem("to").getNodeValue());
 		}
 		catch (Exception e) {
-			// The node is not a valid attribute.
+			// If the node is a vertex there is neither from nor to attributes.
 		}
+		// Node specific attributes
+		retrieveNodeGenericAttributes(node, hashAttr);
+		// System.err.println(node.getAttributes().getNamedItem("id").getNodeValue()+ " Retrieved "+hashAttr+ " "+hashAttr.size());
+		//////////return (lab != null) ? lab : new String("");
+		return hashAttr;
 	}
-}
 
-//Gives the ports in the model related with GraphCells in vertexList.
-private Port[] getPorts(ModelJGraph graph, Object[] vertexList) {
-
-	// Ports of argument vertexs.
-	Port[] ports = new Port[vertexList.length];
-	// Obtain the model.
-	GraphModel model = graph.getModel();
-
-	// Iterate over all Objects.
-	for (int i = 0; i < vertexList.length; i++) {
-		Port objectPort = null;
-		// Iterate over all Children
-		for (int j = 0; j < model.getChildCount(vertexList[i]); j++) {
-			// Fetch the Child of Vertex at Index i
-			Object child = model.getChild(vertexList[i], j);
-			// Check if Child is a Port
-			if (child instanceof Port) {
-
-				// Return the Child as a Port
-				objectPort = (Port) child;
+	private void retrieveNodeGenericAttributes(Node node, Hashtable hashAttr) {
+		NodeList children = node.getChildNodes();
+		for (int j = 0; j < children.getLength(); j++) {
+			Node attr = children.item(j);
+			try {
+				//  System.err.println("analizing "+attr.getAttributes().getNamedItem("name").getNodeValue());
+				Object object = GXL2Object(attr);
+				// System.err.println("analisys finished for "+attr.getAttributes().getNamedItem("name").getNodeValue());
+				hashAttr.put(attr.getAttributes().getNamedItem("name").getNodeValue(),
+						object);
+				// System.err.println("after analysis "+hashAttr+" and inserted "+attr.getAttributes().getNamedItem("name").getNodeValue());
+			}
+			catch (Exception e) {
+				// The node is not a valid attribute.
 			}
 		}
-		ports[i] = objectPort;
 	}
 
-	return ports;
-}
+	//Gives the ports in the model related with GraphCells in vertexList.
+	private Port[] getPorts(ModelJGraph graph, Object[] vertexList) {
 
-/**
- *  The main program for the GraphLoad class
- *
- *@param  args  The command line arguments
- */
-public static void main(String[] args) {
-	GraphLoadImp1 graphLoad1 = new GraphLoadImp1();
-}
+		// Ports of argument vertexs.
+		Port[] ports = new Port[vertexList.length];
+		// Obtain the model.
+		GraphModel model = graph.getModel();
+
+		// Iterate over all Objects.
+		for (int i = 0; i < vertexList.length; i++) {
+			Port objectPort = null;
+			// Iterate over all Children
+			for (int j = 0; j < model.getChildCount(vertexList[i]); j++) {
+				// Fetch the Child of Vertex at Index i
+				Object child = model.getChild(vertexList[i], j);
+				// Check if Child is a Port
+				if (child instanceof Port) {
+
+					// Return the Child as a Port
+					objectPort = (Port) child;
+				}
+			}
+			ports[i] = objectPort;
+		}
+
+		return ports;
+	}
+
+	/**
+	 *  The main program for the GraphLoad class
+	 *
+	 *@param  args  The command line arguments
+	 */
+	public static void main(String[] args) {
+		GraphLoadImp1 graphLoad1 = new GraphLoadImp1();
+	}
 
 }
 

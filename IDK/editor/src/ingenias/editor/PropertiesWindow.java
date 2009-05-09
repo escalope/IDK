@@ -50,7 +50,14 @@ public class PropertiesWindow extends javax.swing.JDialog  implements java.io.Se
 		super((Frame)null,"IDE Properties",true);
 		this.iProperties=prop;
 		props=new Object[prop.size()][];
-		Enumeration enumeration=prop.keys();
+		Vector<String> propertyKeys=new Vector<String>();
+		for (Object key:prop.keySet()){
+			propertyKeys.add(key.toString());
+		}
+		
+		Collections.sort(propertyKeys);
+		
+		Enumeration enumeration=propertyKeys.elements();
 		int k=2;		
 		GridBagLayout gbl=new GridBagLayout();
 		table=new JPanel(gbl);
@@ -63,7 +70,7 @@ public class PropertiesWindow extends javax.swing.JDialog  implements java.io.Se
 		addLabelColumn(2,0, gbl, gbc, "Tip", Color.YELLOW);
 		String lastModule="";
 
-		while (enumeration.hasMoreElements()){
+		while (enumeration.hasMoreElements()){ 
 
 			final ProjectProperty p=(ProjectProperty)prop.get(enumeration.nextElement().toString());			
 						
@@ -166,8 +173,8 @@ public class PropertiesWindow extends javax.swing.JDialog  implements java.io.Se
 			ProjectProperty pp=(ProjectProperty)enumeration.nextElement();
 			
 			JTextField jtf=(JTextField)storedValues.get(pp);
-			if (!pp.value.equals(jtf.getText()))
-				IDE.setChanged();
+			/*if (!pp.value.equals(jtf.getText()))
+				IDE.setChanged();*/
 			pp.value=jtf.getText();
 
 		}

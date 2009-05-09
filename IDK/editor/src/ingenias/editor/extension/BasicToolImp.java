@@ -64,16 +64,13 @@ public abstract class BasicToolImp
      * directly. This constructor is invoked when launching a tool
      * from whithin the IDE.
      */
-    public BasicToolImp() {
+    public BasicToolImp(Browser browser) {
     	for (ProjectProperty pp: this.defaultProperties()){
         	this.putProperty(pp);
         }
-        try {
-            this.browser=BrowserImp.getInstance();
-        } catch (NotInitialised e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
+            this.browser=browser;
+        
     }
     
     /**
@@ -87,9 +84,9 @@ public abstract class BasicToolImp
             ingenias.exception.CannotLoad {
         try {
         	        	
-            ingenias.generator.browser.BrowserImp.initialise(file);
-            Set<Object> keys = ingenias.generator.browser.BrowserImp.getInstance().getState().prop.keySet();
-            this.prop=ingenias.generator.browser.BrowserImp.getInstance().getState().prop;
+            browser=ingenias.generator.browser.BrowserImp.initialise(file);
+            Set<Object> keys =browser.getState().prop.keySet();
+            this.prop=browser.getState().prop;
             /*for (Object key:keys){
             	ProjectProperty pp=((ProjectProperty)ingenias.generator.browser.BrowserImp.getInstance().getState().prop.get(key));
             	this.putProperty(pp);
@@ -98,8 +95,7 @@ public abstract class BasicToolImp
             /*for (ProjectProperty pp: this.defaultProperties()){
             	this.putProperty(pp);
             }*/
-            
-            this.browser=BrowserImp.getInstance();
+                        
         } catch (Throwable e){
             e.printStackTrace();
         }

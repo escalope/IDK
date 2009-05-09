@@ -54,193 +54,196 @@ import ingenias.editor.entities.*;
 public class ProjectTreeRenderer extends javax.swing.tree.DefaultTreeCellRenderer{
 // Meta-models icons
 
- ImageIcon modeloEnvironmentModel=new ImageIcon(ImageLoader.getImage("images/menvdiag.gif"));
+static ImageIcon modeloEnvironmentModel=new ImageIcon(ImageLoader.getImage("images/menvdiag.gif"));
 
- ImageIcon modeloComponentDiagram=new ImageIcon(ImageLoader.getImage("images/musediag.gif"));
+static ImageIcon modeloComponentDiagram=new ImageIcon(ImageLoader.getImage("images/musediag.gif"));
 
- ImageIcon modeloOrganizationModel=new ImageIcon(ImageLoader.getImage("images/morgdiag.gif"));
+static ImageIcon modeloOrganizationModel=new ImageIcon(ImageLoader.getImage("images/morgdiag.gif"));
 
- ImageIcon modeloTasksAndGoalsModel=new ImageIcon(ImageLoader.getImage("images/mtaskgoal.gif"));
+static ImageIcon modeloTasksAndGoalsModel=new ImageIcon(ImageLoader.getImage("images/mtaskgoal.gif"));
 
- ImageIcon modeloInteractionModel=new ImageIcon(ImageLoader.getImage("images/minterdiag.gif"));
+static ImageIcon modeloInteractionModel=new ImageIcon(ImageLoader.getImage("images/minterdiag.gif"));
 
- ImageIcon modeloActivityDiagram=new ImageIcon(ImageLoader.getImage("images/musediag.gif"));
+static ImageIcon modeloActivityDiagram=new ImageIcon(ImageLoader.getImage("images/musediag.gif"));
 
- ImageIcon modeloAgentModel=new ImageIcon(ImageLoader.getImage("images/magdiag.gif"));
+static ImageIcon modeloAgentModel=new ImageIcon(ImageLoader.getImage("images/magdiag.gif"));
 
- ImageIcon modeloUseCaseDiagram=new ImageIcon(ImageLoader.getImage("images/musediag.gif"));
+static ImageIcon modeloUseCaseDiagram=new ImageIcon(ImageLoader.getImage("images/musediag.gif"));
 
- ImageIcon modeloAUMLInteractionDiagram=new ImageIcon(ImageLoader.getImage("images/musediag.gif"));
+static ImageIcon modeloAUMLInteractionDiagram=new ImageIcon(ImageLoader.getImage("images/musediag.gif"));
 
- ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/musediag.gif"));
+static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/musediag.gif"));
 
 
 // Object icons
  
- ImageIcon DecisionNodeIcon=new ImageIcon(ImageLoader.getImage("images/mdecisionnode.gif"));
+ static ImageIcon DecisionNodeIcon=new ImageIcon(ImageLoader.getImage("images/mdecisionnode.gif"));
 	
- ImageIcon TestingPackageIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
+ static ImageIcon TestingPackageIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
 	
- ImageIcon MentalStateIcon=new ImageIcon(ImageLoader.getImage("images/mmstate.gif"));
+ static ImageIcon MentalStateIcon=new ImageIcon(ImageLoader.getImage("images/mmstate.gif"));
 	
- ImageIcon InternalApplicationIcon=new ImageIcon(ImageLoader.getImage("images/mappi.gif"));
+ static ImageIcon InternalApplicationIcon=new ImageIcon(ImageLoader.getImage("images/mappi.gif"));
 	
- ImageIcon GoalIcon=new ImageIcon(ImageLoader.getImage("images/mgoal.gif"));
+ static ImageIcon GoalIcon=new ImageIcon(ImageLoader.getImage("images/mgoal.gif"));
 	
- ImageIcon AgentWSIcon=new ImageIcon(ImageLoader.getImage("images/magentws.gif"));
+ static ImageIcon AgentWSIcon=new ImageIcon(ImageLoader.getImage("images/magentws.gif"));
 	
- ImageIcon FactIcon=new ImageIcon(ImageLoader.getImage("images/mfact.gif"));
+ static ImageIcon FactIcon=new ImageIcon(ImageLoader.getImage("images/mfact.gif"));
 	
- ImageIcon ShareToupleIcon=new ImageIcon(ImageLoader.getImage("images/miu.gif"));
+ static ImageIcon ShareToupleIcon=new ImageIcon(ImageLoader.getImage("images/miu.gif"));
 	
- ImageIcon DeploymentUnitByTypeWithInitMSIcon=new ImageIcon(ImageLoader.getImage("images/mimtypedepl.gif"));
+ static ImageIcon DeploymentUnitByTypeWithInitMSIcon=new ImageIcon(ImageLoader.getImage("images/mimtypedepl.gif"));
 	
- ImageIcon JoinNodeIcon=new ImageIcon(ImageLoader.getImage("images/mforknode.gif"));
+ static ImageIcon JoinNodeIcon=new ImageIcon(ImageLoader.getImage("images/mforknode.gif"));
 	
- ImageIcon RuntimeEventIcon=new ImageIcon(ImageLoader.getImage("images/mffact.gif"));
+ static ImageIcon RuntimeEventIcon=new ImageIcon(ImageLoader.getImage("images/mffact.gif"));
 	
- ImageIcon InitialNodeIcon=new ImageIcon(ImageLoader.getImage("images/minitialnode.gif"));
+ static ImageIcon InitialNodeIcon=new ImageIcon(ImageLoader.getImage("images/minitialnode.gif"));
 	
- ImageIcon TextUseCaseIcon=new ImageIcon(ImageLoader.getImage("images/musecase.gif"));
+ static ImageIcon TextUseCaseIcon=new ImageIcon(ImageLoader.getImage("images/musecase.gif"));
 	
- ImageIcon RemoteProcedureCallIcon=new ImageIcon(ImageLoader.getImage("images/miu.gif"));
+ static ImageIcon RemoteProcedureCallIcon=new ImageIcon(ImageLoader.getImage("images/miu.gif"));
 	
- ImageIcon ResourceIcon=new ImageIcon(ImageLoader.getImage("images/mresource.gif"));
+ static ImageIcon ResourceIcon=new ImageIcon(ImageLoader.getImage("images/mresource.gif"));
 	
- ImageIcon AgentModelBelieveIcon=new ImageIcon(ImageLoader.getImage("images/mabel.gif"));
+ static ImageIcon AgentModelBelieveIcon=new ImageIcon(ImageLoader.getImage("images/mabel.gif"));
 	
- ImageIcon ActivityFinalIcon=new ImageIcon(ImageLoader.getImage("images/mfinalnode.gif"));
+ static ImageIcon ActivityFinalIcon=new ImageIcon(ImageLoader.getImage("images/mfinalnode.gif"));
 	
- ImageIcon INGENIASUseCaseIcon=new ImageIcon(ImageLoader.getImage("images/miusecase.gif"));
+ static ImageIcon INGENIASUseCaseIcon=new ImageIcon(ImageLoader.getImage("images/miusecase.gif"));
 	
- ImageIcon TextNoteIcon=new ImageIcon(ImageLoader.getImage("images/mtext.gif"));
+ static ImageIcon TextNoteIcon=new ImageIcon(ImageLoader.getImage("images/mtext.gif"));
 	
- ImageIcon RuntimeFactIcon=new ImageIcon(ImageLoader.getImage("images/mffact.gif"));
+ static ImageIcon RuntimeFactIcon=new ImageIcon(ImageLoader.getImage("images/mffact.gif"));
 	
- ImageIcon ForkNodeIcon=new ImageIcon(ImageLoader.getImage("images/mforknode.gif"));
+ static ImageIcon ForkNodeIcon=new ImageIcon(ImageLoader.getImage("images/mforknode.gif"));
 	
- ImageIcon OrganizationNetworkIcon=new ImageIcon(ImageLoader.getImage("images/mnetwork.gif"));
+ static ImageIcon OrganizationNetworkIcon=new ImageIcon(ImageLoader.getImage("images/mnetwork.gif"));
 	
- ImageIcon MessagePassingIcon=new ImageIcon(ImageLoader.getImage("images/miu.gif"));
+ static ImageIcon MessagePassingIcon=new ImageIcon(ImageLoader.getImage("images/miu.gif"));
 	
- ImageIcon SubProtocolIcon=new ImageIcon(ImageLoader.getImage("images/prot.png"));
+ static ImageIcon SubProtocolIcon=new ImageIcon(ImageLoader.getImage("images/prot.png"));
 	
- ImageIcon RuntimeConversationIcon=new ImageIcon(ImageLoader.getImage("images/mconv.png"));
+ static ImageIcon RuntimeConversationIcon=new ImageIcon(ImageLoader.getImage("images/mconv.png"));
 	
- ImageIcon AUMLComponentIcon=new ImageIcon(ImageLoader.getImage("images/magent.gif"));
+ static ImageIcon AUMLComponentIcon=new ImageIcon(ImageLoader.getImage("images/magent.gif"));
 	
- ImageIcon OrganizationIcon=new ImageIcon(ImageLoader.getImage("images/morg.gif"));
+ static ImageIcon OrganizationIcon=new ImageIcon(ImageLoader.getImage("images/morg.gif"));
 	
- ImageIcon ConditionalMentalStateIcon=new ImageIcon(ImageLoader.getImage("images/mcmstate.gif"));
+ static ImageIcon ConditionalMentalStateIcon=new ImageIcon(ImageLoader.getImage("images/mcmstate.gif"));
 	
- ImageIcon ApplicationWSIcon=new ImageIcon(ImageLoader.getImage("images/mapp.gif"));
+ static ImageIcon ApplicationWSIcon=new ImageIcon(ImageLoader.getImage("images/mapp.gif"));
 	
- ImageIcon AUMLSpecificationIcon=new ImageIcon(ImageLoader.getImage("images/maumlspec.gif"));
+ static ImageIcon AUMLSpecificationIcon=new ImageIcon(ImageLoader.getImage("images/maumlspec.gif"));
 	
- ImageIcon ApplicationIcon=new ImageIcon(ImageLoader.getImage("images/mapp.gif"));
+ static ImageIcon ApplicationIcon=new ImageIcon(ImageLoader.getImage("images/mapp.gif"));
 	
- ImageIcon DeploymentPackageIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
+ static ImageIcon DeploymentPackageIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
 	
- ImageIcon PlanIcon=new ImageIcon(ImageLoader.getImage("images/mplan.gif"));
+ static ImageIcon PlanIcon=new ImageIcon(ImageLoader.getImage("images/mplan.gif"));
 	
- ImageIcon AUMLPortIcon=new ImageIcon(ImageLoader.getImage("images/magent.gif"));
+ static ImageIcon AUMLPortIcon=new ImageIcon(ImageLoader.getImage("images/magent.gif"));
 	
- ImageIcon INGENIASComponentIcon=new ImageIcon(ImageLoader.getImage("images/micomponent.gif"));
+ static ImageIcon INGENIASComponentIcon=new ImageIcon(ImageLoader.getImage("images/micomponent.gif"));
 	
- ImageIcon OrganizationGroupIcon=new ImageIcon(ImageLoader.getImage("images/mgroup.gif"));
+ static ImageIcon OrganizationGroupIcon=new ImageIcon(ImageLoader.getImage("images/mgroup.gif"));
 	
- ImageIcon IUConcurrenceIcon=new ImageIcon(ImageLoader.getImage("images/mconc.gif"));
+ static ImageIcon IUConcurrenceIcon=new ImageIcon(ImageLoader.getImage("images/mconc.gif"));
 	
- ImageIcon DeploymentUnitByTypeIcon=new ImageIcon(ImageLoader.getImage("images/mtypedepl.gif"));
+ static ImageIcon DeploymentUnitByTypeIcon=new ImageIcon(ImageLoader.getImage("images/mtypedepl.gif"));
 	
- ImageIcon IUIterateIcon=new ImageIcon(ImageLoader.getImage("images/mit.gif"));
+ static ImageIcon IUIterateIcon=new ImageIcon(ImageLoader.getImage("images/mit.gif"));
 	
- ImageIcon AUMLAlternativeRowIcon=new ImageIcon(ImageLoader.getImage("images/altr.png"));
+ static ImageIcon AUMLAlternativeRowIcon=new ImageIcon(ImageLoader.getImage("images/altr.png"));
 	
- ImageIcon ColumnIcon=new ImageIcon(ImageLoader.getImage("images/col.png"));
+ static ImageIcon ColumnIcon=new ImageIcon(ImageLoader.getImage("images/col.png"));
 	
- ImageIcon AutonomousEntityQueryIcon=new ImageIcon(ImageLoader.getImage("images/mquery.gif"));
+ static ImageIcon AutonomousEntityQueryIcon=new ImageIcon(ImageLoader.getImage("images/mquery.gif"));
 	
- ImageIcon AUMLContainerIcon=new ImageIcon(ImageLoader.getImage("images/magent.gif"));
+ static ImageIcon AUMLContainerIcon=new ImageIcon(ImageLoader.getImage("images/magent.gif"));
 	
- ImageIcon ConcreteAgentIcon=new ImageIcon(ImageLoader.getImage("images/mcaquery.gif"));
+ static ImageIcon ConcreteAgentIcon=new ImageIcon(ImageLoader.getImage("images/mcaquery.gif"));
 	
- ImageIcon UMLCommentIcon=new ImageIcon(ImageLoader.getImage("images/mumlcomment.gif"));
+ static ImageIcon UMLCommentIcon=new ImageIcon(ImageLoader.getImage("images/mumlcomment.gif"));
 	
- ImageIcon AgentRequirementsQueryIcon=new ImageIcon(ImageLoader.getImage("images/mrquery.gif"));
+ static ImageIcon AgentRequirementsQueryIcon=new ImageIcon(ImageLoader.getImage("images/mrquery.gif"));
 	
- ImageIcon UMLSpecificationIcon=new ImageIcon(ImageLoader.getImage("images/mumlspec.gif"));
+ static ImageIcon UMLSpecificationIcon=new ImageIcon(ImageLoader.getImage("images/mumlspec.gif"));
 	
- ImageIcon BelieveIcon=new ImageIcon(ImageLoader.getImage("images/mbel.gif"));
+ static ImageIcon BelieveIcon=new ImageIcon(ImageLoader.getImage("images/mbel.gif"));
 	
- ImageIcon WorkflowBoxIcon=new ImageIcon(ImageLoader.getImage("images/mworkflow.gif"));
+ static ImageIcon WorkflowBoxIcon=new ImageIcon(ImageLoader.getImage("images/mworkflow.gif"));
 	
- ImageIcon DeploymentUnitByTypeEnumInitMSIcon=new ImageIcon(ImageLoader.getImage("images/mimtypedepl.gif"));
+ static ImageIcon DeploymentUnitByTypeEnumInitMSIcon=new ImageIcon(ImageLoader.getImage("images/mimtypedepl.gif"));
 	
- ImageIcon GeneralEventIcon=new ImageIcon(ImageLoader.getImage("images/mevent.gif"));
+ static ImageIcon GeneralEventIcon=new ImageIcon(ImageLoader.getImage("images/mevent.gif"));
 	
- ImageIcon CompromiseIcon=new ImageIcon(ImageLoader.getImage("images/mcomp.gif"));
+ static ImageIcon CompromiseIcon=new ImageIcon(ImageLoader.getImage("images/mcomp.gif"));
 	
- ImageIcon RoleIcon=new ImageIcon(ImageLoader.getImage("images/mrole.gif"));
+ static ImageIcon RoleIcon=new ImageIcon(ImageLoader.getImage("images/mrole.gif"));
 	
- ImageIcon EnvironmentApplicationIcon=new ImageIcon(ImageLoader.getImage("images/mappe.gif"));
+ static ImageIcon EnvironmentApplicationIcon=new ImageIcon(ImageLoader.getImage("images/mappe.gif"));
 	
- ImageIcon ApplicationEventSlotsIcon=new ImageIcon(ImageLoader.getImage("images/meventas.gif"));
+ static ImageIcon ApplicationEventSlotsIcon=new ImageIcon(ImageLoader.getImage("images/meventas.gif"));
 	
- ImageIcon ProtocolIcon=new ImageIcon(ImageLoader.getImage("images/prot.png"));
+ static ImageIcon ProtocolIcon=new ImageIcon(ImageLoader.getImage("images/prot.png"));
 	
- ImageIcon MentalInstanceSpecificationIcon=new ImageIcon(ImageLoader.getImage("images/mmispec.gif"));
+ static ImageIcon MentalInstanceSpecificationIcon=new ImageIcon(ImageLoader.getImage("images/mmispec.gif"));
 	
- ImageIcon ActionUMLIcon=new ImageIcon(ImageLoader.getImage("images/miusecase.gif"));
+ static ImageIcon ActionUMLIcon=new ImageIcon(ImageLoader.getImage("images/miusecase.gif"));
 	
- ImageIcon InteractionUnitIcon=new ImageIcon(ImageLoader.getImage("images/miu.gif"));
+ static ImageIcon InteractionUnitIcon=new ImageIcon(ImageLoader.getImage("images/miu.gif"));
 	
- ImageIcon GRASIASpecificationIcon=new ImageIcon(ImageLoader.getImage("images/mgspec.gif"));
+ static ImageIcon GRASIASpecificationIcon=new ImageIcon(ImageLoader.getImage("images/mgspec.gif"));
 	
- ImageIcon MentalStateProcessorIcon=new ImageIcon(ImageLoader.getImage("images/mproc.gif"));
+ static ImageIcon MentalStateProcessorIcon=new ImageIcon(ImageLoader.getImage("images/mproc.gif"));
 	
- ImageIcon MergeNodeIcon=new ImageIcon(ImageLoader.getImage("images/mdecisionnode.gif"));
+ static ImageIcon MergeNodeIcon=new ImageIcon(ImageLoader.getImage("images/mdecisionnode.gif"));
 	
- ImageIcon EndNodeIcon=new ImageIcon(ImageLoader.getImage("images/mendnode.gif"));
+ static ImageIcon EndNodeIcon=new ImageIcon(ImageLoader.getImage("images/mendnode.gif"));
 	
- ImageIcon FrameFactIcon=new ImageIcon(ImageLoader.getImage("images/mffact.gif"));
+ static ImageIcon FrameFactIcon=new ImageIcon(ImageLoader.getImage("images/mffact.gif"));
 	
- ImageIcon TestIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
+ static ImageIcon TestIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
 	
- ImageIcon LifelineIcon=new ImageIcon(ImageLoader.getImage("images/col.png"));
+ static ImageIcon LifelineIcon=new ImageIcon(ImageLoader.getImage("images/col.png"));
 	
- ImageIcon InteractionIcon=new ImageIcon(ImageLoader.getImage("images/minter.gif"));
+ static ImageIcon InteractionIcon=new ImageIcon(ImageLoader.getImage("images/minter.gif"));
 	
- ImageIcon AgentIcon=new ImageIcon(ImageLoader.getImage("images/magent.gif"));
+ static ImageIcon AgentIcon=new ImageIcon(ImageLoader.getImage("images/magent.gif"));
 	
- ImageIcon MentalStateManagerIcon=new ImageIcon(ImageLoader.getImage("images/mman.gif"));
+ static ImageIcon MentalStateManagerIcon=new ImageIcon(ImageLoader.getImage("images/mman.gif"));
 	
- ImageIcon INGENIASCodeComponentIcon=new ImageIcon(ImageLoader.getImage("images/miccomponent.gif"));
+ static ImageIcon INGENIASCodeComponentIcon=new ImageIcon(ImageLoader.getImage("images/miccomponent.gif"));
 	
- ImageIcon CommunicationEventIcon=new ImageIcon(ImageLoader.getImage("images/meventa.gif"));
+ static ImageIcon CommunicationEventIcon=new ImageIcon(ImageLoader.getImage("images/meventa.gif"));
 	
- ImageIcon TaskWSIcon=new ImageIcon(ImageLoader.getImage("images/mtaskws.gif"));
+ static ImageIcon TaskWSIcon=new ImageIcon(ImageLoader.getImage("images/mtaskws.gif"));
 	
- ImageIcon GoalStateWSIcon=new ImageIcon(ImageLoader.getImage("images/mgoalstatews.png"));
+ static ImageIcon GoalStateWSIcon=new ImageIcon(ImageLoader.getImage("images/mgoalstatews.png"));
 	
- ImageIcon StateGoalIcon=new ImageIcon(ImageLoader.getImage("images/msgoal.gif"));
+ static ImageIcon StateGoalIcon=new ImageIcon(ImageLoader.getImage("images/msgoal.gif"));
 	
- ImageIcon ConversationIcon=new ImageIcon(ImageLoader.getImage("images/mconv.png"));
+ static ImageIcon ConversationIcon=new ImageIcon(ImageLoader.getImage("images/mconv.png"));
 	
- ImageIcon ApplicationEventIcon=new ImageIcon(ImageLoader.getImage("images/meventa.gif"));
+ static ImageIcon ApplicationEventIcon=new ImageIcon(ImageLoader.getImage("images/meventa.gif"));
 	
- ImageIcon TaskIcon=new ImageIcon(ImageLoader.getImage("images/mtask.gif"));
+ static ImageIcon TaskIcon=new ImageIcon(ImageLoader.getImage("images/mtask.gif"));
 	
- ImageIcon DeploymentUnitByTypeMSEntityIcon=new ImageIcon(ImageLoader.getImage("images/mimtypedepl.gif"));
+ static ImageIcon DeploymentUnitByTypeMSEntityIcon=new ImageIcon(ImageLoader.getImage("images/mimtypedepl.gif"));
 	
- ImageIcon RoleWSIcon=new ImageIcon(ImageLoader.getImage("images/mrolews.gif"));
+ static ImageIcon RoleWSIcon=new ImageIcon(ImageLoader.getImage("images/mrolews.gif"));
 	
- ImageIcon AUMLAlternativeBoxIcon=new ImageIcon(ImageLoader.getImage("images/altb.png"));
+ static ImageIcon AUMLAlternativeBoxIcon=new ImageIcon(ImageLoader.getImage("images/altb.png"));
 	
- ImageIcon WorkflowIcon=new ImageIcon(ImageLoader.getImage("images/mworkflow.gif"));
+ static ImageIcon WorkflowIcon=new ImageIcon(ImageLoader.getImage("images/mworkflow.gif"));
 	
 
-  ImageIcon paquete;
+	static ImageIcon ConventionalFolderIcon=new ImageIcon(ImageLoader.getImage("images/folder.png"));
+
+	static ImageIcon RootFolderIcon=new ImageIcon(ImageLoader.getImage("images/world.png"));
+
 
   public ProjectTreeRenderer() {
 
@@ -258,302 +261,308 @@ public class ProjectTreeRenderer extends javax.swing.tree.DefaultTreeCellRendere
                         int row,
                         boolean hasFocus) {
 
-        super.getTreeCellRendererComponent(
-                        tree, value, sel,
-                        expanded, leaf, row,
-                        hasFocus);
-        if (leaf){
-            ImageIcon img=this.selectIcon(value);
-            if (img!=null) {
-             setIcon(img);
-             return this;
-            } else
-             return super.getTreeCellRendererComponent(tree,value,sel,expanded,leaf,row,hasFocus);
-        } else {
-            return super.getTreeCellRendererComponent(tree,value,sel,expanded,leaf,row,hasFocus);
-        }
+       		super.getTreeCellRendererComponent(
+				tree, value, sel,
+				expanded, leaf, row,
+				hasFocus);
+		ImageIcon img=this.selectIcon(value);
+		if (row==0)
+			img=RootFolderIcon;
+
+		if (img!=null) {
+			setIcon(img);
+			return this;
+		} else
+			return super.getTreeCellRendererComponent(tree,value,sel,expanded,leaf,row,hasFocus);
     }
 
-    protected ImageIcon selectIcon(Object value) {
+  public static ImageIcon selectIcon(Object value) {
         DefaultMutableTreeNode node =
             (DefaultMutableTreeNode)value;
+        return selectIconByUserObject(node.getUserObject());
+    }
+
+    public static ImageIcon selectIconByUserObject(Object userObject) {
+   
+	if (userObject.getClass().equals(String.class))
+			return ConventionalFolderIcon;
 
 
 	
-        if (node.getUserObject().getClass().equals(DecisionNode.class))
+        if (userObject.getClass().equals(DecisionNode.class))
           return DecisionNodeIcon;
 	
-        if (node.getUserObject().getClass().equals(TestingPackage.class))
+        if (userObject.getClass().equals(TestingPackage.class))
           return TestingPackageIcon;
 	
-        if (node.getUserObject().getClass().equals(MentalState.class))
+        if (userObject.getClass().equals(MentalState.class))
           return MentalStateIcon;
 	
-        if (node.getUserObject().getClass().equals(InternalApplication.class))
+        if (userObject.getClass().equals(InternalApplication.class))
           return InternalApplicationIcon;
 	
-        if (node.getUserObject().getClass().equals(Goal.class))
+        if (userObject.getClass().equals(Goal.class))
           return GoalIcon;
 	
-        if (node.getUserObject().getClass().equals(AgentWS.class))
+        if (userObject.getClass().equals(AgentWS.class))
           return AgentWSIcon;
 	
-        if (node.getUserObject().getClass().equals(Fact.class))
+        if (userObject.getClass().equals(Fact.class))
           return FactIcon;
 	
-        if (node.getUserObject().getClass().equals(ShareTouple.class))
+        if (userObject.getClass().equals(ShareTouple.class))
           return ShareToupleIcon;
 	
-        if (node.getUserObject().getClass().equals(DeploymentUnitByTypeWithInitMS.class))
+        if (userObject.getClass().equals(DeploymentUnitByTypeWithInitMS.class))
           return DeploymentUnitByTypeWithInitMSIcon;
 	
-        if (node.getUserObject().getClass().equals(JoinNode.class))
+        if (userObject.getClass().equals(JoinNode.class))
           return JoinNodeIcon;
 	
-        if (node.getUserObject().getClass().equals(RuntimeEvent.class))
+        if (userObject.getClass().equals(RuntimeEvent.class))
           return RuntimeEventIcon;
 	
-        if (node.getUserObject().getClass().equals(InitialNode.class))
+        if (userObject.getClass().equals(InitialNode.class))
           return InitialNodeIcon;
 	
-        if (node.getUserObject().getClass().equals(TextUseCase.class))
+        if (userObject.getClass().equals(TextUseCase.class))
           return TextUseCaseIcon;
 	
-        if (node.getUserObject().getClass().equals(RemoteProcedureCall.class))
+        if (userObject.getClass().equals(RemoteProcedureCall.class))
           return RemoteProcedureCallIcon;
 	
-        if (node.getUserObject().getClass().equals(Resource.class))
+        if (userObject.getClass().equals(Resource.class))
           return ResourceIcon;
 	
-        if (node.getUserObject().getClass().equals(AgentModelBelieve.class))
+        if (userObject.getClass().equals(AgentModelBelieve.class))
           return AgentModelBelieveIcon;
 	
-        if (node.getUserObject().getClass().equals(ActivityFinal.class))
+        if (userObject.getClass().equals(ActivityFinal.class))
           return ActivityFinalIcon;
 	
-        if (node.getUserObject().getClass().equals(INGENIASUseCase.class))
+        if (userObject.getClass().equals(INGENIASUseCase.class))
           return INGENIASUseCaseIcon;
 	
-        if (node.getUserObject().getClass().equals(TextNote.class))
+        if (userObject.getClass().equals(TextNote.class))
           return TextNoteIcon;
 	
-        if (node.getUserObject().getClass().equals(RuntimeFact.class))
+        if (userObject.getClass().equals(RuntimeFact.class))
           return RuntimeFactIcon;
 	
-        if (node.getUserObject().getClass().equals(ForkNode.class))
+        if (userObject.getClass().equals(ForkNode.class))
           return ForkNodeIcon;
 	
-        if (node.getUserObject().getClass().equals(OrganizationNetwork.class))
+        if (userObject.getClass().equals(OrganizationNetwork.class))
           return OrganizationNetworkIcon;
 	
-        if (node.getUserObject().getClass().equals(MessagePassing.class))
+        if (userObject.getClass().equals(MessagePassing.class))
           return MessagePassingIcon;
 	
-        if (node.getUserObject().getClass().equals(SubProtocol.class))
+        if (userObject.getClass().equals(SubProtocol.class))
           return SubProtocolIcon;
 	
-        if (node.getUserObject().getClass().equals(RuntimeConversation.class))
+        if (userObject.getClass().equals(RuntimeConversation.class))
           return RuntimeConversationIcon;
 	
-        if (node.getUserObject().getClass().equals(AUMLComponent.class))
+        if (userObject.getClass().equals(AUMLComponent.class))
           return AUMLComponentIcon;
 	
-        if (node.getUserObject().getClass().equals(Organization.class))
+        if (userObject.getClass().equals(Organization.class))
           return OrganizationIcon;
 	
-        if (node.getUserObject().getClass().equals(ConditionalMentalState.class))
+        if (userObject.getClass().equals(ConditionalMentalState.class))
           return ConditionalMentalStateIcon;
 	
-        if (node.getUserObject().getClass().equals(ApplicationWS.class))
+        if (userObject.getClass().equals(ApplicationWS.class))
           return ApplicationWSIcon;
 	
-        if (node.getUserObject().getClass().equals(AUMLSpecification.class))
+        if (userObject.getClass().equals(AUMLSpecification.class))
           return AUMLSpecificationIcon;
 	
-        if (node.getUserObject().getClass().equals(Application.class))
+        if (userObject.getClass().equals(Application.class))
           return ApplicationIcon;
 	
-        if (node.getUserObject().getClass().equals(DeploymentPackage.class))
+        if (userObject.getClass().equals(DeploymentPackage.class))
           return DeploymentPackageIcon;
 	
-        if (node.getUserObject().getClass().equals(Plan.class))
+        if (userObject.getClass().equals(Plan.class))
           return PlanIcon;
 	
-        if (node.getUserObject().getClass().equals(AUMLPort.class))
+        if (userObject.getClass().equals(AUMLPort.class))
           return AUMLPortIcon;
 	
-        if (node.getUserObject().getClass().equals(INGENIASComponent.class))
+        if (userObject.getClass().equals(INGENIASComponent.class))
           return INGENIASComponentIcon;
 	
-        if (node.getUserObject().getClass().equals(OrganizationGroup.class))
+        if (userObject.getClass().equals(OrganizationGroup.class))
           return OrganizationGroupIcon;
 	
-        if (node.getUserObject().getClass().equals(IUConcurrence.class))
+        if (userObject.getClass().equals(IUConcurrence.class))
           return IUConcurrenceIcon;
 	
-        if (node.getUserObject().getClass().equals(DeploymentUnitByType.class))
+        if (userObject.getClass().equals(DeploymentUnitByType.class))
           return DeploymentUnitByTypeIcon;
 	
-        if (node.getUserObject().getClass().equals(IUIterate.class))
+        if (userObject.getClass().equals(IUIterate.class))
           return IUIterateIcon;
 	
-        if (node.getUserObject().getClass().equals(AUMLAlternativeRow.class))
+        if (userObject.getClass().equals(AUMLAlternativeRow.class))
           return AUMLAlternativeRowIcon;
 	
-        if (node.getUserObject().getClass().equals(Column.class))
+        if (userObject.getClass().equals(Column.class))
           return ColumnIcon;
 	
-        if (node.getUserObject().getClass().equals(AutonomousEntityQuery.class))
+        if (userObject.getClass().equals(AutonomousEntityQuery.class))
           return AutonomousEntityQueryIcon;
 	
-        if (node.getUserObject().getClass().equals(AUMLContainer.class))
+        if (userObject.getClass().equals(AUMLContainer.class))
           return AUMLContainerIcon;
 	
-        if (node.getUserObject().getClass().equals(ConcreteAgent.class))
+        if (userObject.getClass().equals(ConcreteAgent.class))
           return ConcreteAgentIcon;
 	
-        if (node.getUserObject().getClass().equals(UMLComment.class))
+        if (userObject.getClass().equals(UMLComment.class))
           return UMLCommentIcon;
 	
-        if (node.getUserObject().getClass().equals(AgentRequirementsQuery.class))
+        if (userObject.getClass().equals(AgentRequirementsQuery.class))
           return AgentRequirementsQueryIcon;
 	
-        if (node.getUserObject().getClass().equals(UMLSpecification.class))
+        if (userObject.getClass().equals(UMLSpecification.class))
           return UMLSpecificationIcon;
 	
-        if (node.getUserObject().getClass().equals(Believe.class))
+        if (userObject.getClass().equals(Believe.class))
           return BelieveIcon;
 	
-        if (node.getUserObject().getClass().equals(WorkflowBox.class))
+        if (userObject.getClass().equals(WorkflowBox.class))
           return WorkflowBoxIcon;
 	
-        if (node.getUserObject().getClass().equals(DeploymentUnitByTypeEnumInitMS.class))
+        if (userObject.getClass().equals(DeploymentUnitByTypeEnumInitMS.class))
           return DeploymentUnitByTypeEnumInitMSIcon;
 	
-        if (node.getUserObject().getClass().equals(GeneralEvent.class))
+        if (userObject.getClass().equals(GeneralEvent.class))
           return GeneralEventIcon;
 	
-        if (node.getUserObject().getClass().equals(Compromise.class))
+        if (userObject.getClass().equals(Compromise.class))
           return CompromiseIcon;
 	
-        if (node.getUserObject().getClass().equals(Role.class))
+        if (userObject.getClass().equals(Role.class))
           return RoleIcon;
 	
-        if (node.getUserObject().getClass().equals(EnvironmentApplication.class))
+        if (userObject.getClass().equals(EnvironmentApplication.class))
           return EnvironmentApplicationIcon;
 	
-        if (node.getUserObject().getClass().equals(ApplicationEventSlots.class))
+        if (userObject.getClass().equals(ApplicationEventSlots.class))
           return ApplicationEventSlotsIcon;
 	
-        if (node.getUserObject().getClass().equals(Protocol.class))
+        if (userObject.getClass().equals(Protocol.class))
           return ProtocolIcon;
 	
-        if (node.getUserObject().getClass().equals(MentalInstanceSpecification.class))
+        if (userObject.getClass().equals(MentalInstanceSpecification.class))
           return MentalInstanceSpecificationIcon;
 	
-        if (node.getUserObject().getClass().equals(ActionUML.class))
+        if (userObject.getClass().equals(ActionUML.class))
           return ActionUMLIcon;
 	
-        if (node.getUserObject().getClass().equals(InteractionUnit.class))
+        if (userObject.getClass().equals(InteractionUnit.class))
           return InteractionUnitIcon;
 	
-        if (node.getUserObject().getClass().equals(GRASIASpecification.class))
+        if (userObject.getClass().equals(GRASIASpecification.class))
           return GRASIASpecificationIcon;
 	
-        if (node.getUserObject().getClass().equals(MentalStateProcessor.class))
+        if (userObject.getClass().equals(MentalStateProcessor.class))
           return MentalStateProcessorIcon;
 	
-        if (node.getUserObject().getClass().equals(MergeNode.class))
+        if (userObject.getClass().equals(MergeNode.class))
           return MergeNodeIcon;
 	
-        if (node.getUserObject().getClass().equals(EndNode.class))
+        if (userObject.getClass().equals(EndNode.class))
           return EndNodeIcon;
 	
-        if (node.getUserObject().getClass().equals(FrameFact.class))
+        if (userObject.getClass().equals(FrameFact.class))
           return FrameFactIcon;
 	
-        if (node.getUserObject().getClass().equals(Test.class))
+        if (userObject.getClass().equals(Test.class))
           return TestIcon;
 	
-        if (node.getUserObject().getClass().equals(Lifeline.class))
+        if (userObject.getClass().equals(Lifeline.class))
           return LifelineIcon;
 	
-        if (node.getUserObject().getClass().equals(Interaction.class))
+        if (userObject.getClass().equals(Interaction.class))
           return InteractionIcon;
 	
-        if (node.getUserObject().getClass().equals(Agent.class))
+        if (userObject.getClass().equals(Agent.class))
           return AgentIcon;
 	
-        if (node.getUserObject().getClass().equals(MentalStateManager.class))
+        if (userObject.getClass().equals(MentalStateManager.class))
           return MentalStateManagerIcon;
 	
-        if (node.getUserObject().getClass().equals(INGENIASCodeComponent.class))
+        if (userObject.getClass().equals(INGENIASCodeComponent.class))
           return INGENIASCodeComponentIcon;
 	
-        if (node.getUserObject().getClass().equals(CommunicationEvent.class))
+        if (userObject.getClass().equals(CommunicationEvent.class))
           return CommunicationEventIcon;
 	
-        if (node.getUserObject().getClass().equals(TaskWS.class))
+        if (userObject.getClass().equals(TaskWS.class))
           return TaskWSIcon;
 	
-        if (node.getUserObject().getClass().equals(GoalStateWS.class))
+        if (userObject.getClass().equals(GoalStateWS.class))
           return GoalStateWSIcon;
 	
-        if (node.getUserObject().getClass().equals(StateGoal.class))
+        if (userObject.getClass().equals(StateGoal.class))
           return StateGoalIcon;
 	
-        if (node.getUserObject().getClass().equals(Conversation.class))
+        if (userObject.getClass().equals(Conversation.class))
           return ConversationIcon;
 	
-        if (node.getUserObject().getClass().equals(ApplicationEvent.class))
+        if (userObject.getClass().equals(ApplicationEvent.class))
           return ApplicationEventIcon;
 	
-        if (node.getUserObject().getClass().equals(Task.class))
+        if (userObject.getClass().equals(Task.class))
           return TaskIcon;
 	
-        if (node.getUserObject().getClass().equals(DeploymentUnitByTypeMSEntity.class))
+        if (userObject.getClass().equals(DeploymentUnitByTypeMSEntity.class))
           return DeploymentUnitByTypeMSEntityIcon;
 	
-        if (node.getUserObject().getClass().equals(RoleWS.class))
+        if (userObject.getClass().equals(RoleWS.class))
           return RoleWSIcon;
 	
-        if (node.getUserObject().getClass().equals(AUMLAlternativeBox.class))
+        if (userObject.getClass().equals(AUMLAlternativeBox.class))
           return AUMLAlternativeBoxIcon;
 	
-        if (node.getUserObject().getClass().equals(Workflow.class))
+        if (userObject.getClass().equals(Workflow.class))
           return WorkflowIcon;
 	
 
 
-        if (node.getUserObject().getClass().equals(ingenias.editor.EnvironmentModelModelJGraph.class))
-            return this.modeloEnvironmentModel;
+        if (userObject.getClass().equals(ingenias.editor.models.EnvironmentModelModelJGraph.class))
+            return modeloEnvironmentModel;
 
-        if (node.getUserObject().getClass().equals(ingenias.editor.ComponentDiagramModelJGraph.class))
-            return this.modeloComponentDiagram;
+        if (userObject.getClass().equals(ingenias.editor.models.ComponentDiagramModelJGraph.class))
+            return modeloComponentDiagram;
 
-        if (node.getUserObject().getClass().equals(ingenias.editor.OrganizationModelModelJGraph.class))
-            return this.modeloOrganizationModel;
+        if (userObject.getClass().equals(ingenias.editor.models.OrganizationModelModelJGraph.class))
+            return modeloOrganizationModel;
 
-        if (node.getUserObject().getClass().equals(ingenias.editor.TasksAndGoalsModelModelJGraph.class))
-            return this.modeloTasksAndGoalsModel;
+        if (userObject.getClass().equals(ingenias.editor.models.TasksAndGoalsModelModelJGraph.class))
+            return modeloTasksAndGoalsModel;
 
-        if (node.getUserObject().getClass().equals(ingenias.editor.InteractionModelModelJGraph.class))
-            return this.modeloInteractionModel;
+        if (userObject.getClass().equals(ingenias.editor.models.InteractionModelModelJGraph.class))
+            return modeloInteractionModel;
 
-        if (node.getUserObject().getClass().equals(ingenias.editor.ActivityDiagramModelJGraph.class))
-            return this.modeloActivityDiagram;
+        if (userObject.getClass().equals(ingenias.editor.models.ActivityDiagramModelJGraph.class))
+            return modeloActivityDiagram;
 
-        if (node.getUserObject().getClass().equals(ingenias.editor.AgentModelModelJGraph.class))
-            return this.modeloAgentModel;
+        if (userObject.getClass().equals(ingenias.editor.models.AgentModelModelJGraph.class))
+            return modeloAgentModel;
 
-        if (node.getUserObject().getClass().equals(ingenias.editor.UseCaseDiagramModelJGraph.class))
-            return this.modeloUseCaseDiagram;
+        if (userObject.getClass().equals(ingenias.editor.models.UseCaseDiagramModelJGraph.class))
+            return modeloUseCaseDiagram;
 
-        if (node.getUserObject().getClass().equals(ingenias.editor.AUMLInteractionDiagramModelJGraph.class))
-            return this.modeloAUMLInteractionDiagram;
+        if (userObject.getClass().equals(ingenias.editor.models.AUMLInteractionDiagramModelJGraph.class))
+            return modeloAUMLInteractionDiagram;
 
-        if (node.getUserObject().getClass().equals(ingenias.editor.DeployDiagramModelJGraph.class))
-            return this.modeloDeployDiagram;
+        if (userObject.getClass().equals(ingenias.editor.models.DeployDiagramModelJGraph.class))
+            return modeloDeployDiagram;
 
 
 

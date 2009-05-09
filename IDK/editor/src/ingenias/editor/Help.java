@@ -55,6 +55,8 @@ public class Help
 //    System.err.println(res);
       helpPane.setContentType("text/html");
       helpPane.setText(res);
+      helpPane.setCaretPosition(0);
+		
     }
     catch (IOException ioe) {
       ioe.printStackTrace();

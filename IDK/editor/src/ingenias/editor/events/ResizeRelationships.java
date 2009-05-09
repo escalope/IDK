@@ -98,7 +98,6 @@ public class ResizeRelationships
 
   public void graphChanged(org.jgraph.event.GraphModelEvent gme) {
 
-    ingenias.editor.IDE.setChanged();
     if (enabled && this.workingObject == null) {
       workingObject = "hello";
       boolean foundEdge = false;

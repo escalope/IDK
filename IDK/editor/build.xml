@@ -378,7 +378,7 @@
 
 </target>
 
-<target name="modules" depends="cleanModules,modexample,modhtmldoc,modrefdemo,modapplinker,modcodeuploader,modiam"/>
+<target name="modules" depends="cleanModules,modexample,modhtmldoc,modrefdemo,modapplinker,modcodeuploader"/>
 
 
 
@@ -392,8 +392,10 @@
 	
 	<java fork="true" failonerror="true" maxmemory="300m"
 	      classname="ingenias.editor.IDE">
+	<jvmarg value="-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"/>
 				
 		<classpath>
+			<!--pathelement path="bin" /-->
 			
 			<!--pathelement path="${classpath}" /-->
 			
@@ -562,6 +564,27 @@
 	<delete dir="${tempidk}" />
 	
 </target>
+
+<target name="marathon">
+		
+		<java fork="true" failonerror="true" maxmemory="300m"
+		      classname="net.sourceforge.marathon.Main">	
+			<jvmarg value="-Dmarathon.home='${basedir}' -Dpython.cachedir='${user.home}/.jycache'"/> 						
+			<classpath>
+				
+				<!--pathelement path="${classpath}" /-->
+				
+				<fileset dir="testlibs">
+					
+					<include name="**/*.jar" />
+					
+				</fileset>
+				
+			</classpath>
+			
+		</java>
+		
+	</target>
 
 
 <target name="clean">

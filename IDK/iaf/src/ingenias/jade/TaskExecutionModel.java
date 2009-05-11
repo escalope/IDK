@@ -22,15 +22,6 @@
  */
 package ingenias.jade;
 
-import jade.core.behaviours.OneShotBehaviour;
-import jade.domain.FIPAException;
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
-
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Vector;
-
-import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.editor.entities.RuntimeFact;
@@ -39,11 +30,17 @@ import ingenias.exception.InvalidEntity;
 import ingenias.jade.comm.ActiveConversation;
 import ingenias.jade.comm.StateBehavior;
 import ingenias.jade.components.Task;
-import ingenias.jade.components.TaskInput;
 import ingenias.jade.components.TaskOutput;
 import ingenias.jade.exception.NoAgentsFound;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.testing.DebugUtils;
+import jade.core.behaviours.OneShotBehaviour;
+import jade.domain.FIPAException;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Vector;
 
 public class TaskExecutionModel {
 	Vector<Boolean> markConversationAsUsed=new Vector<Boolean>();

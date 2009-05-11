@@ -24,6 +24,7 @@ package ingenias.codeproc;
 
 import ingenias.exception.NotInitialised;
 import ingenias.exception.NullEntity;
+import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.BrowserImp;
 import ingenias.generator.browser.Graph;
 import ingenias.generator.browser.GraphEntity;
@@ -286,10 +287,10 @@ public class Utils {
 	 * @return
 	 * @throws NotInitialised 
 	 */
-	public static  GraphEntity[] generateEntitiesOfType(String type) throws NotInitialised {
-		Graph[] gs = BrowserImp.getInstance().getGraphs();
+	public static  GraphEntity[] generateEntitiesOfType(String type, Browser browser) throws NotInitialised {
+		Graph[] gs = browser.getGraphs();
 		Sequences p = new Sequences();
-		GraphEntity[] ges = BrowserImp.getInstance().getAllEntities();
+		GraphEntity[] ges = browser.getAllEntities();
 		HashSet actors = new HashSet();
 		for (int k = 0; k < ges.length; k++) {
 			if (ges[k].getType().equals(type)) {

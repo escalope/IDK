@@ -22,28 +22,28 @@
 */
 package ingenias.jade.graphics;
 
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
-import java.util.Hashtable;
-import java.util.Map;
-
-import org.jgraph.graph.BasicMarqueeHandler;
-import org.jgraph.graph.DefaultGraphCell;
-import org.jgraph.graph.GraphConstants;
-
-import ingenias.editor.AgentModelPanel;
 import ingenias.editor.Model;
-import ingenias.editor.cell.ConversationCell;
-import ingenias.editor.cell.ConversationView;
 import ingenias.editor.cell.RuntimeConversationCell;
 import ingenias.editor.cell.RuntimeConversationView;
 import ingenias.editor.cell.RuntimeEventCell;
 import ingenias.editor.cell.RuntimeEventView;
 import ingenias.editor.cell.RuntimeFactCell;
 import ingenias.editor.cell.RuntimeFactView;
-import ingenias.editor.entities.*;
+import ingenias.editor.entities.AgentModelDataEntity;
+import ingenias.editor.entities.RuntimeConversation;
+import ingenias.editor.entities.RuntimeEvent;
+import ingenias.editor.entities.RuntimeFact;
+import ingenias.editor.panels.AgentModelPanel;
+
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.Hashtable;
+import java.util.Map;
+
+import org.jgraph.graph.BasicMarqueeHandler;
+import org.jgraph.graph.DefaultGraphCell;
+import org.jgraph.graph.GraphConstants;
 
 
 public class AgentModelPanelIAF extends AgentModelPanel {

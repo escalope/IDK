@@ -26,12 +26,10 @@ package ingenias.jade;
 import ingenias.editor.entities.MentalEntity;
 import ingenias.exception.NotFound;
 import ingenias.jade.comm.LocksManager;
-import ingenias.jade.components.TaskInput;
 import ingenias.jade.components.Task;
 import ingenias.jade.graphics.AgentGraphics;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.testing.DebugUtils;
-
 import jade.core.AID;
 
 import java.util.Enumeration;

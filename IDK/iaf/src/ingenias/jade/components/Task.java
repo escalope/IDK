@@ -24,15 +24,14 @@
 
 package ingenias.jade.components;
 
-import java.util.*;
-
-import ingenias.editor.entities.Entity;
-import ingenias.editor.entities.FrameFact;
 import ingenias.editor.entities.Goal;
 import ingenias.editor.entities.MentalEntity;
-import ingenias.exception.NotFound;
 import ingenias.editor.entities.RuntimeConversation;
-import ingenias.jade.exception.*;
+import ingenias.jade.exception.TaskException;
+
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Vector;
 
 /**
  * A task is the encapsulation of an action of an agent. A task has a concrete sets of inputs to start from,

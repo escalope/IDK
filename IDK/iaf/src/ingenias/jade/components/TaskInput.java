@@ -24,8 +24,6 @@
 
 package ingenias.jade.components;
 
-import java.util.*;
-import ingenias.jade.exception.*;
 
 /**
  * It is a wrapper for inputs and outputs of a task. It associates an object id with its value.

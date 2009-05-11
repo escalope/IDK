@@ -24,11 +24,20 @@
 
 package ingenias.jade.graphics;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.*;
+import ingenias.jade.exception.NodeNotFound;
 
-import ingenias.jade.exception.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.LayoutManager;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class StateMachineFrame
 extends JPanel {

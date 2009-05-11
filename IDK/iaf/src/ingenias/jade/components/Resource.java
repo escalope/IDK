@@ -24,8 +24,10 @@
 
 package ingenias.jade.components;
 
-import java.util.*;
-import ingenias.jade.exception.*;
+import ingenias.jade.exception.TaskException;
+
+import java.util.Hashtable;
+import java.util.Vector;
 /**
  * Not used yet
  * @author jj

@@ -23,75 +23,45 @@
 
 package ingenias.jade;
 
-import jade.core.Agent;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
-import jade.lang.acl.UnreadableException;
-import jade.core.behaviours.*;
-
-import java.io.IOException;
-import java.io.InterruptedIOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.net.InetAddress;
-
-import jade.core.*;
-import jade.core.behaviours.*;
-
-import jade.domain.FIPAAgentManagement.*;
-import jade.domain.FIPAException;
-import jade.domain.DFService;
-import jade.domain.FIPANames;
-import jade.lang.acl.ACLMessage;
-import jade.util.leap.Iterator;
-import ingenias.jade.*;
-import java.util.*;
-
-import ingenias.jade.mental.*;
+import ingenias.editor.IDEState;
+import ingenias.editor.Model;
+import ingenias.editor.entities.MentalEntity;
+import ingenias.editor.entities.RuntimeConversation;
+import ingenias.exception.InvalidEntity;
+import ingenias.exception.NotFound;
 import ingenias.jade.comm.ActiveConversation;
 import ingenias.jade.comm.AgentProtocols;
 import ingenias.jade.comm.ConversationManagement;
 import ingenias.jade.comm.CustomLocks;
 import ingenias.jade.comm.LocksManager;
-import ingenias.jade.comm.StateBehavior;
-import ingenias.jade.components.*;
-import ingenias.jade.exception.*;
+import ingenias.jade.components.ApplicationManager;
+import ingenias.jade.components.OutputEntity;
+import ingenias.jade.components.Task;
+import ingenias.jade.components.TaskOperations;
+import ingenias.jade.components.TaskOutput;
+import ingenias.jade.components.YellowPages;
+import ingenias.jade.exception.NoAgentsFound;
 import ingenias.jade.graphics.AgentGraphics;
 import ingenias.jade.graphics.AgentModelMarqueeHandlerIAF;
 import ingenias.jade.graphics.AgentModelPanelIAF;
-import ingenias.jade.graphics.BasicAgentModelMarqueeHandlerIAF;
 import ingenias.jade.graphics.MainInteractionManager;
-
-import javax.swing.*;
-
-import ingenias.jade.components.*;
+import ingenias.jade.mental.Agent_data;
 import ingenias.testing.DebugUtils;
+import jade.core.Agent;
+import jade.domain.FIPAException;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.UnreadableException;
 
-import java.awt.event.*;
-
-import java.awt.*;
-
-import ingenias.editor.entities.Entity;
-import ingenias.editor.entities.FrameFact;
-import ingenias.editor.entities.Interaction;
-import ingenias.editor.entities.MentalEntity;
-import ingenias.editor.entities.MentalStateProcessor;
-import ingenias.editor.entities.RuntimeConversation;
-import ingenias.editor.entities.Slot;
-import ingenias.editor.entities.StateGoal;
-import ingenias.editor.*;
-import ingenias.exception.InvalidEntity;
-import ingenias.exception.NotFound;
-
-import javax.swing.border.*;
-
-import org.jgraph.event.GraphModelEvent;
-import org.jgraph.event.GraphModelListener;
-import org.jgraph.graph.BasicMarqueeHandler;
-import org.jgraph.graph.DefaultGraphCell;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Vector;
 
 /**
  * <p>This class represents an agent with mental state, communication session control,
@@ -376,14 +346,8 @@ abstract public class JADEAgent extends Agent{
 			try {
 				synchronized(synRegister){
 					//System.err.println("iniciando registro");
-					Iterator services = roles[k].getAllServices();
-					while (services.hasNext()){
-						ServiceDescription service = (ServiceDescription)services.next();
-					DebugUtils.logEvent("RoleRegistered", new String[]{this.getAID().getLocalName(),service.getType()});
-					}
 					jade.domain.DFService.register(this,
 							roles[k]);		
-					
 					//System.err.println("registrado");
 				}
 
@@ -608,7 +572,7 @@ abstract public class JADEAgent extends Agent{
 					}	          
 
 					// To put back messages that can be processed by other behaviors
-					java.util.Iterator it=processed.iterator();
+					Iterator it=processed.iterator();
 					while (it.hasNext()){
 						ACLMessage nextM=(ACLMessage) it.next();
 						ja.postMessage(nextM);

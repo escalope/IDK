@@ -22,13 +22,11 @@
 */
 package ingenias.jade.components;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Vector;
-import ingenias.jade.comm.*;
-
 import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
+
+import java.util.HashSet;
+import java.util.Vector;
 
 
 public class TaskOutput extends Vector<OutputEntity>{

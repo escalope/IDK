@@ -22,18 +22,18 @@
 */
 package ingenias.testing;
 
+import ingenias.editor.entities.RuntimeConversation;
+import ingenias.editor.entities.RuntimeEvent;
+import ingenias.editor.entities.RuntimeFact;
+import ingenias.editor.entities.StackEntry;
+import ingenias.jade.IAFProperties;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Enumeration;
-
-import ingenias.editor.entities.RuntimeConversation;
-import ingenias.editor.entities.RuntimeEvent;
-import ingenias.editor.entities.RuntimeFact;
-import ingenias.editor.entities.StackEntry;
-import ingenias.jade.IAFProperties;
 
 public class DebugUtils {
 	

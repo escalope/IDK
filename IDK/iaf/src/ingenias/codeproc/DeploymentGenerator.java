@@ -23,9 +23,11 @@
 
 package ingenias.codeproc;
 
+import ingenias.editor.extension.BasicCodeGenerator;
 import ingenias.exception.NotFound;
 import ingenias.exception.NotInitialised;
 import ingenias.exception.NullEntity;
+import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.GraphCollection;
 import ingenias.generator.browser.GraphEntity;
 import ingenias.generator.datatemplate.Repeat;
@@ -47,10 +49,10 @@ public class DeploymentGenerator {
 	 * @param p
 	 * @throws NotInitialised
 	 */
-	public static void generateDeployment(Sequences p) throws NotInitialised {
+	public static void generateDeployment(Sequences p, BasicCodeGenerator bcg, Browser browser) throws NotInitialised {
 
 		GraphEntity[] deployPacks = Utils
-		.generateEntitiesOfType("DeploymentPackage");
+		.generateEntitiesOfType("DeploymentPackage",browser);
 
 		if (deployPacks.length > 0) {
 			for (int k = 0; k < deployPacks.length; k++) {
@@ -58,7 +60,7 @@ public class DeploymentGenerator {
 				Repeat depl = new Repeat("deploynode");
 				p.addRepeat(depl);
 
-				int nagents = generateDeploymentPack(deploymentPack, depl);
+				int nagents = generateDeploymentPack(deploymentPack, depl,bcg);
 
 			}
 		}
@@ -70,7 +72,7 @@ public class DeploymentGenerator {
 		depl.add(new Var("fedport", "60001"));
 		depl.add(new Var("memory", "128m"));
 		depl.add(new Var("node", "")); // To generate a default node
-		GraphEntity[] agents = Utils.generateEntitiesOfType("Agent");
+		GraphEntity[] agents = Utils.generateEntitiesOfType("Agent",browser);
 		for (int k = 0; k < agents.length; k++) {
 			Repeat agentsR = new Repeat("agents");
 			depl.add(agentsR);
@@ -83,7 +85,7 @@ public class DeploymentGenerator {
 
 	}
 
-	public static int generateDeploymentPack(GraphEntity deploymentPack, Repeat depl) {
+	public static int generateDeploymentPack(GraphEntity deploymentPack, Repeat depl, BasicCodeGenerator bcg) {
 		String port = "60000";
 		String memory = "128m";
 		int nagents=0;

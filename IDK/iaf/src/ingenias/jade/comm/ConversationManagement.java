@@ -23,7 +23,8 @@
 
 package ingenias.jade.comm;
 
-import ingenias.editor.entities.*;
+import ingenias.editor.entities.Interaction;
+import ingenias.editor.entities.RuntimeConversation;
 import ingenias.exception.InvalidEntity;
 import ingenias.jade.JADEAgent;
 import ingenias.jade.MentalStateReader;
@@ -32,8 +33,6 @@ import ingenias.jade.components.YellowPages;
 import ingenias.jade.exception.NoAgentsFound;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.testing.DebugUtils;
-
-import jade.core.Agent;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 
@@ -41,7 +40,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Vector;
 
 /**

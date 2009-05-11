@@ -27,8 +27,6 @@ import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.jade.graphics.MainInteractionManager;
 
-import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Vector;
 
 public class ConversationLocksManager implements LocksRemover, LocksWriter {

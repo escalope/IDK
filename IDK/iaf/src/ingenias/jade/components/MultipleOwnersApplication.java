@@ -23,9 +23,9 @@
 
 package ingenias.jade.components;
 
-import java.util.Vector;
-
 import ingenias.jade.JADEAgent;
+
+import java.util.Vector;
 
 /**
  * This class is a wrapper for classes to be accessed from tasks of the agent. 

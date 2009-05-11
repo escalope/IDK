@@ -29,8 +29,10 @@ import ingenias.jade.AgentStates;
 import ingenias.jade.MentalStateManager;
 import ingenias.jade.MentalStateProcessor;
 
-
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Vector;
 
 public class TestUtils {
 

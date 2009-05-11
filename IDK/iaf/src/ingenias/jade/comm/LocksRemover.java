@@ -25,8 +25,6 @@ package ingenias.jade.comm;
 
 import java.util.Vector;
 
-import ingenias.jade.graphics.MainInteractionManager;
-
 /**
  * It gives access to operations for removing and quering locks. It is used inside the DefaultComm inheritors
  * to remove locks and inside the Mental State Processor to guess if a lock can be removed or not.

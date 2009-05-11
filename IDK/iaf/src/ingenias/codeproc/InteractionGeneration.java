@@ -30,6 +30,7 @@ import ingenias.exception.MultipleInitialPoints;
 import ingenias.exception.NotFound;
 import ingenias.exception.NotInitialised;
 import ingenias.exception.NullEntity;
+import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.Graph;
 import ingenias.generator.browser.GraphAttribute;
 import ingenias.generator.browser.GraphCollection;
@@ -43,6 +44,8 @@ import ingenias.generator.datatemplate.Var;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Vector;
+
+import sun.nio.cs.Surrogate.Generator;
 /**
  * The class is responsible of producing information related with the interaction implementation. For each interaction
  * identified in the specification, it locates the associated protocols, concretely a GRASIA specification.
@@ -82,9 +85,11 @@ public class InteractionGeneration {
         }
     };
     IAFGenerator mygen;
+	private Browser browser;
     
-    public InteractionGeneration(IAFGenerator generator) {
+    public InteractionGeneration(IAFGenerator generator, Browser browser) {
         this.mygen=generator;
+        this.browser=browser;
     }
     
     /**
@@ -287,7 +292,7 @@ public class InteractionGeneration {
     private void generateConditionsXML(Repeat instSeq, String conditionName,
             GraphEntity interaction, GraphEntity iu) throws
             Exception {
-        Graph mcondition = ingenias.generator.browser.BrowserImp.getInstance().getGraph(conditionName);
+        Graph mcondition = this.mygen.getBrowser().getGraph(conditionName);
         if (mcondition != null) {
             Vector mcsp = Utils.getEntities(mcondition, "ConditionalMentalState");
             Vector facts = Utils.getEntities(mcondition, "FrameFact");
@@ -390,8 +395,8 @@ public class InteractionGeneration {
      */
     
     void generateActorActions(Sequences seq) throws NullEntity, NotInitialised {
-        GraphEntity[] interactions = Utils.generateEntitiesOfType("Interaction");
-        GraphEntity[] roles = Utils.generateEntitiesOfType("Role");
+        GraphEntity[] interactions = Utils.generateEntitiesOfType("Interaction",browser);
+        GraphEntity[] roles = Utils.generateEntitiesOfType("Role",browser);
         for (int k = 0; k < interactions.length; k++) {
             GraphEntity interaction = interactions[k];
             if (this.getIUs(interaction)==null ||this.getIUs(interaction).length==0 ){
@@ -486,7 +491,7 @@ public class InteractionGeneration {
      * @throws NotInitialised
      */
     public GraphEntity[] getIUs(GraphEntity interaction) throws NotInitialised{
-        Graph[] g = ingenias.generator.browser.BrowserImp.getInstance().getGraphs();
+        Graph[] g = this.mygen.getBrowser().getGraphs();
         Vector selected = new Vector();
         try {
             Vector<GraphEntity> specs=Utils.getRelatedElementsVector(interaction,"IHasSpec" ,"IHasSpectarget");

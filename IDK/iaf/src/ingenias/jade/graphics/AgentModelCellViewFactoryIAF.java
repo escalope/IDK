@@ -22,34 +22,20 @@
 */
 package ingenias.jade.graphics;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.event.*;
-import java.util.Map;
-import java.util.Hashtable;
-
-import java.awt.*;
-import java.awt.image.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.net.URL;
-import java.util.Map;
-import java.util.Hashtable;
-import java.util.ArrayList;
-import javax.swing.event.UndoableEditEvent;
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.jgraph.event.*;
-import java.util.Vector;
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.jgraph.event.*;
-import org.jgraph.plaf.basic.*;
-import ingenias.editor.entities.*;
-import ingenias.editor.cell.*;
+import ingenias.editor.cell.RuntimeConversationView;
+import ingenias.editor.cell.RuntimeEventView;
+import ingenias.editor.cell.RuntimeFactView;
 import ingenias.editor.cellfactories.AgentModelCellViewFactory;
-import ingenias.editor.events.*;
+import ingenias.editor.entities.RuntimeConversation;
+import ingenias.editor.entities.RuntimeEvent;
+import ingenias.editor.entities.RuntimeFact;
+
+import org.jgraph.graph.CellView;
+import org.jgraph.graph.DefaultGraphCell;
+import org.jgraph.graph.EdgeView;
+import org.jgraph.graph.GraphModel;
+import org.jgraph.graph.PortView;
+import org.jgraph.graph.VertexView;
 
 public class AgentModelCellViewFactoryIAF extends  AgentModelCellViewFactory {
 

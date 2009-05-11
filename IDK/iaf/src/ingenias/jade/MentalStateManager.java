@@ -22,22 +22,32 @@
  */
 package ingenias.jade;
 
+import ingenias.editor.IDEState;
+import ingenias.editor.Model;
+import ingenias.editor.ModelJGraph;
+import ingenias.editor.cell.RenderComponentManager;
+import ingenias.editor.entities.Entity;
+import ingenias.editor.entities.MentalEntity;
+import ingenias.editor.entities.RuntimeConversation;
+import ingenias.editor.entities.RuntimeEvent;
+import ingenias.editor.entities.RuntimeFact;
+import ingenias.editor.entities.StateGoal;
+import ingenias.editor.entities.ViewPreferences.ViewType;
+import ingenias.exception.InvalidEntity;
+import ingenias.exception.NotFound;
+import ingenias.jade.graphics.AgentModelPanelIAF;
+import ingenias.testing.DebugUtils;
+import ingenias.testing.MSMRepository;
+
 import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
-
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.jgraph.event.GraphModelEvent;
 import org.jgraph.event.GraphModelListener;
@@ -45,25 +55,6 @@ import org.jgraph.graph.CellView;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphConstants;
 import org.jgraph.graph.GraphModel;
-
-import ingenias.editor.AgentModelPanel;
-import ingenias.editor.IDEState;
-import ingenias.editor.Model;
-import ingenias.editor.ModelJGraph;
-import ingenias.editor.cell.RenderComponentManager;
-import ingenias.editor.entities.Entity;
-import ingenias.editor.entities.FrameFact;
-import ingenias.editor.entities.MentalEntity;
-import ingenias.editor.entities.RuntimeEvent;
-import ingenias.editor.entities.RuntimeFact;
-import ingenias.editor.entities.StateGoal;
-import ingenias.editor.entities.RuntimeConversation;
-import ingenias.editor.entities.ViewPreferences.ViewType;
-import ingenias.exception.InvalidEntity;
-import ingenias.exception.NotFound;
-import ingenias.jade.graphics.AgentModelPanelIAF;
-import ingenias.testing.DebugUtils;
-import ingenias.testing.MSMRepository;
 
 /**
  * The mental state manager is responsible of adding/removing information from

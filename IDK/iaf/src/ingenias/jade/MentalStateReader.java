@@ -23,12 +23,12 @@
 
 package ingenias.jade;
 
-import java.util.Vector;
-
 import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.exception.NotFound;
+
+import java.util.Vector;
 
 
 /**

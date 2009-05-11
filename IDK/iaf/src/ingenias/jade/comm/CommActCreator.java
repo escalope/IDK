@@ -29,26 +29,13 @@ import ingenias.editor.entities.StackEntry;
 import ingenias.jade.JADEAgent;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.testing.DebugUtils;
+import jade.core.AID;
 import jade.core.Agent;
+import jade.core.behaviours.ReceiverBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import jade.core.behaviours.*;
 
-import java.io.IOException;
-import java.io.InterruptedIOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.InetAddress;
-
-import jade.core.*;
-import jade.core.behaviours.*;
-
-import jade.domain.FIPAAgentManagement.*;
-import jade.domain.FIPAException;
-import jade.domain.DFService;
-import jade.domain.FIPANames;
-import jade.lang.acl.ACLMessage;
-import java.util.*;
+import java.util.Vector;
 
 /**
  * This is an utility class designed to create the different communicative acts an agent may

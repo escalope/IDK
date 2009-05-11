@@ -22,7 +22,7 @@
 */
 
 package ingenias.jade.comm;
-import ingenias.editor.entities.*;
+import ingenias.editor.entities.RuntimeConversation;
 
 /**
  * It represents an ongoing conversation between two or more agents. It encapsulates all the data

@@ -23,40 +23,22 @@
 
 package ingenias.jade;
 
-import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.editor.entities.StateGoal;
-import ingenias.jade.comm.ActiveConversation;
-import ingenias.jade.comm.ConversationManagement;
 import ingenias.jade.comm.LocksListener;
-import ingenias.jade.comm.LocksManager;
-import ingenias.jade.comm.StateBehavior;
-import ingenias.jade.components.TaskInput;
 import ingenias.jade.components.Task;
-import ingenias.jade.components.TaskOutput;
-import ingenias.jade.exception.NoAgentsFound;
 import ingenias.jade.exception.TaskException;
 import ingenias.jade.graphics.AgentGraphics;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.testing.DebugUtils;
-import ingenias.testing.MSMRepository;
 import ingenias.testing.MSPRepository;
-
-import jade.core.AID;
 import jade.core.behaviours.OneShotBehaviour;
-import jade.domain.FIPAException;
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.tools.logging.ontology.GetAllLoggers;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 /**
  * This class implements the decision procedure associated to the agent. Basically, it decides which
@@ -362,13 +344,13 @@ public class MentalStateProcessor implements  LocksListener {
 
 				if (lockedInputs.size()!=0){
 					nonactive.add(t);
-					StringBuffer missingitems=new StringBuffer();
+					StringBuffer lockedItems=new StringBuffer();
 					for (int j=0;j<lockedInputs.size();j++){
-						missingitems.append(lockedInputs.elementAt(j).getId()+":"+lockedInputs.elementAt(j).getType()+",");
+						lockedItems.append(lockedInputs.elementAt(j).getId()+":"+lockedInputs.elementAt(j).getType()+",");
 					}
-					MainInteractionManager.logMSP("Not considering task "+t.getID()+" because there are locks on required inputs, concretely "+missingitems+"  are locked. Involved interaction must finish first.",
+					MainInteractionManager.logMSP("Not considering task "+t.getID()+" because there are locks on required inputs, concretely "+lockedItems+"  are locked. Involved interaction must finish first.",
 							ja.getLocalName(),t.getID(),t.getType());
-					MainInteractionManager.logMSP("Not considering task "+t.getID()+" because there are locks on required inputs, concretely "+missingitems+"  are locked. Involved interaction must finish first.",
+					MainInteractionManager.logMSP("Not considering task "+t.getID()+" because there are locks on required inputs, concretely "+lockedItems+"  are locked. Involved interaction must finish first.",
 							ja.getLocalName());
 				}
 

@@ -22,8 +22,6 @@
 */
 package ingenias.testing;
 
-import ingenias.exception.TimeOut;
-import ingenias.jade.MentalStateManager;
 import ingenias.jade.MentalStateProcessor;
 
 import java.util.Hashtable;

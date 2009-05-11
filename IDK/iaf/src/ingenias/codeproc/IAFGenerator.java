@@ -22,19 +22,33 @@
  */
 package ingenias.codeproc;
 
-import ingenias.generator.browser.*;
-import ingenias.generator.datatemplate.*;
-import ingenias.generator.interpreter.Codegen;
-import java.util.*;
-import java.io.*;
-
-import sun.security.action.GetLongAction;
-
-import ingenias.codeproc.jade.NoInitialIU;
-import ingenias.editor.*;
-import ingenias.exception.*;
+import ingenias.codeproc.InteractionGeneration;
+import ingenias.editor.Log;
+import ingenias.editor.ProjectProperty;
 import ingenias.exception.NotFound;
-import ingenias.jade.*;
+import ingenias.exception.NotInitialised;
+import ingenias.exception.NullEntity;
+import ingenias.generator.browser.Browser;
+import ingenias.generator.browser.Graph;
+import ingenias.generator.browser.GraphAttribute;
+import ingenias.generator.browser.GraphCollection;
+import ingenias.generator.browser.GraphEntity;
+import ingenias.generator.browser.GraphRelationship;
+import ingenias.generator.browser.GraphRole;
+import ingenias.generator.datatemplate.Repeat;
+import ingenias.generator.datatemplate.Sequences;
+import ingenias.generator.datatemplate.Var;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Properties;
+import java.util.Set;
+import java.util.Vector;
 
 /**
  *  This class implements an IDK module for the production of MAS based on the JADE platform. The transformation
@@ -47,20 +61,8 @@ import ingenias.jade.*;
 public class IAFGenerator
 extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
-	public IAFGenerator(String file, String[] templateFileArray) throws UnknowFormat, DamagedFormat,
-	CannotLoad {
-		super(file, templateFileArray);
-
-	}
-
-	public IAFGenerator(String[] templateFileArray) throws UnknowFormat, DamagedFormat,
-	CannotLoad {
-		super(templateFileArray);
-
-	}
-	static boolean error = false; // An error has been raised. It indicates the process should stop
-
-	InteractionGeneration ig = new InteractionGeneration(this);
+	
+	InteractionGeneration ig = null;
 	MentalStateGeneration msg = new MentalStateGeneration(this);
 
 
@@ -97,6 +99,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			Log.getInstance().logERROR(fne.getMessage());
 			this.fatalError();
 		}
+		ig = new InteractionGeneration(this,getBrowser());
 	}
 
 	/**
@@ -104,7 +107,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 *
 	 * @throws java.io.FileNotFoundException One of the assigned templates could not be found
 	 */
-	public IAFGenerator() throws java.io.FileNotFoundException {
+	public IAFGenerator(Browser browser) throws java.io.FileNotFoundException {
+		super(browser);
 		try {
 			this.addTemplate("templates/agent.xml");
 			this.addTemplate("templates/commcontrol.xml");
@@ -125,6 +129,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			this.fatalError();
 		}
 
+		ig = new InteractionGeneration(this,getBrowser());
 	}
 
 	/**
@@ -249,14 +254,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		return null;
 	}
 
-	public boolean verify() {
-		error = false;
-		if (this.getError() != true) {
-			this.generate();
-		}
 
-		return this.getError() != true;
-	}
 
 	/**
 	 * It produces the data structure needed to produce the templates. First, it generates the
@@ -283,9 +281,10 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			this.generateFactXML(p);
 			this.generateEventXML(p);
 			this.generateAppsXML(p);
-			DeploymentGenerator.generateDeployment(p);
-			TestGenerator.generateTestingDeployment(p);
-			TestGenerator.generateTests(p);
+			TestGenerator tg=new TestGenerator(getBrowser()); 
+			DeploymentGenerator.generateDeployment(p,this,getBrowser());
+			tg.generateTestingDeployment(p,this,getBrowser());
+			tg.generateTests(p,this);
 			if (!getError()) {
 				this.ig.generateActorActions(p);
 			}
@@ -312,7 +311,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 */
 	private Hashtable getComponents() throws NotFound, NullEntity, NotInitialised {
 		Hashtable components = new Hashtable();
-		GraphEntity[] ge = Utils.generateEntitiesOfType("INGENIASComponent");
+		GraphEntity[] ge = Utils.generateEntitiesOfType("INGENIASComponent",browser);
 		for (int k = 0; k < ge.length; k++) {
 			GraphAttribute files;
 			GraphEntity component = ge[k];
@@ -366,7 +365,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 */
 	private Hashtable getFileAppAssociation() throws NotFound, NullEntity, NotInitialised {
 		Hashtable resultfileapps = new Hashtable();
-		GraphEntity[] ge = Utils.generateEntitiesOfType("INGENIASComponent");
+		GraphEntity[] ge = Utils.generateEntitiesOfType("INGENIASComponent",browser);
 		for (int k = 0; k < ge.length; k++) {
 			GraphAttribute files;
 			GraphEntity component = ge[k];
@@ -408,14 +407,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		return resultfileapps;
 	}
 
-	/**
-	 * Raise an error so that at the end of the analysis there is not code generation
-	 *
-	 */
-	static void fatalError() {
-		error = true;
-		new Exception("Fatal error triggered").printStackTrace();
-	}
+
 
 	/**
 	 * Obtains the value of the error flag
@@ -433,7 +425,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 * @throws Exception
 	 */
 	private void generateTaskXML(Sequences p) throws Exception {
-		GraphEntity[] tasks = Utils.generateEntitiesOfType("Task");
+		GraphEntity[] tasks = Utils.generateEntitiesOfType("Task",browser);
 		for (int k = 0; k < tasks.length; k++) {
 			Repeat r = new Repeat("tasks");			
 			this.generateTaskCode(tasks[k], r);
@@ -494,7 +486,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 * @throws Exception
 	 */
 	private void generateFactXML(Sequences p) throws Exception {
-		GraphEntity[] ffacts = Utils.generateEntitiesOfType("FrameFact");
+		GraphEntity[] ffacts = Utils.generateEntitiesOfType("FrameFact",getBrowser());
 		for (int k = 0; k < ffacts.length; k++) {
 			if (!(ffacts[k].getID().equalsIgnoreCase("agent_data") || ffacts[k].getID().equalsIgnoreCase("agent data"))) {
 				Repeat r = new Repeat("ffacts");
@@ -514,21 +506,21 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 * @throws Exception
 	 */
 	private void generateEventXML(Sequences p) throws Exception {
-		GraphEntity[] ffacts = Utils.generateEntitiesOfType("ApplicationEventSlots");
+		GraphEntity[] ffacts = Utils.generateEntitiesOfType("ApplicationEventSlots",getBrowser());
 		for (int k = 0; k < ffacts.length; k++) {
 			Repeat r = new Repeat("events");
 			r.add(new Var("fname", Utils.replaceBadChars(ffacts[k].getID())));
 			generateFactSlots(r, ffacts[k]);
 			p.addRepeat(r);
 		}
-		ffacts = Utils.generateEntitiesOfType("ApplicationEvent");
+		ffacts = Utils.generateEntitiesOfType("ApplicationEvent",getBrowser());
 		for (int k = 0; k < ffacts.length; k++) {
 			Repeat r = new Repeat("events");
 			r.add(new Var("fname", Utils.replaceBadChars(ffacts[k].getID())));
 			generateFactSlots(r, ffacts[k]);
 			p.addRepeat(r);
 		}
-		ffacts = Utils.generateEntitiesOfType("GeneralEvent");
+		ffacts = Utils.generateEntitiesOfType("GeneralEvent",getBrowser());
 		for (int k = 0; k < ffacts.length; k++) {
 			Repeat r = new Repeat("events");
 			r.add(new Var("fname", Utils.replaceBadChars(ffacts[k].getID())));
@@ -575,31 +567,19 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				} else {
 					Vector<GraphEntity> roles=getRolesPlayedByAgentWhenExecutingTheTask(agent,task);
 					for (GraphEntity role:roles){
-						Repeat convtask = new Repeat("convtask");
-						for (GraphEntity conv : ints) {
-							Repeat conversations = new Repeat("conversations");
-							conversations.add(new Var("arrangedconversations", Utils.replaceBadChars(conv.getID())));
-							convtask.add(conversations);
-						}
-						Repeat satgoal = new Repeat("satgoal");
-						satgoal.add(new Var("tgoal", Utils.replaceBadChars(goal.getID())));
-						this.generateAgentConversationalTask(satgoal, agent, role,task, agentApps, vectorPlayedRoles);					
-						convtask.add(satgoal);
-						r.add(convtask);
+					System.err.println("generar " + agent.getID());
+					Repeat convtask = new Repeat("convtask");
+					for (GraphEntity conv : ints) {
+						Repeat conversations = new Repeat("conversations");
+						conversations.add(new Var("arrangedconversations", Utils.replaceBadChars(conv.getID())));
+						convtask.add(conversations);
 					}
-					if (roles.isEmpty()){
-						// The task is assigned directly to the agent
-						Repeat convtask = new Repeat("convtask");
-						for (GraphEntity conv : ints) {
-							Repeat conversations = new Repeat("conversations");
-							conversations.add(new Var("arrangedconversations", Utils.replaceBadChars(conv.getID())));
-							convtask.add(conversations);
-						}
-						Repeat satgoal = new Repeat("satgoal");
-						satgoal.add(new Var("tgoal", Utils.replaceBadChars(goal.getID())));
-						this.generateAgentConversationalTask(satgoal, agent, null,task, agentApps, vectorPlayedRoles);					
-						convtask.add(satgoal);
-						r.add(convtask);
+					Repeat satgoal = new Repeat("satgoal");
+					satgoal.add(new Var("tgoal", Utils.replaceBadChars(goal.getID())));
+					this.generateAgentConversationalTask(satgoal, agent, role,task, agentApps, vectorPlayedRoles);
+					
+					convtask.add(satgoal);
+					r.add(convtask);
 					}
 				}
 
@@ -629,8 +609,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		} /*else
                 javax.swing.JOptionPane.showMessageDialog(null,agent+" has no initial ms");*/
 	}
-
-
+	
+	
 
 	private Vector<GraphEntity> getRolesPlayedByAgentWhenExecutingTheTask(
 			GraphEntity agent, GraphEntity task) {
@@ -682,7 +662,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 		GraphEntity[] interactions;
 		try {
-			interactions = Utils.generateEntitiesOfType("Interaction");
+			interactions = Utils.generateEntitiesOfType("Interaction",getBrowser());
 			int j = 0;
 			boolean found = false;
 			GraphEntity result = null;
@@ -789,18 +769,13 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		verifyAgentTasks(agent, task, agentApps, roles);
 
 	}
-
+	
 	private void generateAgentConversationalTask(Repeat r, GraphEntity agent, GraphEntity role,
 			GraphEntity task, HashSet agentApps, Vector<GraphEntity> roles) throws NullEntity, NotFound, NotInitialised {
 
 
 		Repeat atask = new Repeat("agentTasks");
-		if (role!=null)
-			// The task is executed under a concrete role
-		 r.add(new Var("roleconvtask",role.getID()));
-		else 
-			// the task is executed under no specific role
-			r.add(new Var("roleconvtask",""));
+		r.add(new Var("roleconvtask",role.getID()));
 		r.add(atask);
 		generateTaskCode(task, atask);
 
@@ -1222,7 +1197,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			iunits = Utils.getRelatedElementsVector(task, "UIInitiates", "UIInitiatessource");
 			iunits.addAll(Utils.getRelatedElementsVector(task, "UIColaborates", "UIColaboratessource"));
 			if (iunits.size() > 0) {
-				GraphEntity[] specs = Utils.generateEntitiesOfType("GRASIASpecification");
+				GraphEntity[] specs = Utils.generateEntitiesOfType("GRASIASpecification",getBrowser());
 				for (int j = 0; j < iunits.size(); j++) {
 					for (int k = 0; k < specs.length; k++) {
 						GraphEntity model;
@@ -1303,8 +1278,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			Repeat internal = new Repeat("initialApplicationsIndividual");
 			appsr.add(internal);
 		}		
-
-
+		
+		
 		appsr.add(new Var("aname", Utils.replaceBadChars(app.getID())));
 		GraphCollection methods = app.getAttributeByName("methods").getCollectionValue();
 		for (int k = 0; k < methods.size(); k++) {
@@ -1450,16 +1425,16 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 * @throws NotInitialised
 	 */
 	private void generateAppsXML(Sequences p) throws NullEntity, NotFound, NotInitialised {
-		GraphEntity[] apps = Utils.generateEntitiesOfType("Application");
+		GraphEntity[] apps = Utils.generateEntitiesOfType("Application",getBrowser());
 		Hashtable appcomponents = this.getComponents();
 		for (int k = 0; k < apps.length; k++) {
 			this.generateApp(p, apps[k], appcomponents);
 		}
-		apps = Utils.generateEntitiesOfType("InternalApplication");
+		apps = Utils.generateEntitiesOfType("InternalApplication",getBrowser());
 		for (int k = 0; k < apps.length; k++) {
 			this.generateApp(p, apps[k], appcomponents);
 		}
-		apps = Utils.generateEntitiesOfType("EnvironmentApplication");
+		apps = Utils.generateEntitiesOfType("EnvironmentApplication",getBrowser());
 		for (int k = 0; k < apps.length; k++) {
 			this.generateApp(p, apps[k], appcomponents);			
 		}
@@ -1844,7 +1819,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		}
 		return taskPerRole;
 	}
-
+	
 	/**
 	 * It extracts all the information required to define an agent. It takes into
 	 *  account the roles played by the agent to incorporate all the interactions
@@ -1857,7 +1832,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 */
 	private void generateAgentXML(Sequences p, Hashtable fileapps, Hashtable components) throws Exception {
 		// Obtain agents to generate
-		GraphEntity[] actors = Utils.generateEntitiesOfType("Agent");
+		GraphEntity[] actors = Utils.generateEntitiesOfType("Agent",getBrowser());
 		for (int k = 0; k < actors.length; k++) {
 			HashSet agentApps = this.getAgentApplications(actors[k]);
 			Repeat r1 = new Repeat("agents");
@@ -2139,7 +2114,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	public static void main(String args[]) throws Exception {
 		ingenias.editor.Log.initInstance(new PrintWriter(System.out));
 		IAFGenerator jadegen = new IAFGenerator(args[0]);
-		Properties props = BrowserImp.getInstance().getState().prop;
+		Properties props = jadegen.getBrowser().getState().prop;
 
 		if (args.length!=0){
 			if (args.length==2){

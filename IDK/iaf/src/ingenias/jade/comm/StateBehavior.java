@@ -24,41 +24,24 @@
 
 package ingenias.jade.comm;
 
-import jade.core.Agent;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
-import jade.core.behaviours.*;
-
-import java.io.IOException;
-import java.io.InterruptedIOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.InetAddress;
-
-import jade.core.*;
-import jade.core.behaviours.*;
-
-import jade.domain.FIPAAgentManagement.*;
-import jade.domain.FIPAException;
-import jade.domain.DFService;
-import jade.domain.FIPANames;
-import jade.lang.acl.ACLMessage;
-import java.util.*;
-
-import ingenias.editor.Log;
-import ingenias.editor.TypedVector;
-import ingenias.editor.entities.FrameFact;
 import ingenias.editor.entities.MentalEntity;
+import ingenias.editor.entities.RuntimeConversation;
+import ingenias.exception.InvalidEntity;
 import ingenias.jade.AgentExternalDescription;
 import ingenias.jade.IAFProperties;
 import ingenias.jade.JADEAgent;
 import ingenias.jade.MentalStateUpdater;
-import ingenias.jade.exception.*;
+import ingenias.jade.exception.NoAgentsFound;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.graphics.StateMachineFrame;
-import ingenias.editor.entities.RuntimeConversation;
-import ingenias.exception.InvalidEntity;
+import jade.core.AID;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+
+import java.io.Serializable;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Vector;
 
 /**
  * It represents the state of a running interaction. This class will be specialised by inheritors which

@@ -24,9 +24,11 @@
 package ingenias.codeproc;
 
 import ingenias.editor.Log;
+import ingenias.editor.extension.BasicCodeGenerator;
 import ingenias.exception.NotFound;
 import ingenias.exception.NotInitialised;
 import ingenias.exception.NullEntity;
+import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.GraphAttribute;
 import ingenias.generator.browser.GraphCollection;
 import ingenias.generator.browser.GraphEntity;
@@ -34,14 +36,18 @@ import ingenias.generator.datatemplate.Repeat;
 import ingenias.generator.datatemplate.Sequences;
 import ingenias.generator.datatemplate.Var;
 
-import java.util.Vector;
-
 public class TestGenerator {
 
-	public static void generateTests(Sequences p){
+	private Browser browser;
+
+	public TestGenerator(Browser browser){
+		this.browser=browser;
+	}
+	
+	public void generateTests(Sequences p, BasicCodeGenerator generator){
 		try {
 			GraphEntity[] testEntities = Utils
-			.generateEntitiesOfType("Test");
+			.generateEntitiesOfType("Test",browser);
 			
 			for (GraphEntity test:testEntities){
 				Repeat testingDepl = new Repeat("testdefinition");
@@ -62,10 +68,10 @@ public class TestGenerator {
 	 * @param p
 	 * @throws NotInitialised
 	 */
-	public static void generateTestingDeployment(Sequences p)
+	public  void generateTestingDeployment(Sequences p, BasicCodeGenerator bcg,Browser browser)
 	throws NotInitialised {
 		GraphEntity[] deployPacks = Utils
-		.generateEntitiesOfType("TestingPackage");
+		.generateEntitiesOfType("TestingPackage",browser);
 		String port = "60000";
 		if (deployPacks.length > 0) {
 			for (int k = 0; k < deployPacks.length; k++) {
@@ -84,7 +90,7 @@ public class TestGenerator {
 						GraphEntity deplPackage = deplPackageAttr.getEntityValue();
 						Repeat depl = new Repeat("deploynode");
 						testingDepl.add(depl);
-						DeploymentGenerator.generateDeploymentPack(deplPackage, depl); // for build.xml script generation
+						DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for build.xml script generation
 						if (deplPackage != null) {
 							
 							if (testAttr!=null && testAttr.getCollectionValue()!=null && testAttr.getCollectionValue().size()>0){
@@ -95,7 +101,7 @@ public class TestGenerator {
 									testingDepl.add(testRepeat);
 									depl = new Repeat("deploynode");
 									testRepeat.add(depl);
-									DeploymentGenerator.generateDeploymentPack(deplPackage, depl); // for JUnit class initialization per test
+									DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for JUnit class initialization per test
 									
 									GraphEntity test=tests.getElementAt(j);																											
 									testRepeat.add(new Var("test",test.getID()));
@@ -103,7 +109,7 @@ public class TestGenerator {
 									if (relatedComponents!=null && 
 											relatedComponents.length>0){
 										if (relatedComponents.length>1){
-											IAFGenerator.fatalError();
+											bcg.fatalError();
 											Log.getInstance().logERROR(
 													"The test element can be associated only to one INGENIAS Component","", test.getID());
 										} else {	
@@ -117,13 +123,13 @@ public class TestGenerator {
 								}
 								
 							} else {
-								IAFGenerator.fatalError();
+								bcg.fatalError();
 								Log.getInstance()
 								.logERROR(
 										"The testing deployment has not defined a test","", deployPacks[k].getID());
 							}
 						} else {
-							IAFGenerator.fatalError();
+							bcg.fatalError();
 							Log.getInstance()
 							.logERROR(
 									"The testing deployment has not defined a deployment package",
@@ -145,13 +151,13 @@ public class TestGenerator {
 
 	}
 
-	private static void analyzeComponent(GraphEntity component, Repeat testingDepl) throws Exception{
+	private  void analyzeComponent(GraphEntity component, Repeat testingDepl,BasicCodeGenerator bcg) throws Exception{
 		GraphAttribute files;
 		try {
 			files = component.getAttributeByName("Files");
 		} catch (NotFound e) {
 			Log.getInstance().logERROR("Entity "+component.getID()+" did not have attribute Files","",component.getID());
-			IAFGenerator.fatalError();
+			bcg.fatalError();
 			throw e;
 		}
 		GraphCollection gc;
@@ -159,12 +165,12 @@ public class TestGenerator {
 			gc = files.getCollectionValue();
 		} catch (NullEntity e) {
 			Log.getInstance().logERROR("Entity "+component.getID()+" do not have any collection of Application-File associated","",component.getID());
-			IAFGenerator.fatalError();
+			bcg.fatalError();
 			throw e;
 		}
 		if (gc.size()>1 || gc.size()==0){
 			Log.getInstance().logERROR("Entity "+component.getID()+" must have only one do not have any collection of Application-File associated","",component.getID());
-			IAFGenerator.fatalError();
+			bcg.fatalError();
 			throw new Exception();
 
 		}
@@ -178,13 +184,13 @@ public class TestGenerator {
 					String fileEntity = filespec.getAttributeByName("Entity").getEntityValue().getID();
 					if (filespec.getAttributeByName("File")==null ||filespec.getAttributeByName("File").getSimpleValue()==null ){
 						Log.getInstance().logERROR("Component has a file spec mapping entity with empty file field","",component.getID());
-						IAFGenerator.fatalError();
+						bcg.fatalError();
 						throw new Exception();
 					}
 					String filePath = filespec.getAttributeByName("File").getSimpleValue();
 					if (filePath==null){
 						Log.getInstance().logERROR("Component has a file spec mapping entity with empty file field","",component.getID());
-						IAFGenerator.fatalError();
+						bcg.fatalError();
 						throw new Exception();
 					}
 
@@ -197,7 +203,7 @@ public class TestGenerator {
 				j++;
 			} catch (NullEntity e) {
 				Log.getInstance().logERROR("Entity "+component.getID()+" hash an entry with empty entity","",component.getID());
-				IAFGenerator.fatalError();
+				bcg.fatalError();
 				throw e;
 			} catch (NotFound e) {				
 				e.printStackTrace();

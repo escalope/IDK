@@ -22,39 +22,22 @@
 */
 package ingenias.jade.graphics;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.event.*;
-import java.util.Map;
-import java.util.Hashtable;
-
-import java.awt.*;
-import java.awt.image.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.net.URL;
-import java.util.Map;
-import java.util.Hashtable;
-import java.util.ArrayList;
-import javax.swing.event.UndoableEditEvent;
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.jgraph.event.*;
-import java.util.Vector;
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.jgraph.event.*;
-import org.jgraph.plaf.basic.*;
-import java.lang.reflect.*;
-import ingenias.editor.entities.*;
-import ingenias.editor.widget.*;
-import ingenias.exception.NullEntity;
-import ingenias.generator.browser.BrowserImp;
-import ingenias.generator.browser.Graph;
-import ingenias.generator.browser.GraphEntity;
+import ingenias.editor.entities.RuntimeConversation;
+import ingenias.editor.entities.RuntimeEvent;
+import ingenias.editor.entities.RuntimeFact;
+import ingenias.editor.entities.ViewPreferences;
 import ingenias.testing.DebugUtils;
-import ingenias.exception.InvalidEntity;
+
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.util.Vector;
+
+import javax.swing.AbstractAction;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+
+import org.jgraph.JGraph;
+import org.jgraph.graph.DefaultGraphCell;
 
 // MarqueeHandler that Connects Vertices and Displays PopupMenus
 

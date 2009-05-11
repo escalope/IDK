@@ -24,28 +24,7 @@
 
 package ingenias.jade.comm;
 
-import jade.core.Agent;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
-import jade.core.behaviours.*;
-
-import java.io.IOException;
-import java.io.InterruptedIOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.net.InetAddress;
-
-import jade.core.*;
-import jade.core.behaviours.*;
-
-import jade.domain.FIPAAgentManagement.*;
-import jade.domain.FIPAException;
-import jade.domain.DFService;
-import jade.domain.FIPANames;
-import jade.lang.acl.ACLMessage;
-import java.util.*;
-import ingenias.jade.exception.*;
 /**
  * Interface for operating over the state behavior. This interface is used within the defaultcommcontrol.
  * @author jj

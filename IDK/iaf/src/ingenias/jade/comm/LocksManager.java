@@ -23,15 +23,11 @@
 
 package ingenias.jade.comm;
 
-import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
-import ingenias.jade.graphics.MainInteractionManager;
 
 import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.Set;
 import java.util.Vector;
 /**
  * It handles locks on information entities stored in the Mental State Manager. When an entity is locked,

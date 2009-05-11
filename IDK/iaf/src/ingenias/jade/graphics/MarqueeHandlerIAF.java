@@ -25,50 +25,27 @@
 
 package ingenias.jade.graphics;
 import ingenias.editor.CellHelpWindow;
-import ingenias.editor.IDE;
 import ingenias.editor.cell.NAryEdge;
-import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.RoleEntity;
-import ingenias.editor.widget.GraphicsUtils;
-import ingenias.exception.NotInitialised;
-import ingenias.exception.NullEntity;
-import ingenias.generator.browser.BrowserImp;
-import ingenias.generator.browser.Graph;
-import ingenias.generator.browser.GraphEntity;
-import ingenias.generator.browser.GraphRelationship;
-import ingenias.generator.browser.GraphRelationshipImp;
 
-import java.awt.*;
-
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.event.*;
-import java.util.Map;
-import java.util.Hashtable;
-
-import java.awt.*;
-import java.awt.image.*;
-import javax.swing.*;
-import java.awt.event.*;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.lang.reflect.Field;
-import java.net.URL;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Hashtable;
-import java.util.ArrayList;
-import java.util.Set;
-
-import javax.swing.event.UndoableEditEvent;
-import javax.swing.tree.TreePath;
-
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.jgraph.event.*;
 import java.util.Vector;
+
+import javax.swing.AbstractAction;
+import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
+
 import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.jgraph.event.*;
-import org.jgraph.plaf.basic.*;
+import org.jgraph.graph.BasicMarqueeHandler;
+import org.jgraph.graph.DefaultEdge;
+import org.jgraph.graph.DefaultGraphCell;
+import org.jgraph.graph.GraphCell;
+import org.jgraph.graph.PortView;
 
 //MarqueeHandler that Connects Vertices and Displays PopupMenus
 
@@ -322,7 +299,7 @@ public abstract class MarqueeHandlerIAF extends BasicMarqueeHandler  implements 
 						chw.setDescription(ent.getHelpDesc());
 						chw.setRec(ent.getHelpRecom());
 						chw.setSize(350,300);
-						chw.setLocation(GraphicsUtils.getCenter(IDE.ide,chw.getSize()));
+						chw.setLocation(new Point(150,200));
 						chw.show();
 					}
 				});

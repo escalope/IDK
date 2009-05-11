@@ -23,10 +23,11 @@
 
 
 package ingenias.jade.comm;
-import ingenias.jade.JADEAgent;
 import ingenias.jade.MentalStateReader;
 import jade.lang.acl.ACLMessage;
-import java.util.*;
+
+import java.util.Enumeration;
+import java.util.Vector;
 /**
  * It handles the reception and deliver of messages. According to the semantics of the protocols, a 
  * message should not be sent until certain conditions are met. Possible conditions refer to the

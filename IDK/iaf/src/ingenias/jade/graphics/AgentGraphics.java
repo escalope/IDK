@@ -23,20 +23,14 @@
 
 package ingenias.jade.graphics;
 
-import ingenias.editor.AgentModelMarqueeHandler;
-import ingenias.editor.AgentModelPanel;
-import ingenias.editor.GraphManager;
+
 import ingenias.editor.IDEState;
 import ingenias.editor.Model;
 import ingenias.editor.ModelJGraph;
-
 import ingenias.editor.entities.Entity;
-import ingenias.editor.entities.FrameFact;
 import ingenias.editor.entities.MentalEntity;
-import ingenias.jade.components.OutputEntity;
-import ingenias.jade.components.TaskInput;
+import ingenias.editor.panels.AgentModelPanel;
 import ingenias.jade.components.Task;
-
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -68,8 +62,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import org.jdom.DefaultJDOMFactory;
-import org.jgraph.graph.BasicMarqueeHandler;
 import org.jgraph.graph.GraphConstants;
 
 public class AgentGraphics {

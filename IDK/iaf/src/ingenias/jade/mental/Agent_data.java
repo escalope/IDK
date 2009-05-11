@@ -24,7 +24,6 @@ package ingenias.jade.mental;
 
 import ingenias.editor.entities.RuntimeFact;
 import ingenias.editor.entities.ViewPreferences.ViewType;
-import ingenias.jade.MentalStateManager;
 
 public class Agent_data extends RuntimeFact{
 	

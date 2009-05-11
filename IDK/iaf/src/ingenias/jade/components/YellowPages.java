@@ -23,14 +23,14 @@
 
 package ingenias.jade.components;
 
-import java.util.Vector;
-
 import jade.core.AID;
 import jade.core.Agent;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.SearchConstraints;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+
+import java.util.Vector;
 
 /**
  * This application can perform searches in the Domain Facilitator. However, it can be invoked only within

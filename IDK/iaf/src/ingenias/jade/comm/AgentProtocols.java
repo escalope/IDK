@@ -23,13 +23,12 @@
 
 package ingenias.jade.comm;
 
+import ingenias.editor.entities.RuntimeConversation;
 import ingenias.jade.MentalStateReader;
 import ingenias.jade.MentalStateUpdater;
 import ingenias.jade.components.YellowPages;
 import ingenias.jade.exception.NoAgentsFound;
-import jade.core.AID;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import ingenias.editor.entities.*;
 
 public interface AgentProtocols {
 	/**

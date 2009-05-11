@@ -35,6 +35,7 @@ import ingenias.exception.CannotLoad;
 import ingenias.exception.InvalidProjectProperty;
 import ingenias.exception.UnknowFormat;
 import ingenias.exception.VersionNotFound;
+import ingenias.generator.browser.BrowserImp;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -268,7 +269,7 @@ public class PersistenceManager {
 				// vnf.printStackTrace();
 			}
 
-			this.setVersion(version);
+			this.setVersion(version,ids);
 			// ol.restoreObject(ids.om, ids.gm, doc);
 			restoreObjects(ids.om, ids.gm, doc);
 			rl.restoreRelationships(ids.om, ids.gm, doc);
@@ -370,7 +371,7 @@ public class PersistenceManager {
 				// vnf.printStackTrace();
 			}
 
-			this.setVersion(version);
+			this.setVersion(version,ids);
 
 			ids.prop.putAll(oldProperties);			
 			// ol.restoreObject(ids.om, ids.gm, doc);
@@ -505,22 +506,22 @@ public class PersistenceManager {
 	 * @exception UnknownVersion
 	 *                Description of Exception
 	 */
-	private void setVersion(String ver) throws UnknownVersion {
+	private void setVersion(String ver, IDEState ids) throws UnknownVersion {
 		if (ver.equals("1.0")) {
 			gl = new GraphLoadImp1();
 			rl = new RelationshipLoadImp1();
-			ol = new ObjectLoadImp1();
+			ol = new ObjectLoadImp1(new BrowserImp(ids));
 			pl = new PropertyLoadImp1();
 		} else {
 			if (ver.equals("1.1") ||ver.equals("1.2")) {
 				gl = new GraphLoadImp2();
 				rl = new RelationshipLoadImp2();
-				ol = new ObjectLoadImp1();
+				ol = new ObjectLoadImp1(new BrowserImp(ids));
 				pl = new PropertyLoadImp1();
 			} else {
 				gl = new GraphLoadImp1();
 				rl = new RelationshipLoadImp1();
-				ol = new ObjectLoadImp1();
+				ol = new ObjectLoadImp1(new BrowserImp(ids));
 				pl = new PropertyLoadImp1();
 			} 
 		}

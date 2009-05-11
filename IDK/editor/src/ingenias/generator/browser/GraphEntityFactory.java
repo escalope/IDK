@@ -73,8 +73,8 @@ public class GraphEntityFactory {
 		return new GraphEntityFactory(IDEState.emptyIDEState());
 	}
 	
-	public static GraphEntityFactory createDefaultGraphFactory() throws NotInitialised{
-		return new GraphEntityFactory(BrowserImp.getInstance().getState());
+	public static GraphEntityFactory createDefaultGraphFactory(Browser browser) throws NotInitialised{
+		return new GraphEntityFactory(browser.getState());
 	}
 	
 	public GraphEntityFactory(IDEState ids){
@@ -111,7 +111,7 @@ public class GraphEntityFactory {
 			}
 			Entity result= (Entity) this.ids.om.findUserObject(id).firstElement();
 			//((GraphEntityImp)BrowserImp.getInstance().findEntity(id)).getEntity();
-			GraphEntityImp gei=new GraphEntityImp(result,((GraphImp)diagram).getGraph());
+			GraphEntityImp gei=new GraphEntityImp(result,((GraphImp)diagram).getGraph(),ids);
 			if (this.isGraphicalEntity(result.getType())){
 				
 				ModelJGraph jg=((GraphImp)diagram).getGraph();
@@ -192,7 +192,7 @@ public class GraphEntityFactory {
 				
 				DefaultGraphCell cell = jg.insertDuplicated(cpoint,(Entity)result);
 			}
-			GraphEntityImp gei=new GraphEntityImp(result,((GraphImp)diagram).getGraph());
+			GraphEntityImp gei=new GraphEntityImp(result,((GraphImp)diagram).getGraph(),ids);
 			
 			return gei; 
 		} catch (NullEntity e) {

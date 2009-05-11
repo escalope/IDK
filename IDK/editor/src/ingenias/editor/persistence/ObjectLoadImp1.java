@@ -31,26 +31,28 @@ import org.xml.sax.InputSource;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.io.OutputStreamWriter;
 import java.io.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.*;
-import java.util.Map;
-import java.util.Hashtable;
-import java.util.ArrayList;
 import javax.xml.parsers.*;
 import org.jgraph.JGraph;
 import org.jgraph.graph.*;
 import org.w3c.dom.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.DOMImplementation;
 import ingenias.editor.entities.*;
 import ingenias.exception.*;
 import ingenias.editor.cell.*;
 import ingenias.editor.*;
+import ingenias.generator.browser.Browser;
+import ingenias.generator.browser.BrowserImp;
 
 public class ObjectLoadImp1
 implements ObjectLoad {
+	private Browser browser;
+
+	public ObjectLoadImp1(Browser browser){
+		this.browser=browser;
+	}
+	
 	public ingenias.editor.entities.Entity restoreObject(ObjectManager om,
 			GraphManager gm, Node n) throws
 			ClassNotFoundException, NoSuchMethodException, IllegalAccessException,
@@ -110,7 +112,7 @@ implements ObjectLoad {
 						Class[] types = {
 								String.class};
 						Object[] params = {
-								 Editor.getNewId()};
+								 Editor.getNewId(browser)};
 						en = (ModelEntity) encClass.getConstructor(types).newInstance(params);
 						PersistenceManager.getPL().restoreProperty(om, gm, current, en);
 					}
@@ -140,7 +142,7 @@ implements ObjectLoad {
 	}
 
 	public static void main(String[] args) {
-		ObjectLoad objectLoad1 = new ObjectLoadImp1();
+		ObjectLoad objectLoad1 = new ObjectLoadImp1(new BrowserImp(IDEState.emptyIDEState()));
 	}
 
 }

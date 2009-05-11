@@ -37,11 +37,13 @@ public class GraphRelationshipImp extends AttributedElementImp implements GraphR
 	IDEState ids;
 	
 	GraphRelationshipImp(ingenias.editor.entities.NAryEdgeEntity rel,ModelJGraph graph, IDEState ids){
-		super(rel,graph);
+		super(rel,graph,ids);
 		this.rel=rel;
 		this.graph=graph;
 		dgc=this.getCell();
 		this.ids=ids;
+		if (ids==null)
+			throw new RuntimeException("The ids parameter cannot be null");
 	}
 	
 	public ingenias.editor.entities.NAryEdgeEntity getNAryEdge(){
@@ -86,7 +88,7 @@ public class GraphRelationshipImp extends AttributedElementImp implements GraphR
 			try {
 				RoleEntity re=rel.getRoleEntity(ids[k]);
 //				System.err.println("agregado "+ent);
-				GraphRoleImp gri = new GraphRoleImp(re, rel.getEntity(ids[k]), graph);
+				GraphRoleImp gri = new GraphRoleImp(re, rel.getEntity(ids[k]), graph,this.ids);
 //				if (!.contains(gri))
 				result.add(gri);
 			} catch (ingenias.exception.NotFound nf){

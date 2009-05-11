@@ -33,10 +33,12 @@ public class CommonMenuEntriesActionFactory {
 
 	private GUIResources resources;
 	private IDEState state;
+	private BrowserImp browser=null;
 
 	public CommonMenuEntriesActionFactory(GUIResources resources, IDEState state){
 		this.resources=resources;
 		this.state=state;
+		browser=new BrowserImp(state);
 	}
 
 	public Vector<AbstractAction> createEdgeActions(final DefaultEdge defaultEdge,
@@ -153,7 +155,7 @@ public class CommonMenuEntriesActionFactory {
 
 		Vector v=ObjectManager.getInheritors(ent.getClass());
 		if (v.size()>0){
-
+		
 			for (int k = 0; k < v.size(); k++) {
 				final Class current = (Class) v.elementAt(k);
 				actions.add(new AbstractAction(current.getName().substring(current.getName().lastIndexOf(".")+1,current.getName().length())) {
@@ -161,7 +163,7 @@ public class CommonMenuEntriesActionFactory {
 						Log.getInstance().logERROR("Replacing");
 						try {
 							Vector<GraphRelationshipImp> rels = 
-								BrowserImp.getInstance().findEntity(ent.getId()).getAllRelationships();
+								browser.findEntity(ent.getId()).getAllRelationships();
 							Entity newent = ConvertUtils.convert(state,ent.getId(), ent.getType(),
 									current);
 							for (int j=0;j<rels.size();j++){

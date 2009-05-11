@@ -23,6 +23,7 @@
 
 package ingenias.generator.browser;
 
+import ingenias.editor.IDEState;
 import ingenias.editor.ModelJGraph;
 import ingenias.exception.NotFound;
 
@@ -33,10 +34,12 @@ class AttributedElementImp implements AttributedElement {
 
   private Object element;
   private ModelJGraph graph;
+private IDEState ids;
 
-  AttributedElementImp(Object ent,ModelJGraph graph ){
+  AttributedElementImp(Object ent,ModelJGraph graph, IDEState ids ){
      this.element=ent;
      this.graph=graph;
+     this.ids=ids;
   }
 
   public GraphAttribute[] getAllAttrs(){
@@ -47,7 +50,7 @@ class AttributedElementImp implements AttributedElement {
         boolean found=false;
         while (k<fields.length){
          try {
-          result[k]=new GraphAttributeImp(fields[k].getName(),fields[k].get(this.element),graph);
+          result[k]=new GraphAttributeImp(fields[k].getName(),fields[k].get(this.element),graph,ids);
          } catch (IllegalAccessException iae){
            iae.printStackTrace();
          }
@@ -84,7 +87,7 @@ class AttributedElementImp implements AttributedElement {
     if (!found)
      throw new NotFound("Available fields in "+element.getClass()+" are "+availableFields);
     try {
-    result=new GraphAttributeImp(name,fields[k].get(this.element),graph);
+    result=new GraphAttributeImp(name,fields[k].get(this.element),graph,ids);
     } catch (IllegalAccessException iae){
       iae.printStackTrace();
     }

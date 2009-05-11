@@ -77,8 +77,8 @@ public class GraphFactory {
 		return new GraphFactory(IDEState.emptyIDEState());
 	}
 
-	public static GraphFactory createDefaultGraphFactory() throws NotInitialised{
-		return new GraphFactory(BrowserImp.getInstance().getState());
+	public static GraphFactory createDefaultGraphFactory(Browser browser) throws NotInitialised{
+		return new GraphFactory(browser.getState());
 	}
 
 	public GraphFactory(IDEState ids){

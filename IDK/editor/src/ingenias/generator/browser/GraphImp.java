@@ -50,7 +50,7 @@ implements Graph {
 	private IDEState ids;
 
 	GraphImp(ingenias.editor.ModelJGraph mjg, IDEState ids) {
-		super(mjg.getProperties(), mjg);
+		super(mjg.getProperties(), mjg,ids);
 		this.mjg = mjg;
 		this.ids=ids;
 	}
@@ -173,7 +173,7 @@ implements Graph {
 						(ingenias.editor.entities.Entity) dgc.getUserObject();
 					GraphEntity ge=null;
 
-					ge = new GraphEntityImp(ne, mjg);
+					ge = new GraphEntityImp(ne, mjg,ids);
 
 					if (!v.contains(ge)) {
 						v.add(ge);

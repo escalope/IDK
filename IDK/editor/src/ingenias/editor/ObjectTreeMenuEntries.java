@@ -4,6 +4,7 @@ import ingenias.editor.entities.Entity;
 import ingenias.editor.utils.DialogWindows;
 import ingenias.exception.NotInitialised;
 import ingenias.exception.NullEntity;
+import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.BrowserImp;
 import ingenias.generator.browser.Graph;
 import ingenias.generator.browser.GraphEntity;
@@ -24,10 +25,12 @@ public class ObjectTreeMenuEntries {
 	
 	private IDEState ids;
 	private GUIResources resources;
+	private Browser browser;
 	
 	public ObjectTreeMenuEntries(IDEState ids, GUIResources resources){
 		this.ids=ids;
 		this.resources=resources;
+		browser=new BrowserImp(ids);
 	}
 	
 	public JPopupMenu menuObjectTree(MouseEvent me1) {
@@ -104,13 +107,13 @@ public class ObjectTreeMenuEntries {
 				menu.add(
 						new AbstractAction("Search occurrences") {				
 							public void actionPerformed(ActionEvent e) {
-								try{
+								
 									if (dmtn.getUserObject()instanceof Entity){
 										Entity ent=(Entity)dmtn.getUserObject();
 
 										StringBuffer result=new StringBuffer();
 										result.append("Diagrams found:<ul>");
-										Graph[] graphs=BrowserImp.getInstance().getGraphs();
+										Graph[] graphs=browser.getGraphs();
 										for (int k=0;k<graphs.length;k++){
 											GraphEntity[] ges;
 											try {
@@ -132,10 +135,7 @@ public class ObjectTreeMenuEntries {
 										resources.getSearchDiagramPanel().setText(result.toString());
 										resources.focusSearchPane();
 									}
-								} catch (NotInitialised e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
+								
 							}
 						});
 			}

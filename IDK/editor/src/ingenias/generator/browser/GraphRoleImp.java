@@ -26,6 +26,7 @@ package ingenias.generator.browser;
 import java.util.*;
 import org.jgraph.graph.*;
 
+import ingenias.editor.IDEState;
 import ingenias.editor.ModelJGraph;
 import ingenias.editor.entities.*;
 import ingenias.exception.NullEntity;
@@ -36,16 +37,20 @@ class GraphRoleImp extends AttributedElementImp implements GraphRole {
 
  private Entity player;
  private ModelJGraph graph;
+ private IDEState ids;
 
- GraphRoleImp(RoleEntity re,Entity player, ModelJGraph graph){
-   super(re,graph);
+ GraphRoleImp(RoleEntity re,Entity player, ModelJGraph graph, IDEState ids){
+   super(re,graph,ids);
    this.re=re;
    this.player=player;
    this.graph=graph;
+   this.ids=ids;
+   if (ids==null)
+		throw new RuntimeException("The ids parameter cannot be null");
  }
 
   public GraphEntity getPlayer() throws NullEntity{
-    return new GraphEntityImp(player,graph);
+    return new GraphEntityImp(player,graph,ids);
   }
 
 

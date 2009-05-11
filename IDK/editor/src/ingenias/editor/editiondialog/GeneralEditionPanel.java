@@ -26,6 +26,7 @@ import ingenias.editor.entities.RoleEntity;
 import ingenias.editor.widget.CustomJTextField;
 import ingenias.editor.widget.Editable;
 import ingenias.editor.widget.EntityWidgetPreferences;
+import ingenias.generator.browser.Browser;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -90,6 +91,7 @@ implements java.io.Serializable {
 
 	private ingenias.editor.ObjectManager om = null;
 	private ingenias.editor.GraphManager gm = null;
+	private Browser browser;
 	public static Image delImage;
 	static {
 		try {
@@ -263,7 +265,7 @@ implements java.io.Serializable {
 			String type = entType.getName().substring(index + 1,
 					entType.getName().length());
 			Object[] paracf = {
-					"" + ingenias.editor.Editor.getNewId()};
+					"" + ingenias.editor.Editor.getNewId(browser)};
 
 
 			String methodName = "create" +
@@ -309,7 +311,7 @@ implements java.io.Serializable {
 			Class[] conscf = {
 					String.class};
 			Object[] paracf = {
-					"" + ingenias.editor.Editor.getNewId()};
+					"" + ingenias.editor.Editor.getNewId(browser)};
 			return (Entity) entType.getConstructor(conscf).newInstance(paracf);
 		}
 		catch (InstantiationException ie) {
@@ -506,7 +508,7 @@ implements java.io.Serializable {
 			Class[] paramt = {
 					String.class};
 			Object[] objects = {
-					"" + ingenias.editor.Editor.getNewId()};
+					"" + ingenias.editor.Editor.getNewId(browser)};
 			cent1 = (ModelEntity) cf.getType().getConstructor(paramt).newInstance(
 					objects);
 			this.setValue(cent1, cf);

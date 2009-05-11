@@ -25,6 +25,7 @@ package ingenias.generator.browser;
 
 import java.util.Vector;
 
+import ingenias.editor.IDEState;
 import ingenias.editor.ModelJGraph;
 import ingenias.editor.TypedVector;
 import ingenias.editor.entities.Entity;
@@ -37,10 +38,12 @@ public class GraphCollectionImp implements GraphCollection {
 
   TypedVector tv=null;
   ModelJGraph g;
+  IDEState ids;
 
-  public GraphCollectionImp(TypedVector tv, ModelJGraph g) {
+  public GraphCollectionImp(TypedVector tv, ModelJGraph g, IDEState ids) {
     this.tv=tv;
     this.g=g;
+    this.ids=ids;
   }
 
   public int size(){
@@ -49,7 +52,7 @@ public class GraphCollectionImp implements GraphCollection {
 
   public GraphEntity getElementAt(int k)  throws NullEntity{
   
-		return new GraphEntityImp((Entity)tv.elementAt(k),g);
+		return new GraphEntityImp((Entity)tv.elementAt(k),g,ids);
 	
   }
 

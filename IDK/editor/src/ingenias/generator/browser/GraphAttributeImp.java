@@ -18,6 +18,7 @@
 
 package ingenias.generator.browser;
 
+import ingenias.editor.IDEState;
 import ingenias.editor.ModelJGraph;
 import ingenias.exception.*;
 
@@ -27,12 +28,14 @@ public class GraphAttributeImp
   private Object attribute;
   private String name;
   private ModelJGraph graph;
+  private IDEState ids;
 
   public GraphAttributeImp(String name, Object attribute,
-                           ModelJGraph graph) {
+                           ModelJGraph graph, IDEState ids) {
     this.name = name;
     this.attribute = attribute;
     this.graph = graph;
+    this.ids=ids;
   }
 
   public String getSimpleValue() {
@@ -50,13 +53,13 @@ public class GraphAttributeImp
     }
     else {
       return new GraphEntityImp( (ingenias.editor.entities.Entity) attribute,
-                                graph);
+                                graph,ids);
     }
   }
 
   public GraphCollection getCollectionValue() throws NullEntity {
     return new GraphCollectionImp( (ingenias.editor.TypedVector) attribute,
-                                  graph);
+                                  graph,ids);
   }
 
   public String getName() {

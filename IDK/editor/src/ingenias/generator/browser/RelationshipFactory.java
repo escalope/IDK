@@ -39,7 +39,7 @@ import ingenias.editor.entities.*;
 public class RelationshipFactory  {
 
 	public static DefaultGraphCell getNRelationshipInstance(String relationshipName,
-			GraphCell[] extremes) {
+			GraphCell[] extremes, Browser browser) {
 
 		// Search for NAryEdges in selected.
 		int nAryEdgesNum = 0;
@@ -65,7 +65,7 @@ public class RelationshipFactory  {
 					try {
 						relEntity = Class.forName(relationshipName);
 						Constructor relEntityCons = relEntity.getConstructor(new Class[]{String.class});					
-						Object relEntityInstance = relEntityCons.newInstance(new Object[]{Editor.getNewId()});					
+						Object relEntityInstance = relEntityCons.newInstance(new Object[]{Editor.getNewId(browser)});					
 						Class edgeEntity=Class.forName(relationshipName+"Edge");
 						Constructor edgeEntityCons = edgeEntity.getConstructor(new Class[]{relEntity});
 						Object edgeEntityIns = edgeEntityCons.newInstance(new Object[]{relEntityInstance});

@@ -34,7 +34,7 @@ import java.io.*;
 public class BrowserImp implements Browser {
 
 	private static Browser browser = null;
-	ingenias.editor.IDEState ids;
+	private ingenias.editor.IDEState ids;
         File currentProject=null;
 
 	/**
@@ -48,7 +48,8 @@ public class BrowserImp implements Browser {
 	
 	public BrowserImp(IDEState ids) {
 		this.ids=ids;
-				
+		if (ids==null)
+			throw new RuntimeException("The ids parameter cannot be null");
 	}
 
 
@@ -61,12 +62,12 @@ public class BrowserImp implements Browser {
 	private BrowserImp(String file) throws ingenias.exception.UnknowFormat, ingenias.exception.DamagedFormat, ingenias.exception.CannotLoad{
 		
 		ingenias.editor.persistence.PersistenceManager p = new ingenias.editor.persistence.PersistenceManager();
-		IDEState ids=IDEState.emptyIDEState();
+		ids=IDEState.emptyIDEState();
 		p.load(file, new GUIResources(),new Properties(),ids);
 		/*ingenias.editor.GraphManager.updateCopy(ids.gm);
 		ingenias.editor.ObjectManager.updateCopy(ids.om);*/
 		
-                this.currentProject=new File(file);
+          this.currentProject=new File(file);
 	}
 
 
@@ -143,13 +144,13 @@ public class BrowserImp implements Browser {
 	 *
 	 *@return    The instance value
 	 */
-	public static Browser getInstance()  throws ingenias.exception.NotInitialised{
+	/*public static Browser getInstance()  throws ingenias.exception.NotInitialised{
 		if (browser == null) {
 			throw new ingenias.exception.NotInitialised("Browser not initialised. You must call \"initialise\" first");
 		} else {
 			return browser;
 		}
-	}
+	}*/
 
 
 	/**

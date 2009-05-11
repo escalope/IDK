@@ -4,6 +4,7 @@ import ingenias.editor.GUIResources;
 import ingenias.editor.IDEState;
 import ingenias.editor.entities.Entity;
 import ingenias.exception.NotInitialised;
+import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.BrowserImp;
 import ingenias.generator.browser.Graph;
 
@@ -27,16 +28,19 @@ public class HyperlinkAction implements HyperlinkListener{
 	protected Vector<TreePath> foundpaths=new Vector<TreePath>();
 
 	protected int lastFoundIndex=0;
+	
+	private Browser browser;
 
 	protected String lastSearch="";
 	
 	public HyperlinkAction(IDEState ids, GUIResources resources){
 		this.ids=ids;
 		this.resources=resources;
+		browser=new BrowserImp(ids);
 	}
 	
 	public void hyperlinkUpdate(HyperlinkEvent e) {
-		try{
+		
 			if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 				JEditorPane pane = (JEditorPane) e.getSource();
 				URL url=e.getURL();
@@ -92,7 +96,7 @@ public class HyperlinkAction implements HyperlinkListener{
 							Vector userobject = ids.om.findUserObject(entity);
 							if (userobject.size()==0){
 								userobject=new Vector();
-								Graph[] graphs=BrowserImp.getInstance().getGraphs();
+								Graph[] graphs=browser.getGraphs();
 								for (int k=0;k<graphs.length;k++){
 
 									for (int j=0;j<graphs[k].getGraph().getModel().getRootCount();j++){
@@ -116,10 +120,7 @@ public class HyperlinkAction implements HyperlinkListener{
 				}
 
 			}	
-		} catch (NotInitialised e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		System.err.println("UPDATED.....................");
 	}
 	

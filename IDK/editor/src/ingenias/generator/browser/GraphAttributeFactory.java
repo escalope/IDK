@@ -73,8 +73,8 @@ public class GraphAttributeFactory {
 		return new GraphAttributeFactory(IDEState.emptyIDEState());
 	}
 	
-	public static GraphAttributeFactory createDefaultGraphFactory() throws NotInitialised{
-		return new GraphAttributeFactory(BrowserImp.getInstance().getState());
+	public static GraphAttributeFactory createDefaultGraphFactory(Browser browser) throws NotInitialised{
+		return new GraphAttributeFactory(browser.getState());
 	}
 	
 	public GraphAttributeFactory(IDEState ids){
@@ -84,7 +84,7 @@ public class GraphAttributeFactory {
 
 	
 	public  GraphAttribute createAttribute(String name, Object value, Graph graph ){
-		GraphAttribute ga=new GraphAttributeImp(name,value,((GraphImp)graph).getGraph());
+		GraphAttribute ga=new GraphAttributeImp(name,value,((GraphImp)graph).getGraph(),ids);
 		return ga;  
 	}
 	
@@ -94,7 +94,7 @@ public class GraphAttributeFactory {
 			for (int k=0;k<elements.size();k++){
 				tv.add(((GraphEntityImp)elements.elementAt(k)).getEntity());
 			}
-			return new GraphCollectionImp(tv,((GraphImp)g).getGraph());
+			return new GraphCollectionImp(tv,((GraphImp)g).getGraph(),ids);
 		}
 		throw new InvalidColection("Collection used is empty");
 		

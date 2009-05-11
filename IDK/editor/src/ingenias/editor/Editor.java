@@ -52,6 +52,7 @@ import ingenias.editor.cell.*;
 import ingenias.editor.models.*;
 //import ingenias.editor.auml.*;
 import ingenias.exception.*;
+import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.BrowserImp;
 
 import java.io.*;
@@ -116,26 +117,22 @@ implements GraphSelectionListener, java.io.Serializable {
 		graphModelListeners.add(gl);
 	};
 
-	public static String getNewId() {
+	public static String getNewId(Browser browser) {
 		idCounter=0;
 
 		Vector<NAryEdgeEntity> rels;
-		try {
-			rels = RelationshipManager.getRelationshipsVector(BrowserImp.getInstance().getState().gm);
-			HashSet<String> trels=new HashSet<String> ();
-			for (NAryEdgeEntity nedge:rels){
-				trels.add(nedge.getId());						
-			}
+
+		rels = RelationshipManager.getRelationshipsVector(browser.getState().gm);
+		HashSet<String> trels=new HashSet<String> ();
+		for (NAryEdgeEntity nedge:rels){
+			trels.add(nedge.getId());						
+		}
 
 
-			while (trels.contains(""+idCounter) || 
-					BrowserImp.getInstance().getState().om.findUserObject(""+idCounter).size()>0 ||
-					BrowserImp.getInstance().getState().gm.getModel(""+idCounter)!=null){
-				idCounter++;
-			}
-		} catch (NotInitialised e) {
-
-			e.printStackTrace();
+		while (trels.contains(""+idCounter) || 
+				browser.getState().om.findUserObject(""+idCounter).size()>0 ||
+				browser.getState().gm.getModel(""+idCounter)!=null){
+			idCounter++;
 		}
 
 
@@ -165,7 +162,7 @@ implements GraphSelectionListener, java.io.Serializable {
 		graphPanel = new JTabbedPaneWithCloseIcons();
 		System.err.println(graphPanel.getUI().getClass().getName());
 		//graphPanel.setUI(new JTabbedPaneWithCloseIconsUI());
-				graphPanel.setName("DiagramsPanel");		
+		graphPanel.setName("DiagramsPanel");		
 		// Use Border Layout
 		setLayout(new BorderLayout());
 		// Construct the Graph
@@ -789,11 +786,11 @@ implements GraphSelectionListener, java.io.Serializable {
 	}
 
 	public void reloadDiagrams() {		
-		
+
 		JScrollPane comp=null;
 		for (int k=0;k<this.graphPanel.getTabCount();k++){
 			comp=(JScrollPane)(graphPanel.getComponentAt(k));
-			
+
 			if (comp!=null)
 				System.err.println(comp.getClass().getName());
 			if (comp!=null && comp.getViewport().getView()!=null){

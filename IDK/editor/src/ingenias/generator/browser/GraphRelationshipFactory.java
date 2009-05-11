@@ -71,19 +71,21 @@ import org.jgraph.graph.Port;
 
 public class GraphRelationshipFactory {
 	private IDEState ids;
+	private Browser browser;
 
 	public static GraphRelationshipFactory createDefaultEmptyGraphFactory(){
 		return new GraphRelationshipFactory(IDEState.emptyIDEState());
 	}
 
-	public static GraphRelationshipFactory createDefaultGraphFactory() throws NotInitialised{
-		return new GraphRelationshipFactory(BrowserImp.getInstance().getState());
+	public static GraphRelationshipFactory createDefaultGraphFactory(Browser browser) throws NotInitialised{
+		return new GraphRelationshipFactory(browser.getState());
 	}
 
 
 
 	public GraphRelationshipFactory(IDEState ids){
-		this.ids=ids;	
+		this.ids=ids;
+		browser=new BrowserImp(ids);
 	}
 
 	/**
@@ -167,13 +169,13 @@ public class GraphRelationshipFactory {
 
 		GraphCell[] selected=new GraphCell[entities.size()];
 		selected=entities.toArray(selected);
-		NAryEdge nEdge=(NAryEdge) RelationshipFactory.getNRelationshipInstance(relationshipType, selected);
+		NAryEdge nEdge=(NAryEdge) RelationshipFactory.getNRelationshipInstance(relationshipType, selected,browser);
 		Vector<Hashtable<String, String>> result = convertToVectorHashtable(connectedEntities, selected, nEdge);
 		return result;
 	}
 
 
-	public static Vector<Hashtable<String,String>> getPossibleRoleAssignment(String relationshipType, String[] connectedEntities, Graph graph) throws NotFound{
+	public static Vector<Hashtable<String,String>> getPossibleRoleAssignment(String relationshipType, String[] connectedEntities, Graph graph, Browser browser) throws NotFound{
 		Vector<GraphCell> entities=new Vector<GraphCell>();
 		for (String entityID:connectedEntities) {
 			DefaultGraphCell entity = findEntity(entityID,graph);
@@ -184,7 +186,7 @@ public class GraphRelationshipFactory {
 
 		GraphCell[] selected=new GraphCell[entities.size()];
 		selected=entities.toArray(selected);
-		NAryEdge nEdge=(NAryEdge) RelationshipFactory.getNRelationshipInstance(relationshipType, selected);
+		NAryEdge nEdge=(NAryEdge) RelationshipFactory.getNRelationshipInstance(relationshipType, selected,browser);
 		Vector<Hashtable<String, String>> result = convertToVectorHashtable(connectedEntities, selected, nEdge);
 		return result;
 	}
@@ -229,9 +231,9 @@ public class GraphRelationshipFactory {
 	}
 
 
-	public static  Vector<Hashtable<String, String>> getPossibleRoleAssignment(String relationshipType, List<String> connectedEntities, Graph graph) throws NotFound{
+	public static  Vector<Hashtable<String, String>> getPossibleRoleAssignment(String relationshipType, List<String> connectedEntities, Graph graph, Browser browser) throws NotFound{
 
-		return getPossibleRoleAssignment(relationshipType,connectedEntities.toArray(new String[connectedEntities.size()]),graph);
+		return getPossibleRoleAssignment(relationshipType,connectedEntities.toArray(new String[connectedEntities.size()]),graph,browser);
 	}
 
 

@@ -2,6 +2,8 @@
 
 	
 	<property name="src" location="src" />
+
+	<property name="srccodegen" location="srccodegen" />
 	
 	<property name="modhtmldoc" location="modules/srchtmldoc" />
 	
@@ -532,6 +534,7 @@
 	
 	<javac compiler="modern" depend="true" destdir="${tempidk}" debug="true" fork="true" memoryInitialSize="128M" memoryMaximumSize="256M">
 		<src path="${src}" />
+		<src path="${srccodegen}" />
 		<classpath>
 			
 			<fileset dir="lib">

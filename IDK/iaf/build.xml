@@ -1,4 +1,4 @@
-<project name="ingenias" default="modiaf" basedir=".">
+<project name="ingenias" default="compile" basedir=".">
 	
 
 	
@@ -20,7 +20,7 @@
 	<target name="init">
 		
 		<tstamp />
-		
+		<copy file="${IDK}/lib/ingeniaseditor.jar" toDir="lib" />
 		
 	</target>
 	
@@ -32,7 +32,7 @@
 <!-- ************************************** -->
 
 <!--   Compiles and deploys the jade module     -->
-<target name="compile">
+<target name="compile" depends="init">
 	
 	<delete dir="${temp}" />
 	

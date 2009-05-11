@@ -64,6 +64,10 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	
 	InteractionGeneration ig = null;
 	MentalStateGeneration msg = new MentalStateGeneration(this);
+	
+	private boolean error = false;
+	
+
 
 
 	/**
@@ -2105,6 +2109,10 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		return result;
 	}
 
+	public void fatalError(){
+		error = true;
+	}
+	
 	/**
 	 *  Generates JADE code from a INGENIAS specification file (1st param)
 	 *
@@ -2137,5 +2145,11 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 		System.exit(0);
 
+	}
+
+	@Override
+	public boolean verify() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

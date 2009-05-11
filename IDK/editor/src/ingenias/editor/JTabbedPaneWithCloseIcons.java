@@ -4,32 +4,25 @@ package ingenias.editor;
 
 import ingenias.editor.entities.Agent;
 
-import javax.swing.*;
-import javax.swing.plaf.TabbedPaneUI;
-import javax.swing.plaf.basic.BasicArrowButton;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
-
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * A JTabbedPane which has a close ('X') icon on each tab.
- *
- * To add a tab, use the method addTab(String, Component)
- *
- * To have an extra icon on each tab (e.g. like in JBuilder, showing the file type) use
- * the method addTab(String, Component, Icon). Only clicking the 'X' closes the tab.
- */
-
-
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
-import javax.swing.plaf.synth.SynthTabbedPaneUI1;
-
-import java.awt.*;
 
 /**
  * An implementation of the TabbedPaneUI that looks like the tabs that are used the Photoshop palette windows.

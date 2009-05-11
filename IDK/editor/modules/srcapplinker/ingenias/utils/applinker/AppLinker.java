@@ -72,9 +72,9 @@ public class AppLinker extends BasicToolImp {
 			GraphEntityFactory gef=null;
 			GraphAttributeFactory  gaf=null; 
 			try {
-				gf = GraphFactory.createDefaultGraphFactory();
-				gef=GraphEntityFactory.createDefaultGraphFactory();
-				gaf=GraphAttributeFactory.createDefaultGraphFactory();
+				gf = GraphFactory.createDefaultGraphFactory(browser);
+				gef=GraphEntityFactory.createDefaultGraphFactory(browser);
+				gaf=GraphAttributeFactory.createDefaultGraphFactory(browser);
 			} catch (NotInitialised ex) {
 				ex.printStackTrace();
 			}			

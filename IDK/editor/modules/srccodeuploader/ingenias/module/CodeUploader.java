@@ -94,15 +94,15 @@ public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 					int indexEnd=content.indexOf("//#end_node");
 					if (indexStart>-1 && indexEnd>-1 && content.indexOf("<--",indexStart)>-1){
 						String nodeid=content.substring(indexStart+"//#start_node:".length(), content.indexOf(" <--",indexStart));
-						GraphEntity entity=BrowserImp.getInstance().findEntity(nodeid);
+						GraphEntity entity=browser.findEntity(nodeid);
 						if (entity!=null){
 							int indexStartCode=content.indexOf("\n",indexStart)+1;
 							String code=content.substring(indexStartCode,indexEnd-1);
-							Graph g=BrowserImp.getInstance().findFirstEntityOccurrence(nodeid);
+							Graph g=browser.findFirstEntityOccurrence(nodeid);
 							System.err.println("node:"+nodeid);
 							System.err.println(g+":"+entity);
-							GraphAttributeFactory.createDefaultGraphFactory();
-							GraphAttributeFactory gaf = GraphAttributeFactory.createDefaultGraphFactory();
+							GraphAttributeFactory.createDefaultGraphFactory(browser);
+							GraphAttributeFactory gaf = GraphAttributeFactory.createDefaultGraphFactory(browser);
 							entity.setAttribute(gaf.createAttribute("Code", code,g));
 							System.err.println(entity.getAttributeByName("Code").getSimpleValue());
 							browser.getState().setChanged(true);														

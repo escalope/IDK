@@ -375,8 +375,10 @@
 
 <target name="cleanModules">
  <delete dir="${temp}"/>
- <delete dir="ext"/>
- <mkdir dir="ext"/>
+ <delete>
+ 	<fileset dir="ext" includes="**/*.jar">
+ 	</fileset>
+ </delete>
 
 </target>
 

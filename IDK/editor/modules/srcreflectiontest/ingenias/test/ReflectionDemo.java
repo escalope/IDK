@@ -57,10 +57,10 @@ public class ReflectionDemo extends BasicToolImp {
 			GraphRelationshipFactory grf=null;
 			GraphAttributeFactory gaf=null;
 			try {
-				gf = GraphFactory.createDefaultGraphFactory();
-				gef= GraphEntityFactory.createDefaultGraphFactory();
-				grf= GraphRelationshipFactory.createDefaultGraphFactory();
-				gaf= GraphAttributeFactory.createDefaultGraphFactory();
+				gf = GraphFactory.createDefaultGraphFactory(browser);
+				gef= GraphEntityFactory.createDefaultGraphFactory(browser);
+				grf= GraphRelationshipFactory.createDefaultGraphFactory(browser);
+				gaf= GraphAttributeFactory.createDefaultGraphFactory(browser);
 				
 			} catch (NotInitialised e) {
 				// TODO Auto-generated catch block
@@ -195,7 +195,7 @@ public class ReflectionDemo extends BasicToolImp {
 		Graph g=browser.getGraph("myDiag");		
 		Vector<String> validRels = grf.getPossibleRelationships( new String[]{"miid1","miid2"}, g);
 		Vector<Hashtable<String, String>> assignments = 
-			grf.getPossibleRoleAssignment(validRels.firstElement(), new String[]{"miid1","miid2"}, g);
+			grf.getPossibleRoleAssignment(validRels.firstElement(), new String[]{"miid1","miid2"}, g, browser);
 		System.err.println(assignments);
 		grf.createRelationship("AInherits",g, assignments.firstElement());
 	}

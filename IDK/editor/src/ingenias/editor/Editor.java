@@ -117,12 +117,12 @@ implements GraphSelectionListener, java.io.Serializable {
 		graphModelListeners.add(gl);
 	};
 
-	public static String getNewId(Browser browser) {
+	public static String getNewId(ObjectManager om, GraphManager gm) {
 		idCounter=0;
 
 		Vector<NAryEdgeEntity> rels;
 
-		rels = RelationshipManager.getRelationshipsVector(browser.getState().gm);
+		rels = RelationshipManager.getRelationshipsVector(gm);
 		HashSet<String> trels=new HashSet<String> ();
 		for (NAryEdgeEntity nedge:rels){
 			trels.add(nedge.getId());						
@@ -130,13 +130,17 @@ implements GraphSelectionListener, java.io.Serializable {
 
 
 		while (trels.contains(""+idCounter) || 
-				browser.getState().om.findUserObject(""+idCounter).size()>0 ||
-				browser.getState().gm.getModel(""+idCounter)!=null){
+				om.findUserObject(""+idCounter).size()>0 ||
+				gm.getModel(""+idCounter)!=null){
 			idCounter++;
 		}
 
 
 		return ""+idCounter;
+	}
+	
+	public static String getNewId(Browser browser) {
+		return getNewId(browser.getState().om,browser.getState().gm);
 	}
 
 	public JTabbedPane getGraphPanel(){

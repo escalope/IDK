@@ -67,7 +67,6 @@ implements java.io.Serializable {
 
 	public void actionPerformed(ActionEvent e) {
 		// Unselects relationships and edges
-		Vector tbRemoved = new Vector();
 		Object[] objs = graph.getSelectionCells();
 
 		expandSelectionToRelationshipsAndEdges(objs, graph);

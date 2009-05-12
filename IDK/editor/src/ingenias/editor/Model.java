@@ -23,15 +23,11 @@ import ingenias.editor.cell.NAryEdge;
 import ingenias.editor.entities.NAryEdgeEntity;
 import ingenias.editor.events.AnyChangeListener;
 import ingenias.editor.events.EventRedirector;
-import ingenias.exception.NotInitialised;
-import ingenias.generator.browser.BrowserImp;
 
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
-
-import javax.swing.JOptionPane;
 
 import org.jgraph.graph.DefaultEdge;
 import org.jgraph.graph.DefaultGraphCell;
@@ -316,7 +312,7 @@ implements java.io.Serializable {
 
 
 	private void removeSelectedRootsWithoutQuestions(GraphCell[] objectsToRemove) {
-		this.removeIfObjectAppearsOnlyOnce(objectsToRemove);
+		//this.removeIfObjectAppearsOnlyOnce(objectsToRemove);
 
 		Vector elementsToRemove = this.getElementsToRemove(objectsToRemove);
 

@@ -175,8 +175,10 @@ public class ButtonToolBar extends JToolBar {
 											"Remove?",
 											JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 									if (res == JOptionPane.OK_OPTION) {										
-										cellsToRemove.add(cell);
-									}									
+										om.removeEntity(ent);
+										om.reload();									} 
+									cellsToRemove.add(cell);
+									
 								} else {
 									cellsToRemove.add(cell);
 								}

@@ -188,6 +188,7 @@ public class DiagramPaneInitialization {
 				Runnable run=new Runnable(){
 					public void run(){
 						ModelJGraph graph = ids.editor.getGraph();
+						
 						if (graph!=null){
 							
 							

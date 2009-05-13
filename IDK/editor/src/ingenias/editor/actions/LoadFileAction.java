@@ -97,7 +97,7 @@ public class LoadFileAction {
 	
 	}
 
-	public IDEState loadFileAction(File file, IDEUpdater updater) {
+	public IDEState loadFileAction(File file) {
 		//System.err.println("antes ids:"+ids.getStateChangelistener());
 		final File input = file;
 		assert(file!=null);			

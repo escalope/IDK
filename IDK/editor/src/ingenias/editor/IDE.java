@@ -100,16 +100,17 @@ extends ingenias.editor.IDEAbs {
 		Log.initInstance(new PrintWriter(new TextAreaOutputStream(resources.getModuleOutput())),
 				new PrintWriter(new TextAreaOutputStream(resources.getLogs())));
 		ide.updateIDEState(ids);
-		
-		
-		
+
+
+
 		//ide.initialiseActionHandlers();
 		ide.validate();
 		ide.pack();
 		ide.setVisible(true);
 
 		if (args.length != 0) {
-			new LoadFileAction(ide.getIds(),ide.getResources()).loadFileAction(new File(args[0]), ide);
+			ids=new LoadFileAction(ide.getIds(),ide.getResources()).loadFileAction(new File(args[0]));
+			ide.updateIDEState(ids);
 		}
 
 

@@ -10,7 +10,7 @@ import javax.swing.JWindow;
 public class BusyMessageWindow extends JWindow {
 	IDEState ids=null;
 
-	public BusyMessageWindow(IDEState ids, JFrame owner) {
+	public BusyMessageWindow(IDEState ids, Frame owner) {
 		super(owner);
 		ids.setBusy();
 		this.ids=ids;

@@ -1,5 +1,6 @@
 package ingenias.editor.actions;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Properties;
@@ -83,7 +84,7 @@ public class ImportFileAction {
 	public void importFile(File file, final IDEUpdater updater) {
 		final File input = file;
 		final JWindow jw = DialogWindows.showMessageWindow("IMPORTING...",ids,resources);
-		final JFrame self=resources.getMainFrame();
+		final Frame self=resources.getMainFrame();
 		new Thread(){
 			public void run(){
 				while (!jw.isVisible()){

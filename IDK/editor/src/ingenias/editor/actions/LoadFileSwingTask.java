@@ -55,7 +55,7 @@ public class LoadFileSwingTask extends SwingWorker<Void, Void> implements Progre
 	 */
 	@Override
 	public Void doInBackground() {
-		nids=new LoadFileAction(ids,resources).loadFileAction(current,updater);
+		nids=new LoadFileAction(ids,resources).loadFileAction(current);
 		return null;
 	}
 

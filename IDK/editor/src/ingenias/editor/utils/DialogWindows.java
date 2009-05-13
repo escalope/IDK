@@ -1,6 +1,7 @@
 package ingenias.editor.utils;
 
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Point;
 
 import ingenias.editor.BusyMessageWindow;
@@ -31,7 +32,7 @@ public class DialogWindows {
 		return jw;
 	}
 	
-	public static Point getCenter(Dimension size, JFrame frame){
+	public static Point getCenter(Dimension size, Frame frame){
 		Dimension d = frame.getSize();
 		Point result=new Point(
 				(d.width / 2 - size.width / 2)+frame.getLocation().x,

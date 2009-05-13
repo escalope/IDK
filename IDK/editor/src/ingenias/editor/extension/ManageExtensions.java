@@ -8,6 +8,7 @@ import ingenias.editor.Log;
 import ingenias.editor.actions.HistoryManager;
 import ingenias.editor.utils.DialogWindows;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
@@ -33,7 +34,7 @@ public class ManageExtensions {
 		resources.getTools().add(nentry);
 		HistoryManager.updateProperties(bt.getProperties(),ids);
 		final BasicTool bt1 = bt;
-		final JFrame jf = resources.getMainFrame();
+		final Frame jf = resources.getMainFrame();
 		nentry.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				new RunToolSwingTask(bt1,ids,resources).execute();
@@ -83,7 +84,7 @@ public class ManageExtensions {
 
 		HistoryManager.updateProperties(bcg.getProperties(),ids);
 		final BasicCodeGenerator bcg1 = bcg;
-		final JFrame jf = resources.getMainFrame();
+		final Frame jf = resources.getMainFrame();
 
 		generate.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {				

@@ -464,16 +464,20 @@ public class GraphManager implements java.io.Serializable {
 
 	public TreePath findModelTreePath(String nameregexp){
 		TreePath found=null;
-		DefaultMutableTreeNode node= root.getFirstLeaf();
-		while (node!=null && found==null && node != root){
-			if (ModelJGraph.class.isAssignableFrom(node.getUserObject().getClass())){
-				ModelJGraph uo=(ModelJGraph)node.getUserObject();
+		Enumeration<DefaultMutableTreeNode> postOrderEnumeration= root.postorderEnumeration();
+		while (found==null && postOrderEnumeration.hasMoreElements()){
+			DefaultMutableTreeNode current=postOrderEnumeration.nextElement();
+			if (ModelJGraph.class.isAssignableFrom(current.getUserObject().getClass())){
+				ModelJGraph uo=(ModelJGraph)current.getUserObject();
 				if (nameregexp.toLowerCase().equals(uo.getName().toLowerCase()))              	
-					found=new TreePath(node.getPath());        
+					found=new TreePath(current.getPath());        
 
-				node=node.getNextLeaf();       
+				
 			}
-
+			if (String.class.isAssignableFrom(current.getUserObject().getClass())){				
+				if (nameregexp.toLowerCase().equals(current.getUserObject().toString().toLowerCase()))              	
+					found=new TreePath(current.getPath());        				
+			}
 		}
 		return found;
 	}

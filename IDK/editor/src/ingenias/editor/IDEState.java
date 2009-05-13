@@ -38,6 +38,7 @@ import java.util.*;
 
 import ingenias.editor.events.DiagramChangeHandler;
 import ingenias.editor.filters.DiagramFilter;
+import ingenias.editor.filters.FilterManager;
 import ingenias.editor.widget.DnDJTree;
 
 import org.apache.xerces.parsers.DOMParser;
@@ -172,6 +173,7 @@ public class IDEState  implements java.io.Serializable, DiagramChangeHandler {
 		this.prop=new Properties();
 		prop.putAll(oldProperties);
 		currentFile=null;
+		this.setDiagramFilter(FilterManager.getINGENIASConfiguration(this.getClass().getClassLoader()));
 		//  ingenias.editor.persistence.PersistenceManager.defaultProperties(prop);
 	}
 
@@ -192,6 +194,7 @@ public class IDEState  implements java.io.Serializable, DiagramChangeHandler {
 				"Folder where the IDE will find its new modules"));
 		Preferences pref=new Preferences();
 		Editor ed=new Editor(om,gm,  pref);
+		
 		return new IDEState(ed, gm, om, prop);
 	}
 

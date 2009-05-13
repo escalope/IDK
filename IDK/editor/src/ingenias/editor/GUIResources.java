@@ -3,6 +3,7 @@ package ingenias.editor;
 import ingenias.editor.entities.Entity;
 import ingenias.editor.widget.DnDJTree;
 
+import java.awt.Frame;
 import java.util.Vector;
 
 import javax.swing.JCheckBoxMenuItem;
@@ -43,7 +44,7 @@ public class GUIResources implements ProgressListener{
 	private JRadioButtonMenuItem enableUMLView;
 	private JMenu file;
 	private JTextPane logs;
-	private JFrame mainFrame;
+	private Frame mainFrame;
 	private JTabbedPaneWithCloseIcons messagespane;
 	private JTextPane moduleOutput;
 	private JProgressBar pbar;
@@ -114,7 +115,7 @@ public class GUIResources implements ProgressListener{
 	public JTextPane getLogs() {
 		return logs;
 	}
-	public JFrame getMainFrame() {
+	public Frame getMainFrame() {
 		return mainFrame;
 	}
 	public JTabbedPaneWithCloseIcons getMessagespane() {
@@ -185,8 +186,10 @@ public class GUIResources implements ProgressListener{
 	 *  Sets the changed attribute of the IDE class
 	 */
 	public  void setChanged() {
+		if (save!=null && saveas!=null){
 		save.setEnabled(true);
 		saveas.setEnabled(true);
+		}
 
 	}
 
@@ -235,7 +238,7 @@ public class GUIResources implements ProgressListener{
 
 	}
 
-	public void setMainFrame(JFrame mainFrame) {
+	public void setMainFrame(Frame mainFrame) {
 		this.mainFrame = mainFrame;
 	}
 
@@ -293,8 +296,10 @@ public class GUIResources implements ProgressListener{
 	 *  Sets the unChanged attribute of the IDE class
 	 */
 	public void setUnChanged() {
+		if (save!=null && saveas!=null){
 		save.setEnabled(false);
 		saveas.setEnabled(true);
+		}
 	}
 	
 	public void removeProgressListener(ProgressListener pl){

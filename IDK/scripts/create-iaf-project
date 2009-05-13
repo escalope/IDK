@@ -1,0 +1,6 @@
+#!/bin/sh
+
+PROJECT_DIR=`pwd $1`/$1
+cd iaf
+ant -DmainP=$PROJECT_DIR create
+

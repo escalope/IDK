@@ -1,4 +1,4 @@
-<project name="ingenias" default="modiaf" basedir=".">
+<project name="ingenias" default="compile" basedir=".">
 	
 		
 	<property name="specfile" location=""/>
@@ -8,7 +8,8 @@
 	<property name="javac.optimize"           value="off"/>
 	<property name="javac.deprecation"        value="on"/>
 	<property name="javac.debug"              value="true"/>
-	
+	<property name="project.version" value="2.8.1"/>
+
 	
 	<target name="init">
 		
@@ -111,6 +112,71 @@
 		
 		
 	</target>
+
+    <target name="dist" depends="init">
+
+   		<ant antfile="build.xml" target="compile"  dir="editor"/>
+		<ant antfile="build.xml" target="modules" dir="editor"/>
+		<copy file="editor/lib/ingeniaseditor.jar" todir="iaf/lib"/>
+		<ant antfile="build.xml" target="compile" dir="iaf"/>
+
+         <!-- Preparacion de directorios -->
+
+       <mkdir dir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}"/>
+       <mkdir dir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/licenses"/>
+       <mkdir dir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/iaf"/>
+       <mkdir dir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/editor"/>
+       <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}">
+           <fileset dir="scripts">
+               <include name="**/*"/>
+           </fileset>
+       </copy>
+       <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/licenses">
+           <fileset dir="licenses">
+               <include name="*"/>
+           </fileset>
+       </copy>
+
+       <!-- Preparacion de iaf -->
+       
+       <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/iaf">
+           <fileset dir="iaf">
+               <include name="lib/**/*.jar"/>
+               <include name="config/**/*.prop"/>
+               <include name="*.xml"/>
+               <include name="src/templates/**/*.xml"/>
+           </fileset>
+       </copy>
+        <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/iaf">
+           <fileset dir="iaf">
+               <include name="modiaf.jar"/>
+           </fileset>
+       </copy>
+       <!-- Preparacion de editor -->
+       <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/editor">
+           <fileset dir="editor">
+               <include name="lib/**/*.jar"/>
+               <include name="ext/**/*.jar"/>
+               <include name="configs/**/*.xml"/>
+               <include name="doc/**/*.gif"/>
+               <include name="doc/**/*.htm"/>
+           </fileset>
+       </copy>
+       <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/editor">
+           <fileset dir="editor/lib">
+               <include name="ingeniaseditor.jar"/>
+           </fileset>
+       </copy>
+       <!-- Preparacion del zip -->
+       <zip basedir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}"
+       destfile="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}.zip">
+       </zip>
+
+       <!-- Eliminacion de temporales -->
+
+       <delete dir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}"/>
+
+    </target>
 	
 </project>
 

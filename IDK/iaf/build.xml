@@ -73,7 +73,7 @@
 
 <!--   Creates an empty project    -->
 
-<target name="create" depends="compile">
+<target name="create">
 	
 	<mkdir dir="${mainP}" />
 	<mkdir dir="${mainP}/bin" />
@@ -115,7 +115,6 @@
 	<copy file="lib/xercesImpl.jar" todir="${mainP}/lib/"/>
 	<copy file="lib/http.jar" todir="${mainP}/lib/"/>
 	<copy file="lib/iiop.jar" todir="${mainP}/lib/"/>
-	<copy file="lib/ingeniaseditor.jar" todir="${mainP}/lib/"/>
 	<copy file="lib/jade.jar" todir="${mainP}/lib/"/>
 	<copy file="lib/junit.jar" todir="${mainP}/lib/"/>
 	<copy file="lib/jadeTools.jar" todir="${mainP}/lib/"/>	

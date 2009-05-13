@@ -38,7 +38,22 @@
 	<property name="javac.deprecation"        value="on"/>
 	<property name="javac.debug"              value="true"/>
 	
-	
+
+   <path id="lib.path.ref">
+    <fileset dir="lib">
+        <include name="**/*.jar"/>
+        <exclude name="ingeniaseditor.jar"/>
+    </fileset>
+  </path>
+
+  <pathconvert pathsep=" " property="lib.path.list" refid="lib.path.ref">
+     <chainedmapper>
+         <flattenmapper/>
+         <globmapper from="*" to="lib/*"/>
+     </chainedmapper>
+  </pathconvert>
+
+
 	<target name="init">
 		
 		<tstamp />
@@ -563,7 +578,8 @@
 	
 	<jar jarfile="lib/ingeniaseditor.jar" basedir="${tempidk}" update="true">
 		<manifest>
-			<attribute name="Main-Class" value="Runme"/>
+			<attribute name="Main-Class" value="ingenias.editor.IDE"/>
+            <attribute name="Class-Path" value="${lib.path.list}"/>
 		</manifest>
 	</jar>
 	<delete dir="${tempidk}" />

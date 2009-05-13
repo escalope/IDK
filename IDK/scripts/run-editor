@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd editor
+java -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -jar ingeniaseditor.jar

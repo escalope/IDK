@@ -65,11 +65,14 @@ public abstract class BasicToolImp
      * from whithin the IDE.
      */
     public BasicToolImp(Browser browser) {
+    	 this.prop=browser.getState().prop;
+    	 
     	for (ProjectProperty pp: this.defaultProperties()){
         	this.putProperty(pp);
         }
         
             this.browser=browser;
+           
         
     }
     
@@ -87,6 +90,9 @@ public abstract class BasicToolImp
             browser=ingenias.generator.browser.BrowserImp.initialise(file);
             Set<Object> keys =browser.getState().prop.keySet();
             this.prop=browser.getState().prop;
+            for (ProjectProperty pp: this.defaultProperties()){
+            	this.putProperty(pp);
+            }
             /*for (Object key:keys){
             	ProjectProperty pp=((ProjectProperty)ingenias.generator.browser.BrowserImp.getInstance().getState().prop.get(key));
             	this.putProperty(pp);
@@ -175,7 +181,8 @@ public abstract class BasicToolImp
 	 * 
 	 */
 	public void putProperty(ProjectProperty pp){
-	 this.prop.put(this.getName()+":"+pp.key, pp);	
+		if (!this.prop.containsKey(this.getName()+":"+pp.key))
+			this.prop.put(this.getName()+":"+pp.key, pp);	
 	}
 
 }

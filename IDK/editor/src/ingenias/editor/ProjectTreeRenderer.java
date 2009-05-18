@@ -276,10 +276,296 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 			return super.getTreeCellRendererComponent(tree,value,sel,expanded,leaf,row,hasFocus);
     }
 
+
+
   public static ImageIcon selectIcon(Object value) {
         DefaultMutableTreeNode node =
             (DefaultMutableTreeNode)value;
         return selectIconByUserObject(node.getUserObject());
+    }
+
+    public static String getIconNameByUserObject(Object userObject) {
+	if (userObject.getClass().equals(String.class))
+			return "images/folder.png";
+
+
+	
+        if (userObject.getClass().equals(DecisionNode.class))
+          return "images/mdecisionnode.gif";
+	
+        if (userObject.getClass().equals(TestingPackage.class))
+          return "images/mdepl.gif";
+	
+        if (userObject.getClass().equals(MentalState.class))
+          return "images/mmstate.gif";
+	
+        if (userObject.getClass().equals(InternalApplication.class))
+          return "images/mappi.gif";
+	
+        if (userObject.getClass().equals(Goal.class))
+          return "images/mgoal.gif";
+	
+        if (userObject.getClass().equals(AgentWS.class))
+          return "images/magentws.gif";
+	
+        if (userObject.getClass().equals(Fact.class))
+          return "images/mfact.gif";
+	
+        if (userObject.getClass().equals(ShareTouple.class))
+          return "images/miu.gif";
+	
+        if (userObject.getClass().equals(DeploymentUnitByTypeWithInitMS.class))
+          return "images/mimtypedepl.gif";
+	
+        if (userObject.getClass().equals(JoinNode.class))
+          return "images/mforknode.gif";
+	
+        if (userObject.getClass().equals(RuntimeEvent.class))
+          return "images/mffact.gif";
+	
+        if (userObject.getClass().equals(InitialNode.class))
+          return "images/minitialnode.gif";
+	
+        if (userObject.getClass().equals(TextUseCase.class))
+          return "images/musecase.gif";
+	
+        if (userObject.getClass().equals(RemoteProcedureCall.class))
+          return "images/miu.gif";
+	
+        if (userObject.getClass().equals(Resource.class))
+          return "images/mresource.gif";
+	
+        if (userObject.getClass().equals(AgentModelBelieve.class))
+          return "images/mabel.gif";
+	
+        if (userObject.getClass().equals(ActivityFinal.class))
+          return "images/mfinalnode.gif";
+	
+        if (userObject.getClass().equals(INGENIASUseCase.class))
+          return "images/miusecase.gif";
+	
+        if (userObject.getClass().equals(TextNote.class))
+          return "images/mtext.gif";
+	
+        if (userObject.getClass().equals(RuntimeFact.class))
+          return "images/mffact.gif";
+	
+        if (userObject.getClass().equals(ForkNode.class))
+          return "images/mforknode.gif";
+	
+        if (userObject.getClass().equals(OrganizationNetwork.class))
+          return "images/mnetwork.gif";
+	
+        if (userObject.getClass().equals(MessagePassing.class))
+          return "images/miu.gif";
+	
+        if (userObject.getClass().equals(SubProtocol.class))
+          return "images/prot.png";
+	
+        if (userObject.getClass().equals(RuntimeConversation.class))
+          return "images/mconv.png";
+	
+        if (userObject.getClass().equals(AUMLComponent.class))
+          return "images/magent.gif";
+	
+        if (userObject.getClass().equals(Organization.class))
+          return "images/morg.gif";
+	
+        if (userObject.getClass().equals(ConditionalMentalState.class))
+          return "images/mcmstate.gif";
+	
+        if (userObject.getClass().equals(ApplicationWS.class))
+          return "images/mapp.gif";
+	
+        if (userObject.getClass().equals(AUMLSpecification.class))
+          return "images/maumlspec.gif";
+	
+        if (userObject.getClass().equals(Application.class))
+          return "images/mapp.gif";
+	
+        if (userObject.getClass().equals(DeploymentPackage.class))
+          return "images/mdepl.gif";
+	
+        if (userObject.getClass().equals(Plan.class))
+          return "images/mplan.gif";
+	
+        if (userObject.getClass().equals(AUMLPort.class))
+          return "images/magent.gif";
+	
+        if (userObject.getClass().equals(INGENIASComponent.class))
+          return "images/micomponent.gif";
+	
+        if (userObject.getClass().equals(OrganizationGroup.class))
+          return "images/mgroup.gif";
+	
+        if (userObject.getClass().equals(IUConcurrence.class))
+          return "images/mconc.gif";
+	
+        if (userObject.getClass().equals(DeploymentUnitByType.class))
+          return "images/mtypedepl.gif";
+	
+        if (userObject.getClass().equals(IUIterate.class))
+          return "images/mit.gif";
+	
+        if (userObject.getClass().equals(AUMLAlternativeRow.class))
+          return "images/altr.png";
+	
+        if (userObject.getClass().equals(Column.class))
+          return "images/col.png";
+	
+        if (userObject.getClass().equals(AutonomousEntityQuery.class))
+          return "images/mquery.gif";
+	
+        if (userObject.getClass().equals(AUMLContainer.class))
+          return "images/magent.gif";
+	
+        if (userObject.getClass().equals(ConcreteAgent.class))
+          return "images/mcaquery.gif";
+	
+        if (userObject.getClass().equals(UMLComment.class))
+          return "images/mumlcomment.gif";
+	
+        if (userObject.getClass().equals(AgentRequirementsQuery.class))
+          return "images/mrquery.gif";
+	
+        if (userObject.getClass().equals(UMLSpecification.class))
+          return "images/mumlspec.gif";
+	
+        if (userObject.getClass().equals(Believe.class))
+          return "images/mbel.gif";
+	
+        if (userObject.getClass().equals(WorkflowBox.class))
+          return "images/mworkflow.gif";
+	
+        if (userObject.getClass().equals(DeploymentUnitByTypeEnumInitMS.class))
+          return "images/mimtypedepl.gif";
+	
+        if (userObject.getClass().equals(GeneralEvent.class))
+          return "images/mevent.gif";
+	
+        if (userObject.getClass().equals(Compromise.class))
+          return "images/mcomp.gif";
+	
+        if (userObject.getClass().equals(Role.class))
+          return "images/mrole.gif";
+	
+        if (userObject.getClass().equals(EnvironmentApplication.class))
+          return "images/mappe.gif";
+	
+        if (userObject.getClass().equals(ApplicationEventSlots.class))
+          return "images/meventas.gif";
+	
+        if (userObject.getClass().equals(Protocol.class))
+          return "images/prot.png";
+	
+        if (userObject.getClass().equals(MentalInstanceSpecification.class))
+          return "images/mmispec.gif";
+	
+        if (userObject.getClass().equals(ActionUML.class))
+          return "images/miusecase.gif";
+	
+        if (userObject.getClass().equals(InteractionUnit.class))
+          return "images/miu.gif";
+	
+        if (userObject.getClass().equals(GRASIASpecification.class))
+          return "images/mgspec.gif";
+	
+        if (userObject.getClass().equals(MentalStateProcessor.class))
+          return "images/mproc.gif";
+	
+        if (userObject.getClass().equals(MergeNode.class))
+          return "images/mdecisionnode.gif";
+	
+        if (userObject.getClass().equals(EndNode.class))
+          return "images/mendnode.gif";
+	
+        if (userObject.getClass().equals(FrameFact.class))
+          return "images/mffact.gif";
+	
+        if (userObject.getClass().equals(Test.class))
+          return "images/mdepl.gif";
+	
+        if (userObject.getClass().equals(Lifeline.class))
+          return "images/col.png";
+	
+        if (userObject.getClass().equals(Interaction.class))
+          return "images/minter.gif";
+	
+        if (userObject.getClass().equals(Agent.class))
+          return "images/magent.gif";
+	
+        if (userObject.getClass().equals(MentalStateManager.class))
+          return "images/mman.gif";
+	
+        if (userObject.getClass().equals(INGENIASCodeComponent.class))
+          return "images/miccomponent.gif";
+	
+        if (userObject.getClass().equals(CommunicationEvent.class))
+          return "images/meventa.gif";
+	
+        if (userObject.getClass().equals(TaskWS.class))
+          return "images/mtaskws.gif";
+	
+        if (userObject.getClass().equals(GoalStateWS.class))
+          return "images/mgoalstatews.png";
+	
+        if (userObject.getClass().equals(StateGoal.class))
+          return "images/msgoal.gif";
+	
+        if (userObject.getClass().equals(Conversation.class))
+          return "images/mconv.png";
+	
+        if (userObject.getClass().equals(ApplicationEvent.class))
+          return "images/meventa.gif";
+	
+        if (userObject.getClass().equals(Task.class))
+          return "images/mtask.gif";
+	
+        if (userObject.getClass().equals(DeploymentUnitByTypeMSEntity.class))
+          return "images/mimtypedepl.gif";
+	
+        if (userObject.getClass().equals(RoleWS.class))
+          return "images/mrolews.gif";
+	
+        if (userObject.getClass().equals(AUMLAlternativeBox.class))
+          return "images/altb.png";
+	
+        if (userObject.getClass().equals(Workflow.class))
+          return "images/mworkflow.gif";
+	
+
+
+        if (userObject.getClass().equals(ingenias.editor.models.EnvironmentModelModelJGraph.class))
+            return "images/menvdiag.gif";
+
+        if (userObject.getClass().equals(ingenias.editor.models.ComponentDiagramModelJGraph.class))
+            return "images/musediag.gif";
+
+        if (userObject.getClass().equals(ingenias.editor.models.OrganizationModelModelJGraph.class))
+            return "images/morgdiag.gif";
+
+        if (userObject.getClass().equals(ingenias.editor.models.TasksAndGoalsModelModelJGraph.class))
+            return "images/mtaskgoal.gif";
+
+        if (userObject.getClass().equals(ingenias.editor.models.InteractionModelModelJGraph.class))
+            return "images/minterdiag.gif";
+
+        if (userObject.getClass().equals(ingenias.editor.models.ActivityDiagramModelJGraph.class))
+            return "images/musediag.gif";
+
+        if (userObject.getClass().equals(ingenias.editor.models.AgentModelModelJGraph.class))
+            return "images/magdiag.gif";
+
+        if (userObject.getClass().equals(ingenias.editor.models.UseCaseDiagramModelJGraph.class))
+            return "images/musediag.gif";
+
+        if (userObject.getClass().equals(ingenias.editor.models.AUMLInteractionDiagramModelJGraph.class))
+            return "images/musediag.gif";
+
+        if (userObject.getClass().equals(ingenias.editor.models.DeployDiagramModelJGraph.class))
+            return "images/musediag.gif";
+
+        return null;
     }
 
     public static ImageIcon selectIconByUserObject(Object userObject) {
@@ -563,10 +849,6 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 
         if (userObject.getClass().equals(ingenias.editor.models.DeployDiagramModelJGraph.class))
             return modeloDeployDiagram;
-
-
-
-
 
         return null;
       }

@@ -33,7 +33,7 @@ import java.io.*;
 public class ScrolledTArea extends JPanel implements Editable,java.io.Serializable ,ConfigurableWidget {
 
   private JTextArea contenido = new JTextArea();
-  private CustomJTextArea jTextArea1 = new CustomJTextArea();
+  
 
 
   public ScrolledTArea() {
@@ -62,17 +62,18 @@ public class ScrolledTArea extends JPanel implements Editable,java.io.Serializab
   }
 
   public String getText(){
-    try {
+	  return contenido.getText();
+	 /* try {
     java.io.ByteArrayOutputStream ba=new java.io.ByteArrayOutputStream();
     OutputStreamWriter osw=new OutputStreamWriter(ba,"UTF8");
     osw.write(contenido.getText() );
-//    osw.close();
+    osw.close();
     //System.err.println(new String(ba.toByteArray()));
     return  new String(ba.toByteArray());
     } catch (Exception uee){
       uee.printStackTrace();
     }
-    return "";
+    return "";*/
 
   }
 

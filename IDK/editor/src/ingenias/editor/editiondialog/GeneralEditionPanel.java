@@ -1194,7 +1194,8 @@ implements java.io.Serializable {
 														&&  objectsWithSameID.contains(entity))))
 														|| !cf.getName().equalsIgnoreCase("id")){		
 							m.invoke(entity, new Object[]{jt.getText()});
-							System.out.println("setting value "+jt.getText()+" to field "+cf.getName());
+							
+							System.out.println("setting value "+jt.getText()+" to field "+cf.getName()+ " from setValueFromTextField");
 						} else {					
 							JOptionPane.showMessageDialog(parentFrame,
 									"There is another entity with that ID. Operation cancelled.", "Error", JOptionPane.WARNING_MESSAGE);
@@ -1250,7 +1251,7 @@ implements java.io.Serializable {
 						public void actionPerformed(ActionEvent e) {
 							try {   
 								m.invoke(entity, paramVal);
-								System.out.println("setting value "+value+" to field "+cf.getName());
+								System.out.println("setting value "+value+" to field "+cf.getName()+" from setValue");
 								//System.err.println("setting old value "+getValue(entity.getClass(),cf));
 							} catch (IllegalArgumentException e1) {
 								// TODO Auto-generated catch block

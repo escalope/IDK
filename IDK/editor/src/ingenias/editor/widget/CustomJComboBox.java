@@ -58,10 +58,10 @@ public class CustomJComboBox extends JComboBox implements Editable,java.io.Seria
   }*/
 
   public String getText(){
-    if (this.getEditor()!=null){
+   // if (this.getEditor()!=null){
       return ((JTextField)this.getEditor().getEditorComponent()).getText();
-    }
-    return "";
+    /*}
+    return "";*/
   }
 
 

@@ -146,7 +146,7 @@ public @@@v@@@agentid@@@/v@@@Protocol(){};
                  try {
                  String cardinality="@@@v@@@irolenamecardinality@@@/v@@@";
 		 DFAgentDescription[] agents=yp.getAgents("@@@v@@@irolename@@@/v@@@");
-                   if (agents.length<=0)
+                   if (agents==null || agents.length<=0)
                       throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role @@@v@@@irolename@@@/v@@@");
                    if (cardinality.equals("1") || cardinality.equals(""))
                     cols.add(agents[0]);

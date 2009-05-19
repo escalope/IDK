@@ -61,12 +61,12 @@ import java.util.Vector;
 public class IAFGenerator
 extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
-	
+
 	InteractionGeneration ig = null;
 	MentalStateGeneration msg = new MentalStateGeneration(this);
-	
+
 	private boolean error = false;
-	
+
 
 
 
@@ -571,19 +571,32 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				} else {
 					Vector<GraphEntity> roles=getRolesPlayedByAgentWhenExecutingTheTask(agent,task);
 					for (GraphEntity role:roles){
-					System.err.println("generar " + agent.getID());
-					Repeat convtask = new Repeat("convtask");
-					for (GraphEntity conv : ints) {
-						Repeat conversations = new Repeat("conversations");
-						conversations.add(new Var("arrangedconversations", Utils.replaceBadChars(conv.getID())));
-						convtask.add(conversations);
+						System.err.println("generar " + agent.getID());
+						Repeat convtask = new Repeat("convtask");
+						for (GraphEntity conv : ints) {
+							Repeat conversations = new Repeat("conversations");
+							conversations.add(new Var("arrangedconversations", Utils.replaceBadChars(conv.getID())));
+							convtask.add(conversations);
+						}
+						Repeat satgoal = new Repeat("satgoal");
+						satgoal.add(new Var("tgoal", Utils.replaceBadChars(goal.getID())));
+						this.generateAgentConversationalTask(satgoal, agent, role,task, agentApps, vectorPlayedRoles);
+						convtask.add(satgoal);
+						r.add(convtask);
 					}
-					Repeat satgoal = new Repeat("satgoal");
-					satgoal.add(new Var("tgoal", Utils.replaceBadChars(goal.getID())));
-					this.generateAgentConversationalTask(satgoal, agent, role,task, agentApps, vectorPlayedRoles);
-					
-					convtask.add(satgoal);
-					r.add(convtask);
+					if (roles.isEmpty()){
+						System.err.println("generar " + agent.getID());
+						Repeat convtask = new Repeat("convtask");
+						for (GraphEntity conv : ints) {
+							Repeat conversations = new Repeat("conversations");
+							conversations.add(new Var("arrangedconversations", Utils.replaceBadChars(conv.getID())));
+							convtask.add(conversations);
+						}
+						Repeat satgoal = new Repeat("satgoal");
+						satgoal.add(new Var("tgoal", Utils.replaceBadChars(goal.getID())));
+						this.generateAgentConversationalDirectTask(satgoal, agent, task, agentApps, vectorPlayedRoles);
+						convtask.add(satgoal);
+						r.add(convtask);	
 					}
 				}
 
@@ -613,8 +626,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		} /*else
                 javax.swing.JOptionPane.showMessageDialog(null,agent+" has no initial ms");*/
 	}
-	
-	
+
+
 
 	private Vector<GraphEntity> getRolesPlayedByAgentWhenExecutingTheTask(
 			GraphEntity agent, GraphEntity task) {
@@ -774,12 +787,29 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 	}
 	
+	private void generateAgentConversationalDirectTask(Repeat r, 
+			GraphEntity agent, GraphEntity task, HashSet agentApps,
+			Vector<GraphEntity> roles) throws NullEntity, NotFound, NotInitialised {
+
+
+		Repeat atask = new Repeat("agentTasks");
+		r.add(new Var("roleconvtask",""));		
+		r.add(new Var("directtask","true"));	
+		r.add(atask);
+		generateTaskCode(task, atask);
+
+//		verifyAgentTasks(agent, task, agentApps, roles);
+
+	}
+
 	private void generateAgentConversationalTask(Repeat r, GraphEntity agent, GraphEntity role,
 			GraphEntity task, HashSet agentApps, Vector<GraphEntity> roles) throws NullEntity, NotFound, NotInitialised {
 
 
 		Repeat atask = new Repeat("agentTasks");
 		r.add(new Var("roleconvtask",role.getID()));
+		r.add(new Var("directtask","false"));
+			
 		r.add(atask);
 		generateTaskCode(task, atask);
 
@@ -879,6 +909,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		GraphEntity codeComponent = getCode(task);
 		Vector<GraphEntity> roles = Utils.getRelatedElementsVector(task,
 				"WFResponsable", "WFResponsablesource");
+		
 		Vector<GraphEntity> satisfiedGoals = Utils.getRelatedElementsVector(task,
 				"GTSatisfies", "GTSatisfiestarget");
 		if (roles.size() == 0) {
@@ -1282,8 +1313,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			Repeat internal = new Repeat("initialApplicationsIndividual");
 			appsr.add(internal);
 		}		
-		
-		
+
+
 		appsr.add(new Var("aname", Utils.replaceBadChars(app.getID())));
 		GraphCollection methods = app.getAttributeByName("methods").getCollectionValue();
 		for (int k = 0; k < methods.size(); k++) {
@@ -1810,6 +1841,16 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		return new Vector(tasks);
 	}
 
+	private Vector getAgentDirectTasks(GraphEntity agent) throws NullEntity {
+		Vector directTasks = Utils.getRelatedElementsVector(agent,
+				"WFResponsable",
+		"WFResponsabletarget");
+
+		HashSet tasks = new HashSet(directTasks);
+
+		return new Vector(tasks);
+	}
+
 	private Hashtable<GraphEntity, Vector<GraphEntity>> getAgentTasksPerRole(GraphEntity agent) throws NullEntity {
 		Hashtable<GraphEntity, Vector<GraphEntity>>  taskPerRole=new Hashtable<GraphEntity, Vector<GraphEntity>>(); 
 		Vector rolesPlayed = Utils.getRelatedElementsVector(agent,
@@ -1823,7 +1864,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		}
 		return taskPerRole;
 	}
-	
+
 	/**
 	 * It extracts all the information required to define an agent. It takes into
 	 *  account the roles played by the agent to incorporate all the interactions
@@ -2112,7 +2153,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	public void fatalError(){
 		error = true;
 	}
-	
+
 	/**
 	 *  Generates JADE code from a INGENIAS specification file (1st param)
 	 *

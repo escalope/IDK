@@ -39,6 +39,7 @@ import ingenias.jade.graphics.AgentModelPanelIAF;
 import ingenias.testing.DebugUtils;
 import ingenias.testing.MSMRepository;
 
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.geom.Rectangle2D;
 import java.util.Collection;
@@ -127,6 +128,7 @@ MentalStateUpdater {
 			}
 		}};
 		private HashSet<String> conversationAlreadyProcessed= new HashSet<String>();
+		private Vector<Runnable> executeLaterActions=new  Vector<Runnable>();
 
 		private class ConversationTracker implements Runnable{
 			private Hashtable<RuntimeConversation, Integer> timeout=new Hashtable<RuntimeConversation, Integer>();
@@ -613,16 +615,30 @@ MentalStateUpdater {
 			}
 
 		}
-
-		public synchronized void addMentalEntityToConversation(RuntimeConversation conv,Vector<MentalEntity> mes)
-		throws ingenias.exception.InvalidEntity{
-			for (MentalEntity me:mes){
-				conv.addCurrentContent(me);
-				DebugUtils.logEvent("MEAddedToConversation", new String[]{this.agentName,me.getType(),me.getId(),conv.getInteraction().getId(),conv.getConversationID()});
+		
+		public synchronized void processNewEntitiesInConversations(){
+			for (Runnable action:executeLaterActions){
+				action.run();
 			}
+			executeLaterActions.clear();
+		}
 
-			resizeAllMentalEntities();
-			setModified();			
+		public synchronized void addMentalEntityToConversation(final RuntimeConversation conv,final Vector<MentalEntity> mes)
+		throws ingenias.exception.InvalidEntity{
+			Runnable action=new Runnable(){
+				public void run(){
+					Vector<MentalEntity> localmes = (Vector<MentalEntity>) mes.clone();
+					for (MentalEntity me:mes){
+						conv.addCurrentContent(me);
+						DebugUtils.logEvent("MEAddedToConversation", new String[]{agentName,me.getType(),me.getId(),conv.getInteraction().getId(),conv.getConversationID()});
+					}
+
+					resizeAllMentalEntities();
+		
+				}
+			};
+			executeLaterActions.add(action);
+						
 
 		}
 

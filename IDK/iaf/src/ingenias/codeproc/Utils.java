@@ -157,7 +157,7 @@ public class Utils {
 	 * @param role The name of the extreme of the relationship that has to be studied
 	 * @return a list of elements placed in the association extreme
 	 */
-	public static Vector getRelatedElementsVector(GraphEntity agent,
+	public static Vector<GraphEntity> getRelatedElementsVector(GraphEntity agent,
 			String relationshipname, String role) throws NullEntity {
 		Vector rels = agent.getAllRelationships();
 		Enumeration enumeration = rels.elements();

@@ -299,8 +299,15 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
          @@@repeat id="agentTasks"@@@
 	   	nonExistingInputs.clear();
   	   	repeatedOutputs.clear();
+  	   	boolean correctRole=conversation.getPlayedRole().equals ("@@@v@@@roleconvtask@@@/v@@@");
+  	   	// Now all ascendant roles are verified, to enable tasks belonging to roles specializing a more
+  	   	// generic one involved in an interaction
+  	   	@@@repeat id="ascendantroles"@@@
+  	   	correctRole=correctRole|| 
+  	   	 conversation.getPlayedRole().equals ("@@@v@@@ascendant@@@/v@@@");
+  	   	@@@/repeat@@@
        	if (tobject.getType().equals("@@@v@@@tname@@@/v@@@") && (@@@v@@@directtask@@@/v@@@ ||
-       		conversation.getPlayedRole().equals ("@@@v@@@roleconvtask@@@/v@@@"))){
+       		correctRole)){
 	        Vector<MentalEntity> expectedInput=null;
             
        	RuntimeFact expectedOutput=null;

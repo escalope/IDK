@@ -89,6 +89,7 @@ public class MentalStateProcessor implements  LocksListener {
 			while(true){
 				boolean repeat=true;
 				while (repeat){
+					msm.processNewEntitiesInConversations();
 					synchronized(monitorDoReplanQueue){
 						repeat=doReplan.isEmpty();
 					}
@@ -98,6 +99,7 @@ public class MentalStateProcessor implements  LocksListener {
 
 						e.printStackTrace();
 					}
+					
 				}
 				synchronized(monitorDoReplanQueue){
 					doReplan.remove(0);

@@ -362,7 +362,10 @@ public class TaskQueue {
 			} catch (NotFound nf){
 				missing.add(element);
 				if (t.getConversationContext()!=null){
-					System.err.println("no encontrado "+element.getId()+" "+t.getConversationContext().getConversationID());
+					MainInteractionManager.logMSP("Not found entity "+element.getId()+" in conversastion "+t.getConversationContext().getConversationID()+
+							" . Scheduled task "+ t.getID()+" is going to be aborted", this.agentID
+							.getLocalName(), t.getID(),t.getType());
+					
 				}
 			}
 		}

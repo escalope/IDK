@@ -2,6 +2,7 @@ package ingenias.editor.events;
 
 import ingenias.editor.ButtonToolBar;
 import ingenias.editor.Editor;
+import ingenias.editor.ModelJGraph;
 import ingenias.editor.cell.NAryEdge;
 
 import java.awt.event.ActionEvent;
@@ -36,6 +37,12 @@ implements java.io.Serializable {
 	 *  Description of the Field
 	 */
 	protected Action action;
+	
+	protected ModelJGraph model;
+
+	public ModelJGraph getModel() {
+		return model;
+	}
 
 	// Construct the "Wrapper" Action
 	/**
@@ -51,8 +58,9 @@ implements java.io.Serializable {
 		this.action = a;
 	}
 
-	public void updateAction(Action a) {
+	public void updateAction(Action a, ModelJGraph graph) {
 		this.action=a;
+		model=graph;
 	}
 
 	public Action getAction() {

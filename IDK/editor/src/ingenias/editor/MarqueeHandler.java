@@ -98,10 +98,13 @@ public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Seri
 	private CommonMenuEntriesActionFactory af;
 	private DiagramMenuEntriesActionsFactory daf;
 
+	private GUIResources resources;
+
 	public MarqueeHandler(ModelJGraph graph, GUIResources resources, IDEState ids, DiagramMenuEntriesActionsFactory daf){
 		this.graph=graph;
 		this.af=new CommonMenuEntriesActionFactory(resources,ids);
 		this.daf=daf;
+		this.resources=resources;
 	}
 
 	public void addContextualMenuAction(AbstractAction action){

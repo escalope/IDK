@@ -48,6 +48,15 @@ implements java.io.Serializable {
 	
 	
 
+	@Override
+	protected void firePropertyChange(String arg0, Object arg1, Object arg2) {
+		// TODO Auto-generated method stub
+		super.firePropertyChange(arg0, arg1, arg2);
+		System.err.println("disparado "+arg0);
+	}
+
+
+
 	public void actionPerformed(ActionEvent e) {
 		super.actionPerformed(e);
 		new Thread(){

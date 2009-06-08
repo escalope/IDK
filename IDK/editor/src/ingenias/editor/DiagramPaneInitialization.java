@@ -299,8 +299,9 @@ public class DiagramPaneInitialization {
 				
 				resources.getButtonModelPanel().removeAll();
 				if (ids.editor.getGraph()!=null){
-					FilteredJToolBar ftb=(FilteredJToolBar)ids.editor.creaPaleta();					
-					ftb.applyFilter(ids.getDiagramFilter());
+					FilteredJToolBar ftb=(FilteredJToolBar)ids.editor.creaPaleta();		
+					if (ids.getDiagramFilter()!=null)
+					 ftb.applyFilter(ids.getDiagramFilter());
 					ScrollableBar modelToolBar = new ScrollableBar(ftb, ScrollableBar.VERTICAL);					
 					//ids.editor.getUpperSidePanel().add(resources.getCommonButtons());
 					resources.getButtonModelPanel().add(modelToolBar, BorderLayout.CENTER);

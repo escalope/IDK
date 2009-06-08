@@ -9,6 +9,7 @@ import ingenias.generator.browser.Browser;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
@@ -81,6 +82,26 @@ public class ButtonToolBar extends JToolBar {
 		jp.add(jc);
 
 		this.add(jp);
+		
+		this.addSeparator();
+		Image img_resize = ImageLoader.getImage("images/arrow_inout.png");
+		ImageIcon resizeIcon = new ImageIcon(img_resize);
+		JButton resize=new JButton(resizeIcon);
+		resize.setToolTipText("Resize");
+		
+		resize.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				if (ButtonToolBar.this.editor.getGraph() != null) {
+					new ingenias.editor.actions.ResizeCurrentDiagramAction(ButtonToolBar.this.editor).resizeCurrentDiagram(arg0);					
+					
+				}
+				
+			}
+			
+		});
+		this.add(resize);
+		
 
 		// Undo
 		this.addSeparator();
@@ -168,7 +189,7 @@ public class ButtonToolBar extends JToolBar {
 								Entity ent=(Entity)((DefaultGraphCell)cell).getUserObject();								
 								int rep=gm.repeatedInstanceInModels(ent.getId());
 								if (rep==1){
-									int res = JOptionPane.showConfirmDialog(null,
+									int res = JOptionPane.showConfirmDialog(ButtonToolBar.this.editor.getGraph(),
 											"Element " + ent.getId() +
 											" of type " + ent.getType() + " is no longer used in other diagrams." +
 											" Do you want to remove it from the objects database (y/n)?",
@@ -307,8 +328,8 @@ public class ButtonToolBar extends JToolBar {
 	}
 
 	public void updateActions(ModelJGraph graph){
-		copy.updateAction(graph.getTransferHandler().getCopyAction());
-		paste.updateAction(graph.getTransferHandler().getPasteAction());
+		copy.updateAction(graph.getTransferHandler().getCopyAction(),graph);
+		paste.updateAction(graph.getTransferHandler().getPasteAction(),graph);
 	}
 
 	public Action getUndo() {

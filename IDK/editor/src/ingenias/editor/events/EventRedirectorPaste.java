@@ -4,6 +4,7 @@ import ingenias.editor.Editor;
 import ingenias.editor.cell.NAryEdge;
 
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
@@ -25,13 +26,14 @@ import org.jgraph.graph.GraphTransferHandler;
  *@author     developer
  *@created    29 de septiembre de 2002
  */
-public class EventRedirectorPaste
+public class EventRedirectorPaste 
 extends EventRedirector
 implements java.io.Serializable {
 	
 	private static Object[] pastedCutObjects;
 	private static JGraph pastedCutModel;
-
+	
+	
 	/**
 	 *  Description of the Field
 	 */
@@ -48,12 +50,14 @@ implements java.io.Serializable {
 		super(editor,a,icon);
 		this.action=a;
 		
+		
 	}
-	
-	
+
 
 	public void actionPerformed(ActionEvent e) {
-		super.actionPerformed(e);		
+		super.actionPerformed(e);	 
+		
+		
 		new Thread(){
 			public void run(){
 				try {

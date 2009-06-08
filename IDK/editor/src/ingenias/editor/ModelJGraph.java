@@ -27,6 +27,7 @@ package ingenias.editor;
 
 import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.ModelDataEntity;
+import ingenias.editor.events.CustomTransferHandler;
 import ingenias.exception.InvalidEntity;
 
 import java.awt.Color;
@@ -79,7 +80,7 @@ public abstract class ModelJGraph extends JGraph implements Cloneable{
 			throw new RuntimeException("IDEState is null  in Model JGraph");
 		creaToolBar();
 		this.setBackground(Color.white);
-
+		this.setTransferHandler(new CustomTransferHandler(om));
 		// this.setTransferHandler(new RelationshipEntityTransferHandler());
 	}
 

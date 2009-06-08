@@ -12,10 +12,12 @@ import ingenias.generator.browser.GraphEntity;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.util.Enumeration;
 
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
@@ -38,6 +40,7 @@ public class ObjectTreeMenuEntries {
 		final MouseEvent me = me1;
 		final TreePath tp = ids.om.arbolObjetos.getSelectionPath();
 		final TreePath[] tps = ids.om.arbolObjetos.getSelectionPaths();
+		
 		if (tp != null && ids.gm.getModel(tp.getPath()) == null) {
 			JGraph jg = ids.gm.getCurrent();
 			final javax.swing.tree.DefaultMutableTreeNode dmtn =
@@ -137,6 +140,20 @@ public class ObjectTreeMenuEntries {
 									}
 								
 							}
+						});
+			} else {
+				menu.add(
+						new AbstractAction("Expand") {
+
+							public void actionPerformed(ActionEvent e){
+								Enumeration<DefaultMutableTreeNode> enumNodes=dmtn.depthFirstEnumeration();
+								while (enumNodes.hasMoreElements()){									
+									DefaultMutableTreeNode next=enumNodes.nextElement();
+									resources.getArbolObjetos().expandPath(new TreePath(next.getPath()));
+								}
+																
+							}
+
 						});
 			}
 		}

@@ -194,7 +194,7 @@ public class RelationshipManager implements java.io.Serializable {
 
 	// Returns the index of the relationship selected by the user between possible ones.
 	// possible relationships contains is an array of String's with the name of relationships.
-	private static Integer getSelectedRelationship(Object[] possibleRelationships) {
+	private static Integer getSelectedRelationship(Object[] possibleRelationships, ModelJGraph graph) {
 		int index = -1;
 		if (possibleRelationships.length > 1) {
 
@@ -202,7 +202,7 @@ public class RelationshipManager implements java.io.Serializable {
 			JPanel temp = new JPanel();
 			temp.add(new JLabel("Select one of the following relationships"));
 			temp.add(pops);
-			int result = JOptionPane.showConfirmDialog(null, temp,
+			int result = JOptionPane.showConfirmDialog(graph, temp,
 					"Valid Relationships",
 					JOptionPane.OK_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE);
@@ -350,7 +350,7 @@ public class RelationshipManager implements java.io.Serializable {
 				nEdge = existAlreadyRelationship;
 				//System.err.println("Relacion previa");
 			} else {
-				int sel = getSelectedRelationship(ops).intValue();
+				int sel = getSelectedRelationship(ops, graph).intValue();
 				if (sel >= 0) {
 					// N-ary relationship.
 					nEdge = (NAryEdge) graph.getInstanciaNRelacion(ops[sel].toString(), selected);
@@ -362,7 +362,7 @@ public class RelationshipManager implements java.io.Serializable {
 				GraphCell[] newSelected = nEdge.prepareSelected(selected);
 				// The user selects a role assignation (List of Strings).
 				java.util.List currentAssignation = selectAssignation(newSelected,
-						nEdge);
+						nEdge,graph);
 				if (currentAssignation != null) {
 					// Connections that will be inserted into the Model.
 					String[] selectedAssignation = new String[currentAssignation.size()];
@@ -436,7 +436,7 @@ public class RelationshipManager implements java.io.Serializable {
 
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Assignation not allowed",
+					JOptionPane.showMessageDialog(graph, "Assignation not allowed",
 							"Warning",
 							JOptionPane.WARNING_MESSAGE);
 				}
@@ -446,7 +446,7 @@ public class RelationshipManager implements java.io.Serializable {
 		}
 		else 
 		{
-			JOptionPane.showMessageDialog(null, "Relationship not allowed", "Warning",
+			JOptionPane.showMessageDialog(graph, "Relationship not allowed", "Warning",
 					JOptionPane.WARNING_MESSAGE);
 		}
 		return nEdge;
@@ -507,7 +507,7 @@ public class RelationshipManager implements java.io.Serializable {
 	
 	// Selects a roles assignation for the given NAryEdge and selected cells to connect.
 	// The assignation is represented as a List of Strings.
-	private static java.util.List selectAssignation(GraphCell[] selected, NAryEdge nEdge) {
+	private static java.util.List selectAssignation(GraphCell[] selected, NAryEdge nEdge, ModelJGraph graph) {
 		// assignations is a Vector of Vectors of Strings where Strings represents roles.
 		Vector assignations = new Vector(nEdge.assignRoles(selected, true));
 		// The user selects one possible assignation.
@@ -515,7 +515,7 @@ public class RelationshipManager implements java.io.Serializable {
 				assignations);
 		if (displayedAssignations.length>1){
 		// Ask the user to select a role assignation.
-		String selectedOption = (String) JOptionPane.showInputDialog(null,
+		String selectedOption = (String) JOptionPane.showInputDialog(graph,
 				"Select one of the following assignations", "Valid Assignations",
 				JOptionPane.OK_CANCEL_OPTION, null,
 				displayedAssignations, displayedAssignations[0]);

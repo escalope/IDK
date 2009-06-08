@@ -36,6 +36,77 @@ import javax.swing.SwingUtilities;
 
 import ingenias.editor.entities.*;
 
+
+
+interface Filter { 
+	public boolean pass(DefaultMutableTreeNode obj);
+	public void setFilteredOff(boolean pass);
+	public boolean isFiltered();
+}
+class MyFilter implements Filter {
+	boolean pass=true;
+	public boolean pass(DefaultMutableTreeNode obj) { 
+		if (pass) return true;
+		//System.err.println(obj.getUserObject().getClass().getName());
+		///boolean oldPass=pass; // to enable the use of getlastleaf isleaf
+		//pass=true;
+		Enumeration dfe=obj.depthFirstEnumeration();		
+		
+		boolean someEntity=false;	
+		while (dfe.hasMoreElements() && !someEntity){
+			DefaultMutableTreeNode next = (DefaultMutableTreeNode) dfe.nextElement();			
+			someEntity=next.isLeaf() && !(next.getUserObject() instanceof java.lang.String);
+		}
+		boolean shouldPass= someEntity;
+		//pass=oldPass;
+		return shouldPass;
+	}
+
+	public void setFilteredOff(boolean pass) { this.pass=pass; }
+	public boolean isFiltered() { return pass; }
+}
+
+class FilterTreeModel extends DefaultTreeModel {
+	Filter filter;
+	
+	public FilterTreeModel(TreeNode root, Filter filter) {
+		super(root);
+		this.filter =filter;
+	}
+	
+	public void setFilteredOff(boolean pass) {
+		filter.setFilteredOff(pass);
+		Object[] path = {root};
+		int[] childIndices  = new int[root.getChildCount()];      
+		Object[] children  = new Object[root.getChildCount()];
+		for (int i = 0; i < root.getChildCount(); i++) {
+			childIndices[i] = i;
+			children[i] = root.getChildAt(i);
+		}
+		fireTreeStructureChanged(this,path,childIndices, children);
+	}
+	
+	public int getChildCount(Object parent) {
+
+		int realCount = super.getChildCount(parent), filterCount=0;;
+		for (int i=0; i<realCount; i++) {
+			DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)super.getChild(parent,i);
+			if (filter.pass(dmtn)) filterCount++;
+		}
+		return filterCount;
+	}
+	public Object getChild(Object parent, int index) {
+
+		int cnt=-1;
+		for (int i=0; i<super.getChildCount(parent); i++) {
+			Object child = super.getChild(parent,i);
+			if (filter.pass((DefaultMutableTreeNode) child)) cnt++;
+			if (cnt==index) return child;
+		}
+		return null;
+	}
+}
+
 public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode implements java.io.Serializable {
 
 
@@ -274,10 +345,20 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 		return om;
 	}
 
+	public void setFilteredOff(boolean filterOn){
+		((FilterTreeModel)this.arbolObjetos.getModel()).setFilteredOff(filterOn);
+		reload();
+	}
+
 	private ObjectManager(javax.swing.tree.DefaultMutableTreeNode root,JTree arbolObjetos) {
 		super("System Objects");
 		this.root=root;
 		this.arbolObjetos=arbolObjetos;
+		MyFilter mf = new MyFilter();
+
+		this.arbolObjetos.setModel(new FilterTreeModel((TreeNode) arbolObjetos.getModel().getRoot(),
+				mf));
+		System.err.println("filtering ............");
 
 		DecisionNodeNode=new javax.swing.tree.DefaultMutableTreeNode("DecisionNode");
 
@@ -729,6 +810,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
 		addNodeInSortedOrder( INGENIASObjectNode,WorkflowNode);
 
+		setFilteredOff(false);
+		reload();
 	}
 
 	// Function is a contribution from Ike http://www.groupsrv.com/computers/about116987.html
@@ -737,18 +820,18 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 		int n = parent.getChildCount();
 		if(n==0){
 			parent.add(child);
-			return;
-		}
-		DefaultMutableTreeNode node=null;
-		for(int i=0;i<n;i++){
-			node = (DefaultMutableTreeNode)parent.getChildAt(i);
-			if(node.toString().compareTo(child.toString())>0){
-				parent.insert(child, i);
-				return;
+
+		} else {
+			DefaultMutableTreeNode node=null;
+			for(int i=0;i<n;i++){
+				node = (DefaultMutableTreeNode)parent.getChildAt(i);
+				if(node.toString().compareTo(child.toString())>0){
+					parent.insert(child, i);
+					return;
+				}
 			}
+			parent.add(child);
 		}
-		parent.add(child);
-		return;
 	}
 
 
@@ -2473,6 +2556,7 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
 
 	public void reload(){
+///		((DefaultTreeModel) this.arbolObjetos.getModel()).reload();
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run() {
 				Enumeration expanded=arbolObjetos.getExpandedDescendants(new TreePath(root.getPath()));
@@ -2735,12 +2819,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
 
 
-	public void setRoot(javax.swing.tree.DefaultMutableTreeNode root) {
-		this.root = root;
-	}
-
 	public javax.swing.tree.DefaultMutableTreeNode getRoot() {
-		return root;
+		return (DefaultMutableTreeNode) arbolObjetos.getModel().getRoot();
 	}
 }
 

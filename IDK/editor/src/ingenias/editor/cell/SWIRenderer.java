@@ -52,7 +52,7 @@ public class SWIRenderer {
   }
 
   public static SwingEngine getAnotherSWIEngine() {
-    SwingEngine swiengine = new SwingEngine(null);
+    SwingEngine swiengine = new SwingEngine(null); 
        swiengine.getTaglib().registerTag("stereotype".toLowerCase(),
                                       ingenias.editor.rendererxml.JLabelStereotype.class);
     swiengine.getTaglib().registerTag("htmllabel".toLowerCase(),

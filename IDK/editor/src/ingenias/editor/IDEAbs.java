@@ -192,7 +192,7 @@ implements java.io.Serializable,IDEUpdater
 			final JCheckBoxMenuItem menuEntry=new JCheckBoxMenuItem();
 			profileSelector.add(menuEntry);
 			menuEntry.setText(df.getName());
-			if (df.equals(oldDiagramFilter)){
+			if (oldDiagramFilter!=null && df.equals(oldDiagramFilter)){
 				defaultMenuEntry=menuEntry;
 				defaultFilter=oldDiagramFilter;
 			}
@@ -570,7 +570,7 @@ implements java.io.Serializable,IDEUpdater
 
 
 	void resizeAll_actionPerformed(ActionEvent e) {
-		new ResizeCurrentDiagramAction(ids,resources).resizeCurrentDiagram(e);
+		new ResizeCurrentDiagramAction(ids.editor).resizeCurrentDiagram(e);
 
 	}
 

@@ -63,7 +63,13 @@ public class FilterManager {
 
 			}
 			else {
-			 filterIS=new FileInputStream("configs/default.xml");
+				try {
+					filterIS=baseURL.openStream();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					filterIS=new FileInputStream(filePath);					
+				}
+			 
 			}
 			//     System.err.println(baseURL);
 		}

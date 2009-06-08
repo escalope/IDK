@@ -340,8 +340,7 @@ public class MentalStateProcessor implements  LocksListener {
 					}
 					MainInteractionManager.logMSP("Not considering task "+t.getID()+" because there are not all required inputs, concretely "+missingitems+"  are missing",
 							ja.getLocalName(),t.getID(), t.getType());
-					MainInteractionManager.logMSP("Not considering task "+t.getID()+" because there are not all required inputs, concretely "+missingitems+"  are missing",
-							ja.getLocalName(),t.getID(), t.getType());
+				
 				}
 
 				if (lockedInputs.size()!=0){

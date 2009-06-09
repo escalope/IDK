@@ -15,10 +15,12 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Hashtable;
 import java.util.Map;
 
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
 
 import org.jgraph.JGraph;
@@ -80,7 +82,7 @@ public class CustomTransferHandler extends GraphTransferHandler{
 					GraphTransferable gt = (GraphTransferable) obj;
 
 					// Get Transferred Cells
-					Object[] cells = gt.getCells();
+					final Object[] cells = gt.getCells();
 
 					// Check if all cells are in the model
 					boolean allInModel = true;
@@ -106,13 +108,43 @@ public class CustomTransferHandler extends GraphTransferHandler{
 					if (!allInModel)
 						return false;
 					else {
-						for (int i = 0; i < cells.length && allInModel; i++){
-							if (cells[i] instanceof DefaultGraphCell &&
-									!(cells[i] instanceof NAryEdge)){
-								ingenias.editor.entities.Entity ent=
-									(Entity) ((DefaultGraphCell)cells[i]).getUserObject();
-								om.insert(ent);
-							}					
+						for ( int i = 0; i < cells.length && allInModel; i++){
+							final Object currentCell=cells[i];
+							Runnable createNewNonExistingEntities=new Runnable(){
+							 public void run(){
+								 if (currentCell instanceof DefaultGraphCell &&
+											!(currentCell instanceof NAryEdge)){
+										ingenias.editor.entities.Entity ent=
+											(Entity) ((DefaultGraphCell)currentCell).getUserObject();
+										if (om.findUserObject(ent.getId()).isEmpty())
+											try {
+												om.insert(ent);
+											} catch (SecurityException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (IllegalArgumentException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (NoSuchFieldException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (NoSuchMethodException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (IllegalAccessException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (InvocationTargetException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+								 }
+								
+							 }
+							};
+							SwingUtilities.invokeLater(createNewNonExistingEntities);
+							 
+												
 						}	
 					}
 						

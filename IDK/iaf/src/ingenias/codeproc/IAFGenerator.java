@@ -714,10 +714,15 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	private Vector getAgentGoals(GraphEntity agent) throws NullEntity {
 		Vector directGoals = Utils.getRelatedElementsVector(agent,
 				"GTPursues",
-		"GTPursuestarget");
-		Vector rolesPlayed = Utils.getRelatedElementsVector(agent,
+		"GTPursuestarget");		
+		Vector<GraphEntity> rolesPlayed = Utils.getRelatedElementsVector(agent,
 				"WFPlays",
 		"WFPlaystarget");
+		Vector<GraphEntity> additionalRoles=new Vector<GraphEntity>();
+		for (GraphEntity ge:rolesPlayed){
+			additionalRoles.addAll(getAscendantsOfRole(ge));
+		}
+		rolesPlayed.addAll(additionalRoles);
 		Enumeration enumeration = rolesPlayed.elements();
 		while (enumeration.hasMoreElements()) {
 			GraphEntity role = (GraphEntity) enumeration.nextElement();

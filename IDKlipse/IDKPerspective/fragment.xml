@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<fragment>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="ingenias.plugin.perspective.IDKPerspective"
+            icon="icons/releng_gears.gif"
+            id="ingenias.plugin.perspective.IDKPerspective"
+            name="IDK Perspective">
+      </perspective>
+
+   </extension>
+
+</fragment>

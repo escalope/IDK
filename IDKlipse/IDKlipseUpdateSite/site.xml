@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/IDKlipse_0.0.13.jar" id="IDKlipse" version="0.0.13" os="aix,hpux,linux,macosx,qnx,solaris,win32" ws="carbon,gtk,motif,photon,win32,wpf" nl="en_US" arch="ia64,ia64_32,PA_RISC,ppc,sparc,x86,x86_64"/>
+   <category-def name="IDK" label="IDK"/>
+</site>

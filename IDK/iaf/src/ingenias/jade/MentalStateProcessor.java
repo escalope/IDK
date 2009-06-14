@@ -99,26 +99,28 @@ public class MentalStateProcessor implements  LocksListener {
 
 						e.printStackTrace();
 					}
-					
+
 				}
 				synchronized(monitorDoReplanQueue){
 					doReplan.remove(0);
 				}
 				//System.err.println("replanning "+doReplan.size());				
 				replan();	
+				if (tem.isInteractionsProcessed()){
+					// Do not execute other tasks until the interactions associated
+					// with the current one are processed.
+					OneShotBehaviour osb=new OneShotBehaviour(){
 
-				OneShotBehaviour osb=new OneShotBehaviour(){
+						@Override
+						public void action() {
+							state = AgentStates.DECISION_FINISHED;
+							processQueues();
+							state=AgentStates.EXECUTION_FINISHED;
+						}
 
-					@Override
-					public void action() {
-						state = AgentStates.DECISION_FINISHED;
-						processQueues();
-						state=AgentStates.EXECUTION_FINISHED;
-					}
-					
-				};
-				ja.addBehaviour(osb);
-				
+					};
+					ja.addBehaviour(osb);
+				}
 			}
 
 		}
@@ -201,7 +203,7 @@ public class MentalStateProcessor implements  LocksListener {
 							this.ja.getAID().getLocalName(),nextTask.getID(), nextTask.getType());
 					DebugUtils.logEvent("TaskAborted", new String[]{ja.getAID().getLocalName(),nextTask.getType(),nextTask.getID(),missingitems.toString()});
 					queues.taskExecuted(nextTask);
-					
+
 				} else
 				{
 					processTaskExecution(nextTask);
@@ -293,7 +295,7 @@ public class MentalStateProcessor implements  LocksListener {
 			StateGoal sg=(StateGoal)enumeration.nextElement();
 
 			Vector<Task> tasks=this.ja.tasksThatSatisfyGoal(sg.getId());
-		/*	// schedule first those tasks affecting conversations not finished/aborted
+			/*	// schedule first those tasks affecting conversations not finished/aborted
 			Vector<Task> finishedTasks=new Vector<Task>(); 
 			for (Task t:tasks){
 				if (t.getConversationContext()!=null){
@@ -340,7 +342,7 @@ public class MentalStateProcessor implements  LocksListener {
 					}
 					MainInteractionManager.logMSP("Not considering task "+t.getID()+" because there are not all required inputs, concretely "+missingitems+"  are missing",
 							ja.getLocalName(),t.getID(), t.getType());
-				
+
 				}
 
 				if (lockedInputs.size()!=0){
@@ -430,7 +432,7 @@ public class MentalStateProcessor implements  LocksListener {
 					final Task t=(Task)tasks.elementAt(k);
 
 					queues.scheduleTask(t);
-					
+
 
 				}
 				MainInteractionManager.logMSP("Current scheduled tasks:"+queues.getScheduledTasks(),this.ja.getLocalName());

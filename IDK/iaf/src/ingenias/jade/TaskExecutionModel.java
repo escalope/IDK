@@ -71,6 +71,11 @@ public class TaskExecutionModel {
 
 
 	};
+	private Vector<String> interactionsProcessed=new Vector<String>();
+
+	public boolean isInteractionsProcessed() {
+		return interactionsProcessed.isEmpty();
+	}
 
 	public TaskExecutionModel(String agentName){
 		conversationModificationAndNotificationThread.setName("TaskExecutionModel "+agentName);
@@ -161,6 +166,7 @@ public class TaskExecutionModel {
 		for (int k=0;k<newInteractions.size();k++){
 			final RuntimeConversation current=newInteractions.elementAt(k);
 			//ja.getLM().addInteractionLocks(current.getInteraction().getId());
+			this.interactionsProcessed.add("OneToGo");
 			ja.addBehaviour(new OneShotBehaviour(){
 				@Override
 				public void action() {
@@ -205,6 +211,7 @@ public class TaskExecutionModel {
 						current.setState("ABORTED");
 						current.setAbortCode(IAFProperties.NO_AGENTS_FOUND);
 					}
+					interactionsProcessed.remove(0);
 				}
 
 				private void copyContentFromTempConversationToNewConversation(
@@ -334,6 +341,7 @@ public class TaskExecutionModel {
 					return found;
 				}
 			});	
+			
 
 		}
 	}

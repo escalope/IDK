@@ -173,7 +173,12 @@ public class IDEState  implements java.io.Serializable, DiagramChangeHandler {
 		this.prop=new Properties();
 		prop.putAll(oldProperties);
 		currentFile=null;
+		try {
 		this.setDiagramFilter(FilterManager.getINGENIASConfiguration(this.getClass().getClassLoader()));
+		} catch (Throwable t){
+			System.err.println("Could not load the default filter from classpath");
+			System.err.println(t.getMessage());
+		}
 		//  ingenias.editor.persistence.PersistenceManager.defaultProperties(prop);
 	}
 

@@ -166,8 +166,12 @@ public class PersistenceManager {
 			JFileChooser jfc = new JFileChooser();
 			File homedir = jfc.getCurrentDirectory();
 			String filename = homedir.getPath() + "/.idk/idkproperties.xml";
+			if (!new File(homedir.getPath() + "/.idk").exists() ){
+				new File(homedir.getPath() + "/.idk").mkdir();
+			}
 			java.io.FileOutputStream fos = new java.io.FileOutputStream(
 					filename);
+	
 			fos
 			.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<preferences>\n"
 					.getBytes());

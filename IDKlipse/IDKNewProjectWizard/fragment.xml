@@ -11,7 +11,7 @@
             class="ingenias.plugin.wizard.IDKProjectCreationWizard"
             finalPerspective="ingenias.plugin.perspective.IDKPerspective"
             hasPages="true"
-            icon="icons/idk.ico"
+            icon="icons/idkicon.gif"
             id="ingenias.plugin.wizard.IDKProjectCreationWizard"
             name="IDKProject"
             project="true">

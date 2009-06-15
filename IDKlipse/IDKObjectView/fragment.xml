@@ -10,9 +10,9 @@
       <view
             category="ingenias.plugin.idk"
             class="ingenias.plugin.views.SpecificationObjectView"
-            icon="icons/releng_gears.gif"
+            icon="icons/idkicon.gif"
             id="ingenias.plugin.views.SpecificationObjectView"
-            name="Object view"
+            name="Entities"
             restorable="true">
       </view>
    </extension>

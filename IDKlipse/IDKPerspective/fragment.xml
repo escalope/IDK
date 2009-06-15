@@ -5,7 +5,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="ingenias.plugin.perspective.IDKPerspective"
-            icon="icons/releng_gears.gif"
+            icon="icons/idkicon.gif"
             id="ingenias.plugin.perspective.IDKPerspective"
             name="IDK Perspective">
       </perspective>

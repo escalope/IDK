@@ -251,16 +251,16 @@ public class IDKProjectCreationWizard extends Wizard implements INewWizard {
 				String targetFileLocation=container.getLocation().toString();
 				// Copy Files
 				int selectedTemplate = projectNamePage.getAvailableTemplates();
-
+				System.err.println("Seleccionado "+selectedTemplate);
 				switch (selectedTemplate){
 				case 0:
 					FileCopy.copyFile(monitor, targetFileLocation,"lib/exampleHelloWorld.idk","/spec/specification.idk");
 					break;
 				case 1:
-					FileCopy.copyFile(monitor, targetFileLocation,"lib/exampleGUIAgent.idk","/spec/specification.idk");
+					FileCopy.copyFile(monitor, targetFileLocation,"lib/exampleInteraction.idk","/spec/specification.idk");
 					break;
 				case 2:
-					FileCopy.copyFile(monitor, targetFileLocation,"lib/exampleInteraction.idk","/spec/specification.idk");
+					FileCopy.copyFile(monitor, targetFileLocation,"lib/exampleGUIAgent.idk","/spec/specification.idk");
 					break;
 				default:
 					break;

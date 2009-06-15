@@ -10,9 +10,9 @@
       <view
             category="ingenias.plugin.idk"
             class="ingenias.plugin.views.IDKAntRunView"
-            icon="icons/tabrunnericon.gif"
+            icon="icons/idkicon.gif"
             id="ingenias.plugin.views.IDKAntRunView"
-            name="IDK run"
+            name="run"
             restorable="true">
       </view>
    </extension>

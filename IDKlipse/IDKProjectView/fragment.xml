@@ -7,9 +7,9 @@
          point="org.eclipse.ui.views">
       <view
             class="ingenias.plugin.views.SpecificationView"
-            icon="icons/releng_gears.gif"
+            icon="icons/idkicon.gif"
             id="ingenias.plugin.views.SpecificationView"
-            name="IDK View">
+            name="Diagrams">
       </view>
       <category
             id="IDKEditor.category1"

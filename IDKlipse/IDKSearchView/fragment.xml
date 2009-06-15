@@ -7,9 +7,9 @@
       <view
             category="ingenias.plugin.idk"
             class="ingenias.plugin.views.SearchView"
-            icon="icons/releng_gears.gif"
+            icon="icons/idkicon.gif"
             id="ingenias.plugin.views.SearchView"
-            name="Search view"
+            name="Search"
             restorable="true">
       </view>
    </extension>

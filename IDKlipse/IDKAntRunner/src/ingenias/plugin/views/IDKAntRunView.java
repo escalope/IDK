@@ -261,44 +261,45 @@ public class IDKAntRunView extends ViewPart {
 	}
 
 
-	private void fillInTreeWithTasks(){
+	private boolean fillInTreeWithTasks(){
 		targetTable.clear();
 		runner = new AntRunner();
 
-
 		pathProject=project.getLocation().toString();
-		runner.setBuildFileLocation(pathProject+"/build.xml");
-		titleLabel.setText("Project "+project.getName());
-		TargetInfo[] targets;
+		if (new File(pathProject+"/build.xml").exists()){
+			runner.setBuildFileLocation(pathProject+"/build.xml");
+			titleLabel.setText("Project "+project.getName());
+			TargetInfo[] targets;
 
-		try {
-			targets = runner.getAvailableTargets();
-			for (TargetInfo target:targets){
-				if (target.getName().startsWith("run")||target.getName().startsWith("debug")){
-					DefaultMutableTreeNode node=new DefaultMutableTreeNode();
-					node.setUserObject(target.getName());
-					root.add(node);
-					node.setParent(root); 
-					targetTable.put(target.getName(),target);
+			try {
+				targets = runner.getAvailableTargets();
+				for (TargetInfo target:targets){
+					if (target.getName().startsWith("run")||target.getName().startsWith("debug")){
+						DefaultMutableTreeNode node=new DefaultMutableTreeNode();
+						node.setUserObject(target.getName());
+						root.add(node);
+						node.setParent(root); 
+						targetTable.put(target.getName(),target);
+					}
+
 				}
-
+				return true;
+			} catch (CoreException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-		} catch (CoreException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
-
-
+		return false;
 
 
 	}
 
 	private void initializeWithModel(){
-		IProject oldProject = getSelectedProject(this.getSite().getShell());
-		if ((project==null && oldProject!=null) ||  
-				(oldProject!=null && project==null) || 
-				(oldProject!=null && !oldProject.equals(project))){
-			project=oldProject;
+		IProject newProject = getSelectedProject(this.getSite().getShell());
+		if (	((newProject!=null && project==null) || 
+				(newProject!=null && !newProject.equals(project))) &&
+				new File(newProject.getLocation().toString()+"/build.xml").exists()){
+			project=newProject;
 			mainPanel.removeAll();
 			root=new DefaultMutableTreeNode("Run targets");
 			fillInTreeWithTasks();
@@ -347,7 +348,7 @@ public class IDKAntRunView extends ViewPart {
 
 								findFileInPlugin(getSite().getPluginId(),"icons/exectask.png").toFile().toString()));
 					} catch (MalformedURLException e) {
-					
+
 						e.printStackTrace();
 					} catch (IOException e) {
 						e.printStackTrace();

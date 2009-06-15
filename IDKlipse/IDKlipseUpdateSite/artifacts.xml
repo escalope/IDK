@@ -1,41 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?artifactRepository class='org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepository' version='1.0.0'?>
-<repository name='file:/home/jj/idk/idklipse/workplugin/IDKlipseUpdateSite/ - artifacts' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
+<repository name='file:/home/jj/idk/trunk/IDKlipse/IDKlipseUpdateSite/ - artifacts' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
   <properties size='2'>
     <property name='p2.compressed' value='false'/>
-    <property name='p2.timestamp' value='1244037581157'/>
+    <property name='p2.timestamp' value='1245006277290'/>
   </properties>
   <mappings size='3'>
     <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
     <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
     <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
   </mappings>
-  <artifacts size='21'>
-    <artifact classifier='osgi.bundle' id='IDKEditor' version='0.7.0'>
+  <artifacts size='29'>
+    <artifact classifier='osgi.bundle' id='IDKPerspective' version='1.0.2'>
       <properties size='3'>
-        <property name='artifact.size' value='18895330'/>
-        <property name='download.size' value='18895330'/>
+        <property name='artifact.size' value='2224'/>
+        <property name='download.size' value='2224'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
     <artifact classifier='osgi.bundle' id='IDKEditor' version='0.7.0'>
       <properties size='3'>
-        <property name='artifact.size' value='18889051'/>
-        <property name='download.size' value='18889051'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='IDKProjectView' version='0.4.0'>
-      <properties size='3'>
-        <property name='artifact.size' value='11119'/>
-        <property name='download.size' value='11119'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='IDKNewProjectWizard' version='0.3.0'>
-      <properties size='3'>
-        <property name='artifact.size' value='78426'/>
-        <property name='download.size' value='78426'/>
+        <property name='artifact.size' value='19107676'/>
+        <property name='download.size' value='19107676'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
@@ -45,65 +31,24 @@
         <property name='download.size' value='12573'/>
       </properties>
     </artifact>
-    <artifact classifier='osgi.bundle' id='IDKEditor' version='0.6.0'>
-      <properties size='3'>
-        <property name='artifact.size' value='18880532'/>
-        <property name='download.size' value='18880532'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
     <artifact classifier='osgi.bundle' id='IDKNewProjectWizard' version='0.3.0'>
       <properties size='3'>
-        <property name='artifact.size' value='82786'/>
-        <property name='download.size' value='82786'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='IDKAntRunner' version='3.0.0'>
-      <properties size='3'>
-        <property name='artifact.size' value='15713'/>
-        <property name='download.size' value='15713'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
-    <artifact classifier='org.eclipse.update.feature' id='IDKlipse' version='0.0.11'>
-      <properties size='2'>
-        <property name='artifact.size' value='12572'/>
-        <property name='download.size' value='12572'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='IDKEditor' version='0.7.0'>
-      <properties size='3'>
-        <property name='artifact.size' value='18886025'/>
-        <property name='download.size' value='18886025'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='IDKBasicActions' version='1.0.2'>
-      <properties size='3'>
-        <property name='artifact.size' value='170733'/>
-        <property name='download.size' value='170733'/>
+        <property name='artifact.size' value='83410'/>
+        <property name='download.size' value='83410'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
     <artifact classifier='osgi.bundle' id='IDKEditor' version='0.7.0'>
       <properties size='3'>
-        <property name='artifact.size' value='18880395'/>
-        <property name='download.size' value='18880395'/>
+        <property name='artifact.size' value='19107777'/>
+        <property name='download.size' value='19107777'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
-    <artifact classifier='osgi.bundle' id='IDKPerspective' version='1.0.2'>
+    <artifact classifier='osgi.bundle' id='IDKProjectView' version='0.4.0'>
       <properties size='3'>
-        <property name='artifact.size' value='2229'/>
-        <property name='download.size' value='2229'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='IDKNewProjectWizard' version='0.3.0'>
-      <properties size='3'>
-        <property name='artifact.size' value='82787'/>
-        <property name='download.size' value='82787'/>
+        <property name='artifact.size' value='11822'/>
+        <property name='download.size' value='11822'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
@@ -115,15 +60,8 @@
     </artifact>
     <artifact classifier='osgi.bundle' id='IDKNewProjectWizard' version='0.3.0'>
       <properties size='3'>
-        <property name='artifact.size' value='82788'/>
-        <property name='download.size' value='82788'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='IDKObjectView' version='1.0.3'>
-      <properties size='3'>
-        <property name='artifact.size' value='11722'/>
-        <property name='download.size' value='11722'/>
+        <property name='artifact.size' value='83403'/>
+        <property name='download.size' value='83403'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
@@ -133,24 +71,142 @@
         <property name='download.size' value='12573'/>
       </properties>
     </artifact>
-    <artifact classifier='osgi.bundle' id='IDKRefreshLibraries' version='1.0.0'>
+    <artifact classifier='osgi.bundle' id='IDKObjectView' version='1.0.3'>
       <properties size='3'>
-        <property name='artifact.size' value='2245'/>
-        <property name='download.size' value='2245'/>
+        <property name='artifact.size' value='12428'/>
+        <property name='download.size' value='12428'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
     <artifact classifier='osgi.bundle' id='IDKSearchView' version='1.0.2'>
       <properties size='3'>
-        <property name='artifact.size' value='7805'/>
-        <property name='download.size' value='7805'/>
+        <property name='artifact.size' value='7806'/>
+        <property name='download.size' value='7806'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKNewProjectWizard' version='0.3.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='83353'/>
+        <property name='download.size' value='83353'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKEditor' version='0.7.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='19107541'/>
+        <property name='download.size' value='19107541'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKProjectView' version='0.4.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='12383'/>
+        <property name='download.size' value='12383'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKBasicActions' version='1.0.2'>
+      <properties size='3'>
+        <property name='artifact.size' value='22029'/>
+        <property name='download.size' value='22029'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
     <artifact classifier='osgi.bundle' id='IDKRefreshLibraries' version='1.0.0'>
       <properties size='3'>
-        <property name='artifact.size' value='4053'/>
-        <property name='download.size' value='4053'/>
+        <property name='artifact.size' value='5145'/>
+        <property name='download.size' value='5145'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKEditor' version='0.7.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='19102684'/>
+        <property name='download.size' value='19102684'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKPerspective' version='1.0.2'>
+      <properties size='3'>
+        <property name='artifact.size' value='2220'/>
+        <property name='download.size' value='2220'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKNewProjectWizard' version='0.3.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='82790'/>
+        <property name='download.size' value='82790'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKEditor' version='0.7.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='19107438'/>
+        <property name='download.size' value='19107438'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKAntRunner' version='3.0.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='15704'/>
+        <property name='download.size' value='15704'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKAntRunner' version='3.0.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='16265'/>
+        <property name='download.size' value='16265'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKEditor' version='0.7.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='18910340'/>
+        <property name='download.size' value='18910340'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='IDKlipse' version='0.0.11'>
+      <properties size='2'>
+        <property name='artifact.size' value='12572'/>
+        <property name='download.size' value='12572'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKSearchView' version='1.0.2'>
+      <properties size='3'>
+        <property name='artifact.size' value='7801'/>
+        <property name='download.size' value='7801'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKNewProjectWizard' version='0.3.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='82789'/>
+        <property name='download.size' value='82789'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKObjectView' version='1.0.3'>
+      <properties size='3'>
+        <property name='artifact.size' value='12987'/>
+        <property name='download.size' value='12987'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKAntRunner' version='3.0.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='16201'/>
+        <property name='download.size' value='16201'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='IDKEditor' version='0.7.0'>
+      <properties size='3'>
+        <property name='artifact.size' value='18901860'/>
+        <property name='download.size' value='18901860'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>

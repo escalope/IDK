@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="IDKlipseUpdateSite" componentType="buckminster" version="1.0.0" versionType="OSGi">
+    <cs:dependencies>
+        <cs:dependency name="IDKlipse" componentType="eclipse.feature"/>
+    </cs:dependencies>
+    <cs:artifacts>
+        <cs:public name="site.rootFiles" path="index.html"/>
+        <cs:public name="site.template" path="site.xml"/>
+    </cs:artifacts>
+    <cs:actions>
+        <cs:public name="build.site" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFileId" value="buckminster.pdetasks"/>
+                <cs:property key="targets" value="create.site"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="site.name" value="test.archivedsite"/>
+            </cs:properties>
+            <cs:prerequisites>
+                <cs:attribute name="bundle.jar" alias="plugins"/>
+                <cs:attribute name="feature.jars" alias="features"/>
+                <cs:attribute name="site.rootFiles" alias="rootFiles"/>
+                <cs:attribute name="site.template" alias="template"/>
+            </cs:prerequisites>
+            <cs:products alias="action.output" base="site/"/>
+        </cs:public>
+    </cs:actions>
+    <cs:groups>
+        <cs:private name="bundle.jar">
+            <cs:attribute name="bundle.jars" component="IDKlipse"/>
+        </cs:private>
+        <cs:private name="feature.jars">
+            <cs:attribute name="feature.jar" component="IDKlipse"/>
+        </cs:private>
+    </cs:groups>
+</cs:cspec>

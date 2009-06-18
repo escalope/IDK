@@ -570,6 +570,10 @@
 		<fileset dir="images/"></fileset>
 	</copy>
 
+	<copy todir="${tempidk}/configs">
+		<fileset dir="configs/"></fileset>
+	</copy>
+
 	<copy todir="${tempidk}/ingenias/editor/rendererxml">
 		<fileset dir="src/ingenias/editor/rendererxml"></fileset>
 	</copy>

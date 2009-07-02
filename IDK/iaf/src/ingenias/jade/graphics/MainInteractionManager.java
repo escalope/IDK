@@ -382,6 +382,7 @@ extends javax.swing.JFrame {
 				try {
 
 					MainInteractionManager.getInstance().logFile.write((sbl.toString()+"|").getBytes());
+					MainInteractionManager.getInstance().logFile.write((cdate.getTime()+"|").getBytes());
 					MainInteractionManager.getInstance().logFile.write((agent+"|").getBytes());
 					MainInteractionManager.getInstance().logFile.write((message+"|").getBytes());
 					MainInteractionManager.getInstance().logFile.write(("\n").getBytes());

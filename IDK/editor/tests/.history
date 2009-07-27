@@ -1,0 +1,25 @@
+Fixtures are used to setup and launch the application under test. Every testcase should start with clean slate. This state can be setup in the setup() function of the Fixture.
+click('DnDJTree', 'Project')
+		select('DnDJTree', '[Project]')
+		rightclick('DnDJTree', 'Project')
+		select_menu('Add EnvironmentModel')
+		select('DnDJTree', '[Project]')
+
+		if window('New graph'):
+			select('OptionPane.textField', 'e1')
+			click('OK')
+		close()
+		assert_content('DnDJTree', [ ['Project', 'e1']
+])
+click('DnDJTree', 'Project')
+		select('DnDJTree', '[Project]')
+		rightclick('DnDJTree', 'Project')
+		select_menu('Add EnvironmentModel')
+		select('DnDJTree', '[Project]')
+
+		if window('New graph'):
+			select('OptionPane.textField', 'e1')
+			click('OK')
+		close()
+		assert_content('DnDJTree', [ ['Project', 'e1']
+])

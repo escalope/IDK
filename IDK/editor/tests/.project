@@ -1,0 +1,23 @@
+#Marathon Project File
+#Fri Apr 03 18:05:21 CEST 2009
+marathon.checklist.dir=%marathon.project.dir%/Checklists
+marathon.test.dir=%marathon.project.dir%/TestCases
+marathon.application.launchtime=60000
+marathon.application.pythonpath=
+marathon.runtime.assertions=Enabled\:\:;Background\:\:;Foreground\:\:;RowCount\:javax.swing.JTable\:;ColumnCount\:javax.swing.JTable\:;ItemCount\:javax.swing.JComboBox\:;Model.Size\:javax.swing.JList\:ItemCount;Font\:\:;Font.Family\:\:FontFamily;Border\:\:;Border.LineColor\:\:BorderLineColor
+marathon.component.ignore.components=javax.swing.JMenuBar(ignorechild\:false);javax.swing.JToolBar(ignorechild\:false);javax.swing.JPanel(ignorechild\:false);javax.swing.JViewport(ignorechild\:false);javax.swing.JScrollBar(ignorechild\:true)
+marathon.application.classpath=%marathon.project.dir%/../bin;%marathon.project.dir%/../lib/ant.jar;%marathon.project.dir%/../lib/antl.jar;%marathon.project.dir%/../lib/antlr-2.7.7.jar;%marathon.project.dir%/../lib/antlr.jar;%marathon.project.dir%/../lib/Base64.jar;%marathon.project.dir%/../lib/batik-anim.jar;%marathon.project.dir%/../lib/batik-awt-util.jar;%marathon.project.dir%/../lib/batik-bridge.jar;%marathon.project.dir%/../lib/batik-codec.jar;%marathon.project.dir%/../lib/batik-css.jar;%marathon.project.dir%/../lib/batik-dom.jar;%marathon.project.dir%/../lib/batik-ext.jar;%marathon.project.dir%/../lib/batik-extension.jar;%marathon.project.dir%/../lib/batik-gui-util.jar;%marathon.project.dir%/../lib/batik-gvt.jar;%marathon.project.dir%/../lib/batik-parser.jar;%marathon.project.dir%/../lib/batik-rasterizer.jar;%marathon.project.dir%/../lib/batik-script.jar;%marathon.project.dir%/../lib/batik-slideshow.jar;%marathon.project.dir%/../lib/batik-squiggle.jar;%marathon.project.dir%/../lib/batik-svg-dom.jar;%marathon.project.dir%/../lib/batik-svggen.jar;%marathon.project.dir%/../lib/batik-svgpp.jar;%marathon.project.dir%/../lib/batik-swing.jar;%marathon.project.dir%/../lib/batik-transcoder.jar;%marathon.project.dir%/../lib/batik-ttf2svg.jar;%marathon.project.dir%/../lib/batik-util.jar;%marathon.project.dir%/../lib/batik-xml.jar;%marathon.project.dir%/../lib/batik.jar;%marathon.project.dir%/../lib/epsgraphics.jar;%marathon.project.dir%/../lib/http.jar;%marathon.project.dir%/../lib/iiop.jar;%marathon.project.dir%/../lib/j2h.jar;%marathon.project.dir%/../lib/jade.jar;%marathon.project.dir%/../lib/jadeTools.jar;%marathon.project.dir%/../lib/jdom.jar;%marathon.project.dir%/../lib/jgraph.jar;%marathon.project.dir%/../lib/js.jar;%marathon.project.dir%/../lib/junit.jar;%marathon.project.dir%/../lib/oy-lm-1.4.jar;%marathon.project.dir%/../lib/pdf-transcoder.jar;%marathon.project.dir%/../lib/pounder_0.95.jar;%marathon.project.dir%/../lib/quaqua.jar;%marathon.project.dir%/../lib/resolver.jar;%marathon.project.dir%/../lib/serializer.jar;%marathon.project.dir%/../lib/SpeedJG.jar;%marathon.project.dir%/../lib/stringtemplate-3.0.jar;%marathon.project.dir%/../lib/substance.jar;%marathon.project.dir%/../lib/swixml.jar;%marathon.project.dir%/../lib/ui.jar;%marathon.project.dir%/../lib/xerces_2_5_0.jar;%marathon.project.dir%/../lib/xercesImpl.jar;%marathon.project.dir%/../lib/xercesSamples.jar;%marathon.project.dir%/../lib/xml-apis-ext.jar;%marathon.project.dir%/../lib/xml-apis.jar
+marathon.application.arguments=
+marathon.application.working.dir=
+marathon.capture.dir=%marathon.project.dir%/Modules
+marathon.application.mainclass=ingenias.editor.IDE
+marathon.application.pythonhome=
+marathon.recorder.namingstrategy=net.sourceforge.marathon.component.MarathonNamingStrategy
+marathon.component.resolvers=
+marathon.fixture.dir=%marathon.project.dir%/Fixtures
+marathon.application.toolkit_menumask=false
+marathon.project.description=
+marathon.application.vm.command=
+marathon.project.name=editor
+marathon.project.script.model=net.sourceforge.marathon.python.PythonScriptModel
+marathon.application.vm.arguments=

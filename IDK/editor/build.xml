@@ -37,6 +37,10 @@
 	<property name="javac.optimize"           value="off"/>
 	<property name="javac.deprecation"        value="on"/>
 	<property name="javac.debug"              value="true"/>
+
+	<property name='marathon.home' value='testlibs' />
+	<property name='marathon.project.dir' value='tests/tests-marathon' />
+
 	
 
    <path id="lib.path.ref">
@@ -411,7 +415,7 @@
 	
 	<java fork="true" failonerror="true" maxmemory="300m"
 	      classname="ingenias.editor.IDE">
-	<jvmarg value="-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"/>
+	<!--jvmarg value="-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"/-->
 				
 		<classpath>
 			<!--pathelement path="bin" /-->
@@ -594,7 +598,7 @@
 		
 		<java fork="true" failonerror="true" maxmemory="300m"
 		      classname="net.sourceforge.marathon.Main">	
-			<jvmarg value="-Dmarathon.home='${basedir}' -Dpython.cachedir='${user.home}/.jycache'"/> 						
+			<jvmarg value="-Dmarathon.home='${marathon.home}' -Dpython.cachedir='${user.home}/.jycache' -Dmarathon.application.working.dir='${basedir}'"/> 						
 			<classpath>
 				
 				<!--pathelement path="${classpath}" /-->
@@ -606,10 +610,36 @@
 				</fileset>
 				
 			</classpath>
+			<arg line="${marathon.project.dir}" />
 			
 		</java>
 		
 	</target>
+
+<target name="runMarathonTests">
+		
+		<java fork="true" failonerror="true" maxmemory="300m"
+		      classname="net.sourceforge.marathon.Main">	
+			<jvmarg value="-Dmarathon.home='${marathon.home}' -Dpython.cachedir='${user.home}/.jycache' -Dmarathon.application.working.dir='${basedir}'"/> 						
+
+			<classpath>
+				
+				<!--pathelement path="${classpath}" /-->
+				
+				<fileset dir="testlibs">
+					
+					<include name="**/*.jar" />
+					
+				</fileset>
+				
+			</classpath>
+			<arg value="-batch" />			
+			<arg line="${marathon.project.dir}" />
+			
+		</java>
+		
+	</target>
+
 
 
 <target name="clean">

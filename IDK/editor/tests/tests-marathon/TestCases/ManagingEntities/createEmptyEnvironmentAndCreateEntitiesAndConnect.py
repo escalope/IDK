@@ -11,15 +11,15 @@ def test():
 		#Creates two entites and connects them
 		createEnvironmentEntitiesAndConnectThem()
 		#The panel shows two entities
-		assert_p('e1', 'Component.Model.Roots', '[Agent0, Application0, , , ]')
+		assert_p('e1', 'Component.Roots', '[Agent0, Application0, 0:EPerceives, EPerceivessourceRole0:EPerceivessourceRole, EPerceivestargetRole0:EPerceivestargetRole]')
 		#The entities are present in the object tree
-		doubleclick('ObjectsTree', 'INGENIASObject')
-		doubleclick('ObjectsTree', 'Autonomous_entity')
-		doubleclick('ObjectsTree', 'Agent')
+		click('ObjectsTree', 'INGENIASObject')
+		click('ObjectsTree', 'Autonomous_entity')
+		click('ObjectsTree', 'Agent')
 		click('ObjectsTree', 'Agent0')
 		assert_p('ObjectsTree', 'Text', 'Agent0', 'Agent0')
-		doubleclick('ObjectsTree', 'AgentComponent')
-		doubleclick('ObjectsTree', 'Application')
+		click('ObjectsTree', 'AgentComponent')
+		click('ObjectsTree', 'Application')
 		click('ObjectsTree', 'Application0')		
 	close()
 	

@@ -3,7 +3,7 @@ from marathon.playback import *
 
 class Fixture:
 	def start_application(self):
-		args = []
+		args = ["testing"]
 		IDE.main(args)
 
 	def teardown(self):

@@ -16,9 +16,9 @@ def test():
 		#create the target diagram where old entities will be put
 		generateEmptyEnvironmentDiagram('e2')		
 		#Select created entity
-		doubleclick('ObjectsTree', 'INGENIASObject')
-		doubleclick('ObjectsTree', 'Autonomous_entity')
-		doubleclick('ObjectsTree', 'Agent')		
+		click('ObjectsTree', 'INGENIASObject')
+		click('ObjectsTree', 'Autonomous_entity')
+		click('ObjectsTree', 'Agent')		
 		click('ObjectsTree', 'Agent0')
 		select('ObjectsTree', '[Agent0]')
 		#Gain access to operations over the entity

@@ -32,6 +32,14 @@ public class IPursuessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public IPursuessourceRole() {
+	    super("IPursuessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IPursuessourceRole(String id) {

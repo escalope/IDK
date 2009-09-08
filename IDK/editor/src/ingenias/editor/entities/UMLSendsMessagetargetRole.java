@@ -32,6 +32,14 @@ public class UMLSendsMessagetargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UMLSendsMessagetargetRole() {
+	    super("UMLSendsMessagetargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UMLSendsMessagetargetRole(String id) {

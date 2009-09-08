@@ -32,6 +32,14 @@ public class UIPrecedessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UIPrecedessourceRole() {
+	    super("UIPrecedessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UIPrecedessourceRole(String id) {

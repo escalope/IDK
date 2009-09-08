@@ -32,6 +32,14 @@ public class UseCasePursuestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UseCasePursuestargetRole() {
+	    super("UseCasePursuestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UseCasePursuestargetRole(String id) {

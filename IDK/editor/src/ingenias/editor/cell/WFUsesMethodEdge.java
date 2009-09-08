@@ -236,11 +236,11 @@ this.addClass("WFUsestarget","ingenias.editor.entities.Resource");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFUsessource")){
- 	 edges.add( new DefaultEdge( new WFUsessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFUsessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFUsestarget")){
- 	 edges.add( new DefaultEdge( new WFUsestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFUsestargetRole() ) );
 	 }
       
 

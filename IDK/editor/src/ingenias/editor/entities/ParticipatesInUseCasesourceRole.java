@@ -32,6 +32,14 @@ public class ParticipatesInUseCasesourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public ParticipatesInUseCasesourceRole() {
+	    super("ParticipatesInUseCasesourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public ParticipatesInUseCasesourceRole(String id) {

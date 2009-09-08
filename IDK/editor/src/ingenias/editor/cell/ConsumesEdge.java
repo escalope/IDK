@@ -234,11 +234,11 @@ this.addClass("WFConsumestarget","ingenias.editor.entities.MentalEntity");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFConsumessource")){
- 	 edges.add( new DefaultEdge( new WFConsumessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFConsumessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFConsumestarget")){
- 	 edges.add( new DefaultEdge( new WFConsumestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFConsumestargetRole() ) );
 	 }
       
 

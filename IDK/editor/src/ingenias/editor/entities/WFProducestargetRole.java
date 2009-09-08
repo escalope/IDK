@@ -34,6 +34,14 @@ public class WFProducestargetRole extends RoleEntity {
   public java.lang.String Cardinality;
 
 
+ static int idCounter=0;
+
+ public WFProducestargetRole() {
+	    super("WFProducestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFProducestargetRole(String id) {

@@ -87,6 +87,11 @@ extends ingenias.editor.IDEAbs {
 
 
 	public static void main(String args[]) throws Exception {
+		if (args.length != 0) {			
+			if (args[0].equalsIgnoreCase("testing")){
+				StaticPreferences.setTesting(true);
+			}
+		}
 		IDEState ids=IDEState.emptyIDEState();
 		try {
 			ingenias.generator.browser.BrowserImp.initialise(ids);
@@ -108,7 +113,7 @@ extends ingenias.editor.IDEAbs {
 		ide.pack();
 		ide.setVisible(true);
 
-		if (args.length != 0) {
+		if (args.length != 0 && !args[0].equalsIgnoreCase("testing")) {			
 			ids=new LoadFileAction(ide.getIds(),ide.getResources()).loadFileAction(new File(args[0]));
 			ide.updateIDEState(ids);
 		}

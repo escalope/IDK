@@ -232,11 +232,11 @@ this.addClass("UMLRealizestarget","ingenias.editor.entities.INGENIASComponent");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("UMLRealizessource")){
- 	 edges.add( new DefaultEdge( new UMLRealizessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new UMLRealizessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("UMLRealizestarget")){
- 	 edges.add( new DefaultEdge( new UMLRealizestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new UMLRealizestargetRole() ) );
 	 }
       
 

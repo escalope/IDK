@@ -34,6 +34,14 @@ public class WFUsestargetRole extends RoleEntity {
   public java.lang.String Label;
 
 
+ static int idCounter=0;
+
+ public WFUsestargetRole() {
+	    super("WFUsestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFUsestargetRole(String id) {

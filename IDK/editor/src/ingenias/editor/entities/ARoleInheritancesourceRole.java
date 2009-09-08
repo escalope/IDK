@@ -32,6 +32,14 @@ public class ARoleInheritancesourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public ARoleInheritancesourceRole() {
+	    super("ARoleInheritancesourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public ARoleInheritancesourceRole(String id) {

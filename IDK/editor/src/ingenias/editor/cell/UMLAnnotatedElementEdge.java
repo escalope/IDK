@@ -236,11 +236,11 @@ this.addClass("HasCommenttarget","ingenias.editor.entities.UMLClassifier");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("HasCommentsource")){
- 	 edges.add( new DefaultEdge( new HasCommentsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new HasCommentsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("HasCommenttarget")){
- 	 edges.add( new DefaultEdge( new HasCommenttargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new HasCommenttargetRole() ) );
 	 }
       
 

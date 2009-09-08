@@ -71,7 +71,7 @@ if (this.getCondition() instanceof String)
 }
 
 public String toString(){
- return "";
+ return getId()+":"+getType();
 }
 
 

@@ -34,6 +34,14 @@ public class IColaboratestargetRole extends RoleEntity {
   public java.lang.String Cardinality;
 
 
+ static int idCounter=0;
+
+ public IColaboratestargetRole() {
+	    super("IColaboratestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IColaboratestargetRole(String id) {

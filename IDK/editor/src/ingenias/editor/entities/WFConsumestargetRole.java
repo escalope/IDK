@@ -34,6 +34,14 @@ public class WFConsumestargetRole extends RoleEntity {
   public java.lang.String Cardinality;
 
 
+ static int idCounter=0;
+
+ public WFConsumestargetRole() {
+	    super("WFConsumestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFConsumestargetRole(String id) {

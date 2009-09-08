@@ -32,6 +32,14 @@ public class IInitiatessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public IInitiatessourceRole() {
+	    super("IInitiatessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IInitiatessourceRole(String id) {

@@ -244,11 +244,11 @@ this.addClass("WFEndstarget","ingenias.editor.entities.EndNode");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFEndssource")){
- 	 edges.add( new DefaultEdge( new WFEndssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFEndssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFEndstarget")){
- 	 edges.add( new DefaultEdge( new WFEndstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFEndstargetRole() ) );
 	 }
       
 

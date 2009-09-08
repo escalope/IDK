@@ -234,11 +234,11 @@ this.addClass("WFContainsTasktarget","ingenias.editor.entities.Workflow");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFContainsTasksource")){
- 	 edges.add( new DefaultEdge( new WFContainsTasksourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFContainsTasksourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFContainsTasktarget")){
- 	 edges.add( new DefaultEdge( new WFContainsTasktargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFContainsTasktargetRole() ) );
 	 }
       
 

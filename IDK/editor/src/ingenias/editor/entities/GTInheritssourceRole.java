@@ -32,6 +32,14 @@ public class GTInheritssourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTInheritssourceRole() {
+	    super("GTInheritssourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTInheritssourceRole(String id) {

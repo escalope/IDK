@@ -236,11 +236,11 @@ this.addClass("AGORelationship3target","ingenias.editor.entities.Role");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("AGORelationship3source")){
- 	 edges.add( new DefaultEdge( new AGORelationship3sourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new AGORelationship3sourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("AGORelationship3target")){
- 	 edges.add( new DefaultEdge( new AGORelationship3targetRole("") ) );
+ 	 edges.add( new DefaultEdge( new AGORelationship3targetRole() ) );
 	 }
       
 

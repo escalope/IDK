@@ -32,6 +32,14 @@ public class UMLAssociationsourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UMLAssociationsourceRole() {
+	    super("UMLAssociationsourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UMLAssociationsourceRole(String id) {

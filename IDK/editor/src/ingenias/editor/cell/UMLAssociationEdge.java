@@ -232,11 +232,11 @@ this.addClass("UMLAssociationtarget","ingenias.editor.entities.UseCase");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("UMLAssociationsource")){
- 	 edges.add( new DefaultEdge( new UMLAssociationsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new UMLAssociationsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("UMLAssociationtarget")){
- 	 edges.add( new DefaultEdge( new UMLAssociationtargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new UMLAssociationtargetRole() ) );
 	 }
       
 

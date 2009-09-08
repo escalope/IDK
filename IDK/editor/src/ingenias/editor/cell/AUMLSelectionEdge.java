@@ -232,11 +232,11 @@ this.addClass("AUMLSelectiontarget","ingenias.editor.entities.AUMLPort");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("AUMLSelectionsource")){
- 	 edges.add( new DefaultEdge( new AUMLSelectionsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new AUMLSelectionsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("AUMLSelectiontarget")){
- 	 edges.add( new DefaultEdge( new AUMLSelectiontargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new AUMLSelectiontargetRole() ) );
 	 }
       
 

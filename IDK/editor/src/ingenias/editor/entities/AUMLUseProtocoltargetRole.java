@@ -32,6 +32,14 @@ public class AUMLUseProtocoltargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AUMLUseProtocoltargetRole() {
+	    super("AUMLUseProtocoltargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AUMLUseProtocoltargetRole(String id) {

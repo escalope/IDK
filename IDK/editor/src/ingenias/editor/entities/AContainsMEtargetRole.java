@@ -34,6 +34,14 @@ public class AContainsMEtargetRole extends RoleEntity {
   public java.lang.String Label;
 
 
+ static int idCounter=0;
+
+ public AContainsMEtargetRole() {
+	    super("AContainsMEtargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AContainsMEtargetRole(String id) {

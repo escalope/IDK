@@ -32,6 +32,14 @@ public class HasCommenttargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public HasCommenttargetRole() {
+	    super("HasCommenttargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public HasCommenttargetRole(String id) {

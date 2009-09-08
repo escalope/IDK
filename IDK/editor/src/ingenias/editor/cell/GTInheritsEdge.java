@@ -232,11 +232,11 @@ this.addClass("GTInheritstarget","ingenias.editor.entities.MentalEntity");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("GTInheritssource")){
- 	 edges.add( new DefaultEdge( new GTInheritssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTInheritssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("GTInheritstarget")){
- 	 edges.add( new DefaultEdge( new GTInheritstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTInheritstargetRole() ) );
 	 }
       
 

@@ -32,6 +32,14 @@ public class AGORelationship1sourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AGORelationship1sourceRole() {
+	    super("AGORelationship1sourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AGORelationship1sourceRole(String id) {

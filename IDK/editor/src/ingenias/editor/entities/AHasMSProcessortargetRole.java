@@ -32,6 +32,14 @@ public class AHasMSProcessortargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AHasMSProcessortargetRole() {
+	    super("AHasMSProcessortargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AHasMSProcessortargetRole(String id) {

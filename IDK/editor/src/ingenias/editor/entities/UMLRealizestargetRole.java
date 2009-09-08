@@ -32,6 +32,14 @@ public class UMLRealizestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UMLRealizestargetRole() {
+	    super("UMLRealizestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UMLRealizestargetRole(String id) {

@@ -32,6 +32,14 @@ public class GTSatisfiessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTSatisfiessourceRole() {
+	    super("GTSatisfiessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTSatisfiessourceRole(String id) {

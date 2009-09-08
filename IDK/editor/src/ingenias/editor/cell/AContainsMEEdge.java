@@ -234,11 +234,11 @@ this.addClass("AContainsMEtarget","ingenias.editor.entities.MentalInstanceSpecif
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("AContainsMEsource")){
- 	 edges.add( new DefaultEdge( new AContainsMEsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new AContainsMEsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("AContainsMEtarget")){
- 	 edges.add( new DefaultEdge( new AContainsMEtargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new AContainsMEtargetRole() ) );
 	 }
       
 

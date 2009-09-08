@@ -232,11 +232,11 @@ this.addClass("GTDependstarget","ingenias.editor.entities.Goal");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("GTDependssource")){
- 	 edges.add( new DefaultEdge( new GTDependssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTDependssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("GTDependstarget")){
- 	 edges.add( new DefaultEdge( new GTDependstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTDependstargetRole() ) );
 	 }
       
 

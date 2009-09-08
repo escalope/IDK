@@ -34,6 +34,14 @@ public class OHasWFtargetRole extends RoleEntity {
   public java.lang.String Cardinality;
 
 
+ static int idCounter=0;
+
+ public OHasWFtargetRole() {
+	    super("OHasWFtargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public OHasWFtargetRole(String id) {

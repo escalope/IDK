@@ -32,6 +32,14 @@ public class WFParticipatessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFParticipatessourceRole() {
+	    super("WFParticipatessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFParticipatessourceRole(String id) {

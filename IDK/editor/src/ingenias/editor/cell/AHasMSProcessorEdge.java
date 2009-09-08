@@ -232,11 +232,11 @@ this.addClass("AHasMSProcessortarget","ingenias.editor.entities.MentalStateProce
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("AHasMSProcessorsource")){
- 	 edges.add( new DefaultEdge( new AHasMSProcessorsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new AHasMSProcessorsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("AHasMSProcessortarget")){
- 	 edges.add( new DefaultEdge( new AHasMSProcessortargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new AHasMSProcessortargetRole() ) );
 	 }
       
 

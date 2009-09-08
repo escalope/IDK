@@ -232,11 +232,11 @@ this.addClass("OHasWFtarget","ingenias.editor.entities.Workflow");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("OHasWFsource")){
- 	 edges.add( new DefaultEdge( new OHasWFsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new OHasWFsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("OHasWFtarget")){
- 	 edges.add( new DefaultEdge( new OHasWFtargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new OHasWFtargetRole() ) );
 	 }
       
 

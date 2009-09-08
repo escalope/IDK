@@ -32,6 +32,14 @@ public class AContainsMEsourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AContainsMEsourceRole() {
+	    super("AContainsMEsourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AContainsMEsourceRole(String id) {

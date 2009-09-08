@@ -232,11 +232,11 @@ this.addClass("GroupBelongsToOrganizationT","ingenias.editor.entities.Organizati
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("GroupBelongsToOrganizationO")){
- 	 edges.add( new DefaultEdge( new GroupBelongsToOrganizationORole("") ) );
+ 	 edges.add( new DefaultEdge( new GroupBelongsToOrganizationORole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("GroupBelongsToOrganizationT")){
- 	 edges.add( new DefaultEdge( new GroupBelongsToOrganizationTRole("") ) );
+ 	 edges.add( new DefaultEdge( new GroupBelongsToOrganizationTRole() ) );
 	 }
       
 

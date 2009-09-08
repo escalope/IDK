@@ -32,6 +32,14 @@ public class WFEndssourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFEndssourceRole() {
+	    super("WFEndssourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFEndssourceRole(String id) {

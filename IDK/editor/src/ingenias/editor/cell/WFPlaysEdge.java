@@ -234,11 +234,11 @@ this.addClass("WFPlaystarget","ingenias.editor.entities.Role");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFPlayssource")){
- 	 edges.add( new DefaultEdge( new WFPlayssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFPlayssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFPlaystarget")){
- 	 edges.add( new DefaultEdge( new WFPlaystargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFPlaystargetRole() ) );
 	 }
       
 

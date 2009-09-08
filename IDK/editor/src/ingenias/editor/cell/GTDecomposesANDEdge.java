@@ -232,11 +232,11 @@ this.addClass("GTDecomposestarget","ingenias.editor.entities.Goal");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("GTDecomposessource")){
- 	 edges.add( new DefaultEdge( new GTDecomposessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTDecomposessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("GTDecomposestarget")){
- 	 edges.add( new DefaultEdge( new GTDecomposestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTDecomposestargetRole() ) );
 	 }
       
 

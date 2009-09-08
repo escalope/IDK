@@ -243,15 +243,15 @@ this.addClass("GTFailsHelperTasktarget","ingenias.editor.entities.Task");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("GTFailssource")){
- 	 edges.add( new DefaultEdge( new GTFailssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTFailssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("GTFailstarget")){
- 	 edges.add( new DefaultEdge( new GTFailstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTFailstargetRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("GTFailsHelperTasktarget")){
- 	 edges.add( new DefaultEdge( new GTFailsHelperTasktargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTFailsHelperTasktargetRole() ) );
 	 }
       
 

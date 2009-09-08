@@ -75,7 +75,7 @@ super.toMap(ht);
 }
 
 public String toString(){
- return "";
+ return getId()+":"+getType();
 }
 
 

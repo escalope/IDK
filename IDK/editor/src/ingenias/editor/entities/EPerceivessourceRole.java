@@ -32,6 +32,14 @@ public class EPerceivessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public EPerceivessourceRole() {
+	    super("EPerceivessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public EPerceivessourceRole(String id) {

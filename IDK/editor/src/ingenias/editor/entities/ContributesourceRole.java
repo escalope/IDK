@@ -32,6 +32,14 @@ public class ContributesourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public ContributesourceRole() {
+	    super("ContributesourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public ContributesourceRole(String id) {

@@ -32,6 +32,14 @@ public class CDUsesCodetargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public CDUsesCodetargetRole() {
+	    super("CDUsesCodetargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public CDUsesCodetargetRole(String id) {

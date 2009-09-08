@@ -236,11 +236,11 @@ this.addClass("UISelectiontarget","ingenias.editor.entities.Interaction");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("UISelectionsource")){
- 	 edges.add( new DefaultEdge( new UISelectionsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new UISelectionsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("UISelectiontarget")){
- 	 edges.add( new DefaultEdge( new UISelectiontargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new UISelectiontargetRole() ) );
 	 }
       
 

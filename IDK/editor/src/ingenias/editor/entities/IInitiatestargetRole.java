@@ -32,6 +32,14 @@ public class IInitiatestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public IInitiatestargetRole() {
+	    super("IInitiatestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IInitiatestargetRole(String id) {

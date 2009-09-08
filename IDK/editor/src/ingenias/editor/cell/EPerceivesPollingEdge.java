@@ -232,11 +232,11 @@ this.addClass("EPerceivestarget","ingenias.editor.entities.Application");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("EPerceivessource")){
- 	 edges.add( new DefaultEdge( new EPerceivessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new EPerceivessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("EPerceivestarget")){
- 	 edges.add( new DefaultEdge( new EPerceivestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new EPerceivestargetRole() ) );
 	 }
       
 

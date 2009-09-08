@@ -32,6 +32,14 @@ public class AUMLSendSimpletargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AUMLSendSimpletargetRole() {
+	    super("AUMLSendSimpletargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AUMLSendSimpletargetRole(String id) {

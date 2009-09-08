@@ -32,6 +32,14 @@ public class UIPrecedestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UIPrecedestargetRole() {
+	    super("UIPrecedestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UIPrecedestargetRole(String id) {

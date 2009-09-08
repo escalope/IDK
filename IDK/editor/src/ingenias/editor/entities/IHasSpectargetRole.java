@@ -32,6 +32,14 @@ public class IHasSpectargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public IHasSpectargetRole() {
+	    super("IHasSpectargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IHasSpectargetRole(String id) {

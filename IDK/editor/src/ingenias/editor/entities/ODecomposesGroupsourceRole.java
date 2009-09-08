@@ -32,6 +32,14 @@ public class ODecomposesGroupsourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public ODecomposesGroupsourceRole() {
+	    super("ODecomposesGroupsourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public ODecomposesGroupsourceRole(String id) {

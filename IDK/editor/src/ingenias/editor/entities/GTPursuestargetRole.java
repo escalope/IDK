@@ -32,6 +32,14 @@ public class GTPursuestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTPursuestargetRole() {
+	    super("GTPursuestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTPursuestargetRole(String id) {

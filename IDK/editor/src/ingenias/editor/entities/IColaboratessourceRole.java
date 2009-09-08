@@ -32,6 +32,14 @@ public class IColaboratessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public IColaboratessourceRole() {
+	    super("IColaboratessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IColaboratessourceRole(String id) {

@@ -34,6 +34,14 @@ public class GTDependssourceRole extends RoleEntity {
   public java.lang.String Cardinality;
 
 
+ static int idCounter=0;
+
+ public GTDependssourceRole() {
+	    super("GTDependssourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTDependssourceRole(String id) {

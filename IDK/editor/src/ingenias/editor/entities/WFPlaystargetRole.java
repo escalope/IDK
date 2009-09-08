@@ -32,6 +32,14 @@ public class WFPlaystargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFPlaystargetRole() {
+	    super("WFPlaystargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFPlaystargetRole(String id) {

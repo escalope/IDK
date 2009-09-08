@@ -32,6 +32,14 @@ public class GTDestroyssourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTDestroyssourceRole() {
+	    super("GTDestroyssourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTDestroyssourceRole(String id) {

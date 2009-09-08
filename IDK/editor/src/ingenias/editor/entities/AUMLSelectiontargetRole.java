@@ -32,6 +32,14 @@ public class AUMLSelectiontargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AUMLSelectiontargetRole() {
+	    super("AUMLSelectiontargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AUMLSelectiontargetRole(String id) {

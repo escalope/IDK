@@ -32,6 +32,14 @@ public class UIColaboratestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UIColaboratestargetRole() {
+	    super("UIColaboratestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UIColaboratestargetRole(String id) {

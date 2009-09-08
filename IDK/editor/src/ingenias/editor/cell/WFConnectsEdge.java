@@ -236,11 +236,11 @@ this.addClass("WFConnectstarget","ingenias.editor.entities.Task");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFConnectssource")){
- 	 edges.add( new DefaultEdge( new WFConnectssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFConnectssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFConnectstarget")){
- 	 edges.add( new DefaultEdge( new WFConnectstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFConnectstargetRole() ) );
 	 }
       
 

@@ -232,11 +232,11 @@ this.addClass("AUMLSendSimpletarget","ingenias.editor.entities.AUMLPort");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("AUMLSendSimplesource")){
- 	 edges.add( new DefaultEdge( new AUMLSendSimplesourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new AUMLSendSimplesourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("AUMLSendSimpletarget")){
- 	 edges.add( new DefaultEdge( new AUMLSendSimpletargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new AUMLSendSimpletargetRole() ) );
 	 }
       
 

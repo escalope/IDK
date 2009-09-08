@@ -32,6 +32,14 @@ public class WFSpecifiesExecutiontargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFSpecifiesExecutiontargetRole() {
+	    super("WFSpecifiesExecutiontargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFSpecifiesExecutiontargetRole(String id) {

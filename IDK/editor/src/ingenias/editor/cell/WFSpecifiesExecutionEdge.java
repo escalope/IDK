@@ -232,11 +232,11 @@ this.addClass("WFSpecifiesExecutiontarget","ingenias.editor.entities.Interaction
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFSpecifiesExecutionsource")){
- 	 edges.add( new DefaultEdge( new WFSpecifiesExecutionsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFSpecifiesExecutionsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFSpecifiesExecutiontarget")){
- 	 edges.add( new DefaultEdge( new WFSpecifiesExecutiontargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFSpecifiesExecutiontargetRole() ) );
 	 }
       
 

@@ -32,6 +32,14 @@ public class WFDecidessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFDecidessourceRole() {
+	    super("WFDecidessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFDecidessourceRole(String id) {

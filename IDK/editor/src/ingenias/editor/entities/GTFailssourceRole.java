@@ -32,6 +32,14 @@ public class GTFailssourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTFailssourceRole() {
+	    super("GTFailssourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTFailssourceRole(String id) {

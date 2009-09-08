@@ -32,6 +32,14 @@ public class GTDestroystargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTDestroystargetRole() {
+	    super("GTDestroystargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTDestroystargetRole(String id) {

@@ -32,6 +32,14 @@ public class GTDecomposessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTDecomposessourceRole() {
+	    super("GTDecomposessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTDecomposessourceRole(String id) {

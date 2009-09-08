@@ -232,11 +232,11 @@ this.addClass("CDUsesCodetarget","ingenias.editor.entities.INGENIASCodeComponent
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("CDUsesCodesource")){
- 	 edges.add( new DefaultEdge( new CDUsesCodesourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new CDUsesCodesourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("CDUsesCodetarget")){
- 	 edges.add( new DefaultEdge( new CDUsesCodetargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new CDUsesCodetargetRole() ) );
 	 }
       
 

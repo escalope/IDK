@@ -32,6 +32,14 @@ public class WSConnectstargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WSConnectstargetRole() {
+	    super("WSConnectstargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WSConnectstargetRole(String id) {

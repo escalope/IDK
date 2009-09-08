@@ -32,6 +32,14 @@ public class WFFollowstargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFFollowstargetRole() {
+	    super("WFFollowstargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFFollowstargetRole(String id) {

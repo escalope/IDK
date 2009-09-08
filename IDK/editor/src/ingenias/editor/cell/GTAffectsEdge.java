@@ -236,11 +236,11 @@ this.addClass("GTAffectstarget","ingenias.editor.entities.MentalEntity");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("GTAffectssource")){
- 	 edges.add( new DefaultEdge( new GTAffectssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTAffectssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("GTAffectstarget")){
- 	 edges.add( new DefaultEdge( new GTAffectstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTAffectstargetRole() ) );
 	 }
       
 

@@ -32,6 +32,14 @@ public class ODecomposesWFtargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public ODecomposesWFtargetRole() {
+	    super("ODecomposesWFtargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public ODecomposesWFtargetRole(String id) {

@@ -238,11 +238,11 @@ this.addClass("WFResponsibletarget","ingenias.editor.entities.Plan");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFResponsiblesource")){
- 	 edges.add( new DefaultEdge( new WFResponsiblesourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFResponsiblesourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFResponsibletarget")){
- 	 edges.add( new DefaultEdge( new WFResponsibletargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFResponsibletargetRole() ) );
 	 }
       
 

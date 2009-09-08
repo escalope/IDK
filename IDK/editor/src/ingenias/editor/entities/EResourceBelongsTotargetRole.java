@@ -32,6 +32,14 @@ public class EResourceBelongsTotargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public EResourceBelongsTotargetRole() {
+	    super("EResourceBelongsTotargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public EResourceBelongsTotargetRole(String id) {

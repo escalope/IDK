@@ -32,6 +32,14 @@ public class ExtendssourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public ExtendssourceRole() {
+	    super("ExtendssourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public ExtendssourceRole(String id) {

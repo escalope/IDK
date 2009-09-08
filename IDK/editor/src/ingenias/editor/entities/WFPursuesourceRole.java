@@ -32,6 +32,14 @@ public class WFPursuesourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFPursuesourceRole() {
+	    super("WFPursuesourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFPursuesourceRole(String id) {

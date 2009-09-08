@@ -32,6 +32,14 @@ public class DefinesDeploymentsourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public DefinesDeploymentsourceRole() {
+	    super("DefinesDeploymentsourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public DefinesDeploymentsourceRole(String id) {

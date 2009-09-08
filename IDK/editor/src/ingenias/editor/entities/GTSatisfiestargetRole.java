@@ -32,6 +32,14 @@ public class GTSatisfiestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTSatisfiestargetRole() {
+	    super("GTSatisfiestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTSatisfiestargetRole(String id) {

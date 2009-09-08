@@ -236,11 +236,11 @@ this.addClass("ApplicationBelongsTotarget","ingenias.editor.entities.Application
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("ApplicationBelongsTosource")){
- 	 edges.add( new DefaultEdge( new ApplicationBelongsTosourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new ApplicationBelongsTosourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("ApplicationBelongsTotarget")){
- 	 edges.add( new DefaultEdge( new ApplicationBelongsTotargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new ApplicationBelongsTotargetRole() ) );
 	 }
       
 

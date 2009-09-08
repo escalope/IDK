@@ -32,6 +32,14 @@ public class ExtendstargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public ExtendstargetRole() {
+	    super("ExtendstargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public ExtendstargetRole(String id) {

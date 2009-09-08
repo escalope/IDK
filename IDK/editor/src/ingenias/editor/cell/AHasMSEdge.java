@@ -234,11 +234,11 @@ this.addClass("AHasMStarget","ingenias.editor.entities.MentalState");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("AHasMSsource")){
- 	 edges.add( new DefaultEdge( new AHasMSsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new AHasMSsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("AHasMStarget")){
- 	 edges.add( new DefaultEdge( new AHasMStargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new AHasMStargetRole() ) );
 	 }
       
 

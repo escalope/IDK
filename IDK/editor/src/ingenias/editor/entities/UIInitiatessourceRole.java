@@ -34,6 +34,14 @@ public class UIInitiatessourceRole extends RoleEntity {
   public java.lang.String Timeout;
 
 
+ static int idCounter=0;
+
+ public UIInitiatessourceRole() {
+	    super("UIInitiatessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UIInitiatessourceRole(String id) {

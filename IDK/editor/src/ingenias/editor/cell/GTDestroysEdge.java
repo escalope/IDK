@@ -232,11 +232,11 @@ this.addClass("GTDestroystarget","ingenias.editor.entities.MentalEntity");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("GTDestroyssource")){
- 	 edges.add( new DefaultEdge( new GTDestroyssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTDestroyssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("GTDestroystarget")){
- 	 edges.add( new DefaultEdge( new GTDestroystargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTDestroystargetRole() ) );
 	 }
       
 

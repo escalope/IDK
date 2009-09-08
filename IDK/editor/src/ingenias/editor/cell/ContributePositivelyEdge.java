@@ -232,11 +232,11 @@ this.addClass("Contributetarget","ingenias.editor.entities.Goal");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("Contributesource")){
- 	 edges.add( new DefaultEdge( new ContributesourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new ContributesourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("Contributetarget")){
- 	 edges.add( new DefaultEdge( new ContributetargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new ContributetargetRole() ) );
 	 }
       
 

@@ -232,11 +232,11 @@ this.addClass("OHasGrouptarget","ingenias.editor.entities.OrganizationGroup");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("OHasGroupsource")){
- 	 edges.add( new DefaultEdge( new OHasGroupsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new OHasGroupsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("OHasGrouptarget")){
- 	 edges.add( new DefaultEdge( new OHasGrouptargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new OHasGrouptargetRole() ) );
 	 }
       
 

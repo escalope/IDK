@@ -232,11 +232,11 @@ this.addClass("DefinesDeploymenttarget","ingenias.editor.entities.DeploymentPack
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("DefinesDeploymentsource")){
- 	 edges.add( new DefaultEdge( new DefinesDeploymentsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new DefinesDeploymentsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("DefinesDeploymenttarget")){
- 	 edges.add( new DefaultEdge( new DefinesDeploymenttargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new DefinesDeploymenttargetRole() ) );
 	 }
       
 

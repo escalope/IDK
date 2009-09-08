@@ -232,11 +232,11 @@ this.addClass("WFDecomposestarget","ingenias.editor.entities.Task");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFDecomposessource")){
- 	 edges.add( new DefaultEdge( new WFDecomposessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFDecomposessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFDecomposestarget")){
- 	 edges.add( new DefaultEdge( new WFDecomposestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFDecomposestargetRole() ) );
 	 }
       
 

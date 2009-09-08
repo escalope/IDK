@@ -32,6 +32,14 @@ public class WFPlayssourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFPlayssourceRole() {
+	    super("WFPlayssourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFPlayssourceRole(String id) {

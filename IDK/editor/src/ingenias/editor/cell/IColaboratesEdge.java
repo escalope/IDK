@@ -234,11 +234,11 @@ this.addClass("IColaboratestarget","ingenias.editor.entities.Role");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("IColaboratessource")){
- 	 edges.add( new DefaultEdge( new IColaboratessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new IColaboratessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("IColaboratestarget")){
- 	 edges.add( new DefaultEdge( new IColaboratestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new IColaboratestargetRole() ) );
 	 }
       
 

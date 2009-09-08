@@ -32,6 +32,14 @@ public class UMLDescribesUseCasesourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UMLDescribesUseCasesourceRole() {
+	    super("UMLDescribesUseCasesourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UMLDescribesUseCasesourceRole(String id) {

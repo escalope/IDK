@@ -32,6 +32,14 @@ public class WFFollowssourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFFollowssourceRole() {
+	    super("WFFollowssourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFFollowssourceRole(String id) {

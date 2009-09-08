@@ -232,11 +232,11 @@ this.addClass("ODecomposesGrouptarget","ingenias.editor.entities.OrganizationGro
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("ODecomposesGroupsource")){
- 	 edges.add( new DefaultEdge( new ODecomposesGroupsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new ODecomposesGroupsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("ODecomposesGrouptarget")){
- 	 edges.add( new DefaultEdge( new ODecomposesGrouptargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new ODecomposesGrouptargetRole() ) );
 	 }
       
 

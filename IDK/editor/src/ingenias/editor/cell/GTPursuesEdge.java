@@ -236,11 +236,11 @@ this.addClass("GTPursuestarget","ingenias.editor.entities.Goal");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("GTPursuessource")){
- 	 edges.add( new DefaultEdge( new GTPursuessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTPursuessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("GTPursuestarget")){
- 	 edges.add( new DefaultEdge( new GTPursuestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTPursuestargetRole() ) );
 	 }
       
 

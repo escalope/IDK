@@ -32,6 +32,14 @@ public class WFResponsablesourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFResponsablesourceRole() {
+	    super("WFResponsablesourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFResponsablesourceRole(String id) {

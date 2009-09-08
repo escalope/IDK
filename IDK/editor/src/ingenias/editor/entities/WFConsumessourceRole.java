@@ -32,6 +32,14 @@ public class WFConsumessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFConsumessourceRole() {
+	    super("WFConsumessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFConsumessourceRole(String id) {

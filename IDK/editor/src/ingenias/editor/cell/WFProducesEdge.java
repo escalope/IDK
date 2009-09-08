@@ -234,11 +234,11 @@ this.addClass("WFProducestarget","ingenias.editor.entities.Resource");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFProducessource")){
- 	 edges.add( new DefaultEdge( new WFProducessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFProducessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFProducestarget")){
- 	 edges.add( new DefaultEdge( new WFProducestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFProducestargetRole() ) );
 	 }
       
 

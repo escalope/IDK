@@ -236,11 +236,11 @@ this.addClass("GTSatisfiestarget","ingenias.editor.entities.Goal");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("GTSatisfiessource")){
- 	 edges.add( new DefaultEdge( new GTSatisfiessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTSatisfiessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("GTSatisfiestarget")){
- 	 edges.add( new DefaultEdge( new GTSatisfiestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new GTSatisfiestargetRole() ) );
 	 }
       
 

@@ -32,6 +32,14 @@ public class AInheritstargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AInheritstargetRole() {
+	    super("AInheritstargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AInheritstargetRole(String id) {

@@ -32,6 +32,14 @@ public class GTAffectstargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTAffectstargetRole() {
+	    super("GTAffectstargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTAffectstargetRole(String id) {

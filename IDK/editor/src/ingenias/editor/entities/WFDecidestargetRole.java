@@ -32,6 +32,14 @@ public class WFDecidestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFDecidestargetRole() {
+	    super("WFDecidestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFDecidestargetRole(String id) {

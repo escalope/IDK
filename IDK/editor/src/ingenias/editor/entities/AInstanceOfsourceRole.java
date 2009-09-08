@@ -32,6 +32,14 @@ public class AInstanceOfsourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AInstanceOfsourceRole() {
+	    super("AInstanceOfsourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AInstanceOfsourceRole(String id) {

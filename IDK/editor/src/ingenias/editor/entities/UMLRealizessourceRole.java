@@ -32,6 +32,14 @@ public class UMLRealizessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UMLRealizessourceRole() {
+	    super("UMLRealizessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UMLRealizessourceRole(String id) {

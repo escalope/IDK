@@ -32,6 +32,14 @@ public class UIExecutestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UIExecutestargetRole() {
+	    super("UIExecutestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UIExecutestargetRole(String id) {

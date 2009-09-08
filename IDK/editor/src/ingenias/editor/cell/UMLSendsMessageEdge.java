@@ -236,11 +236,11 @@ this.addClass("UMLSendsMessagetarget","ingenias.editor.entities.Role");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("UMLSendsMessagesource")){
- 	 edges.add( new DefaultEdge( new UMLSendsMessagesourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new UMLSendsMessagesourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("UMLSendsMessagetarget")){
- 	 edges.add( new DefaultEdge( new UMLSendsMessagetargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new UMLSendsMessagetargetRole() ) );
 	 }
       
 

@@ -232,11 +232,11 @@ this.addClass("IHasSpectarget","ingenias.editor.entities.Specification");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("IHasSpecsource")){
- 	 edges.add( new DefaultEdge( new IHasSpecsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new IHasSpecsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("IHasSpectarget")){
- 	 edges.add( new DefaultEdge( new IHasSpectargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new IHasSpectargetRole() ) );
 	 }
       
 

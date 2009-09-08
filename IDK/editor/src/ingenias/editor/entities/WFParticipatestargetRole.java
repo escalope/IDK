@@ -32,6 +32,14 @@ public class WFParticipatestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFParticipatestargetRole() {
+	    super("WFParticipatestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFParticipatestargetRole(String id) {

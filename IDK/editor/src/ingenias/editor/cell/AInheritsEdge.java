@@ -232,11 +232,11 @@ this.addClass("AInheritstarget","ingenias.editor.entities.Agent");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("AInheritssource")){
- 	 edges.add( new DefaultEdge( new AInheritssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new AInheritssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("AInheritstarget")){
- 	 edges.add( new DefaultEdge( new AInheritstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new AInheritstargetRole() ) );
 	 }
       
 

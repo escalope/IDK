@@ -32,6 +32,14 @@ public class IHasSpecsourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public IHasSpecsourceRole() {
+	    super("IHasSpecsourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IHasSpecsourceRole(String id) {

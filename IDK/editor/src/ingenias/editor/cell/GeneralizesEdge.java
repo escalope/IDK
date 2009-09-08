@@ -232,11 +232,11 @@ this.addClass("Includestarget","ingenias.editor.entities.UseCase");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("Includessource")){
- 	 edges.add( new DefaultEdge( new IncludessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new IncludessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("Includestarget")){
- 	 edges.add( new DefaultEdge( new IncludestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new IncludestargetRole() ) );
 	 }
       
 

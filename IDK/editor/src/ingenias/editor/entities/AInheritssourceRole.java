@@ -32,6 +32,14 @@ public class AInheritssourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AInheritssourceRole() {
+	    super("AInheritssourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AInheritssourceRole(String id) {

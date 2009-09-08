@@ -32,6 +32,14 @@ public class WFDecomposessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFDecomposessourceRole() {
+	    super("WFDecomposessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFDecomposessourceRole(String id) {

@@ -32,6 +32,14 @@ public class WFContainsTasktargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFContainsTasktargetRole() {
+	    super("WFContainsTasktargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFContainsTasktargetRole(String id) {

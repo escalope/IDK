@@ -238,11 +238,11 @@ this.addClass("EResourceBelongsTotarget","ingenias.editor.entities.Application")
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("EResourceBelongsTosource")){
- 	 edges.add( new DefaultEdge( new EResourceBelongsTosourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new EResourceBelongsTosourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("EResourceBelongsTotarget")){
- 	 edges.add( new DefaultEdge( new EResourceBelongsTotargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new EResourceBelongsTotargetRole() ) );
 	 }
       
 

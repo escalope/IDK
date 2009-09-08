@@ -243,15 +243,15 @@ this.addClass("UIExecutestarget","ingenias.editor.entities.Task");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("UIColaboratessource")){
- 	 edges.add( new DefaultEdge( new UIColaboratessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new UIColaboratessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("UIColaboratestarget")){
- 	 edges.add( new DefaultEdge( new UIColaboratestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new UIColaboratestargetRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("UIExecutestarget")){
- 	 edges.add( new DefaultEdge( new UIExecutestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new UIExecutestargetRole() ) );
 	 }
       
 

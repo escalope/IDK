@@ -32,6 +32,14 @@ public class ApplicationBelongsTotargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public ApplicationBelongsTotargetRole() {
+	    super("ApplicationBelongsTotargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public ApplicationBelongsTotargetRole(String id) {

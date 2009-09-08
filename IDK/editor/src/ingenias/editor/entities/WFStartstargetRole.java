@@ -32,6 +32,14 @@ public class WFStartstargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFStartstargetRole() {
+	    super("WFStartstargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFStartstargetRole(String id) {

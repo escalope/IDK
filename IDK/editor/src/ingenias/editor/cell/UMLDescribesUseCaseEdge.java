@@ -232,11 +232,11 @@ this.addClass("UMLDescribesUseCasetarget","ingenias.editor.entities.Interaction"
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("UMLDescribesUseCasesource")){
- 	 edges.add( new DefaultEdge( new UMLDescribesUseCasesourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new UMLDescribesUseCasesourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("UMLDescribesUseCasetarget")){
- 	 edges.add( new DefaultEdge( new UMLDescribesUseCasetargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new UMLDescribesUseCasetargetRole() ) );
 	 }
       
 

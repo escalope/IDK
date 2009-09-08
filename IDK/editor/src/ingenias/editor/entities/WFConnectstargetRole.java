@@ -32,6 +32,14 @@ public class WFConnectstargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFConnectstargetRole() {
+	    super("WFConnectstargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFConnectstargetRole(String id) {

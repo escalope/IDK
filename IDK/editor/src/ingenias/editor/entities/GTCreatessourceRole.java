@@ -32,6 +32,14 @@ public class GTCreatessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTCreatessourceRole() {
+	    super("GTCreatessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTCreatessourceRole(String id) {

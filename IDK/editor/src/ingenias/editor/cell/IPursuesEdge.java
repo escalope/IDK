@@ -232,11 +232,11 @@ this.addClass("IPursuestarget","ingenias.editor.entities.Goal");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("IPursuessource")){
- 	 edges.add( new DefaultEdge( new IPursuessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new IPursuessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("IPursuestarget")){
- 	 edges.add( new DefaultEdge( new IPursuestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new IPursuestargetRole() ) );
 	 }
       
 

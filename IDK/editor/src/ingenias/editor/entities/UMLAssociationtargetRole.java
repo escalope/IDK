@@ -32,6 +32,14 @@ public class UMLAssociationtargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UMLAssociationtargetRole() {
+	    super("UMLAssociationtargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UMLAssociationtargetRole(String id) {

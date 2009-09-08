@@ -32,6 +32,14 @@ public class GTDependstargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTDependstargetRole() {
+	    super("GTDependstargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTDependstargetRole(String id) {

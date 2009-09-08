@@ -32,6 +32,14 @@ public class UISelectionsourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public UISelectionsourceRole() {
+	    super("UISelectionsourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UISelectionsourceRole(String id) {

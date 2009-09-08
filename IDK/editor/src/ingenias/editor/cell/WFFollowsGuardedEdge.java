@@ -238,11 +238,11 @@ this.addClass("WFFollowstarget","ingenias.editor.entities.Task");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFFollowssource")){
- 	 edges.add( new DefaultEdge( new WFFollowssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFFollowssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFFollowstarget")){
- 	 edges.add( new DefaultEdge( new WFFollowstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFFollowstargetRole() ) );
 	 }
       
 

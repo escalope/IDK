@@ -232,11 +232,11 @@ this.addClass("WSConnectstarget","ingenias.editor.entities.TaskWS");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WSConnectssource")){
- 	 edges.add( new DefaultEdge( new WSConnectssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WSConnectssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WSConnectstarget")){
- 	 edges.add( new DefaultEdge( new WSConnectstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WSConnectstargetRole() ) );
 	 }
       
 

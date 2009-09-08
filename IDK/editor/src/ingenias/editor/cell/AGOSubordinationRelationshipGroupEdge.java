@@ -232,11 +232,11 @@ this.addClass("AGORelationship2target","ingenias.editor.entities.OrganizationGro
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("AGORelationship2source")){
- 	 edges.add( new DefaultEdge( new AGORelationship2sourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new AGORelationship2sourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("AGORelationship2target")){
- 	 edges.add( new DefaultEdge( new AGORelationship2targetRole("") ) );
+ 	 edges.add( new DefaultEdge( new AGORelationship2targetRole() ) );
 	 }
       
 

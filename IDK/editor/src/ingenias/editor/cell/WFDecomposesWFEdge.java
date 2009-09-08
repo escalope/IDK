@@ -234,11 +234,11 @@ this.addClass("WFDecomposesWFtarget","ingenias.editor.entities.Workflow");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFDecomposesWFsource")){
- 	 edges.add( new DefaultEdge( new WFDecomposesWFsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFDecomposesWFsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFDecomposesWFtarget")){
- 	 edges.add( new DefaultEdge( new WFDecomposesWFtargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFDecomposesWFtargetRole() ) );
 	 }
       
 

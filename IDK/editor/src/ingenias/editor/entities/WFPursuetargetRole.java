@@ -32,6 +32,14 @@ public class WFPursuetargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public WFPursuetargetRole() {
+	    super("WFPursuetargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFPursuetargetRole(String id) {

@@ -34,6 +34,14 @@ public class UIColaboratessourceRole extends RoleEntity {
   public java.lang.String Timeout;
 
 
+ static int idCounter=0;
+
+ public UIColaboratessourceRole() {
+	    super("UIColaboratessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public UIColaboratessourceRole(String id) {

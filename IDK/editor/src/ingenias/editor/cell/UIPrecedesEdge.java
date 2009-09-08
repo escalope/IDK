@@ -236,11 +236,11 @@ this.addClass("UIPrecedestarget","ingenias.editor.entities.Interaction");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("UIPrecedessource")){
- 	 edges.add( new DefaultEdge( new UIPrecedessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new UIPrecedessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("UIPrecedestarget")){
- 	 edges.add( new DefaultEdge( new UIPrecedestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new UIPrecedestargetRole() ) );
 	 }
       
 

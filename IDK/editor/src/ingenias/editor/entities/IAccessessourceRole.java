@@ -32,6 +32,14 @@ public class IAccessessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public IAccessessourceRole() {
+	    super("IAccessessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IAccessessourceRole(String id) {

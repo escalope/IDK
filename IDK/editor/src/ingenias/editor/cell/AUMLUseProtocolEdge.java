@@ -232,11 +232,11 @@ this.addClass("AUMLUseProtocoltarget","ingenias.editor.entities.AUMLPort");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("AUMLUseProtocolsource")){
- 	 edges.add( new DefaultEdge( new AUMLUseProtocolsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new AUMLUseProtocolsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("AUMLUseProtocoltarget")){
- 	 edges.add( new DefaultEdge( new AUMLUseProtocoltargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new AUMLUseProtocoltargetRole() ) );
 	 }
       
 

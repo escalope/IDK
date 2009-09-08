@@ -238,11 +238,11 @@ this.addClass("ParticipatesInUseCasetarget","ingenias.editor.entities.UseCase");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("ParticipatesInUseCasesource")){
- 	 edges.add( new DefaultEdge( new ParticipatesInUseCasesourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new ParticipatesInUseCasesourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("ParticipatesInUseCasetarget")){
- 	 edges.add( new DefaultEdge( new ParticipatesInUseCasetargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new ParticipatesInUseCasetargetRole() ) );
 	 }
       
 

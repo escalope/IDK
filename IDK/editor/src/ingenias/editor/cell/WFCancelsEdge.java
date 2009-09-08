@@ -234,11 +234,11 @@ this.addClass("WFCancelstarget","ingenias.editor.entities.Conversation");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFUsessource")){
- 	 edges.add( new DefaultEdge( new WFUsessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFUsessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFCancelstarget")){
- 	 edges.add( new DefaultEdge( new WFCancelstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFCancelstargetRole() ) );
 	 }
       
 

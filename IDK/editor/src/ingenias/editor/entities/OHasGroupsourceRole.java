@@ -34,6 +34,14 @@ public class OHasGroupsourceRole extends RoleEntity {
   public java.lang.String Cardinality;
 
 
+ static int idCounter=0;
+
+ public OHasGroupsourceRole() {
+	    super("OHasGroupsourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public OHasGroupsourceRole(String id) {

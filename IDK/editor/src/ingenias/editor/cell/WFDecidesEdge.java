@@ -248,11 +248,11 @@ this.addClass("WFDecidestarget","ingenias.editor.entities.EndNode");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFDecidessource")){
- 	 edges.add( new DefaultEdge( new WFDecidessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFDecidessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFDecidestarget")){
- 	 edges.add( new DefaultEdge( new WFDecidestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFDecidestargetRole() ) );
 	 }
       
 

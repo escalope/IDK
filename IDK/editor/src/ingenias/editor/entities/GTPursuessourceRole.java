@@ -32,6 +32,14 @@ public class GTPursuessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTPursuessourceRole() {
+	    super("GTPursuessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTPursuessourceRole(String id) {

@@ -232,11 +232,11 @@ this.addClass("UseCasePursuestarget","ingenias.editor.entities.Goal");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("UseCasePursuessource")){
- 	 edges.add( new DefaultEdge( new UseCasePursuessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new UseCasePursuessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("UseCasePursuestarget")){
- 	 edges.add( new DefaultEdge( new UseCasePursuestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new UseCasePursuestargetRole() ) );
 	 }
       
 

@@ -32,6 +32,14 @@ public class GTCreatestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTCreatestargetRole() {
+	    super("GTCreatestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTCreatestargetRole(String id) {

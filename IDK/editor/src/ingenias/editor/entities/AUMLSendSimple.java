@@ -71,7 +71,7 @@ if (this.getSpeechAct() instanceof String)
 }
 
 public String toString(){
- return "";
+ return getId()+":"+getType();
 }
 
 

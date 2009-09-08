@@ -232,11 +232,11 @@ this.addClass("IAccessestarget","ingenias.editor.entities.Interaction");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("IAccessessource")){
- 	 edges.add( new DefaultEdge( new IAccessessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new IAccessessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("IAccessestarget")){
- 	 edges.add( new DefaultEdge( new IAccessestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new IAccessestargetRole() ) );
 	 }
       
 

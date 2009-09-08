@@ -32,6 +32,14 @@ public class EPerceivestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public EPerceivestargetRole() {
+	    super("EPerceivestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public EPerceivestargetRole(String id) {

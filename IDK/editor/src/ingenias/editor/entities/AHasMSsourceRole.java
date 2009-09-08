@@ -32,6 +32,14 @@ public class AHasMSsourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AHasMSsourceRole() {
+	    super("AHasMSsourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AHasMSsourceRole(String id) {

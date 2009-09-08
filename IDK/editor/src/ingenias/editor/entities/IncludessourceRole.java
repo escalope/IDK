@@ -32,6 +32,14 @@ public class IncludessourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public IncludessourceRole() {
+	    super("IncludessourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IncludessourceRole(String id) {

@@ -32,6 +32,14 @@ public class AUMLSelectionsourceRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public AUMLSelectionsourceRole() {
+	    super("AUMLSelectionsourceRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public AUMLSelectionsourceRole(String id) {

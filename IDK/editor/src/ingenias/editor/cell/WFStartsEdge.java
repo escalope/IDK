@@ -244,11 +244,11 @@ this.addClass("WFStartstarget","ingenias.editor.entities.Task");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFStartssource")){
- 	 edges.add( new DefaultEdge( new WFStartssourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFStartssourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFStartstarget")){
- 	 edges.add( new DefaultEdge( new WFStartstargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFStartstargetRole() ) );
 	 }
       
 

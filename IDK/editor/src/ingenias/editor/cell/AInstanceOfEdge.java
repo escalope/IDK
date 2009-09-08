@@ -234,11 +234,11 @@ this.addClass("AInstanceOftarget","ingenias.editor.entities.AutonomousEntityQuer
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("AInstanceOfsource")){
- 	 edges.add( new DefaultEdge( new AInstanceOfsourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new AInstanceOfsourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("AInstanceOftarget")){
- 	 edges.add( new DefaultEdge( new AInstanceOftargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new AInstanceOftargetRole() ) );
 	 }
       
 

@@ -32,6 +32,14 @@ public class GroupBelongsToOrganizationTRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GroupBelongsToOrganizationTRole() {
+	    super("GroupBelongsToOrganizationTRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GroupBelongsToOrganizationTRole(String id) {

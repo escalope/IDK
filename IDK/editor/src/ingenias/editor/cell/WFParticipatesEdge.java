@@ -236,11 +236,11 @@ this.addClass("WFParticipatestarget","ingenias.editor.entities.Workflow");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFParticipatessource")){
- 	 edges.add( new DefaultEdge( new WFParticipatessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFParticipatessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFParticipatestarget")){
- 	 edges.add( new DefaultEdge( new WFParticipatestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFParticipatestargetRole() ) );
 	 }
       
 

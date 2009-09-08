@@ -32,6 +32,14 @@ public class IPursuestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public IPursuestargetRole() {
+	    super("IPursuestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IPursuestargetRole(String id) {

@@ -234,11 +234,11 @@ this.addClass("WFPursuetarget","ingenias.editor.entities.Goal");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("WFPursuesource")){
- 	 edges.add( new DefaultEdge( new WFPursuesourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFPursuesourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("WFPursuetarget")){
- 	 edges.add( new DefaultEdge( new WFPursuetargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new WFPursuetargetRole() ) );
 	 }
       
 

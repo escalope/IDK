@@ -32,6 +32,14 @@ public class IncludestargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public IncludestargetRole() {
+	    super("IncludestargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public IncludestargetRole(String id) {

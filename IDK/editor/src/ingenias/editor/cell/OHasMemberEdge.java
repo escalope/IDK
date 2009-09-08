@@ -238,11 +238,11 @@ this.addClass("OHasMembertarget","ingenias.editor.entities.Application");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("OHasMembersource")){
- 	 edges.add( new DefaultEdge( new OHasMembersourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new OHasMembersourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("OHasMembertarget")){
- 	 edges.add( new DefaultEdge( new OHasMembertargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new OHasMembertargetRole() ) );
 	 }
       
 

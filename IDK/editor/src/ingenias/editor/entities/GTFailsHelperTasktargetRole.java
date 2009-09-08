@@ -32,6 +32,14 @@ public class GTFailsHelperTasktargetRole extends RoleEntity {
 
 
 
+ static int idCounter=0;
+
+ public GTFailsHelperTasktargetRole() {
+	    super("GTFailsHelperTasktargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public GTFailsHelperTasktargetRole(String id) {

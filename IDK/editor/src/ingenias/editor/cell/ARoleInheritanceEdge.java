@@ -232,11 +232,11 @@ this.addClass("ARoleInheritancetarget","ingenias.editor.entities.Role");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("ARoleInheritancesource")){
- 	 edges.add( new DefaultEdge( new ARoleInheritancesourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new ARoleInheritancesourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("ARoleInheritancetarget")){
- 	 edges.add( new DefaultEdge( new ARoleInheritancetargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new ARoleInheritancetargetRole() ) );
 	 }
       
 

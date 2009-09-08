@@ -34,6 +34,14 @@ public class WFCancelstargetRole extends RoleEntity {
   public java.lang.String Label;
 
 
+ static int idCounter=0;
+
+ public WFCancelstargetRole() {
+	    super("WFCancelstargetRole"+idCounter);
+	    idCounter++;
+
+	  }
+
 
 
   public WFCancelstargetRole(String id) {

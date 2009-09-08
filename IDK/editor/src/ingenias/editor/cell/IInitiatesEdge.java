@@ -234,11 +234,11 @@ this.addClass("IInitiatestarget","ingenias.editor.entities.Role");
               selected[i] instanceof DefaultPort) ){
       
 	if (roles[i].equalsIgnoreCase("IInitiatessource")){
- 	 edges.add( new DefaultEdge( new IInitiatessourceRole("") ) );
+ 	 edges.add( new DefaultEdge( new IInitiatessourceRole() ) );
 	 }
       
 	if (roles[i].equalsIgnoreCase("IInitiatestarget")){
- 	 edges.add( new DefaultEdge( new IInitiatestargetRole("") ) );
+ 	 edges.add( new DefaultEdge( new IInitiatestargetRole() ) );
 	 }
       
 

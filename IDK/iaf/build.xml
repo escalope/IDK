@@ -17,6 +17,20 @@
 	<property name="javac.debug"              value="true"/>
 	
 	
+	<!--taskdef resource="ise.antelope.tasks.antelope.taskdefs">
+  <classpath>
+    <pathelement location="lib/AntelopeTasks_3.5.1.jar"/>
+  </classpath>
+</taskdef-->
+
+<taskdef name="repeat" classname="ise.antelope.tasks.Repeat">
+<classpath>
+    <pathelement location="lib/AntelopeTasks_3.5.1.jar"/>
+  </classpath>
+</taskdef>
+
+	
+	
 	<target name="init">
 		
 		<tstamp />
@@ -39,7 +53,7 @@
 	<mkdir dir="${temp}/templates" />
 
 	
-	<javac compiler="modern" depend="true" destdir="${temp}" debug="true" fork="true">
+	<javac compiler="modern" depend="true" destdir="${temp}" debug="true">
 		
 		<src path="${src}" />
 		
@@ -66,6 +80,8 @@
 	
 	
 	<copy file="modiaf.jar" toDir="${IDK}/ext" />
+	<copy file="modiaf.jar" toDir="tests/commsonetomany/lib" />
+	<copy file="modiaf.jar" toDir="tests/trust/lib" />	
 	<delete dir="${temp}" />
 	
 </target>
@@ -121,6 +137,39 @@
 	<copy file="lib/jgraph.jar" todir="${mainP}/lib/"/>	
 	
 </target>
+
+<target name="generatetests" depends="compile">
+	<copy file="modiaf.jar" todir="tests/commsonetomany/lib/"/>
+	<copy file="lib/ingeniaseditor.jar" todir="tests/commsonetomany/lib/"/>
+	<java fork="true" failonerror="true" maxmemory="200m"
+	      classname="ingenias.codeproc.IAFGenerator">		
+		<arg value="tests/commsonetomany/spec/specification.idk"/>
+		<arg value="tests/commsonetomany"/>		
+		<classpath>
+			<fileset dir="tests/commsonetomany/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>		
+	</java>
+	<java fork="true" failonerror="true" maxmemory="200m"
+	      classname="ingenias.codeproc.IAFGenerator">		
+		<arg value="tests/trust/spec/specification.idk"/>
+		<arg value="tests/trust"/>		
+		<classpath>
+			<fileset dir="tests/trust/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>		
+	</java>
+
+</target>
+
+<target name="runtests" depends="generatetests">
+	<repeat count="3" >
+		<ant dir="tests/commsonetomany" antfile="build.xml" target="alljunit"/> 
+	</repeat>	
+</target>
+
 
 
 <target name="clean">

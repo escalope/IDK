@@ -53,6 +53,7 @@ public class TestGenerator {
 				Repeat testingDepl = new Repeat("testdefinition");
 				p.addRepeat(testingDepl);
 				testingDepl.add(new Var("test", test.getID()));
+				addAgentIdsToBeLaunchedAtTest(testingDepl, test,generator,browser);
 			}
 			
 		} catch (NotInitialised e) {			
@@ -61,6 +62,66 @@ public class TestGenerator {
 
 	}
 
+
+	private void addAgentIdsToBeLaunchedAtTest(Repeat testingDepl,
+			GraphEntity test,BasicCodeGenerator bcg,Browser browser) throws NotInitialised {
+		GraphEntity[] deployPacks = Utils
+		.generateEntitiesOfType("TestingPackage",browser);
+		if (deployPacks.length > 0) {
+			for (int k = 0; k < deployPacks.length; k++) {
+				try {
+					
+					GraphAttribute deplPackageAttr = deployPacks[k]
+					                                             .getAttributeByName("TestingDeployment");
+					GraphAttribute testAttr = deployPacks[k].getAttributeByName("Tests");
+			
+
+					if (deplPackageAttr != null) {
+						GraphEntity deplPackage = deplPackageAttr.getEntityValue();
+						if (deplPackage != null) {
+						Repeat depl = new Repeat("deploynode");
+						DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for build.xml script generation
+		
+							
+							if (testAttr!=null && 
+									testAttr.getCollectionValue()!=null && 
+									testAttr.getCollectionValue().size()>0){
+								GraphCollection tests = testAttr.getCollectionValue();
+								
+								for (int j=0;j<tests.size();j++){								
+									GraphEntity localTest=tests.getElementAt(j);		
+									if (localTest.equals(test)){
+										testingDepl.add(depl);				
+									}
+								}
+								
+							} else {
+								bcg.fatalError();
+								Log.getInstance()
+								.logERROR(
+										"The testing deployment has not defined a test","", deployPacks[k].getID());
+							}
+						} else {
+							bcg.fatalError();
+							Log.getInstance()
+							.logERROR(
+									"The testing deployment has not defined a deployment package",
+									"", deployPacks[k].getID());
+						};
+
+					}					
+
+				} catch (NullEntity e) {					
+					e.printStackTrace();
+				} catch (Exception e) {					
+					e.printStackTrace();
+				}
+
+
+			}
+		}
+		
+	}
 
 	/**
 	 * 
@@ -119,7 +180,15 @@ public class TestGenerator {
 											//DeploymentGenerator.generateDeploymentPack(deplPackage,
 											//		testRepeat);
 										}
-									} 
+									} else {
+										 if (relatedComponents!=null && 
+													relatedComponents.length>0){
+												bcg.fatalError();
+												Log.getInstance().logERROR(
+														"The test element must be associated to one INGENIAS Component","", test.getID());
+												 
+										 }
+									}
 								}
 								
 							} else {

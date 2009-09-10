@@ -24,6 +24,7 @@
 package ingenias.jade.comm;
 
 import ingenias.editor.entities.MentalEntity;
+import ingenias.jade.EventManager;
 import ingenias.jade.graphics.MainInteractionManager;
 
 import java.util.Vector;
@@ -82,7 +83,8 @@ public class GeneralLocksManager implements LocksRemover, LocksWriter {
 	public  synchronized  void removeDeletionLock(ingenias.editor.entities.MentalEntity element){		
 		this.cannotBeDeleted.remove(element);
 		notifyChangeLocks();
-		MainInteractionManager.logMSM("Removed "+element+". Current lokcs:"+this.cannotBeDeleted.toString(),aname);
+                EventManager.getInstance().removedDeletionLock(element,this.cannotBeDeleted,this.aname,"");
+	
 	}
 	
 	/**
@@ -92,8 +94,8 @@ public class GeneralLocksManager implements LocksRemover, LocksWriter {
 	
 	public synchronized void addDeletionLockExpectedType(String type){
 		this.cannotBeDeletedExpectedTypes.add(type);		
-		MainInteractionManager.logMSM("Added "+type+".  Current locks:"+this.cannotBeDeleted.toString(),
-				aname);
+	/*	MainInteractionManager.logMSM("Added "+type+".  Current locks:"+this.cannotBeDeleted.toString(),
+				aname);*/
 		
 	}
 	
@@ -101,8 +103,10 @@ public class GeneralLocksManager implements LocksRemover, LocksWriter {
 		if (this.cannotBeDeletedExpectedTypes.contains(entity.getType())){
 			this.cannotBeDeleted.add(entity);
 			notifyChangeLocks();
-			MainInteractionManager.logMSM("Added "+entity+".  Current locks:"+this.cannotBeDeleted.toString(),
-					aname);
+        EventManager.getInstance().addDeletionLock(entity,this.cannotBeDeleted,this.aname,"");
+
+			/*MainInteractionManager.logMSM("Added "+entity+".  Current locks:"+this.cannotBeDeleted.toString(),
+					aname);*/
 		}		
 	}
 

@@ -121,13 +121,14 @@ public class TaskQueue {
 		if (!tqueue.contains(t) && !manualExecQueue.contains(t)){
 			
 			DebugUtils.logEvent("TaskScheduled", new String[]{agentID.getLocalName(),t.getType(),t.getID(),t.getInputs().toString()});
-			tqueue.add(t);			
-			MainInteractionManager.logMSP("Task "+t.getID()+" of type "+t.getType()+" was sucessfully scheduled. Other tasks are :"+tqueue, agentID.getLocalName());
+			tqueue.add(t);
+			EventManager.getInstance().scheduledTask(agentID.getLocalName(), "", t);
 			if (t.getConversationContext()!=null){
 				msr.conversationIsInUse(t.getConversationContext());	
 			}
 		} else {
-			MainInteractionManager.logMSP("Task "+t.getID()+" of type "+t.getType()+" was already scheduled", agentID.getLocalName());
+			
+			//MainInteractionManager.logMSP("Task "+t.getID()+" of type "+t.getType()+" was already scheduled", agentID.getLocalName());
 		}
 	}
 
@@ -193,10 +194,11 @@ public class TaskQueue {
 	 * @param t
 	 */
 	public synchronized void descheduleTask(Task t) {
-		MainInteractionManager.logMSP("Aborting task " + t.getID(), agentID.getLocalName());
-		MainInteractionManager.logMSP("Aborting task " + t.getID(), agentID.getLocalName(),t.getID(),t.getType());
+	
+	/*	MainInteractionManager.logMSP("Aborting task " + t.getID(), agentID.getLocalName());
+		MainInteractionManager.logMSP("Aborting task " + t.getID(), agentID.getLocalName(),t.getID(),t.getType());*/
 		tqueue.remove(t); // Dequeue the task
-		DebugUtils.logEvent("TaskAborted", new String[]{agentID.getLocalName(),t.getType(),t.getID()});
+		//DebugUtils.logEvent("TaskAborted", new String[]{agentID.getLocalName(),t.getType(),t.getID()});
 		MainInteractionManager.refresh();
 	}
 
@@ -271,10 +273,9 @@ public class TaskQueue {
 			for (int j = 0; j < missing.size(); j++) {
 				missingitems.append(missing.elementAt(j).getType() + ",");
 			}
-			MainInteractionManager.logMSP("Aborting task " + nextTask.getID()
-					+ " because there are not all required inputs, concretely "
-					+ missingitems + "  are missing", agentID.getLocalName()
-					, nextTask.getID(),nextTask.getType());
+			EventManager.getInstance().abortedTaskDueToMissingItems(
+					agentID.getLocalName(), "", nextTask, missing.toArray(
+							new MentalEntity[missing.size()]));
 			// System.err.println("removed "+nextTask);
 			valid = false;
 		} else {
@@ -282,15 +283,21 @@ public class TaskQueue {
 
 			Vector<MentalEntity> lockedElements = getLockedConsumedInputs(nextTask);
 
+			if (lockedElements.size()>0){
+				EventManager.getInstance().abortedTaskDueToLockedItems(
+						agentID.getLocalName(), "", nextTask, lockedElements.toArray(
+								new MentalEntity[lockedElements.size()]));
+			}
 			valid = lockedElements.size() == 0;
-			for (MentalEntity ei : lockedElements) {
+			
+			/*for (MentalEntity ei : lockedElements) {
 				MainInteractionManager.logMSP("Aborting task " + nextTask.getID()
 						+ " because it consumes " + ei.getType()
 						+ ", an input required by an active interaction",
 						agentID.getLocalName(), nextTask.getID(),nextTask.getType());
-			}
+			}*/
 
-			if (lockedElements.size() > 0) {
+			/*if (lockedElements.size() > 0) {
 				// The task can be executed
 				MainInteractionManager.logMSP(nextTask.getID()
 						+ " did not have any lock or missing element "
@@ -300,7 +307,7 @@ public class TaskQueue {
 
 				MainInteractionManager.logMSP(nextTask.getID()
 						+ " inputs review completed. It is ready for execution" , this.agentID
-						.getLocalName(), nextTask.getID(),nextTask.getType());
+						.getLocalName(), nextTask.getID(),nextTask.getType());*/
 		}
 		return valid;
 	}
@@ -362,9 +369,9 @@ public class TaskQueue {
 			} catch (NotFound nf){
 				missing.add(element);
 				if (t.getConversationContext()!=null){
-					MainInteractionManager.logMSP("Not found entity "+element.getId()+" in conversastion "+t.getConversationContext().getConversationID()+
+				/*	MainInteractionManager.logMSP("Not found entity "+element.getId()+" in conversastion "+t.getConversationContext().getConversationID()+
 							" . Scheduled task "+ t.getID()+" is going to be aborted", this.agentID
-							.getLocalName(), t.getID(),t.getType());
+							.getLocalName(), t.getID(),t.getType());*/
 					
 				}
 			}

@@ -25,6 +25,7 @@ package ingenias.testing;
 import ingenias.jade.MentalStateProcessor;
 
 import java.util.Hashtable;
+import java.util.Vector;
 
 public class MSPRepository {
 
@@ -66,6 +67,11 @@ public class MSPRepository {
 			
 			throw new ingenias.exception.TimeOut("It was not possible to obtain an instance of the Mental State Processor of agent "+agentID);
 		
+	}
+
+	public Vector<MentalStateProcessor> getAllRegisteredMSP() {
+		// TODO Auto-generated method stub
+		return new Vector<MentalStateProcessor>(msps.values());
 	}
 
 

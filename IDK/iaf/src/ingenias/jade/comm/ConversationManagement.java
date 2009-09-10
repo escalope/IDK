@@ -26,6 +26,9 @@ package ingenias.jade.comm;
 import ingenias.editor.entities.Interaction;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.exception.InvalidEntity;
+import ingenias.jade.AgentExternalDescription;
+import ingenias.jade.EventManager;
+import ingenias.jade.IAFProperties;
 import ingenias.jade.JADEAgent;
 import ingenias.jade.MentalStateReader;
 import ingenias.jade.MentalStateUpdater;
@@ -49,39 +52,6 @@ import java.util.Vector;
  * 
  */
 public class ConversationManagement {
-
-	/**
-	 * It associates a Conversation id with the played role. An agent can play
-	 * different roles within the same conversation. Therefore, it is required
-	 * to distinguish the state behaviors referring to the conversations
-	 * associated to one role and others. This is achieved making the id of a
-	 * conversation the combination of the conversation id and the role played
-	 * 
-	 * @author jj
-	 * 
-	 */
-	private class Pair {
-		String cid;
-		String playedRole;
-
-		public Pair(String cid, String playedRole) {
-			this.cid = cid;
-			this.playedRole = cid;
-		}
-
-		@Override
-		public int hashCode() {
-			return (cid.hashCode() + playedRole.hashCode()) % Integer.MAX_VALUE;
-		}
-
-		public boolean equals(Object obj) {
-			if (obj instanceof Pair) {
-				return ((Pair) obj).cid.equals(cid)
-				&& ((Pair) obj).playedRole.equals(playedRole);
-			} else
-				return super.equals(obj);
-		}
-	}
 
 	private int cid = 0; // a counter to store different conversation ids
 	private Vector<Pair> conversationIDs = new Vector<Pair>(); // The different
@@ -226,9 +196,9 @@ public class ConversationManagement {
 	 * @throws NoAgentsFound
 	 */
 	public ActiveConversation launchProtocolAsInitiator(String protocol,
-			DFAgentDescription[] actors) throws NoAgentsFound {
+			AgentExternalDescription[] actors) throws NoAgentsFound {
 		String role = this.initiatorRoles.get(protocol);
-		
+		if (actors==null) throw new RuntimeException("There are null actors. Cannot initialise the protocol");
 		ActiveConversation actconv = this.launchProtocolAsInitiator(protocol,
 				role, actors, this.agent.getMSM(), this.agent.getMSM());
 		try {
@@ -260,9 +230,10 @@ public class ConversationManagement {
 	 * @throws NoAgentsFound
 	 */
 	public ActiveConversation launchAsCollaborator(String protocol,
-			String requestedRole, String cid) throws NoAgentsFound {
+			String requestedRole, String cid, AgentExternalDescription[] actors) throws NoAgentsFound {
+		
 		ActiveConversation actconv = this.launchProtocolAsCollaborator(
-				protocol, requestedRole, cid, null, this.agent.getMSM(),
+				protocol, requestedRole, cid, actors, this.agent.getMSM(),
 				this.agent.getMSM());
 		
 		this.add(actconv.getSb());		
@@ -271,6 +242,9 @@ public class ConversationManagement {
 		} catch (InvalidEntity e) {
 			e.printStackTrace();
 		}
+		/*EventManager.getInstance().startingInteractionAsCollaborator(this.agent.getLocalName(),
+				agent.getClass().getName().substring(agent.getClass().getName().indexOf("JADE")),
+				protocol, requestedRole,cid);*/
 		DebugUtils.logEvent("CollaborationAccepted", new String[]{protocol,cid,agent.getLocalName(), requestedRole});
 		return actconv;
 	}
@@ -322,7 +296,7 @@ public class ConversationManagement {
 	 * @throws NoAgentsFound
 	 */
 	protected ActiveConversation launchProtocolAsCollaborator(String protocol,
-			String role, String cid, DFAgentDescription[] actors,
+			String role, String cid, AgentExternalDescription[] actors,
 			MentalStateReader msr, MentalStateUpdater msu)
 	throws NoAgentsFound {
 		int tries = 10;
@@ -333,10 +307,11 @@ public class ConversationManagement {
 		conv.setInteraction(new Interaction(protocol));
 		conv.setConversationID(cid);
 		conv.setPlayedRole(role);
+                conv.setAbortCode(IAFProperties.NONE);
 	
 		aconv = launchProtocol(actors, msr, msu, tries, aconv,
 				continueInit, conv);
-		DebugUtils.logEvent("CollaborationAccepted", new String[]{protocol,cid,agent.getLocalName(),role});
+		//DebugUtils.logEvent("CollaborationAccepted", new String[]{protocol,cid,agent.getLocalName(),role});
 		return aconv;
 	}
 
@@ -368,7 +343,7 @@ public class ConversationManagement {
 	 * @return The initialized active conversation
 	 * @throws NoAgentsFound
 	 */
-	private ActiveConversation launchProtocol(DFAgentDescription[] actors,
+	private ActiveConversation launchProtocol(AgentExternalDescription[] actors,
 			MentalStateReader msr, MentalStateUpdater msu, 
 			int tries, ActiveConversation aconv, boolean continueInit,
 			RuntimeConversation conv) throws NoAgentsFound {
@@ -400,10 +375,7 @@ public class ConversationManagement {
 
 			}
 		}
-		if (aconv!=null)
-			MainInteractionManager.logInteraction("Protocol "+conv.getInteraction().getId()+" initialised", agent.getLocalName(), conv.getId());
-		else
-			MainInteractionManager.logInteraction("Protocol "+conv.getInteraction().getId()+" initialisation failed", agent.getLocalName(), conv.getId());
+		
 		return aconv;
 	};
 
@@ -427,7 +399,7 @@ public class ConversationManagement {
 	 * @throws NoAgentsFound
 	 */
 	protected ActiveConversation launchProtocolAsInitiator(String protocol,
-			String role, DFAgentDescription[] actors, MentalStateReader msr,
+			String role, AgentExternalDescription[] actors, MentalStateReader msr,
 			MentalStateUpdater msu) throws NoAgentsFound {
 		int tries = 10;
 		ActiveConversation aconv = null;
@@ -438,10 +410,19 @@ public class ConversationManagement {
 		conv.setInteraction(new Interaction(protocol));
 		conv.setConversationID(cid);
 		conv.setPlayedRole(role);
+                conv.setAbortCode(IAFProperties.NONE);
 	
 
 		aconv = launchProtocol(actors, msr, msu,  tries, aconv,
 				continueInit, conv);
+		if (aconv!=null){
+			EventManager.getInstance().startingInteractionAsInitiator(
+					this.agent.getLocalName(),
+					agent.getClass().getName().substring(agent.getClass().getName().indexOf("JADE")), aconv);
+			
+		}else{
+			//MainInteractionManager.logInteraction("Protocol "+conv.getInteraction().getId()+" initialisation failed", agent.getLocalName(), conv.getId());
+		}
 		return aconv;
 	};
 
@@ -544,8 +525,8 @@ public class ConversationManagement {
 	 * 
 	 * @return An indexed hashtable
 	 */
-	public Hashtable<Pair, StateBehavior> getActiveMachines() {
-		return activeMachines;
+	public synchronized Hashtable<Pair, StateBehavior> getActiveMachines() {		
+		return new Hashtable<Pair, StateBehavior>(activeMachines);
 	}
 
 	/**
@@ -566,16 +547,16 @@ public class ConversationManagement {
 	 * @param role
 	 *            The role played during the interaction
 	 */
-	public void removeActiveMachine(String cid, String role) {
-		this.getActiveMachines().remove(new Pair(cid, role));
+	public synchronized void removeActiveMachine(String cid, String role) {
+		activeMachines.remove(new Pair(cid, role));
 	}
 
 	/**
 	 * It removes those state behaviors whose state is finished.
 	 * 
 	 */
-	public void removedFinishedProtocols() {
-		if (getActiveMachines().size() > 0) {
+	public synchronized void removedFinishedProtocols() {
+		if (activeMachines.size() > 0) {
 			Hashtable<String, StateBehavior> v = (Hashtable<String, StateBehavior>) activeMachines
 			.clone();
 			Enumeration enumeration = v.elements();
@@ -640,8 +621,8 @@ public class ConversationManagement {
 	 */
 	protected ActiveConversation launchProtocolAsInitiator(String protocol,
 			String role, YellowPages yp) throws NoAgentsFound {
-		DFAgentDescription[] actors = this.ap
-		.getInteractionActors(protocol, yp);
+		AgentExternalDescription[] actors = this.ap.getInteractionActors(protocol, yp);
+		if (actors==null) throw new RuntimeException("There are null actors. Cannot initialise the protocol");
 		return this.launchProtocolAsInitiator(protocol, role, actors,
 				this.agent.getMSM(), this.agent.getMSM());
 	};
@@ -666,7 +647,7 @@ public class ConversationManagement {
 	 * @return true if the actor list is satisfactory, and false i.o.c.
 	 */
 	public boolean verifyActors(String interactionType,
-			DFAgentDescription[] actors) {
+			AgentExternalDescription[] actors) {
 
 		return this.ap.verifyActors(interactionType, actors);
 	}
@@ -722,6 +703,8 @@ public class ConversationManagement {
 		}
 		return result;
 	}
+	
+	
 	
 
 }

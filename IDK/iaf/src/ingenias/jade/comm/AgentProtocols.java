@@ -24,6 +24,7 @@
 package ingenias.jade.comm;
 
 import ingenias.editor.entities.RuntimeConversation;
+import ingenias.jade.AgentExternalDescription;
 import ingenias.jade.MentalStateReader;
 import ingenias.jade.MentalStateUpdater;
 import ingenias.jade.components.YellowPages;
@@ -40,7 +41,7 @@ public interface AgentProtocols {
 	 * @return An array of agent descriptors
 	 * @throws ingenias.jade.exception.NoAgentsFound
 	 */
-	public DFAgentDescription[] getInteractionActors(String interaction, YellowPages yp) 
+	public AgentExternalDescription[] getInteractionActors(String interaction, YellowPages yp) 
 	 throws ingenias.jade.exception.NoAgentsFound;
 	
 	
@@ -55,7 +56,7 @@ public interface AgentProtocols {
 	 * @param actors The actors to be studied
 	 * @return true if the actors play the roles required
 	 */
-	public  boolean verifyActors(String protocol, DFAgentDescription[ ] actors);
+	public  boolean verifyActors(String protocol, AgentExternalDescription[ ] actors);
 	 // This method tells for each interaction type, the roles played. The description is
 	 // an instance of DFAgentDescription. An agent can play several roles within the same
 	 // interaction. Therefore, when this agent is requested to participate
@@ -84,7 +85,7 @@ public interface AgentProtocols {
 	public ActiveConversation initialiseProtocols(String agentName,RuntimeConversation conv, 
 			MentalStateReader msr, MentalStateUpdater msu,
 			ingenias.jade.comm.LocksRemover lr,  
-			DFAgentDescription[] actors) throws NoAgentsFound;
+			AgentExternalDescription[] actors) throws NoAgentsFound;
 	 
 	
 }

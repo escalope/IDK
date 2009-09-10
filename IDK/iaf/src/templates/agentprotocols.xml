@@ -94,11 +94,11 @@ public @@@v@@@agentid@@@/v@@@Protocol(){};
 	public ActiveConversation initialiseProtocols(String agentName,RuntimeConversation conv, 
 			MentalStateReader msr, MentalStateUpdater msu,
 			ingenias.jade.comm.LocksRemover lr,  
-			DFAgentDescription[] actors) throws NoAgentsFound{
+			AgentExternalDescription[] actors) throws NoAgentsFound{
         // Adds a protocol to the protocol queue
-          StateBehavior   sb=null;
-		           // Interactions in which this agent appears as collaborator
-                   @@@repeat id="interactionsColaborated"@@@                  
+            StateBehavior   sb=null;
+		    // Interactions in which this agent appears as collaborator
+           @@@repeat id="interactionsColaborated"@@@                  
 		   if (conv.getInteraction().getId().equals("@@@v@@@interactionid@@@/v@@@") && conv.getPlayedRole().equals("@@@v@@@roleid@@@/v@@@")){
 		   	DefaultCommControl dcc=new @@@v@@@roleid@@@/v@@@@@@v@@@interactionid@@@/v@@@DefaultCommControl(
                         		   conv.getConversationID(),msr,lr);
@@ -137,11 +137,11 @@ public @@@v@@@agentid@@@/v@@@Protocol(){};
 
  
 	
-	        public DFAgentDescription[] getInteractionActors(String interaction, YellowPages yp) throws ingenias.jade.exception.NoAgentsFound{
-              DFAgentDescription[] result=null;
+	        public AgentExternalDescription[] getInteractionActors(String interaction, YellowPages yp) throws ingenias.jade.exception.NoAgentsFound{
+              AgentExternalDescription[] result=null;
              @@@repeat id="interactions"@@@
                if (interaction.equals("@@@v@@@interactionid@@@/v@@@")){
-                 Vector cols=new Vector();
+                Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
                  @@@repeat id="interactionroles"@@@
                  try {
                  String cardinality="@@@v@@@irolenamecardinality@@@/v@@@";
@@ -149,17 +149,17 @@ public @@@v@@@agentid@@@/v@@@Protocol(){};
                    if (agents==null || agents.length<=0)
                       throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role @@@v@@@irolename@@@/v@@@");
                    if (cardinality.equals("1") || cardinality.equals(""))
-                    cols.add(agents[0]);
+                    cols.add(new AgentExternalDescription(agents[0].getName(),"@@@v@@@irolename@@@/v@@@"));
                     else
                 	   if (cardinality.equals("1__*"))
 						   for (int k=0;k<agents.length;k++)
-                			   cols.add(agents[k]);
+                			  cols.add(new AgentExternalDescription(agents[k].getName(),"@@@v@@@irolename@@@/v@@@"));
                  } catch (FIPAException fe){
                    fe.printStackTrace();
                    throw new NoAgentsFound();
                  }
                  @@@/repeat@@@
-                result=new DFAgentDescription[cols.size()];
+                result=new AgentExternalDescription[cols.size()];
                 cols.toArray(result);
                }
              @@@/repeat@@@
@@ -200,7 +200,7 @@ public @@@v@@@agentid@@@/v@@@Protocol(){};
 	}*/
 	
 	
-	public boolean verifyActors(String protocol, DFAgentDescription[ ] actors) {
+	public boolean verifyActors(String protocol, AgentExternalDescription[ ] actors) {
           
         
         @@@repeat id="interactions"@@@
@@ -212,18 +212,11 @@ public @@@v@@@agentid@@@/v@@@Protocol(){};
          	@@@/repeat@@@
         	if (actors.length<toVerify.size())
         		return false;
-        	for (int k=0;k<actors.length;k++){
-        		Iterator it=actors[k].getAllServices();
-        		boolean found=false;
-        		while (it.hasNext() && !found){
-        			ServiceDescription service=(ServiceDescription) it.next();
-        			if (toVerify.contains(service.getType())){
-        				rolesFound.add(service.getType());
-        				found=true;
-        			}
-        		}
-        		if (!found)
-        			return false;
+        	boolean found=false;
+        	for (int k=0;k<actors.length ;k++){
+        		if (toVerify.contains(actors[k].role)){
+    				rolesFound.add(actors[k].role);    			
+    			}
         	}
         	return toVerify.size()==rolesFound.size();
         }

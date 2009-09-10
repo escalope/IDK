@@ -42,5 +42,16 @@ public class AgentExternalDescription implements java.io.Serializable {
 		this.id = id;
 		this.role = role;
 	}
+	public boolean equals(Object object){
+		if (object instanceof AgentExternalDescription){
+			return ((AgentExternalDescription)object).id.equals(id) &&
+			((AgentExternalDescription)object).role.equals(role);
+		}
+		return super.equals(object);
+	}
+	
+	public String toString(){
+		return "("+id.getLocalName()+","+role+")";
+	}
 
 }

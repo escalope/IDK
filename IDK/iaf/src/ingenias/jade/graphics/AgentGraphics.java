@@ -29,7 +29,7 @@ import ingenias.editor.Model;
 import ingenias.editor.ModelJGraph;
 import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.MentalEntity;
-import ingenias.editor.panels.AgentModelPanel;
+
 import ingenias.jade.components.Task;
 
 import java.awt.BorderLayout;
@@ -258,7 +258,7 @@ public class AgentGraphics {
 
 	}
 
-	public void setMentalStatePanel(String agentName, AgentModelPanel amm ) {
+	public void setMentalStatePanel(String agentName, ingenias.editor.panels.AgentModelPanel amm ) {
 		Border border1 = BorderFactory.createLineBorder(Color.black, 2);
 		TitledBorder nametask = new TitledBorder(border1,agentName);
 		amm.setBorder(nametask);

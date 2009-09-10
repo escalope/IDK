@@ -34,7 +34,8 @@ public class IAFProperties {
 	public static final int TIMEOUT=0;
 	public static final int INTERNAL_FAILURE = 1;
 	public static final int NO_AGENTS_FOUND = 2;
-
+        public static final int NONE = 2;
+        
 	static {
 		readProperties();	
 	}

@@ -78,7 +78,7 @@ extends JPanel {
 
 	public StateMachineFrame(String cid, String protocol, String playedRole) {
 		this.cid = cid;
-		this.role=role;
+		this.role=playedRole;
 		this.protocol=protocol;
 //		super(title);
 	}

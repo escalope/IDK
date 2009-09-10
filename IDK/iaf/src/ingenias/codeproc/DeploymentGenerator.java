@@ -23,6 +23,7 @@
 
 package ingenias.codeproc;
 
+import ingenias.editor.Log;
 import ingenias.editor.extension.BasicCodeGenerator;
 import ingenias.exception.NotFound;
 import ingenias.exception.NotInitialised;
@@ -148,18 +149,31 @@ public class DeploymentGenerator {
 				if (depunit.getType().equals("DeploymentUnitByType")) {
 					GraphEntity atype = depunit.getAttributeByName(
 					"AgentTypeDeployed").getEntityValue();
-					int ninstances = Integer.parseInt(depunit
-							.getAttributeByName("NumberInstances")
-							.getSimpleValue());
-					for (int l = 0; l < ninstances; l++) {
-						Repeat agentsR = new Repeat("agents");
-						depl.add(agentsR);
-						agentsR.add(new Var("agentid", Utils
-								.replaceBadChars(atype.getID())
-								+ "_" + l+Utils
-								.replaceBadChars(depunit.getID())));
-						agentsR.add(new Var("agenttype", Utils
-								.replaceBadChars(atype.getID())));
+					if (depunit
+							.getAttributeByName("NumberInstances")==null ){
+						bcg.fatalError();
+						Log.getInstance().logERROR(
+								"The deployment unit must have a number of instances defined","", depunit.getID());
+					} else {
+						try  {
+							int ninstances = Integer.parseInt(depunit
+									.getAttributeByName("NumberInstances")
+									.getSimpleValue());
+							for (int l = 0; l < ninstances; l++) {
+								Repeat agentsR = new Repeat("agents");
+								depl.add(agentsR);
+								agentsR.add(new Var("agentid", Utils
+										.replaceBadChars(atype.getID())
+										+ "_" + l+Utils
+										.replaceBadChars(depunit.getID())));
+								agentsR.add(new Var("agenttype", Utils
+										.replaceBadChars(atype.getID())));
+							}
+						} catch (NumberFormatException nfe){
+							bcg.fatalError();
+							Log.getInstance().logERROR(
+									"The number of instances to create must be specified","", depunit.getID());	
+						}
 					}
 				}
 				if (depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeMSEntity")) {

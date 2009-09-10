@@ -229,13 +229,13 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 	      initialised= allEntitiesExist;
 
 		if (!allEntitiesExist){
-			StringBuffer nonexisting=new StringBuffer();
-			for (int j=0;j<nonExistingInputs.size();j++){
-				nonexisting.append(nonExistingInputs.elementAt(j).toString()+",");
+		   String[] nonexisting=new String[nonExistingInputs.size()];
+		   for (int j=0;j<nonExistingInputs.size();j++){
+				nonexisting[j]=nonExistingInputs.elementAt(j).toString();
 			}
-			
-			MainInteractionManager.log("Non conversational initialisation discarded task "+tobject.getType()+
-				" to achieve goal @@@v@@@tgoal@@@/v@@@ because did not have all preconditions. Missing elements are:"+nonexisting+". Currently, the MS has the following elements:"+this.getMSM().getAllMentalEntities(),getLocalName()+"-"+tobject.getType());
+			EventManager.getInstance().conversationalInitializationOfTaskFailed(getLocalName(), 
+												"@@@v@@@agentid@@@/v@@@", 
+												tobject, nonexisting);
 		}
 		return initialised;	       
 	      }
@@ -394,13 +394,14 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 	     
 	     
      	      if (!allEntitiesExist){
-				StringBuffer nonexisting=new StringBuffer();
-				for (int j=0;j<nonExistingInputs.size();j++){
-					nonexisting.append(nonExistingInputs.elementAt(j).toString()+",");
-				}
-       	        MainInteractionManager.log("Conversational intialisation discarded task "+tobject.getType()+
-	        	 " to achieve goal @@@v@@@tgoal@@@/v@@@ because did not have all preconditions. Missing elements are:"+nonexisting+
-                        ". Currently, the MS has the following elements:"+this.getMSM().getAllMentalEntities(),getLocalName()+"-"+tobject.getType());
+     	         String[] nonexisting=new String[nonExistingInputs.size()];
+		   		 for (int j=0;j<nonExistingInputs.size();j++){
+					nonexisting[j]=nonExistingInputs.elementAt(j).toString();
+				 }
+				 EventManager.getInstance().conversationalInitializationOfTaskFailed(
+				 			getLocalName(), "@@@v@@@agentid@@@/v@@@", 
+												tobject, nonexisting);
+     	     			
 			   }
 	        	       
  	      initialised= allEntitiesExist;
@@ -439,7 +440,7 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 					tobject=new @@@v@@@tname@@@/v@@@Task(ingenias.jade.MentalStateManager.generateMentalEntityID());
 					canbescheduled=initialiseConversationalTask(conversations.elementAt(k),tobject);
 					if (canbescheduled){
-						MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal @@@v@@@tgoal@@@/v@@@",getLocalName()+"-"+tobject.getType());
+					//	MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal @@@v@@@tgoal@@@/v@@@",getLocalName()+"-"+tobject.getType());
 						tasks.add(tobject);
 					}
 					tobject=new DeleteNonUsedEntitiesTask("DeleteNonUsedEntitiesTask","DeleteNonUsedEntitiesTask");
@@ -467,7 +468,7 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 				 tobject=new @@@v@@@tname@@@/v@@@Task(ingenias.jade.MentalStateManager.generateMentalEntityID());
 				 canbescheduled=initialiseNonConversationalTask(tobject);
 			 	 if (canbescheduled){
-					MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal @@@v@@@tgoal@@@/v@@@",getLocalName()+"-"+tobject.getType());
+					//MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal @@@v@@@tgoal@@@/v@@@",getLocalName()+"-"+tobject.getType());
 					tasks.add(tobject);
 				 } 			
 	     }
@@ -642,6 +643,7 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
     if (getGraphics()!=null)
      getGraphics().startAgentDebug();
     
+    getMSM().setModified(); // to trigger a first planning round
     // To indicate that the MSP can start
     this.agentInitialised();
 

@@ -33,7 +33,7 @@ import ingenias.editor.entities.AgentModelDataEntity;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.editor.entities.RuntimeEvent;
 import ingenias.editor.entities.RuntimeFact;
-import ingenias.editor.panels.AgentModelPanel;
+
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -46,13 +46,14 @@ import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphConstants;
 
 
-public class AgentModelPanelIAF extends AgentModelPanel {
+public class AgentModelPanelIAF extends ingenias.editor.panels.AgentModelPanel {
 
 	public AgentModelPanelIAF(AgentModelDataEntity mde, String nombre, Model m) {
 		super(mde, nombre, m, new BasicMarqueeHandler());
 		 this.getGraphLayoutCache().setFactory(new AgentModelCellViewFactoryIAF());
 	}
 	
+    @Override
 	public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.Entity
             entity) {
 		

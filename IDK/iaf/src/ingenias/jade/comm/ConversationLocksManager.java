@@ -25,9 +25,12 @@ package ingenias.jade.comm;
 
 import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
+import ingenias.jade.EventManager;
 import ingenias.jade.graphics.MainInteractionManager;
 
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConversationLocksManager implements LocksRemover, LocksWriter {
 
@@ -37,7 +40,23 @@ public class ConversationLocksManager implements LocksRemover, LocksWriter {
 	private CustomLocks cl=null;
 	private Vector<LocksListener> listeners=new Vector<LocksListener>();
 	private RuntimeConversation localConversation=null;
-
+        private java.util.concurrent.ConcurrentLinkedQueue<Boolean>  changeNotificationQueue=new
+                java.util.concurrent.ConcurrentLinkedQueue<Boolean> ();
+        private Thread notificationThread=new Thread(){
+            public void run(){
+                while (true){
+                try {
+                    while (changeNotificationQueue.isEmpty()) {
+                        Thread.currentThread().sleep(100);
+                    }
+                    changeNotificationQueue.remove();
+                    notifyChangeLocks();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ConversationLocksManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
+            }
+        };
 
 	/**
 	 * It creates a locks manager
@@ -48,6 +67,7 @@ public class ConversationLocksManager implements LocksRemover, LocksWriter {
 		this.aname=agentName;
 		this.cl=cl;
 		this.localConversation=rc;
+                notificationThread.start();
 	}
 
 	/**
@@ -55,7 +75,8 @@ public class ConversationLocksManager implements LocksRemover, LocksWriter {
 	 * 
 	 */
 	public  synchronized boolean canBeDeleted(ingenias.editor.entities.MentalEntity element){		
-		return !this.cannotBeDeleted.contains(element);
+		return !this.cannotBeDeleted.contains(element) &&
+                       ! this.cannotBeDeletedExpectedTypes.contains(element.getType());
 	}
 
 	public  synchronized boolean canBeDeleted(Vector<ingenias.editor.entities.MentalEntity> elements){
@@ -68,14 +89,20 @@ public class ConversationLocksManager implements LocksRemover, LocksWriter {
 		return result;
 	}
 
+        public void generateNotification(){
+          changeNotificationQueue.add(new Boolean(true));
+        };
+
 	/**
-	 * It removes one lock associated to the element. There can be as many as needed.
+         * It removes one lock associated to the element. There can be as many as needed.
 	 * An entity has as many locks as times the addDeletionLock has been invoked
 	 */
 	public  synchronized  void removeDeletionLock(ingenias.editor.entities.MentalEntity element){		
 		this.cannotBeDeleted.remove(element);
-		notifyChangeLocks();
-		MainInteractionManager.logMSM("Removed "+element+". Current lokcs:"+this.cannotBeDeleted.toString(),aname);
+		generateNotification();
+                EventManager.getInstance().removedDeletionLock(element,this.cannotBeDeleted,aname,"");
+                        
+		//MainInteractionManager.logMSM("Removed "+element+". Current lokcs:"+this.cannotBeDeleted.toString(),aname);
 	}
 
 	/**
@@ -84,9 +111,11 @@ public class ConversationLocksManager implements LocksRemover, LocksWriter {
 	 */
 
 	public synchronized void addDeletionLockExpectedType(String type){
-		this.cannotBeDeletedExpectedTypes.add(type);		
-		MainInteractionManager.logMSM("Expecting entities of type "+type+" to lock to conversation "+localConversation.getId()+".  Current locks:"+this.cannotBeDeleted.toString(),
-				aname);		
+		this.cannotBeDeletedExpectedTypes.add(type);
+                generateNotification();
+		 EventManager.getInstance().addDeletionLockToType(type, cannotBeDeletedExpectedTypes, aname, "");
+                /*MainInteractionManager.logMSM("Expecting entities of type "+type+" to lock to conversation "+localConversation.getId()+".  Current locks:"+this.cannotBeDeleted.toString(),
+				aname);*/		
 
 	}
 
@@ -94,9 +123,10 @@ public class ConversationLocksManager implements LocksRemover, LocksWriter {
 		
 		if (this.cannotBeDeletedExpectedTypes.contains(entity.getType())){
 			this.cannotBeDeleted.add(entity);
-			notifyChangeLocks();
-			MainInteractionManager.logMSM("Added "+entity+" lock to conversation "+localConversation.getId()+".  Current locks:"+this.cannotBeDeleted.toString(),
-					aname);
+			generateNotification();
+                        EventManager.getInstance().addDeletionLock(entity, cannotBeDeleted, aname, "");
+			/*MainInteractionManager.logMSM("Added "+entity+" lock to conversation "+localConversation.getId()+".  Current locks:"+this.cannotBeDeleted.toString(),
+					aname);*/
 		}
 
 	}

@@ -30,6 +30,7 @@ import ingenias.testing.DebugUtils;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.util.Enumeration;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
@@ -67,6 +68,25 @@ public class AgentModelMarqueeHandlerIAF extends
 					window.setVisible(true);					
 				}
 			});
+                            possibleViews.add(new AbstractAction("List contained entities") {
+				public void actionPerformed(ActionEvent e) {
+                                    RuntimeConversation runEnt= (RuntimeConversation)ent;
+					
+					JFrame window=new JFrame();
+					JTextArea jta=new JTextArea();
+					window.getContentPane().add(jta);
+                                        String content="";
+                                        Enumeration<ingenias.editor.entities.MentalEntity> enumeration=runEnt.getCurrentContentElements();
+                                        while (enumeration.hasMoreElements()){
+                                            ingenias.editor.entities.MentalEntity current=enumeration.nextElement();
+                                            content=content+"-"+current.getId()+":"+current.getType()+"\n";
+                                        }
+					jta.setText(content);
+					window.pack();
+					window.setTitle("List of entities");
+					window.setVisible(true);
+				}
+			});
 		}
 		
 		if (RuntimeFact.class.isAssignableFrom(ent.getClass())){			
@@ -97,6 +117,7 @@ public class AgentModelMarqueeHandlerIAF extends
 					window.setVisible(true);					
 				}
 			});
+
 		}
 		return possibleViews;
 

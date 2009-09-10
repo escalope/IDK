@@ -26,12 +26,15 @@ package ingenias.jade.comm;
 
 import ingenias.editor.entities.RuntimeFact;
 import ingenias.editor.entities.StackEntry;
+import ingenias.jade.EventManager;
 import ingenias.jade.JADEAgent;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.testing.DebugUtils;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.behaviours.ParallelBehaviour;
 import jade.core.behaviours.ReceiverBehaviour;
+import jade.core.behaviours.SequentialBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
@@ -87,8 +90,8 @@ public class CommActCreator {
         acts.add(send);
         
         ag.addBehaviour(send);
+        EventManager.getInstance().messageDelivered(ag.getLocalName(),ag.getClass().getName().substring(0,ag.getClass().getName().indexOf("JADE")),message2BSend);
         
-        MainInteractionManager.logInteraction("Sending "+seqcode+" "+message2BSend.toString(),ag.getLocalName(),CID);
         return acts;
     }
     
@@ -107,7 +110,7 @@ public class CommActCreator {
      * @return
      */
     public static Vector generateSObject(final JADEAgent ag,
-            Vector<String> roles, AID[] receiver,
+            final Vector<String> roles, AID[] receiver,
             final String CID,
             final String seqcode,
             final String protocol,
@@ -121,22 +124,24 @@ public class CommActCreator {
         	receivers=receivers+creceiver.getName()+",";
         }
         final String freceivers=receivers; 
-        
+        if (seqcode.equalsIgnoreCase("AgenteDesconocidoUI")){
+        	int j=0;
+        	j=j+1;
+        }
 
-        
+        jade.core.behaviours.ParallelBehaviour pbehabior=new jade.core.behaviours.ParallelBehaviour(ag, ParallelBehaviour.WHEN_ALL);
         for (int k = 0; k < receiver.length; k++) {
             final ACLMessage message2BSend = new ACLMessage(ACLMessage.INFORM);
-//      if (!ag.getAID().equals(receiver[k])) { // To avoid sending messages to itself
             message2BSend.addReceiver(receiver[k]);
-            
             try {
-                
-                message2BSend.addUserDefinedParameter("sequence", seqcode);
-                
+                message2BSend.addUserDefinedParameter("sequence", seqcode);              
                 message2BSend.addUserDefinedParameter("requestedRole", roles.elementAt(k));
+                /*if (roles.elementAt(k).equalsIgnoreCase("SupervisorInterestedInReputationRole")){
+                 throw new RuntimeException("Enviando reputation role!!!");	
+                }*/
                 message2BSend.setProtocol(protocol);
-                message2BSend.setConversationId(CID);
-                
+                message2BSend.setConversationId(CID);          
+                System.out.println(ag.getLocalName()+"::::: Enviando "+CID+" seq:"+seqcode+" y role: "+roles.elementAt(k)+" protocolo "+protocol+" a "+receiver[k].getLocalName());
                 if (content instanceof Vector){
                 	for (Object obj:(Vector)content){                        
                     		if (obj instanceof RuntimeFact){
@@ -149,31 +154,34 @@ public class CommActCreator {
                     		}
                 	}
                 }
-                //System.err.println(ag.getLocalName()+"-"+CID+" enviando "+seqcode);
+                final String deliveredRole=roles.elementAt(k);
+              //  System.err.println(ag.getLocalName()+":::::"+CID+" enviando "+seqcode+" esperando "+);
                 message2BSend.setContentObject(content);
                 jade.core.behaviours.SenderBehaviour send =
                         new jade.core.behaviours.SenderBehaviour(ag, message2BSend);           
                  
-                jade.core.behaviours.OneShotBehaviour after= new jade.core.behaviours.OneShotBehaviour(ag){
+                        jade.core.behaviours.OneShotBehaviour after= new jade.core.behaviours.OneShotBehaviour(ag){
 					@Override
 					public void action() {
-						 MainInteractionManager.logInteraction("Sent (content omitted) "+seqcode+":"+message2BSend,ag.getLocalName(),CID);
-						 DebugUtils.logEvent("MessageSent", new String[]{protocol,CID,seqcode,ag.getLocalName(),freceivers});
-					}                	
+                                             System.out.println(ag.getLocalName()+"::::: Ya enviado "+CID+" seq:"+seqcode+" y role: "+deliveredRole+" protocolo "+protocol+" a ");
+				        EventManager.getInstance().messageDelivered(ag.getLocalName(),ag.getClass().getName().substring(0,ag.getClass().getName().indexOf("JADE")),message2BSend);
+					}
                 };
-                jade.core.behaviours.SequentialBehaviour seb=new jade.core.behaviours.SequentialBehaviour(ag);
-                seb.addSubBehaviour(send);
-                seb.addSubBehaviour(after);
-                
-                acts.add(seb);
-                
-                ag.addBehaviour(seb);
-                
+                after.setBehaviourName("Waiting for the message to be delivered");
+
+                SequentialBehaviour seq=new SequentialBehaviour();
+                seq.setBehaviourName("Delivering message");
+                seq.addSubBehaviour(send);
+                seq.addSubBehaviour(after);
+                pbehabior.addSubBehaviour(seq);
             } catch (java.io.IOException ioe) {
                 ioe.printStackTrace();
             }
         }
-        ingenias.jade.graphics.MainInteractionManager.logInteraction("Sending message to "+receivers+" with content "+content,ag.getName(),CID);
+        acts.add(pbehabior);
+        ag.addBehaviour(pbehabior);
+
+        //ingenias.jade.graphics.MainInteractionManager.logInteraction("Sending message to "+receivers+" with content "+content,ag.getName(),CID);
         return acts;
     }
     
@@ -190,8 +198,11 @@ public class CommActCreator {
      * @param sb The state behavior encapsulating the message interchange behavior for this converstaion
      * @return The new behaviors added.
      */
-    public static Vector<jade.core.behaviours.SequentialBehaviour>  generateR(final Agent ag, final String CID, final String seqcode,
+    public static Vector<jade.core.behaviours.SequentialBehaviour>  generateR(final Agent ag,
+            final String CID,
+            final String seqcode,
             final String protocol,
+            final String roleToPlay,           
             String[] options,
             StateBehavior sb,
             int multiple,
@@ -211,6 +222,7 @@ public class CommActCreator {
         
         Vector acts = new Vector();
         
+        System.out.println(ag.getLocalName()+" esperando "+_seqcode+" y role "+roleToPlay+" protocolo "+protocol);
         
         // Receive a message to start interaction
         // First message contains the actor list
@@ -223,17 +235,22 @@ public class CommActCreator {
                         mes.getConversationId().equals(_CID) &&
                         mes.getContent() != null &&
                         mes.getUserDefinedParameter("sequence") != null &&
-                        mes.getUserDefinedParameter("sequence").equals(_seqcode);
+                        mes.getUserDefinedParameter("sequence").equals(_seqcode) &&
+                        mes.getUserDefinedParameter("requestedRole") != null &&
+                        mes.getUserDefinedParameter("requestedRole").equals(roleToPlay);
             };
         };
         
         MessageTemplate mt = new MessageTemplate(me);
-        MainInteractionManager.logInteraction("Waiting for "+CID+"("+seqcode+")",ag.getLocalName(),CID);
+        EventManager.getInstance().waitingForNextMessageInSequence(ag.getLocalName(),
+        		ag.getClass().getName().substring(0,ag.getClass().getName().indexOf("JADE")),
+        		CID,seqcode);
+        
         
         jade.core.behaviours.SequentialBehaviour seqBehavior =
                 new jade.core.behaviours.SequentialBehaviour(ag);
         acts.add(seqBehavior);
-        seqBehavior.setBehaviourName("Receive "+CID+" state "+seqcode);
+        seqBehavior.setBehaviourName("Expecting to receive "+CID+" at state "+seqcode+" as role "+roleToPlay);
         jade.core.behaviours.ParallelBehaviour parBehavior=
         	new jade.core.behaviours.ParallelBehaviour(ag, jade.core.behaviours.ParallelBehaviour.WHEN_ALL);
         parBehavior.setBehaviourName("Multiple reception");
@@ -245,7 +262,7 @@ public class CommActCreator {
             
             jade.core.behaviours.ReceiverBehaviour rec = new jade.core.behaviours.
                     ReceiverBehaviour(ag, timeout, mt);
-            rec.setBehaviourName("Reception act");
+            rec.setBehaviourName("Reception act "+k);
             parBehavior.addSubBehaviour(rec);
             receiverBehaviors.add(rec);         
         }
@@ -259,8 +276,9 @@ public class CommActCreator {
                 for (jade.core.behaviours.ReceiverBehaviour recB:receiverBehaviors){
                     try {                    	
                         received.add(recB.getMessage());
-                        DebugUtils.logEvent("MessageReceived", new String[]{protocol,CID,seqcode,recB.getMessage().getSender().getLocalName(),ag.getLocalName()});
-                        MainInteractionManager.logInteraction("Received messages for "+CID+"("+seqcode+") from "+recB.getMessage().getSender().getLocalName(),ag.getLocalName(),CID);        
+                        //DebugUtils.logEvent("MessageReceived", new String[]{protocol,CID,seqcode,recB.getMessage().getSender().getLocalName(),ag.getLocalName()});
+                        EventManager.getInstance().receivedMessageInSequence(ag.getLocalName(),
+                        		ag.getClass().getName().substring(0,ag.getClass().getName().indexOf("JADE")),recB.getMessage());
                         // OK. Message received within timeout.
                     } catch(ReceiverBehaviour.TimedOut rbte) {
                     	// No message received so far from that behavior
@@ -276,9 +294,12 @@ public class CommActCreator {
                 _dcc.notifyNewMessage(received, _options, _sb);
                 }
                 
+                _sb.restart(); // To ensure the changes are processed, just in case
+                // the behavior codifying the transitions is blocked.
+                
 //           System.err.println("notified ");
                 done = true;
-                
+         
             }
             
             public boolean done() {
@@ -317,6 +338,7 @@ public class CommActCreator {
             final JADEAgent ag,
             final String protocol,
             final String seqcode,
+            final String roleToPlay,
             String[] options,
             StateBehavior sb) {
         final String _protocol = protocol;
@@ -324,7 +346,6 @@ public class CommActCreator {
         final String[] _options = options;
         final DefaultCommControl _dcc = sb.getDCC();
         final StateBehavior _sb = sb;
-        
         Vector acts = new Vector();
         // Receive a message to start interaction
         // First message contains the actor list
@@ -334,7 +355,10 @@ public class CommActCreator {
                 return mes.getProtocol() != null && mes.getProtocol().equals(_protocol) &&
                         mes.getContent() != null &&
                         mes.getUserDefinedParameter("sequence") != null &&
-                        mes.getUserDefinedParameter("sequence").equals(_seqcode);
+                        mes.getUserDefinedParameter("sequence").equals(_seqcode) &&
+                        mes.getUserDefinedParameter("requestedRole") != null &&
+                        mes.getUserDefinedParameter("requestedRole").equals(roleToPlay);
+
             };
         };
         
@@ -351,13 +375,19 @@ public class CommActCreator {
             private boolean done = false;
             public void action() {
                 try {
-                	DebugUtils.logEvent("CollaborationRequestReceived", new String[]{protocol,seqcode,rec.getMessage().getSender().getLocalName(),ag.getLocalName()});
-                	MainInteractionManager.logInteraction("Received messages for protocol "+protocol+"("+seqcode+") from "+rec.getMessage().getSender().getLocalName(),ag.getLocalName(),protocol);
+                    EventManager.getInstance().receivedMessageToStartACollaboration(ag.getLocalName(),
+                    		ag.getClass().getName().substring(0,ag.getClass().getName().indexOf("JADE")),
+                    		rec.getMessage(),protocol);
+                
+                	//DebugUtils.logEvent("CollaborationRequestReceived", new String[]{protocol,seqcode,rec.getMessage().getSender().getLocalName(),ag.getLocalName()});
+                	//MainInteractionManager.logInteraction("Received messages for protocol "+protocol+"("+seqcode+") from "+rec.getMessage().getSender().getLocalName(),ag.getLocalName(),protocol);
                     Vector<ACLMessage> messages=new Vector<ACLMessage>();
                     messages.add(rec.getMessage());
                     _dcc.notifyNewMessage(messages, _options, _sb);
                     _sb.setConversationID(rec.getMessage().getConversationId());
                     done = true;
+                    _sb.restart(); // To ensure the changes are processed, just in case
+                    // the behavior codifying the transitions is blocked.
                 } catch (jade.core.behaviours.ReceiverBehaviour.NotYetReady nyr) {
                     nyr.printStackTrace();
                 } catch (jade.core.behaviours.ReceiverBehaviour.TimedOut to) {

@@ -34,6 +34,8 @@ import ingenias.jade.comm.AgentProtocols;
 import ingenias.jade.comm.ConversationManagement;
 import ingenias.jade.comm.CustomLocks;
 import ingenias.jade.comm.LocksManager;
+import ingenias.jade.comm.StateBehavior;
+import ingenias.jade.comm.StateBehaviorChangesListener;
 import ingenias.jade.components.ApplicationManager;
 import ingenias.jade.components.OutputEntity;
 import ingenias.jade.components.Task;
@@ -48,20 +50,31 @@ import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.mental.Agent_data;
 import ingenias.testing.DebugUtils;
 import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
+import jade.core.behaviours.CompositeBehaviour;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.core.messaging.MatchAllFilter;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
+import jade.proto.states.MsgReceiver;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
+import org.jfree.util.WaitingImageObserver;
+import org.jgraph.event.GraphModelEvent;
+import org.jgraph.event.GraphModelListener;
 
 /**
  * <p>This class represents an agent with mental state, communication session control,
@@ -122,8 +135,10 @@ abstract public class JADEAgent extends Agent{
 	private CustomLocks cl=null;
 	private IDEState ids = null;
 	private boolean completedLast=false;
+	private CommsManagementBehavior mainBehavior;
 
-	private static String synRegister="sinchronization of registering process";
+	private  String synRegister="sinchronization of registering process";
+	
 
 	public JADEAgent(AgentProtocols ap, CustomLocks cl){
 		super();
@@ -135,7 +150,7 @@ abstract public class JADEAgent extends Agent{
 			this.ap=ap;
 			cman=new ConversationManagement(this,ap);
 			this.cl=cl;
-		}catch (Exception e){
+		}catch (Throwable e){
 			e.printStackTrace();
 		}
 
@@ -328,7 +343,7 @@ abstract public class JADEAgent extends Agent{
 	 *  
 	 */
 	public void setup() {
-
+            try {
 		super.setup();
 		if (IAFProperties.getGraphicsOn()){
 			this.graphics=new AgentGraphics(this.getName());			
@@ -391,9 +406,10 @@ abstract public class JADEAgent extends Agent{
 		 * state processor is associated to the GUI of the agents.
 		 */
 		if (IAFProperties.getGraphicsOn())
-			this.msm=new MentalStateManager(ids,amm, this.getName());
+			this.msm=new MentalStateManager(ids,amm, this.getAID().getLocalName());
 		else
-			this.msm=new MentalStateManager(ids, this.getName());
+			this.msm=new MentalStateManager(ids, this.getAID().getLocalName());
+		this.addBehaviour(this.msm.getConvTracker());
 		if (IAFProperties.getGraphicsOn())
 			this.graphics.setMentalStatePanel(this.getLocalName(),amm);
 		if (IAFProperties.getGraphicsOn())
@@ -468,221 +484,76 @@ abstract public class JADEAgent extends Agent{
 		 * groups: messages being processed and messages not being processed.
 		 * Messages being processed are added again to the messages queue so that
 		 * they can be processed by a specialized behavior
+		 * @return 
 		 */
-		Thread vthread = new Thread() {
-
-			public void run() {
-				//System.err.println("trying to wake up "+getLocalName());
-				while (true) {
-					completedLast = false;
-					//msp.wakeup(); // It tells the MSP to take a decision about task execution
-					msp.lifeCycle();
-					// information is uploaded to top level conversations
-					completedLast = true;
-					while (completedLast) {
-						try {
-							Thread.currentThread().sleep(100);
-						} catch (InterruptedException ie) {
-							ie.printStackTrace();
-						}
-					}
-					//		System.err.println("Wakened up "+getLocalName());
-				}
-			}
-		};
+		final LifeCycleThread vthread = new LifeCycleThread(this) ;
+		
+		getMSM().registerChangeListener(vthread);
+		
 		vthread.setName("Lifecycle "+this.getAID().getLocalName());
 		vthread.start(); // The thread is constantly running so that no new
 		// threads are needed;
-
-		jade.core.behaviours.CyclicBehaviour mainBehavior=new jade.core.behaviours.CyclicBehaviour(this) {
-			int cycledTimes=0;
-
-
-
-			Date last=new Date();
-			public void action() {
-				/*cycledTimes=(cycledTimes+1)%maxCyclesWithoutGarbageCollection;
-				if (cycledTimes==0)
-					System.gc();*/
-				//System.err.println("----------------Execution------------"+myAgent.getCurQueueSize());
-				getCM().removedFinishedProtocols();						
-				determineMessagesWhichCanBeProcessed();
-				processNotProcessedMessages();
-				/*if (last!=null){
-					System.err.println("time "+(new Date().getTime()-last.getTime()));
-					last=new Date();
+		StateBehaviorChangesListener behaviorChangesListener=null;
+		
+			
+		
+		behaviorChangesListener=new StateBehaviorChangesListener(){		
+			private void wakeUpCommsManagementBehavior(){
+				/*while (!mainBehavior.getExecutionState().equalsIgnoreCase(CyclicBehaviour.STATE_BLOCKED)){
+					//System.out.println(mainBehavior.getExecutionState());
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}*/
-				getCM().launchScheduledProtocols();
-				if (completedLast
-						&& 
-						(getMSP().getScheduledTasks().size()!=0 
-								|| getMSM().modifiedSinceLastLecture())){
-					completedLast=false; // This forces a new planning
-
-				} 
-				//System.err.println("----------------End Execution------------"+myAgent.getCurQueueSize());
+				if (mainBehavior.getExecutionState().equalsIgnoreCase(CyclicBehaviour.STATE_BLOCKED))
+					mainBehavior.restart();
 			}
-
-
-			/**
-			 * It removes message processing behaviors that have already
-			 * finished. A message is processed if there is an existing conversation
-			 * with the same id of the message. These kind of messages are posted again
-			 * to the JADE message queue so that they can be received by the different
-			 * existing state behaviors instances. When the message has not been processed, it 
-			 * means that the agent should initiate an state behavior to further process it.
-			 * 
-			 */  
-
-			private void determineMessagesWhichCanBeProcessed() {
-
-				if (myAgent.getCurQueueSize() > 0) {
-					HashSet<ACLMessage> processed=new HashSet<ACLMessage>(); // to store processed acl
-					JADEAgent ja = (JADEAgent) myAgent;
-					int size=myAgent.getCurQueueSize();
-					for (int k = 0; k < size; k++) {
-						ACLMessage acl = myAgent.receive();
-						if (acl!=null){// the message can have been processed by other behavior
-							String requestedRole=acl.getUserDefinedParameter("requestedRole");
-							String aclSummary=aclSummary(acl);
-
-							if ((getCM().contains(acl.getConversationId(),requestedRole) &&
-									getCM().isKnownProtocol(acl.getProtocol()))) {
-								// if the message can be processed by some existing interaction
-								// and the protocol is known, the message will be send back to 
-								// the message queue
-
-								//System.err.println("Added a processed message "+acl);
-								processed.add(acl);									
-								MainInteractionManager.logMSP("Processing "+aclSummary,getLocalName());
-
-							}
-							else {	
-								//System.err.println("Not processed message1 "+acl);	
-								// if the message  cannot be processed by any existing interaction
-								// but there is an interaction that could understand it, a new conversation
-								// would be launched
-								if (getCM().isKnownProtocol(acl.getProtocol()))
-									getCM().addPending(acl);
-								else
-									MainInteractionManager.logMSP("Not processing "+aclSummary,getLocalName());
-
-							}
-						}
-					}	          
-
-					// To put back messages that can be processed by other behaviors
-					Iterator it=processed.iterator();
-					while (it.hasNext()){
-						ACLMessage nextM=(ACLMessage) it.next();
-						ja.postMessage(nextM);
+			
+			@Override
+			public void protocolFinished() {
+				new Thread("waking up comms from "+getAID().getLocalName()){
+					public void run(){
+						wakeUpCommsManagementBehavior();		
 					}
-				}
+				}.start();
+								
 			}
 
-			public String aclSummary(ACLMessage acl) {
-				String cobj="";
-				try {
-					cobj = acl.getContentObject().toString();
-					cobj=cobj.substring(0,Math.min(cobj.length(),1000));
-				} catch (UnreadableException e) {
-
-				}
-
-				return "convid:"+acl.getConversationId()+ " protocol:"+acl.getProtocol()+ " sender:"+acl.getSender()+" state:"+acl.getUserDefinedParameter("state")+ " content:"+cobj;
-			}
-
-			/**
-			 * This behavior checks unprocessed messages and starts new behaviors
-			 * able to process them. Non-processed messages are those not having
-			 * a running state behavior instance to process them. We know if they
-			 * are processed or not by their id. Should there be a state behavior
-			 * instance representing a conversation with the same id of the agent,
-			 * then we consider the message processed. 
-			 * To start a new state behavior, first we need to determine if the agent
-			 * can handle it. This is done with isKnownProtocol method. If it is known,
-			 * we proceed to start a new state machine playing a collaborator role
-			 * with the method launchAsCollaborator. When the method finishes, we create
-			 * a new mental state entity, a conversation, so that tasks can access
-			 * to run time information of the interaction. Once create the new state behavior,
-			 * the message is no more un-processed, so we return the message to the message
-			 * queue.
-			 *  
-			 * 
-			 */                                                                                                                                                                                                                    
-
-			private void processNotProcessedMessages() {
-				Enumeration enumeration=getCM().getPendingMessages();                                                                                                                                                                                                   
-				Vector processed=new Vector();      
-				JADEAgent ja = (JADEAgent) myAgent;
-				while (enumeration.hasMoreElements()){                                                                                                                                                                                                          
-					ACLMessage acl=(ACLMessage)enumeration.nextElement();
-					//System.err.println("PRocesando .... "+acl);
-					String requestedRole=acl.getUserDefinedParameter("requestedRole");
-					String sequence=acl.getUserDefinedParameter("sequence");
-					if (getCM().isKnownProtocol(acl.getProtocol()) 
-							&& 
-							!getCM().contains(acl.getConversationId(),requestedRole) ){                                                                                                                                                                                              
-						boolean initialised=false;                                                                                                                                                                                                                  
-						while (!initialised){                                                                                                                                                                                                                       
-							try {                                                                                                                                                                                                                                       
-								/*if (getMSM().findEntity(requestedRole+"-"+conv.getConversationID())!=null)
-									JOptionPane.showMessageDialog(null, "Ya existia "+requestedRole+"-"+conv.getConversationID());*/
-								try {											
-									getMSM().findEntity(requestedRole+"-"+acl.getConversationId());											
-									MainInteractionManager.getInstance().logInteraction("Already had that conversation. Error in processing message. ",getLocalName(),acl.getConversationId());											
-								}  catch (NotFound e) {			
-
-									MainInteractionManager.getInstance().logInteraction("Starting as collaborator interaction ",getLocalName(),acl.getConversationId());
-
-									ActiveConversation actconv=getCM().launchAsCollaborator(acl.getProtocol(),
-											requestedRole,
-											acl.getConversationId());
-
-									RuntimeConversation conv=actconv.getConv();
-									/*try {
-										System.err.println("convid "+conv.getId());
-										getMSM().addMentalEntity(conv);
-
-									} catch (InvalidEntity e1) {												
-										e1.printStackTrace();
-									}*/
-									getCM().addCID(acl.getConversationId(),requestedRole);   
-								}
-								getCM().removePending(acl);   
-								processed.add(acl);  
-								initialised=true;                                                                                                                                                                                                                      
-
-
-								//System.err.println("Initiating "+convid+" "+acl.getConversationId()+" "+requestedRole);
-							} catch (NoAgentsFound nf) {                                                                                                                                                                                                                
-								try {
-									Thread.sleep(100);                                                                                                                                                                                                                 
-								} catch (Exception e) {} ;
-							}
-						}
-					} else {
-						if (getCM().contains(acl.getConversationId(),requestedRole)){
-							getCM().removePending(acl);
-							processed.add(acl);  
-						} else
-							MainInteractionManager.logMSP("Could not process a message because this agent does not play role "+requestedRole+
-									". The message is "+acl,getLocalName());
-
+			@Override
+			public void protocolStarted() {
+				new Thread("waking up comms from "+getAID().getLocalName()){
+					public void run(){
+						wakeUpCommsManagementBehavior();		
 					}
-				}                                                                                                                                                                                                                                               
-				for (int k=0;k<processed.size();k++){                                                                                                                                                                                                           
-					myAgent.postMessage(((ACLMessage)processed.elementAt(k)));                                                                                                                                                                                      
-				}
-			}   
-		};	
+				}.start();
+			}
+
+			
+			@Override
+			public void stateTransitionExecuted(String fromState, String toState) {
+				new Thread("waking up comms from "+getAID().getLocalName()){
+					public void run(){
+						wakeUpCommsManagementBehavior();		
+					}
+				}.start();	
+			}
+			
+		};
+			
+		mainBehavior=new CommsManagementBehavior(this,behaviorChangesListener) ;	
 		mainBehavior.setBehaviourName("LifeCycle");
 		this.addBehaviour(mainBehavior);
+		
 
-
-
+            } catch (Throwable t){
+                t.printStackTrace();
+            }
 	}
-
+	
+	
 	public CustomLocks getCl() {
 		return cl;
 	}
@@ -700,10 +571,11 @@ abstract public class JADEAgent extends Agent{
 						roles[k]);
 			}
 			catch (FIPAException fe) {
-				fe.printStackTrace();
+	//			fe.printStackTrace();
 			}
 		}
 	}
+
 
 
 

@@ -41,7 +41,6 @@ import org.junit.Test;
 
 import jade.core.*;
 import jade.wrapper.StaleProxyException;
-import jade.wrapper.State;
 import ingenias.editor.entities.MentalEntity;
 import ingenias.jade.MentalStateManager;
 import ingenias.jade.graphics.MainInteractionManager;
@@ -55,12 +54,19 @@ import ingenias.jade.IAFProperties;
 public class @@@v@@@test@@@/v@@@ {
 @Test
   public void testDemo(){			
-  			
+  			// Involved agent local ids for this test are:
+  			@@@repeat id="deploynode"@@@@@@repeat id="agents"@@@  			
+        	// -@@@v@@@agentid@@@/v@@@
+        	@@@/repeat@@@@@@/repeat@@@
   			// write here the agent id whose 
   			// mental state manager you want to get access to
-			MentalStateManager msm = MSMRepository.getInstance().get("MY_AGENT_ID"); // provides access to the
-			// mental state of the agent
+			// MentalStateManager msm = MSMRepository.getInstance().get("MY_AGENT_ID"); // provides access to the
+			// For current agents, these are the variables containing their mental states
+			@@@repeat id="deploynode"@@@@@@repeat id="agents"@@@  			
+        	MentalStateManager msm@@@v@@@agentid@@@/v@@@=MSMRepository.getInstance().get("@@@v@@@agentid@@@/v@@@");
+        	@@@/repeat@@@@@@/repeat@@@
 			
+			// mental state of the agent
 			Vector<MentalEntity> frameFactEntitiesBefore = msm
 					.getMentalEntityByType("MY_TYPE"); // Obtains entities of a given type
 						

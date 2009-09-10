@@ -65,7 +65,7 @@ private MentalStateReader msr=null;
    			MentalStateReader msr,
    			MentalStateUpdater msu,
   			RuntimeConversation conv, String playedRole, 
-			DFAgentDescription[] actors, 
+			AgentExternalDescription[] actors, 
 			//DFAgentDescription[] playedRoles,
 			DefaultCommControl dcc, 
 			String protocol){
@@ -111,12 +111,14 @@ private MentalStateReader msr=null;
   public synchronized void action() {
     boolean cond1 = true;
     boolean cond2 = true;
+    
+    String initialStateToCompareAtTheEnd=this.getStates();
 
     @@@repeat id="initialiseColaborator"@@@
     if (this.isState("disabled")){     
      String[] options=new String[]{"@@@v@@@firstiu@@@/v@@@"};
      CommActCreator.generateRWithoutCID((JADEAgent)myAgent,
-      "@@@v@@@interactionid@@@/v@@@","enable",options,this);
+      "@@@v@@@interactionid@@@/v@@@","enable",this.getPlayedRole(),options,this);
       this.removeState("disabled");
       
      this.addState("waiting for enable");
@@ -126,6 +128,7 @@ private MentalStateReader msr=null;
      @@@/repeat@@@
      @@@/repeat@@@
      this.setRunning();   
+      this.notifyStateTransitionExecuted("disabled",options[0]);
     }
     @@@/repeat@@@
 
@@ -144,14 +147,21 @@ private MentalStateReader msr=null;
         rolesv.add("@@@v@@@receiver@@@/v@@@");
        }
       }
+     
 
       @@@/repeat@@@
+      
+      Vector<AgentExternalDescription> completelistInvolvedActors = this.getAgentExternalDescription();      
+      completelistInvolvedActors.add(new AgentExternalDescription(myAgent.getAID(),getPlayedRole()));
+      
       actors=new AID[actorsv.size()];
       actorsv.toArray(actors);
       CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
-       "enable","@@@v@@@interactionid@@@/v@@@",this.getAgentExternalDescription());
+       "enable","@@@v@@@interactionid@@@/v@@@",completelistInvolvedActors);
       this.getDCC().notifyMessageSent("disabled",options,this);
+     
       this.setRunning();   
+      this.notifyStateTransitionExecuted("disabled",options[0]);
       } catch (NoAgentsFound e) {
       e.printStackTrace();
   	}
@@ -190,10 +200,12 @@ private MentalStateReader msr=null;
       if (allexist && @@@v@@@condition@@@/v@@@){     
 		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
                         this.getConversationID(),"@@@v@@@iud@@@/v@@@",
-                   "@@@v@@@interactionid@@@/v@@@",optionsA,this,cardinality,@@@v@@@timeout@@@/v@@@));
+                   "@@@v@@@interactionid@@@/v@@@",this.getPlayedRole(),
+                   optionsA,this,cardinality,@@@v@@@timeout@@@/v@@@));
       }	 
       this.removeState("@@@v@@@iud@@@/v@@@");
       this.addState("waiting for @@@v@@@iud@@@/v@@@");
+      this.notifyStateTransitionExecuted("@@@v@@@iud@@@/v@@@", "waiting for @@@v@@@iud@@@/v@@@");
   } 
   @@@/repeat@@@
   
@@ -217,9 +229,9 @@ private MentalStateReader msr=null;
       @@@/repeat@@@
       actors=new AID[actorsv.size()];
       actorsv.toArray(actors);
-      Vector options=new Vector();
+      Vector options=new Vector();      
       @@@repeat id="nextstates"@@@
-      options.add("@@@v@@@possibleiu@@@/v@@@");
+      options.add("@@@v@@@possibleiu@@@/v@@@");      
       @@@/repeat@@@
       String[] optionsA=new String[options.size()];
       options.toArray(optionsA);
@@ -228,9 +240,11 @@ private MentalStateReader msr=null;
             CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
            "@@@v@@@iud@@@/v@@@","@@@v@@@interactionid@@@/v@@@",this.getContentForNextMessage());
            getTimeout().stop();
+            this.notifyStateTransitionExecuted("@@@v@@@iud@@@/v@@@", options.firstElement().toString());
       } else {
     	  if (getTimeout().isStarted() && getTimeout().isFinished()){
     	    		 this.abortDueTimeout();   	        
+    	    		  this.notifyStateTransitionExecuted("@@@v@@@iud@@@/v@@@", "ABORTED");
     	  } else  {
     		  if (!getTimeout().isStarted())
     		  getTimeout().start(@@@v@@@timeout@@@/v@@@);
@@ -248,6 +262,7 @@ private MentalStateReader msr=null;
   // Finishes this state machine
   if (this.isState("end@@@v@@@stateid@@@/v@@@")) {
     this.setFinished(); // End of transitions
+    this.notifyProtocolFinished();
     this.getDCC().removeDefaultLocks();
   }
   @@@/repeat@@@
@@ -255,6 +270,9 @@ private MentalStateReader msr=null;
   if (this.isState("ABORTED")) {	    
 	    this.getDCC().removeDefaultLocks();
   }
+  
+  if (initialStateToCompareAtTheEnd.equals(this.getStates()))
+   this.block();
 
 }
 

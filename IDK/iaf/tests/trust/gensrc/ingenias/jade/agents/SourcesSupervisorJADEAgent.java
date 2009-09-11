@@ -371,82 +371,6 @@ public class SourcesSupervisorJADEAgent
   	   	correctRole=correctRole|| 
   	   	 conversation.getPlayedRole().equals ("");
   	   	
-       	if (tobject.getType().equals("AceptarNegacionPreguntaReputacionTask") && (false ||
-       		correctRole)){
-	        Vector<MentalEntity> expectedInput=null;
-            
-       	RuntimeFact expectedOutput=null;
-	   	RuntimeConversation expectedInt=null;
-       	ingenias.jade.components.Resource expectedResource=null;
-	   	ingenias.jade.components.Application expectedApp=null;        	
-	   	TaskOutput to=null;
-	   	to=new TaskOutput("default");
-
-		tobject.setConversationContext(conversation);
-		boolean allEntitiesExist=true;
-	     
-            
-		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"AgenteDesconocido");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("AgenteDesconocido");
-			else {
-			    addExpectedInputs(tobject, "AgenteDesconocido","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
-		
-	      expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
-             tobject.addApplication("YellowPages",expectedApp);
-        /*     
-		
-	      */	      
-	     boolean alreadyExists=true;
-	 
-	     
-	     
-     
-	     tobject.addOutput(to);
-	     
-	     
-     	      if (!allEntitiesExist){
-     	         String[] nonexisting=new String[nonExistingInputs.size()];
-		   		 for (int j=0;j<nonExistingInputs.size();j++){
-					nonexisting[j]=nonExistingInputs.elementAt(j).toString();
-				 }
-				 EventManager.getInstance().conversationalInitializationOfTaskFailed(
-				 			getLocalName(), "SourcesSupervisor", 
-												tobject, nonexisting);
-     	     			
-			   }
-	        	       
- 	      initialised= allEntitiesExist;
- 	       return initialised;
-	      }
-         
-         
-         }
-         validConversationType=false;
-             
-
-		    
-		validConversationType=validConversationType||
-				conversation.getInteraction().getId().equalsIgnoreCase("ConsultaReputacion");
-	 	
-				
-		if (validConversationType){
-    	         
-         
-	   	nonExistingInputs.clear();
-  	   	repeatedOutputs.clear();
-  	   	boolean correctRole=conversation.getPlayedRole().equals ("SupervisorInterestedInReputationRole");
-  	   	// Now all ascendant roles are verified, to enable tasks belonging to roles specializing a more
-  	   	// generic one involved in an interaction
-  	   	
-  	   	correctRole=correctRole|| 
-  	   	 conversation.getPlayedRole().equals ("");
-  	   	
        	if (tobject.getType().equals("ActualizarValorReputacionTask") && (false ||
        		correctRole)){
 	        Vector<MentalEntity> expectedInput=null;
@@ -1155,11 +1079,6 @@ public class SourcesSupervisorJADEAgent
              to.add(new OutputEntity(expectedOutputReputacionAgente,TaskOperations.CreateWF));
             }
 	     
-		    {AgenteDesconocido expectedOutputAgenteDesconocido=		    
-		     new AgenteDesconocido(MentalStateManager.generateMentalEntityID());			
-             to.add(new OutputEntity(expectedOutputAgenteDesconocido,TaskOperations.CreateWF));
-            }
-	     
      
 	     tobject.addOutput(to);
 	     
@@ -1195,36 +1114,6 @@ public class SourcesSupervisorJADEAgent
          //************************************
          // Conversational tasks evaluation
          //************************************
-         
-         typesOfConversation=new Vector<String>();
-	     
-	     typesOfConversation.add("ConsultaReputacion");
-		 
-         
-         if (goalname.equals("MantenerActualizadoInfoReputacion")){
-         
-          {
-		    Task tobject=null;
-			Vector<RuntimeConversation>  conversations=getCM().getCurrentActiveConversations(typesOfConversation);
-				boolean canbescheduled=false;
-				for (int k=0;k<conversations.size();k++){
-					tobject=new AceptarNegacionPreguntaReputacionTaskTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
-					canbescheduled=initialiseConversationalTask(conversations.elementAt(k),tobject);
-					if (canbescheduled){
-					//	MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal MantenerActualizadoInfoReputacion",getLocalName()+"-"+tobject.getType());
-						tasks.add(tobject);
-					}
-					tobject=new DeleteNonUsedEntitiesTask("DeleteNonUsedEntitiesTask","DeleteNonUsedEntitiesTask");
-					canbescheduled=initialiseConversationalTask(conversations.elementAt(k),tobject);
-					 if (canbescheduled && IAFProperties.getGarbageCollectionEnabled()){			
-							tasks.add(tobject);
-					 }
-				}
-				// If a conversational initialization fails, a conventional one is tried
-	      }
-         
-          }        
-         
          
          typesOfConversation=new Vector<String>();
 	     
@@ -1475,12 +1364,6 @@ public class SourcesSupervisorJADEAgent
 		super.setup();
 		Vector<String> ttypes=new Vector<String>(); 
 		          
-         
-                   
-         ttypes.add("AceptarNegacionPreguntaReputacionTask");					
-         
-         
-                  
          
                    
          ttypes.add("ActualizarValorReputacionTask");					

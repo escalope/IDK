@@ -70,10 +70,6 @@ public class ProcesarConsultaReputacionTaskTask extends Task{
 			(ReputacionAgente)
 				outputsdefault.getEntityByType("ReputacionAgente");
 		
-		AgenteDesconocido outputsdefaultAgenteDesconocido=
-			(AgenteDesconocido)
-				outputsdefault.getEntityByType("AgenteDesconocido");
-		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
@@ -85,7 +81,6 @@ System.out.println(this.getClass().getName()+" << ");
         trabajomaster.demo.supervisor.Tareas.procesarConsultaReputacionTask(this.getAgentID(),eiConsultaReputacionAgente,
                 eiValoresConfianzaReputacion,
                 outputsdefaultReputacionAgente,
-                outputsdefaultAgenteDesconocido,
                 outputsdefault);
         System.out.println(this.getClass().getName()+" >> ");
         

@@ -52,13 +52,6 @@ import ingenias.exception.NotFound;
     
     // Facts that cannot be removed because they must be sent
      
-     lw.addDeletionLockExpectedType("AgenteDesconocido");
-     
-    
-       // Facts that cannot be removed because they are part of guards
-    
-    // Facts that cannot be removed because they must be sent
-     
      lw.addDeletionLockExpectedType("ReputacionAgente");
      
      
@@ -67,13 +60,6 @@ import ingenias.exception.NotFound;
      public Vector<String> getDefaultLocks(){
       Vector<String> locks=new       Vector<String>();
   
-       // Facts that cannot be removed because they are part of guards
-    
-    // Facts that cannot be removed because they must be sent
-     
-     locks.add("AgenteDesconocido");
-     
-    
        // Facts that cannot be removed because they are part of guards
     
     // Facts that cannot be removed because they must be sent
@@ -121,37 +107,6 @@ import ingenias.exception.NotFound;
     Vector<String> futureStates=new Vector<String>();
   
   
-   
-    if (stateToEvaluate.equals("AgenteDesconocidoUI") &&
-    	 sb.isState("AgenteDesconocidoUI")&& options.length>0) {         
-         boolean allexist=true;
-         Vector<MentalEntity> mfcontent=null;
-         
-		 
-		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"AgenteDesconocido").isEmpty();
-		   
-         if (allexist && true){
-           sb.clearContentNextMessage();
-           sb.removeState("AgenteDesconocidoUI");
-           
-           
-	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"AgenteDesconocido");
-	   	   for (MentalEntity me:mfcontent)             
-             sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLock(mfcontent);
-	       lockProcessed("AgenteDesconocido");
-           //MainInteractionManager.log("Removing lock AgenteDesconocido",this.getAgent().getLocalName()+"-"+sb.getConversationID());
-            
-             
-           
-  		   //sb.clearState();         
-	              
-		   futureStates.add("endAgenteDesconocidoUI");
-          
-          processed = true;
-      	 }
-     
-    } 
    
     if (stateToEvaluate.equals("RespuetaReputacion") &&
     	 sb.isState("RespuetaReputacion")&& options.length>0) {         
@@ -233,8 +188,6 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
  		   }
 
 	              
-		   futureStates.add("AgenteDesconocidoUI");
-                  
 		   futureStates.add("RespuetaReputacion");
           
           processed = true;

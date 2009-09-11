@@ -75,8 +75,31 @@
   
   <target name="emptyTarget"/>
    
-  <target name="alljunit" depends="emptyTarget"/>
+  <target name="alljunit" depends="junitTestingPackage,emptyTarget"/>
   
+  
+
+   
+   
+    <target name="junitTestingPackage" depends="compile">
+    <java fork="true" failonerror="true" maxmemory="128m"
+    classname="org.junit.runner.JUnitCore">
+    <arg line="ingenias.testing.TestingPackageLauncher"/>    
+      <classpath>
+
+		<pathelement path="${temp}" />        
+        <fileset dir="${lib}">
+          <include name="**/*.jar" />
+        </fileset>
+
+      </classpath>
+
+    </java>
+  </target>
+   
+
+  	  
+
   
   
   

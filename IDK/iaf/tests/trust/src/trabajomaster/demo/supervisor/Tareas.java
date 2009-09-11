@@ -75,7 +75,6 @@ public class Tareas {
     public static void procesarConsultaReputacionTask(String id, ConsultaReputacionAgente eiConsultaReputacionAgente,
             ValoresConfianzaReputacion eiValoresConfianzaReputacion,
             ReputacionAgente outputsdefaultReputacionAgente,
-            AgenteDesconocido outputsdefaultAgenteDesconocido,
             TaskOutput outputsdefault) {
 
         Object data = eiValoresConfianzaReputacion.getdata();
@@ -89,10 +88,9 @@ public class Tareas {
         Trust trustAgente = regret.getConfianzas().get(idAgente);
         if (trustAgente == null) {
             outputsdefault.removeEntity(outputsdefaultReputacionAgente);
-            outputsdefaultAgenteDesconocido.setdata(idAgente);
+            eiConsultaReputacionAgente.setdata(null);
             VisualizacionAppInit.getInstance().update(0, id + ": No conozco al agente " + idAgente);
         } else {
-            outputsdefault.removeEntity(outputsdefaultAgenteDesconocido);
             ReputacionInfo reputacion = new ReputacionInfo();
             WitnessTrust wt = new WitnessTrust();
             wt.setObject(trustAgente.getObjectCriteriaGoodQuality());
@@ -207,7 +205,11 @@ public class Tareas {
 
     public static void actualizarValorReputacionTask(String id, ReputacionAgente eiReputacionAgente,
             ValoresConfianzaReputacion eiValoresConfianzaReputacion) {
+
+        if(eiReputacionAgente.getdata()==null) return;
+
         ReputacionInfo reputacion = (ReputacionInfo) eiReputacionAgente.getdata();
+        if(reputacion.getTrust().getWitnessId().equals(id)) return;
 
         VisualizacionAppInit.getInstance().update(0, id + ": Reputacion recibida para:" + reputacion.getColaboradorId() + " " + reputacion.getTrust().getSubjectCriteriaGoodQuality().getValue() + "%" + reputacion.getTrust().getSubjectCriteriaGoodQuality().getReliability());
 

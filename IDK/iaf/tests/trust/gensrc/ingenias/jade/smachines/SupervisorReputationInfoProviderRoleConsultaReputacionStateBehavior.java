@@ -78,16 +78,9 @@ private MentalStateReader msr=null;
 			      
 			      // Next states after receiving "ConsultaReputacionUI"
 			      
-			       smf.add("waiting for ConsultaReputacionUI","AgenteDesconocidoUI");
-			      
 			       smf.add("waiting for ConsultaReputacionUI","RespuetaReputacion");
 			      
 			    
-			    
-			     // States involved in message deliver
-			     
-			      smf.add("AgenteDesconocidoUI", "endAgenteDesconocidoUI");
-			      
 			    
 			     // States involved in message deliver
 			     
@@ -136,8 +129,6 @@ private MentalStateReader msr=null;
          
       Vector options=new Vector();
       
-      options.add("AgenteDesconocidoUI");
-      
       options.add("RespuetaReputacion");
       
       String[] optionsA=new String[options.size()];
@@ -168,51 +159,6 @@ private MentalStateReader msr=null;
   
   
   
-  
-  // Sends a message and synchronization commands
-  if (this.isState("AgenteDesconocidoUI")) {
-     
-     try {
-      AID[] actors=null;
-      Vector actorsv=new Vector();
-      Vector<String> rolesv=new Vector<String>();
-      
-      {      
-       Vector<AID> receivers=this.getActor("SupervisorInterestedInReputationRole");      
-       actorsv.addAll(receivers);
-       for (AID aid:receivers){
-        rolesv.add("SupervisorInterestedInReputationRole");
-       }
-      }
-      
-      actors=new AID[actorsv.size()];
-      actorsv.toArray(actors);
-      Vector options=new Vector();      
-      
-      options.add("endAgenteDesconocidoUI");      
-      
-      String[] optionsA=new String[options.size()];
-      options.toArray(optionsA);
-      if (this.getDCC().notifyMessageSent("AgenteDesconocidoUI",optionsA,this)){
-           //If mental state conditions are met, the message is send and state changed
-            CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
-           "AgenteDesconocidoUI","ConsultaReputacion",this.getContentForNextMessage());
-           getTimeout().stop();
-            this.notifyStateTransitionExecuted("AgenteDesconocidoUI", options.firstElement().toString());
-      } else {
-    	  if (getTimeout().isStarted() && getTimeout().isFinished()){
-    	    		 this.abortDueTimeout();   	        
-    	    		  this.notifyStateTransitionExecuted("AgenteDesconocidoUI", "ABORTED");
-    	  } else  {
-    		  if (!getTimeout().isStarted())
-    		  getTimeout().start(0);
-    	  }
-      }
-
-      } catch (NoAgentsFound e) {
-      e.printStackTrace();
-  	}
-  } 
   
   // Sends a message and synchronization commands
   if (this.isState("RespuetaReputacion")) {
@@ -261,13 +207,6 @@ private MentalStateReader msr=null;
   
    
 
-  
-  // Finishes this state machine
-  if (this.isState("endAgenteDesconocidoUI")) {
-    this.setFinished(); // End of transitions
-    this.notifyProtocolFinished();
-    this.getDCC().removeDefaultLocks();
-  }
   
   // Finishes this state machine
   if (this.isState("endRespuetaReputacion")) {

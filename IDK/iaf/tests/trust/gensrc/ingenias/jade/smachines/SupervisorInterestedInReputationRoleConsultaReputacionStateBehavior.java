@@ -73,14 +73,6 @@ private MentalStateReader msr=null;
 			    
 			    
 			      // Receiving a message    
-			      smf.add("AgenteDesconocidoUI", "waiting for AgenteDesconocidoUI");
-			      
-			      // Next states after receiving "AgenteDesconocidoUI"
-			      
-			       smf.add("waiting for AgenteDesconocidoUI","endAgenteDesconocidoUI");
-			      
-			    
-			      // Receiving a message    
 			      smf.add("RespuetaReputacion", "waiting for RespuetaReputacion");
 			      
 			      // Next states after receiving "RespuetaReputacion"
@@ -91,8 +83,6 @@ private MentalStateReader msr=null;
 			    
 			     // States involved in message deliver
 			     
-			      smf.add("ConsultaReputacionUI", "AgenteDesconocidoUI");
-			      
 			      smf.add("ConsultaReputacionUI", "RespuetaReputacion");
 			      
 			    
@@ -155,40 +145,6 @@ private MentalStateReader msr=null;
   
   
   // Receives a message and a synchronization command
-  if (this.isState("AgenteDesconocidoUI") ) {  // State changed by other agent and upted
-    //in the parent class
-         
-      Vector options=new Vector();
-      
-      options.add("endAgenteDesconocidoUI");
-      
-      String[] optionsA=new String[options.size()];
-      options.toArray(optionsA);
-      boolean allexist=true;
-      
-      int cardinality=1;
-      if ("n".equals("n")){
-         try{
-          Vector<AID> receivers=this.getActor("SupervisorReputationInfoProviderRole");    
-          cardinality=receivers.size();          
-          } catch (NoAgentsFound ex) {
-                    ex.printStackTrace();
-                }   
-       
-      }
-      
-      if (allexist && true){     
-		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
-                        this.getConversationID(),"AgenteDesconocidoUI",
-                   "ConsultaReputacion",this.getPlayedRole(),
-                   optionsA,this,cardinality,0));
-      }	 
-      this.removeState("AgenteDesconocidoUI");
-      this.addState("waiting for AgenteDesconocidoUI");
-      this.notifyStateTransitionExecuted("AgenteDesconocidoUI", "waiting for AgenteDesconocidoUI");
-  } 
-  
-  // Receives a message and a synchronization command
   if (this.isState("RespuetaReputacion") ) {  // State changed by other agent and upted
     //in the parent class
          
@@ -245,8 +201,6 @@ private MentalStateReader msr=null;
       actorsv.toArray(actors);
       Vector options=new Vector();      
       
-      options.add("AgenteDesconocidoUI");      
-      
       options.add("RespuetaReputacion");      
       
       String[] optionsA=new String[options.size()];
@@ -274,13 +228,6 @@ private MentalStateReader msr=null;
   
    
 
-  
-  // Finishes this state machine
-  if (this.isState("endAgenteDesconocidoUI")) {
-    this.setFinished(); // End of transitions
-    this.notifyProtocolFinished();
-    this.getDCC().removeDefaultLocks();
-  }
   
   // Finishes this state machine
   if (this.isState("endRespuetaReputacion")) {

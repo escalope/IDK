@@ -132,8 +132,6 @@ import ingenias.exception.NotFound;
            
   		   //sb.clearState();         
 	              
-		   futureStates.add("AgenteDesconocidoUI");
-                  
 		   futureStates.add("RespuetaReputacion");
           
           processed = true;
@@ -170,31 +168,6 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
     Vector<String> futureStates=new Vector<String>();
   
    
-   
-    if (sb.isState("waiting for AgenteDesconocidoUI")&& options.length>0 && mes!=null
-    && mes.getUserDefinedParameter("sequence")!=null &&
-    		mes.getUserDefinedParameter("sequence").equals("AgenteDesconocidoUI")){
-    	 boolean allexist=true;
-         
-         if (allexist && true){
-     	   sb.removeState("waiting for AgenteDesconocidoUI");           
-    	   try {
-                    Vector toAdd=new Vector();
-					for (ACLMessage singleMessage:multipleMessages){
-						toAdd.addAll((Vector)singleMessage.getContentObject());						
-					}
-					sb.updateMentalState(toAdd);	
-		   } catch (UnreadableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
- 		   }
-
-	              
-		   futureStates.add("endAgenteDesconocidoUI");
-          
-          processed = true;
-      	 }      	 
-    } 
    
     if (sb.isState("waiting for RespuetaReputacion")&& options.length>0 && mes!=null
     && mes.getUserDefinedParameter("sequence")!=null &&

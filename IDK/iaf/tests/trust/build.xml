@@ -87,7 +87,7 @@
     <arg line="ingenias.testing.TestingPackageLauncher"/>    
       <classpath>
 
-		<pathelement path="${temp}" />        
+	<pathelement path="${temp}" />        
         <fileset dir="${lib}">
           <include name="**/*.jar" />
         </fileset>

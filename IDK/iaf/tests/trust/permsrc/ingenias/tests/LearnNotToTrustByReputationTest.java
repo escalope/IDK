@@ -26,29 +26,22 @@
 
 package ingenias.tests;
 
-import static org.junit.Assert.*;
 
-import java.util.Vector;
 
-import org.junit.Before;
-import org.junit.After;
 import org.junit.Test;
 
-import jade.core.*;
-import jade.wrapper.StaleProxyException;
-import ingenias.editor.entities.MentalEntity;
 import ingenias.jade.MentalStateManager;
 import ingenias.jade.graphics.MainInteractionManager;
-import ingenias.jade.mental.*;
-import ingenias.testing.MSMRepository;
-import ingenias.testing.TestUtils;
 import ingenias.testing.*;
 import ingenias.jade.IAFProperties;
+import ingenias.jade.MentalStateProcessor;
 
 
 public class LearnNotToTrustByReputationTest {
 @Test
-  public void testDemo(){			
+  public void testDemo() throws Exception{
+        IAFProperties.setGarbageCollectionInterval(100);
+
   			// Involved agent local ids for this test are:
   			  			
         	// -AutonomousColaborator_0AutonomousColaboratorDU
@@ -70,33 +63,50 @@ public class LearnNotToTrustByReputationTest {
 			// MentalStateManager msm = MSMRepository.getInstance().get("MY_AGENT_ID"); // provides access to the
 			// For current agents, these are the variables containing their mental states
 			  			
-        	MentalStateManager msmAutonomousColaborator_0AutonomousColaboratorDU=MSMRepository.getInstance().get("AutonomousColaborator_0AutonomousColaboratorDU");
-        	  			
-        	MentalStateManager msmSourcesSupervisor_0SourcesSupervisorDU=MSMRepository.getInstance().get("SourcesSupervisor_0SourcesSupervisorDU");
-        	  			
-        	MentalStateManager msmSourcesSupervisor_1SourcesSupervisorDU=MSMRepository.getInstance().get("SourcesSupervisor_1SourcesSupervisorDU");
-        	  			
-        	MentalStateManager msmSourcesManager_0SourcesManagerDU=MSMRepository.getInstance().get("SourcesManager_0SourcesManagerDU");
-        	  			
-        	MentalStateManager msmResearcherAssistant_0ResearcherAssistantDU=MSMRepository.getInstance().get("ResearcherAssistant_0ResearcherAssistantDU");
-        	  			
-        	MentalStateManager msmSourcesInspector_0SourcesInspectorDU=MSMRepository.getInstance().get("SourcesInspector_0SourcesInspectorDU");
-        	  			
-        	MentalStateManager msmSourcesAlfaInspector_0SourcesAlfaInspectorDU=MSMRepository.getInstance().get("SourcesAlfaInspector_0SourcesAlfaInspectorDU");
-        	
-			
-//			// mental state of the agent
-//			Vector<MentalEntity> frameFactEntitiesBefore = msm.getMentalEntityByType("MY_TYPE"); // Obtains entities of a given type
+       MentalStateManager msmA = MSMRepository.getInstance().waitFor("AutonomousColaborator_0AutonomousColaboratorDU");
+        MentalStateProcessor mspA = MSPRepository.getInstance().waitFor("AutonomousColaborator_0AutonomousColaboratorDU");
+        TestUtils.waitForAgentInitialised(mspA);
+        MainInteractionManager.goAutomatic();
 //
-//			assertTrue("There should be two MY_TYPE entities",frameFactEntitiesBefore.size()==2);
+//        NuevoCicloEvento evento = new NuevoCicloEvento();
+//        evento.setdata("urn:fuente:2");
+//        msmA.addMentalEntity(evento);
 //
-//			MainInteractionManager.goAutomatic(); // tells the agents to start working
-//			TestUtils.doNothing(1000); // waits for 1 second
-//			Vector<MentalEntity> frameFactEntitiesAfter = msm.getMentalEntityByType("MY_TYPE");
+//        TestUtils.doNothing(4000);
 //
-//			assertTrue("There should be no any MY_TYPE entities",
-//			  frameFactEntitiesAfter.size() == 0); // checks that all entities of type MY_TYPE
-//			  // do not exist
+//
+//        evento = new NuevoCicloEvento();
+//        evento.setdata("urn:fuente:2");
+//        msmA.addMentalEntity(evento);
+//
+//        TestUtils.doNothing(4000);
+//
+//        evento = new NuevoCicloEvento();
+//        evento.setdata("urn:fuente:2");
+//        msmA.addMentalEntity(evento);
+//
+//        TestUtils.doNothing(4000);
+//
+//        evento = new NuevoCicloEvento();
+//        evento.setdata("urn:fuente:2");
+//        msmA.addMentalEntity(evento);
+//
+//        TestUtils.doNothing(4000);
+//
+//
+//        evento = new NuevoCicloEvento();
+//        evento.setdata("_urn:fuente:1");
+//        msmA.addMentalEntity(evento);
+//
+//        TestUtils.doNothing(4000);
+//
+//
+//        evento = new NuevoCicloEvento();
+//        evento.setdata("urn:fuente:2");
+//        msmA.addMentalEntity(evento);
+//
+//        TestUtils.doNothing(4000);
+
   }
 }
 

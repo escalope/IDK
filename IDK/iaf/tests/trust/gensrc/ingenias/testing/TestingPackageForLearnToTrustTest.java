@@ -197,7 +197,7 @@ jade.wrapper.AgentContainer ac=null;
      
      @After
 	public void endTest() throws StaleProxyException{
-	 ac.kill();	
+	 ac.kill();
 	};
 	
 

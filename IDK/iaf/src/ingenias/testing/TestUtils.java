@@ -19,7 +19,7 @@
     along with INGENIAS Agent Framework; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-*/
+ */
 package ingenias.testing;
 
 import static org.junit.Assert.assertTrue;
@@ -29,6 +29,7 @@ import ingenias.jade.AgentStates;
 import ingenias.jade.MentalStateManager;
 import ingenias.jade.MentalStateProcessor;
 
+import java.security.Permission;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -38,11 +39,26 @@ public class TestUtils {
 
 	private static Hashtable<String,Vector<MentalEntity>> snapshots=new Hashtable<String,Vector<MentalEntity>>();
 
+	public static void forbidSystemExitCall() {
+		final SecurityManager securityManager = new SecurityManager() {
+			public void checkPermission( Permission permission ) {
+				if( "exitVM".equals( permission.getName() ) ) {
+					throw new ExitTrappedException() ;
+				}
+			}
+		} ;
+		System.setSecurityManager( securityManager ) ;
+	}
+
+	public static void enableSystemExitCall() {
+		System.setSecurityManager( null ) ;
+	}
+
 	public static void doNothing(long sleepTime) {
 		try {
 			Thread.currentThread().sleep(sleepTime);
 		} catch (InterruptedException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
@@ -56,16 +72,16 @@ public class TestUtils {
 			}
 		}
 	}
-	
+
 	public static void printSnapshot(String id){
 		System.out.println(snapshots.get(id));
 	}
-	
+
 	public static String getSnapshotString(String id){
 		return snapshots.get(id).toString();
 	}
-	
-	
+
+
 
 	public static void snapShot(MentalStateManager msm, String id) {
 		snapshots.put(id,msm.getAllMentalEntities());
@@ -83,12 +99,12 @@ public class TestUtils {
 			}
 			if (!found)
 				differentEntities.add(me);
-			
+
 		}
 		return differentEntities;
-		
+
 	}
-	
+
 	public static Vector<MentalEntity>  findMentalEntityInConversationByType(
 			RuntimeConversation conv, String value) {
 		Enumeration elementsContained=conv.getCurrentContentElements();
@@ -111,7 +127,7 @@ public class TestUtils {
 			String type, String agent, int instances) {
 		assertTrue("There should be "+instances+" instance of "+type+" in the mental state of agent "+agent,msm.getMentalEntityByType(type).size()==instances);
 	}
-	
+
 	public static void checkNOExistenceMEWithinConv(RuntimeConversation conv, String type, String agent) {
 		Vector<MentalEntity> mes;
 		mes=TestUtils.findMentalEntityInConversationByType(conv,type);
@@ -135,7 +151,7 @@ public class TestUtils {
 		conv=(RuntimeConversation)conversations.elementAt(0);
 		return conv;
 	}
-	
-	
+
+
 
 }

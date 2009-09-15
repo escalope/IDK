@@ -171,31 +171,6 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
   
    
    
-    if (sb.isState("waiting for PropuestaRechazadaIU")&& options.length>0 && mes!=null
-    && mes.getUserDefinedParameter("sequence")!=null &&
-    		mes.getUserDefinedParameter("sequence").equals("PropuestaRechazadaIU")){
-    	 boolean allexist=true;
-         
-         if (allexist && true){
-     	   sb.removeState("waiting for PropuestaRechazadaIU");           
-    	   try {
-                    Vector toAdd=new Vector();
-					for (ACLMessage singleMessage:multipleMessages){
-						toAdd.addAll((Vector)singleMessage.getContentObject());						
-					}
-					sb.updateMentalState(toAdd);	
-		   } catch (UnreadableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
- 		   }
-
-	              
-		   futureStates.add("endPropuestaRechazadaIU");
-          
-          processed = true;
-      	 }      	 
-    } 
-   
     if (sb.isState("waiting for PropuestaAceptadaIU")&& options.length>0 && mes!=null
     && mes.getUserDefinedParameter("sequence")!=null &&
     		mes.getUserDefinedParameter("sequence").equals("PropuestaAceptadaIU")){
@@ -216,6 +191,31 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
 
 	              
 		   futureStates.add("endPropuestaAceptadaIU");
+          
+          processed = true;
+      	 }      	 
+    } 
+   
+    if (sb.isState("waiting for PropuestaRechazadaIU")&& options.length>0 && mes!=null
+    && mes.getUserDefinedParameter("sequence")!=null &&
+    		mes.getUserDefinedParameter("sequence").equals("PropuestaRechazadaIU")){
+    	 boolean allexist=true;
+         
+         if (allexist && true){
+     	   sb.removeState("waiting for PropuestaRechazadaIU");           
+    	   try {
+                    Vector toAdd=new Vector();
+					for (ACLMessage singleMessage:multipleMessages){
+						toAdd.addAll((Vector)singleMessage.getContentObject());						
+					}
+					sb.updateMentalState(toAdd);	
+		   } catch (UnreadableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+ 		   }
+
+	              
+		   futureStates.add("endPropuestaRechazadaIU");
           
           processed = true;
       	 }      	 

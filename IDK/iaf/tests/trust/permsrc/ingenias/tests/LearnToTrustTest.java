@@ -70,9 +70,7 @@ public class LearnToTrustTest {
         MentalStateProcessor mspB = MSPRepository.getInstance().waitFor("SourcesSupervisor_0SourcesSupervisorDU");
         TestUtils.waitForAgentInitialised(mspB);
 
-        System.out.println("voy");
         MainInteractionManager.goAutomatic();
-        System.out.println("voy");
 
         NuevaPropuestaIntroducidaEvento evento = new NuevaPropuestaIntroducidaEvento();
         evento.setdata("urn:fuente:3");

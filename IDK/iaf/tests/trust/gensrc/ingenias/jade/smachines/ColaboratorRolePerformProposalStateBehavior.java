@@ -73,19 +73,19 @@ private MentalStateReader msr=null;
 			    
 			    
 			      // Receiving a message    
-			      smf.add("PropuestaRechazadaIU", "waiting for PropuestaRechazadaIU");
-			      
-			      // Next states after receiving "PropuestaRechazadaIU"
-			      
-			       smf.add("waiting for PropuestaRechazadaIU","endPropuestaRechazadaIU");
-			      
-			    
-			      // Receiving a message    
 			      smf.add("PropuestaAceptadaIU", "waiting for PropuestaAceptadaIU");
 			      
 			      // Next states after receiving "PropuestaAceptadaIU"
 			      
 			       smf.add("waiting for PropuestaAceptadaIU","endPropuestaAceptadaIU");
+			      
+			    
+			      // Receiving a message    
+			      smf.add("PropuestaRechazadaIU", "waiting for PropuestaRechazadaIU");
+			      
+			      // Next states after receiving "PropuestaRechazadaIU"
+			      
+			       smf.add("waiting for PropuestaRechazadaIU","endPropuestaRechazadaIU");
 			      
 			    
 			    
@@ -155,40 +155,6 @@ private MentalStateReader msr=null;
   
   
   // Receives a message and a synchronization command
-  if (this.isState("PropuestaRechazadaIU") ) {  // State changed by other agent and upted
-    //in the parent class
-         
-      Vector options=new Vector();
-      
-      options.add("endPropuestaRechazadaIU");
-      
-      String[] optionsA=new String[options.size()];
-      options.toArray(optionsA);
-      boolean allexist=true;
-      
-      int cardinality=1;
-      if ("1".equals("n")){
-         try{
-          Vector<AID> receivers=this.getActor("SupervisorRole");    
-          cardinality=receivers.size();          
-          } catch (NoAgentsFound ex) {
-                    ex.printStackTrace();
-                }   
-       
-      }
-      
-      if (allexist && true){     
-		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
-                        this.getConversationID(),"PropuestaRechazadaIU",
-                   "PerformProposal",this.getPlayedRole(),
-                   optionsA,this,cardinality,0));
-      }	 
-      this.removeState("PropuestaRechazadaIU");
-      this.addState("waiting for PropuestaRechazadaIU");
-      this.notifyStateTransitionExecuted("PropuestaRechazadaIU", "waiting for PropuestaRechazadaIU");
-  } 
-  
-  // Receives a message and a synchronization command
   if (this.isState("PropuestaAceptadaIU") ) {  // State changed by other agent and upted
     //in the parent class
          
@@ -220,6 +186,40 @@ private MentalStateReader msr=null;
       this.removeState("PropuestaAceptadaIU");
       this.addState("waiting for PropuestaAceptadaIU");
       this.notifyStateTransitionExecuted("PropuestaAceptadaIU", "waiting for PropuestaAceptadaIU");
+  } 
+  
+  // Receives a message and a synchronization command
+  if (this.isState("PropuestaRechazadaIU") ) {  // State changed by other agent and upted
+    //in the parent class
+         
+      Vector options=new Vector();
+      
+      options.add("endPropuestaRechazadaIU");
+      
+      String[] optionsA=new String[options.size()];
+      options.toArray(optionsA);
+      boolean allexist=true;
+      
+      int cardinality=1;
+      if ("1".equals("n")){
+         try{
+          Vector<AID> receivers=this.getActor("SupervisorRole");    
+          cardinality=receivers.size();          
+          } catch (NoAgentsFound ex) {
+                    ex.printStackTrace();
+                }   
+       
+      }
+      
+      if (allexist && true){     
+		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
+                        this.getConversationID(),"PropuestaRechazadaIU",
+                   "PerformProposal",this.getPlayedRole(),
+                   optionsA,this,cardinality,0));
+      }	 
+      this.removeState("PropuestaRechazadaIU");
+      this.addState("waiting for PropuestaRechazadaIU");
+      this.notifyStateTransitionExecuted("PropuestaRechazadaIU", "waiting for PropuestaRechazadaIU");
   } 
   
   
@@ -276,14 +276,14 @@ private MentalStateReader msr=null;
 
   
   // Finishes this state machine
-  if (this.isState("endPropuestaRechazadaIU")) {
+  if (this.isState("endPropuestaAceptadaIU")) {
     this.setFinished(); // End of transitions
     this.notifyProtocolFinished();
     this.getDCC().removeDefaultLocks();
   }
   
   // Finishes this state machine
-  if (this.isState("endPropuestaAceptadaIU")) {
+  if (this.isState("endPropuestaRechazadaIU")) {
     this.setFinished(); // End of transitions
     this.notifyProtocolFinished();
     this.getDCC().removeDefaultLocks();

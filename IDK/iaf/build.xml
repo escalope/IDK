@@ -154,7 +154,7 @@
 	</java>
 	<java fork="true" failonerror="true" maxmemory="200m"
 	      classname="ingenias.codeproc.IAFGenerator">		
-		<arg value="tests/trust/spec/specification.idk"/>
+		<arg value="tests/trust/spec/specification.xml"/>
 		<arg value="tests/trust"/>		
 		<classpath>
 			<fileset dir="tests/trust/lib">

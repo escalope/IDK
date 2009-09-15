@@ -52,14 +52,14 @@ import ingenias.exception.NotFound;
     
     // Facts that cannot be removed because they must be sent
      
-     lw.addDeletionLockExpectedType("PropuestaRechazada");
+     lw.addDeletionLockExpectedType("AcceptedProposal");
      
     
        // Facts that cannot be removed because they are part of guards
     
     // Facts that cannot be removed because they must be sent
      
-     lw.addDeletionLockExpectedType("AcceptedProposal");
+     lw.addDeletionLockExpectedType("PropuestaRechazada");
      
      
     }
@@ -71,14 +71,14 @@ import ingenias.exception.NotFound;
     
     // Facts that cannot be removed because they must be sent
      
-     locks.add("PropuestaRechazada");
+     locks.add("AcceptedProposal");
      
     
        // Facts that cannot be removed because they are part of guards
     
     // Facts that cannot be removed because they must be sent
      
-     locks.add("AcceptedProposal");
+     locks.add("PropuestaRechazada");
      
      
     return locks;
@@ -122,37 +122,6 @@ import ingenias.exception.NotFound;
   
   
    
-    if (stateToEvaluate.equals("PropuestaRechazadaIU") &&
-    	 sb.isState("PropuestaRechazadaIU")&& options.length>0) {         
-         boolean allexist=true;
-         Vector<MentalEntity> mfcontent=null;
-         
-		 
-		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"PropuestaRechazada").isEmpty();
-		   
-         if (allexist && true){
-           sb.clearContentNextMessage();
-           sb.removeState("PropuestaRechazadaIU");
-           
-           
-	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"PropuestaRechazada");
-	   	   for (MentalEntity me:mfcontent)             
-             sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLock(mfcontent);
-	       lockProcessed("PropuestaRechazada");
-           //MainInteractionManager.log("Removing lock PropuestaRechazada",this.getAgent().getLocalName()+"-"+sb.getConversationID());
-            
-             
-           
-  		   //sb.clearState();         
-	              
-		   futureStates.add("endPropuestaRechazadaIU");
-          
-          processed = true;
-      	 }
-     
-    } 
-   
     if (stateToEvaluate.equals("PropuestaAceptadaIU") &&
     	 sb.isState("PropuestaAceptadaIU")&& options.length>0) {         
          boolean allexist=true;
@@ -178,6 +147,37 @@ import ingenias.exception.NotFound;
   		   //sb.clearState();         
 	              
 		   futureStates.add("endPropuestaAceptadaIU");
+          
+          processed = true;
+      	 }
+     
+    } 
+   
+    if (stateToEvaluate.equals("PropuestaRechazadaIU") &&
+    	 sb.isState("PropuestaRechazadaIU")&& options.length>0) {         
+         boolean allexist=true;
+         Vector<MentalEntity> mfcontent=null;
+         
+		 
+		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"PropuestaRechazada").isEmpty();
+		   
+         if (allexist && true){
+           sb.clearContentNextMessage();
+           sb.removeState("PropuestaRechazadaIU");
+           
+           
+	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"PropuestaRechazada");
+	   	   for (MentalEntity me:mfcontent)             
+             sb.addContentForNextMessage(me);    
+	       getLR().removeDeletionLock(mfcontent);
+	       lockProcessed("PropuestaRechazada");
+           //MainInteractionManager.log("Removing lock PropuestaRechazada",this.getAgent().getLocalName()+"-"+sb.getConversationID());
+            
+             
+           
+  		   //sb.clearState();         
+	              
+		   futureStates.add("endPropuestaRechazadaIU");
           
           processed = true;
       	 }

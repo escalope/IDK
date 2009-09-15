@@ -55,7 +55,7 @@ jade.wrapper.AgentContainer ac=null;
         jade.core.Runtime rt = jade.core.Runtime.instance();
 
         // Exit the JVM when there are no more containers around
-        rt.setCloseVM(true);
+        rt.setCloseVM(false);
 
         // Create a default profile
         Profile p = new ProfileImpl();
@@ -197,7 +197,7 @@ jade.wrapper.AgentContainer ac=null;
      
      @After
 	public void endTest() throws StaleProxyException{
-	 ac.kill();
+	 ac.kill();	
 	};
 	
 

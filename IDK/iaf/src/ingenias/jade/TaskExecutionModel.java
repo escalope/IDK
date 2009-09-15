@@ -293,7 +293,9 @@ public class TaskExecutionModel {
                     Vector<AgentExternalDescription> descV = new Vector<AgentExternalDescription>();
                     String colaboratorsFound = "";
                     String colaboratorNotFound = "";
-                    while (collaborators.hasMoreElements() && current.getAbortCode() !=null && current.getAbortCode() != IAFProperties.INTERNAL_FAILURE) {
+                    while (collaborators.hasMoreElements() && 
+                            ((current.getAbortCode() !=null && current.getAbortCode() != IAFProperties.INTERNAL_FAILURE)
+                            || current.getAbortCode()==null)) {
                     	AgentExternalDescription colLocalID = collaborators.nextElement();
                             //descr = ja.getAM().getYellowPages().getAgentFromLocalID(colLocalID);
                         //if (descr.length > 0) {

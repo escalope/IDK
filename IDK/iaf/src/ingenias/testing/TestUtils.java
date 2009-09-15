@@ -39,17 +39,19 @@ public class TestUtils {
 
 	private static Hashtable<String,Vector<MentalEntity>> snapshots=new Hashtable<String,Vector<MentalEntity>>();
 
+	// From Laurent Caillette's weblog
 	public static void forbidSystemExitCall() {
 		final SecurityManager securityManager = new SecurityManager() {
 			public void checkPermission( Permission permission ) {
 				if( "exitVM".equals( permission.getName() ) ) {
-					throw new ExitTrappedException() ;
+					throw new RuntimeException("System exit signal trapped") ;
 				}
 			}
 		} ;
 		System.setSecurityManager( securityManager ) ;
 	}
-
+	
+	// From Laurent Caillette's weblog
 	public static void enableSystemExitCall() {
 		System.setSecurityManager( null ) ;
 	}
@@ -72,6 +74,17 @@ public class TestUtils {
 			}
 		}
 	}
+	
+	public static void waitForAgentInitialised(MentalStateManager msm) {
+		while (msm.findEntityTypeInstances("Agent_data").isEmpty()){
+			try {
+				Thread.currentThread().sleep(100);
+			} catch (InterruptedException e) {			
+				e.printStackTrace();
+			}
+		}
+	}
+
 
 	public static void printSnapshot(String id){
 		System.out.println(snapshots.get(id));

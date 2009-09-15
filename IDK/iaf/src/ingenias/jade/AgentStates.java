@@ -28,5 +28,7 @@ public class AgentStates {
 	public static final int DECISION_FINISHED = 1;
 	public static final int EXECUTION_FINISHED = 2;
 	public static final int PLANNING_STARTING = 3;
+	public static final int STARTING_AGENT = 3;
+	
 
 }

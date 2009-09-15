@@ -96,7 +96,7 @@ public class TaskExecutionModel {
      * @param t
      */
     public synchronized void executeTask(final JADEAgent ja, final TaskQueue queues, final MentalStateManager cmsm, final Task t) {
-        msm.lockChanges();
+     	msm.lockChanges();
         EventManager.getInstance().startingTaskExecution(ja.getLocalName(),
                 ja.getClass().getName().substring(0,
                 ja.getClass().getName().indexOf("JADE")),

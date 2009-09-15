@@ -49,6 +49,8 @@ import ingenias.jade.graphics.AgentModelPanelIAF;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.mental.Agent_data;
 import ingenias.testing.DebugUtils;
+import ingenias.testing.MSMRepository;
+import ingenias.testing.MSPRepository;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CompositeBehaviour;
@@ -138,7 +140,7 @@ abstract public class JADEAgent extends Agent{
 	private CommsManagementBehavior mainBehavior;
 
 	private  String synRegister="sinchronization of registering process";
-	
+
 
 	public JADEAgent(AgentProtocols ap, CustomLocks cl){
 		super();
@@ -343,85 +345,85 @@ abstract public class JADEAgent extends Agent{
 	 *  
 	 */
 	public void setup() {
-            try {
-		super.setup();
-		if (IAFProperties.getGraphicsOn()){
-			this.graphics=new AgentGraphics(this.getName());			
-		}
-
-		this.lman=new LocksManager(this.getAID().getLocalName(),cl);
-
-
-		/**
-		 * Registers the agent in the yellow pages services. It uses the getDescription
-		 * to obtain a list of services the agent can provide
-		 */
-		DFAgentDescription[] roles = this.getDescription();
-		for (int k = 0; k < roles.length; k++) {
-			try {
-				synchronized(synRegister){
-					//System.err.println("iniciando registro");
-					jade.domain.DFService.register(this,
-							roles[k]);		
-					//System.err.println("registrado");
-				}
-
+		try {
+			super.setup();
+			if (IAFProperties.getGraphicsOn()){
+				this.graphics=new AgentGraphics(this.getName());			
 			}
-			catch (FIPAException fe) {
-				if (! (fe.getMessage().toLowerCase().indexOf("already") >= 0)) {
-					System.out.println(fe.getACLMessage().getPerformative(fe.
-							getACLMessage().
-							getPerformative()));
+
+			this.lman=new LocksManager(this.getAID().getLocalName(),cl);
+
+
+			/**
+			 * Registers the agent in the yellow pages services. It uses the getDescription
+			 * to obtain a list of services the agent can provide
+			 */
+			DFAgentDescription[] roles = this.getDescription();
+			for (int k = 0; k < roles.length; k++) {
+				try {
+					synchronized(synRegister){
+						//System.err.println("iniciando registro");
+						jade.domain.DFService.register(this,
+								roles[k]);		
+						//System.err.println("registrado");
+					}
+
 				}
-				else {
-					try {
-						synchronized(synRegister){
-						//	System.err.println("iniciando registro 2");
-							jade.domain.DFService.register(this,
-									roles[k]);		
-						//	System.err.println("registrado 2");
+				catch (FIPAException fe) {
+					if (! (fe.getMessage().toLowerCase().indexOf("already") >= 0)) {
+						System.out.println(fe.getACLMessage().getPerformative(fe.
+								getACLMessage().
+								getPerformative()));
+					}
+					else {
+						try {
+							synchronized(synRegister){
+								//	System.err.println("iniciando registro 2");
+								jade.domain.DFService.register(this,
+										roles[k]);		
+								//	System.err.println("registrado 2");
+							}
+						}
+						catch (FIPAException fe1) {
+							// No more exception should be produced
 						}
 					}
-					catch (FIPAException fe1) {
-						// No more exception should be produced
-					}
 				}
 			}
-		}
 
-		/**
-		 * Creates the GUI for the Mental State Manager
-		 */
+			/**
+			 * Creates the GUI for the Mental State Manager
+			 */
 
-		AgentModelPanelIAF amm =null;
-		if (IAFProperties.getGraphicsOn()){
-			ids = IDEState.emptyIDEState();
-			amm = new AgentModelPanelIAF(
-					new ingenias.editor.entities.AgentModelDataEntity("1"), 
-					"1", new Model(ids));
-			amm.setMarqueeHandler(new AgentModelMarqueeHandlerIAF(amm));
-		}
-		/**
-		 * Initializes the Mental State Manager and the Mental State Processor. The mental 
-		 * state processor is associated to the GUI of the agents.
-		 */
-		if (IAFProperties.getGraphicsOn())
-			this.msm=new MentalStateManager(ids,amm, this.getAID().getLocalName());
-		else
-			this.msm=new MentalStateManager(ids, this.getAID().getLocalName());
-		this.addBehaviour(this.msm.getConvTracker());
-		if (IAFProperties.getGraphicsOn())
-			this.graphics.setMentalStatePanel(this.getLocalName(),amm);
-		if (IAFProperties.getGraphicsOn())
-			this.msp=new ingenias.jade.MentalStateProcessor(msm,this,this.getGraphics());
-		else
-			this.msp=new ingenias.jade.MentalStateProcessor(msm,this);
-		this.lman.register(msp); // To get notifications of locks removal/addition
-		/**
-		 * Creates handlers to deal with operations made on the GUI representing the
-		 * Mental State Manager
-		 */
-		/*this.msm.registerChangeListener(new GraphModelListener(){
+			AgentModelPanelIAF amm =null;
+			if (IAFProperties.getGraphicsOn()){
+				ids = IDEState.emptyIDEState();
+				amm = new AgentModelPanelIAF(
+						new ingenias.editor.entities.AgentModelDataEntity("1"), 
+						"1", new Model(ids));
+				amm.setMarqueeHandler(new AgentModelMarqueeHandlerIAF(amm));
+			}
+			/**
+			 * Initializes the Mental State Manager and the Mental State Processor. The mental 
+			 * state processor is associated to the GUI of the agents.
+			 */
+			if (IAFProperties.getGraphicsOn())
+				this.msm=new MentalStateManager(ids,amm, this.getAID().getLocalName());
+			else
+				this.msm=new MentalStateManager(ids, this.getAID().getLocalName());
+			this.addBehaviour(this.msm.getConvTracker());
+			if (IAFProperties.getGraphicsOn())
+				this.graphics.setMentalStatePanel(this.getLocalName(),amm);
+			if (IAFProperties.getGraphicsOn())
+				this.msp=new ingenias.jade.MentalStateProcessor(msm,this,this.getGraphics());
+			else
+				this.msp=new ingenias.jade.MentalStateProcessor(msm,this);
+			this.lman.register(msp); // To get notifications of locks removal/addition
+			/**
+			 * Creates handlers to deal with operations made on the GUI representing the
+			 * Mental State Manager
+			 */
+			/*this.msm.registerChangeListener(new GraphModelListener(){
 
 			public void graphChanged(GraphModelEvent arg0) {
 				MainInteractionManager.logMSM("Evaluating changes in mental state",getLocalName());
@@ -449,28 +451,28 @@ abstract public class JADEAgent extends Agent{
 
 		});*/
 
-		/**
-		 * It creates the initial mental state of the agent. It retrieves elements from the
-		 * getO2AObject method, a data transfer method.
-		 */
-		MentalEntity queue=null;
-		do {
-			queue=(MentalEntity)this.getO2AObject();
-			if (queue!=null){
-				try {
-					this.msm.addMentalEntity(queue);
-				} catch (InvalidEntity e) {
+			/**
+			 * It creates the initial mental state of the agent. It retrieves elements from the
+			 * getO2AObject method, a data transfer method.
+			 */
+			MentalEntity queue=null;
+			do {
+				queue=(MentalEntity)this.getO2AObject();
+				if (queue!=null){
+					try {
+						this.msm.addMentalEntity(queue);
+					} catch (InvalidEntity e) {
 
-					e.printStackTrace();
-				}
-			} 
-		} while (queue!=null);
+						e.printStackTrace();
+					}
+				} 
+			} while (queue!=null);
 
-		/**
-		 * A cyclic behavior so that, constantly, the agent is executing the actions required by running
-		 * protocols. This makes possible that, once started, the protocol evolves and finishes. 
-		 */
-		/*this.addBehaviour(
+			/**
+			 * A cyclic behavior so that, constantly, the agent is executing the actions required by running
+			 * protocols. This makes possible that, once started, the protocol evolves and finishes. 
+			 */
+			/*this.addBehaviour(
 				new jade.core.behaviours.CyclicBehaviour(this) {
 					public void action() {
 						for (StateBehavior sb:getCM().getActiveMachines().values()){
@@ -479,27 +481,27 @@ abstract public class JADEAgent extends Agent{
 					}
 				});*/
 
-		/**
-		 * This behavior takes incoming acl messages and distributes them into two 
-		 * groups: messages being processed and messages not being processed.
-		 * Messages being processed are added again to the messages queue so that
-		 * they can be processed by a specialized behavior
-		 * @return 
-		 */
-		final LifeCycleThread vthread = new LifeCycleThread(this) ;
-		
-		getMSM().registerChangeListener(vthread);
-		
-		vthread.setName("Lifecycle "+this.getAID().getLocalName());
-		vthread.start(); // The thread is constantly running so that no new
-		// threads are needed;
-		StateBehaviorChangesListener behaviorChangesListener=null;
-		
-			
-		
-		behaviorChangesListener=new StateBehaviorChangesListener(){		
-			private void wakeUpCommsManagementBehavior(){
-				/*while (!mainBehavior.getExecutionState().equalsIgnoreCase(CyclicBehaviour.STATE_BLOCKED)){
+			/**
+			 * This behavior takes incoming acl messages and distributes them into two 
+			 * groups: messages being processed and messages not being processed.
+			 * Messages being processed are added again to the messages queue so that
+			 * they can be processed by a specialized behavior
+			 * @return 
+			 */
+			final LifeCycleThread vthread = new LifeCycleThread(this) ;
+
+			getMSM().registerChangeListener(vthread);
+
+			vthread.setName("Lifecycle "+this.getAID().getLocalName());
+			vthread.start(); // The thread is constantly running so that no new
+			// threads are needed;
+			StateBehaviorChangesListener behaviorChangesListener=null;
+
+
+
+			behaviorChangesListener=new StateBehaviorChangesListener(){		
+				private void wakeUpCommsManagementBehavior(){
+					/*while (!mainBehavior.getExecutionState().equalsIgnoreCase(CyclicBehaviour.STATE_BLOCKED)){
 					//System.out.println(mainBehavior.getExecutionState());
 					try {
 						Thread.sleep(100);
@@ -508,52 +510,52 @@ abstract public class JADEAgent extends Agent{
 						e.printStackTrace();
 					}
 				}*/
-				if (mainBehavior.getExecutionState().equalsIgnoreCase(CyclicBehaviour.STATE_BLOCKED))
-					mainBehavior.restart();
-			}
-			
-			@Override
-			public void protocolFinished() {
-				new Thread("waking up comms from "+getAID().getLocalName()){
-					public void run(){
-						wakeUpCommsManagementBehavior();		
-					}
-				}.start();
-								
-			}
+					if (mainBehavior.getExecutionState().equalsIgnoreCase(CyclicBehaviour.STATE_BLOCKED))
+						mainBehavior.restart();
+				}
 
-			@Override
-			public void protocolStarted() {
-				new Thread("waking up comms from "+getAID().getLocalName()){
-					public void run(){
-						wakeUpCommsManagementBehavior();		
-					}
-				}.start();
-			}
+				@Override
+				public void protocolFinished() {
+					new Thread("waking up comms from "+getAID().getLocalName()){
+						public void run(){
+							wakeUpCommsManagementBehavior();		
+						}
+					}.start();
 
-			
-			@Override
-			public void stateTransitionExecuted(String fromState, String toState) {
-				new Thread("waking up comms from "+getAID().getLocalName()){
-					public void run(){
-						wakeUpCommsManagementBehavior();		
-					}
-				}.start();	
-			}
-			
-		};
-			
-		mainBehavior=new CommsManagementBehavior(this,behaviorChangesListener) ;	
-		mainBehavior.setBehaviourName("LifeCycle");
-		this.addBehaviour(mainBehavior);
-		
+				}
 
-            } catch (Throwable t){
-                t.printStackTrace();
-            }
+				@Override
+				public void protocolStarted() {
+					new Thread("waking up comms from "+getAID().getLocalName()){
+						public void run(){
+							wakeUpCommsManagementBehavior();		
+						}
+					}.start();
+				}
+
+
+				@Override
+				public void stateTransitionExecuted(String fromState, String toState) {
+					new Thread("waking up comms from "+getAID().getLocalName()){
+						public void run(){
+							wakeUpCommsManagementBehavior();		
+						}
+					}.start();	
+				}
+
+			};
+
+			mainBehavior=new CommsManagementBehavior(this,behaviorChangesListener) ;	
+			mainBehavior.setBehaviourName("LifeCycle");
+			this.addBehaviour(mainBehavior);
+
+
+		} catch (Throwable t){
+			t.printStackTrace();
+		}
 	}
-	
-	
+
+
 	public CustomLocks getCl() {
 		return cl;
 	}
@@ -571,9 +573,11 @@ abstract public class JADEAgent extends Agent{
 						roles[k]);
 			}
 			catch (FIPAException fe) {
-	//			fe.printStackTrace();
+				//			fe.printStackTrace();
 			}
 		}
+		MSMRepository.getInstance().remove(this.getLocalName());
+		MSPRepository.getInstance().remove(this.getLocalName());
 	}
 
 

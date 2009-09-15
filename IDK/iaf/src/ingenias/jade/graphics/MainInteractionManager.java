@@ -613,6 +613,6 @@ public class MainInteractionManager
                 getInstance().runWithoutInterruption.setEnabled(true);
             }
         }
-        getInstance().runStepActionPerformed(null);
+       // getInstance().runStepActionPerformed(null);
     }
 }

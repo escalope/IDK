@@ -222,7 +222,8 @@ public class MentalStateProcessor implements LocksListener {
         Task oldtask = null;
         long delay = MainInteractionManager.getInstance().getDelay();
 
-        if (MainInteractionManager.getInstance().isAutomatic() && queues.manualQueueSize() != 0) {
+        if (MainInteractionManager.getInstance().isAutomatic() 
+        		&& queues.manualQueueSize() != 0) {
 
 
             // Emptying the buffer of tasks shown in the User GUI. It is assumed

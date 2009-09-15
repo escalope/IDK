@@ -72,7 +72,7 @@ public class TaskExecutionModel {
     };
     private Vector<String> interactionsProcessed = new Vector<String>();
 
-    public boolean isInteractionsProcessed() {
+    public synchronized boolean isInteractionsProcessed() {
         return interactionsProcessed.isEmpty();
     }
 
@@ -175,9 +175,11 @@ public class TaskExecutionModel {
 
     }
 
-    private void createNewInteractions(final JADEAgent ja, final Task t, Vector<RuntimeConversation> newInteractions) {
+    private void createNewInteractions(final JADEAgent ja, final Task t, final Vector<RuntimeConversation> newInteractions) {
         for (int k = 0; k < newInteractions.size(); k++) {
             final RuntimeConversation current = newInteractions.elementAt(k);
+            final Enumeration<AgentExternalDescription> collaborators = 
+            	(Enumeration<AgentExternalDescription>)newInteractions.elementAt(k).getCollaboratorsElements();
             //ja.getLM().addInteractionLocks(current.getInteraction().getId());
             this.interactionsProcessed.add("OneToGo");
             SimpleBehaviour oneShotBehaviour = new SimpleBehaviour() {
@@ -190,8 +192,7 @@ public class TaskExecutionModel {
                         done = false;
                     } else {
                         try {
-                            ActiveConversation newConversation = null;
-                            Enumeration collaborators = current.getCollaboratorsElements();
+                            ActiveConversation newConversation = null;                          
                             if (collaborators != null && collaborators.hasMoreElements()) {
                                 newConversation = createNewInteractionWithCollaboratorsSetByUser(
                                         ja, t, current, newConversation, collaborators);
@@ -229,7 +230,8 @@ public class TaskExecutionModel {
                             current.setState("ABORTED");
                             current.setAbortCode(IAFProperties.NO_AGENTS_FOUND);
                         }
-                        interactionsProcessed.remove(0); // to indicate one interaction was already processed
+                        msm.setModified();
+                        interactionsProcessed.remove(0); // to indicate one interaction was already processed                        
                         done = true;
                         
 

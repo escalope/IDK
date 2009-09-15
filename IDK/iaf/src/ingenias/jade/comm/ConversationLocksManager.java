@@ -52,7 +52,7 @@ public class ConversationLocksManager implements LocksRemover, LocksWriter {
                     changeNotificationQueue.remove();
                     notifyChangeLocks();
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(ConversationLocksManager.class.getName()).log(Level.SEVERE, null, ex);
+                  //  Logger.getLogger(ConversationLocksManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 }
             }

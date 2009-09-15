@@ -60,7 +60,7 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 			completedLast=false; // This forces a new planning
 
 		}*/				
-		this.block();
+		this.block(100);
 		//System.out.println(ja.getAID().getLocalName()+" finishing");
 		//System.err.println("----------------End Execution------------"+myAgent.getCurQueueSize());
 	}

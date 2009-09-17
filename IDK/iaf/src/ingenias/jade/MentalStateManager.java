@@ -973,6 +973,10 @@ MentalStateUpdater {
 
 	}
 
+	public String getAgentName() {
+			return this.agentName;
+	}
+
 
 
 }

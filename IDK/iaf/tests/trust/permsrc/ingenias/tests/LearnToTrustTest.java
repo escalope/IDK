@@ -31,7 +31,7 @@ import ingenias.jade.MentalStateManager;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.mental.*;
 import ingenias.testing.*;
-import trabajomaster.demo.supervisor.ReGreTInfo;
+import tws.demo.supervisor.ReGreTInfo;
 
 public class LearnToTrustTest {
 
@@ -72,36 +72,36 @@ public class LearnToTrustTest {
 
         MainInteractionManager.goAutomatic();
 
-        NuevaPropuestaIntroducidaEvento evento = new NuevaPropuestaIntroducidaEvento();
+        NewIntroducedProposalEvent evento = new NewIntroducedProposalEvent();
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
         TestUtils.doNothing(4000);
 
-        TestUtils.checkExistenceMEWithinMS(msmB, "ValoresConfianzaReputacion", "SourcesSupervisor_0SourcesSupervisorDU", 1);
+        TestUtils.checkExistenceMEWithinMS(msmB, "TrustInformation", "SourcesSupervisor_0SourcesSupervisorDU", 1);
 
 
-        evento = new NuevaPropuestaIntroducidaEvento();
-        evento.setdata("urn:fuente:3");
-        msmA.addMentalEntity(evento);
-
-        TestUtils.doNothing(4000);
-
-
-        evento = new NuevaPropuestaIntroducidaEvento();
+        evento = new NewIntroducedProposalEvent();
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
         TestUtils.doNothing(4000);
 
 
-        evento = new NuevaPropuestaIntroducidaEvento();
+        evento = new NewIntroducedProposalEvent();
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
         TestUtils.doNothing(4000);
 
-        ValoresConfianzaReputacion vcr = (ValoresConfianzaReputacion) msmB.getMentalEntityByType("ValoresConfianzaReputacion").get(0);
+
+        evento = new NewIntroducedProposalEvent();
+        evento.setdata("urn:fuente:3");
+        msmA.addMentalEntity(evento);
+
+        TestUtils.doNothing(4000);
+
+        TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();
         assertNotNull(data);
 

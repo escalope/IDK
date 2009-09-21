@@ -28,10 +28,10 @@ import org.junit.Test;
 import ingenias.jade.MentalStateManager;
 import ingenias.jade.MentalStateProcessor;
 import ingenias.jade.graphics.MainInteractionManager;
-import ingenias.jade.mental.NuevoCicloEvento;
-import ingenias.jade.mental.ValoresConfianzaReputacion;
+import ingenias.jade.mental.NewCycleEvent;
+import ingenias.jade.mental.TrustInformation;
 import ingenias.testing.*;
-import trabajomaster.demo.supervisor.ReGreTInfo;
+import tws.demo.supervisor.ReGreTInfo;
 import static org.junit.Assert.*;
 
 public class LearnNotToTrustTest {
@@ -62,8 +62,8 @@ public class LearnNotToTrustTest {
         // For current agents, these are the variables containing their mental states
 
 
-        MentalStateManager msmA = MSMRepository.getInstance().waitFor("AutonomousColaborator_0AutonomousColaboratorDU");
-        MentalStateProcessor mspA = MSPRepository.getInstance().waitFor("AutonomousColaborator_0AutonomousColaboratorDU");
+        MentalStateManager msmA = MSMRepository.getInstance().waitFor("AutonomousCollaborator_0AutonomousCollaboratorDU");
+        MentalStateProcessor mspA = MSPRepository.getInstance().waitFor("AutonomousCollaborator_0AutonomousCollaboratorDU");
         TestUtils.waitForAgentInitialised(mspA);
 
         MentalStateManager msmB = MSMRepository.getInstance().waitFor("SourcesSupervisor_0SourcesSupervisorDU");
@@ -72,39 +72,39 @@ public class LearnNotToTrustTest {
 
         MainInteractionManager.goAutomatic();
 
-        NuevoCicloEvento evento = new NuevoCicloEvento();
+        NewCycleEvent evento = new NewCycleEvent();
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
         TestUtils.doNothing(4000);
 
-        TestUtils.checkExistenceMEWithinMS(msmB, "ValoresConfianzaReputacion", "SourcesSupervisor_0SourcesSupervisorDU", 1);
+        TestUtils.checkExistenceMEWithinMS(msmB, "TrustInformation", "SourcesSupervisor_0SourcesSupervisorDU", 1);
 
-        evento = new NuevoCicloEvento();
+        evento = new NewCycleEvent();
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
         TestUtils.doNothing(4000);
 
-        evento = new NuevoCicloEvento();
+        evento = new NewCycleEvent();
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
         TestUtils.doNothing(4000);
 
-        evento = new NuevoCicloEvento();
+        evento = new NewCycleEvent();
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
         TestUtils.doNothing(4000);
 
-        ValoresConfianzaReputacion vcr = (ValoresConfianzaReputacion) msmB.getMentalEntityByType("ValoresConfianzaReputacion").get(0);
+        TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();
         assertNotNull(data);
 
-        assertTrue(data.getOdb().get("AutonomousColaborator_0AutonomousColaboratorDU").size() == 4);
-        assertTrue(data.getConfianzas().get("AutonomousColaborator_0AutonomousColaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
-        assertTrue(data.getConfianzas().get("AutonomousColaborator_0AutonomousColaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0);
+        assertTrue(data.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() == 4);
+        assertTrue(data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
+        assertTrue(data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0);
     }
 }
 

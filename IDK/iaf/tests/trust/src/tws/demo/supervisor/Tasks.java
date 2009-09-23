@@ -86,8 +86,8 @@ public class Tasks {
         String idAgente = (String) eiAgentReputationQuery.getdata();
         Trust trustAgente = regret.getConfianzas().get(idAgente);
         if (trustAgente == null) {
-            outputsdefault.removeEntity(outputsdefaultReputacionAgente);
-            eiAgentReputationQuery.setdata(null);
+            //outputsdefault.removeEntity(outputsdefaultReputacionAgente);
+            outputsdefaultReputacionAgente.setdata(null);
             VisualizationAppInit.getInstance().update(0, id + ": No conozco al agente " + idAgente);
         } else {
             ReputationInfo reputacion = new ReputationInfo();

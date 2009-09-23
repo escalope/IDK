@@ -11,6 +11,8 @@
 
 package tws.demo.visualization;
 
+import javax.swing.SwingUtilities;
+
 import ingenias.jade.components.TimerAppInit;
 import ingenias.jade.components.VisualizationAppInit;
 
@@ -27,10 +29,16 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void addMensaje(String mensaje){
-        mensajes+=mensaje+"\n";
-        areaMensajes.setText(mensajes);
-        areaMensajes.repaint();
+    public void addMensaje(final String mensaje){
+    	Runnable run=new Runnable(){
+    		public void run(){
+    			mensajes+=mensaje+"\n";
+    	        areaMensajes.setText(mensajes);
+    	        areaMensajes.repaint();		
+    		}
+    	};
+    	SwingUtilities.invokeLater(run);
+        
     }
 
 

@@ -48,7 +48,7 @@ jade.wrapper.AgentContainer ac=null;
  
   @Before
   public void agentSetup() throws StaleProxyException, TimeOut{
-        IAFProperties.setGraphicsOn(false); // disable graphics
+      //  IAFProperties.setGraphicsOn(false); // disable graphics
          MainInteractionManager.goManual(); // Stop task execution
         
         // Get a hold on JADE runtime

@@ -105,9 +105,11 @@ private MentalStateReader msr=null;
 
   }
 
+  private boolean additionalRound=false;
   public synchronized void action() {
     boolean cond1 = true;
     boolean cond2 = true;
+    additionalRound=false;
     
     String initialStateToCompareAtTheEnd=this.getStates();
 
@@ -208,6 +210,7 @@ private MentalStateReader msr=null;
     		  getTimeout().start(0);
     	  }
       }
+      additionalRound=true; // To enable a reevaluation of the state since this is a cyclicbehavior
 
       } catch (NoAgentsFound e) {
       e.printStackTrace();
@@ -253,6 +256,7 @@ private MentalStateReader msr=null;
     		  getTimeout().start(0);
     	  }
       }
+      additionalRound=true; // To enable a reevaluation of the state since this is a cyclicbehavior
 
       } catch (NoAgentsFound e) {
       e.printStackTrace();
@@ -282,7 +286,10 @@ private MentalStateReader msr=null;
   }
   
   if (initialStateToCompareAtTheEnd.equals(this.getStates()))
-   this.block();
+   if (additionalRound)
+   	this.block(100); // To start a new round in 100 millis
+   else
+    this.block(); // Else wait for some external event
 
 }
 

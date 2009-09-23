@@ -76,7 +76,7 @@ public class LearnToTrustTest {
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(4000);
+        TestUtils.doNothing(2000);
 
         TestUtils.checkExistenceMEWithinMS(msmB, "TrustInformation", "SourcesSupervisor_0SourcesSupervisorDU", 1);
 
@@ -85,21 +85,21 @@ public class LearnToTrustTest {
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(4000);
+        TestUtils.doNothing(2000);
 
 
         evento = new NewIntroducedProposalEvent();
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(4000);
+        TestUtils.doNothing(2000);
 
 
         evento = new NewIntroducedProposalEvent();
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(4000);
+        TestUtils.doNothing(2000);
 
         TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();

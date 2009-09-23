@@ -41,9 +41,11 @@ import ingenias.exception.NotFound;
   public class SourcesManagerRoleRequestToAddSourceDefaultCommControl extends DefaultCommControl{
   
   	  private Vector<String> previous=new Vector<String>();
+  	  private com.thoughtworks.xstream.XStream xstream=new com.thoughtworks.xstream.XStream(new com.thoughtworks.xstream.io.xml.DomDriver()); 
   	  
   public SourcesManagerRoleRequestToAddSourceDefaultCommControl(String cid, MentalStateReader msr, ingenias.jade.comm.LocksRemover lr){
   super(msr, lr);
+  
   };
   
   public static void addDefaultLocks(LocksWriter lw){
@@ -81,7 +83,8 @@ import ingenias.exception.NotFound;
 
     if (sequence.equals("enable")){
      try {
-       Vector actorlist = (Vector) mes.getContentObject();
+      	 String content=mes.getContent();    	
+    	 Vector actorlist = (Vector) xstream.fromXML(content);
        sb.updateActorList(actorlist);
      } catch (Exception e){
        e.printStackTrace();
@@ -146,7 +149,7 @@ import ingenias.exception.NotFound;
 
 public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] options,
                                StateBehavior sb){
-
+   
    boolean processed = false;
     ACLMessage mes=multipleMessages.firstElement();
   // String sequence= sb.getState();
@@ -161,16 +164,18 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
          
          if (allexist && true){
      	   sb.removeState("waiting for AddingSourceRequestIU");           
-    	   try {
+    	   //try {
                     Vector toAdd=new Vector();
 					for (ACLMessage singleMessage:multipleMessages){
-						toAdd.addAll((Vector)singleMessage.getContentObject());						
+						 String content=singleMessage.getContent();    	 				
+    	 				Vector realContent = (Vector) xstream.fromXML(content);
+						toAdd.addAll(realContent);						
 					}
 					sb.updateMentalState(toAdd);	
-		   } catch (UnreadableException e) {
+		   /*} catch (UnreadableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
- 		   }
+ 		   }*/
 
 	              
 		   futureStates.add("AddingSourceResponseIU");

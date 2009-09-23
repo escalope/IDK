@@ -35,6 +35,9 @@ public class Tasks {
             fuente = fuente.substring(1);
             try {
                 DFAgentDescription[] ad = yp.getAgents("SupervisorRole");
+                if (ad.length<2){
+                	System.err.println("fallo!!!");
+                }
                 DFAgentDescription sup2 = ad[1];
                 String supId = sup2.getName().getLocalName();
 

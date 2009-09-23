@@ -143,7 +143,7 @@ extends JPanel {
 		this.add(center, java.awt.BorderLayout.CENTER);
 		this.add(new JLabel(role+"-"+agent), java.awt.BorderLayout.NORTH);
 		this.createNext(center, first);
-		MainInteractionManager.addAgentInteraction(this, cid,role, protocol);
+		MainInteractionManager.addAgentInteraction(this,agent, cid,role, protocol);
 	}
 
 	private void createNext(javax.swing.JPanel parentPanel, Vector init) {

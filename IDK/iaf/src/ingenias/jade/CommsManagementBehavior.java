@@ -93,7 +93,7 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 			JADEAgent ja = (JADEAgent) myAgent;
 			int size=myAgent.getCurQueueSize();
 			for (int k = 0; k < size; k++) {
-				ACLMessage acl = myAgent.receive();
+				final ACLMessage acl = myAgent.receive();
 				if (acl!=null){// the message can have been processed by other behavior
 					String requestedRole=acl.getUserDefinedParameter("requestedRole");
 					String aclSummary=aclSummary(acl);

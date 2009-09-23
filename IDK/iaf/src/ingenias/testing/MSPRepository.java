@@ -53,7 +53,7 @@ public class MSPRepository {
 	}
 
 	public synchronized MentalStateProcessor waitFor(String agentID) throws ingenias.exception.TimeOut{
-			int timeOut=5;
+			int timeOut=10;
 			while(!msps.containsKey(agentID) && timeOut>0)
 				try {
 				wait(1000);

@@ -35,10 +35,17 @@ import jade.core.Agent;
 import jade.core.behaviours.ParallelBehaviour;
 import jade.core.behaviours.ReceiverBehaviour;
 import jade.core.behaviours.SequentialBehaviour;
+import jade.core.behaviours.ReceiverBehaviour.NotYetReady;
+import jade.core.behaviours.ReceiverBehaviour.TimedOut;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
+import jade.util.leap.Serializable;
 
+import java.lang.reflect.Field;
 import java.util.Vector;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 /**
  * This is an utility class designed to create the different communicative acts an agent may
@@ -117,6 +124,12 @@ public class CommActCreator {
 			java.io.Serializable content) {
 		Vector acts = new Vector();
 
+		Field [] fields=content.getClass().getFields();				
+		String fieldNotSerializable="";		
+		Vector<Class> verifiedClasses=new Vector<Class>();
+		verifiedClasses.add(content.getClass());
+		verifyFields(content.getClass(), content, verifiedClasses);
+
 		//    new Exception().printStackTrace();
 		//  System.err.println(ag.getAID().getName()+" received "+seqcode);
 		String receivers="";
@@ -133,14 +146,16 @@ public class CommActCreator {
 		for (int k = 0; k < receiver.length; k++) {
 			final ACLMessage message2BSend = new ACLMessage(ACLMessage.INFORM);
 			message2BSend.addReceiver(receiver[k]);
-			try {
+		//	try {
 				message2BSend.addUserDefinedParameter("sequence", seqcode);              
 				message2BSend.addUserDefinedParameter("requestedRole", roles.elementAt(k));
 				/*if (roles.elementAt(k).equalsIgnoreCase("SupervisorInterestedInReputationRole")){
                  throw new RuntimeException("Enviando reputation role!!!");	
                 }*/
 				message2BSend.setProtocol(protocol);
-				message2BSend.setConversationId(CID);          
+				message2BSend.setConversationId(CID);
+				
+				
 				System.out.println(ag.getLocalName()+"::::: Enviando "+CID+" seq:"+seqcode+" y role: "+roles.elementAt(k)+" protocolo "+protocol+" a "+receiver[k].getLocalName());
 				if (content instanceof Vector){
 					for (Object obj:(Vector)content){                        
@@ -154,9 +169,13 @@ public class CommActCreator {
 						}
 					}
 				}
+				String messageXML="";
+				XStream xs=new XStream(new DomDriver());
+				messageXML=xs.toXML(content);
 				final String deliveredRole=roles.elementAt(k);
 				//  System.err.println(ag.getLocalName()+":::::"+CID+" enviando "+seqcode+" esperando "+);
-				message2BSend.setContentObject(content);
+				
+				message2BSend.setContent(messageXML);
 				jade.core.behaviours.SenderBehaviour send =
 					new jade.core.behaviours.SenderBehaviour(ag, message2BSend);           
 
@@ -174,15 +193,56 @@ public class CommActCreator {
 				seq.addSubBehaviour(send);
 				seq.addSubBehaviour(after);
 				pbehabior.addSubBehaviour(seq);
-			} catch (java.io.IOException ioe) {
+			/*} catch (java.io.IOException ioe) {
 				ioe.printStackTrace();
-			}
+			}*/
 		}
 		acts.add(pbehabior);
 		ag.addBehaviour(pbehabior);
 
 		//ingenias.jade.graphics.MainInteractionManager.logInteraction("Sending message to "+receivers+" with content "+content,ag.getName(),CID);
 		return acts;
+	}
+
+	private static boolean verifyFields(
+			Class<? extends java.io.Serializable> myClass,
+			java.lang.Object content, Vector<Class> verifiedClasses) {
+		Field[] fields = myClass.getFields();
+		boolean serializableFields=true;
+
+		for (Field field:fields){
+			try {
+				if (field.get(content)==null){
+					throw new RuntimeException("Field "+field.getName()+" of class instance "+content.getClass().getName()+" does contain a null value. It cannot be serialized properly");
+				}
+				
+				Class fieldClass=field.getDeclaringClass();
+				verifiedClasses.add(fieldClass);
+				boolean serializableExists = isSerializable(fieldClass);
+				if (!serializableExists) 
+					throw new RuntimeException("Field "+field.getName()+" does not implement the serializable interface. It cannot be transmitted");			
+				if (!verifiedClasses.contains(fieldClass))
+					verifyFields(fieldClass,field.get(content), verifiedClasses);
+				serializableFields=serializableFields && serializableExists;		
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return serializableFields;
+
+	}
+
+	private static boolean isSerializable(Class fieldClass) {
+		Class<?>[] interfaces = fieldClass.getInterfaces();
+		boolean serializableExists=false;
+		for (Class currentInterface:interfaces){
+			serializableExists=serializableExists || currentInterface.equals(Serializable.class);
+		}
+		return serializableExists;
 	}
 
 	/**
@@ -264,6 +324,7 @@ public class CommActCreator {
 			ReceiverBehaviour(ag, timeout, mt);
 			rec.setBehaviourName("Reception act "+k);
 			parBehavior.addSubBehaviour(rec);
+		
 			receiverBehaviors.add(rec);         
 		}
 

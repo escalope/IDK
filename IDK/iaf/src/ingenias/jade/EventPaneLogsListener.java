@@ -1,10 +1,12 @@
 package ingenias.jade;
 
+import ingenias.editor.entities.Conversation;
 import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.jade.comm.ActiveConversation;
 import ingenias.jade.comm.StateBehavior;
 import ingenias.jade.components.Task;
+import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import java.util.Vector;
@@ -74,6 +76,7 @@ public class EventPaneLogsListener implements AgentEventListener {
 			Task t, MentalEntity newEntity, RuntimeConversation conversation){
 		logMSP("Produced entity "+newEntity.getId()+":"+newEntity.getType()+" and stored within conversation "+
                         conversation.getPlayedRole()+"-"+conversation.getConversationID(),agentid,t.getID(),t.getType());
+		
 	}
 
 	@Override
@@ -87,7 +90,7 @@ public class EventPaneLogsListener implements AgentEventListener {
 	@Override
 	public void addedNewEntityToMS(String agentid, String agentType,
 			Task t,MentalEntity me) {
-		logMSP("Produced entity "+me.getId()+":"+me.getType(),agentid,t.getID(),t.getType());
+		logMSP("Produced entity "+me.getId()+":"+me.getType(),agentid,t.getID(),t.getType());		
 	}
 
 
@@ -149,11 +152,10 @@ public class EventPaneLogsListener implements AgentEventListener {
 	@Override
 	public void dontKnowHowToProcessReceivedMessage(String agentid,
 			String agentType,ACLMessage acl) {
-        try {
-            logMSP("Cannot process  message submitted by " + acl.getSender().getLocalName() + " with content " + acl.getContentObject().toString().substring(0, Math.min(acl.getContentObject().toString().length(), 100)), agentid);
-        } catch (UnreadableException ex) {
-            Logger.getLogger(EventPaneLogsListener.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+        	String contentToString=acl.getContent();
+            logMSP("Cannot process  message submitted by " + acl.getSender().getLocalName() + " with content " + contentToString.substring(0, Math.min(contentToString.length(), 100)), agentid);
+        
 	}
 
 	@Override
@@ -257,23 +259,30 @@ public class EventPaneLogsListener implements AgentEventListener {
 		logMSP("Executing task "+task.getID(),agentid,task.getID(),task.getType());
 		logMSP("Executing task "+task.getID(),agentid);			
 		logMSP("Executing task "+task.getID(),agentid, task.getID(), task.getType());
+		if (task.getConversationContext()!=null){		
+		Conversation conversation=task.getConversationContext();
+		logInteraction("Starting task "+task.getID()+":"+task.getType()+" in the context of this conversation "+conversation.getConversationID()
+				,agentid,conversation.getPlayedRole()+"-"+conversation.getConversationID());
+		}
 	}
 
 	@Override
 	public void taskExecutionFinished(String agentid, String agentType,
 			Task task) {
 		logMSP("Task completed "+task.getID(),agentid,task.getID(),task.getType());
-		
+		if (task.getConversationContext()!=null){		
+			Conversation conversation=task.getConversationContext();
+			logInteraction("Finished task "+task.getID()+":"+task.getType()+" in the context of this conversation "+conversation.getConversationID()
+					,agentid,conversation.getPlayedRole()+"-"+conversation.getConversationID());
+			}
 	}
 
 	@Override
 	public void processingReceivedMessage(String agentid, String agentType,
 			jade.lang.acl.ACLMessage acl) {
-        try {
-            logInteraction("Processing message with content " + acl.getContentObject().toString().substring(0, Math.min(acl.getContentObject().toString().length(), 100)), agentid, acl.getConversationId());
-        } catch (UnreadableException ex) {
-            Logger.getLogger(EventPaneLogsListener.class.getName()).log(Level.SEVERE, null, ex);
-        }
+     
+            logInteraction("Processing message with content " + acl.getContent().toString().substring(0, Math.min(acl.getContent().toString().length(), 100)), agentid, acl.getConversationId());
+     
 	}
 
 	@Override

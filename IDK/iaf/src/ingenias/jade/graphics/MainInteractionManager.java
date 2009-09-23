@@ -125,7 +125,7 @@ public class MainInteractionManager
         return mim;
     }
 
-    public static void addAgentInteraction(final JPanel jp, final String cid, final String role, final String protocol) {
+    public static void addAgentInteraction(final JPanel jp, final String agent, final String cid, final String role, final String protocol) {
         if (IAFProperties.getGraphicsOn()) {
             Runnable run = new Runnable() {
 
@@ -177,7 +177,26 @@ public class MainInteractionManager
                         spanel.add(wpanel, BorderLayout.WEST);
                         getInstance().interactions.add(spanel);
                     }
-                    panel.add(jp);
+                    JPanel ncontainerPanel=new JPanel(new BorderLayout());
+                    ncontainerPanel.add(jp,BorderLayout.CENTER);
+                    JButton logInt = new JButton("LocalLog");
+                    logInt.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                            JFrame logwindow = new JFrame();
+
+                            JTextArea contentWidget = new JTextArea();
+                            contentWidget.setWrapStyleWord(true);
+                            contentWidget.setLineWrap(true);
+                            JScrollPane jscr = new JScrollPane(contentWidget);
+                            contentWidget.setText(getInstance().mainLogs.findLogs(role+"-"+cid ));
+                            contentWidget.setEditable(false);
+                            logwindow.getContentPane().add(jscr);
+                            logwindow.pack();
+                            logwindow.setVisible(true);
+                        }
+                    });
+                    ncontainerPanel.add(logInt,BorderLayout.WEST);
+                    panel.add(ncontainerPanel);
                     JFrame jf;
                     getInstance().repaint();
                 }
@@ -608,10 +627,16 @@ public class MainInteractionManager
     public static void goManual() {
         getInstance().automatic = false;
         if (IAFProperties.getGraphicsOn()) {
-            synchronized (getInstance()) {
-                getInstance().runStep.setEnabled(false);
-                getInstance().runWithoutInterruption.setEnabled(true);
-            }
+        	Runnable run=new Runnable(){
+        		public void run(){
+        			//synchronized (getInstance()) {
+                        getInstance().runStep.setEnabled(false);
+                        getInstance().runWithoutInterruption.setEnabled(true);
+                    //}		
+        		}
+        	};
+        	SwingUtilities.invokeLater(run);
+            
         }
        // getInstance().runStepActionPerformed(null);
     }

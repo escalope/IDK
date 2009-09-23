@@ -183,9 +183,16 @@ public class AgentEventChartsHandler implements AgentEventListener {
 
 	@Override
 	public void removeEntityFromMS(String agentid, String agentType,
-			Task task, MentalEntity entity) {
+			 MentalEntity entity) {
 		this.charts.addEvent(agentid+":"+agentType+", entity "+entity.getType()+" was removed",new Date().getTime(),1);
 		this.charts.addEvent(agentid+":"+agentType+",  an entity was removed",new Date().getTime(),1);		
+	}
+	
+	@Override
+	public void removeEntityFromMSByTask(String agentid, String agentType,
+			Task task, MentalEntity entity) {
+		this.charts.addEvent(agentid+":"+agentType+", entity "+entity.getType()+" was removed by task "+task.getType(),new Date().getTime(),1);
+		this.charts.addEvent(agentid+":"+agentType+",  an entity was removed by task "+task.getType(),new Date().getTime(),1);		
 	}
 
 	@Override

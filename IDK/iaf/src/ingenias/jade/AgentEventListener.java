@@ -57,7 +57,10 @@ public interface AgentEventListener {
 			String interactionType, String collaboratorNotFound);
 	
 	public void removeEntityFromMS(String agentid, String agentType,
+			 MentalEntity entity);
+	public void removeEntityFromMSByTask(String agentid, String agentType,
 			Task task, MentalEntity entity);
+	
 	public void addedNewEntityToConversation(String agentid, String agentType,Task task, MentalEntity entity, RuntimeConversation conversation);
 	public void removeEntityFromConversation(String agentid, String agentType,
 			Task task,MentalEntity entity, RuntimeConversation conversation);

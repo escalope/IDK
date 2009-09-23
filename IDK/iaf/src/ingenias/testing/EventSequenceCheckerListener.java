@@ -309,14 +309,28 @@ public class EventSequenceCheckerListener implements AgentEventListener {
 				new RuntimeConversation[]{conversation},
 				null));
 	}
+	
+	@Override
+	public void removeEntityFromMSByTask(String agentid, String agentType, Task task,
+			MentalEntity entity) {
+		checker.notify(new Event(
+				agentid,agentType,
+				EventKind.RemoveEntityFromMSByTask,
+				new Task[]{task},new MentalEntity[]{entity},
+				new StateGoal[]{},
+				new RuntimeConversation[]{},
+				null));
+
+	}
+
 
 	@Override
-	public void removeEntityFromMS(String agentid, String agentType, Task task,
+	public void removeEntityFromMS(String agentid, String agentType, 
 			MentalEntity entity) {
 		checker.notify(new Event(
 				agentid,agentType,
 				EventKind.RemoveEntityFromMS,
-				new Task[]{task},new MentalEntity[]{entity},
+				new Task[]{},new MentalEntity[]{entity},
 				new StateGoal[]{},
 				new RuntimeConversation[]{},
 				null));

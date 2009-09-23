@@ -75,7 +75,7 @@ import org.jgraph.graph.GraphModel;
  * <li> the user edits one entity in the GUI
  * <li> the user adds an entity in the GUI
  * <li> the user removes an entity in the GUI
- * </ul>
+ * </ul>StateBehavior
  * On the other hand, if a new entity appears as a result of an internal
  * operation, it is inmediately asserted into this GUI.
  * 
@@ -139,55 +139,55 @@ MentalStateUpdater {
 	private boolean changesAllowed=true;
 	private Thread ownerThread=null;
 
-	private class ConversationTracker extends CyclicBehaviour{
-		private Hashtable<RuntimeConversation, Integer> timeout=new Hashtable<RuntimeConversation, Integer>();
+	//	private class ConversationTracker extends CyclicBehaviour{
+	private Hashtable<RuntimeConversation, Integer> timeout=new Hashtable<RuntimeConversation, Integer>();
 
-		public void action(){
-			Vector<RuntimeConversation> convs = getConversations();
-			for (RuntimeConversation conv:convs){
-				if ((conv.getState().equalsIgnoreCase("finished") 
-						|| conv.getState().equalsIgnoreCase("aborted"))){
-					if (
-							!isConversationBeingUsedByATask(conv) 
-							&& !hasAnOngoingParentConversation(conv)
-							&&!hasAnOngoingChildConversation(conv)
-					){
-						if (timeout.containsKey(conv)){
-							timeout.put(conv, timeout.get(conv)+1);
-						} else {
-							timeout.put(conv, 1);
-						}
+	public void cleanConversations(){
+		Vector<RuntimeConversation> convs = getConversations();
+		for (RuntimeConversation conv:convs){
+			if ((conv.getState().equalsIgnoreCase("finished") 
+					|| conv.getState().equalsIgnoreCase("aborted"))){
+				if (
+						!isConversationBeingUsedByATask(conv) 
+						&& !hasAnOngoingParentConversation(conv)
+						&&!hasAnOngoingChildConversation(conv)
+				){
+					if (timeout.containsKey(conv)){
+						timeout.put(conv, timeout.get(conv)+1);
 					} else {
-						if (timeout.containsKey(conv)){
-							timeout.remove(conv);
-						}
+						timeout.put(conv, 1);
+					}
+				} else {
+					if (timeout.containsKey(conv)){
+						timeout.remove(conv);
 					}
 				}
 			}
-
-			Enumeration<RuntimeConversation> ks = timeout.keys();
-			while (ks.hasMoreElements()){
-				RuntimeConversation conv=ks.nextElement();
-				if (timeout.get(conv)>IAFProperties.getGarbageCollectionInterval() 
-						&& !isConversationBeingUsedByATask(conv) 
-						&& !hasAnOngoingParentConversation(conv)
-						&& !hasAnOngoingChildConversation(conv)
-						&& IAFProperties.getGarbageCollectionEnabled()){
-
-					remove(conv.getId());
-					timeout.remove(conv);
-				}
-			}
-
-			if (amm!=null){
-				amm.validate();
-				amm.repaint();
-			}
-
-			block(1000);
 		}
 
+		Enumeration<RuntimeConversation> ks = timeout.keys();
+		while (ks.hasMoreElements()){
+			RuntimeConversation conv=ks.nextElement();
+			if (timeout.get(conv)>IAFProperties.getGarbageCollectionInterval() 
+					&& !isConversationBeingUsedByATask(conv) 
+					&& !hasAnOngoingParentConversation(conv)
+					&& !hasAnOngoingChildConversation(conv)
+					&& IAFProperties.getGarbageCollectionEnabled()){
+
+				remove(conv.getId());
+				timeout.remove(conv);
+			}
+		}
+
+		if (amm!=null){
+			amm.validate();
+			amm.repaint();
+		}
+
+		//		block(1000);
 	}
+
+	//	}
 
 	/*public synchronized void updateFinishedConversations(){
 			Vector<RuntimeConversation> convs = getConversations();			
@@ -302,9 +302,9 @@ MentalStateUpdater {
 		return  conversationsInUse.contains(conv.getId());
 	}
 
-	public ConversationTracker getConvTracker(){
+	/*public ConversationTracker getConvTracker(){
 		return new ConversationTracker();
-	}
+	}*/
 
 	public  MentalStateManager(IDEState ids, String name) {
 		//this.ids = ids;
@@ -449,7 +449,7 @@ MentalStateUpdater {
 	 * @return The entity or null if not found
 	 * @throws ingenias.exception.NotFound
 	 */
-	public synchronized Entity findEntity(String id) throws ingenias.exception.NotFound {
+	public synchronized MentalEntity findEntity(String id) throws ingenias.exception.NotFound {
 		if (state.containsKey(id))
 			return state.get(id);
 		else
@@ -468,10 +468,11 @@ MentalStateUpdater {
 	public synchronized void remove(String id) {
 		try {
 			checkLockChanges();
-			final Entity ent = this.findEntity(id);
+			final MentalEntity ent = this.findEntity(id);
 			//System.err.println(this.agentName+":Borrado de "+ent);
 			state.remove(id);
-			DebugUtils.logEvent("MERemovedFromMentalState", new String[]{this.agentName,id});
+			EventManager.getInstance().removeEntityFromMS(agentName, "",  ent);
+			//	DebugUtils.logEvent("MERemovedFromMentalState", new String[]{this.agentName,id});
 			this.setModified();
 			//System.err.println("Current MS "+this.agentName+" "+this.state);
 			if (amm!=null){
@@ -625,7 +626,7 @@ MentalStateUpdater {
 
 	}
 
-        public synchronized void addActionsToProcessNewEntitiesInConversations(Runnable action){
+	public synchronized void addActionsToProcessNewEntitiesInConversations(Runnable action){
 
 		executeLaterActions.add(action);
 	}
@@ -639,27 +640,29 @@ MentalStateUpdater {
 
 	public synchronized void addMentalEntityToConversation(final RuntimeConversation conv,final Vector<MentalEntity> mes)
 	throws ingenias.exception.InvalidEntity{
-		
+		System.err.println(" added from conversation.................. "+agentName);
 		Runnable action=new Runnable(){
 			public void run(){
-                            checkLockChanges();
-
+				System.err.println(" inicio.................. "+agentName);
+				checkLockChanges();
+				System.err.println(" .................. "+agentName);
 				Vector<MentalEntity> localmes = (Vector<MentalEntity>) mes.clone();
 				for (MentalEntity me:mes){
 					conv.addCurrentContent(me);
-			//		DebugUtils.logEvent("MEAddedToConversation", new String[]{agentName,me.getType(),me.getId(),conv.getInteraction().getId(),conv.getConversationID()});
+					//		DebugUtils.logEvent("MEAddedToConversation", new String[]{agentName,me.getType(),me.getId(),conv.getInteraction().getId(),conv.getConversationID()});
+					
 				}
 
 				resizeAllMentalEntities();
-                                setModified();
-                                graphModificationQueue.add(true);// This instruction forces to replan, since
-                                // the MSP is listening to changes in the MSM
+				setModified();
+				graphModificationQueue.add(true);// This instruction forces to replan, since
+				// the MSP is listening to changes in the MSM
 
 			}
 		};
-                addActionsToProcessNewEntitiesInConversations(action);
-		
-				
+		addActionsToProcessNewEntitiesInConversations(action);
+		setModified(); // force a replan so that the MSP does execute these updates
+
 	}
 
 	public synchronized void addMentalEntity(Vector<MentalEntity> mes)
@@ -749,6 +752,7 @@ MentalStateUpdater {
 	 */
 	public synchronized void setModified() {
 		modified = true;
+	//	System.err.println("requesting replan "+agentName);
 		graphModificationQueue.add(true);
 
 
@@ -943,17 +947,17 @@ MentalStateUpdater {
 	}
 
 	public synchronized void checkLockChanges(){
-        StackTraceElement[] traces = new Exception().getStackTrace();
-                    for (StackTraceElement trace:traces){
-            try {
-                if (StateBehavior.class.isAssignableFrom(Class.forName(trace.getClassName()))) {
-                    new RuntimeException("Object wait in a JADE behavior!!!");
-                }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(MentalStateManager.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                    }
-                    while (!changesAllowed && !Thread.currentThread().equals(ownerThread))
+		StackTraceElement[] traces = new Exception().getStackTrace();
+		for (StackTraceElement trace:traces){
+			try {
+				if (StateBehavior.class.isAssignableFrom(Class.forName(trace.getClassName()))) {
+					new RuntimeException("Object wait in a JADE behavior!!!");
+				}
+			} catch (ClassNotFoundException ex) {
+				Logger.getLogger(MentalStateManager.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+		while (!changesAllowed && !Thread.currentThread().equals(ownerThread))
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -963,9 +967,9 @@ MentalStateUpdater {
 
 	}
 
-    public boolean isLocked(){
-        return !changesAllowed;
-    }
+	public boolean isLocked(){
+		return !changesAllowed;
+	}
 
 	public synchronized void lockChanges() {
 		changesAllowed=false;
@@ -974,7 +978,7 @@ MentalStateUpdater {
 	}
 
 	public String getAgentName() {
-			return this.agentName;
+		return this.agentName;
 	}
 
 

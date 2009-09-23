@@ -411,7 +411,7 @@ abstract public class JADEAgent extends Agent{
 				this.msm=new MentalStateManager(ids,amm, this.getAID().getLocalName());
 			else
 				this.msm=new MentalStateManager(ids, this.getAID().getLocalName());
-			this.addBehaviour(this.msm.getConvTracker());
+		//	this.addBehaviour(this.msm.getConvTracker());
 			if (IAFProperties.getGraphicsOn())
 				this.graphics.setMentalStatePanel(this.getLocalName(),amm);
 			if (IAFProperties.getGraphicsOn())
@@ -468,18 +468,7 @@ abstract public class JADEAgent extends Agent{
 				} 
 			} while (queue!=null);
 
-			/**
-			 * A cyclic behavior so that, constantly, the agent is executing the actions required by running
-			 * protocols. This makes possible that, once started, the protocol evolves and finishes. 
-			 */
-			/*this.addBehaviour(
-				new jade.core.behaviours.CyclicBehaviour(this) {
-					public void action() {
-						for (StateBehavior sb:getCM().getActiveMachines().values()){
-							sb.action();
-						}
-					}
-				});*/
+
 
 			/**
 			 * This behavior takes incoming acl messages and distributes them into two 

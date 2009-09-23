@@ -77,11 +77,18 @@ public class EventManager implements AgentEventListener{
 			listener.removeEntityFromConversation(agentid, agentType, task, entity, conversation);
 		}
 	}
+	
+	@Override
+	public void removeEntityFromMSByTask(String agentid, String agentType,Task task, MentalEntity entity ){
+		for (AgentEventListener listener:listeners){
+			listener.removeEntityFromMSByTask(agentid, agentType, task, entity);
+		}
+	}
 
 	@Override
-	public void removeEntityFromMS(String agentid, String agentType,Task task, MentalEntity entity ){
+	public void removeEntityFromMS(String agentid, String agentType, MentalEntity entity ){
 		for (AgentEventListener listener:listeners){
-			listener.removeEntityFromMS(agentid, agentType, task, entity);
+			listener.removeEntityFromMS(agentid, agentType, entity);
 		}
 	}
 

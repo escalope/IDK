@@ -276,12 +276,18 @@ public class EventFileLogger implements AgentEventListener{
 				task.getID(),task.getType());
 
 	}
-
+	
 	@Override
-	public void removeEntityFromMS(String agentid, String agentType,
+	public void removeEntityFromMSByTask(String agentid, String agentType,
 			Task task, MentalEntity entity){
 		logMSP("Requested removal of entity "+entity.getId()+":"+entity.getType(),agentid,
 				task.getID(),task.getType());
+	}
+	
+	@Override
+	public void removeEntityFromMS(String agentid, String agentType,
+			 MentalEntity entity){
+		logMSM("Requested removal of entity "+entity.getId()+":"+entity.getType(),agentid);
 	}
 
 	@Override

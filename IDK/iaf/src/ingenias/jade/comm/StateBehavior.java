@@ -460,7 +460,7 @@ abstract public class StateBehavior
     }
 
     public String getStates() {
-        String result = null;
+        String result = "";
         for (String s : this.state) {
             result = result + s + ";";
         }

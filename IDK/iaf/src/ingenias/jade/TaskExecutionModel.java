@@ -65,7 +65,7 @@ public class TaskExecutionModel {
 
                 removeMark();
 
-                msm.setModified();
+               
             }
         //	wakeup();
         }
@@ -149,11 +149,19 @@ public class TaskExecutionModel {
             ja.getMSM().remove(t.getConversationContext().getId());
             }
             }*/
+            
+            waitForCommsInitialization(ja,newInteractions); // Comms will be initialized when 
+            // a state behavior is created for handling the comms. This happens in two steps.
+            // First, the state machine is created and added to the comms manager queue.
+            // Second, the comms manager initializes all pending comms during the next comms handling
+            // cycle. This way, comms are handled the same way no matter if you are initiator or a collaborator
+            
             ja.getMSM().resizeAllMentalEntities();
 
             ctask = t;
             msm = cmsm;
             markMentalStateAsChanged();
+                        
             EventManager.getInstance().taskExecutionFinished(ja.getLocalName(),
                     ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),
                     t);
@@ -165,7 +173,20 @@ public class TaskExecutionModel {
 
     }
 
-    private synchronized void markMentalStateAsChanged() {
+    private void waitForCommsInitialization(JADEAgent ja, Vector<RuntimeConversation> newInteractions) {
+    	while (!isInteractionsProcessed() || ja.getCM().getPendingStateBehaviors()>0){
+    		try {
+				Thread.currentThread().sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	
+		
+	}
+
+	private synchronized void markMentalStateAsChanged() {
         markConversationAsUsed.add(true);
     }
 

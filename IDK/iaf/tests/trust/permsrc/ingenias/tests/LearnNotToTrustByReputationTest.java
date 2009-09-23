@@ -82,7 +82,7 @@ public class LearnNotToTrustByReputationTest {
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(4000);
+        TestUtils.doNothing(2000);
 
         TestUtils.checkExistenceMEWithinMS(msmB, "TrustInformation", "SourcesSupervisor_0SourcesSupervisorDU", 1);
 
@@ -91,19 +91,19 @@ public class LearnNotToTrustByReputationTest {
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(4000);
+        TestUtils.doNothing(2000);
 
         evento = new NewCycleEvent();
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(4000);
+        TestUtils.doNothing(2000);
 
         evento = new NewCycleEvent();
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(4000);
+        TestUtils.doNothing(2000);
         
         TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();
@@ -118,7 +118,7 @@ public class LearnNotToTrustByReputationTest {
         evento.setdata("_urn:fuente:1");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(4000);
+        TestUtils.doNothing(2000);
 
         TestUtils.checkExistenceMEWithinMS(msmB1, "TrustInformation", "SourcesSupervisor_1SourcesSupervisorDU", 1);
 
@@ -134,7 +134,7 @@ public class LearnNotToTrustByReputationTest {
         assertNotNull(data1);
 
         assertNotNull(data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU"));
-        assertTrue(data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() == 2);
+        assertTrue("Agent SourcesSupervisor_1SourcesSupervisorDU should have received 2 proposals and has received: "+data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size(),  data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() == 2);
         assertTrue(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
         assertTrue(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0);
 

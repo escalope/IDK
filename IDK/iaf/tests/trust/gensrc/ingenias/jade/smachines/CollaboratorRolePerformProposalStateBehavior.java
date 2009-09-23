@@ -73,19 +73,19 @@ private MentalStateReader msr=null;
 			    
 			    
 			      // Receiving a message    
-			      smf.add("DeniedProposalIU", "waiting for DeniedProposalIU");
-			      
-			      // Next states after receiving "DeniedProposalIU"
-			      
-			       smf.add("waiting for DeniedProposalIU","endDeniedProposalIU");
-			      
-			    
-			      // Receiving a message    
 			      smf.add("AcceptedProposalIU", "waiting for AcceptedProposalIU");
 			      
 			      // Next states after receiving "AcceptedProposalIU"
 			      
 			       smf.add("waiting for AcceptedProposalIU","endAcceptedProposalIU");
+			      
+			    
+			      // Receiving a message    
+			      smf.add("DeniedProposalIU", "waiting for DeniedProposalIU");
+			      
+			      // Next states after receiving "DeniedProposalIU"
+			      
+			       smf.add("waiting for DeniedProposalIU","endDeniedProposalIU");
 			      
 			    
 			    
@@ -155,40 +155,6 @@ private MentalStateReader msr=null;
   
   
   // Receives a message and a synchronization command
-  if (this.isState("DeniedProposalIU") ) {  // State changed by other agent and upted
-    //in the parent class
-         
-      Vector options=new Vector();
-      
-      options.add("endDeniedProposalIU");
-      
-      String[] optionsA=new String[options.size()];
-      options.toArray(optionsA);
-      boolean allexist=true;
-      
-      int cardinality=1;
-      if ("1".equals("n")){
-         try{
-          Vector<AID> receivers=this.getActor("SupervisorRole");    
-          cardinality=receivers.size();          
-          } catch (NoAgentsFound ex) {
-                    ex.printStackTrace();
-                }   
-       
-      }
-      
-      if (allexist && true){     
-		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
-                        this.getConversationID(),"DeniedProposalIU",
-                   "PerformProposal",this.getPlayedRole(),
-                   optionsA,this,cardinality,0));
-      }	 
-      this.removeState("DeniedProposalIU");
-      this.addState("waiting for DeniedProposalIU");
-      this.notifyStateTransitionExecuted("DeniedProposalIU", "waiting for DeniedProposalIU");
-  } 
-  
-  // Receives a message and a synchronization command
   if (this.isState("AcceptedProposalIU") ) {  // State changed by other agent and upted
     //in the parent class
          
@@ -220,6 +186,40 @@ private MentalStateReader msr=null;
       this.removeState("AcceptedProposalIU");
       this.addState("waiting for AcceptedProposalIU");
       this.notifyStateTransitionExecuted("AcceptedProposalIU", "waiting for AcceptedProposalIU");
+  } 
+  
+  // Receives a message and a synchronization command
+  if (this.isState("DeniedProposalIU") ) {  // State changed by other agent and upted
+    //in the parent class
+         
+      Vector options=new Vector();
+      
+      options.add("endDeniedProposalIU");
+      
+      String[] optionsA=new String[options.size()];
+      options.toArray(optionsA);
+      boolean allexist=true;
+      
+      int cardinality=1;
+      if ("1".equals("n")){
+         try{
+          Vector<AID> receivers=this.getActor("SupervisorRole");    
+          cardinality=receivers.size();          
+          } catch (NoAgentsFound ex) {
+                    ex.printStackTrace();
+                }   
+       
+      }
+      
+      if (allexist && true){     
+		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
+                        this.getConversationID(),"DeniedProposalIU",
+                   "PerformProposal",this.getPlayedRole(),
+                   optionsA,this,cardinality,0));
+      }	 
+      this.removeState("DeniedProposalIU");
+      this.addState("waiting for DeniedProposalIU");
+      this.notifyStateTransitionExecuted("DeniedProposalIU", "waiting for DeniedProposalIU");
   } 
   
   
@@ -276,14 +276,14 @@ private MentalStateReader msr=null;
 
   
   // Finishes this state machine
-  if (this.isState("endDeniedProposalIU")) {
+  if (this.isState("endAcceptedProposalIU")) {
     this.setFinished(); // End of transitions
     this.notifyProtocolFinished();
     this.getDCC().removeDefaultLocks();
   }
   
   // Finishes this state machine
-  if (this.isState("endAcceptedProposalIU")) {
+  if (this.isState("endDeniedProposalIU")) {
     this.setFinished(); // End of transitions
     this.notifyProtocolFinished();
     this.getDCC().removeDefaultLocks();

@@ -171,31 +171,6 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
   
    
    
-    if (sb.isState("waiting for DeniedProposalIU")&& options.length>0 && mes!=null
-    && mes.getUserDefinedParameter("sequence")!=null &&
-    		mes.getUserDefinedParameter("sequence").equals("DeniedProposalIU")){
-    	 boolean allexist=true;
-         
-         if (allexist && true){
-     	   sb.removeState("waiting for DeniedProposalIU");           
-    	   try {
-                    Vector toAdd=new Vector();
-					for (ACLMessage singleMessage:multipleMessages){
-						toAdd.addAll((Vector)singleMessage.getContentObject());						
-					}
-					sb.updateMentalState(toAdd);	
-		   } catch (UnreadableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
- 		   }
-
-	              
-		   futureStates.add("endDeniedProposalIU");
-          
-          processed = true;
-      	 }      	 
-    } 
-   
     if (sb.isState("waiting for AcceptedProposalIU")&& options.length>0 && mes!=null
     && mes.getUserDefinedParameter("sequence")!=null &&
     		mes.getUserDefinedParameter("sequence").equals("AcceptedProposalIU")){
@@ -216,6 +191,31 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
 
 	              
 		   futureStates.add("endAcceptedProposalIU");
+          
+          processed = true;
+      	 }      	 
+    } 
+   
+    if (sb.isState("waiting for DeniedProposalIU")&& options.length>0 && mes!=null
+    && mes.getUserDefinedParameter("sequence")!=null &&
+    		mes.getUserDefinedParameter("sequence").equals("DeniedProposalIU")){
+    	 boolean allexist=true;
+         
+         if (allexist && true){
+     	   sb.removeState("waiting for DeniedProposalIU");           
+    	   try {
+                    Vector toAdd=new Vector();
+					for (ACLMessage singleMessage:multipleMessages){
+						toAdd.addAll((Vector)singleMessage.getContentObject());						
+					}
+					sb.updateMentalState(toAdd);	
+		   } catch (UnreadableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+ 		   }
+
+	              
+		   futureStates.add("endDeniedProposalIU");
           
           processed = true;
       	 }      	 

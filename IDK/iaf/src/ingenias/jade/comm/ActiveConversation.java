@@ -48,6 +48,8 @@ public class ActiveConversation {
  
  public ActiveConversation(StateBehavior sb, DefaultCommControl dcc, RuntimeConversation conv) {
 	super();
+	if (sb==null)
+		throw new RuntimeException("The statebehavior supplied is null");
 	this.sb = sb;
 	this.role = conv.getPlayedRole();
 	this.cid = conv.getConversationID();

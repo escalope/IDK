@@ -129,7 +129,8 @@ public @@@v@@@agentid@@@/v@@@Protocol(){};
                    }
 		@@@/repeat@@@
 
-         return null;
+         throw new RuntimeException("Agent "+agentName+" does not know any interaction protocol of type "+conv.getInteraction().getId()+" where the " +
+		   		" agent knows how to play the protocol "+conv.getPlayedRole());
         
         
         

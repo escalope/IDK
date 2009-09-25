@@ -817,7 +817,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 
 		Repeat atask = new Repeat("agentTasks");
-		r.add(new Var("roleconvtask",role.getID()));
+		r.add(new Var("roleconvtask",Utils.replaceBadChars(role.getID())));
 		insertAscedantsOfRoleWithAscendantsRolesRepeat(role, atask);
 		r.add(new Var("directtask","false"));
 

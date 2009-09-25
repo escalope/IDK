@@ -91,7 +91,7 @@ public class MentalStateProcessor implements LocksListener {
 				while (repeat) {
 					//System.err.println("1replanning "+doReplan.size());
 					msm.processNewEntitiesInConversations();
-					repeat = isReplanRequestQueueEmpty();
+					repeat = false;//isReplanRequestQueueEmpty();
 					try {
 						Thread.currentThread().sleep(100);
 					} catch (InterruptedException e) {
@@ -99,7 +99,7 @@ public class MentalStateProcessor implements LocksListener {
 				}
 				//System.err.println("phase2 "+ja.getName());
 				//System.err.println("1replanning "+doReplan.size());
-				removeFirstReplanRequest();
+			//	removeFirstReplanRequest();
 				//System.err.println("phase3 "+ja.getName());
 				
 				letAllJadeBehaviorsReevaluate();

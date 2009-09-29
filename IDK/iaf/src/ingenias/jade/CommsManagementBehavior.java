@@ -123,12 +123,13 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 							EventManager.getInstance().dontKnowHowToProcessReceivedMessage(ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),acl);
 							if (acl.getSender().getLocalName().equalsIgnoreCase("df")||
 									acl.getSender().getLocalName().equalsIgnoreCase("ams")||
-									acl.getSender().getLocalName().equalsIgnoreCase("rma"))
+									acl.getSender().getLocalName().equalsIgnoreCase("rma")){
 								ja.putBack(acl);// Some messages are to be processed by internal
 							// components, like the DF service. Search consults to the DF requires
 							// admiting this kind of messages.
-							else
-								System.err.println("Rechazado "+acl);
+							//	System.err.println("Putting back "+acl);
+							} else
+								System.err.println("Rejected "+acl);
 						}
 					}
 				}

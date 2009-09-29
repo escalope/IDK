@@ -1514,6 +1514,8 @@ public class SourcesSupervisorJADEAgent
 			  try {
 			  getCM().launchProtocolAsInitiator("AlphaQualityInspectionRequest",getAM().getYellowPages());
               } catch (NoAgentsFound naf){
+              } catch (WrongInteraction wi){
+              	wi.printStackTrace();
               }
              } else {
               if (getGraphics()!=null)
@@ -1542,6 +1544,8 @@ public class SourcesSupervisorJADEAgent
 			  try {
 			  getCM().launchProtocolAsInitiator("RequestToAddSource",getAM().getYellowPages());
               } catch (NoAgentsFound naf){
+              } catch (WrongInteraction wi){
+              	wi.printStackTrace();
               }
              } else {
               if (getGraphics()!=null)
@@ -1570,6 +1574,8 @@ public class SourcesSupervisorJADEAgent
 			  try {
 			  getCM().launchProtocolAsInitiator("QualityInspectionRequest",getAM().getYellowPages());
               } catch (NoAgentsFound naf){
+              } catch (WrongInteraction wi){
+              	wi.printStackTrace();
               }
              } else {
               if (getGraphics()!=null)
@@ -1598,6 +1604,8 @@ public class SourcesSupervisorJADEAgent
 			  try {
 			  getCM().launchProtocolAsInitiator("ReputationQuery",getAM().getYellowPages());
               } catch (NoAgentsFound naf){
+              } catch (WrongInteraction wi){
+              	wi.printStackTrace();
               }
              } else {
               if (getGraphics()!=null)

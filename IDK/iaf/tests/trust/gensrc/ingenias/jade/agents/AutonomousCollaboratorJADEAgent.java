@@ -720,6 +720,8 @@ public class AutonomousCollaboratorJADEAgent
 			  try {
 			  getCM().launchProtocolAsInitiator("PerformProposal",getAM().getYellowPages());
               } catch (NoAgentsFound naf){
+              } catch (WrongInteraction wi){
+              	wi.printStackTrace();
               }
              } else {
               if (getGraphics()!=null)

@@ -281,7 +281,7 @@ public class EventStore extends ApplicationFrame implements EventListener {
 				for (int k=0;k<10;k++){
 					demo.abortedTask("ag1", "agT", "tid1","TID", null);
 					try {
-						Thread.currentThread().sleep(2000);
+						Thread.currentThread().sleep((long)(2000*Math.random()));
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -290,7 +290,7 @@ public class EventStore extends ApplicationFrame implements EventListener {
 				for (int k=0;k<10;k++){
 					demo.abortedTask("ag2", "agT", "tid1","TID", null);
 					try {
-						Thread.currentThread().sleep(1000);
+						Thread.currentThread().sleep((long)(1000*Math.random()));
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

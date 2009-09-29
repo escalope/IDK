@@ -32,6 +32,7 @@ import ingenias.jade.IAFProperties;
 import ingenias.jade.JADEAgent;
 import ingenias.jade.MentalStateReader;
 import ingenias.jade.MentalStateUpdater;
+import ingenias.jade.WrongInteraction;
 import ingenias.jade.components.YellowPages;
 import ingenias.jade.exception.NoAgentsFound;
 import ingenias.jade.graphics.MainInteractionManager;
@@ -166,7 +167,7 @@ public class ConversationManagement {
 	 * @throws NoAgentsFound
 	 */
 	public ActiveConversation launchProtocolAsInitiator(String protocol,
-			YellowPages yp) throws NoAgentsFound {
+			YellowPages yp) throws NoAgentsFound, WrongInteraction {
 		String role = this.initiatorRoles.get(protocol);
 		// System.err.println(initiatorRoles);
 		ActiveConversation actconv = this.launchProtocolAsInitiator(protocol,
@@ -196,7 +197,7 @@ public class ConversationManagement {
 	 * @throws NoAgentsFound
 	 */
 	public ActiveConversation launchProtocolAsInitiator(String protocol,
-			AgentExternalDescription[] actors) throws NoAgentsFound {
+			AgentExternalDescription[] actors) throws NoAgentsFound, WrongInteraction {
 		String role = this.initiatorRoles.get(protocol);
 		if (actors==null) throw new RuntimeException("There are null actors. Cannot initialise the protocol");
 		ActiveConversation actconv = this.launchProtocolAsInitiator(protocol,
@@ -230,7 +231,8 @@ public class ConversationManagement {
 	 * @throws NoAgentsFound
 	 */
 	public ActiveConversation launchAsCollaborator(String protocol,
-			String requestedRole, String cid, AgentExternalDescription[] actors) throws NoAgentsFound {
+			String requestedRole, String cid, AgentExternalDescription[] actors) 
+	throws NoAgentsFound, WrongInteraction {
 		
 		ActiveConversation actconv = this.launchProtocolAsCollaborator(
 				protocol, requestedRole, cid, actors, this.agent.getMSM(),
@@ -298,7 +300,7 @@ public class ConversationManagement {
 	protected ActiveConversation launchProtocolAsCollaborator(String protocol,
 			String role, String cid, AgentExternalDescription[] actors,
 			MentalStateReader msr, MentalStateUpdater msu)
-	throws NoAgentsFound {
+	throws NoAgentsFound, WrongInteraction {
 		int tries = 10;
 		ActiveConversation aconv = null;
 		boolean continueInit = false;
@@ -346,7 +348,7 @@ public class ConversationManagement {
 	private ActiveConversation launchProtocol(AgentExternalDescription[] actors,
 			MentalStateReader msr, MentalStateUpdater msu, 
 			int tries, ActiveConversation aconv, boolean continueInit,
-			RuntimeConversation conv) throws NoAgentsFound {
+			RuntimeConversation conv) throws NoAgentsFound, WrongInteraction {
 		
 		ConversationLocksManager clm=new ConversationLocksManager(this.agent.getLocalName(),this.agent.getCl(),conv);
 		clm.addInteractionLocks(conv.getInteraction().getId());
@@ -367,13 +369,12 @@ public class ConversationManagement {
 				if (tries <= 0)
 					throw nf;
 				try {
-					Thread.sleep(1000);
+					Thread.sleep((long)(1000*Math.random()));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 				;
-
-			}
+			} 
 		}
 		
 		return aconv;
@@ -400,7 +401,7 @@ public class ConversationManagement {
 	 */
 	protected ActiveConversation launchProtocolAsInitiator(String protocol,
 			String role, AgentExternalDescription[] actors, MentalStateReader msr,
-			MentalStateUpdater msu) throws NoAgentsFound {
+			MentalStateUpdater msu) throws NoAgentsFound,WrongInteraction {
 		int tries = 10;
 		ActiveConversation aconv = null;
 		boolean continueInit = false;
@@ -620,7 +621,7 @@ public class ConversationManagement {
 	 * @throws NoAgentsFound
 	 */
 	protected ActiveConversation launchProtocolAsInitiator(String protocol,
-			String role, YellowPages yp) throws NoAgentsFound {
+			String role, YellowPages yp) throws NoAgentsFound, WrongInteraction {
 		AgentExternalDescription[] actors = this.ap.getInteractionActors(protocol, yp);
 		if (actors==null) throw new RuntimeException("There are null actors. Cannot initialise the protocol");
 		return this.launchProtocolAsInitiator(protocol, role, actors,

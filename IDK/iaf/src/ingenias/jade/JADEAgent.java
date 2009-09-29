@@ -537,6 +537,8 @@ abstract public class JADEAgent extends Agent{
 			mainBehavior=new CommsManagementBehavior(this,behaviorChangesListener) ;	
 			mainBehavior.setBehaviourName("LifeCycle");
 			this.addBehaviour(mainBehavior);
+			this.getMainBehavior();
+			
 
 
 		} catch (Throwable t){
@@ -544,6 +546,11 @@ abstract public class JADEAgent extends Agent{
 		}
 	}
 
+
+	public CommsManagementBehavior getMainBehavior() {
+		return mainBehavior;
+		
+	}
 
 	public CustomLocks getCl() {
 		return cl;

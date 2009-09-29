@@ -404,6 +404,7 @@ public class TaskQueue {
 	 * 
 	 */
 	synchronized void printQueues() {
+		
 		System.out.println("Manual");
 		System.out.println("-------");
 		for (int k = 0; k < manualQueueSize(); k++) {

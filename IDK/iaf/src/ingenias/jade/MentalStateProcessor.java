@@ -91,77 +91,108 @@ public class MentalStateProcessor implements LocksListener {
 				while (repeat) {
 					//System.err.println("1replanning "+doReplan.size());
 					msm.processNewEntitiesInConversations();
-					repeat = false;//isReplanRequestQueueEmpty();
+					repeat = isReplanRequestQueueEmpty();
 					try {
-						Thread.currentThread().sleep(100);
+						Thread.currentThread().sleep((long)(200*Math.random()));
 					} catch (InterruptedException e) {
 					}
 				}
 				//System.err.println("phase2 "+ja.getName());
 				//System.err.println("1replanning "+doReplan.size());
-			//	removeFirstReplanRequest();
+				//	removeFirstReplanRequest();
 				//System.err.println("phase3 "+ja.getName());
-				
+
 				letAllJadeBehaviorsReevaluate();
 				//System.err.println("phase4 "+ja.getName());
-				
+
 				//System.err.println("replanning "+doReplan.size()+ " "+ja.getLocalName());
 				//if (tem.isInteractionsProcessed()) { // Do nothing until all interactions are processed
-					// this way, convenient locks for each interaction are created prior to the planning
-					// of new tasks. Also, this will permit to abort those scheduled tasks which use as input
-					// lo2cked elements.
-					replan();
+				// this way, convenient locks for each interaction are created prior to the planning
+				// of new tasks. Also, this will permit to abort those scheduled tasks which use as input
+				// lo2cked elements.
+				replan();
+				if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents")){
+	//				queues.printQueues();					
+				}
+				msm.cleanConversations();
+				//System.err.println("phase5 "+ja.getName());
 
-					msm.cleanConversations();
-					//System.err.println("phase5 "+ja.getName());
-					
-					// Do not execute other tasks until the interactions associated
-					// with the current one are processed.
-					//OneShotBehaviour osb = new OneShotBehaviour() {
+				// Do not execute other tasks until the interactions associated
+				// with the current one are processed.
+				//OneShotBehaviour osb = new OneShotBehaviour() {
 
-					//	@Override
-					//	public void action() {
-						MSPState = AgentStates.DECISION_FINISHED;
-							processQueues();
-				//			System.err.println("phase6 "+ja.getName());
-							
-							MSPState = AgentStates.EXECUTION_FINISHED;
-							letAllJadeBehaviorsReevaluate();
-					//	}
-					//};
-					//osb.setBehaviourName("Processing queues for " + ja.getAID().getLocalName());
-					//ja.addBehaviour(osb);
-					//System.err.println("Cycle finished "+ja.getName());		
-//				}
+				//	@Override
+				//	public void action() {
+				MSPState = AgentStates.DECISION_FINISHED;
+				
+			/*	if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+					System.err.println("phase5 "+ja.getName());*/
+
+				processQueues();
+
+				
+/*				if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+							System.err.println("phase6 "+ja.getName());*/
+
+				MSPState = AgentStates.EXECUTION_FINISHED;
+				letAllJadeBehaviorsReevaluate();
+
+	/*			if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+							System.err.println("phase7 "+ja.getName());*/
+				//	}
+				//};
+				//osb.setBehaviourName("Processing queues for " + ja.getAID().getLocalName());
+				//ja.addBehaviour(osb);
+				//System.err.println("Cycle finished "+ja.getName());		
+				//				}
 
 			}
 
 		}
+	};
 
-		private void letAllJadeBehaviorsReevaluate() {
-			Collection<StateBehavior> stateMachines = ja.getCM().getActiveMachines().values();
-			for (StateBehavior sb : stateMachines) {
-				if (!sb.isState("FINISHED")) {
-					//System.err.println("waking up behavior "+sb.getBehaviourName());
-					int k=0;
-					while (!sb.getExecutionState().equals(StateBehavior.STATE_BLOCKED) 
-							&& !sb.getFinished()){
-							/*k++;
+	public void letAllJadeBehaviorsReevaluate() {
+		Collection<StateBehavior> stateMachines = ja.getCM().getActiveMachines().values();
+		for (StateBehavior sb : stateMachines) {
+			if (!sb.isState("FINISHED")) {
+				//System.err.println("waking up behavior "+sb.getBehaviourName());
+				int k=0;
+				while (!sb.getExecutionState().equals(StateBehavior.STATE_BLOCKED) 
+						&& !sb.getFinished()){
+					/*k++;
 							if (k>100)
 								System.err.println("Blocked at behavior "+
 										sb.getBehaviourName()+" in agent "+
 										sb.getAgentName()+ " "+sb.getStates()+" \n"+sb.getExecutionState());*/
-						try {
-							Thread.currentThread().sleep(100);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					try {
+						Thread.currentThread().sleep((long)(200*Math.random()));
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					sb.restart();
-					//System.err.println("behavior "+sb.getBehaviourName()+" resumed");
 				}
+				sb.restart();
+				//System.err.println("behavior "+sb.getBehaviourName()+" resumed");
 			}
+		};
+		wakeUpCommManagerBehavior();
+	}
+
+	public void wakeUpCommManagerBehavior() {
+		if (ja.getMainBehavior()!=null){
+			while (!ja.getMainBehavior().
+					getExecutionState().equals(
+							ja.getMainBehavior().STATE_BLOCKED)){
+				try {
+					Thread.currentThread().sleep((long)(1000*Math.random()));
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+				//	e.printStackTrace();
+				}
+		/*		if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+				System.err.println("esperando ");*/
+			}
+			ja.getMainBehavior().restart();
 		}
 	};
 
@@ -499,6 +530,10 @@ public class MentalStateProcessor implements LocksListener {
 
 		doReplan.add(true);
 
+	}
+
+	public synchronized boolean agentInitialised(){
+		return ja.isAgentInitialised();
 	}
 
 	/**

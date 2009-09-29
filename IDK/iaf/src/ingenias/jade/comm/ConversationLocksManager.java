@@ -47,7 +47,7 @@ public class ConversationLocksManager implements LocksRemover, LocksWriter {
                 while (true){
                 try {
                     while (changeNotificationQueue.isEmpty()) {
-                        Thread.currentThread().sleep(100);
+                        Thread.currentThread().sleep((long)(200*Math.random()));
                     }
                     changeNotificationQueue.remove();
                     notifyChangeLocks();

@@ -122,14 +122,13 @@ MentalStateUpdater {
 			while (true){
 				while (isGraphModificationQueueEmpty()){
 					try {
-						Thread.currentThread().sleep(100);
+						Thread.currentThread().sleep((long)(200*Math.random()));
 					} catch (InterruptedException e) {
 					}
 				}
 				removeFirstFromGraphModificationQueue();
-				for (GraphModelListener gml:changeListeners){
-					gml.graphChanged(null);
-				}
+				notifyGraphModificationListeners();
+				
 			}
 		}
 	};
@@ -228,6 +227,13 @@ MentalStateUpdater {
 		}*/
 
 
+
+	protected synchronized void notifyGraphModificationListeners() {
+		for (GraphModelListener gml:changeListeners){
+			gml.graphChanged(null);
+		}
+		
+	}
 
 	/**
 	 * It creates a new mental state manager. It requires an object IDEState to
@@ -640,12 +646,12 @@ MentalStateUpdater {
 
 	public synchronized void addMentalEntityToConversation(final RuntimeConversation conv,final Vector<MentalEntity> mes)
 	throws ingenias.exception.InvalidEntity{
-		System.err.println(" added from conversation.................. "+agentName);
+		//System.err.println(" added from conversation.................. "+agentName);
 		Runnable action=new Runnable(){
 			public void run(){
-				System.err.println(" inicio.................. "+agentName);
+			//	System.err.println(" inicio.................. "+agentName);
 				checkLockChanges();
-				System.err.println(" .................. "+agentName);
+			//	System.err.println(" .................. "+agentName);
 				Vector<MentalEntity> localmes = (Vector<MentalEntity>) mes.clone();
 				for (MentalEntity me:mes){
 					conv.addCurrentContent(me);

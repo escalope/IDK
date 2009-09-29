@@ -623,6 +623,8 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
 			  try {
 			  getCM().launchProtocolAsInitiator("@@@v@@@interactionid@@@/v@@@",getAM().getYellowPages());
               } catch (NoAgentsFound naf){
+              } catch (WrongInteraction wi){
+              	wi.printStackTrace();
               }
              } else {
               if (getGraphics()!=null)

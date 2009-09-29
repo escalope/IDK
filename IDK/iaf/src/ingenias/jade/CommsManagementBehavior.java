@@ -24,12 +24,12 @@ import jade.lang.acl.UnreadableException;
 
 public class CommsManagementBehavior extends CyclicBehaviour {
 
-	
+
 	int cycledTimes=0;
-	
+
 	JADEAgent ja=null;
-	
-	
+
+
 
 	private StateBehaviorChangesListener behaviorChangesListener;
 
@@ -40,27 +40,30 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 	}
 
 	Date last=new Date();
+        private boolean doSomething=false;
 	public void action() {
 		/*cycledTimes=(cycledTimes+1)%maxCyclesWithoutGarbageCollection;
 		if (cycledTimes==0)
 			System.gc();*/
 		//System.err.println("----------------Execution------------"+myAgent.getCurQueueSize());
-		
-        // If there are finished protocols, then those are removed
+
+		// If there are finished protocols, then those are removed
 		//System.out.println(ja.getAID().getLocalName()+" starting another protocol handling round");
-        ja.getCM().removedFinishedProtocols();
+
+            ja.getCM().removedFinishedProtocols();
 		determineMessagesWhichCanBeProcessed();
 		processNotProcessedMessages();
 		ja.getCM().launchScheduledProtocols();
-		addActiveMachinesAListener();		
-	/*	if (completedLast
+		addActiveMachinesAListener();
+                
+		/*	if (completedLast
 				&& 
 				(ja.getMSP().getScheduledTasks().size()!=0 
 						|| ja.getMSM().modifiedSinceLastLecture())){
 			completedLast=false; // This forces a new planning
 
 		}*/				
-		this.block(100);
+		this.block();
 		//System.out.println(ja.getAID().getLocalName()+" finishing");
 		//System.err.println("----------------End Execution------------"+myAgent.getCurQueueSize());
 	}
@@ -118,9 +121,15 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 							ja.getCM().addPending(acl);
 						else{
 							EventManager.getInstance().dontKnowHowToProcessReceivedMessage(ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),acl);
-							
+							if (acl.getSender().getLocalName().equalsIgnoreCase("df")||
+									acl.getSender().getLocalName().equalsIgnoreCase("ams")||
+									acl.getSender().getLocalName().equalsIgnoreCase("rma"))
+								ja.putBack(acl);// Some messages are to be processed by internal
+							// components, like the DF service. Search consults to the DF requires
+							// admiting this kind of messages.
+							else
+								System.err.println("Rechazado "+acl);
 						}
-
 					}
 				}
 			}	          
@@ -129,11 +138,11 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 			Iterator it=processed.iterator();
 			while (it.hasNext()){
 				ACLMessage nextM=(ACLMessage) it.next();
-           //     System.out.println("posting "+aclSummary(nextM));
+				//     System.out.println("posting "+aclSummary(nextM));
 				ja.postMessage(nextM);// It has to be posted because, that way, all behaviors are waked up
 			}
 
-            //ja.getMSP().wakeup();
+			//ja.getMSP().wakeup();
 		}
 	}
 
@@ -190,12 +199,12 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 						/*if (getMSM().findEntity(requestedRole+"-"+conv.getConversationID())!=null)
 							JOptionPane.showMessageDialog(null, "Ya existia "+requestedRole+"-"+conv.getConversationID());*/
 						try {			
-							System.err.println(ja.getLocalName()+"..."+ja.getMSM().getAllMentalEntities());
-							System.err.println(ja.getLocalName()+"..."+requestedRole+"-"+acl.getConversationId());
+							//System.out.println(ja.getLocalName()+"..."+ja.getMSM().getAllMentalEntities());
+							//System.out.println(ja.getLocalName()+"..."+requestedRole+"-"+acl.getConversationId());
 							ja.getMSM().findEntity(requestedRole+"-"+acl.getConversationId());
-							System.err.println(ja.getMSM().getAllMentalEntities());
+							//	System.out.println(ja.getMSM().getAllMentalEntities());
 							EventManager.getInstance().alreadyHadAConversationCreatedForThatMesssage(ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),acl);
-																	
+
 						}  catch (NotFound e) {			
 							EventManager.getInstance().startingInteractionAsCollaborator(ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),acl);
 							/*Vector<ingenias.jade.AgentExternalDescription> vector=null;
@@ -218,22 +227,27 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 								sd.setOwnership("JADE");
 							 actors[k].addServices(sd);
 							}*/
-							ActiveConversation actconv=ja.getCM().launchAsCollaborator(
-									acl.getProtocol(),
-									requestedRole,
-									acl.getConversationId(),
-									null);
-							actconv.getSb().addListener(behaviorChangesListener);
+							try {
+								ActiveConversation actconv=ja.getCM().launchAsCollaborator(
+										acl.getProtocol(),
+										requestedRole,
+										acl.getConversationId(),
+										null);
+								actconv.getSb().addListener(behaviorChangesListener);
 
-							RuntimeConversation conv=actconv.getConv();
-							/*try {
+								RuntimeConversation conv=actconv.getConv();
+								/*try {
 								System.err.println("convid "+conv.getId());
 								getMSM().addMentalEntity(conv);
 
 							} catch (InvalidEntity e1) {												
 								e1.printStackTrace();
 							}*/
-							ja.getCM().addCID(acl.getConversationId(),requestedRole);   
+								ja.getCM().addCID(acl.getConversationId(),requestedRole);   
+							} catch (WrongInteraction wi){
+								System.err.println("The message cannot be processed "+acl);
+								wi.printStackTrace();
+							}
 						}
 						ja.getCM().removePending(acl);   
 						processed.add(acl);  
@@ -243,7 +257,7 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 						//System.err.println("Initiating "+convid+" "+acl.getConversationId()+" "+requestedRole);
 					} catch (NoAgentsFound nf) {                                                                                                                                                                                                                
 						try {
-							Thread.sleep(100);                                                                                                                                                                                                                 
+							Thread.sleep((long)(200*Math.random()));                                                                                                                                                                                                                 
 						} catch (Exception e) {} ;
 					}
 				}
@@ -255,13 +269,13 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 					EventManager.getInstance().couldNotProcessMessageBecauseAgentDoesNotPlayRequestedRole(
 							ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),
 							acl,requestedRole);
-					
+
 				}
-					
+
 			}
 		}                                                                                                                                                                                                                                               
 		for (int k=0;k<processed.size();k++){
-           //  System.out.println("posting1 "+aclSummary(((ACLMessage)processed.elementAt(k))));
+			//  System.out.println("posting1 "+aclSummary(((ACLMessage)processed.elementAt(k))));
 			myAgent.postMessage(((ACLMessage)processed.elementAt(k)));                                                                                                                                                                                      
 		}
 	}   

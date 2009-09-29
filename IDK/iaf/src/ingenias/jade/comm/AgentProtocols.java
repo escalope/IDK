@@ -27,6 +27,7 @@ import ingenias.editor.entities.RuntimeConversation;
 import ingenias.jade.AgentExternalDescription;
 import ingenias.jade.MentalStateReader;
 import ingenias.jade.MentalStateUpdater;
+import ingenias.jade.WrongInteraction;
 import ingenias.jade.components.YellowPages;
 import ingenias.jade.exception.NoAgentsFound;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -85,7 +86,7 @@ public interface AgentProtocols {
 	public ActiveConversation initialiseProtocols(String agentName,RuntimeConversation conv, 
 			MentalStateReader msr, MentalStateUpdater msu,
 			ingenias.jade.comm.LocksRemover lr,  
-			AgentExternalDescription[] actors) throws NoAgentsFound;
+			AgentExternalDescription[] actors) throws NoAgentsFound,WrongInteraction;
 	 
 	
 }

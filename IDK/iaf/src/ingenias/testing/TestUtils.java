@@ -66,7 +66,7 @@ public class TestUtils {
 	}
 
 	public static void waitForAgentInitialised(MentalStateProcessor msp) {
-		while (msp.getState()==AgentStates.PLANNING_STARTING){
+		while (!msp.agentInitialised()){
 			try {
 				Thread.currentThread().sleep(100);
 			} catch (InterruptedException e) {			

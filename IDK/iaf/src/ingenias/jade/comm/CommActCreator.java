@@ -75,14 +75,14 @@ public class CommActCreator {
 			String protocol,
 			String content) {
 		Vector acts = new Vector();
-		//    System.err.println(ag.getAID().getName()+" received "+seqcode);
+		//System.out.println(ag.getAID().getName()+" received "+seqcode);
 		ACLMessage message2BSend = new ACLMessage(ACLMessage.INFORM);
 
 		for (int k = 0; k < receiver.length; k++) {
 			if (!ag.getAID().equals(receiver[k])) { // To avoid sending messages to itself
 				message2BSend.addReceiver(receiver[k]);
 
-				//      System.err.println("Sending to "+receiver[k]);
+			//	System.out.println("Sending to "+receiver[k]);
 			}
 		}
 
@@ -131,7 +131,7 @@ public class CommActCreator {
 		verifyFields(content.getClass(), content, verifiedClasses);
 
 		//    new Exception().printStackTrace();
-		//  System.err.println(ag.getAID().getName()+" received "+seqcode);
+		//System.out.println(ag.getAID().getName()+" received "+seqcode);
 		String receivers="";
 		for (AID creceiver:receiver){
 			receivers=receivers+creceiver.getName()+",";
@@ -156,7 +156,7 @@ public class CommActCreator {
 				message2BSend.setConversationId(CID);
 				
 				
-				System.out.println(ag.getLocalName()+"::::: Enviando "+CID+" seq:"+seqcode+" y role: "+roles.elementAt(k)+" protocolo "+protocol+" a "+receiver[k].getLocalName());
+				//System.out.println(ag.getLocalName()+"::::: Enviando "+CID+" seq:"+seqcode+" y role: "+roles.elementAt(k)+" protocolo "+protocol+" a "+receiver[k].getLocalName());
 				if (content instanceof Vector){
 					for (Object obj:(Vector)content){                        
 						if (obj instanceof RuntimeFact){
@@ -173,7 +173,7 @@ public class CommActCreator {
 				XStream xs=new XStream(new DomDriver());
 				messageXML=xs.toXML(content);
 				final String deliveredRole=roles.elementAt(k);
-				//  System.err.println(ag.getLocalName()+":::::"+CID+" enviando "+seqcode+" esperando "+);
+				//System.out.println(ag.getLocalName()+":::::"+CID+" enviando "+seqcode+" esperando "+);
 				
 				message2BSend.setContent(messageXML);
 				jade.core.behaviours.SenderBehaviour send =
@@ -182,7 +182,7 @@ public class CommActCreator {
 				jade.core.behaviours.OneShotBehaviour after= new jade.core.behaviours.OneShotBehaviour(ag){
 					@Override
 					public void action() {
-						System.out.println(ag.getLocalName()+"::::: Ya enviado "+CID+" seq:"+seqcode+" y role: "+deliveredRole+" protocolo "+protocol+" a ");
+			//			System.out.println(ag.getLocalName()+"::::: Ya enviado "+CID+" seq:"+seqcode+" y role: "+deliveredRole+" protocolo "+protocol+" a ");
 						EventManager.getInstance().messageDelivered(ag.getLocalName(),ag.getClass().getName().substring(0,ag.getClass().getName().indexOf("JADE")),message2BSend);
 					}
 				};
@@ -282,7 +282,7 @@ public class CommActCreator {
 
 		Vector acts = new Vector();
 
-		System.out.println(ag.getLocalName()+" esperando "+_seqcode+" y role "+roleToPlay+" protocolo "+protocol);
+//		System.out.println(ag.getLocalName()+" esperando "+_seqcode+" y role "+roleToPlay+" protocolo "+protocol);
 
 		// Receive a message to start interaction
 		// First message contains the actor list

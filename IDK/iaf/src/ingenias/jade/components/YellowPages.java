@@ -70,7 +70,7 @@ public class YellowPages extends Application {
 				result= jade.domain.DFService.searchUntilFound(ja, ja.getDefaultDF(), this.getColDescription(rolename), searchcons, 20000);
 				// Lower values than 20 seconds timeout lead to null values returned. See ingenias.testing.TestJadeDFSearch
 			}catch (FIPAException fe){
-
+				fe.printStackTrace();
 			}
 			k=k+1;
 		} 

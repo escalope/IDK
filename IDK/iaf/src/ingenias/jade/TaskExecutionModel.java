@@ -56,7 +56,7 @@ public class TaskExecutionModel {
             while (true) {
                 while (markConversationAsUsed.isEmpty()) {
                     try {
-                        Thread.currentThread().sleep(100);
+                        Thread.currentThread().sleep((long)(200*Math.random()));
                     } catch (InterruptedException e) {
                     }
                 }
@@ -96,15 +96,42 @@ public class TaskExecutionModel {
      * @param t
      */
     public synchronized void executeTask(final JADEAgent ja, final TaskQueue queues, final MentalStateManager cmsm, final Task t) {
+    /*	if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+    		System.err.println("1.locking MSM");*/
      	msm.lockChanges();
         EventManager.getInstance().startingTaskExecution(ja.getLocalName(),
                 ja.getClass().getName().substring(0,
                 ja.getClass().getName().indexOf("JADE")),
                 t);
+ /*       if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+    		System.err.println("2.Checking MSM");*/
         if (queues.reviewTaskToBeExecuted(t)) {
             try {
+            	/*if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+            		System.err.println("3. Execute 1 "+t.getType());*/
                 t.setAgentID(ja.getLocalName());
+                Thread timeout=new Thread(){
+					public void run(){
+						try {
+							sleep(5000);
+							new Exception(ja.getLocalName()+" timeout exceeded when executing task "+t.getID()+":"+t.getType()
+								+ " current scheduled tasks "+queues.getScheduledTasks()).printStackTrace();
+					/*		if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents")){
+							new Exception(ja.getLocalName()).printStackTrace();
+								
+							System.exit(0);
+							}*/
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+					//		e.printStackTrace();
+						}
+					}
+				};
+				timeout.start();
                 t.execute();
+                timeout.interrupt();
+            /*    if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+            		System.err.println("3. Execute 2");*/
             //DebugUtils.logEvent("TaskExecuted", new String[]{ja.getAID().getLocalName(),t.getType(),t.getID()});
             //MainInteractionManager.logMSP("Execution finished ",ja.getLocalName(),t.getID(),t.getType());
             //System.err.println(agentName+": Execution finished "+t.getID()+t.getType());
@@ -128,19 +155,22 @@ public class TaskExecutionModel {
             StateBehavior associatedStateMachine = null;
             Vector<RuntimeConversation> newInteractions = new Vector<RuntimeConversation>();
 
-
+            /*if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+        		System.err.println("3. Execute 3");*/
             TaskOutput generatedOutput = t.getFinalOutput();
 
             removeConsumedInputs(ja, cmsm, t, generatedOutput);
 
             createNewEntities(ja, cmsm, t, t.getConversationContext(), generatedOutput, newInteractions);
-
+  /*          if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+        		System.err.println("3. Execute 4");*/
             // Interactions are launched at the end to ensure that they check
             // the latest mental state
 
             msm.unlockChanges(); // Changes are permitted again so that new conversations can access to the mental state manager
             // from another thread
-
+    /*        if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+        		System.err.println("3. Execute 5");*/
             createNewInteractions(ja, t, newInteractions);
 
             /*if (t.getConversationContext()!=null){
@@ -149,25 +179,31 @@ public class TaskExecutionModel {
             ja.getMSM().remove(t.getConversationContext().getId());
             }
             }*/
-            
+ /*           if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+        		System.err.println("3. Execute 6");*/
             waitForCommsInitialization(ja,newInteractions); // Comms will be initialized when 
             // a state behavior is created for handling the comms. This happens in two steps.
             // First, the state machine is created and added to the comms manager queue.
             // Second, the comms manager initializes all pending comms during the next comms handling
             // cycle. This way, comms are handled the same way no matter if you are initiator or a collaborator
-            
+  /*          if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+        		System.err.println("3. Execute 7");*/
             ja.getMSM().resizeAllMentalEntities();
-
+    /*        if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+        		System.err.println("3. Execute 8");*/
             ctask = t;
             msm = cmsm;
             markMentalStateAsChanged();
-                        
+  /*          if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+        		System.err.println("3. Execute 9");          */              
             EventManager.getInstance().taskExecutionFinished(ja.getLocalName(),
                     ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),
                     t);
         } else {
               msm.unlockChanges();
         }
+  /*      if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+    		System.err.println("4. Finished");*/
         
 
 
@@ -176,11 +212,16 @@ public class TaskExecutionModel {
     private void waitForCommsInitialization(JADEAgent ja, Vector<RuntimeConversation> newInteractions) {
     	while (!isInteractionsProcessed() || ja.getCM().getPendingStateBehaviors()>0){
     		try {
-				Thread.currentThread().sleep(100);
+				Thread.currentThread().sleep((long)(200*Math.random()));
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+/*			if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+			System.err.println("Waiting 1....");*/
+			ja.getMSP().wakeUpCommManagerBehavior();
+/*			if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
+			System.err.println("Waiting 2....");*/
     	}
     	
 		
@@ -250,6 +291,8 @@ public class TaskExecutionModel {
                             e.printStackTrace();
                             current.setState("ABORTED");
                             current.setAbortCode(IAFProperties.NO_AGENTS_FOUND);
+                        } catch (WrongInteraction wi){
+                        	wi.printStackTrace();
                         }
                         msm.setModified();
                         interactionsProcessed.remove(0); // to indicate one interaction was already processed                        
@@ -290,7 +333,7 @@ public class TaskExecutionModel {
 
                 private ActiveConversation createNewInteractionWithCollaboratorsAutomaticallySet(
                         final JADEAgent ja, final Task t,
-                        final RuntimeConversation current) throws NoAgentsFound {
+                        final RuntimeConversation current) throws NoAgentsFound, WrongInteraction {
                     ActiveConversation actconv;
                     // automatic selection of participants
                     actconv = ja.getCM().launchProtocolAsInitiator(current.getInteraction().getId(),
@@ -310,7 +353,7 @@ public class TaskExecutionModel {
                         final JADEAgent ja, final Task t,
                         final RuntimeConversation current,
                         ActiveConversation actconv, Enumeration<AgentExternalDescription> collaborators)
-                        throws NoAgentsFound {
+                        throws NoAgentsFound, WrongInteraction {
                     //Collaborators have been set
                     AgentExternalDescription[] actors;
                     Vector<AgentExternalDescription> descV = new Vector<AgentExternalDescription>();

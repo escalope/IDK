@@ -83,6 +83,9 @@
 	<copy file="modiaf.jar" toDir="tests/commsonetomany/lib" />
 	<copy file="modiaf.jar" toDir="tests/trust/lib" />	
 	<copy file="modiaf.jar" toDir="tests/testTasks/lib" />
+	<copy file="modiaf.jar" toDir="tests/cinema/lib" />
+	<copy file="modiaf.jar" toDir="tests/multipleComms/lib" />
+
 	<delete dir="${temp}" />
 	
 </target>
@@ -135,7 +138,8 @@
 	<copy file="lib/jade.jar" todir="${mainP}/lib/"/>
 	<copy file="lib/junit.jar" todir="${mainP}/lib/"/>
 	<copy file="lib/jadeTools.jar" todir="${mainP}/lib/"/>	
-	<copy file="lib/jgraph.jar" todir="${mainP}/lib/"/>	
+	<copy file="lib/jgraph.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/xstream-1.2.jar" todir="${mainP}/lib/"/>
 	
 </target>
 
@@ -172,17 +176,51 @@
 			</fileset>
 		</classpath>		
 	</java>
+	<java fork="true" failonerror="true" maxmemory="200m"
+	      classname="ingenias.codeproc.IAFGenerator">		
+		<arg value="tests/cinema/spec/specification.xml"/>
+		<arg value="tests/cinema"/>		
+		<classpath>
+			<fileset dir="tests/cinema/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>		
+	</java>
+
+	<java fork="true" failonerror="true" maxmemory="200m"
+	      classname="ingenias.codeproc.IAFGenerator">		
+		<arg value="tests/multipleComms/spec/specification.xml"/>
+		<arg value="tests/multipleComms"/>		
+		<classpath>
+			<fileset dir="tests/multipleComms/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>		
+	</java>
 	
 
 </target>
 
-<target name="runtests" depends="generatetests">
+
+<target name="calltests">
 	<repeat count="3" >
 		<ant dir="tests/commsonetomany" antfile="build.xml" target="alljunit"/> 
-	</repeat>	
+	</repeat>
+	<repeat count="3" >
+		<ant dir="tests/cinema" antfile="build.xml" target="alljunit"/> 
+	</repeat>
+	<repeat count="3" >
+		<ant dir="tests/trust" antfile="build.xml" target="alljunit"/> 
+	</repeat>
+	<repeat count="3" >
+		<ant dir="tests/multipleComms" antfile="build.xml" target="alljunit"/> 
+	</repeat>
+	<repeat count="3" >
+		<ant dir="tests/testTasks" antfile="build.xml" target="alljunit"/> 
+	</repeat>
 </target>
 
-
+<target name="runtests" depends="generatetests,calltests"/>
 
 <target name="clean">
 	

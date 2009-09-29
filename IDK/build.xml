@@ -33,11 +33,11 @@
 		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/perceptionExample/lib"/>
 		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/testInteractions/lib"/>
 		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/testTasks/lib"/>		
-		<ant antfile="build.xml" target="compile" dir="workspace/cinema"/>
+	<!--	<ant antfile="build.xml" target="compile" dir="workspace/cinema"/>
 		<ant antfile="build.xml" target="compile" dir="workspace/requestExample"/>
 		<ant antfile="build.xml" target="compile" dir="workspace/perceptionExample"/>
 		<ant antfile="build.xml" target="compile" dir="workspace/testInteractions"/>		
-		<ant antfile="build.xml" target="compile" dir="workspace/testTasks"/>	
+		<ant antfile="build.xml" target="compile" dir="workspace/testTasks"/>	-->
 		
 	</target>
 	
@@ -113,25 +113,24 @@
 		
 	</target>
 
-    <target name="dist" depends="init">
+    <target name="--dist-ingenias-all" depends="init,--pre-dist">
 
-   		<ant antfile="build.xml" target="compile"  dir="editor"/>
-		<ant antfile="build.xml" target="modules" dir="editor"/>
-		<copy file="editor/lib/ingeniaseditor.jar" todir="iaf/lib"/>
-		<ant antfile="build.xml" target="compile" dir="iaf"/>
+
 
          <!-- Preparacion de directorios -->
 
-       <mkdir dir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}"/>
-       <mkdir dir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/licenses"/>
-       <mkdir dir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/iaf"/>
-       <mkdir dir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/editor"/>
-       <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}">
-           <fileset dir="scripts">
-               <include name="**/*"/>
+       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
+       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/licenses"/>
+       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/iaf"/>
+       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/editor"/>
+
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}">
+           <fileset dir=".">
+               <include name="*.txt"/>
+               <include name="*.xml"/>
            </fileset>
        </copy>
-       <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/licenses">
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/licenses">
            <fileset dir="licenses">
                <include name="*"/>
            </fileset>
@@ -139,44 +138,66 @@
 
        <!-- Preparacion de iaf -->
        
-       <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/iaf">
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/iaf">
            <fileset dir="iaf">
-               <include name="lib/**/*.jar"/>
-               <include name="config/**/*.prop"/>
-               <include name="*.xml"/>
-               <include name="src/templates/**/*.xml"/>
+               <include name="**/*"/>
+               <exclude name="**/.svn/**"/>
            </fileset>
        </copy>
-        <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/iaf">
-           <fileset dir="iaf">
-               <include name="modiaf.jar"/>
-           </fileset>
-       </copy>
+
        <!-- Preparacion de editor -->
-       <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/editor">
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/editor">
            <fileset dir="editor">
-               <include name="lib/**/*.jar"/>
-               <include name="ext/**/*.jar"/>
-               <include name="configs/**/*.xml"/>
-               <include name="doc/**/*.gif"/>
-               <include name="doc/**/*.htm"/>
+              <include name="**/*"/>
+               <exclude name="**/.svn/**"/>
            </fileset>
        </copy>
-       <copy todir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}/editor">
-           <fileset dir="editor/lib">
-               <include name="ingeniaseditor.jar"/>
-           </fileset>
-       </copy>
+
        <!-- Preparacion del zip -->
-       <zip basedir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}"
-       destfile="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}.zip">
+       <zip basedir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"
+       destfile="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}.zip">
        </zip>
 
        <!-- Eliminacion de temporales -->
 
-       <delete dir="dist/ingenias-${project.version}-${DSTAMP}${TSTAMP}"/>
+       <delete dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
 
     </target>
-	
+
+    <target name="--pre-dist">
+   		<ant antfile="build.xml" target="compile"  dir="editor"/>
+		<ant antfile="build.xml" target="modules" dir="editor"/>
+		<copy file="editor/lib/ingeniaseditor.jar" todir="iaf/lib"/>
+		<ant antfile="build.xml" target="compile" dir="iaf"/>
+    </target>
+    
+    <target name="--dist-editor" depends="--pre-dist">
+       <mkdir dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
+       <copy todir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}/">
+           <fileset dir="editor">
+              <include name="**/*"/>
+               <exclude name="**/.svn/**"/>
+           </fileset>
+       </copy>
+       <zip basedir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"
+       destfile="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}.zip">
+       </zip>
+       <delete dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
+    </target>
+    <target name="--dist-iaf" depends="--pre-dist">
+       <mkdir dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
+       <copy todir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}/">
+           <fileset dir="iaf">
+              <include name="**/*"/>
+               <exclude name="**/.svn/**"/>
+           </fileset>
+       </copy>
+      <zip basedir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"
+       destfile="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}.zip">
+       </zip>
+       <delete dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
+    </target>
+    <target name="dist" depends="--pre-dist,--dist-ingenias-all,--dist-editor,--dist-iaf">
+    </target>
 </project>
 

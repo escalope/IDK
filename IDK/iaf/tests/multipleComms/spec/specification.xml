@@ -1,0 +1,4518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project cid="215" version="1.2">
+<projectproperties>
+<projectproperty id="analyserfolder" module="Ingenias Analyser Module"  name="Main folder of the ACLAnaliser folder" value="/home/idk/acl2/ACLAnalyserV0.7/Analyser/ACLAnalyser/protocols/"  tooltip="The folder that contains the ACLAnalyser" />
+<projectproperty id="producecode" module="Ingenias Agent Framework generator"  name="Triggers the use of code components" value="yes"  tooltip="Write &quot;yes&quot; if you want to use code componentes, and &quot;no&quot; in any other case" />
+<projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
+<projectproperty id="jadeout" module="JADE agents generator"  name="JADE output folder" value="outputjade"  tooltip="The folder that will hold generated JADE agents" />
+<projectproperty id="jadeout" module="Ingenias Agent Framework generator"  name="JADE generated output folder" value="gensrc"  tooltip="The folder that will hold generated JADE agents" />
+<projectproperty id="proysrc" module="Ingenias Agent Framework generator"  name="Main source folder for the project" value="src"  tooltip="The folder containing the sources of the project" />
+<projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="ext"  tooltip="Folder where the IDE will find its new modules" />
+<projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="/home/jj/idk/trunk/IDK/iaf/tests/multipleComms"  tooltip="The folder that will contain the project for this development" />
+<projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="/home/jj/idk/trunk/IDK/iaf/tests/multipleComms"  tooltip="The document folder that will contain HTML version of this specification" />
+ <openeddiagram>agent deployments</openeddiagram> <openeddiagram>tasks code</openeddiagram> <openeddiagram>application initialization</openeddiagram> <openeddiagram>Agents identified</openeddiagram> <openeddiagram>serious configuration initial mental states</openeddiagram> <openeddiagram>tests</openeddiagram> <openeddiagram>applications</openeddiagram> <openeddiagram>applications configuration</openeddiagram> <openeddiagram>Buyer assignment protocol description</openeddiagram> <openeddiagram>assistant assignment tasks</openeddiagram></projectproperties>
+<leafpackages>
+   <path>
+    <package id="Project"/>
+    <package id="interactions"/>
+    <package id="buyer to interface agent assignment interaction"/>
+    <package id="Buyer Assignment description"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="interactions"/>
+    <package id="buyer to interface agent assignment interaction"/>
+    <package id="Buyer assignment protocol description"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="interactions"/>
+    <package id="buyer to interface agent assignment interaction"/>
+    <package id="assistant assignment tasks"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="agents"/>
+    <package id="Agents identified"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="applications"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="applications configuration"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="tasks code"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="agent deployments"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="tests"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+    <package id="serious configuration initial mental states"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="system init"/>
+    <package id="application initialization"/>
+   </path>
+</leafpackages>
+<objects>
+<object id="Clock" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="VirtualTerminal" type="ingenias.editor.entities.InternalApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Look for an assistant" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Look for another buyer" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Evaluate Assitency Proposal" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Make Buyer an Assitant" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="InterfaceAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="BuyerAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="SeriousConfiguration" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+<object id="208" type="ingenias.editor.entities.Parameter">
+<mapproperties>
+<key id="Name">memory</key>
+<key id="Value">256m</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+<object id="multipleInterfaceAgents" type="ingenias.editor.entities.DeploymentUnitByTypeMSEntity">
+<objectproperty id="AgentTypeDeployed">
+<object id="InterfaceAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState">
+<object id="Interface agent with multiple preferences" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">10</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="multipleBuyers" type="ingenias.editor.entities.DeploymentUnitByTypeMSEntity">
+<objectproperty id="AgentTypeDeployed">
+<object id="BuyerAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState">
+<object id="buyer initial mental state" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">10</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="interfaceinstantiation" type="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS">
+<objectproperty id="AgentTypeDeployed">
+<object id="InterfaceAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">100</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="90" type="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS">
+<objectproperty id="AgentTypeDeployed">
+<object id="BuyerAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">100</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="91" type="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS">
+<objectproperty id="AgentTypeDeployed">
+</objectproperty>
+<objectproperty id="InitialState" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">3</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="146" type="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS">
+<objectproperty id="AgentTypeDeployed">
+</objectproperty>
+<objectproperty id="InitialState" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">5</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="93" type="ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS">
+<objectproperty id="AgentTypeDeployed">
+</objectproperty>
+<objectproperty id="InitialState" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">3</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="multipleInterfaceAgents" type="ingenias.editor.entities.DeploymentUnitByTypeMSEntity">
+<objectproperty id="AgentTypeDeployed">
+<object id="InterfaceAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState">
+<object id="Interface agent with multiple preferences" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">10</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="multipleBuyers" type="ingenias.editor.entities.DeploymentUnitByTypeMSEntity">
+<objectproperty id="AgentTypeDeployed">
+<object id="BuyerAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState">
+<object id="buyer initial mental state" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">10</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="151" type="ingenias.editor.entities.DeploymentUnitByTypeWithInitMS">
+<objectproperty id="InitialState">
+</objectproperty>
+<objectproperty id="AgentTypeDeployed">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="283" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="InterfaceAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="287" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="282" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="BuyerAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="284" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">3</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="285" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">2</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent0" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent6" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Code">        outputsdefaultAssignedBuyer.setbuyerName(eiBuyersToConsult.getbuyerBeingConsulted());</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent7" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Code">if (eiCurrentAssistedAgent.getinterfaceAgent()==null || eiCurrentAssistedAgent.getinterfaceAgent().equals(&quot;&quot;)){
+	eiCurrentAssistedAgent.setinterfaceAgent(eiBuyerAssignmentProposal.getinterfaceAgent());
+	outputsdefault.remove(outputsdefaultReject_assistency_proposal);
+} else {
+	outputsdefault.remove(outputsdefaultAccept_assistency_proposal);
+}</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent8" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Code">        Vector&lt;String&gt; buyers = eiBuyersToConsult.getbuyers();
+        String fbuyer=buyers.firstElement();
+        buyers.remove(0);
+        outputsdefaultBuyerAssignment.addCollaborators(new ingenias.jade.AgentExternalDescription(
+				new jade.core.AID(fbuyer,false),&quot;Buyer&quot;));
+        eiBuyersToConsult.setbuyerBeingConsulted(fbuyer);</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent1" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Language"></key>
+<key id="Code">		try {
+			jade.domain.FIPAAgentManagement.DFAgentDescription[] agents = yp.getAgents(&quot;Buyer&quot;);
+			Vector&lt;String&gt; candidates=new Vector&lt;String&gt; ();
+			for (jade.domain.FIPAAgentManagement.DFAgentDescription df:agents){
+				candidates.add(df.getName().getLocalName());
+			}
+			String first=candidates.firstElement();
+			candidates.remove(0);
+			outputsdefaultBuyersToConsult.setbuyers(candidates);
+			outputsdefaultBuyersToConsult.setbuyerBeingConsulted(first);
+			
+			outputsdefaultBuyerAssignment.addCollaborators(new ingenias.jade.AgentExternalDescription(
+					new jade.core.AID(first,false),&quot;Buyer&quot;));
+			outputsdefaultBuyerAssignmentProposal.setinterfaceAgent(this.getAgentID());
+			
+		} catch (jade.domain.FIPAException e) {	
+			e.printStackTrace();
+		}
+	</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Asking for a ticket" type="ingenias.editor.entities.Interaction">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Buy ticket" type="ingenias.editor.entities.Interaction">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Nature">cooperation</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="BuyerAssignment" type="ingenias.editor.entities.Interaction">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="RejectBecomingAssistant" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="Reject assistency proposal" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">refuse</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="AcceptBecomingAssistant" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="Accept assistency proposal" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">accept-proposal</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="GiveTicket" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">inform</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="RequestOrder" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">request</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="ObtainTicket" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">query-if</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="SellTicket" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">inform</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TicketExists" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">inform</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="I want it" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">confirm</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="I do not want it" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">reject-proposal</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TicketRequestRefused" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">inform</key>
+<key id="Timeout"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="ImpossibleToGiveTicket" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">inform</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="RequestBeingAssistant" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="BuyerAssignmentProposal" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="199" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">interfaceAgent</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct">request</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="AssistUser" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="Description">Assisting the user means doing things on behalf him, saving him work and doing it quicker</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="BuyTickets" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="EarnMoney" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Clean mental state" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="GetAnAssistant" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Conversation223" type="ingenias.editor.entities.Conversation">
+<objectproperty id="Interaction">
+<object id="Asking for a ticket" type="ingenias.editor.entities.Interaction">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="CurrentContent" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Conversation226" type="ingenias.editor.entities.Conversation">
+<objectproperty id="Interaction">
+<object id="Buy ticket" type="ingenias.editor.entities.Interaction">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Nature">cooperation</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="CurrentContent" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Conversation0" type="ingenias.editor.entities.Conversation">
+<objectproperty id="Interaction">
+<object id="BuyerAssignment" type="ingenias.editor.entities.Interaction">
+<objectproperty id="TransferredInfo" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="CurrentContent" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="ParticipantsSearch">Automatic</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Reject assistency proposal" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Accept assistency proposal" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="BuyerAssignmentProposal" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="199" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">interfaceAgent</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="AssignedBuyer" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="152" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">buyerName</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Description">It contains the name of the buyer with which there is an agreement to act as representative</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="BuyersToConsult" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="172" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">buyers</key>
+<key id="Type">java.util.Vector&lt;java.lang.String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="203" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">buyerBeingConsulted</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="GetAssignments" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description">This entity serves to initiate the workflow for associating a buyer agent to the assistant</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="CurrentAssistedAgent" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="199" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">interfaceAgent</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Description">This entity is specific of buyers. It declares the name of the interface agent currently assigned. Once it is filled with a value, this prevents other assistants to be assigned to this buyer.</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="User wants to watch a movie" type="ingenias.editor.entities.ApplicationEventSlots">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<objectproperty id="Source">
+</objectproperty>
+<mapproperties>
+<key id="Description">The user has shown actively its interest in watching a movie. Now, the assistant is expected to choose one among the preferred ones and look for a ticket in a suitable cinema mathching the preferences of the user</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="MentalInstanceSpecification0" type="ingenias.editor.entities.MentalInstanceSpecification">
+<objectproperty id="InstanceType">
+<object id="GetAssignments" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description">This entity serves to initiate the workflow for associating a buyer agent to the assistant</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="SlotsValues" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="MentalInstanceSpecification1" type="ingenias.editor.entities.MentalInstanceSpecification">
+<objectproperty id="InstanceType">
+<object id="CurrentAssistedAgent" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="199" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">interfaceAgent</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Description">This entity is specific of buyers. It declares the name of the interface agent currently assigned. Once it is filled with a value, this prevents other assistants to be assigned to this buyer.</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="SlotsValues" collection="true">
+<object id="202" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="199" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">interfaceAgent</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">&quot;&quot;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Interface agent with multiple preferences" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="buyer initial mental state" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="289" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">presentTicket</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="User assistant" type="ingenias.editor.entities.Role">
+<mapproperties>
+<key id="Description">An assistant represents the user in the system.</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Buyer" type="ingenias.editor.entities.Role">
+<mapproperties>
+<key id="Description">A user assistant delegates on a buyer to obtain cinema tickets satisfiying some requirements.  Therefore, a buyer is responsible for locating a cinema selling tickets under conditions that match the user assistant requirements. </key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="199" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">interfaceAgent</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="152" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">buyerName</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="172" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">buyers</key>
+<key id="Type">java.util.Vector&lt;java.lang.String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="203" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">buyerBeingConsulted</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="48" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">moviesILike</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="49" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">preferredSessions</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="301" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">preferredSeats</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="59" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">preferredPrice</key>
+<key id="Type">Integer</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="60" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">preferredExtras</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="52" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">scoreForLastCinemasVisited</key>
+<key id="Type">Hashtable&lt;String,Integer&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="46" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">startingTimeMovie</key>
+<key id="Type">Hashtable&lt;String,Vector&lt;String&gt;&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="47" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">availableSeats</key>
+<key id="Type">Hashtable&lt;String,Hashtable&lt;String,Vector&lt;String&gt;&gt;&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="96" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">availableExtras</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="252" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">price</key>
+<key id="Type">Integer</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="233" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">seat</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="53" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">movieName</key>
+<key id="Type">String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="65" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">sessions</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="67" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">requestedExtras</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="98" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">requestedSeats</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="104" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">cinemaName</key>
+<key id="Type">String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="137" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">numberIntents</key>
+<key id="Type">int</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="145" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">triedCinemas</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="232" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">operationID</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="251" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">offeredSeats</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="101" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">session</key>
+<key id="Type">String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="72" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">reason</key>
+<key id="Type">cinema.types.TicketRequestRejectedType</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="444" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">cost</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="45" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">movieList</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="202" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="199" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">interfaceAgent</key>
+<key id="Type">java.lang.String</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">&quot;&quot;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="89" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="48" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">moviesILike</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">cinema.helpers.DSHelper.createVS(&quot;{Rambo,Rocky}&quot;)</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="61" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="49" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">preferredSessions</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">cinema.helpers.DSHelper.createVS(&quot;{1900,2000}&quot;)</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="87" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="301" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">preferredSeats</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">cinema.helpers.DSHelper.createVS(&quot;{1,2,3}&quot;)</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="88" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="59" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">preferredPrice</key>
+<key id="Type">Integer</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">5</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="109" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="60" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">preferredExtras</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">cinema.helpers.DSHelper.createVS(&quot;(nachos)&quot;)</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="92" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="52" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">scoreForLastCinemasVisited</key>
+<key id="Type">Hashtable&lt;String,Integer&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">new java.util.Hashtable&lt;String,Integer&gt;()</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="97" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="96" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">availableExtras</key>
+<key id="Type">Vector&lt;String&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">cinema.helpers.DSHelper.createVS(&quot;(icecream,nachos,coke)&quot;)</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="95" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="47" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">availableSeats</key>
+<key id="Type">Hashtable&lt;String,Hashtable&lt;String,Vector&lt;String&gt;&gt;&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">cinema.helpers.DSHelper.createSeats(&quot;(Rambo,((1900,{1,2,3,4,5}))),(Rocky,((1900,{1,2,3,4,5}),(2000,{1,2,3,4,5,6})))&quot;)</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="94" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="46" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">startingTimeMovie</key>
+<key id="Type">Hashtable&lt;String,Vector&lt;String&gt;&gt;</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">cinema.helpers.DSHelper.createSessions(&quot;(Rambo,{1900,2000}),(Rocky,{1900,2100})&quot;)</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="148" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="252" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">price</key>
+<key id="Type">Integer</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">2</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="100" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="252" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">price</key>
+<key id="Type">Integer</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">6</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="GRASIABuyDescription" type="ingenias.editor.entities.GRASIASpecification">
+<objectproperty id="ModelThatContainsSpecification">
+<object id="0" type="ingenias.editor.entities.InteractionModelModelEntity">
+<mapproperties>
+<key id="ModelType">InteractionModel</key>
+<key id="ModelID">GRASIABuyDescription</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="GRASIA find cinema interaction description" type="ingenias.editor.entities.GRASIASpecification">
+<objectproperty id="ModelThatContainsSpecification">
+<object id="0" type="ingenias.editor.entities.InteractionModelModelEntity">
+<mapproperties>
+<key id="ModelType">InteractionModel</key>
+<key id="ModelID">Find cinema interaction protocol</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="GRASIASpecification0" type="ingenias.editor.entities.GRASIASpecification">
+<objectproperty id="ModelThatContainsSpecification">
+<object id="0" type="ingenias.editor.entities.InteractionModelModelEntity">
+<mapproperties>
+<key id="ModelType">InteractionModel</key>
+<key id="ModelID">Buyer assignment protocol description</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="CheckingATicketWasObtained" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="TestingSetupForCheckingATicket" type="ingenias.editor.entities.TestingPackage">
+<objectproperty id="TestingDeployment">
+<object id="SeriousConfiguration" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+<object id="208" type="ingenias.editor.entities.Parameter">
+<mapproperties>
+<key id="Name">memory</key>
+<key id="Value">256m</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+<object id="multipleInterfaceAgents" type="ingenias.editor.entities.DeploymentUnitByTypeMSEntity">
+<objectproperty id="AgentTypeDeployed">
+<object id="InterfaceAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState">
+<object id="Interface agent with multiple preferences" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">10</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="multipleBuyers" type="ingenias.editor.entities.DeploymentUnitByTypeMSEntity">
+<objectproperty id="AgentTypeDeployed">
+<object id="BuyerAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="InitialState">
+<object id="buyer initial mental state" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">10</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Tests" collection="true">
+<object id="CheckingATicketWasObtained" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="208" type="ingenias.editor.entities.Parameter">
+<mapproperties>
+<key id="Name">memory</key>
+<key id="Value">256m</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="143" type="ingenias.editor.entities.Parameter">
+<mapproperties>
+<key id="Name">memory</key>
+<key id="Value">350M</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="296" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+</objectproperty>
+<mapproperties>
+<key id="File">permsrc/ingenias/jade/components/UserGUIApp.java</key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="357" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="VirtualTerminal" type="ingenias.editor.entities.InternalApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputperm/ingenias/jade/components/VirtualTerminalApp.java</key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="358" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+</objectproperty>
+<mapproperties>
+<key id="File">outputperm/ingenias/jade/components/Cinema_directoryApp.java</key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="58" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="Clock" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Pattern">Singleton</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="213" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+</objectproperty>
+<mapproperties>
+<key id="File"></key>
+<key id="Pattern">Singleton</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent353" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="357" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="VirtualTerminal" type="ingenias.editor.entities.InternalApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File">outputperm/ingenias/jade/components/VirtualTerminalApp.java</key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Language">Java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent0" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="58" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="Clock" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Pattern">Singleton</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Language">Java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="TextNote130" type="ingenias.editor.entities.TextNote">
+<mapproperties>
+<key id="Text">The agent moves from a PDA enviroment to another environment where the transaction is executed</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="TextNote138" type="ingenias.editor.entities.TextNote">
+<mapproperties>
+<key id="Text">Buyer moves to the node where the seller is</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="UMLComment0" type="ingenias.editor.entities.UMLComment">
+<mapproperties>
+<key id="Text">This mental state is reusable for all buyers</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="BuyCinemaTicketUC" type="ingenias.editor.entities.INGENIASUseCase">
+<objectproperty id="Postcondition" collection="true">
+</objectproperty>
+<objectproperty id="Scenarios" collection="true">
+</objectproperty>
+<objectproperty id="Precondition" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description">The assistant informs the buyer that a new cinema ticket is needed. The assistant informs the buyer on the preferences. The preferences cover the preferred seats, preferred price, preferred sessions, and preferred add-ons (nachos and so on). The user is informed of the success or the failure of the query.
+
+There is failure if none of the cinemas had tickets satisfying the requirements. Then, the assistant is free to relax the constaints or give up.
+
+</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Sell a ticket" type="ingenias.editor.entities.INGENIASUseCase">
+<objectproperty id="Postcondition" collection="true">
+</objectproperty>
+<objectproperty id="Scenarios" collection="true">
+</objectproperty>
+<objectproperty id="Precondition" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description">A buyer contacts a seller in order to get a ticket. The buyer asks the cinemas about the attributes of the service, i.e., about the number of available sessions, available seats, price, and extras. The cinema offers as well a price for the ticket. The conditions can match those of the assistant, so the buyer accepts and starts a transaction to deliver the money. When money is received, the cinema delivers the ticket.
+
+If the user assistant preferences are not met. Then the buyer informs the cinema that there is no further interest in the proposal, and proceeds to locate another cinema. If no more are available, then, the ticket sell is considered as a failure.</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="LocateAnAssistant" type="ingenias.editor.entities.INGENIASUseCase">
+<objectproperty id="Postcondition" collection="true">
+</objectproperty>
+<objectproperty id="Scenarios" collection="true">
+</objectproperty>
+<objectproperty id="Precondition" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description">The relationship between the assistant and the buyer is dinamic. Initially, an assistant does not know with which buyer is going to interact. Hence, a first step consists in asking the different buyers if they would like to act as a representative to cinemas.
+&lt;p&gt;
+Each buyer can represent only one assistant.  There are no specific means to determine which buyer is better, at least in this version. Also, there are no mechanisms for the buyer to decide whether if it is profitable to accept or not the association proposal.</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objects>
+<relationships>
+<relationship id="156" type="ingenias.editor.entities.IHasSpec">
+<object id="156" type="ingenias.editor.entities.IHasSpec">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="BuyerAssignment" class="ingenias.editor.entities.Interaction" roleName="IHasSpecsource" type="ingenias.editor.entities.IHasSpecsourceRole" dgcid="1504067088">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GRASIASpecification0" class="ingenias.editor.entities.GRASIASpecification" roleName="IHasSpectarget" type="ingenias.editor.entities.IHasSpectargetRole" dgcid="1303636565">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="155" type="ingenias.editor.entities.IColaborates">
+<object id="155" type="ingenias.editor.entities.IColaborates">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Buyer" class="ingenias.editor.entities.Role" roleName="IColaboratestarget" type="ingenias.editor.entities.IColaboratestargetRole" dgcid="402797912">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAssignment" class="ingenias.editor.entities.Interaction" roleName="IColaboratessource" type="ingenias.editor.entities.IColaboratessourceRole" dgcid="1504067088">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="187" type="ingenias.editor.entities.IAccesses">
+<object id="187" type="ingenias.editor.entities.IAccesses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make Buyer an Assitant" class="ingenias.editor.entities.Task" roleName="IAccessessource" type="ingenias.editor.entities.IAccessessourceRole" dgcid="1159526633">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAssignment" class="ingenias.editor.entities.Interaction" roleName="IAccessestarget" type="ingenias.editor.entities.IAccessestargetRole" dgcid="295932193">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="188" type="ingenias.editor.entities.IAccesses">
+<object id="188" type="ingenias.editor.entities.IAccesses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Look for another buyer" class="ingenias.editor.entities.Task" roleName="IAccessessource" type="ingenias.editor.entities.IAccessessourceRole" dgcid="1418030336">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAssignment" class="ingenias.editor.entities.Interaction" roleName="IAccessestarget" type="ingenias.editor.entities.IAccessestargetRole" dgcid="295932193">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="189" type="ingenias.editor.entities.IAccesses">
+<object id="189" type="ingenias.editor.entities.IAccesses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="BuyerAssignment" class="ingenias.editor.entities.Interaction" roleName="IAccessestarget" type="ingenias.editor.entities.IAccessestargetRole" dgcid="295932193">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Evaluate Assitency Proposal" class="ingenias.editor.entities.Task" roleName="IAccessessource" type="ingenias.editor.entities.IAccessessourceRole" dgcid="1355460312">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="190" type="ingenias.editor.entities.IAccesses">
+<object id="190" type="ingenias.editor.entities.IAccesses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Evaluate Assitency Proposal" class="ingenias.editor.entities.Task" roleName="IAccessessource" type="ingenias.editor.entities.IAccessessourceRole" dgcid="1550593523">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAssignment" class="ingenias.editor.entities.Interaction" roleName="IAccessestarget" type="ingenias.editor.entities.IAccessestargetRole" dgcid="295932193">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="154" type="ingenias.editor.entities.IInitiates">
+<object id="154" type="ingenias.editor.entities.IInitiates">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="User assistant" class="ingenias.editor.entities.Role" roleName="IInitiatestarget" type="ingenias.editor.entities.IInitiatestargetRole" dgcid="2078851746">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAssignment" class="ingenias.editor.entities.Interaction" roleName="IInitiatessource" type="ingenias.editor.entities.IInitiatessourceRole" dgcid="1504067088">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="157" type="ingenias.editor.entities.UIInitiates">
+<object id="157" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="RequestBeingAssistant" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="1059558514">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="User assistant" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="958829171">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="163" type="ingenias.editor.entities.UIPrecedes">
+<object id="163" type="ingenias.editor.entities.UIPrecedes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="RequestBeingAssistant" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedessource" type="ingenias.editor.entities.UIPrecedessourceRole" dgcid="1059558514">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="AcceptBecomingAssistant" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedestarget" type="ingenias.editor.entities.UIPrecedestargetRole" dgcid="2024320121">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="164" type="ingenias.editor.entities.UIPrecedes">
+<object id="164" type="ingenias.editor.entities.UIPrecedes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="RequestBeingAssistant" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedessource" type="ingenias.editor.entities.UIPrecedessourceRole" dgcid="1059558514">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="RejectBecomingAssistant" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedestarget" type="ingenias.editor.entities.UIPrecedestargetRole" dgcid="1414153170">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="159" type="ingenias.editor.entities.UIInitiates">
+<object id="159" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Buyer" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="2126366019">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="AcceptBecomingAssistant" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="2024320121">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="158" type="ingenias.editor.entities.UIColaborates">
+<object id="158" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="RequestBeingAssistant" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="1059558514">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Buyer" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="1467701155">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="161" type="ingenias.editor.entities.UIInitiates">
+<object id="161" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Buyer" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="339730661">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="RejectBecomingAssistant" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="1414153170">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="162" type="ingenias.editor.entities.UIColaborates">
+<object id="162" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="User assistant" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="1136969288">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="RejectBecomingAssistant" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="1414153170">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="160" type="ingenias.editor.entities.UIColaborates">
+<object id="160" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="User assistant" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="277624307">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="AcceptBecomingAssistant" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="2024320121">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="200" type="ingenias.editor.entities.GTModifies">
+<object id="200" type="ingenias.editor.entities.GTModifies">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Evaluate Assitency Proposal" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="2022310296">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="CurrentAssistedAgent" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="142784811">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="191" type="ingenias.editor.entities.GTSatisfies">
+<object id="191" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Look for an assistant" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1077878419">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GetAnAssistant" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1490623584">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="180" type="ingenias.editor.entities.WFConsumes">
+<object id="180" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="BuyersToConsult" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="133660207">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Make Buyer an Assitant" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="377599246">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="173" type="ingenias.editor.entities.WFResponsable">
+<object id="173" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Evaluate Assitency Proposal" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="2022310296">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Buyer" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1401226503">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="209" type="ingenias.editor.entities.WFConsumes">
+<object id="209" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make Buyer an Assitant" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="377599246">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAssignmentProposal" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="959737444">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="185" type="ingenias.editor.entities.WFProduces">
+<object id="185" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Evaluate Assitency Proposal" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="2022310296">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Accept assistency proposal" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="133626431">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="178" type="ingenias.editor.entities.WFConsumes">
+<object id="178" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make Buyer an Assitant" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="377599246">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Accept assistency proposal" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="774593448">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="194" type="ingenias.editor.entities.GTSatisfies">
+<object id="194" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Evaluate Assitency Proposal" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="2022310296">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GetAnAssistant" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="159132479">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="166" type="ingenias.editor.entities.GTCreates">
+<object id="166" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Look for an assistant" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="1077878419">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Conversation0" class="ingenias.editor.entities.Conversation" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="815275691">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="168" type="ingenias.editor.entities.GTCreates">
+<object id="168" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Look for another buyer" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="188787161">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Conversation0" class="ingenias.editor.entities.Conversation" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="1259286773">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="186" type="ingenias.editor.entities.WFProduces">
+<object id="186" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Look for an assistant" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="1077878419">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAssignmentProposal" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1644171854">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="182" type="ingenias.editor.entities.GTCreates">
+<object id="182" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make Buyer an Assitant" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="377599246">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="AssignedBuyer" class="ingenias.editor.entities.FrameFact" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="1822373240">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="165" type="ingenias.editor.entities.WFResponsable">
+<object id="165" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Look for an assistant" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1077878419">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="User assistant" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1223656947">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="174" type="ingenias.editor.entities.WFConsumes">
+<object id="174" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Evaluate Assitency Proposal" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="2022310296">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAssignmentProposal" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="987488521">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="177" type="ingenias.editor.entities.WFResponsable">
+<object id="177" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make Buyer an Assitant" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="377599246">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="User assistant" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1223656947">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="170" type="ingenias.editor.entities.GTModifies">
+<object id="170" type="ingenias.editor.entities.GTModifies">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="BuyersToConsult" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1373658589">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Look for another buyer" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="188787161">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="183" type="ingenias.editor.entities.WFProduces">
+<object id="183" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Evaluate Assitency Proposal" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="2022310296">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Reject assistency proposal" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="2108992104">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="193" type="ingenias.editor.entities.GTSatisfies">
+<object id="193" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make Buyer an Assitant" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="377599246">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GetAnAssistant" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="2006503042">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="192" type="ingenias.editor.entities.GTSatisfies">
+<object id="192" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Look for another buyer" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="188787161">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GetAnAssistant" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1328879319">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="169" type="ingenias.editor.entities.WFResponsable">
+<object id="169" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Look for another buyer" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="188787161">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="User assistant" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1223656947">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="167" type="ingenias.editor.entities.WFConsumes">
+<object id="167" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Reject assistency proposal" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1150459147">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Look for another buyer" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="188787161">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="197" type="ingenias.editor.entities.WFConsumes">
+<object id="197" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GetAssignments" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="643395775">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Look for an assistant" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1077878419">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="171" type="ingenias.editor.entities.WFProduces">
+<object id="171" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="BuyersToConsult" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1373658589">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Look for an assistant" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="1077878419">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="33" type="ingenias.editor.entities.WFPlays">
+<object id="33" type="ingenias.editor.entities.WFPlays">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Buyer" class="ingenias.editor.entities.Role" roleName="WFPlaystarget" type="ingenias.editor.entities.WFPlaystargetRole" dgcid="1283826455">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAgent" class="ingenias.editor.entities.Agent" roleName="WFPlayssource" type="ingenias.editor.entities.WFPlayssourceRole" dgcid="1504334423">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="105" type="ingenias.editor.entities.WFPlays">
+<object id="105" type="ingenias.editor.entities.WFPlays">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InterfaceAgent" class="ingenias.editor.entities.Agent" roleName="WFPlayssource" type="ingenias.editor.entities.WFPlayssourceRole" dgcid="210220389">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="User assistant" class="ingenias.editor.entities.Role" roleName="WFPlaystarget" type="ingenias.editor.entities.WFPlaystargetRole" dgcid="945299648">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="140" type="ingenias.editor.entities.GTPursues">
+<object id="140" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="AssistUser" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="1637048729">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAgent" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="1504334423">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="196" type="ingenias.editor.entities.GTPursues">
+<object id="196" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="BuyerAgent" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="1504334423">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GetAnAssistant" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="697963613">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="195" type="ingenias.editor.entities.GTPursues">
+<object id="195" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InterfaceAgent" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="210220389">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GetAnAssistant" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="697963613">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="427" type="ingenias.editor.entities.GTPursues">
+<object id="427" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Clean mental state" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="1350641736">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BuyerAgent" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="1504334423">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="426" type="ingenias.editor.entities.GTPursues">
+<object id="426" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="AssistUser" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="108796506">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InterfaceAgent" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="210220389">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="351" type="ingenias.editor.entities.ApplicationBelongsTo">
+<object id="351" type="ingenias.editor.entities.ApplicationBelongsTo">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="BuyerAgent" class="ingenias.editor.entities.Agent" roleName="ApplicationBelongsTosource" type="ingenias.editor.entities.ApplicationBelongsTosourceRole" dgcid="2071473032">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="VirtualTerminal" class="ingenias.editor.entities.InternalApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="1876258307">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="57" type="ingenias.editor.entities.UMLRealizes">
+<object id="57" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Clock" class="ingenias.editor.entities.EnvironmentApplication" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="139145087">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASComponent0" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="1190730312">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="354" type="ingenias.editor.entities.UMLRealizes">
+<object id="354" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASComponent353" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="1023143764">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="VirtualTerminal" class="ingenias.editor.entities.InternalApplication" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="1654386234">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="207" type="ingenias.editor.entities.CDUsesCode">
+<object id="207" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Look for another buyer" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="1472413645">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASCodeComponent8" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="122705349">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="205" type="ingenias.editor.entities.CDUsesCode">
+<object id="205" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASCodeComponent6" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="1488752741">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Make Buyer an Assitant" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="1002276202">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="206" type="ingenias.editor.entities.CDUsesCode">
+<object id="206" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASCodeComponent7" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="1679152723">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Evaluate Assitency Proposal" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="426168733">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="0" type="ingenias.editor.entities.CDUsesCode">
+<object id="0" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Look for an assistant" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="478428514">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASCodeComponent1" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="17026332">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="41" type="ingenias.editor.entities.CDUsesCode">
+<object id="41" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="CheckingATicketWasObtained" class="ingenias.editor.entities.Test" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="727147367">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASCodeComponent0" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="863658234">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="73" type="ingenias.editor.entities.UMLAnnotatedElement">
+<object id="73" type="ingenias.editor.entities.UMLAnnotatedElement">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="buyer initial mental state" class="ingenias.editor.entities.MentalState" roleName="HasCommenttarget" type="ingenias.editor.entities.HasCommenttargetRole" dgcid="867985259">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="UMLComment0" class="ingenias.editor.entities.UMLComment" roleName="HasCommentsource" type="ingenias.editor.entities.HasCommentsourceRole" dgcid="216787636">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="201" type="ingenias.editor.entities.AContainsME">
+<object id="201" type="ingenias.editor.entities.AContainsME">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="buyer initial mental state" class="ingenias.editor.entities.MentalState" roleName="AContainsMEsource" type="ingenias.editor.entities.AContainsMEsourceRole" dgcid="867985259">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="MentalInstanceSpecification1" class="ingenias.editor.entities.MentalInstanceSpecification" roleName="AContainsMEtarget" type="ingenias.editor.entities.AContainsMEtargetRole" dgcid="1315028041">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="198" type="ingenias.editor.entities.AContainsME">
+<object id="198" type="ingenias.editor.entities.AContainsME">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Interface agent with multiple preferences" class="ingenias.editor.entities.MentalState" roleName="AContainsMEsource" type="ingenias.editor.entities.AContainsMEsourceRole" dgcid="1214823733">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="MentalInstanceSpecification0" class="ingenias.editor.entities.MentalInstanceSpecification" roleName="AContainsMEtarget" type="ingenias.editor.entities.AContainsMEtargetRole" dgcid="616831100">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+</relationships>
+<models> 
+ <model id="Buyer Assignment description" type="ingenias.editor.models.InteractionModelModelJGraph">
+<object id="Buyer Assignment description" type="ingenias.editor.entities.InteractionModelDataEntity">
+<objectproperty id="InteractionConsidered">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="interactions"/>
+    <package id="buyer to interface agent assignment interaction"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="190" nid="1649688337" type="IAccesses">
+
+	<connected id="1550593523">
+
+
+	</connected>
+	<connected id="295932193">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Look for another buyer" nid="1418030336" type="Task">
+
+	</node>
+			
+	<node id="154" nid="1122335225" type="IInitiates">
+
+	<connected id="1504067088">
+
+
+	</connected>
+	<connected id="2078851746">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="189" nid="449390461" type="IAccesses">
+
+	<connected id="1355460312">
+
+
+	</connected>
+	<connected id="295932193">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Buyer" nid="402797912" type="Role">
+
+	</node>
+			
+	<node id="Evaluate Assitency Proposal" nid="1550593523" type="Task">
+
+	</node>
+			
+	<node id="GRASIASpecification0" nid="1303636565" type="GRASIASpecification">
+
+	</node>
+			
+	<node id="187" nid="1005066319" type="IAccesses">
+
+	<connected id="1159526633">
+
+
+	</connected>
+	<connected id="295932193">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="156" nid="655621292" type="IHasSpec">
+
+	<connected id="1303636565">
+
+
+
+	</connected>
+	<connected id="1504067088">
+
+
+	</connected>
+	</node>
+			
+	<node id="User assistant" nid="2078851746" type="Role">
+
+	</node>
+			
+	<node id="Make Buyer an Assitant" nid="1159526633" type="Task">
+
+	</node>
+			
+	<node id="155" nid="516092062" type="IColaborates">
+
+	<connected id="402797912">
+
+
+
+	</connected>
+	<connected id="1504067088">
+
+
+	</connected>
+	</node>
+			
+	<node id="BuyerAssignment" nid="1504067088" type="Interaction">
+
+	</node>
+			
+	<node id="188" nid="1050033976" type="IAccesses">
+
+	<connected id="1418030336">
+
+
+	</connected>
+	<connected id="295932193">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="BuyerAssignment" nid="295932193" type="Interaction">
+
+	</node>
+			
+	<node id="Evaluate Assitency Proposal" nid="1355460312" type="Task">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="297" y="383" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="306" y="221" width="144" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="88" y="88" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="504" y="334" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="243" y="116" width="43" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="124" y="407" width="174" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="372" y="5" width="133" height="93"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="303" y="320" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="251" y="38" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="75" y="122" width="91" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="146" y="271" width="147" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="172" y="85" width="93" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="124" y="15" width="110" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="371" y="290" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="388" y="331" width="110" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="585" y="299" width="174" height="43"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Buyer assignment protocol description" type="ingenias.editor.models.InteractionModelModelJGraph">
+<object id="Buyer assignment protocol description" type="ingenias.editor.entities.InteractionModelDataEntity">
+<objectproperty id="InteractionConsidered">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="interactions"/>
+    <package id="buyer to interface agent assignment interaction"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="User assistant" nid="958829171" type="Role">
+
+	</node>
+			
+	<node id="162" nid="844964335" type="UIColaborates">
+
+	<connected id="1414153170">
+
+
+	</connected>
+	<connected id="1136969288">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="164" nid="1378997401" type="UIPrecedes">
+
+	<connected id="1059558514">
+
+
+	</connected>
+	<connected id="1414153170">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="157" nid="410838321" type="UIInitiates">
+
+	<connected id="1059558514">
+
+
+	</connected>
+	<connected id="958829171">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Buyer" nid="1467701155" type="Role">
+
+	</node>
+			
+	<node id="158" nid="634615298" type="UIColaborates">
+
+	<connected id="1059558514">
+
+
+	</connected>
+	<connected id="1467701155">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="RequestBeingAssistant" nid="1059558514" type="InteractionUnit">
+
+	</node>
+			
+	<node id="Buyer" nid="2126366019" type="Role">
+
+	</node>
+			
+	<node id="RejectBecomingAssistant" nid="1414153170" type="InteractionUnit">
+
+	</node>
+			
+	<node id="163" nid="127810364" type="UIPrecedes">
+
+	<connected id="1059558514">
+
+
+	</connected>
+	<connected id="2024320121">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="159" nid="740358806" type="UIInitiates">
+
+	<connected id="2024320121">
+
+
+	</connected>
+	<connected id="2126366019">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Buyer" nid="339730661" type="Role">
+
+	</node>
+			
+	<node id="User assistant" nid="1136969288" type="Role">
+
+	</node>
+			
+	<node id="AcceptBecomingAssistant" nid="2024320121" type="InteractionUnit">
+
+	</node>
+			
+	<node id="160" nid="58895457" type="UIColaborates">
+
+	<connected id="2024320121">
+
+
+	</connected>
+	<connected id="277624307">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="161" nid="798375035" type="UIInitiates">
+
+	<connected id="1414153170">
+
+
+	</connected>
+	<connected id="339730661">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="User assistant" nid="277624307" type="Role">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="80" y="9" width="91" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="620" y="158" width="102" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="256" y="125" width="81" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="86" y="57" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="102" y="189" width="43" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="72" y="162" width="102" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="13" y="80" width="224" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="686" y="0" width="43" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="355" y="117" width="225" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="260" y="75" width="81" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="600" y="20" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="765" y="107" width="43" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="762" y="156" width="91" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="364" y="14" width="229" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="601" y="58" width="102" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="633" y="128" width="78" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="711" y="56" width="91" height="40"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="assistant assignment tasks" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
+<object id="assistant assignment tasks" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="interactions"/>
+    <package id="buyer to interface agent assignment interaction"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="197" nid="432181789" type="WFConsumes">
+
+	<connected id="1077878419">
+
+
+	</connected>
+	<connected id="643395775">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="186" nid="841038702" type="WFProduces">
+
+	<connected id="1644171854">
+
+
+
+	</connected>
+	<connected id="1077878419">
+
+
+	</connected>
+	</node>
+			
+	<node id="174" nid="1263228198" type="WFConsumes">
+
+	<connected id="2022310296">
+
+
+	</connected>
+	<connected id="987488521">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Make Buyer an Assitant" nid="377599246" type="Task">
+
+	</node>
+			
+	<node id="180" nid="1955969050" type="WFConsumes">
+
+	<connected id="377599246">
+
+
+	</connected>
+	<connected id="133660207">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="194" nid="1281415944" type="GTSatisfies">
+
+	<connected id="2022310296">
+
+
+	</connected>
+	<connected id="159132479">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Reject assistency proposal" nid="2108992104" type="FrameFact">
+
+	</node>
+			
+	<node id="185" nid="466320500" type="WFProduces">
+
+	<connected id="133626431">
+
+
+
+	</connected>
+	<connected id="2022310296">
+
+
+	</connected>
+	</node>
+			
+	<node id="167" nid="1043662856" type="WFConsumes">
+
+	<connected id="188787161">
+
+
+	</connected>
+	<connected id="1150459147">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="182" nid="465199021" type="GTCreates">
+
+	<connected id="377599246">
+
+
+	</connected>
+	<connected id="1822373240">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Evaluate Assitency Proposal" nid="2022310296" type="Task">
+
+	</node>
+			
+	<node id="171" nid="1239665046" type="WFProduces">
+
+	<connected id="1373658589">
+
+
+
+	</connected>
+	<connected id="1077878419">
+
+
+	</connected>
+	</node>
+			
+	<node id="GetAnAssistant" nid="159132479" type="Goal">
+
+	</node>
+			
+	<node id="173" nid="1094114309" type="WFResponsable">
+
+	<connected id="1401226503">
+
+
+	</connected>
+	<connected id="2022310296">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Buyer" nid="1401226503" type="Role">
+
+	</node>
+			
+	<node id="GetAnAssistant" nid="2006503042" type="Goal">
+
+	</node>
+			
+	<node id="Look for an assistant" nid="1077878419" type="Task">
+
+	</node>
+			
+	<node id="178" nid="826309868" type="WFConsumes">
+
+	<connected id="377599246">
+
+
+	</connected>
+	<connected id="774593448">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="166" nid="1156127351" type="GTCreates">
+
+	<connected id="1077878419">
+
+
+	</connected>
+	<connected id="815275691">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GetAnAssistant" nid="1490623584" type="Goal">
+
+	</node>
+			
+	<node id="177" nid="1931509558" type="WFResponsable">
+
+	<connected id="1223656947">
+
+
+	</connected>
+	<connected id="377599246">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="BuyersToConsult" nid="133660207" type="FrameFact">
+
+	</node>
+			
+	<node id="183" nid="753816592" type="WFProduces">
+
+	<connected id="2108992104">
+
+
+
+	</connected>
+	<connected id="2022310296">
+
+
+	</connected>
+	</node>
+			
+	<node id="User assistant" nid="1223656947" type="Role">
+
+	</node>
+			
+	<node id="209" nid="1323793597" type="WFConsumes">
+
+	<connected id="377599246">
+
+
+	</connected>
+	<connected id="959737444">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="BuyerAssignmentProposal" nid="959737444" type="FrameFact">
+
+	</node>
+			
+	<node id="168" nid="1082666111" type="GTCreates">
+
+	<connected id="188787161">
+
+
+	</connected>
+	<connected id="1259286773">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Conversation0" nid="815275691" type="Conversation">
+
+	</node>
+			
+	<node id="191" nid="1529737345" type="GTSatisfies">
+
+	<connected id="1077878419">
+
+
+	</connected>
+	<connected id="1490623584">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GetAnAssistant" nid="1328879319" type="Goal">
+
+	</node>
+			
+	<node id="192" nid="529756032" type="GTSatisfies">
+
+	<connected id="188787161">
+
+
+	</connected>
+	<connected id="1328879319">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Reject assistency proposal" nid="1150459147" type="FrameFact">
+
+	</node>
+			
+	<node id="200" nid="1353873907" type="GTModifies">
+
+	<connected id="2022310296">
+
+
+	</connected>
+	<connected id="142784811">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Look for another buyer" nid="188787161" type="Task">
+
+	</node>
+			
+	<node id="193" nid="1142486555" type="GTSatisfies">
+
+	<connected id="377599246">
+
+
+	</connected>
+	<connected id="2006503042">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Conversation0" nid="1259286773" type="Conversation">
+
+	</node>
+			
+	<node id="Accept assistency proposal" nid="774593448" type="FrameFact">
+
+	</node>
+			
+	<node id="169" nid="456875065" type="WFResponsable">
+
+	<connected id="1223656947">
+
+
+	</connected>
+	<connected id="188787161">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="AssignedBuyer" nid="1822373240" type="FrameFact">
+
+	</node>
+			
+	<node id="170" nid="250649917" type="GTModifies">
+
+	<connected id="188787161">
+
+
+	</connected>
+	<connected id="1373658589">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="BuyerAssignmentProposal" nid="1644171854" type="FrameFact">
+
+	</node>
+			
+	<node id="165" nid="1393423910" type="WFResponsable">
+
+	<connected id="1223656947">
+
+
+	</connected>
+	<connected id="1077878419">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GetAssignments" nid="643395775" type="FrameFact">
+
+	</node>
+			
+	<node id="BuyersToConsult" nid="1373658589" type="FrameFact">
+
+	</node>
+			
+	<node id="BuyerAssignmentProposal" nid="987488521" type="FrameFact">
+
+	</node>
+			
+	<node id="Accept assistency proposal" nid="133626431" type="FrameFact">
+
+	</node>
+			
+	<node id="CurrentAssistedAgent" nid="142784811" type="FrameFact">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node45">
+		<attr name="bounds">
+			<rectangle x="334" y="79" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node34">
+		<attr name="bounds">
+			<rectangle x="434" y="136" width="104" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node37">
+		<attr name="bounds">
+			<rectangle x="509" y="596" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="278" y="354" width="168" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node26">
+		<attr name="bounds">
+			<rectangle x="338" y="420" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node31">
+		<attr name="bounds">
+			<rectangle x="294" y="680" width="101" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="587" y="615" width="193" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node29">
+		<attr name="bounds">
+			<rectangle x="458" y="658" width="104" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node44">
+		<attr name="bounds">
+			<rectangle x="464" y="279" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node35">
+		<attr name="bounds">
+			<rectangle x="213" y="428" width="90" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="252" y="612" width="200" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node46">
+		<attr name="bounds">
+			<rectangle x="428" y="163" width="104" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="288" y="720" width="110" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node27">
+		<attr name="bounds">
+			<rectangle x="111" y="622" width="130" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="38" y="607" width="49" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="33" y="373" width="110" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node23">
+		<attr name="bounds">
+			<rectangle x="261" y="112" width="151" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node30">
+		<attr name="bounds">
+			<rectangle x="466" y="377" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node32">
+		<attr name="bounds">
+			<rectangle x="424" y="104" width="90" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="30" y="115" width="110" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node38">
+		<attr name="bounds">
+			<rectangle x="145" y="314" width="130" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="292" y="457" width="323" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node40">
+		<attr name="bounds">
+			<rectangle x="462" y="626" width="104" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="19" y="254" width="106" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node28">
+		<attr name="bounds">
+			<rectangle x="467" y="407" width="111" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="605" y="436" width="276" height="55"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node33">
+		<attr name="bounds">
+			<rectangle x="416" y="306" width="90" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="533" y="67" width="124" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node25">
+		<attr name="bounds">
+			<rectangle x="151" y="129" width="101" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="286" y="173" width="110" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node42">
+		<attr name="bounds">
+			<rectangle x="291" y="233" width="101" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="619" y="276" width="193" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node24">
+		<attr name="bounds">
+			<rectangle x="427" y="584" width="94" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="263" y="257" width="164" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node41">
+		<attr name="bounds">
+			<rectangle x="161" y="380" width="101" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node21">
+		<attr name="bounds">
+			<rectangle x="504" y="317" width="124" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="605" y="376" width="196" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node43">
+		<attr name="bounds">
+			<rectangle x="131" y="268" width="130" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node22">
+		<attr name="bounds">
+			<rectangle x="36" y="473" width="251" height="55"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node39">
+		<attr name="bounds">
+			<rectangle x="433" y="249" width="94" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node19">
+		<attr name="bounds">
+			<rectangle x="563" y="131" width="276" height="55"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node36">
+		<attr name="bounds">
+			<rectangle x="138" y="197" width="130" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="391" y="14" width="116" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="544" y="191" width="323" height="70"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="690" y="543" width="276" height="55"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node18">
+		<attr name="bounds">
+			<rectangle x="579" y="677" width="196" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="534" y="526" width="157" height="46"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Agents identified" type="ingenias.editor.models.AgentModelModelJGraph">
+<object id="Agents identified" type="ingenias.editor.entities.AgentModelDataEntity">
+<mapproperties>
+<key id="Description">In the system, four agents are defined playing the roles user assistant, buyer and seller. The &quot;Interface agent&quot; plays the &quot;user assistant&quot; role and pursues to assist the user in obtaining a cinema ticket and finding the proper cinemas. The &quot;buyer agent&quot; plays the role &quot;buyer&quot; and has the responsibility of interacting with the cinemas in order to obtain the tickets. Its goals are assisting the user as well, obtaining the ticket from providers, and finding the proper cinemas. The &quot;seller agent1&quot; and &quot;seller agent2&quot; play the seller role.  Both correspond to two hypothetical different implementations of the cinema representativeness functionality. A seller pursues to sell tickets, mainly.
+						&lt;p&gt;
+						Each agent has a clean mental state goal. This goal refers to the need of restoring the mental state of each agent to the conditions where the agent can provide the service again. Each service provision implies the generation of temporal data. This data has to be cleaned after finishing the service provision.</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="agents"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="InterfaceAgent" nid="210220389" type="Agent">
+
+	</node>
+			
+	<node id="196" nid="1780914262" type="GTPursues">
+
+	<connected id="1504334423">
+
+
+	</connected>
+	<connected id="697963613">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="AssistUser" nid="108796506" type="Goal">
+
+	</node>
+			
+	<node id="426" nid="652761846" type="GTPursues">
+
+	<connected id="210220389">
+
+
+	</connected>
+	<connected id="108796506">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="140" nid="1579873675" type="GTPursues">
+
+	<connected id="1504334423">
+
+
+	</connected>
+	<connected id="1637048729">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Clean mental state" nid="1350641736" type="Goal">
+
+	</node>
+			
+	<node id="427" nid="767159404" type="GTPursues">
+
+	<connected id="1504334423">
+
+
+	</connected>
+	<connected id="1350641736">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="105" nid="2127414939" type="WFPlays">
+
+	<connected id="210220389">
+
+
+	</connected>
+	<connected id="945299648">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="User assistant" nid="945299648" type="Role">
+
+	</node>
+			
+	<node id="AssistUser" nid="1637048729" type="Goal">
+
+	</node>
+			
+	<node id="33" nid="2023404061" type="WFPlays">
+
+	<connected id="1504334423">
+
+
+	</connected>
+	<connected id="1283826455">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Buyer" nid="1283826455" type="Role">
+
+	</node>
+			
+	<node id="BuyerAgent" nid="1504334423" type="Agent">
+
+	</node>
+			
+	<node id="195" nid="688556158" type="GTPursues">
+
+	<connected id="210220389">
+
+
+	</connected>
+	<connected id="697963613">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GetAnAssistant" nid="697963613" type="Goal">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="220" y="33" width="106" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="181" y="176" width="92" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="500" y="0" width="76" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="365" y="35" width="92" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="316" y="206" width="92" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="398" y="114" width="135" height="80"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="298" y="180" width="92" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="123" y="56" width="76" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="36" y="44" width="106" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="434" y="176" width="76" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="107" y="220" width="76" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="37" y="206" width="49" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="207" y="200" width="83" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="191" y="96" width="92" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="173" y="117" width="110" height="50"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="applications" type="ingenias.editor.models.EnvironmentModelModelJGraph">
+<object id="applications" type="ingenias.editor.entities.EnvironmentModelDataEntity">
+<mapproperties>
+<key id="Description">Each agent has a number of applications, developed externally, that provide basic functionality not related with agent concerns. Also, these applications are used to connect with the environment and obtain information from it. These applications are used by the different tasks each agent has.
+						&lt;p&gt;
+						The UserGUI application represents the GUI the user interacts with. This application produces events as a result of the actions of the user. These events trigger different actions on the agent. In this case, the event considered is &quot;user wants to watch a movie&quot; and the action triggered  on the interface agent, which plays the user assistant role, is &quot;choose movie&quot;. This application has some methods that permit to interact with the user, concretely, the deliver of the ticket to the user.
+						&lt;p&gt;
+						The Virtual terminal application represents a payment gateway with methods able to deliver electronically the money to a concrete recipient. This is used to send the money to the cinema.
+						&lt;p&gt;
+						The cinema directory represents a white pages service specialized in cinemas. Therefore, it contains all existing cinemas.</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="351" nid="1324910826" type="ApplicationBelongsTo">
+
+	<connected id="2071473032">
+
+
+	</connected>
+	<connected id="1876258307">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="InterfaceAgent" nid="1899025201" type="Agent">
+
+	</node>
+			
+	<node id="BuyerAgent" nid="2071473032" type="Agent">
+
+	</node>
+			
+	<node id="VirtualTerminal" nid="1876258307" type="InternalApplication">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="177" y="350" width="169" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="1" y="78" width="106" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="38" y="330" width="83" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="394" y="337" width="153" height="40"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="applications configuration" type="ingenias.editor.models.ComponentDiagramModelJGraph">
+<object id="applications configuration" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="354" nid="1505329890" type="UMLRealizes">
+
+	<connected id="1654386234">
+
+
+	</connected>
+	<connected id="1023143764">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="VirtualTerminal" nid="1654386234" type="InternalApplication">
+
+	</node>
+			
+	<node id="INGENIASComponent353" nid="1023143764" type="INGENIASComponent">
+
+	</node>
+			
+	<node id="Clock" nid="139145087" type="EnvironmentApplication">
+
+	</node>
+			
+	<node id="INGENIASComponent0" nid="1190730312" type="INGENIASComponent">
+
+	</node>
+			
+	<node id="57" nid="702478921" type="UMLRealizes">
+
+	<connected id="139145087">
+
+
+	</connected>
+	<connected id="1190730312">
+
+
+
+	</connected>
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="294" y="266" width="65" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="259" y="297" width="135" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="18" y="177" width="616" height="72"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="18" y="402" width="166" height="40"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="310" y="377" width="174" height="72"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="215" y="410" width="65" height="15"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="tasks code" type="ingenias.editor.models.ComponentDiagramModelJGraph">
+<object id="tasks code" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="207" nid="2084547450" type="CDUsesCode">
+
+	<connected id="1472413645">
+
+
+	</connected>
+	<connected id="122705349">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Look for an assistant" nid="478428514" type="Task">
+
+	</node>
+			
+	<node id="Look for another buyer" nid="1472413645" type="Task">
+
+	</node>
+			
+	<node id="0" nid="227296752" type="CDUsesCode">
+
+	<connected id="478428514"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="17026332">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="205" nid="2097584624" type="CDUsesCode">
+
+	<connected id="1002276202">
+
+
+	</connected>
+	<connected id="1488752741">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Evaluate Assitency Proposal" nid="426168733" type="Task">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent1" nid="17026332" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="Make Buyer an Assitant" nid="1002276202" type="Task">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent8" nid="122705349" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="206" nid="2043597613" type="CDUsesCode">
+
+	<connected id="426168733">
+
+
+	</connected>
+	<connected id="1679152723">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="INGENIASCodeComponent7" nid="1679152723" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent6" nid="1488752741" type="INGENIASCodeComponent">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="245" y="196" width="106" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="50" y="242" width="133" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="37" y="182" width="164" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="256" y="252" width="95" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="219" y="30" width="106" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="39" y="91" width="200" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="424" y="228" width="206" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="38" y="25" width="168" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="395" y="175" width="224" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="235" y="105" width="106" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="338" y="84" width="224" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="339" y="0" width="224" height="57"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="agent deployments" type="ingenias.editor.models.DeployDiagramModelJGraph">
+<object id="agent deployments" type="ingenias.editor.entities.DeployDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="SeriousConfiguration" nid="2073460759" type="DeploymentPackage">
+
+	</node>
+			
+	<node id="TestingSetupForCheckingATicket" nid="1720024937" type="TestingPackage">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="79" y="49" width="483" height="85"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="677" y="55" width="278" height="70"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="tests" type="ingenias.editor.models.ComponentDiagramModelJGraph">
+<object id="tests" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="INGENIASCodeComponent0" nid="863658234" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="41" nid="1758645859" type="CDUsesCode">
+
+	<connected id="727147367">
+
+
+	</connected>
+	<connected id="863658234">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="CheckingATicketWasObtained" nid="727147367" type="Test">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="394" y="17" width="206" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="266" y="62" width="95" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="36" y="36" width="189" height="40"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="serious configuration initial mental states" type="ingenias.editor.models.AgentModelModelJGraph">
+<object id="serious configuration initial mental states" type="ingenias.editor.entities.AgentModelDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="implementation"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="UMLComment0" nid="216787636" type="UMLComment">
+
+	</node>
+			
+	<node id="201" nid="859655531" type="AContainsME">
+
+	<connected id="867985259">
+
+
+	</connected>
+	<connected id="1315028041">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="buyer initial mental state" nid="867985259" type="MentalState">
+
+	</node>
+			
+	<node id="MentalInstanceSpecification1" nid="1315028041" type="MentalInstanceSpecification">
+
+	</node>
+			
+	<node id="MentalInstanceSpecification0" nid="616831100" type="MentalInstanceSpecification">
+
+	</node>
+			
+	<node id="73" nid="825815324" type="UMLAnnotatedElement">
+
+	<connected id="216787636">
+
+
+	</connected>
+	<connected id="867985259">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Interface agent with multiple preferences" nid="1214823733" type="MentalState">
+
+	</node>
+			
+	<node id="198" nid="1420957363" type="AContainsME">
+
+	<connected id="1214823733">
+
+
+	</connected>
+	<connected id="616831100">
+
+
+
+	</connected>
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="17" y="300" width="231" height="67"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="270" y="364" width="108" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="41" y="408" width="186" height="53"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="422" y="258" width="256" height="76"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="449" y="91" width="256" height="55"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="116" y="387" width="0" height="0"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="0" y="152" width="291" height="53"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="316" y="139" width="108" height="15"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="application initialization" type="ingenias.editor.models.ComponentDiagramModelJGraph">
+<object id="application initialization" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="system init"/>
+   </path>
+<gxl>
+
+	<graph>
+	</graph>
+
+
+	<layout>
+	</layout>
+</gxl> </model>
+</models>
+</project>

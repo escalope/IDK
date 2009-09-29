@@ -65,6 +65,7 @@ public static void shutdown(){
 	instance=new MyApplicationAppImp();	
     initialize(instance);
    } 
+	instance.registerMultipleOwners(owner);
 	
    return instance;
    }

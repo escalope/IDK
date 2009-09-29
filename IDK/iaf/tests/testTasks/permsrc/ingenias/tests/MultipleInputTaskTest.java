@@ -88,7 +88,7 @@ public class MultipleInputTaskTest {
 
 	MainInteractionManager.goAutomatic();
 	
-	TestUtils.doNothing(1000);
+	TestUtils.doNothing(2000);
 	
 	Vector<MentalEntity> frameFactEntitiesAfter = msm
 			.getMentalEntityByType("AFrameFact");

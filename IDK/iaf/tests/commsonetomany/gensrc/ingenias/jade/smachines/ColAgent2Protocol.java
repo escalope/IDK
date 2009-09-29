@@ -88,7 +88,7 @@ public ColAgent2Protocol(){};
 	public ActiveConversation initialiseProtocols(String agentName,RuntimeConversation conv, 
 			MentalStateReader msr, MentalStateUpdater msu,
 			ingenias.jade.comm.LocksRemover lr,  
-			AgentExternalDescription[] actors) throws NoAgentsFound{
+			AgentExternalDescription[] actors) throws NoAgentsFound,WrongInteraction{
         // Adds a protocol to the protocol queue
             StateBehavior   sb=null;
 		    // Interactions in which this agent appears as collaborator
@@ -109,7 +109,8 @@ public ColAgent2Protocol(){};
 		           // Interactions in which this agent appears as initiator                  
                   
 
-         return null;
+         throw new WrongInteraction("Agent "+agentName+" does not know any interaction protocol of type "+conv.getInteraction().getId()+" where the " +
+		   		" agent knows how to play the protocol "+conv.getPlayedRole());
         
         
         

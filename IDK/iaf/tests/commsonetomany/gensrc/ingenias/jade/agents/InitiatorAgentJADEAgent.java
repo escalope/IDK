@@ -530,6 +530,8 @@ public class InitiatorAgentJADEAgent
 			  try {
 			  getCM().launchProtocolAsInitiator("SampleInteraction",getAM().getYellowPages());
               } catch (NoAgentsFound naf){
+              } catch (WrongInteraction wi){
+              	wi.printStackTrace();
               }
              } else {
               if (getGraphics()!=null)

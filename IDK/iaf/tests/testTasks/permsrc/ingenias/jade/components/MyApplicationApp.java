@@ -32,7 +32,10 @@ import ingenias.jade.exception.*;
 
 
 
-public abstract class MyApplicationApp extends Application{
+public abstract class MyApplicationApp extends MultipleOwnersApplication{
+
+
+
 
  public MyApplicationApp(){
   super();

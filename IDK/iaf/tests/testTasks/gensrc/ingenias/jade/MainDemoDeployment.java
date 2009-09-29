@@ -49,8 +49,6 @@ public class MainDemoDeployment {
 
         // Exit the JVM when there are no more containers around
         rt.setCloseVM(true);
-        
-       // MainInteractionManager.getInstance().goManual();
 
         // Create a default profile
         Profile p = new ProfileImpl();

@@ -67,7 +67,8 @@ public class SingleInputTaskTest {
 			assertTrue("There should be two SingleInputTaskFact entities, and this is the actual content "+frameFactEntitiesBefore,frameFactEntitiesBefore.size()==2);
 						
 			MainInteractionManager.goAutomatic(); // tells the agents to start working
-			TestUtils.doNothing(500); // waits for 1 second
+			TestUtils.doNothing(1000); // waits for 1 second
+			
 			Vector<MentalEntity> frameFactEntitiesAfter = msm
 					.getMentalEntityByType("SingleInputTaskFact");
 					

@@ -275,7 +275,7 @@ public class CheckingATicketWasObtained {
 
 		MainInteractionManager.goAutomatic(); 
 
-		TestUtils.doNothing(110000); // waits for 2 seconds
+		TestUtils.doNothing(40000); // waits for 2 seconds
 
 		printCurrentAssignment(msmBuyerAgent_0multipleBuyers);
 		printCurrentAssignment(msmBuyerAgent_1multipleBuyers);

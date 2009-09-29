@@ -304,15 +304,6 @@ public class InterfaceAgentJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Accept_assistency_proposal");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Accept_assistency_proposal");
-			else {
-			    addExpectedInputs(tobject, "Accept_assistency_proposal","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyersToConsult");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("BuyersToConsult");
@@ -327,6 +318,15 @@ public class InterfaceAgentJADEAgent
 				nonExistingInputs.add("BuyerAssignmentProposal");
 			else {
 			    addExpectedInputs(tobject, "BuyerAssignmentProposal","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Accept_assistency_proposal");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Accept_assistency_proposal");
+			else {
+			    addExpectedInputs(tobject, "Accept_assistency_proposal","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;

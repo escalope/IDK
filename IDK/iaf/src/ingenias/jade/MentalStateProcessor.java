@@ -531,10 +531,12 @@ public class MentalStateProcessor implements LocksListener {
 		doReplan.add(true);
 
 	}
-
+	
 	public synchronized boolean agentInitialised(){
 		return ja.isAgentInitialised();
 	}
+
+
 
 	/**
 	 * It reviews agent mental state to reconsider if there are new active tasks. Active tasks are

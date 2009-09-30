@@ -8,7 +8,7 @@
 	<property name="javac.optimize"           value="off"/>
 	<property name="javac.deprecation"        value="on"/>
 	<property name="javac.debug"              value="true"/>
-	<property name="project.version" value="2.8.1"/>
+	<property name="project.version" value="3.0.0-devel"/>
 
 	
 	<target name="init">

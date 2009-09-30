@@ -34,6 +34,8 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 
 import jade.lang.acl.ACLMessage;
 import jade.proto.AchieveREInitiator;
+
+import java.util.Date;
 import java.util.Vector;
 
 /**
@@ -70,9 +72,11 @@ public class YellowPages extends Application {
 		searchcons.setMaxResults(100l); // To return 100 matches as much
 		searchResult=null;
 		searchFinished=false;
+		ACLMessage requestMessage=jade.domain.DFService.createRequestMessage(ja,ja.getDefaultDF(),  FIPAManagementVocabulary.SEARCH,
+				this.getColDescription(rolename), searchcons);
+		requestMessage.setReplyByDate(new Date(new Date().getTime()+10000)); // set timeout to 10 seconds
 		AchieveREInitiator request=new AchieveREInitiator(ja,
-				jade.domain.DFService.createRequestMessage(ja,ja.getDefaultDF(),  FIPAManagementVocabulary.SEARCH,
-						this.getColDescription(rolename), searchcons)){
+				requestMessage){
 			@Override
 			protected void handleAgree(ACLMessage agree) {
 				// TODO Auto-generated method stub

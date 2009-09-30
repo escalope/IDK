@@ -165,6 +165,10 @@
     </target>
 
     <target name="--pre-dist" depends="compile">
+      <delete>
+        <fileset dir="dist" includes="*.zip"/>
+     </delete>
+ 
     </target>
     
     <target name="--dist-editor" depends="--pre-dist">

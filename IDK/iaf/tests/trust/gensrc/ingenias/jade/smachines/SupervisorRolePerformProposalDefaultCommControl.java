@@ -141,7 +141,7 @@ import ingenias.exception.NotFound;
 	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"AcceptedProposal");
 	   	   for (MentalEntity me:mfcontent)             
              sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLock(mfcontent);
+	       getLR().removeDeletionLockType("AcceptedProposal");
 	       lockProcessed("AcceptedProposal");
            //MainInteractionManager.log("Removing lock AcceptedProposal",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             
@@ -172,7 +172,7 @@ import ingenias.exception.NotFound;
 	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"DeniedProposal");
 	   	   for (MentalEntity me:mfcontent)             
              sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLock(mfcontent);
+	       getLR().removeDeletionLockType("DeniedProposal");
 	       lockProcessed("DeniedProposal");
            //MainInteractionManager.log("Removing lock DeniedProposal",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             

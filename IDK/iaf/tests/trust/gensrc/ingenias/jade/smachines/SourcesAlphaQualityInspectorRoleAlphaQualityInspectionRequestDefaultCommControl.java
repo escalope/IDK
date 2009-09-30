@@ -127,7 +127,7 @@ import ingenias.exception.NotFound;
 	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"QualityDegreeOfSourceInTesting");
 	   	   for (MentalEntity me:mfcontent)             
              sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLock(mfcontent);
+	       getLR().removeDeletionLockType("QualityDegreeOfSourceInTesting");
 	       lockProcessed("QualityDegreeOfSourceInTesting");
            //MainInteractionManager.log("Removing lock QualityDegreeOfSourceInTesting",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             

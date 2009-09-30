@@ -141,7 +141,7 @@ import ingenias.exception.NotFound;
 	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"Reject_assistency_proposal");
 	   	   for (MentalEntity me:mfcontent)             
              sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLock(mfcontent);
+	       getLR().removeDeletionLockType("Reject_assistency_proposal");
 	       lockProcessed("Reject_assistency_proposal");
            //MainInteractionManager.log("Removing lock Reject_assistency_proposal",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             
@@ -172,7 +172,7 @@ import ingenias.exception.NotFound;
 	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"Accept_assistency_proposal");
 	   	   for (MentalEntity me:mfcontent)             
              sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLock(mfcontent);
+	       getLR().removeDeletionLockType("Accept_assistency_proposal");
 	       lockProcessed("Accept_assistency_proposal");
            //MainInteractionManager.log("Removing lock Accept_assistency_proposal",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             

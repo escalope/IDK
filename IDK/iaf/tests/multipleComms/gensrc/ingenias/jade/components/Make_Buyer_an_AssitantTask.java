@@ -47,9 +47,9 @@ public class Make_Buyer_an_AssitantTask extends Task{
 
         BuyersToConsult  eiBuyersToConsult=(BuyersToConsult)this.getFirstInputOfType("BuyersToConsult");             
 
-        BuyerAssignmentProposal  eiBuyerAssignmentProposal=(BuyerAssignmentProposal)this.getFirstInputOfType("BuyerAssignmentProposal");             
-
         Accept_assistency_proposal  eiAccept_assistency_proposal=(Accept_assistency_proposal)this.getFirstInputOfType("Accept_assistency_proposal");             
+
+        BuyerAssignmentProposal  eiBuyerAssignmentProposal=(BuyerAssignmentProposal)this.getFirstInputOfType("BuyerAssignmentProposal");             
 
 
 

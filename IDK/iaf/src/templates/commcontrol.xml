@@ -140,7 +140,7 @@ import ingenias.exception.NotFound;
 	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"@@@v@@@type@@@/v@@@");
 	   	   for (MentalEntity me:mfcontent)             
              sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLock(mfcontent);
+	       getLR().removeDeletionLockType("@@@v@@@type@@@/v@@@");
 	       lockProcessed("@@@v@@@type@@@/v@@@");
            //MainInteractionManager.log("Removing lock @@@v@@@type@@@/v@@@",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             

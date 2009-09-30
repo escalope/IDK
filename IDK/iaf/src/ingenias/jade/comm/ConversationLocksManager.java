@@ -171,4 +171,13 @@ public class ConversationLocksManager implements LocksRemover, LocksWriter {
 		
 	}
 
+	@Override
+	public synchronized void removeDeletionLockType(String type) {
+		this.cannotBeDeletedExpectedTypes.remove(type);
+		generateNotification();
+        //EventManager.getInstance().reremovedDeletionLock(element, locked, type, atype)eletionLock(element,this.cannotBeDeleted,aname,"");
+                
+		
+	}
+
 }

@@ -114,7 +114,7 @@ public class MentalStateProcessor implements LocksListener {
 				if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents")){
 	//				queues.printQueues();					
 				}
-				msm.cleanConversations();
+			
 				//System.err.println("phase5 "+ja.getName());
 
 				// Do not execute other tasks until the interactions associated
@@ -130,7 +130,7 @@ public class MentalStateProcessor implements LocksListener {
 
 				processQueues();
 
-				
+				msm.cleanConversations();
 /*				if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
 							System.err.println("phase6 "+ja.getName());*/
 

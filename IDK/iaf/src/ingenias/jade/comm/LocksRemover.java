@@ -39,6 +39,7 @@ public interface LocksRemover {
 	 */
 	public    void removeDeletionLock(ingenias.editor.entities.MentalEntity element);
 	public    void removeDeletionLock(Vector<ingenias.editor.entities.MentalEntity> element);
+	public    void removeDeletionLockType(String type);
 	
 	/**
 	 * It tells whether the element can be removed or not

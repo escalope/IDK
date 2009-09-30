@@ -151,4 +151,14 @@ public class GeneralLocksManager implements LocksRemover, LocksWriter {
 		
 	}
 
+
+	@Override
+	public void removeDeletionLockType(String type) {
+		cannotBeDeletedExpectedTypes.remove(type);
+		
+		notifyChangeLocks();
+                
+		
+	}
+
 }

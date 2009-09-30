@@ -127,7 +127,7 @@ import ingenias.exception.NotFound;
 	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"Answer");
 	   	   for (MentalEntity me:mfcontent)             
              sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLock(mfcontent);
+	       getLR().removeDeletionLockType("Answer");
 	       lockProcessed("Answer");
            //MainInteractionManager.log("Removing lock Answer",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             

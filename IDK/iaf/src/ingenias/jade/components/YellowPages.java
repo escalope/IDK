@@ -25,11 +25,15 @@ package ingenias.jade.components;
 
 import jade.core.AID;
 import jade.core.Agent;
+import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.FIPAManagementVocabulary;
 import jade.domain.FIPAAgentManagement.SearchConstraints;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 
+import jade.lang.acl.ACLMessage;
+import jade.proto.AchieveREInitiator;
 import java.util.Vector;
 
 /**
@@ -42,6 +46,8 @@ import java.util.Vector;
 public class YellowPages extends Application {
 
 	Agent ja;
+	private DFAgentDescription[]  searchResult;
+	private boolean searchFinished;
 
 
 
@@ -62,8 +68,49 @@ public class YellowPages extends Application {
 		SearchConstraints searchcons= new SearchConstraints();
 		searchcons.setMaxDepth(5l); // To search within federated DFs
 		searchcons.setMaxResults(100l); // To return 100 matches as much
-		DFAgentDescription[] result=null;		
-		int k=0;
+		searchResult=null;
+		searchFinished=false;
+		AchieveREInitiator request=new AchieveREInitiator(ja,
+				jade.domain.DFService.createRequestMessage(ja,ja.getDefaultDF(),  FIPAManagementVocabulary.SEARCH,
+						this.getColDescription(rolename), searchcons)){
+			@Override
+			protected void handleAgree(ACLMessage agree) {
+				// TODO Auto-generated method stub
+				super.handleAgree(agree);
+				searchFinished=true;
+			}
+
+			@Override
+			protected void handleRefuse(ACLMessage refuse) {
+				// TODO Auto-generated method stub
+				super.handleRefuse(refuse);
+				searchFinished=true;
+			}
+			@Override
+			public void handleInform(ACLMessage inform){
+				try {
+					searchResult=DFService.decodeResult(inform.getContent());
+				} catch (FIPAException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				searchFinished=true;
+			}
+		};
+		ja.addBehaviour(request);
+		while (!searchFinished){
+			try {
+				Thread.currentThread().sleep((long) (100*Math.random()));
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (searchResult==null)
+			new Exception("Null returned by DFService").printStackTrace();
+		return searchResult;
+
+		/*int k=0;
 		while (result==null && k<10){
 			try {
 				AID dfName;
@@ -74,7 +121,7 @@ public class YellowPages extends Application {
 			}
 			k=k+1;
 		} 
-		return result;
+		return result;*/
 	}
 
 	/**
@@ -86,22 +133,22 @@ public class YellowPages extends Application {
 	 * @throws FIPAException
 	 */
 	public DFAgentDescription[] getAgentFromLocalID(String localid) throws FIPAException {
-		
+
 		SearchConstraints searchcons= new SearchConstraints();
-		
+
 		searchcons.setMaxDepth(2l); // To search within federated DFs
 		searchcons.setMaxResults(100l); // To return 100 matches as much
 		DFAgentDescription[] result=null;		
 		int k=0;
-		
+
 		//while (result==null && k<500){
-			try {
-				AID dfName;
-				//System.err.println("Try "+k+" looking for agent with localid "+localid);
-				result= jade.domain.DFService.search(ja, new DFAgentDescription(), 
-						searchcons);
-				if (result!=null){
-				
+		try {
+			AID dfName;
+			//System.err.println("Try "+k+" looking for agent with localid "+localid);
+			result= jade.domain.DFService.search(ja, new DFAgentDescription(), 
+					searchcons);
+			if (result!=null){
+
 				Vector<DFAgentDescription> descriptors=new Vector<DFAgentDescription>();
 				for (DFAgentDescription desc:result){
 					//System.err.println("found "+desc.getName().getLocalName());
@@ -112,11 +159,11 @@ public class YellowPages extends Application {
 				//System.err.println("found "+descriptors);
 				result=descriptors.toArray(new DFAgentDescription[descriptors.size()]);
 				// Lower values than 20 seconds timeout lead to null values returned. See ingenias.testing.TestJadeDFSearch
-				}
-			}catch (FIPAException fe){
-fe.printStackTrace();
 			}
-			k=k+1;
+		}catch (FIPAException fe){
+			fe.printStackTrace();
+		}
+		k=k+1;
 		//} 
 		//System.err.println("found "+result);
 		return result;

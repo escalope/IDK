@@ -244,7 +244,7 @@ public class TaskExecutionModel {
             	(Enumeration<AgentExternalDescription>)newInteractions.elementAt(k).getCollaboratorsElements();
             //ja.getLM().addInteractionLocks(current.getInteraction().getId());
             this.interactionsProcessed.add("OneToGo");
-            SimpleBehaviour oneShotBehaviour = new SimpleBehaviour() {
+           /* SimpleBehaviour oneShotBehaviour = new SimpleBehaviour() {
 
                 private boolean done = false;
 
@@ -252,7 +252,7 @@ public class TaskExecutionModel {
                 public void action() {
                     if (msm.isLocked()) {
                         done = false;
-                    } else {
+                    } else {*/
                         try {
                             ActiveConversation newConversation = null;                          
                             if (collaborators != null && collaborators.hasMoreElements()) {
@@ -296,142 +296,143 @@ public class TaskExecutionModel {
                         }
                         msm.setModified();
                         interactionsProcessed.remove(0); // to indicate one interaction was already processed                        
-                        done = true;
+                 //       done = true;
                         
-
+/*
                     }
                 }
 
                 @Override
                 public boolean done() {
                     return done;
-                }
+                }*/
 
-                private void copyContentFromTempConversationToNewConversation(
-                        final RuntimeConversation current,
-                        ActiveConversation newConversation) {
-                    Enumeration enumEnt;
-                    enumEnt = current.getCurrentContentElements();
-                    while (enumEnt.hasMoreElements()) {
-                        MentalEntity nelement = (MentalEntity) enumEnt.nextElement();
-                        if (!contains(newConversation.getConv(), nelement) && !(nelement instanceof RuntimeConversation)) {
-                            newConversation.getConv().addCurrentContent(nelement);
-                        }
-                    }
-                }
-
-                private void copyConversationContextContentToNewConversation(
-                        final Task t, ActiveConversation newConversation) {
-                    Enumeration enumEnt = t.getConversationContext().getCurrentContentElements();
-                    while (enumEnt.hasMoreElements()) {
-                        MentalEntity nelement = (MentalEntity) enumEnt.nextElement();
-                        if (!contains(newConversation.getConv(), nelement) && !(nelement instanceof RuntimeConversation)) {
-                            newConversation.getConv().addCurrentContent(nelement);
-                        }
-                    }
-                }
-
-                private ActiveConversation createNewInteractionWithCollaboratorsAutomaticallySet(
-                        final JADEAgent ja, final Task t,
-                        final RuntimeConversation current) throws NoAgentsFound, WrongInteraction {
-                    ActiveConversation actconv;
-                    // automatic selection of participants
-                    actconv = ja.getCM().launchProtocolAsInitiator(current.getInteraction().getId(),
-                            ja.getAM().getYellowPages());
-                    StackEntry se = new StackEntry("");
-                    se.setOperation("Creation");
-                    se.setPlace(t.getID() + ":" + t.getType());
-                    se.setResposible(ja.getLocalName());
-                    se.setTime("" + new java.util.Date().getTime());
-
-
-                    actconv.getConv().addStack(se);
-                    return actconv;
-                }
-
-                private ActiveConversation createNewInteractionWithCollaboratorsSetByUser(
-                        final JADEAgent ja, final Task t,
-                        final RuntimeConversation current,
-                        ActiveConversation actconv, Enumeration<AgentExternalDescription> collaborators)
-                        throws NoAgentsFound, WrongInteraction {
-                    //Collaborators have been set
-                    AgentExternalDescription[] actors;
-                    Vector<AgentExternalDescription> descV = new Vector<AgentExternalDescription>();
-                    String colaboratorsFound = "";
-                    String colaboratorNotFound = "";
-                    while (collaborators.hasMoreElements() && 
-                            ((current.getAbortCode() !=null && current.getAbortCode() != IAFProperties.INTERNAL_FAILURE)
-                            || current.getAbortCode()==null)) {
-                    	AgentExternalDescription colLocalID = collaborators.nextElement();
-                            //descr = ja.getAM().getYellowPages().getAgentFromLocalID(colLocalID);
-                        //if (descr.length > 0) {
-							descV.add(colLocalID);
-							//colaboratorsFound = colaboratorsFound + descr[0].getName().getLocalName();
-                        //}                       
-                    }
-                    actors = descV.toArray(new AgentExternalDescription[descV.size()]);
-                    if (ja.getCM().verifyActors(current.getInteraction().getId(), actors)) {
-                        actconv = ja.getCM().launchProtocolAsInitiator(
-                                current.getInteraction().getId(), actors);
-                        StackEntry se = new StackEntry("");
-                        se.setOperation("Creation");
-                        se.setPlace(t.getID() + ":" + t.getType());
-                        se.setResposible(ja.getLocalName());
-                        se.setTime("" + new java.util.Date().getTime());
-                        actconv.getConv().addStack(se);
-
-                    } else {
-                        EventManager.getInstance().failedToFindColaboratorsWhenManuallyInitializingAConversation(
-                                ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),
-                                t,
-                                current.getInteraction().getType(),
-                                colaboratorNotFound);
-
-
-                        current.setState("ABORTED");
-                        current.setAbortCode(IAFProperties.NO_AGENTS_FOUND);
-                    }
-                    return actconv;
-                }
-
-                private void updateAncestorConversationOfDifferentType(
-                        RuntimeConversation current,
-                        RuntimeConversation parent) {
-                    if (!parent.getInteraction().getId().equalsIgnoreCase(current.getInteraction().getId())) {
-                        if (!contains(current, parent)) {
-                            current.addCurrentContent(parent);
-                        }
-                    } else {
-                        Enumeration<MentalEntity> content = parent.getCurrentContentElements();
-                        while (content.hasMoreElements()) {
-                            MentalEntity next = content.nextElement();
-                            if (next instanceof RuntimeConversation) {
-                                updateAncestorConversationOfDifferentType(current, (RuntimeConversation) next);
-                            }
-                        }
-                    }
-                }
-
-                private boolean contains(RuntimeConversation conv,
-                        MentalEntity newME) {
-                    Enumeration elements = conv.getCurrentContentElements();
-                    boolean found = false;
-                    while (elements.hasMoreElements() && !found) {
-                        MentalEntity nelement = (MentalEntity) elements.nextElement();
-                        if (nelement.getId().equals(newME.getId())) {
-                            found = true;
-                        }
-                    }
-
-                    return found;
-                }
-            };
-            oneShotBehaviour.setBehaviourName("New interactions creation for task " + t.getID() + ":" + t.getType());
-            ja.addBehaviour(oneShotBehaviour);
+                
+         //   };
+          //  oneShotBehaviour.setBehaviourName("New interactions creation for task " + t.getID() + ":" + t.getType());
+            //ja.addBehaviour(oneShotBehaviour);
 
 
         }
     }
+private void copyContentFromTempConversationToNewConversation(
+        final RuntimeConversation current,
+        ActiveConversation newConversation) {
+    Enumeration enumEnt;
+    enumEnt = current.getCurrentContentElements();
+    while (enumEnt.hasMoreElements()) {
+        MentalEntity nelement = (MentalEntity) enumEnt.nextElement();
+        if (!contains(newConversation.getConv(), nelement) && !(nelement instanceof RuntimeConversation)) {
+            newConversation.getConv().addCurrentContent(nelement);
+        }
+    }
+}
+
+private void copyConversationContextContentToNewConversation(
+        final Task t, ActiveConversation newConversation) {
+    Enumeration enumEnt = t.getConversationContext().getCurrentContentElements();
+    while (enumEnt.hasMoreElements()) {
+        MentalEntity nelement = (MentalEntity) enumEnt.nextElement();
+        if (!contains(newConversation.getConv(), nelement) && !(nelement instanceof RuntimeConversation)) {
+            newConversation.getConv().addCurrentContent(nelement);
+        }
+    }
+}
+
+private ActiveConversation createNewInteractionWithCollaboratorsAutomaticallySet(
+        final JADEAgent ja, final Task t,
+        final RuntimeConversation current) throws NoAgentsFound, WrongInteraction {
+    ActiveConversation actconv;
+    // automatic selection of participants
+    actconv = ja.getCM().launchProtocolAsInitiator(current.getInteraction().getId(),
+            ja.getAM().getYellowPages());
+    StackEntry se = new StackEntry("");
+    se.setOperation("Creation");
+    se.setPlace(t.getID() + ":" + t.getType());
+    se.setResposible(ja.getLocalName());
+    se.setTime("" + new java.util.Date().getTime());
+
+
+    actconv.getConv().addStack(se);
+    return actconv;
+}
+
+private ActiveConversation createNewInteractionWithCollaboratorsSetByUser(
+        final JADEAgent ja, final Task t,
+        final RuntimeConversation current,
+        ActiveConversation actconv, Enumeration<AgentExternalDescription> collaborators)
+        throws NoAgentsFound, WrongInteraction {
+    //Collaborators have been set
+    AgentExternalDescription[] actors;
+    Vector<AgentExternalDescription> descV = new Vector<AgentExternalDescription>();
+    String colaboratorsFound = "";
+    String colaboratorNotFound = "";
+    while (collaborators.hasMoreElements() && 
+            ((current.getAbortCode() !=null && current.getAbortCode() != IAFProperties.INTERNAL_FAILURE)
+            || current.getAbortCode()==null)) {
+    	AgentExternalDescription colLocalID = collaborators.nextElement();
+            //descr = ja.getAM().getYellowPages().getAgentFromLocalID(colLocalID);
+        //if (descr.length > 0) {
+			descV.add(colLocalID);
+			//colaboratorsFound = colaboratorsFound + descr[0].getName().getLocalName();
+        //}                       
+    }
+    actors = descV.toArray(new AgentExternalDescription[descV.size()]);
+    if (ja.getCM().verifyActors(current.getInteraction().getId(), actors)) {
+        actconv = ja.getCM().launchProtocolAsInitiator(
+                current.getInteraction().getId(), actors);
+        StackEntry se = new StackEntry("");
+        se.setOperation("Creation");
+        se.setPlace(t.getID() + ":" + t.getType());
+        se.setResposible(ja.getLocalName());
+        se.setTime("" + new java.util.Date().getTime());
+        actconv.getConv().addStack(se);
+
+    } else {
+        EventManager.getInstance().failedToFindColaboratorsWhenManuallyInitializingAConversation(
+                ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),
+                t,
+                current.getInteraction().getType(),
+                colaboratorNotFound);
+
+
+        current.setState("ABORTED");
+        current.setAbortCode(IAFProperties.NO_AGENTS_FOUND);
+    }
+    return actconv;
+}
+
+private void updateAncestorConversationOfDifferentType(
+        RuntimeConversation current,
+        RuntimeConversation parent) {
+    if (!parent.getInteraction().getId().equalsIgnoreCase(current.getInteraction().getId())) {
+        if (!contains(current, parent)) {
+            current.addCurrentContent(parent);
+        }
+    } else {
+        Enumeration<MentalEntity> content = parent.getCurrentContentElements();
+        while (content.hasMoreElements()) {
+            MentalEntity next = content.nextElement();
+            if (next instanceof RuntimeConversation) {
+                updateAncestorConversationOfDifferentType(current, (RuntimeConversation) next);
+            }
+        }
+    }
+}
+
+private boolean contains(RuntimeConversation conv,
+        MentalEntity newME) {
+    Enumeration elements = conv.getCurrentContentElements();
+    boolean found = false;
+    while (elements.hasMoreElements() && !found) {
+        MentalEntity nelement = (MentalEntity) elements.nextElement();
+        if (nelement.getId().equals(newME.getId())) {
+            found = true;
+        }
+    }
+
+    return found;
+}
 
     private void createNewEntities(final JADEAgent ja, MentalStateManager msm, final Task t, RuntimeConversation currentConv,
             TaskOutput generatedOutput, Vector<RuntimeConversation> newInteractions) {

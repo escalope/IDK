@@ -84,7 +84,7 @@ public class TaskExecution {
 		// mental state of the agent
 		System.out.println("sigo");
 		MainInteractionManager.goAutomatic(); // tells the agents to start working
-		TestUtils.doNothing(2000); // waits for 2 second
+		TestUtils.doNothing(5000); // waits for 2 second
 
 		assertTrue("The task InteractionLaunchingTask should have been executed and it is in state "+
 				esm.getCurrentStates()+". The trace is \n"+esm.getTracesAsString(),esm.isAccepted()); 		

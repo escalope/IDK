@@ -193,7 +193,7 @@
            </fileset>
        </copy>
       <zip basedir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"
-       destfile="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}.zip">
+       destfile="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}.zip">
        </zip>
        <delete dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
     </target>

@@ -38,6 +38,7 @@ public class LearnNotToTrustTest {
 
     @Test
     public void testDemo() throws Exception {
+        int delay=4000;
         IAFProperties.setGarbageCollectionInterval(100);
 
         // Involved agent local ids for this test are:
@@ -76,7 +77,7 @@ public class LearnNotToTrustTest {
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(2000);
+        TestUtils.doNothing(delay);
 
         TestUtils.checkExistenceMEWithinMS(msmB, "TrustInformation", "SourcesSupervisor_0SourcesSupervisorDU", 1);
 
@@ -84,19 +85,19 @@ public class LearnNotToTrustTest {
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(2000);
+        TestUtils.doNothing(delay);
 
         evento = new NewCycleEvent();
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(2000);
+        TestUtils.doNothing(delay);
 
         evento = new NewCycleEvent();
         evento.setdata("urn:fuente:2");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(2000);
+        TestUtils.doNothing(delay);
 
         TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();

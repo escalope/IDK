@@ -58,7 +58,7 @@ public class LearnToTrustTest {
         // MentalStateManager msm = MSMRepository.getInstance().get("MY_AGENT_ID"); // provides access to the
         // For current agents, these are the variables containing their mental states
 
-        System.out.println("voy");
+        int delay=4000;
 
         IAFProperties.setGarbageCollectionInterval(100);
 
@@ -76,7 +76,7 @@ public class LearnToTrustTest {
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(2000);
+        TestUtils.doNothing(delay);
 
         TestUtils.checkExistenceMEWithinMS(msmB, "TrustInformation", "SourcesSupervisor_0SourcesSupervisorDU", 1);
 
@@ -85,21 +85,21 @@ public class LearnToTrustTest {
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(2000);
+        TestUtils.doNothing(delay);
 
 
         evento = new NewIntroducedProposalEvent();
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(2000);
+        TestUtils.doNothing(delay);
 
 
         evento = new NewIntroducedProposalEvent();
         evento.setdata("urn:fuente:3");
         msmA.addMentalEntity(evento);
 
-        TestUtils.doNothing(2000);
+        TestUtils.doNothing(delay);
 
         TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();

@@ -1,8 +1,8 @@
 <project name="ingenias" default="runide" basedir=".">
-
+	
 	
 	<property name="src" location="src" />
-
+	
 	<property name="srccodegen" location="srccodegen" />
 	
 	<property name="modhtmldoc" location="modules/srchtmldoc" />
@@ -18,9 +18,9 @@
 	<property name="modrefdemo" location="modules/srcreflectiontest" />
 	
 	<property name="modcodeuploader" location="modules/srccodeuploader" />
-
+	
 	<property name="modiam" location="modules/srciam" />
-
+	
 	<property name="modatai" location="modules/srcatai" />	
 	
 	<property name="temp" location="tmp" />
@@ -33,31 +33,31 @@
 	<property name="specfile" location=""/>
 	
 	<property name="mainP" location="project"/>		
-		
+	
 	<property name="javac.optimize"           value="off"/>
 	<property name="javac.deprecation"        value="on"/>
 	<property name="javac.debug"              value="true"/>
-
+	
 	<property name='marathon.home' value='testlibs' />
 	<property name='marathon.project.dir' value='tests/tests-marathon' />
-
 	
-
-   <path id="lib.path.ref">
-    <fileset dir="lib">
-        <include name="**/*.jar"/>
-        <exclude name="ingeniaseditor.jar"/>
-    </fileset>
-  </path>
-
-  <pathconvert pathsep=" " property="lib.path.list" refid="lib.path.ref">
-     <chainedmapper>
-         <flattenmapper/>
-         <globmapper from="*" to="lib/*"/>
-     </chainedmapper>
-  </pathconvert>
-
-
+	
+	
+	<path id="lib.path.ref">
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+			<exclude name="ingeniaseditor.jar"/>
+		</fileset>
+	</path>
+	
+	<pathconvert pathsep=" " property="lib.path.list" refid="lib.path.ref">
+		<chainedmapper>
+			<flattenmapper/>
+			<globmapper from="*" to="lib/*"/>
+		</chainedmapper>
+	</pathconvert>
+	
+	
 	<target name="init">
 		
 		<tstamp />
@@ -65,12 +65,12 @@
 		
 	</target>
 	
-
+	
 	<!-- *********************************** -->
 	<!--   MODULE INGENIAS Analyser Module   -->
 	<!-- *********************************** -->
 	<!--   Compiles and deploys the aim module     -->
-
+	
 	<target name="modiam">
 		
 		<delete dir="${temp}" />
@@ -96,31 +96,75 @@
 			
 		</javac>
 		
-	<copy todir="${temp}/templates">
+		<copy todir="${temp}/templates">
+			
+			<fileset dir="${modiam}/templates"></fileset>
+			
+		</copy>
 		
-		<fileset dir="${modiam}/templates"></fileset>
+		<jar jarfile="${modiam}/modiam.jar"
+		     
+		     basedir="${temp}" />
 		
-	</copy>
+		<delete file="${moddeploy}/modiam.jar" />
+		
+		<move file="${modiam}/modiam.jar"
+		      
+		      toDir="${moddeploy}" />
+		<delete dir="${temp}" />
+		
+	</target>
 	
-	<jar jarfile="${modiam}/modiam.jar"
-	     
-	     basedir="${temp}" />
+	<!-- ********************* -->
+	<!--   MODULE IAF Generator    -->
+	<!-- ********************* -->
 	
-	<delete file="${moddeploy}/modiam.jar" />
+	<condition property="modiaf.module">
+		<and>
+			<available file="modules/srcmodiaf/ingenias/codeproc/IAFGenerator.java"/>
+		</and>
+  	</condition>
 	
-	<move file="${modiam}/modiam.jar"
-	      
-	      toDir="${moddeploy}" />
-	<delete dir="${temp}" />
+	<target name="modiaf" if="modiaf.module">
+		<delete dir="${temp}" />
+		
+		<mkdir dir="${temp}/templates" />
+		
+		
+		<javac compiler="modern" depend="true" destdir="${temp}" debug="true">
+			
+			<src path="modules/srcmodiaf" />
+			
+			<classpath>
+				
+				
+				<fileset dir="lib">
+					
+					<include name="**/*.jar" />
+					
+				</fileset>
+				
+			</classpath>
+			
+		</javac>
+		
+		<copy todir="${temp}/templates">
+			
+			<fileset dir="modules/srcmodiaf/templates"></fileset>
+			
+		</copy>
+		
+		<jar jarfile="modiaf.jar" basedir="${temp}" />
+		<move file="modiaf.jar"
+		      toDir="${moddeploy}" />
+		<delete dir="${temp}" />
+	</target>	
 	
-</target>	
-	
-
 	<!-- ********************* -->
 	<!--   MODULE AT Assistant    -->
 	<!-- ********************* -->
 	<!--   Compiles and deploys the html doc module     -->
-
+	
 	<target name="modatai">
 		
 		<delete dir="${temp}" />
@@ -164,54 +208,54 @@
 	<delete dir="${temp}" />
 	
 </target>	
+
+
+<!-- ********************* -->
+<!--   MODULE APP Linker    -->
+<!-- ********************* -->
+<!--   Compiles and deploys the html doc module     -->
+<target name="modapplinker">
 	
-	
-	<!-- ********************* -->
-	<!--   MODULE APP Linker    -->
-	<!-- ********************* -->
-	<!--   Compiles and deploys the html doc module     -->
-	<target name="modapplinker">
-		
-		<delete dir="${temp}" />
-		<mkdir dir="${temp}"/>
-		
-		
-		<javac compiler="modern" depend="true" destdir="${temp}" debug="true" fork="true">
-			
-			<src path="${modapplinker}" />
-			
-			<classpath>
-				
-				<pathelement path="${classpath}" />
-				
-				
-				<fileset dir="lib">
-					
-					<include name="**/*.jar" />
-					
-				</fileset>
-				
-			</classpath>
-			
-		</javac>
-		
-		<!--copy todir="${temp}/templates">
-		
-		<fileset dir="${modapplinker}/templates"></fileset>
-		
-	</copy-->
-	
-	<jar jarfile="${modapplinker}/modapplinker.jar"
-	     
-	     basedir="${temp}" />
-	
-	<delete file="${moddeploy}/modapplinker.jar" />
-	
-	<move file="${modapplinker}/modapplinker.jar"
-	      
-	      toDir="${moddeploy}" />
 	<delete dir="${temp}" />
+	<mkdir dir="${temp}"/>
 	
+	
+	<javac compiler="modern" depend="true" destdir="${temp}" debug="true" fork="true">
+		
+		<src path="${modapplinker}" />
+		
+		<classpath>
+			
+			<pathelement path="${classpath}" />
+			
+			
+			<fileset dir="lib">
+				
+				<include name="**/*.jar" />
+				
+			</fileset>
+			
+		</classpath>
+		
+	</javac>
+	
+	<!--copy todir="${temp}/templates">
+	
+	<fileset dir="${modapplinker}/templates"></fileset>
+	
+</copy-->
+
+<jar jarfile="${modapplinker}/modapplinker.jar"
+     
+     basedir="${temp}" />
+
+<delete file="${moddeploy}/modapplinker.jar" />
+
+<move file="${modapplinker}/modapplinker.jar"
+      
+      toDir="${moddeploy}" />
+<delete dir="${temp}" />
+
 </target>
 
 
@@ -232,7 +276,7 @@
 		<classpath>
 			
 			<pathelement path="${classpath}" />
-						
+			
 			<fileset dir="lib">
 				
 				<include name="**/*.jar" />
@@ -258,7 +302,7 @@
 <move file="${modrefdemo}/modrefdemo.jar"
       
       toDir="${moddeploy}" />
-	<delete dir="${temp}" />
+<delete dir="${temp}" />
 
 </target>
 <!-- ********************* -->
@@ -279,7 +323,7 @@
 		<classpath>
 			
 			<pathelement path="${classpath}" />
-					
+			
 			<fileset dir="lib">
 				
 				<include name="**/*.jar" />
@@ -329,7 +373,7 @@
 		<classpath>
 			
 			<pathelement path="${classpath}" />
-					
+			
 			<fileset dir="lib">
 				
 				<include name="**/*.jar" />
@@ -356,52 +400,52 @@
 	<delete dir="${temp}" />
 	
 </target>
+
+<target name="modcodeuploader">
 	
-	<target name="modcodeuploader">
+	<delete dir="${temp}" />
+	<mkdir dir="${temp}" />
+	
+	<javac compiler="modern" depend="true" destdir="${temp}" debug="true" fork="true">
 		
-		<delete dir="${temp}" />
-		<mkdir dir="${temp}" />
-				
-		<javac compiler="modern" depend="true" destdir="${temp}" debug="true" fork="true">
+		<src path="${modcodeuploader}" />
+		
+		<classpath>
 			
-			<src path="${modcodeuploader}" />
+			<pathelement path="${classpath}" />
 			
-			<classpath>
+			<fileset dir="lib">
 				
-				<pathelement path="${classpath}" />
-						
-				<fileset dir="lib">
-					
-					<include name="**/*.jar" />
-					
-				</fileset>
+				<include name="**/*.jar" />
 				
-			</classpath>
+			</fileset>
 			
-		</javac>
+		</classpath>
 		
-		
-		<jar jarfile="${modcodeuploader}/modcodeuploader.jar"
-		     
-		     basedir="${temp}" />
-		
-		<move file="${modcodeuploader}/modcodeuploader.jar"
-		      
-		      toDir="${moddeploy}" />
-		<delete dir="${temp}" />
-		
-	</target>
-
-<target name="cleanModules">
- <delete dir="${temp}"/>
- <delete>
- 	<fileset dir="ext" includes="**/*.jar">
- 	</fileset>
- </delete>
-
+	</javac>
+	
+	
+	<jar jarfile="${modcodeuploader}/modcodeuploader.jar"
+	     
+	     basedir="${temp}" />
+	
+	<move file="${modcodeuploader}/modcodeuploader.jar"
+	      
+	      toDir="${moddeploy}" />
+	<delete dir="${temp}" />
+	
 </target>
 
-<target name="modules" depends="cleanModules,modexample,modhtmldoc,modrefdemo,modapplinker,modcodeuploader"/>
+<target name="cleanModules">
+	<delete dir="${temp}"/>
+	<delete>
+		<fileset dir="ext" includes="**/*.jar">
+		</fileset>
+	</delete>
+	
+</target>
+
+<target name="modules" depends="cleanModules,modexample,modhtmldoc,modrefdemo,modapplinker,modcodeuploader, modiaf"/>
 
 
 
@@ -415,8 +459,8 @@
 	
 	<java fork="true" failonerror="true" maxmemory="300m"
 	      classname="ingenias.editor.IDE">
-	<!--jvmarg value="-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"/-->
-				
+		<!--jvmarg value="-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"/-->
+		
 		<classpath>
 			<!--pathelement path="bin" /-->
 			
@@ -438,7 +482,7 @@
 	
 	<java fork="true" failonerror="true" maxmemory="128m"
 	      classname="ingenias.editor.IDE">
-<jvmarg line="-Xdebug -Xrunjdwp:transport=dt_socket,address=60005,server=y,suspend=n"/>
+		<jvmarg line="-Xdebug -Xrunjdwp:transport=dt_socket,address=60005,server=y,suspend=n"/>
 		<classpath>
 			
 			<!--pathelement path="${classpath}" /-->
@@ -573,11 +617,11 @@
 	<copy todir="${tempidk}/images">
 		<fileset dir="images/"></fileset>
 	</copy>
-
+	
 	<copy todir="${tempidk}/configs">
 		<fileset dir="configs/"></fileset>
 	</copy>
-
+	
 	<copy todir="${tempidk}/ingenias/editor/rendererxml">
 		<fileset dir="src/ingenias/editor/rendererxml"></fileset>
 	</copy>
@@ -587,7 +631,7 @@
 	<jar jarfile="lib/ingeniaseditor.jar" basedir="${tempidk}" update="true">
 		<manifest>
 			<attribute name="Main-Class" value="ingenias.editor.IDE"/>
-            <attribute name="Class-Path" value="${lib.path.list}"/>
+			<attribute name="Class-Path" value="${lib.path.list}"/>
 		</manifest>
 	</jar>
 	<delete dir="${tempidk}" />
@@ -595,50 +639,50 @@
 </target>
 
 <target name="marathon">
-		
-		<java fork="true" failonerror="true" maxmemory="300m"
-		      classname="net.sourceforge.marathon.Main">	
-			<jvmarg value="-Dmarathon.home='${marathon.home}' -Dpython.cachedir='${user.home}/.jycache' -Dmarathon.application.working.dir='${basedir}'"/> 						
-			<classpath>
-				
-				<!--pathelement path="${classpath}" /-->
-				
-				<fileset dir="testlibs">
-					
-					<include name="**/*.jar" />
-					
-				</fileset>
-				
-			</classpath>
-			<arg line="${marathon.project.dir}" />
+	
+	<java fork="true" failonerror="true" maxmemory="300m"
+	      classname="net.sourceforge.marathon.Main">	
+		<jvmarg value="-Dmarathon.home='${marathon.home}' -Dpython.cachedir='${user.home}/.jycache' -Dmarathon.application.working.dir='${basedir}'"/> 						
+		<classpath>
 			
-		</java>
+			<!--pathelement path="${classpath}" /-->
+			
+			<fileset dir="testlibs">
+				
+				<include name="**/*.jar" />
+				
+			</fileset>
+			
+		</classpath>
+		<arg line="${marathon.project.dir}" />
 		
-	</target>
+	</java>
+	
+</target>
 
 <target name="runMarathonTests">
+	
+	<java fork="true" failonerror="true" maxmemory="300m"
+	      classname="net.sourceforge.marathon.Main">	
+		<jvmarg value="-Dmarathon.home='${marathon.home}' -Dpython.cachedir='${user.home}/.jycache' -Dmarathon.application.working.dir='${basedir}'"/> 						
 		
-		<java fork="true" failonerror="true" maxmemory="300m"
-		      classname="net.sourceforge.marathon.Main">	
-			<jvmarg value="-Dmarathon.home='${marathon.home}' -Dpython.cachedir='${user.home}/.jycache' -Dmarathon.application.working.dir='${basedir}'"/> 						
-
-			<classpath>
-				
-				<!--pathelement path="${classpath}" /-->
-				
-				<fileset dir="testlibs">
-					
-					<include name="**/*.jar" />
-					
-				</fileset>
-				
-			</classpath>
-			<arg value="-batch" />			
-			<arg line="${marathon.project.dir}" />
+		<classpath>
 			
-		</java>
+			<!--pathelement path="${classpath}" /-->
+			
+			<fileset dir="testlibs">
+				
+				<include name="**/*.jar" />
+				
+			</fileset>
+			
+		</classpath>
+		<arg value="-batch" />			
+		<arg line="${marathon.project.dir}" />
 		
-	</target>
+	</java>
+	
+</target>
 
 
 
@@ -646,7 +690,7 @@
 	
 	
 	<delete dir="${tmp}" />
-
+	
 	
 </target>
 

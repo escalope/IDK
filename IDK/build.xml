@@ -113,45 +113,34 @@
 		
 	</target>
 
+	<target name="aa" depends ="--pre-dist,--dist-ingenias-all"/>
     <target name="--dist-ingenias-all" depends="init,--pre-dist">
-
-
 
          <!-- Preparacion de directorios -->
 
        <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
-       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/licenses"/>
-       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/iaf"/>
-       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/editor"/>
-
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}">
-           <fileset dir=".">
-               <include name="*.txt"/>
-               <include name="*.xml"/>
-           </fileset>
-       </copy>
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/licenses">
-           <fileset dir="licenses">
-               <include name="*"/>
-           </fileset>
-       </copy>
-
-       <!-- Preparacion de iaf -->
-       
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/iaf">
-           <fileset dir="iaf">
-               <include name="**/*"/>
-               <exclude name="**/.svn/**"/>
-           </fileset>
-       </copy>
 
        <!-- Preparacion de editor -->
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/editor">
-           <fileset dir="editor">
-              <include name="**/*"/>
-               <exclude name="**/.svn/**"/>
-           </fileset>
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}">
+	       <fileset dir="editor">
+		       <include name="**/*"/>
+		       <exclude name="**/.svn/**"/>
+		       <exclude name="tests/**/*"/>
+		       <exclude name="testlibs/**/*"/>
+	       </fileset>
        </copy>
+
+       <!-- Preparacion de iaf -->       
+       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiaf"/>
+    
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiaf">
+	       <fileset dir="iaf/src">
+		       <include name="**/*"/>
+		       <exclude name="**/.svn/**"/>
+	       </fileset>
+       </copy>
+       <!-- recompilar el modulo iaf dentro del editor-->
+       <ant antfile="build.xml" target="modules" dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
 
        <!-- Preparacion del zip -->
        <zip basedir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"

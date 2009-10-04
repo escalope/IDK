@@ -113,7 +113,6 @@
 		
 	</target>
 
-	<target name="aa" depends ="--pre-dist,--dist-ingenias-all"/>
     <target name="--dist-ingenias-all" depends="init,--pre-dist">
 
          <!-- Preparacion de directorios -->

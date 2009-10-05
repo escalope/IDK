@@ -386,7 +386,7 @@ public class CheckingATicketWasObtained {
 		checkTicketsPreDeliver(msmBuyerAgent_9multipleBuyers);
 
 		MainInteractionManager.goAutomatic(); 
-		TestUtils.doNothing(4000000); // waits for 2 seconds
+		TestUtils.doNothing(40000); // waits for 2 seconds
 
 
 		checkTicketsPostDeliver(msmBuyerAgent_0multipleBuyers);
@@ -407,9 +407,9 @@ public class CheckingATicketWasObtained {
 	private void checkTicketsPostDeliver(
 			MentalStateManager msmBuyerAgent_0multipleBuyers) {
 		Vector<MentalEntity> tickets = msmBuyerAgent_0multipleBuyers.getMentalEntityByType("Ticket_data");
-		assertTrue("There should be exactly one Ticket_data " +
+		assertTrue("There should be exactly no Ticket_data " +
 				"and there were "+tickets+ " in agent "+msmBuyerAgent_0multipleBuyers.getAgentName()+". Current state is "+msmBuyerAgent_0multipleBuyers.getAllMentalEntities(),
-				tickets.size() == 1); 
+				tickets.size() == 0); 
 	}
 
 	private void checkTicketsPreDeliver(

@@ -196,7 +196,7 @@ MentalStateUpdater {
 				Method method = me.getClass().getMethod("checkNoNullFields");
 				Vector<String> result=(Vector<String>) method.invoke(me,new Object[]{});
 				if (!result.isEmpty()){
-					System.err.println("There are null fields in entiy "+me.getId()+":"+me.getType()+" \n. Null fields are "+result+"\n the stack for this fact is "+((RuntimeFact)me).getStack());
+					System.err.println("There are null fields in entiy "+me.getId()+":"+me.getType()+" in agent "+getAgentName()+"\n. Null fields are "+result+"\n the stack for this fact is "+((RuntimeFact)me).getStack());
 				}
 			} catch (SecurityException e) {
 				// TODO Auto-generated catch block

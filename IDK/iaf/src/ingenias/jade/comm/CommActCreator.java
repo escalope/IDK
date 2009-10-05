@@ -216,7 +216,7 @@ public class CommActCreator {
 					throw new RuntimeException("Field "+field.getName()+" of class instance "+content.getClass().getName()+" does contain a null value. It cannot be serialized properly");
 				}
 				
-				Class fieldClass=field.getDeclaringClass();
+				Class fieldClass=field.get(content).getClass();
 				verifiedClasses.add(fieldClass);
 				boolean serializableExists = isSerializable(fieldClass);
 				if (!serializableExists) 

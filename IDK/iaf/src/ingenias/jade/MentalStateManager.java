@@ -37,6 +37,7 @@ import ingenias.exception.InvalidEntity;
 import ingenias.exception.NotFound;
 import ingenias.jade.comm.StateBehavior;
 import ingenias.jade.graphics.AgentModelPanelIAF;
+import ingenias.jade.mental.Agent_data;
 import ingenias.testing.DebugUtils;
 import ingenias.testing.MSMRepository;
 
@@ -45,6 +46,8 @@ import jade.core.behaviours.CyclicBehaviour;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.geom.Rectangle2D;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -184,6 +187,37 @@ MentalStateUpdater {
 		}
 
 		//		block(1000);
+	}
+	
+	public void checkNullFieldsInMentalEntities(){
+		for (MentalEntity me:this.state.values()){
+			if (me instanceof RuntimeFact && !(me instanceof Agent_data)){
+			 try {
+				Method method = me.getClass().getMethod("checkNoNullFields");
+				Vector<String> result=(Vector<String>) method.invoke(me,new Object[]{});
+				if (!result.isEmpty()){
+					System.err.println("There are null fields in entiy "+me.getId()+":"+me.getType()+" \n. Null fields are "+result+"\n the stack for this fact is "+((RuntimeFact)me).getStack());
+				}
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+			 
+			}
+			
+		}
 	}
 
 	//	}

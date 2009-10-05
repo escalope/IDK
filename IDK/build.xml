@@ -142,8 +142,9 @@
        <ant antfile="build.xml" target="modules" dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
 
        <!-- Preparacion del zip -->
-       <zip basedir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"
+       <zip basedir="dist"
        destfile="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}.zip">
+	       <zipfileset dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
        </zip>
 
        <!-- Eliminacion de temporales -->
@@ -166,9 +167,10 @@
               <include name="**/*"/>
                <exclude name="**/.svn/**"/>
            </fileset>
-       </copy>
-       <zip basedir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"
-       destfile="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}.zip">
+       </copy>         
+       <zip basedir="dist"
+	    destfile="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}.zip">
+	       <zipfileset dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
        </zip>
        <delete dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
     </target>
@@ -180,9 +182,11 @@
                <exclude name="**/.svn/**"/>
            </fileset>
        </copy>
-      <zip basedir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"
-       destfile="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}.zip">
+       <zip basedir="dist"
+	    destfile="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}.zip">
+	       <zipfileset dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
        </zip>
+
        <delete dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
     </target>
     <target name="dist" depends="--pre-dist,--dist-ingenias-all,--dist-editor,--dist-iaf">
@@ -191,10 +195,15 @@
    <target name="--pre-test" depends="compile">
      
    </target>
+   
+   <target name="test-editor-all" depends="--pre-test">
+	   <ant antfile="build.xml" target="runMarathonTests"  dir="editor"/>	   
+   </target>
 
    <target name="test-iaf-all" depends="--pre-test">
      <ant antfile="build.xml" target="test"  dir="iaf/tests/testTasks"/>
      <ant antfile="build.xml" target="test"  dir="iaf/tests/commsonetomany"/>
+     <ant antfile="build.xml" target="test"  dir="iaf/tests/trust"/>
      <ant antfile="build.xml" target="test"  dir="iaf/tests/trust"/>
    </target>
 </project>

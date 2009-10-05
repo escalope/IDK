@@ -40,6 +40,7 @@
 	
 	<property name='marathon.home' value='testlibs' />
 	<property name='marathon.project.dir' value='tests/tests-marathon' />
+	<property name="test.results.dir" location="tests/output"/>
 	
 	
 	
@@ -661,7 +662,7 @@
 </target>
 
 <target name="runMarathonTests">
-	
+	<mkdir dir="${test.results.dir}" />
 	<java fork="true" failonerror="true" maxmemory="300m"
 	      classname="net.sourceforge.marathon.Main">	
 		<jvmarg value="-Dmarathon.home='${marathon.home}' -Dpython.cachedir='${user.home}/.jycache' -Dmarathon.application.working.dir='${basedir}'"/> 						
@@ -675,9 +676,17 @@
 				<include name="**/*.jar" />
 				
 			</fileset>
+			<fileset dir="lib">
+				
+				<include name="**/*.jar" />
+				
+			</fileset>
 			
 		</classpath>
-		<arg value="-batch" />			
+		<arg line="-batch" />
+		<arg line="-capture" />		
+		<arg line="-reportdir"/>				
+		<arg line="${test.results.dir}"/>				
 		<arg line="${marathon.project.dir}" />
 		
 	</java>
@@ -695,4 +704,5 @@
 </target>
 
 </project>
+
 

@@ -22,7 +22,7 @@
  */
 package ingenias.testing;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.jade.AgentStates;
@@ -38,6 +38,29 @@ import java.util.Vector;
 public class TestUtils {
 
 	private static Hashtable<String,Vector<MentalEntity>> snapshots=new Hashtable<String,Vector<MentalEntity>>();
+	
+	public static void assertUntil(final AssertExpression expression, final long timeout){
+		
+		Thread thread=new Thread(){
+			public void run(){
+				long localTimeout=timeout;
+				while (!expression.canEvaluate() && timeout>0){
+					localTimeout=(long) (localTimeout-100*Math.random());
+					try {
+						Thread.currentThread().sleep(timeout);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				if (!expression.canEvaluate()){
+					fail("Timed out expression "+expression.getName()+". Could not evaluate its content before timeout "+timeout);
+				} else 
+				assertTrue(expression.getFailureMessage(),expression.evaluate());
+			}
+		};
+		thread.start();
+	}
 
 	// From Laurent Caillette's weblog
 	public static void forbidSystemExitCall() {

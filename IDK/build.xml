@@ -201,6 +201,7 @@
    </target>
 
    <target name="test-iaf-all" depends="--pre-test">
+	   <ant antfile="build.xml" target="generatetests"  dir="iaf"/>   
      <ant antfile="build.xml" target="test"  dir="iaf/tests/testTasks"/>
      <ant antfile="build.xml" target="test"  dir="iaf/tests/commsonetomany"/>
      <ant antfile="build.xml" target="test"  dir="iaf/tests/trust"/>

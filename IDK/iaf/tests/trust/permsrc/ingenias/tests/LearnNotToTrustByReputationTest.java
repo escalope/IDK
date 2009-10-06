@@ -39,7 +39,7 @@ public class LearnNotToTrustByReputationTest {
     @Test
     public void testDemo() throws Exception {
 
-        int delay=4000;
+        int delay=500;
         IAFProperties.setGarbageCollectionInterval(100);
 
         // Involved agent local ids for this test are:
@@ -108,10 +108,26 @@ public class LearnNotToTrustByReputationTest {
         TestUtils.doNothing(delay);
         
         TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
-        ReGreTInfo data = (ReGreTInfo) vcr.getdata();
-        assertNotNull(data);
+       ReGreTInfo data = (ReGreTInfo) vcr.getdata();
 
+       //Guarda
+        while(data==null){
+            TestUtils.doNothing(delay);
+            data = (ReGreTInfo) vcr.getdata();
+        }
+       assertNotNull(data);
+
+        //Guarda
+        while(data.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() < 4){
+            TestUtils.doNothing(delay);
+        }
         assertTrue(data.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() == 4);
+
+        //Guarda
+        while(data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU")==null){
+            TestUtils.doNothing(delay);
+        }
+
         assertTrue(data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
         assertTrue(data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0);
 
@@ -132,15 +148,35 @@ public class LearnNotToTrustByReputationTest {
         TestUtils.doNothing(delay);
 
         TrustInformation vcr1 = (TrustInformation) msmB1.getMentalEntityByType("TrustInformation").get(0);
+
+        //Guarda
         ReGreTInfo data1 = (ReGreTInfo) vcr1.getdata();
+        while(data1==null){
+            TestUtils.doNothing(delay);
+            data1 = (ReGreTInfo) vcr1.getdata();
+        }
         assertNotNull(data1);
         TestUtils.doNothing(delay);
         assertNotNull(data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU"));
+
+        //Guarda
+        while(data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() < 2){
+            TestUtils.doNothing(delay);
+        }
+
         assertTrue("Agent SourcesSupervisor_1SourcesSupervisorDU should have received 2 proposals and has received: "+data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size(),  data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() == 2);
+
+        //Guarda
+        while(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU")==null){
+            TestUtils.doNothing(delay);
+        }
+
         assertTrue(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
         assertTrue(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0);
 
     }
+
+
 }
 
  

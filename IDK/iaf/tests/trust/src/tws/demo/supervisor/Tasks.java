@@ -136,7 +136,7 @@ public class Tasks {
         boolean necesitaInspAlfa = false;
 
         if (!regret.getConfianzas().containsKey(colaborador)) {
-            regret.getConfianzas().put(colaborador, null);
+            regret.getConfianzas().put(colaborador, new Trust());
             regret.getOdb().put(colaborador, new Vector<EvaluationValue>());
             regret.getIdb().put(colaborador, new Vector<WitnessTrust>());
 

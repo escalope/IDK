@@ -71,6 +71,16 @@ public class QualityDegreeOfSourceInTesting extends ingenias.editor.entities.Run
    }
     
   
+  public Vector<String> checkNoNullFields(){
+   Vector<String> nullFields=new  Vector<String>();
+  
+    if ( data==null)
+     nullFields.add("data");
+   
+   return nullFields;
+  }
+  
+    
   
 }
 

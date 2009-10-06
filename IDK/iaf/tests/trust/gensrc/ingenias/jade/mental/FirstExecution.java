@@ -60,6 +60,13 @@ public class FirstExecution extends ingenias.editor.entities.RuntimeFact{
   
     
   
+  public Vector<String> checkNoNullFields(){
+   Vector<String> nullFields=new  Vector<String>();
+  
+   return nullFields;
+  }
+  
+    
   
 }
 

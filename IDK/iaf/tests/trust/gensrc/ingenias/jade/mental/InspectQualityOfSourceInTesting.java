@@ -71,6 +71,16 @@ public class InspectQualityOfSourceInTesting extends ingenias.editor.entities.Ru
    }
     
   
+  public Vector<String> checkNoNullFields(){
+   Vector<String> nullFields=new  Vector<String>();
+  
+    if ( data==null)
+     nullFields.add("data");
+   
+   return nullFields;
+  }
+  
+    
   
 }
 

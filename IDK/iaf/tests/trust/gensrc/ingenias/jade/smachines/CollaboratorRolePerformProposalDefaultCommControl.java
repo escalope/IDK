@@ -52,6 +52,8 @@ import ingenias.exception.NotFound;
   
        // Facts that cannot be removed because they are part of guards
     
+    lw.addDeletionLockExpectedType("SourceInfoProposal");
+     
     // Facts that cannot be removed because they must be sent
      
      lw.addDeletionLockExpectedType("SourceInfoProposal");
@@ -64,6 +66,8 @@ import ingenias.exception.NotFound;
   
        // Facts that cannot be removed because they are part of guards
     
+    locks.add("SourceInfoProposal");
+     
     // Facts that cannot be removed because they must be sent
      
      locks.add("SourceInfoProposal");
@@ -116,10 +120,13 @@ import ingenias.exception.NotFound;
          boolean allexist=true;
          Vector<MentalEntity> mfcontent=null;
          
+         Vector<MentalEntity> sip=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"SourceInfoProposal");
+         allexist=allexist && (sip !=null) && !sip.isEmpty();
+         
 		 
 		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"SourceInfoProposal").isEmpty();
 		   
-         if (allexist && true){
+         if (allexist && ((SourceInfoProposal)sip.get(0)).getdata()!=null){
            sb.clearContentNextMessage();
            sb.removeState("ProposalIU");
            
@@ -132,6 +139,8 @@ import ingenias.exception.NotFound;
            //MainInteractionManager.log("Removing lock SourceInfoProposal",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             
              
+           
+           //MainInteractionManager.log("Removing lock SourceInfoProposal",this.getAgent().getLocalName()+"-"+sb.getConversationID());
            
   		   //sb.clearState();         
 	              

@@ -71,6 +71,16 @@ public class NewProposalToBeSent extends ingenias.editor.entities.RuntimeFact{
    }
     
   
+  public Vector<String> checkNoNullFields(){
+   Vector<String> nullFields=new  Vector<String>();
+  
+    if ( data==null)
+     nullFields.add("data");
+   
+   return nullFields;
+  }
+  
+    
   
 }
 

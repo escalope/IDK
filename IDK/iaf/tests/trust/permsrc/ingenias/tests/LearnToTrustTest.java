@@ -104,8 +104,10 @@ public class LearnToTrustTest {
         TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();
         assertNotNull(data);
-
-        assertTrue(data.getOdb().get("ResearcherAssistant_0ResearcherAssistantDU").size() == 4);
+        assertNotNull(data.getOdb());
+        assertTrue("There should be an evaluation for ResearcherAssistant_0ResearcherAssistantDU and there are "+data.getOdb(),data.getOdb().get("ResearcherAssistant_0ResearcherAssistantDU")!=null);
+        
+        assertTrue("There should be four evaluations of agent ResearcherAssistant_0ResearcherAssistantDU and there are the following " +data.getOdb(), data.getOdb().get("ResearcherAssistant_0ResearcherAssistantDU").size() == 4);
         assertTrue(data.getConfianzas().get("ResearcherAssistant_0ResearcherAssistantDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
         assertTrue(data.getConfianzas().get("ResearcherAssistant_0ResearcherAssistantDU").getSubjectCriteriaGoodQuality().getValue() > 0);
 

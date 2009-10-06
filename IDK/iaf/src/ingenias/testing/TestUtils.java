@@ -39,27 +39,34 @@ public class TestUtils {
 
 	private static Hashtable<String,Vector<MentalEntity>> snapshots=new Hashtable<String,Vector<MentalEntity>>();
 	
-	public static void assertUntil(final AssertExpression expression, final long timeout){
+	public static Thread assertUntil(final AssertExpression expression, final long timeout){
 		
 		Thread thread=new Thread(){
 			public void run(){
 				long localTimeout=timeout;
-				while (!expression.canEvaluate() && timeout>0){
-					localTimeout=(long) (localTimeout-100*Math.random());
+				while (!expression.canEvaluate() && localTimeout>0){
+					double sleeptime = 1000*Math.random();
+					localTimeout=(long) (localTimeout-sleeptime);
 					try {
-						Thread.currentThread().sleep(timeout);
+						Thread.currentThread().sleep((long) sleeptime);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
+				
+				new Exception().printStackTrace();
 				if (!expression.canEvaluate()){
 					fail("Timed out expression "+expression.getName()+". Could not evaluate its content before timeout "+timeout);
 				} else 
 				assertTrue(expression.getFailureMessage(),expression.evaluate());
 			}
-		};
+		};		
+	    thread.setUncaughtExceptionHandler(Thread.currentThread().getUncaughtExceptionHandler());
+	    thread.setDefaultUncaughtExceptionHandler(Thread.currentThread().getDefaultUncaughtExceptionHandler());
+
 		thread.start();
+		return thread;
 	}
 
 	// From Laurent Caillette's weblog

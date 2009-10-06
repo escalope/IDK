@@ -613,11 +613,11 @@ public class @@@v@@@agentid@@@/v@@@JADEAgent
              new jade.core.behaviours.OneShotBehaviour() {
            public void action() {
 			 // If mental conditions are meet then the protocol is started
-			 RuntimeFact expectedInput=null;
+			 Vector<MentalEntity> expectedInput=null;
 			 boolean allexist=true;
 			 @@@repeat id="hastoexist"@@@
-			  expectedInput=(RuntimeFact)getMSM().getMentalEntity("@@@v@@@mentity@@@/v@@@");
-			  allexist=allexist&(expectedInput!=null);
+			  expectedInput=getMSM().getMentalEntityByType("@@@v@@@mentity@@@/v@@@");
+			  allexist=allexist&(expectedInput!=null && !expectedInput.isEmpty());
 			 @@@/repeat@@@
 			 if (allexist){
 			  try {

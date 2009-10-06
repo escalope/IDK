@@ -17,7 +17,6 @@ marathon.component.resolvers=
 marathon.fixture.dir=%marathon.project.dir%/Fixtures
 marathon.application.toolkit_menumask=false
 marathon.project.description=
-marathon.application.vm.command=/usr/bin/java
 marathon.project.name=editor-testing
 marathon.project.script.model=net.sourceforge.marathon.python.PythonScriptModel
 marathon.application.vm.arguments=

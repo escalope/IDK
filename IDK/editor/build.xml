@@ -608,6 +608,12 @@
 				<include name="*.jar" />
 				
 			</fileset>
+			<fileset dir="testlibs">
+				
+				<include name="**/*.jar" />
+				
+			</fileset>
+			
 			
 		</classpath>
 		
@@ -647,7 +653,7 @@
 		<classpath>
 			
 			<!--pathelement path="${classpath}" /-->
-			
+			<pathelement path="lib/ingeniaseditor.jar" />
 			<fileset dir="testlibs">
 				
 				<include name="**/*.jar" />
@@ -670,7 +676,7 @@
 		<classpath>
 			
 			<!--pathelement path="${classpath}" /-->
-			
+			<pathelement path="lib/ingeniaseditor.jar" />
 			<fileset dir="testlibs">
 				
 				<include name="**/*.jar" />

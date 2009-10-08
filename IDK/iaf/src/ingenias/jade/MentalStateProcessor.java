@@ -130,7 +130,7 @@ public class MentalStateProcessor implements LocksListener {
 
 				processQueues();
 				
-				msm.checkNullFieldsInMentalEntities();
+			//	msm.checkNullFieldsInMentalEntities();
 
 				msm.cleanConversations();
 /*				if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))

@@ -29,6 +29,9 @@ import ingenias.jade.AgentStates;
 import ingenias.jade.MentalStateManager;
 import ingenias.jade.MentalStateProcessor;
 
+import jade.util.leap.Serializable;
+
+import java.lang.reflect.Field;
 import java.security.Permission;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -195,6 +198,47 @@ public class TestUtils {
 		return conv;
 	}
 
+	public static void verifyFields(
+			Class myClass,
+			java.lang.Object content, Vector<Class> verifiedClasses) throws VerificationFailure{
+		Field[] fields = myClass.getDeclaredFields();
+		boolean serializableFields=true;
+		if (!isSerializable(myClass))
+			throw new VerificationFailure("Class "+myClass.getName()+" is not serializable");
+		for (Field field:fields){
+			try {
+				field.setAccessible(true); // to eliminate private access restrictions
+				if (field.get(content)==null){
+					throw new VerificationFailure("Field "+field.getName()+" of class instance "+content.getClass().getName()+" does contain a null value. It cannot be serialized properly");
+				}
+				
+				Class fieldClass=field.getDeclaringClass();
+				verifiedClasses.add(fieldClass);
+				boolean serializableExists = isSerializable(fieldClass);
+				if (!serializableExists) 
+					throw new VerificationFailure("Field "+field.getName()+" does not implement the serializable interface. It cannot be transmitted");			
+				if (!verifiedClasses.contains(fieldClass))
+					verifyFields(fieldClass,field.get(content), verifiedClasses);
+				serializableFields=serializableFields && serializableExists;		
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public static boolean isSerializable(Class fieldClass) {
+		Class<?>[] interfaces = fieldClass.getInterfaces();
+		boolean serializableExists=false;
+		for (Class currentInterface:interfaces){
+			serializableExists=serializableExists || currentInterface.equals(java.io.Serializable.class);
+		}
+		return serializableExists;
+	}
 
 
 }

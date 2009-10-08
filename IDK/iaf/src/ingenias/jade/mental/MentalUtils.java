@@ -22,9 +22,12 @@
 */
 package ingenias.jade.mental;
 
+import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeFact;
 import ingenias.editor.entities.StackEntry;
+import ingenias.jade.JADEAgent;
 
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -70,6 +73,29 @@ public class MentalUtils {
 		
 		}				
 		return sender;
+	}
+
+	public static void addStackEntry(MentalEntity consumedFact, String operation, String place, String responsible) {
+		if (consumedFact instanceof RuntimeFact){
+			RuntimeFact rf=(RuntimeFact)consumedFact;
+		StackEntry se=new StackEntry("");
+		se.setOperation(operation);
+		se.setPlace(place);
+		se.setResposible(responsible);
+		se.setTime(""+new java.util.Date().getTime());
+		rf.addStack(se);
+		}
+		
+	}
+
+	public static void addCommStackEntry(final JADEAgent ag, final String CID,
+			final String protocol, Object obj) {
+		StackEntry se=new StackEntry("");
+		se.setOperation("Transferred");
+		se.setPlace(CID+":"+protocol);
+		se.setResposible(ag.getLocalName());
+		se.setTime(""+new java.util.Date().getTime());
+		((RuntimeFact)obj).addStack(se);
 	}
 	
 

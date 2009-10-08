@@ -33,6 +33,7 @@ import ingenias.jade.components.Task;
 import ingenias.jade.components.TaskOutput;
 import ingenias.jade.exception.NoAgentsFound;
 import ingenias.jade.graphics.MainInteractionManager;
+import ingenias.jade.mental.MentalUtils;
 import ingenias.testing.DebugUtils;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
@@ -136,6 +137,7 @@ public class TaskExecutionModel {
             //MainInteractionManager.logMSP("Execution finished ",ja.getLocalName(),t.getID(),t.getType());
             //System.err.println(agentName+": Execution finished "+t.getID()+t.getType());
             } catch (Throwable ex) {
+            	System.err.println("Error produced: dumping inputs for the task "+t.getID()+":"+t.getType()+" in agent "+agentName);
                 Vector<MentalEntity> inputs = t.getInputs();
                 for (MentalEntity input : inputs) {
                     if (input instanceof RuntimeFact) {
@@ -160,6 +162,11 @@ public class TaskExecutionModel {
             TaskOutput generatedOutput = t.getFinalOutput();
 
             removeConsumedInputs(ja, cmsm, t, generatedOutput);
+            
+            Vector<MentalEntity> inputsProbablyModified = t.getInputs();
+            for (MentalEntity input:inputsProbablyModified){
+            	MentalUtils.addStackEntry(input,"read/modified", t.getID()+":"+t.getType(), ja.getLocalName());
+            }
 
             createNewEntities(ja, cmsm, t, t.getConversationContext(), generatedOutput, newInteractions);
   /*          if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
@@ -588,11 +595,12 @@ private boolean contains(RuntimeConversation conv,
         for (MentalEntity consumedFact : consumedInputs) {
             if (t.getConversationContext() == null) {
                 msm.remove(consumedFact.getId());
+                MentalUtils.addStackEntry(consumedFact,"Removed by task ",t.getID()+":"+t.getType(),ja.getLocalName());
                 EventManager.getInstance().consumedEntityDuringtaskExecutionFinished(ja.getLocalName(),
                         ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),
                         t,
                         (MentalEntity) consumedFact);
-
+                
 
             //System.err.println("Consumed fact "+consumedFact.getName()+" from mental state "+t.getID());
             } else {

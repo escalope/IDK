@@ -102,9 +102,12 @@ public class YellowPages extends Application {
 			}
 		};
 		ja.addBehaviour(request);
-		while (!searchFinished){
+		long timeout=10000;
+		while (!searchFinished && timeout>0){
 			try {
-				Thread.currentThread().sleep((long) (100*Math.random()));
+				long currentSleep=(long) (100*Math.random());
+				Thread.currentThread().sleep(currentSleep);
+				timeout=timeout-currentSleep;
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

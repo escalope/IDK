@@ -24,12 +24,16 @@
 
 package ingenias.jade.comm;
 
+import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeFact;
 import ingenias.editor.entities.StackEntry;
 import ingenias.jade.EventManager;
 import ingenias.jade.JADEAgent;
 import ingenias.jade.graphics.MainInteractionManager;
+import ingenias.jade.mental.MentalUtils;
 import ingenias.testing.DebugUtils;
+import ingenias.testing.TestUtils;
+import ingenias.testing.VerificationFailure;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.ParallelBehaviour;
@@ -128,7 +132,11 @@ public class CommActCreator {
 		String fieldNotSerializable="";		
 		Vector<Class> verifiedClasses=new Vector<Class>();
 		verifiedClasses.add(content.getClass());
-		verifyFields(content.getClass(), content, verifiedClasses);
+		try {
+			TestUtils.verifyFields(content.getClass(), content, verifiedClasses);
+		} catch (VerificationFailure e) {
+			throw new RuntimeException(e.getMessage());
+		}
 
 		//    new Exception().printStackTrace();
 		//System.out.println(ag.getAID().getName()+" received "+seqcode);
@@ -159,13 +167,8 @@ public class CommActCreator {
 				//System.out.println(ag.getLocalName()+"::::: Enviando "+CID+" seq:"+seqcode+" y role: "+roles.elementAt(k)+" protocolo "+protocol+" a "+receiver[k].getLocalName());
 				if (content instanceof Vector){
 					for (Object obj:(Vector)content){                        
-						if (obj instanceof RuntimeFact){
-							StackEntry se=new StackEntry("");
-							se.setOperation("Transferred");
-							se.setPlace(CID+":"+protocol);
-							se.setResposible(ag.getLocalName());
-							se.setTime(""+new java.util.Date().getTime());
-							((RuntimeFact)obj).addStack(se);
+						if (obj instanceof RuntimeFact){							
+							MentalUtils.addStackEntry((RuntimeFact) obj,"Transferred",CID+":"+protocol,ag.getLocalName());
 						}
 					}
 				}
@@ -202,47 +205,6 @@ public class CommActCreator {
 
 		//ingenias.jade.graphics.MainInteractionManager.logInteraction("Sending message to "+receivers+" with content "+content,ag.getName(),CID);
 		return acts;
-	}
-
-	private static boolean verifyFields(
-			Class<? extends java.io.Serializable> myClass,
-			java.lang.Object content, Vector<Class> verifiedClasses) {
-		Field[] fields = myClass.getFields();
-		boolean serializableFields=true;
-
-		for (Field field:fields){
-			try {
-				if (field.get(content)==null){
-					throw new RuntimeException("Field "+field.getName()+" of class instance "+content.getClass().getName()+" does contain a null value. It cannot be serialized properly");
-				}
-				
-				Class fieldClass=field.get(content).getClass();
-				verifiedClasses.add(fieldClass);
-				boolean serializableExists = isSerializable(fieldClass);
-				if (!serializableExists) 
-					throw new RuntimeException("Field "+field.getName()+" does not implement the serializable interface. It cannot be transmitted");			
-				if (!verifiedClasses.contains(fieldClass))
-					verifyFields(fieldClass,field.get(content), verifiedClasses);
-				serializableFields=serializableFields && serializableExists;		
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return serializableFields;
-
-	}
-
-	private static boolean isSerializable(Class fieldClass) {
-		Class<?>[] interfaces = fieldClass.getInterfaces();
-		boolean serializableExists=false;
-		for (Class currentInterface:interfaces){
-			serializableExists=serializableExists || currentInterface.equals(Serializable.class);
-		}
-		return serializableExists;
 	}
 
 	/**

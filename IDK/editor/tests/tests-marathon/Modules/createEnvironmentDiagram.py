@@ -14,13 +14,13 @@ def generateEmptyEnvironmentDiagram(name):
 	
 def createEnvironmentEntitiesAndConnectThem():
 	from marathon.playback import *
-	if window('INGENIAS Development Kit'):
+	if window('INGENIAS Development Kit'):		
 		doubleclick('ProjectsTree', 'e1')
-		select('ProjectsTree', '[e1]')
-		click('Agent')
-		click('Application')
-		drag('e1', 49, 17, 160, 168)
-		drag('e1', 21, 28, 149, 175)
+		select('ProjectsTree', '[e1]')		
+		click('Agent')		
+		click('Application')		
+		drag('e1', 56, 26, 125, 140)
+		drag('e1', 25, 29, 108, 136)
 		if window('Valid Relationships'):
 			click('OK')
 		close()

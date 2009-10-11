@@ -11,8 +11,8 @@ def test():
 		#The panel shows two entities connected with a relationship
 		assert_p('e1', 'Component.Roots', '[Agent0, Application0, 0:EPerceives, EPerceivessourceRole0:EPerceivessourceRole, EPerceivestargetRole0:EPerceivestargetRole]')
 		#One single edge of the relationship is selected
-		click('e1', 126, 145)
-		assert_p('e1', 'Component.SelectionCells', '[EPerceivestargetRole0:EPerceivestargetRole]')		
+		click('e1', 110, 80)
+		assert_p('e1', 'Component.SelectionCells', '[EPerceivessourceRole0:EPerceivessourceRole]')		
 		#click('e1', 298, 132)
 		#click('e1', 122, 137)		
 		keystroke('e1', 'Ctrl+C')

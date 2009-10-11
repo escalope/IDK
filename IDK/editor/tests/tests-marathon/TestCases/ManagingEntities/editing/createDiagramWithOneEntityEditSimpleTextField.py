@@ -16,8 +16,8 @@ def test():
 		#Check new name on the panel
 		assert_p('e1', 'Component.Model.Roots[0]', 'Agent1')
 		#Check new name on the objects tree
-		doubleclick('ObjectsTree', 'INGENIASObject')
-		doubleclick('ObjectsTree', 'Autonomous_entity')
-		doubleclick('ObjectsTree', 'Agent')
+		#doubleclick('ObjectsTree', 'INGENIASObject')
+		#doubleclick('ObjectsTree', 'Autonomous_entity')
+		#doubleclick('ObjectsTree', 'Agent')
 		assert_p('ObjectsTree', 'Text', 'Agent1', 'Agent1')
 	close()

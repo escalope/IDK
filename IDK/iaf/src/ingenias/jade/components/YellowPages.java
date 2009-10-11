@@ -102,7 +102,7 @@ public class YellowPages extends Application {
 			}
 		};
 		ja.addBehaviour(request);
-		long timeout=10000;
+		long timeout=30000;
 		while (!searchFinished && timeout>0){
 			try {
 				long currentSleep=(long) (100*Math.random());

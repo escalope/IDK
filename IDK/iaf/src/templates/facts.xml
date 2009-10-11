@@ -74,19 +74,8 @@ public class @@@v@@@fname@@@/v@@@ extends ingenias.editor.entities.RuntimeFact{
    public @@@v@@@slottype@@@/v@@@ get@@@v@@@slotname@@@/v@@@(){
      return @@@v@@@slotname@@@/v@@@;      
    }
-   @@@/repeat@@@ 
-  
-  public Vector<String> checkNoNullFields(){
-   Vector<String> nullFields=new  Vector<String>();
-  @@@repeat id="slot"@@@
-    if ( @@@v@@@slotname@@@/v@@@==null)
-     nullFields.add("@@@v@@@slotname@@@/v@@@");
-   @@@/repeat@@@
-   return nullFields;
-  }
-  
+   @@@/repeat@@@  
     
-  
 }
 
  @@@/text@@@

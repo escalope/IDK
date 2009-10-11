@@ -19,7 +19,7 @@
     along with INGENIAS Agent Framework; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-*/
+ */
 package ingenias.jade.mental;
 
 import ingenias.editor.entities.MentalEntity;
@@ -42,8 +42,8 @@ public class MentalUtils {
 		Vector<StackEntry> stack = getVectorStack(rf);
 		StackEntry creatorStack = stack.firstElement();
 		return creatorStack.getResposible();
-									
-		}
+
+	}
 
 	/**
 	 * @param rf
@@ -57,8 +57,8 @@ public class MentalUtils {
 		}
 		return stack;
 	}
-		
-	
+
+
 	public static String getLastSender(RuntimeFact rf){
 		Vector<StackEntry> stack = getVectorStack(rf);
 		int k=stack.size()-1;
@@ -70,7 +70,7 @@ public class MentalUtils {
 			if (found)
 				sender=current.Resposible;
 			k++;
-		
+
 		}				
 		return sender;
 	}
@@ -78,14 +78,14 @@ public class MentalUtils {
 	public static void addStackEntry(MentalEntity consumedFact, String operation, String place, String responsible) {
 		if (consumedFact instanceof RuntimeFact){
 			RuntimeFact rf=(RuntimeFact)consumedFact;
-		StackEntry se=new StackEntry("");
-		se.setOperation(operation);
-		se.setPlace(place);
-		se.setResposible(responsible);
-		se.setTime(""+new java.util.Date().getTime());
-		rf.addStack(se);
+			StackEntry se=new StackEntry("");
+			se.setOperation(operation);
+			se.setPlace(place);
+			se.setResposible(responsible);
+			se.setTime(""+new java.util.Date().getTime());
+			rf.addStack(se);
 		}
-		
+
 	}
 
 	public static void addCommStackEntry(final JADEAgent ag, final String CID,
@@ -97,6 +97,6 @@ public class MentalUtils {
 		se.setTime(""+new java.util.Date().getTime());
 		((RuntimeFact)obj).addStack(se);
 	}
-	
+
 
 }

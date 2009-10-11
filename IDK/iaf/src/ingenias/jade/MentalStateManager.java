@@ -189,37 +189,7 @@ MentalStateUpdater {
 		//		block(1000);
 	}
 	
-	public void checkNullFieldsInMentalEntities(){
-		for (MentalEntity me:this.state.values()){
-			if (me instanceof RuntimeFact && !(me instanceof Agent_data)){
-			 try {
-				Method method = me.getClass().getMethod("checkNoNullFields");
-				Vector<String> result=(Vector<String>) method.invoke(me,new Object[]{});
-				if (!result.isEmpty()){
-					System.err.println("There are null fields in entiy "+me.getId()+":"+me.getType()+" in agent "+getAgentName()+"\n. Null fields are "+result+"\n the stack for this fact is "+((RuntimeFact)me).getStack());
-				}
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
-			 
-			}
-			
-		}
-	}
-
+	
 	//	}
 
 	/*public synchronized void updateFinishedConversations(){

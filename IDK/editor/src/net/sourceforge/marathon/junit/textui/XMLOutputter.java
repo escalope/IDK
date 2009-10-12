@@ -53,6 +53,7 @@ public class XMLOutputter implements Outputter {
 
 	public void output(Writer writer, Test testSuite, Map testOutputMap) {
 		try {
+			System.err.println("Producing xml outputter file ...................................");
 			writer.write("<?xml version=\"1.0\" ?>\n");
 			String reportDir = new File(System.getProperty(Constants.PROP_REPORT_DIR)).getName();
 			//writer.write("<testsuites projectname='" + System.getProperty(Constants.PROP_PROJECT_NAME, "") + "' " + "reportdir='"

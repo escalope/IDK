@@ -37,6 +37,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -54,29 +55,58 @@ public class XMLOutputter implements Outputter {
 		try {
 			writer.write("<?xml version=\"1.0\" ?>\n");
 			String reportDir = new File(System.getProperty(Constants.PROP_REPORT_DIR)).getName();
-			writer.write("<testsuites projectname='" + System.getProperty(Constants.PROP_PROJECT_NAME, "") + "' " + "reportdir='"
-					+ reportDir + "' " + ">\n");
+			//writer.write("<testsuites projectname='" + System.getProperty(Constants.PROP_PROJECT_NAME, "") + "' " + "reportdir='"
+			//		+ reportDir + "' " + ">\n");
 			printResult("", writer, testSuite, testOutputMap);
-			writer.write("</testsuites>");
+			//writer.write("</testsuites>");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-	private void printResult(String indent, Writer writer, Test test, Map testOutputMap) throws IOException {
+	
+	private void captureTestResult(Test test, Map testOutputMap,Vector<MarathonTestResult> results) throws IOException {
 		if (test instanceof TestSuite) {
 			TestSuite suite = (TestSuite) test;						
-			writer.write(indent + "<testsuite name=\"" + suite.getName() + "\" tests=\""+suite.countTestCases()+"\" failures=\""+
-					countFailures(test)+"\" errors=\""+countErrors(test)+"\" >\n");
+			
 			Enumeration testsEnum = suite.tests();
 			while (testsEnum.hasMoreElements()) {
-				printResult(indent + "  ", writer, (Test) testsEnum.nextElement(), testOutputMap);
+				captureTestResult((Test) testsEnum.nextElement(),testOutputMap,results);
 			}
-			writer.write(indent + "</testsuite>\n");
 		} else {
 			MarathonTestResult result = (MarathonTestResult) testOutputMap.get(test);
+			results.add(result);
+		}
+		
+	}
+	private void printResult(String indent, Writer writer, Test test, Map testOutputMap) throws IOException {
+		Vector<MarathonTestResult> mtr=new Vector<MarathonTestResult>();
+		int counttests=0;
+		int countfails=0;
+		int counterrors=0;
+		String name="";
+		if (test instanceof TestSuite) {
+			TestSuite suite = (TestSuite) test;						
+			name=suite.getName();
+			counttests=counttests+suite.countTestCases();
+			countfails=countfails+countFailures(test);
+			counterrors=counterrors+countErrors(test);
+			Enumeration testsEnum = suite.tests();
+			while (testsEnum.hasMoreElements()) {
+				captureTestResult((Test) testsEnum.nextElement(), testOutputMap,mtr);
+			}
+			
+			
+		} else {
+			MarathonTestResult result = (MarathonTestResult) testOutputMap.get(test);
+			mtr.add(result);
+			//writeResultXML(indent, writer, result, test);
+		}
+		writer.write(indent + "<testsuite name=\"" + name + "\" tests=\""+counttests+"\" failures=\""+
+				countfails+"\" errors=\""+counterrors+"\" >\n");
+		for (MarathonTestResult result:mtr){
 			writeResultXML(indent, writer, result, test);
 		}
+		writer.write(indent + "</testsuite>\n");
 	}
 
 	private int countFailures(Test test){

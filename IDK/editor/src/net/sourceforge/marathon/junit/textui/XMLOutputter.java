@@ -54,10 +54,10 @@ public class XMLOutputter implements Outputter {
 		try {
 			writer.write("<?xml version=\"1.0\" ?>\n");
 			String reportDir = new File(System.getProperty(Constants.PROP_REPORT_DIR)).getName();
-			/*writer.write("<test projectname='" + System.getProperty(Constants.PROP_PROJECT_NAME, "") + "' " + "reportdir='"
-					+ reportDir + "' " + ">\n");*/
+			writer.write("<testsuites projectname='" + System.getProperty(Constants.PROP_PROJECT_NAME, "") + "' " + "reportdir='"
+					+ reportDir + "' " + ">\n");
 			printResult("", writer, testSuite, testOutputMap);
-			//writer.write("</test>");
+			writer.write("</testsuites>");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

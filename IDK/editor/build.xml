@@ -40,7 +40,7 @@
 	
 	<property name='marathon.home' value='testlibs' />
 	<property name='marathon.project.dir' value='tests/tests-marathon' />
-	<property name="test.results.dir" location="tests/output"/>
+	<property name="test.results.dir" location="output/tests"/>
 	
 	
 	

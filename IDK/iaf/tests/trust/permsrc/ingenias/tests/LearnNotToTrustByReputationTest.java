@@ -32,6 +32,8 @@ import ingenias.jade.MentalStateProcessor;
 import ingenias.jade.mental.NewCycleEvent;
 import ingenias.jade.mental.TrustInformation;
 import tws.demo.supervisor.ReGreTInfo;
+import tws.demo.testing.Assertion;
+import static tws.demo.testing.TestUtils2.*;
 import static org.junit.Assert.*;
 
 public class LearnNotToTrustByReputationTest {
@@ -39,7 +41,7 @@ public class LearnNotToTrustByReputationTest {
     @Test
     public void testDemo() throws Exception {
 
-        int delay=4000;
+        int delay = 4000;
         IAFProperties.setGarbageCollectionInterval(100);
 
         // Involved agent local ids for this test are:
@@ -68,12 +70,12 @@ public class LearnNotToTrustByReputationTest {
         TestUtils.waitForAgentInitialised(mspA);
 
 
-        MentalStateManager msmB = MSMRepository.getInstance().waitFor("SourcesSupervisor_0SourcesSupervisorDU");
+        final MentalStateManager msmB = MSMRepository.getInstance().waitFor("SourcesSupervisor_0SourcesSupervisorDU");
         MentalStateProcessor mspB = MSPRepository.getInstance().waitFor("SourcesSupervisor_0SourcesSupervisorDU");
         TestUtils.waitForAgentInitialised(mspB);
 
 
-        MentalStateManager msmB1 = MSMRepository.getInstance().waitFor("SourcesSupervisor_1SourcesSupervisorDU");
+        final MentalStateManager msmB1 = MSMRepository.getInstance().waitFor("SourcesSupervisor_1SourcesSupervisorDU");
         MentalStateProcessor mspB1 = MSPRepository.getInstance().waitFor("SourcesSupervisor_1SourcesSupervisorDU");
         TestUtils.waitForAgentInitialised(mspB1);
 
@@ -86,7 +88,7 @@ public class LearnNotToTrustByReputationTest {
 
         TestUtils.doNothing(delay);
 
-        
+
         TestUtils.checkExistenceMEWithinMS(msmB, "TrustInformation", "SourcesSupervisor_0SourcesSupervisorDU", 1);
 
         evento = new NewCycleEvent();
@@ -106,43 +108,6 @@ public class LearnNotToTrustByReputationTest {
         msmA.addMentalEntity(evento);
 
         TestUtils.doNothing(delay);
-        
-        TrustInformation vcr1 = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
-        TrustInformation vcr2 = (TrustInformation) msmB1.getMentalEntityByType("TrustInformation").get(0);
-        
-        ReGreTInfo data1 = (ReGreTInfo) vcr1.getdata();
-        ReGreTInfo data2 = (ReGreTInfo) vcr2.getdata();
-
-        int totalSubscriptionRequests=0;
-        if (data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU")!=null){
-        	totalSubscriptionRequests=totalSubscriptionRequests+data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size();
-        }
-        if (data2.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU")!=null){
-        	totalSubscriptionRequests=totalSubscriptionRequests+data2.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size();
-        }
-        
-        assertTrue(totalSubscriptionRequests==4);
-
-        if (data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU")!=null){
-        	assertTrue(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
-            assertTrue(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0);
-        } 
-        
-        if (data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU")!=null){
-        	assertTrue(data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
-            assertTrue(data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0);
-        }
-         
-
-
-       /* evento = new NewCycleEvent();
-        evento.setdata("_urn:fuente:1");
-        msmA.addMentalEntity(evento);
-
-        TestUtils.doNothing(delay);
-
-        TestUtils.checkExistenceMEWithinMS(msmB1, "TrustInformation", "SourcesSupervisor_1SourcesSupervisorDU", 1);
-
 
         evento = new NewCycleEvent();
         evento.setdata("_urn:fuente:2");
@@ -150,36 +115,100 @@ public class LearnNotToTrustByReputationTest {
 
         TestUtils.doNothing(delay);
 
-        TrustInformation vcr1 = (TrustInformation) msmB1.getMentalEntityByType("TrustInformation").get(0);
+        evento = new NewCycleEvent();
+        evento.setdata("_urn:fuente:2");
+        msmA.addMentalEntity(evento);
 
-        //Guarda
-        ReGreTInfo data1 = (ReGreTInfo) vcr1.getdata();
-        while(data1==null){
-            TestUtils.doNothing(delay);
-            data1 = (ReGreTInfo) vcr1.getdata();
-        }
-        assertNotNull(data1);
-        TestUtils.doNothing(delay);
-        assertNotNull(data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU"));
+        waitAssertionUntil(new Assertion(){
+            public boolean eval() {
+                return msmB.getMentalEntityByType("TrustInformation")!=null && 
+                        msmB1.getMentalEntityByType("TrustInformation")!=null;
+            }
+            public String failMessage() {
+                return "";
+            }
+            
+        }, 2*delay/1000);
 
-        //Guarda
-        while(data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() < 2){
-            TestUtils.doNothing(delay);
-        }
 
-        assertTrue("Agent SourcesSupervisor_1SourcesSupervisorDU should have received 2 proposals and has received: "+data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size(),  data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() == 2);
+        final TrustInformation vcr1 = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
+        final TrustInformation vcr2 = (TrustInformation) msmB1.getMentalEntityByType("TrustInformation").get(0);
 
-        //Guarda
-        while(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU")==null){
-            TestUtils.doNothing(delay);
-        }
+        waitAssertionUntil(new Assertion(){
 
-        assertTrue(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
-        assertTrue(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0);*/
+            public boolean eval() {
+                return vcr1.getdata()!=null && vcr2.getdata()!=null;
+            }
+
+            public String failMessage() {
+                return "";
+            }
+        },2*delay/1000);
+   
+        final ReGreTInfo data1 = (ReGreTInfo) vcr1.getdata();
+        final ReGreTInfo data2 = (ReGreTInfo) vcr2.getdata();
+
+
+        waitAssertionUntil(new Assertion(){
+
+            public boolean eval() {
+                
+                return data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU") != null
+                        &&
+                        data2.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU") != null;
+            }
+
+            public String failMessage() {
+                return "";
+            }
+        },2*delay/1000);
+
+
+        waitAssertionUntil(new Assertion(){
+
+            public boolean eval() {
+                return data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size()==4
+                        &&
+                        data2.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size()==2;
+            }
+
+            public String failMessage() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        },20);
+
+        waitAssertionUntil(new Assertion(){
+
+            public boolean eval() {
+                boolean e=true;
+                e=e&&data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU") != null;
+                e=e&&data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5;
+                e=e&&data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0;
+                return e;
+            }
+
+            public String failMessage() {
+                return "";
+            }
+        },12);
+
+        waitAssertionUntil(new Assertion(){
+
+            public boolean eval() {
+                boolean e=true;
+                e=e&&data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU") != null;
+                e=e&&data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5;
+                e=e&&data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0;
+                return e;
+            }
+
+            public String failMessage() {
+                return "";
+            }
+
+        },12);
 
     }
-
-
 }
 
  

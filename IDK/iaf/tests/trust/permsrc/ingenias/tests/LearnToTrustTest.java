@@ -100,6 +100,8 @@ public class LearnToTrustTest {
         msmA.addMentalEntity(evento);
 
         TestUtils.doNothing(delay);
+        TestUtils.doNothing(delay);
+        TestUtils.doNothing(delay);
 
         TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();
@@ -107,7 +109,7 @@ public class LearnToTrustTest {
         assertNotNull(data.getOdb());
         assertTrue("There should be an evaluation for ResearcherAssistant_0ResearcherAssistantDU and there are "+data.getOdb(),data.getOdb().get("ResearcherAssistant_0ResearcherAssistantDU")!=null);
         
-        assertTrue("There should be four evaluations of agent ResearcherAssistant_0ResearcherAssistantDU and there are the following " +data.getOdb(), data.getOdb().get("ResearcherAssistant_0ResearcherAssistantDU").size() == 4);
+        assertTrue("There should be four evaluations of agent ResearcherAssistant_0ResearcherAssistantDU and there are the following " +data.getOdb().size(), data.getOdb().get("ResearcherAssistant_0ResearcherAssistantDU").size() == 4);
         assertTrue(data.getConfianzas().get("ResearcherAssistant_0ResearcherAssistantDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
         assertTrue(data.getConfianzas().get("ResearcherAssistant_0ResearcherAssistantDU").getSubjectCriteriaGoodQuality().getValue() > 0);
 

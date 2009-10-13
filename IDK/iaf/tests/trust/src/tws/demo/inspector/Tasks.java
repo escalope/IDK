@@ -40,6 +40,7 @@ public class Tasks {
         }
         fuente.setEval(eval);
         outputsdefaultGradoCalidadFuente.setdata(fuente);
+        System.out.println("Inspector: "+eval.getSubjectCriteria());
     }
 
 }

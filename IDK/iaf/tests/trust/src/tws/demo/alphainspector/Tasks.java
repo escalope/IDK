@@ -41,6 +41,7 @@ public class Tasks {
         inspeccion.getFuenteInfo().setEval(eval);
         outputsdefaultGradoCalidadFuenteCuarentena.setdata(inspeccion);
 
+        System.out.println("Inspector: "+eval.getSubjectCriteria());
     }
 
 }

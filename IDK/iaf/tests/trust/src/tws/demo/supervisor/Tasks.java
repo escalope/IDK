@@ -248,6 +248,7 @@ public class Tasks {
         AlphaInspection inspeccion = (AlphaInspection) eiGradoCalidadFuenteCuarentena.getdata();
         VisualizationAppInit.getInstance().update(0, id + ": Nuevo dato de inspeccion alfa para:" + inspeccion.getFuenteInfo().getCollaboradorId());
         EvaluationValue eval = inspeccion.getFuenteInfo().getEval();
+        System.out.println("Supervisor: Evaluacion:"+eval.getSubjectCriteria());
         ReGreTInfo regret = (ReGreTInfo) eiValoresConfianzaReputacion.getdata();
         boolean esAceptada = true;
 
@@ -316,6 +317,8 @@ public class Tasks {
         if (!regret.getOdb().containsKey(fuente.getCollaboradorId())) {
             regret.getOdb().put(fuente.getCollaboradorId(), new Vector<EvaluationValue>());
         }
+
+        System.out.println("Supervisor: Evaluacion:"+fuente.getEval().getSubjectCriteria());
 
         regret.getOdb().get(fuente.getCollaboradorId()).add(fuente.getEval());
         ITrustCalculation tc = ReGreTServicesFactory.createTrustCalculationService();

@@ -138,6 +138,40 @@
 		       <exclude name="**/.svn/**"/>
 	       </fileset>
        </copy>
+       
+       <!-- Preparacion de iaf project creator -->       
+       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator"/>
+       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/lib"/>
+       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/config"/>
+       
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator">
+	       <fileset dir="iaf/srcpcreator">
+		       <include name="**/*"/>
+		       <exclude name="**/.svn/**"/>
+	       </fileset>
+       </copy>
+       
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/lib">
+	       <fileset dir="iaf/lib">
+		       <include name="**/*"/>
+		       <exclude name="**/.svn/**"/>
+	       </fileset>
+       </copy>
+       
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/config">
+	       <fileset dir="iaf/config">
+		       <include name="**/*"/>
+		       <exclude name="**/.svn/**"/>
+	       </fileset>
+       </copy>
+       
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/">
+	       <fileset dir="iaf/">
+		       <include name="generate.xml"/>
+		       <exclude name="**/.svn/**"/>
+	       </fileset>
+       </copy>
+       
        <!-- recompilar el modulo iaf dentro del editor-->
        <ant antfile="build.xml" target="modules" dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
 

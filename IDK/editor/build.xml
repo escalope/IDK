@@ -162,6 +162,35 @@
 	</target>	
 	
 	<!-- ********************* -->
+	<!--   MODULE IAF Project creator    -->
+	<!-- ********************* -->
+	
+	<condition property="modiafpcreator.module">
+		<and>
+			<available file="modules/srcmodiafpcreator/ingenias/module/IAFProjectCreator.java"/>
+		</and>
+	</condition>
+	
+	<target name="modiafpcreator" if="modiafpcreator.module">
+		<delete dir="${temp}" />
+		
+		<javac compiler="modern" depend="true" destdir="${temp}" debug="true">
+			<src path="modules/srcmodiafpcreator" />
+			<classpath>
+				<fileset dir="lib">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+		
+		<jar jarfile="modiafpcreator.jar" basedir="${temp}" />
+		<move file="modiafpcreator.jar"
+		      toDir="${moddeploy}" />
+		<delete dir="${temp}" />
+	</target>	
+	
+	
+	<!-- ********************* -->
 	<!--   MODULE AT Assistant    -->
 	<!-- ********************* -->
 	<!--   Compiles and deploys the html doc module     -->
@@ -694,9 +723,8 @@
 		<arg line="-reportdir"/>				
 		<arg line="${test.results.dir}"/>				
 		<arg line="${marathon.project.dir}" />
-		
 	</java>
-	
+
 </target>
 
 

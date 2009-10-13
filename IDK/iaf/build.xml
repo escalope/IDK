@@ -77,7 +77,7 @@
 	</copy>
 	
 	<jar jarfile="modiaf.jar" basedir="${temp}" />
-	
+	<delete dir="${temp}" />
 	
 	<copy file="modiaf.jar" toDir="${IDK}/ext" />
 	<copy file="modiaf.jar" toDir="tests/commsonetomany/lib" />
@@ -87,6 +87,37 @@
 	<copy file="modiaf.jar" toDir="tests/multipleComms/lib" />
 
 	<delete dir="${temp}" />
+	<mkdir dir="${temp}" />
+	
+	<javac compiler="modern" depend="true" destdir="${temp}" debug="true">
+		
+		<src path="srcpcreator" />
+		
+		<classpath>
+			
+			
+			<fileset dir="lib">
+				
+				<include name="**/*.jar" />
+				
+			</fileset>
+			
+		</classpath>
+		
+	</javac>
+	<mkdir dir="${temp}/examples" />
+	<copy todir="${temp}/examples">		
+		<fileset dir="examples"></fileset>		
+	</copy>
+	<copy file="modiaf.jar" toDir="${temp}/lib" />
+	<copy file="generate.xml" todir="${temp}/"/>	
+	<copy file="config/Properties.prop" todir="${temp}/config"/>
+	<copy todir="${temp}/lib">		
+		<fileset dir="lib"></fileset>		
+	</copy>
+	
+	<jar jarfile="modpcreator.jar" basedir="${temp}" />
+	<copy file="modpcreator.jar" toDir="${IDK}/ext" />	
 	
 </target>
 

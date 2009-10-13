@@ -183,6 +183,14 @@
 			</classpath>
 		</javac>
 		
+		<copy todir="${temp}">
+			<fileset dir="modules/srcmodiafpcreator">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+				<exclude name="**/.svn/**/*.java"/>
+	       		</fileset>
+			
+		</copy>
 		<jar jarfile="modiafpcreator.jar" basedir="${temp}" />
 		<move file="modiafpcreator.jar"
 		      toDir="${moddeploy}" />

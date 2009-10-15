@@ -188,6 +188,7 @@
     </target>
 
     <target name="--pre-dist" depends="compile">
+      <mkdir dir="dist"/>
       <delete>
         <fileset dir="dist" includes="**/*"/>
      </delete>

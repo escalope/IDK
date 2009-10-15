@@ -189,7 +189,7 @@
 
     <target name="--pre-dist" depends="compile">
       <delete>
-        <fileset dir="dist" includes="*.zip"/>
+        <fileset dir="dist" includes="**/*"/>
      </delete>
  
     </target>
@@ -208,6 +208,7 @@
        </zip>
        <delete dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
     </target>
+
     <target name="--dist-iaf" depends="--pre-dist">
        <mkdir dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
        <copy todir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}/">

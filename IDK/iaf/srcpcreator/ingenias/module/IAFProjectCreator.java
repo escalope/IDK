@@ -57,7 +57,6 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.jgraph.JGraph;
 
-import com.lowagie.text.pdf.RadioCheckField;
 
 
 import sun.awt.VerticalBagLayout;

@@ -172,6 +172,13 @@
 	       </fileset>
        </copy>
        
+       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/examples">
+	       <fileset dir="iaf/examples">
+		       <include name="*.xml"/>
+		       <exclude name="**/.svn/**"/>
+	       </fileset>
+       </copy>
+       
        <!-- recompilar el modulo iaf dentro del editor-->
        <ant antfile="build.xml" target="modules" dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
 

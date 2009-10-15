@@ -186,7 +186,7 @@
        <ant antfile="build.xml" target="modules" dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
 
        <!-- Preparacion del zip -->
-       <zip basedir="dist"
+       <zip
        destfile="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}.zip">
 	       <zipfileset dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
        </zip>
@@ -213,7 +213,7 @@
                <exclude name="**/.svn/**"/>
            </fileset>
        </copy>         
-       <zip basedir="dist"
+       <zip 
 	    destfile="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}.zip">
 	       <zipfileset dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
        </zip>
@@ -228,7 +228,7 @@
                <exclude name="**/.svn/**"/>
            </fileset>
        </copy>
-       <zip basedir="dist"
+       <zip 
 	    destfile="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}.zip">
 	       <zipfileset dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
        </zip>

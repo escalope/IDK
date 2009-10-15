@@ -144,6 +144,8 @@
        <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/lib"/>
        <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/config"/>
        
+       <copy file="iaf/modiaf.jar" todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/lib"/>
+       
        <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator">
 	       <fileset dir="iaf/srcpcreator">
 		       <include name="**/*"/>
@@ -157,6 +159,7 @@
 		       <exclude name="**/.svn/**"/>
 	       </fileset>
        </copy>
+       
        
        <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/config">
 	       <fileset dir="iaf/config">

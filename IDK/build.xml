@@ -174,7 +174,7 @@
        
        <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/examples">
 	       <fileset dir="iaf/examples">
-		       <include name="*.xml"/>
+		       <include name="*.idk"/>
 		       <exclude name="**/.svn/**"/>
 	       </fileset>
        </copy>

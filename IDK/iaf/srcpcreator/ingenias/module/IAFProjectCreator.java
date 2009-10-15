@@ -339,10 +339,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 							copyResourceFromTo("examples/exampleGUIAgent.idk",directory.getText()+"/spec/specification.xml");
 						if (rad4.isSelected())
 							copyResourceFromTo("examples/exampleInteraction.idk",directory.getText()+"/spec/specification.xml");
-						Enumeration<URL> resources = this.getClass().getClassLoader().getResources("lib/*.jar");
-						while (resources.hasMoreElements()){									
-							System.err.println(resources.nextElement());
-						}
+						
 						copyResourceFromTo("generate.xml",directory.getText()+"/generate.xml");
 						copyResourceFromTo("lib/modiaf.jar",directory.getText()+"/lib/modiaf.jar");
 						copyResourceFromTo("config/Properties.prop",directory.getText()+"/config/Properties.prop");
@@ -376,13 +373,20 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 						p.setProperty("specfile", directory.getText()+"/spec/specification.xml");
 						p.setProperty("mainP", directory.getText());
 						helper.parse(p, buildFile);
+						
+						DefaultLogger consoleLogger = new DefaultLogger();
+						consoleLogger.setErrorPrintStream(System.err);
+						consoleLogger.setOutputPrintStream(System.out);
+						consoleLogger.setMessageOutputLevel(Project.MSG_INFO);
+						p.addBuildListener(consoleLogger);
+
 						p.executeTarget(p.getDefaultTarget());
 
 						JOptionPane.showMessageDialog(dialog, "Project created successfully ","Project created",JOptionPane.INFORMATION_MESSAGE);
 						dialog.setVisible(false);
 						dialog=null;
 					}
-					catch (Exception ex) {
+					catch (Throwable ex) {
 						ex.printStackTrace();
 					}	
 				}

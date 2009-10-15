@@ -98,6 +98,8 @@ public class LearnNotToTrustTest {
         msmA.addMentalEntity(evento);
 
         TestUtils.doNothing(delay);
+        TestUtils.doNothing(delay);
+        TestUtils.doNothing(delay);
 
         TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();

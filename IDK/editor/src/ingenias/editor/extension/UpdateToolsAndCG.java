@@ -39,12 +39,15 @@ extends Thread {
 				java.lang.reflect.Constructor cons = bt.getDeclaredConstructor(new
 						Class[]{Browser.class});
 				BasicTool bti = (BasicTool) cons.newInstance(new Object[]{browser});
-				
+				System.err.println(ct);
 				if (ct.contains(bti.getName())) {
 					me.removeEntry(bti);
+					System.gc(); // To request a garbage collection that removes unused classloaders
 				}
 				else {
+					
 					ct.add(bti.getName());
+					System.err.println("Adding module ...."+ct);
 				}
 				
 				me.addToolEntry(bti);
@@ -95,6 +98,7 @@ extends Thread {
 				folder = ( (ProjectProperty) ids.prop.get("extfolder")).value;
 			}
 			this.readLibs(folder);
+			
 			try {
 				Thread.sleep(5000);
 			}

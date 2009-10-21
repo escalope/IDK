@@ -635,7 +635,7 @@
 	
 	
 	
-	
+	<delete dir="${tempidk}" />
 	
 	<mkdir dir="${tempidk}" />
 	
@@ -691,7 +691,7 @@
 	
 	<java fork="true" failonerror="true" maxmemory="300m"
 	      classname="net.sourceforge.marathon.Main">	
-		<jvmarg value="-Dmarathon.home='${marathon.home}' -Dpython.cachedir='${user.home}/.jycache' -Dmarathon.application.working.dir='${basedir}'"/> 						
+		<jvmarg value="-Dmarathon.home='${marathon.home}' -Dpython.cachedir='${user.home}/.jycache' -Dmarathon.application.working.dir='${basedir}' -Dmarathon.application.vm.command='${java.home}/bin/java'"/> 						
 		<classpath>
 			
 			<!--pathelement path="${classpath}" /-->

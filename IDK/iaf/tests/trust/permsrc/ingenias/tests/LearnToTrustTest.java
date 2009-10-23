@@ -105,13 +105,13 @@ public class LearnToTrustTest {
 
         TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();
-        assertNotNull(data);
-        assertNotNull(data.getOdb());
-        assertTrue("There should be an evaluation for ResearcherAssistant_0ResearcherAssistantDU and there are "+data.getOdb(),data.getOdb().get("ResearcherAssistant_0ResearcherAssistantDU")!=null);
+        assertNotNull("The ReGreTInfo must not be null but it is",data);
+        assertNotNull("Outcome database must not be null but it is",data.getOdb());
+        assertTrue("There should be an evaluation for ResearcherAssistant_0 and there are "+data.getOdb(),data.getOdb().get("ResearcherAssistant_0ResearcherAssistantDU")!=null);
         
-        assertTrue("There should be four evaluations of agent ResearcherAssistant_0ResearcherAssistantDU and there are the following " +data.getOdb().size(), data.getOdb().get("ResearcherAssistant_0ResearcherAssistantDU").size() == 4);
-        assertTrue(data.getConfianzas().get("ResearcherAssistant_0ResearcherAssistantDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
-        assertTrue(data.getConfianzas().get("ResearcherAssistant_0ResearcherAssistantDU").getSubjectCriteriaGoodQuality().getValue() > 0);
+        assertTrue("There should be four evaluations of agent ResearcherAssistant_0 and there are the following " +data.getOdb().size(), data.getOdb().get("ResearcherAssistant_0ResearcherAssistantDU").size() == 4);
+        assertTrue("The trust reability in ResearcherAssistant_0 must be greater than 50% but it is "+data.getConfianzas().get("ResearcherAssistant_0ResearcherAssistantDU").getSubjectCriteriaGoodQuality().getReliability(),data.getConfianzas().get("ResearcherAssistant_0ResearcherAssistantDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
+        assertTrue("The trust value in AutonomousCollaborator_0 must be less than 0 but it is "+data.getConfianzas().get("ResearcherAssistant_0ResearcherAssistantDU").getSubjectCriteriaGoodQuality().getValue(),data.getConfianzas().get("ResearcherAssistant_0ResearcherAssistantDU").getSubjectCriteriaGoodQuality().getValue() > 0);
 
     }
 }

@@ -103,11 +103,11 @@ public class LearnNotToTrustTest {
 
         TrustInformation vcr = (TrustInformation) msmB.getMentalEntityByType("TrustInformation").get(0);
         ReGreTInfo data = (ReGreTInfo) vcr.getdata();
-        assertNotNull(data);
+        assertNotNull("ReGreTInfo must not be NULL but it is",data);
 
-        assertTrue(data.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() == 4);
-        assertTrue(data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
-        assertTrue(data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0);
+        assertTrue("Outcome registries of AutonomousCollaborator_0 bust be equals 4 but it is "+data.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size(),data.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() == 4);
+        assertTrue("The trust reability in AutonomousCollaborator_0 must be greater than 50% but it is "+data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability(),data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability() >= 0.5);
+        assertTrue("The trust value in AutonomousCollaborator_0 must be less than 0 but it is "+data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue(),data.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue() < 0);
     }
 }
 

@@ -125,7 +125,19 @@ public class LearnNotToTrustByReputationTest {
                         msmB1.getMentalEntityByType("TrustInformation")!=null;
             }
             public String failMessage() {
+
+                if(msmB.getMentalEntityByType("TrustInformation")==null&&msmB1.getMentalEntityByType("TrustInformation")==null){
+                        return "TrustInformation entity must be present " +
+                                "in both SourcesSupervisor_0 and SourcesSupervisor_1 and S but it is not";
+                }
+                if(msmB.getMentalEntityByType("TrustInformation")==null){
+                        return "TrustInformation entity must be present in SourceSupervisor_0 but it is not";
+                }
+                if(msmB1.getMentalEntityByType("TrustInformation")==null){
+                    return "TrustInformation entity must be present in SourceSupervisor_1 but it is not";
+                }
                 return "";
+
             }
             
         }, 2*delay/1000);
@@ -141,6 +153,16 @@ public class LearnNotToTrustByReputationTest {
             }
 
             public String failMessage() {
+
+                if(vcr1.getdata()==null && vcr2.getdata()==null){
+                    return "TrustInformation data must be initialized in both SourcesSupervisor_0 and SourcesSupervisor_1 but NULL was found";
+                }
+                if(vcr1.getdata()==null){
+                    return "TrustInformation data must be initialized in SourcesSupervisor_0 but NULL was found";
+                }
+                if(vcr2.getdata()==null){
+                    return "TrustInformation data must be initialized in SourcesSupervisor_1 but NULL was found";
+                }
                 return "";
             }
         },2*delay/1000);
@@ -159,6 +181,16 @@ public class LearnNotToTrustByReputationTest {
             }
 
             public String failMessage() {
+                if(data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU") == null &&
+                        data2.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU") == null){
+                    return "Outcome registries form AutonomousCollaborator_0 and AutonomousCollaborator_1 must be present but there are no registries of it";
+                }
+                if(data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU") == null){
+                    return "Outcome registries form AutonomousCollaborator_0 must be present but there are no registries of it";
+                }
+                if(data2.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU") == null){
+                    return "Outcome registries form AutonomousCollaborator_1 must be present but there are no registries of it";
+                }
                 return "";
             }
         },2*delay/1000);
@@ -173,7 +205,18 @@ public class LearnNotToTrustByReputationTest {
             }
 
             public String failMessage() {
-                throw new UnsupportedOperationException("Not supported yet.");
+                if(data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size()!=4 &&
+                        data2.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size()!=2){
+                    return "There must be 4 outcome registries form AutonomousCollaborator_0 but "+data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size()+" found \n" +
+                            "There must be 2 outcome registries form AutonomousCollaborator_1 but "+data1.getOdb().get("AutonomousCollaborator_1AutonomousCollaboratorDU").size()+" found";
+                }
+                if(data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() !=4){
+                    return "There must be 4 outcome registries form AutonomousCollaborator_0 but "+data1.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size()+" found";
+                }
+                if(data2.getOdb().get("AutonomousCollaborator_0AutonomousCollaboratorDU").size() !=2){
+                    return "There must be 2 outcome registries form AutonomousCollaborator_1 but "+data1.getOdb().get("AutonomousCollaborator_1AutonomousCollaboratorDU").size()+" found";
+                }
+                return "";
             }
         },20);
 
@@ -188,6 +231,18 @@ public class LearnNotToTrustByReputationTest {
             }
 
             public String failMessage() {
+                String message="The SourcesSupervisor_1 trust in Autonomouscollaborator_0 must be less than 0 with a reability higher than 50% but ";
+                if(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU") == null){
+                    message+="trust info is empty";
+                return message;
+                }
+                if(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability()<0.5){
+                    message+="reability is "+data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability();
+                    return message;
+                }
+                if(data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue()>=0){
+                    message+="trust value is "+data1.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue();
+                }
                 return "";
             }
         },12);
@@ -203,6 +258,18 @@ public class LearnNotToTrustByReputationTest {
             }
 
             public String failMessage() {
+                String message="The SourcesSupervisor_1 trust in Autonomouscollaborator_0 must be less than 0 with a reability higher than 50% but ";
+                if(data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU") == null){
+                    message+="trust info is empty";
+                return message;
+                }
+                if(data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability()<0.5){
+                    message+="reability is "+data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getReliability();
+                    return message;
+                }
+                if(data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue()>=0){
+                    message+="trust value is "+data2.getConfianzas().get("AutonomousCollaborator_0AutonomousCollaboratorDU").getSubjectCriteriaGoodQuality().getValue();
+                }
                 return "";
             }
 

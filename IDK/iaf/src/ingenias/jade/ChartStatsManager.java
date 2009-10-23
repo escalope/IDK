@@ -294,6 +294,7 @@ public class ChartStatsManager extends ApplicationFrame {
 		plot.setRangeCrosshairVisible(true);
 
 		plot.setForegroundAlpha(0.6F);
+		
 		XYItemRenderer r = plot.getRenderer();
 		if (r instanceof XYLineAndShapeRenderer) {
 			XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) r;
@@ -331,36 +332,7 @@ public class ChartStatsManager extends ApplicationFrame {
 	 */
 	public static void main(String[] args) {
 
-		final ChartStatsManager demo = new ChartStatsManager(
-		"Time Series Chart Demo 1");
-		demo.pack();
-		RefineryUtilities.centerFrameOnScreen(demo);
-		demo.setVisible(true);
-
-		Thread t=new Thread(){
-			public void run(){
-				for (int k=0;k<10;k++){
-//					demo.abortedTask("ag1", "agT", "tid1","TID", null);
-					try {
-						Thread.currentThread().sleep((long)(2000*Math.random()));
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				for (int k=0;k<10;k++){
-	//				demo.abortedTask("ag2", "agT", "tid1","TID", null);
-					try {
-						Thread.currentThread().sleep((long)(1000*Math.random()));
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-			}
-		};
-		t.start();
+	
 	}
 
 }

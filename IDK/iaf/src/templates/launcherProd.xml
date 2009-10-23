@@ -80,7 +80,7 @@ public class Main@@@v@@@node@@@/v@@@ProdStandAlone {
 		
 		while (notConnected){			
 				try {
-					Socket s=new Socket("localhost",Integer.parseInt("60000"));
+					Socket s=new Socket("localhost",Integer.parseInt("@@@v@@@port@@@/v@@@"));
 					notConnected=false;
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block

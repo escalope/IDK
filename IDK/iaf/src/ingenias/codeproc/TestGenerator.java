@@ -52,7 +52,7 @@ public class TestGenerator {
 			for (GraphEntity test:testEntities){
 				Repeat testingDepl = new Repeat("testdefinition");
 				p.addRepeat(testingDepl);
-				testingDepl.add(new Var("test", test.getID()));
+				testingDepl.add(new Var("test", Utils.replaceBadChars(test.getID())));
 				addAgentIdsToBeLaunchedAtTest(testingDepl, test,generator,browser);
 			}
 			
@@ -140,7 +140,7 @@ public class TestGenerator {
 					Repeat testingDepl = new Repeat("testingnode");
 					p.addRepeat(testingDepl);
 					
-					testingDepl.add(new Var("testingconfig",deployPacks[k].getID()));
+					testingDepl.add(new Var("testingconfig",Utils.replaceBadChars(deployPacks[k].getID())));
 
 					GraphAttribute deplPackageAttr = deployPacks[k]
 					                                             .getAttributeByName("TestingDeployment");
@@ -165,7 +165,7 @@ public class TestGenerator {
 									DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for JUnit class initialization per test
 									
 									GraphEntity test=tests.getElementAt(j);																											
-									testRepeat.add(new Var("test",test.getID()));
+									testRepeat.add(new Var("test", Utils.replaceBadChars(test.getID())));
 									GraphEntity[] relatedComponents = Utils.getRelatedElements(test, "UMLRealizes", "UMLRealizestarget");
 									if (relatedComponents!=null && 
 											relatedComponents.length>0){

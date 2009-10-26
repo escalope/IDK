@@ -146,6 +146,11 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("@@@v@@@agentid@@@/v@@@");
+                @@@repeat id="roles"@@@
+                addAgentRole("@@@v@@@agentid@@@/v@@@","@@@v@@@roleid@@@/v@@@");   
+    			@@@/repeat@@@             
+    			             
                System.out.println("Starting up @@@v@@@agentid@@@/v@@@...");
               agc@@@v@@@agentid@@@/v@@@.start();
               

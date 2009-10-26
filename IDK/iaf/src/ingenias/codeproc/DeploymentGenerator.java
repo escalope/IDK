@@ -168,6 +168,14 @@ public class DeploymentGenerator {
 										.replaceBadChars(depunit.getID())));
 								agentsR.add(new Var("agenttype", Utils
 										.replaceBadChars(atype.getID())));
+								Repeat rolesR = new Repeat("roles");
+								agentsR.add(rolesR);
+								HashSet<GraphEntity> playedRoles = Utils.getPlayedRoles(atype);
+								for (GraphEntity role:playedRoles){
+									rolesR.add(new Var("roleid", Utils
+											.replaceBadChars(role.getID())));
+								}
+								
 							}
 						} catch (NumberFormatException nfe){
 							bcg.fatalError();

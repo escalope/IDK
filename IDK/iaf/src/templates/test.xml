@@ -51,7 +51,9 @@ import ingenias.testing.*;
 import ingenias.jade.IAFProperties;
 
 
-public class @@@v@@@test@@@/v@@@ {
+public class @@@v@@@test@@@/v@@@ extends BasicMASTest{
+
+
 @Test
   public void testDemo(){			
   			// Involved agent local ids for this test are:

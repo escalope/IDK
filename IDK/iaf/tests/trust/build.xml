@@ -77,26 +77,7 @@
   <target name="emptyTarget"/>
    
   <target name="alljunit" depends="junitTestsSetupForExperimentationWithTediousCollaboratorsAndGaussianEvaluators,junitTestSetupForExperimentingWithGaussianEvaluators,junitTestSetupForExperimentingWithPerfectEvaluators,junitTestsSetupForExperimentationWithTediousCollaboratorsAndPerfectEvaluators,junitTestingPackage,emptyTarget"/>
-  
-  
-
-   
-   
-    <target name="junitTestsSetupForExperimentationWithTediousCollaboratorsAndGaussianEvaluators" depends="compile">
-    <java fork="true" failonerror="true" maxmemory="128m"
-    classname="org.junit.runner.JUnitCore">
-    <arg line="ingenias.testing.TestsSetupForExperimentationWithTediousCollaboratorsAndGaussianEvaluatorsLauncher"/>    
-      <classpath>
-
-		<pathelement path="${temp}" />        
-        <fileset dir="${lib}">
-          <include name="**/*.jar" />
-        </fileset>
-
-      </classpath>
-
-    </java>
-  </target>
+ 
    <target name="test" depends="compile">
         <mkdir dir="${test.results.dir}"/>
         <junit showoutput="true"
@@ -121,6 +102,27 @@
             <formatter type="xml"/>
         </junit>
     </target>
+    
+  
+
+   
+   
+    <target name="junitTestsSetupForExperimentationWithTediousCollaboratorsAndGaussianEvaluators" depends="compile">
+    <java fork="true" failonerror="true" maxmemory="128m"
+    classname="org.junit.runner.JUnitCore">
+    <arg line="ingenias.testing.TestsSetupForExperimentationWithTediousCollaboratorsAndGaussianEvaluatorsLauncher"/>    
+      <classpath>
+
+		<pathelement path="${temp}" />        
+        <fileset dir="${lib}">
+          <include name="**/*.jar" />
+        </fileset>
+
+      </classpath>
+
+    </java>
+  </target>
+
    
 
   	  
@@ -144,30 +146,7 @@
 
     </java>
   </target>
-   <target name="test" depends="compile">
-        <mkdir dir="${test.results.dir}"/>
-        <junit showoutput="true"
-           fork="true"
-           failureproperty="tests.failed"
-           errorproperty="tests.failed">
-            <batchtest todir="${test.results.dir}">
-                <fileset dir="${gensrc}">
-                    <include name="ingenias/testing/*.java"/>
-                    <exclude name="ingenias/testing/*Launcher.java"/>
-                </fileset>
-            </batchtest>
-            <classpath>
 
-                <pathelement path="${temp}" />
-                <fileset dir="${lib}">
-                    <include name="**/*.jar" />
-                </fileset>
-
-            </classpath>
-            <formatter usefile="false" type="brief"/>
-            <formatter type="xml"/>
-        </junit>
-    </target>
    
 
   	  
@@ -191,30 +170,7 @@
 
     </java>
   </target>
-   <target name="test" depends="compile">
-        <mkdir dir="${test.results.dir}"/>
-        <junit showoutput="true"
-           fork="true"
-           failureproperty="tests.failed"
-           errorproperty="tests.failed">
-            <batchtest todir="${test.results.dir}">
-                <fileset dir="${gensrc}">
-                    <include name="ingenias/testing/*.java"/>
-                    <exclude name="ingenias/testing/*Launcher.java"/>
-                </fileset>
-            </batchtest>
-            <classpath>
 
-                <pathelement path="${temp}" />
-                <fileset dir="${lib}">
-                    <include name="**/*.jar" />
-                </fileset>
-
-            </classpath>
-            <formatter usefile="false" type="brief"/>
-            <formatter type="xml"/>
-        </junit>
-    </target>
    
 
   	  
@@ -238,30 +194,7 @@
 
     </java>
   </target>
-   <target name="test" depends="compile">
-        <mkdir dir="${test.results.dir}"/>
-        <junit showoutput="true"
-           fork="true"
-           failureproperty="tests.failed"
-           errorproperty="tests.failed">
-            <batchtest todir="${test.results.dir}">
-                <fileset dir="${gensrc}">
-                    <include name="ingenias/testing/*.java"/>
-                    <exclude name="ingenias/testing/*Launcher.java"/>
-                </fileset>
-            </batchtest>
-            <classpath>
 
-                <pathelement path="${temp}" />
-                <fileset dir="${lib}">
-                    <include name="**/*.jar" />
-                </fileset>
-
-            </classpath>
-            <formatter usefile="false" type="brief"/>
-            <formatter type="xml"/>
-        </junit>
-    </target>
    
 
   	  
@@ -285,30 +218,7 @@
 
     </java>
   </target>
-   <target name="test" depends="compile">
-        <mkdir dir="${test.results.dir}"/>
-        <junit showoutput="true"
-           fork="true"
-           failureproperty="tests.failed"
-           errorproperty="tests.failed">
-            <batchtest todir="${test.results.dir}">
-                <fileset dir="${gensrc}">
-                    <include name="ingenias/testing/*.java"/>
-                    <exclude name="ingenias/testing/*Launcher.java"/>
-                </fileset>
-            </batchtest>
-            <classpath>
 
-                <pathelement path="${temp}" />
-                <fileset dir="${lib}">
-                    <include name="**/*.jar" />
-                </fileset>
-
-            </classpath>
-            <formatter usefile="false" type="brief"/>
-            <formatter type="xml"/>
-        </junit>
-    </target>
    
 
   	  

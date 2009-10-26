@@ -77,26 +77,7 @@
   <target name="emptyTarget"/>
    
   <target name="alljunit" depends="junitTestingTasks,emptyTarget"/>
-  
-  
-
-   
-   
-    <target name="junitTestingTasks" depends="compile">
-    <java fork="true" failonerror="true" maxmemory="128m"
-    classname="org.junit.runner.JUnitCore">
-    <arg line="ingenias.testing.TestingTasksLauncher"/>    
-      <classpath>
-
-		<pathelement path="${temp}" />        
-        <fileset dir="${lib}">
-          <include name="**/*.jar" />
-        </fileset>
-
-      </classpath>
-
-    </java>
-  </target>
+ 
    <target name="test" depends="compile">
         <mkdir dir="${test.results.dir}"/>
         <junit showoutput="true"
@@ -121,6 +102,27 @@
             <formatter type="xml"/>
         </junit>
     </target>
+    
+  
+
+   
+   
+    <target name="junitTestingTasks" depends="compile">
+    <java fork="true" failonerror="true" maxmemory="128m"
+    classname="org.junit.runner.JUnitCore">
+    <arg line="ingenias.testing.TestingTasksLauncher"/>    
+      <classpath>
+
+		<pathelement path="${temp}" />        
+        <fileset dir="${lib}">
+          <include name="**/*.jar" />
+        </fileset>
+
+      </classpath>
+
+    </java>
+  </target>
+
    
 
   	  

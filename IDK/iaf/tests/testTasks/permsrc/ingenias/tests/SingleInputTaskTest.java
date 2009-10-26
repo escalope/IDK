@@ -43,6 +43,7 @@ import ingenias.jade.MentalStateManager;
 import ingenias.jade.MentalStateProcessor;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.mental.*;
+import ingenias.testing.BasicMASTest;
 import ingenias.testing.MSMRepository;
 import ingenias.testing.MSPRepository;
 import ingenias.testing.TestUtils;

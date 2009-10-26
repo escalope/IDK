@@ -30,7 +30,8 @@ import ingenias.jade.MentalStateManager;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.testing.MSMRepository;
 import ingenias.testing.TestUtils;
-import ingenias.tests.BasicMASTest;
+import ingenias.testing.BasicMASTest;
+
 
 import java.util.Vector;
 

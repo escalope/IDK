@@ -49,6 +49,7 @@ import ingenias.jade.mental.*;
 import ingenias.testing.MSMRepository;
 import ingenias.testing.MSPRepository;
 import ingenias.testing.TestUtils;
+import ingenias.testing.BasicMASTest;
 import ingenias.tests.*;
 
 

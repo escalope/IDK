@@ -720,7 +720,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		"WFPlaystarget");
 		Vector<GraphEntity> additionalRoles=new Vector<GraphEntity>();
 		for (GraphEntity ge:rolesPlayed){
-			additionalRoles.addAll(getAscendantsOfRole(ge));
+			additionalRoles.addAll(Utils.getAscendantsOfRole(ge));
 		}
 		rolesPlayed.addAll(additionalRoles);
 		Enumeration enumeration = rolesPlayed.elements();
@@ -1846,7 +1846,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		HashSet tasks = new HashSet(directTasks);
 		Vector<GraphEntity> generalizedRoles=new Vector<GraphEntity>();
 		for (GraphEntity role:rolesPlayed){
-			generalizedRoles.addAll(getAscendantsOfRole(role));
+			generalizedRoles.addAll(Utils.getAscendantsOfRole(role));
 		}
 		generalizedRoles.addAll(rolesPlayed);
 		generalizedRoles=new Vector<GraphEntity>(new HashSet<GraphEntity>(generalizedRoles));
@@ -1875,7 +1875,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		"WFPlaystarget");
 		HashSet<GraphEntity> expandedHierarchy=new HashSet<GraphEntity>();
 		for (GraphEntity ge:rolesPlayed){
-			expandedHierarchy.addAll(getAscendantsOfRole(ge));	
+			expandedHierarchy.addAll(Utils.getAscendantsOfRole(ge));	
 		}
 		expandedHierarchy.addAll(rolesPlayed);
 		HashSet tasks = new HashSet();
@@ -1888,37 +1888,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		return taskPerRole;
 	}
 
-	/**
-	 * It obtains all ascendants of a role through the ARoleInheritance relationship. 
-	 * @param ge
-	 * @return
-	 */
-	private Collection<? extends GraphEntity> getAscendantsOfRole(GraphEntity ge) {
-		Vector<GraphEntity> allAscendants=new Vector<GraphEntity> ();
-		try {
-			Vector<GraphEntity> ascendants = Utils.getRelatedElementsVector(ge,
-					"ARoleInheritance",
-			"ARoleInheritancetarget");
-			while (!ascendants.isEmpty()){
-				allAscendants.addAll(ascendants);
-				ascendants.clear();
-				for (GraphEntity ascendant:allAscendants){
 
-					ascendants.addAll(Utils.getRelatedElementsVector(ascendant,
-							"ARoleInheritance",
-					"ARoleInheritancetarget"));
-
-				}
-				ascendants.removeAll(allAscendants);
-			}
-		} catch (NullEntity e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-		return allAscendants;
-
-
-	}
 
 
 	/**
@@ -1964,32 +1934,26 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 */
 	private void generateAgentXML(Sequences p, Hashtable fileapps, Hashtable components) throws Exception {
 		// Obtain agents to generate
-		GraphEntity[] actors = Utils.generateEntitiesOfType("Agent",getBrowser());
-		for (int k = 0; k < actors.length; k++) {
-			HashSet agentApps = this.getAgentApplications(actors[k]);
+		GraphEntity[] agents = Utils.generateEntitiesOfType("Agent",getBrowser());
+		for (int k = 0; k < agents.length; k++) {
+			HashSet agentApps = this.getAgentApplications(agents[k]);
 			Repeat r1 = new Repeat("agents");
 
 			p.addRepeat(r1);
-			r1.add(new Var("agentid", Utils.replaceBadChars(actors[k].getID())));
+			r1.add(new Var("agentid", Utils.replaceBadChars(agents[k].getID())));
 
 
 
-			this.generateAgentApps(r1, actors[k], agentApps, components);
+			this.generateAgentApps(r1, agents[k], agentApps, components);
 
 			// Obtain roles played by the agent
-			GraphEntity[] initialPlayedRoles = Utils.getRelatedElements(actors[k], "WFPlays",
-			"WFPlaystarget");
-			HashSet<GraphEntity> playedRoles=new HashSet<GraphEntity>();
-			for (GraphEntity prole:initialPlayedRoles){
-				playedRoles.add(prole);
-				playedRoles.addAll(getAscendantsOfRole(prole));
-			}
+			HashSet<GraphEntity> playedRoles = Utils.getPlayedRoles(agents[k]);
 			//Vector vectorPlayedRoles = Utils.getRelatedElementsVector(actors[k], "WFPlays", "WFPlaystarget");
-			this.generateAgentTasks(r1, actors[k], agentApps, new Vector(playedRoles));
-			generateInitialMentalState(r1, actors[k], agentApps, new Vector(playedRoles));
+			this.generateAgentTasks(r1, agents[k], agentApps, new Vector(playedRoles));
+			generateInitialMentalState(r1, agents[k], agentApps, new Vector(playedRoles));
 
 			if (playedRoles.size() == 0) {
-				Log.getInstance().logWARNING("Agent " + actors[k].getID() +
+				Log.getInstance().logWARNING("Agent " + agents[k].getID() +
 						" does not play" +
 				" any role. This agent will not participate in any interaction");
 				//					this.fatalError();
@@ -2060,11 +2024,13 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		}
 	}
 
+
+
 	private void insertAscedantsOfRoleWithAscendantsRolesRepeat(
 			GraphEntity prole, Repeat rroles) {
 		Repeat ascendantRolesRepeat = new Repeat("ascendantroles");
 		rroles.add(ascendantRolesRepeat);
-		Collection<? extends GraphEntity> ascendantRoles = getAscendantsOfRole(prole);
+		Collection<? extends GraphEntity> ascendantRoles = Utils.getAscendantsOfRole(prole);
 		for (GraphEntity descendant:ascendantRoles){
 			rroles.add(new Var("ascendant", Utils.replaceBadChars(descendant.getID())));
 		} // Descendants are included to account for polimorphism
@@ -2247,7 +2213,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	private GraphEntity[] getRoleInheritedRels(GraphEntity role, String rel,
 			String relext) throws NullEntity {
 
-		Collection<? extends GraphEntity> inheritedRoles = getAscendantsOfRole(role);
+		Collection<? extends GraphEntity> inheritedRoles = Utils.getAscendantsOfRole(role);
 		Vector inheritedInteractions = Utils.getRelatedElementsVectorAux(role,
 				rel, relext);
 

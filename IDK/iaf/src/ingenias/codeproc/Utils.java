@@ -19,7 +19,7 @@
     along with INGENIAS Agent Framework; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-*/
+ */
 package ingenias.codeproc;
 
 import ingenias.exception.NotInitialised;
@@ -32,6 +32,7 @@ import ingenias.generator.browser.GraphRelationship;
 import ingenias.generator.browser.GraphRole;
 import ingenias.generator.datatemplate.Sequences;
 
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -54,6 +55,50 @@ public class Utils {
 	 */
 	public static String replaceBadChars(String string){
 		return string.replace(' ','_').replace(',','_').replace('.','_').replace('-', '_');
+	}
+
+	public static HashSet<GraphEntity> getPlayedRoles(GraphEntity agent)
+	throws NullEntity {
+		GraphEntity[] initialPlayedRoles = Utils.getRelatedElements(agent, "WFPlays",
+		"WFPlaystarget");
+		HashSet<GraphEntity> playedRoles=new HashSet<GraphEntity>();
+		for (GraphEntity prole:initialPlayedRoles){
+			playedRoles.add(prole);
+			playedRoles.addAll(Utils.getAscendantsOfRole(prole));
+		}
+		return playedRoles;
+	}
+
+	/**
+	 * It obtains all ascendants of a role through the ARoleInheritance relationship. 
+	 * @param ge
+	 * @return
+	 */
+	public static Collection<? extends GraphEntity> getAscendantsOfRole(GraphEntity ge) {
+		Vector<GraphEntity> allAscendants=new Vector<GraphEntity> ();
+		try {
+			Vector<GraphEntity> ascendants = Utils.getRelatedElementsVector(ge,
+					"ARoleInheritance",
+			"ARoleInheritancetarget");
+			while (!ascendants.isEmpty()){
+				allAscendants.addAll(ascendants);
+				ascendants.clear();
+				for (GraphEntity ascendant:allAscendants){
+
+					ascendants.addAll(Utils.getRelatedElementsVector(ascendant,
+							"ARoleInheritance",
+					"ARoleInheritancetarget"));
+
+				}
+				ascendants.removeAll(allAscendants);
+			}
+		} catch (NullEntity e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return allAscendants;
+
+
 	}
 
 	/**
@@ -328,9 +373,9 @@ public class Utils {
 		}
 		return toGRoArray(related.toArray());
 	}
-        
-        
-        /**
+
+
+	/**
 	 * It obtains the extremes of the association of type 	"relationshipname", where one
 	 * of their roles is "role", and originated in the "element"
 	 * 
@@ -360,33 +405,33 @@ public class Utils {
 	}
 
 	/**
-		 * It returns an array of the relationships whose name is "relationshipname" and 
-		 * that are linked to "element" and there is an element occupiying the extreme
-		 * labelled with "role"
-		 * 
-		 * @param element The element to be studied
-		 * @param relationshipname The name of the relationship which will be studied
-		 * @param role The name of the extreme of the relationship that has to be studied
-		 * @return an array of relationships
-		 */
+	 * It returns an array of the relationships whose name is "relationshipname" and 
+	 * that are linked to "element" and there is an element occupiying the extreme
+	 * labelled with "role"
+	 * 
+	 * @param element The element to be studied
+	 * @param relationshipname The name of the relationship which will be studied
+	 * @param role The name of the extreme of the relationship that has to be studied
+	 * @return an array of relationships
+	 */
 	public static GraphRelationship[] getRelatedElementsRels(GraphEntity element,
-				String relationshipname, String role) {
-			Vector rels = element.getAllRelationships();
-			Enumeration enumeration = rels.elements();
-			Vector related = new Vector();
-			while (enumeration.hasMoreElements()) {
-				GraphRelationship gr = (GraphRelationship) enumeration.nextElement();
-				if (gr.getType().toLowerCase().equals(relationshipname.toLowerCase())) {
-					GraphRole[] roles = gr.getRoles();
-					for (int k = 0; k < roles.length; k++) {
-						if (roles[k].getName().toLowerCase().equals(role.toLowerCase())) {
-							related.add(gr);
-						}
+			String relationshipname, String role) {
+		Vector rels = element.getAllRelationships();
+		Enumeration enumeration = rels.elements();
+		Vector related = new Vector();
+		while (enumeration.hasMoreElements()) {
+			GraphRelationship gr = (GraphRelationship) enumeration.nextElement();
+			if (gr.getType().toLowerCase().equals(relationshipname.toLowerCase())) {
+				GraphRole[] roles = gr.getRoles();
+				for (int k = 0; k < roles.length; k++) {
+					if (roles[k].getName().toLowerCase().equals(role.toLowerCase())) {
+						related.add(gr);
 					}
 				}
 			}
-			return toGRArray(related.toArray());
 		}
+		return toGRArray(related.toArray());
+	}
 
 	/**
 	 * It obtains the entities in the graph "g" whose type is the same as "typeName".

@@ -58,9 +58,8 @@ public class SingleInputTaskFact extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+     
     
-  
-  
 }
 
  

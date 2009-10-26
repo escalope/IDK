@@ -42,32 +42,85 @@ import ingenias.tests.*;
 import ingenias.jade.IAFProperties;
 import ingenias.jade.graphics.MainInteractionManager;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+
+
 
 public class TestingTasksForMultipleInputTaskTest extends MultipleInputTaskTest{
 jade.wrapper.AgentContainer ac=null;
  
   @Before
   public void agentSetup() throws StaleProxyException, TimeOut{
+  
+  
         IAFProperties.setGraphicsOn(false); // disable graphics
          MainInteractionManager.goManual(); // Stop task execution
-        
+         
+         new Thread(){
+			public void run(){
+				String[] args1=new String[4];
+				args1[0]="-port";
+				args1[1]="60000";
+				args1[2]="-file-dir";
+				args1[3]="jade/";								 				
+				jade.Boot.main(args1);		
+			}
+		}.start();
+
         // Get a hold on JADE runtime
         jade.core.Runtime rt = jade.core.Runtime.instance();
 
         // Exit the JVM when there are no more containers around
-        rt.setCloseVM(false);
+        rt.setCloseVM(true);
 
         // Create a default profile
         Profile p = new ProfileImpl();
         p.setParameter("preload","a*");
         p.setParameter(Profile.MAIN_PORT, "60000");
         p.setParameter(Profile.FILE_DIR, "jade/");
+        
+        
+        // Waits for JADE to start
+        boolean notConnected=true;
+		
+		while (notConnected){			
+				try {
+					Socket s=new Socket("localhost",Integer.parseInt("60000"));
+					notConnected=false;
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UnknownHostException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					System.err.println("Error: "+e.getMessage());
+					System.err.println("Reconnecting in one second");
+					try {
+						Thread.currentThread().sleep(1000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}
 
+		}
+        
+     
+        // Exit the JVM when there are no more containers around
+        rt.setCloseVM(false);
+        
         // Create a new non-main container, connecting to the default
         // main container (i.e. on this host, port 1099)
-         ac = rt.createAgentContainer(p);
-        MainInteractionManager.goManual();
-
+        ac = rt.createAgentContainer(p);
 
 {
         // Create a new agent
@@ -102,6 +155,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("A_0DeploymentUnitByTypeEnumInitMS1");
+                             
+    			             
                System.out.println("Starting up A_0DeploymentUnitByTypeEnumInitMS1...");
               agcA_0DeploymentUnitByTypeEnumInitMS1.start();
               

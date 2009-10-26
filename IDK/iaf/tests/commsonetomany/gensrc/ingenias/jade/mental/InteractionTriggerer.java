@@ -58,9 +58,8 @@ public class InteractionTriggerer extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+     
     
-  
-  
 }
 
  

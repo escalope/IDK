@@ -30,12 +30,13 @@ import ingenias.jade.MentalStateManager;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.testing.MSMRepository;
 import ingenias.testing.TestUtils;
+import ingenias.tests.BasicMASTest;
 
 import java.util.Vector;
 
 import org.junit.Test;
 
-public class TaskTest {
+public class TaskTest extends BasicMASTest {
 
 	@Test
 	public void testDemo() {

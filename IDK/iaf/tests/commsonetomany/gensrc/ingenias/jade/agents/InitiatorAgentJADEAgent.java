@@ -523,7 +523,7 @@ public class InitiatorAgentJADEAgent
              new jade.core.behaviours.OneShotBehaviour() {
            public void action() {
 			 // If mental conditions are meet then the protocol is started
-			 RuntimeFact expectedInput=null;
+			 Vector<MentalEntity> expectedInput=null;
 			 boolean allexist=true;
 			 
 			 if (allexist){

@@ -58,9 +58,8 @@ public class OtherFrameFact extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+     
     
-  
-  
 }
 
  

@@ -42,10 +42,11 @@ import ingenias.jade.components.InteractionLaunchingTaskTask;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.mental.*;
 import ingenias.testing.*;
+import ingenias.tests.BasicMASTest;
 import ingenias.jade.IAFProperties;
 
 
-public class TaskExecution {
+public class TaskExecution extends BasicMASTest {
 
 
 

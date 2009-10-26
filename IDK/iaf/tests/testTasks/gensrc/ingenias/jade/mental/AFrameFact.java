@@ -69,9 +69,8 @@ public class AFrameFact extends ingenias.editor.entities.RuntimeFact{
    public String getaField(){
      return aField;      
    }
+     
     
-  
-  
 }
 
  

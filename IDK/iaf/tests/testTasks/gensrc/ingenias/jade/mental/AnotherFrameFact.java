@@ -69,9 +69,8 @@ public class AnotherFrameFact extends ingenias.editor.entities.RuntimeFact{
    public String getmySlot(){
      return mySlot;      
    }
+     
     
-  
-  
 }
 
  

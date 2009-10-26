@@ -58,9 +58,8 @@ public class Answer extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+     
     
-  
-  
 }
 
  

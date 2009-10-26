@@ -50,7 +50,7 @@ import ingenias.tests.*;
 
 
 
-public class SingleInputTaskTest {
+public class SingleInputTaskTest extends BasicMASTest {
 @Test
   public void testDemo() throws TimeOut{			
   			

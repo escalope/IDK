@@ -5,11 +5,15 @@
 
 package tws.demo.inspector;
 
+import ingenias.jade.MyMath;
 import ingenias.jade.components.TaskOutput;
+import ingenias.jade.mental.InspectQualityOfSourceInTesting;
+import ingenias.jade.mental.QualityDegreeOfSourceInTesting;
 import ingenias.jade.mental.SourceQualityDegree;
 
 import ingenias.jade.mental.InspectQualitySource;
 import regretsystem.EvaluationValue;
+import tws.demo.AlphaInspection;
 import tws.demo.SourceInfo;
 
 /**
@@ -42,5 +46,39 @@ public class Tasks {
         outputsdefaultGradoCalidadFuente.setdata(fuente);
         System.out.println("Inspector: "+eval.getSubjectCriteria());
     }
+    
+    public static void perfectProcessQualityInspectionRequestTaskTask(
+    		InspectQualitySource eiInspeccionarCalidadFuente,
+            SourceQualityDegree outputsdefaultGradoCalidadFuente,
+            TaskOutput outputsdefault) {
+        SourceInfo fuente = (SourceInfo) eiInspeccionarCalidadFuente.getdata();
+        String fuenteURL = (String) fuente.getData();
+        EvaluationValue eval = new EvaluationValue();
+        eval.setObjectCriteria(eiInspeccionarCalidadFuente.getdeclaredQuality());
+		eval.setProcessCriteria(eiInspeccionarCalidadFuente.getdeclaredQuality());
+		eval.setSubjectCriteria(eiInspeccionarCalidadFuente.getdeclaredQuality());
+        fuente.setEval(eval);
+        outputsdefaultGradoCalidadFuente.setdata(fuente);
+        System.out.println("Inspector: "+eval.getSubjectCriteria());
+    }
+    
+    public static void gaussianProcessQualityInspectionRequestTaskTask(
+    		InspectQualitySource eiInspeccionarCalidadFuente,
+            SourceQualityDegree outputsdefaultGradoCalidadFuente,
+            TaskOutput outputsdefault) {
+        SourceInfo fuente = (SourceInfo) eiInspeccionarCalidadFuente.getdata();
+        String fuenteURL = (String) fuente.getData();
+        EvaluationValue eval = new EvaluationValue();
+        
+        eval.setObjectCriteria(MyMath.gaussian(0.5, 0.5));
+		eval.setProcessCriteria(MyMath.gaussian(0.5, 0.5));
+		eval.setSubjectCriteria(MyMath.gaussian(0.5, 0.5));
+		
+        fuente.setEval(eval);
+        outputsdefaultGradoCalidadFuente.setdata(fuente);
+        System.out.println("Inspector: "+eval.getSubjectCriteria());
+    }
+    
+   
 
 }

@@ -124,7 +124,7 @@ public class AddSourceIntoSystemTask extends Task{
                 outputsdefaultAcceptedProposal,
                 outputsdefault);
         System.out.println(this.getClass().getName()+" >> ");
-
+        outputsdefaultInspectQualitySource.setdeclaredQuality(eiSourceToProcess.getdeclaredQuality());
 //#end_node:AddSourceIntoSystemImpl <--- DO NOT REMOVE THIS
 
  }

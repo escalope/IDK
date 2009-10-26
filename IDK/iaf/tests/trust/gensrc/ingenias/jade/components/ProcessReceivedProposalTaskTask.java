@@ -100,6 +100,7 @@ public class ProcessReceivedProposalTaskTask extends Task{
                 outputsdefault);
         System.out.println(this.getClass().getName()+" >> ");
         outputsdefaultSourceToTesting.setdeclaredQuality(eiSourceInfoProposal.getdeclaredQuality());
+        outputsdefaultSourceToProcess.setdeclaredQuality(eiSourceInfoProposal.getdeclaredQuality());
 
 
 //#end_node:ProcessReceivedProposalTaskImpl <--- DO NOT REMOVE THIS

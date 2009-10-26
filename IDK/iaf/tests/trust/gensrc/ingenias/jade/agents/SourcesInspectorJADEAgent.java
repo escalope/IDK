@@ -184,7 +184,7 @@ public class SourcesInspectorJADEAgent
   	   	// generic one involved in an interaction
   	   	
   	   	correctRole=correctRole|| 
-  	   	 conversation.getPlayedRole().equals ("");
+  	   	 conversation.getPlayedRole().equals ("SourceQualityInspectorRole");
   	   	
        	if (tobject.getType().equals("ProcessQualityInspectionRequestTask") && (false ||
        		correctRole)){

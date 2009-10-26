@@ -136,6 +136,22 @@ public class MainProdStandAlone {
         }.start();
 
         // Create a new agent
+        final jade.wrapper.AgentController agcPerfectSourceQualityInspector = ac.createNewAgent("PerfectSourceQualityInspector",
+            "ingenias.jade.agents.PerfectSourceQualityInspectorJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up PerfectSourceQualityInspector...");
+              agcPerfectSourceQualityInspector.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
         final jade.wrapper.AgentController agcGaussianSourcesAlfaInspector = ac.createNewAgent("GaussianSourcesAlfaInspector",
             "ingenias.jade.agents.GaussianSourcesAlfaInspectorJADEAgent", new Object[0]);	
 	
@@ -241,6 +257,22 @@ public class MainProdStandAlone {
             try {
                System.out.println("Starting up AutonomousCollaborator...");
               agcAutonomousCollaborator.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcGaussianSourcesInspector = ac.createNewAgent("GaussianSourcesInspector",
+            "ingenias.jade.agents.GaussianSourcesInspectorJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up GaussianSourcesInspector...");
+              agcGaussianSourcesInspector.start();
             } catch (Exception e){
               e.printStackTrace();
             }

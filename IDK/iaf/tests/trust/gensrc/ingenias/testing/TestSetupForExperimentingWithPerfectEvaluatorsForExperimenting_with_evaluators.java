@@ -178,6 +178,50 @@ jade.wrapper.AgentContainer ac=null;
         }.start();
 
         // Create a new agent
+        final jade.wrapper.AgentController agcPerfectSourceQualityInspector_0PerfectSourceInspectorsDU = ac.createNewAgent("PerfectSourceQualityInspector_0PerfectSourceInspectorsDU",
+            "ingenias.jade.agents.PerfectSourceQualityInspectorJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+                addStartedAgent("PerfectSourceQualityInspector_0PerfectSourceInspectorsDU");
+                
+                addAgentRole("PerfectSourceQualityInspector_0PerfectSourceInspectorsDU","SourceQualityInspectorRole");   
+    			             
+    			             
+               System.out.println("Starting up PerfectSourceQualityInspector_0PerfectSourceInspectorsDU...");
+              agcPerfectSourceQualityInspector_0PerfectSourceInspectorsDU.start();
+              
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcPerfectSourceQualityInspector_1PerfectSourceInspectorsDU = ac.createNewAgent("PerfectSourceQualityInspector_1PerfectSourceInspectorsDU",
+            "ingenias.jade.agents.PerfectSourceQualityInspectorJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+                addStartedAgent("PerfectSourceQualityInspector_1PerfectSourceInspectorsDU");
+                
+                addAgentRole("PerfectSourceQualityInspector_1PerfectSourceInspectorsDU","SourceQualityInspectorRole");   
+    			             
+    			             
+               System.out.println("Starting up PerfectSourceQualityInspector_1PerfectSourceInspectorsDU...");
+              agcPerfectSourceQualityInspector_1PerfectSourceInspectorsDU.start();
+              
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
         final jade.wrapper.AgentController agcPerfectSourcesAlfaInspector_0PerefectSourceAlphaInspectorsDU = ac.createNewAgent("PerfectSourcesAlfaInspector_0PerefectSourceAlphaInspectorsDU",
             "ingenias.jade.agents.PerfectSourcesAlfaInspectorJADEAgent", new Object[0]);	
 	
@@ -280,28 +324,6 @@ jade.wrapper.AgentContainer ac=null;
     			             
                System.out.println("Starting up ResearcherAssistant_0ResearcherAssistantDU...");
               agcResearcherAssistant_0ResearcherAssistantDU.start();
-              
-            } catch (Exception e){
-              e.printStackTrace();
-            }
-          }
-        }.start();
-
-        // Create a new agent
-        final jade.wrapper.AgentController agcSourcesInspector_0SourcesInspectorDU = ac.createNewAgent("SourcesInspector_0SourcesInspectorDU",
-            "ingenias.jade.agents.SourcesInspectorJADEAgent", new Object[0]);	
-	
-	
-        new Thread(){
-          public void run(){
-            try {
-                addStartedAgent("SourcesInspector_0SourcesInspectorDU");
-                
-                addAgentRole("SourcesInspector_0SourcesInspectorDU","SourceQualityInspectorRole");   
-    			             
-    			             
-               System.out.println("Starting up SourcesInspector_0SourcesInspectorDU...");
-              agcSourcesInspector_0SourcesInspectorDU.start();
               
             } catch (Exception e){
               e.printStackTrace();

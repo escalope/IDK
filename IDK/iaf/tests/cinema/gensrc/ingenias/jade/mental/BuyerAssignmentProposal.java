@@ -69,9 +69,8 @@ public class BuyerAssignmentProposal extends ingenias.editor.entities.RuntimeFac
    public java.lang.String getinterfaceAgent(){
      return interfaceAgent;      
    }
+     
     
-  
-  
 }
 
  

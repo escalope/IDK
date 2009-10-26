@@ -69,9 +69,8 @@ public class CurrentAssistedAgent extends ingenias.editor.entities.RuntimeFact{
    public java.lang.String getinterfaceAgent(){
      return interfaceAgent;      
    }
+     
     
-  
-  
 }
 
  

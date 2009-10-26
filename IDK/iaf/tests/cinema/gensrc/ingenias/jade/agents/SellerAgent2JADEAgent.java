@@ -318,20 +318,20 @@ public class SellerAgent2JADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Transaction_payment");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Transaction_payment");
-			else {
-			    addExpectedInputs(tobject, "Transaction_payment","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Offer");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("Offer");
 			else {
 			    addExpectedInputs(tobject, "Offer","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Transaction_payment");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Transaction_payment");
+			else {
+			    addExpectedInputs(tobject, "Transaction_payment","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;

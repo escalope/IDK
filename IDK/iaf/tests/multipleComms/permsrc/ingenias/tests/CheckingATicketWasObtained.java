@@ -43,10 +43,11 @@ import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.mental.*;
 import ingenias.jade.*;
 import ingenias.testing.*;
+import ingenias.tests.BasicMASTest;
 import ingenias.jade.IAFProperties;
 
 
-public class CheckingATicketWasObtained {
+public class CheckingATicketWasObtained extends BasicMASTest {
 
 
 	@Test

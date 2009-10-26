@@ -69,9 +69,8 @@ public class AssignedBuyer extends ingenias.editor.entities.RuntimeFact{
    public java.lang.String getbuyerName(){
      return buyerName;      
    }
+     
     
-  
-  
 }
 
  

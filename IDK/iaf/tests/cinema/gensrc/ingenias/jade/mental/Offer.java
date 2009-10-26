@@ -102,9 +102,8 @@ public class Offer extends ingenias.editor.entities.RuntimeFact{
    public String getsession(){
      return session;      
    }
+     
     
-  
-  
 }
 
  

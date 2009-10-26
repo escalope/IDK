@@ -113,9 +113,8 @@ public class MoviesProfile extends ingenias.editor.entities.RuntimeFact{
    public Vector<String> getpreferredSeats(){
      return preferredSeats;      
    }
+     
     
-  
-  
 }
 
  

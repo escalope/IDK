@@ -80,9 +80,8 @@ public class BuyersToConsult extends ingenias.editor.entities.RuntimeFact{
    public java.lang.String getbuyerBeingConsulted(){
      return buyerBeingConsulted;      
    }
+     
     
-  
-  
 }
 
  

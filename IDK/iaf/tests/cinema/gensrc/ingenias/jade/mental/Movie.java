@@ -113,9 +113,8 @@ public class Movie extends ingenias.editor.entities.RuntimeFact{
    public Vector<String> getpreferredSessions(){
      return preferredSessions;      
    }
+     
     
-  
-  
 }
 
  

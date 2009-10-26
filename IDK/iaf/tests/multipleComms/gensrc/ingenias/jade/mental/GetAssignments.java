@@ -58,9 +58,8 @@ public class GetAssignments extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+     
     
-  
-  
 }
 
  

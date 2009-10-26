@@ -304,20 +304,20 @@ public class InterfaceAgentJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyersToConsult");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("BuyersToConsult");
-			else {
-			    addExpectedInputs(tobject, "BuyersToConsult","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Accept_assistency_proposal");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("Accept_assistency_proposal");
 			else {
 			    addExpectedInputs(tobject, "Accept_assistency_proposal","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyersToConsult");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("BuyersToConsult");
+			else {
+			    addExpectedInputs(tobject, "BuyersToConsult","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -702,7 +702,7 @@ public class InterfaceAgentJADEAgent
              new jade.core.behaviours.OneShotBehaviour() {
            public void action() {
 			 // If mental conditions are meet then the protocol is started
-			 RuntimeFact expectedInput=null;
+			 Vector<MentalEntity> expectedInput=null;
 			 boolean allexist=true;
 			 
 			 if (allexist){

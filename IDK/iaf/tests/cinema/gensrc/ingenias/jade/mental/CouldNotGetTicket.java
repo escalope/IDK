@@ -58,9 +58,8 @@ public class CouldNotGetTicket extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+     
     
-  
-  
 }
 
  

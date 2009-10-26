@@ -45,11 +45,11 @@ public class Process_ticket_obtainedTask extends Task{
  public void execute() throws TaskException{
 
 
-        Ticket_data  eiTicket_data=(Ticket_data)this.getFirstInputOfType("Ticket_data");             
+        Movie  eiMovie=(Movie)this.getFirstInputOfType("Movie");             
 
         Find_a_movie  eiFind_a_movie=(Find_a_movie)this.getFirstInputOfType("Find_a_movie");             
 
-        Movie  eiMovie=(Movie)this.getFirstInputOfType("Movie");             
+        Ticket_data  eiTicket_data=(Ticket_data)this.getFirstInputOfType("Ticket_data");             
 
 
 

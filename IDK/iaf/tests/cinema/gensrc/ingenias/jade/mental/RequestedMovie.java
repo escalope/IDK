@@ -135,9 +135,8 @@ public class RequestedMovie extends ingenias.editor.entities.RuntimeFact{
    public Vector<String> gettriedCinemas(){
      return triedCinemas;      
    }
+     
     
-  
-  
 }
 
  

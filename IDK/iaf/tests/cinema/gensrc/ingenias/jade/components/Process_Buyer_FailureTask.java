@@ -45,9 +45,9 @@ public class Process_Buyer_FailureTask extends Task{
  public void execute() throws TaskException{
 
 
-        CouldNotGetTicket  eiCouldNotGetTicket=(CouldNotGetTicket)this.getFirstInputOfType("CouldNotGetTicket");             
-
         Find_a_movie  eiFind_a_movie=(Find_a_movie)this.getFirstInputOfType("Find_a_movie");             
+
+        CouldNotGetTicket  eiCouldNotGetTicket=(CouldNotGetTicket)this.getFirstInputOfType("CouldNotGetTicket");             
 
         Movie  eiMovie=(Movie)this.getFirstInputOfType("Movie");             
 

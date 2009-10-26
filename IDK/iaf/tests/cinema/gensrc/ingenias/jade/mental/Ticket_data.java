@@ -80,9 +80,8 @@ public class Ticket_data extends ingenias.editor.entities.RuntimeFact{
    public Integer getprice(){
      return price;      
    }
+     
     
-  
-  
 }
 
  

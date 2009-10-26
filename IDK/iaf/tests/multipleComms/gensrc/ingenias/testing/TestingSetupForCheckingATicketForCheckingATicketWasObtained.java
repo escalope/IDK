@@ -42,32 +42,85 @@ import ingenias.tests.*;
 import ingenias.jade.IAFProperties;
 import ingenias.jade.graphics.MainInteractionManager;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+
+
 
 public class TestingSetupForCheckingATicketForCheckingATicketWasObtained extends CheckingATicketWasObtained{
 jade.wrapper.AgentContainer ac=null;
  
   @Before
   public void agentSetup() throws StaleProxyException, TimeOut{
+  
+  
         IAFProperties.setGraphicsOn(false); // disable graphics
          MainInteractionManager.goManual(); // Stop task execution
-        
+         
+         new Thread(){
+			public void run(){
+				String[] args1=new String[4];
+				args1[0]="-port";
+				args1[1]="60000";
+				args1[2]="-file-dir";
+				args1[3]="jade/";								 				
+				jade.Boot.main(args1);		
+			}
+		}.start();
+
         // Get a hold on JADE runtime
         jade.core.Runtime rt = jade.core.Runtime.instance();
 
         // Exit the JVM when there are no more containers around
-        rt.setCloseVM(false);
+        rt.setCloseVM(true);
 
         // Create a default profile
         Profile p = new ProfileImpl();
         p.setParameter("preload","a*");
         p.setParameter(Profile.MAIN_PORT, "60000");
         p.setParameter(Profile.FILE_DIR, "jade/");
+        
+        
+        // Waits for JADE to start
+        boolean notConnected=true;
+		
+		while (notConnected){			
+				try {
+					Socket s=new Socket("localhost",Integer.parseInt("60000"));
+					notConnected=false;
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UnknownHostException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					System.err.println("Error: "+e.getMessage());
+					System.err.println("Reconnecting in one second");
+					try {
+						Thread.currentThread().sleep(1000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}
 
+		}
+        
+     
+        // Exit the JVM when there are no more containers around
+        rt.setCloseVM(false);
+        
         // Create a new non-main container, connecting to the default
         // main container (i.e. on this host, port 1099)
-         ac = rt.createAgentContainer(p);
-        MainInteractionManager.goManual();
-
+        ac = rt.createAgentContainer(p);
 
 {
         // Create a new agent
@@ -85,6 +138,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("BuyerAgent_0multipleBuyers");
+                             
+    			             
                System.out.println("Starting up BuyerAgent_0multipleBuyers...");
               agcBuyerAgent_0multipleBuyers.start();
               
@@ -109,6 +165,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("BuyerAgent_1multipleBuyers");
+                             
+    			             
                System.out.println("Starting up BuyerAgent_1multipleBuyers...");
               agcBuyerAgent_1multipleBuyers.start();
               
@@ -133,6 +192,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("BuyerAgent_2multipleBuyers");
+                             
+    			             
                System.out.println("Starting up BuyerAgent_2multipleBuyers...");
               agcBuyerAgent_2multipleBuyers.start();
               
@@ -157,6 +219,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("BuyerAgent_3multipleBuyers");
+                             
+    			             
                System.out.println("Starting up BuyerAgent_3multipleBuyers...");
               agcBuyerAgent_3multipleBuyers.start();
               
@@ -181,6 +246,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("BuyerAgent_4multipleBuyers");
+                             
+    			             
                System.out.println("Starting up BuyerAgent_4multipleBuyers...");
               agcBuyerAgent_4multipleBuyers.start();
               
@@ -205,6 +273,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("BuyerAgent_5multipleBuyers");
+                             
+    			             
                System.out.println("Starting up BuyerAgent_5multipleBuyers...");
               agcBuyerAgent_5multipleBuyers.start();
               
@@ -229,6 +300,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("BuyerAgent_6multipleBuyers");
+                             
+    			             
                System.out.println("Starting up BuyerAgent_6multipleBuyers...");
               agcBuyerAgent_6multipleBuyers.start();
               
@@ -253,6 +327,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("BuyerAgent_7multipleBuyers");
+                             
+    			             
                System.out.println("Starting up BuyerAgent_7multipleBuyers...");
               agcBuyerAgent_7multipleBuyers.start();
               
@@ -277,6 +354,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("BuyerAgent_8multipleBuyers");
+                             
+    			             
                System.out.println("Starting up BuyerAgent_8multipleBuyers...");
               agcBuyerAgent_8multipleBuyers.start();
               
@@ -301,6 +381,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("BuyerAgent_9multipleBuyers");
+                             
+    			             
                System.out.println("Starting up BuyerAgent_9multipleBuyers...");
               agcBuyerAgent_9multipleBuyers.start();
               
@@ -323,6 +406,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("InterfaceAgent_0multipleInterfaceAgents");
+                             
+    			             
                System.out.println("Starting up InterfaceAgent_0multipleInterfaceAgents...");
               agcInterfaceAgent_0multipleInterfaceAgents.start();
               
@@ -345,6 +431,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("InterfaceAgent_1multipleInterfaceAgents");
+                             
+    			             
                System.out.println("Starting up InterfaceAgent_1multipleInterfaceAgents...");
               agcInterfaceAgent_1multipleInterfaceAgents.start();
               
@@ -367,6 +456,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("InterfaceAgent_2multipleInterfaceAgents");
+                             
+    			             
                System.out.println("Starting up InterfaceAgent_2multipleInterfaceAgents...");
               agcInterfaceAgent_2multipleInterfaceAgents.start();
               
@@ -389,6 +481,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("InterfaceAgent_3multipleInterfaceAgents");
+                             
+    			             
                System.out.println("Starting up InterfaceAgent_3multipleInterfaceAgents...");
               agcInterfaceAgent_3multipleInterfaceAgents.start();
               
@@ -411,6 +506,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("InterfaceAgent_4multipleInterfaceAgents");
+                             
+    			             
                System.out.println("Starting up InterfaceAgent_4multipleInterfaceAgents...");
               agcInterfaceAgent_4multipleInterfaceAgents.start();
               
@@ -433,6 +531,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("InterfaceAgent_5multipleInterfaceAgents");
+                             
+    			             
                System.out.println("Starting up InterfaceAgent_5multipleInterfaceAgents...");
               agcInterfaceAgent_5multipleInterfaceAgents.start();
               
@@ -455,6 +556,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("InterfaceAgent_6multipleInterfaceAgents");
+                             
+    			             
                System.out.println("Starting up InterfaceAgent_6multipleInterfaceAgents...");
               agcInterfaceAgent_6multipleInterfaceAgents.start();
               
@@ -477,6 +581,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("InterfaceAgent_7multipleInterfaceAgents");
+                             
+    			             
                System.out.println("Starting up InterfaceAgent_7multipleInterfaceAgents...");
               agcInterfaceAgent_7multipleInterfaceAgents.start();
               
@@ -499,6 +606,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("InterfaceAgent_8multipleInterfaceAgents");
+                             
+    			             
                System.out.println("Starting up InterfaceAgent_8multipleInterfaceAgents...");
               agcInterfaceAgent_8multipleInterfaceAgents.start();
               
@@ -521,6 +631,9 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("InterfaceAgent_9multipleInterfaceAgents");
+                             
+    			             
                System.out.println("Starting up InterfaceAgent_9multipleInterfaceAgents...");
               agcInterfaceAgent_9multipleInterfaceAgents.start();
               

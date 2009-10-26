@@ -91,9 +91,8 @@ public class Ticket extends ingenias.editor.entities.RuntimeFact{
    public Integer getprice(){
      return price;      
    }
+     
     
-  
-  
 }
 
  

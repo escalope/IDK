@@ -69,9 +69,8 @@ public class TicketNotAvailable extends ingenias.editor.entities.RuntimeFact{
    public cinema.types.TicketRequestRejectedType getreason(){
      return reason;      
    }
+     
     
-  
-  
 }
 
  

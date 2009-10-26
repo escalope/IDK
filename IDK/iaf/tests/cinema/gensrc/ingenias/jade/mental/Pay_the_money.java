@@ -58,9 +58,8 @@ public class Pay_the_money extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+     
     
-  
-  
 }
 
  

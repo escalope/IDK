@@ -58,9 +58,8 @@ public class Transaction_payment extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+     
     
-  
-  
 }
 
  

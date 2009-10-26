@@ -427,20 +427,20 @@ public class InterfaceAgentJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyersToConsult");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("BuyersToConsult");
-			else {
-			    addExpectedInputs(tobject, "BuyersToConsult","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyerAssignmentProposal");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("BuyerAssignmentProposal");
 			else {
 			    addExpectedInputs(tobject, "BuyerAssignmentProposal","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyersToConsult");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("BuyersToConsult");
+			else {
+			    addExpectedInputs(tobject, "BuyersToConsult","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -765,15 +765,6 @@ public class InterfaceAgentJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Movie");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Movie");
-			else {
-			    addExpectedInputs(tobject, "Movie","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"CouldNotGetTicket");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("CouldNotGetTicket");
@@ -788,6 +779,15 @@ public class InterfaceAgentJADEAgent
 				nonExistingInputs.add("Find_a_movie");
 			else {
 			    addExpectedInputs(tobject, "Find_a_movie","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Movie");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Movie");
+			else {
+			    addExpectedInputs(tobject, "Movie","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -1167,7 +1167,7 @@ public class InterfaceAgentJADEAgent
              new jade.core.behaviours.OneShotBehaviour() {
            public void action() {
 			 // If mental conditions are meet then the protocol is started
-			 RuntimeFact expectedInput=null;
+			 Vector<MentalEntity> expectedInput=null;
 			 boolean allexist=true;
 			 
 			 if (allexist){
@@ -1197,7 +1197,7 @@ public class InterfaceAgentJADEAgent
              new jade.core.behaviours.OneShotBehaviour() {
            public void action() {
 			 // If mental conditions are meet then the protocol is started
-			 RuntimeFact expectedInput=null;
+			 Vector<MentalEntity> expectedInput=null;
 			 boolean allexist=true;
 			 
 			 if (allexist){

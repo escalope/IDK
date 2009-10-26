@@ -58,9 +58,8 @@ public class Accept_assistency_proposal extends ingenias.editor.entities.Runtime
    return "RuntimeFact";
   }
   
+     
     
-  
-  
 }
 
  

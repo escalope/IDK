@@ -69,9 +69,8 @@ public class CinemaProfile extends ingenias.editor.entities.RuntimeFact{
    public Hashtable<String,Integer> getscoreForLastCinemasVisited(){
      return scoreForLastCinemasVisited;      
    }
+     
     
-  
-  
 }
 
  

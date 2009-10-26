@@ -43,10 +43,11 @@ import ingenias.jade.MentalStateProcessor;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.mental.*;
 import ingenias.testing.*;
+import ingenias.tests.BasicMASTest;
 import ingenias.jade.IAFProperties;
 
 
-public class CheckingATicketWasObtained {
+public class CheckingATicketWasObtained extends BasicMASTest {
 	
 	public void testDemo(){			
 		// Involved agent local ids for this test are:

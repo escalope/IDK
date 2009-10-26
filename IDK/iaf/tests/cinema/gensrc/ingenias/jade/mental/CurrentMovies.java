@@ -102,9 +102,8 @@ public class CurrentMovies extends ingenias.editor.entities.RuntimeFact{
    public Integer getprice(){
      return price;      
    }
+     
     
-  
-  
 }
 
  

@@ -58,9 +58,8 @@ public class SearchTimeExceeded extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+     
     
-  
-  
 }
 
  

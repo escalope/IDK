@@ -34,6 +34,8 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 public class NewCycleEvent extends ingenias.editor.entities.RuntimeEvent{
    
     java.lang.Object data;   
+   
+    java.lang.Double declaredQuality;   
     
    
    public NewCycleEvent (String id){
@@ -69,6 +71,15 @@ public class NewCycleEvent extends ingenias.editor.entities.RuntimeEvent{
    
    public java.lang.Object getdata(){
      return data;      
+   }
+   
+
+   public void setdeclaredQuality(java.lang.Double value){
+     declaredQuality=value;   
+   };
+   
+   public java.lang.Double getdeclaredQuality(){
+     return declaredQuality;      
    }
     
   

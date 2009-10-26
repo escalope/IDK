@@ -71,11 +71,11 @@ import ingenias.jade.graphics.*;
 import ingenias.jade.MentalStateManager;
 import ingenias.exception.InvalidEntity;
 
-public class SourcesAlfaInspectorJADEAgent
+public class GaussianSourcesAlfaInspectorJADEAgent
 		 extends JADEAgent {         
  
-		 public SourcesAlfaInspectorJADEAgent(){
-		 super(new SourcesAlfaInspectorProtocol(),new SourcesAlfaInspectorInteractionLocks());
+		 public GaussianSourcesAlfaInspectorJADEAgent(){
+		 super(new GaussianSourcesAlfaInspectorProtocol(),new GaussianSourcesAlfaInspectorInteractionLocks());
 		 }
 
 	private boolean initialiseNonConversationalTask(Task tobject) {
@@ -179,6 +179,87 @@ public class SourcesAlfaInspectorJADEAgent
          
 	   	nonExistingInputs.clear();
   	   	repeatedOutputs.clear();
+  	   	boolean correctRole=conversation.getPlayedRole().equals ("GaussianSourcesAlphaQualityInspectorRole");
+  	   	// Now all ascendant roles are verified, to enable tasks belonging to roles specializing a more
+  	   	// generic one involved in an interaction
+  	   	
+  	   	correctRole=correctRole|| 
+  	   	 conversation.getPlayedRole().equals ("SourcesAlphaQualityInspectorRole");
+  	   	
+       	if (tobject.getType().equals("GaussianProcessAlphaQualityInspectionRequestTask") && (false ||
+       		correctRole)){
+	        Vector<MentalEntity> expectedInput=null;
+            
+       	RuntimeFact expectedOutput=null;
+	   	RuntimeConversation expectedInt=null;
+       	ingenias.jade.components.Resource expectedResource=null;
+	   	ingenias.jade.components.Application expectedApp=null;        	
+	   	TaskOutput to=null;
+	   	to=new TaskOutput("default");
+
+		tobject.setConversationContext(conversation);
+		boolean allEntitiesExist=true;
+	     
+            
+		
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"InspectQualityOfSourceInTesting");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("InspectQualityOfSourceInTesting");
+			else {
+			    addExpectedInputs(tobject, "InspectQualityOfSourceInTesting","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+		
+	      expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
+             tobject.addApplication("YellowPages",expectedApp);
+        /*     
+		
+	      */	      
+	     boolean alreadyExists=true;
+	 
+	     
+	     
+		    {QualityDegreeOfSourceInTesting expectedOutputQualityDegreeOfSourceInTesting=		    
+		     new QualityDegreeOfSourceInTesting(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputQualityDegreeOfSourceInTesting,TaskOperations.CreateWF));
+            }
+	     
+     
+	     tobject.addOutput(to);
+	     
+	     
+     	      if (!allEntitiesExist){
+     	         String[] nonexisting=new String[nonExistingInputs.size()];
+		   		 for (int j=0;j<nonExistingInputs.size();j++){
+					nonexisting[j]=nonExistingInputs.elementAt(j).toString();
+				 }
+				 EventManager.getInstance().conversationalInitializationOfTaskFailed(
+				 			getLocalName(), "GaussianSourcesAlfaInspector", 
+												tobject, nonexisting);
+     	     			
+			   }
+	        	       
+ 	      initialised= allEntitiesExist;
+ 	       return initialised;
+	      }
+         
+         
+         }
+         validConversationType=false;
+             
+
+		    
+		validConversationType=validConversationType||
+				conversation.getInteraction().getId().equalsIgnoreCase("AlphaQualityInspectionRequest");
+	 	
+				
+		if (validConversationType){
+    	         
+         
+	   	nonExistingInputs.clear();
+  	   	repeatedOutputs.clear();
   	   	boolean correctRole=conversation.getPlayedRole().equals ("SourcesAlphaQualityInspectorRole");
   	   	// Now all ascendant roles are verified, to enable tasks belonging to roles specializing a more
   	   	// generic one involved in an interaction
@@ -236,7 +317,7 @@ public class SourcesAlfaInspectorJADEAgent
 					nonexisting[j]=nonExistingInputs.elementAt(j).toString();
 				 }
 				 EventManager.getInstance().conversationalInitializationOfTaskFailed(
-				 			getLocalName(), "SourcesAlfaInspector", 
+				 			getLocalName(), "GaussianSourcesAlfaInspector", 
 												tobject, nonexisting);
      	     			
 			   }
@@ -261,6 +342,36 @@ public class SourcesAlfaInspectorJADEAgent
          //************************************
          // Conversational tasks evaluation
          //************************************
+         
+         typesOfConversation=new Vector<String>();
+	     
+	     typesOfConversation.add("AlphaQualityInspectionRequest");
+		 
+         
+         if (goalname.equals("GivingQualityDegreesToInfoSourcesInTesting")){
+         
+          {
+		    Task tobject=null;
+			Vector<RuntimeConversation>  conversations=getCM().getCurrentActiveConversations(typesOfConversation);
+				boolean canbescheduled=false;
+				for (int k=0;k<conversations.size();k++){
+					tobject=new GaussianProcessAlphaQualityInspectionRequestTaskTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
+					canbescheduled=initialiseConversationalTask(conversations.elementAt(k),tobject);
+					if (canbescheduled){
+					//	MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal GivingQualityDegreesToInfoSourcesInTesting",getLocalName()+"-"+tobject.getType());
+						tasks.add(tobject);
+					}
+					tobject=new DeleteNonUsedEntitiesTask("DeleteNonUsedEntitiesTask","DeleteNonUsedEntitiesTask");
+					canbescheduled=initialiseConversationalTask(conversations.elementAt(k),tobject);
+					 if (canbescheduled && IAFProperties.getGarbageCollectionEnabled()){			
+							tasks.add(tobject);
+					 }
+				}
+				// If a conversational initialization fails, a conventional one is tried
+	      }
+         
+          }        
+         
          
          typesOfConversation=new Vector<String>();
 	     
@@ -312,6 +423,12 @@ public class SourcesAlfaInspectorJADEAgent
 		super.setup();
 		Vector<String> ttypes=new Vector<String>(); 
 		          
+         
+                   
+         ttypes.add("GaussianProcessAlphaQualityInspectionRequestTask");					
+         
+         
+                  
          
                    
          ttypes.add("ProcessAlphaQualityInspectionRequestTask");					
@@ -397,6 +514,14 @@ public class SourcesAlfaInspectorJADEAgent
 	        DFAgentDescription dfd=null;
                 dfd = new DFAgentDescription();
                 ServiceDescription sd=null;
+                
+		dfd.setName(getAID());
+		sd = new ServiceDescription();
+		sd.setName(getLocalName() + "-sub-df");
+		sd.setType("GaussianSourcesAlphaQualityInspectorRole");
+		sd.setOwnership("JADE");
+		dfd.addServices(sd);
+                playedRoles.add(dfd);
                 
 		dfd.setName(getAID());
 		sd = new ServiceDescription();

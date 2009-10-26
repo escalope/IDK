@@ -687,6 +687,12 @@ public class AutonomousCollaboratorJADEAgent
 	 slot.setType("java.lang.Object");
 	 slot.setValue("");
 	 event.addSlots(slot);
+	 
+	 slot=new Slot("283");
+	 slot.setName("declaredQuality");
+	 slot.setType("java.lang.Double");
+	 slot.setValue("");
+	 event.addSlots(slot);
 	  
 	 */ 
 	 events.add(event);

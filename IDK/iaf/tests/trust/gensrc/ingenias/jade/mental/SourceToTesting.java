@@ -34,6 +34,8 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 public class SourceToTesting extends ingenias.editor.entities.RuntimeFact{
    
     java.lang.Object data;   
+   
+    java.lang.Double declaredQuality;   
     
    
   public SourceToTesting (String id){
@@ -68,6 +70,15 @@ public class SourceToTesting extends ingenias.editor.entities.RuntimeFact{
    
    public java.lang.Object getdata(){
      return data;      
+   }
+   
+
+   public void setdeclaredQuality(java.lang.Double value){
+     declaredQuality=value;   
+   };
+   
+   public java.lang.Double getdeclaredQuality(){
+     return declaredQuality;      
    }
      
     

@@ -98,6 +98,7 @@ public class GenerateProposalTaskTask extends Task{
                 outputsdefault,
                 yp);
         System.out.println(this.getClass().getName()+" >> ");
+        outputsdefaultSourceInfoProposal.setdeclaredQuality(eiNewProposalToBeSent.getdeclaredQuality());
 
 //#end_node:GenerateProposalTaskImpl <--- DO NOT REMOVE THIS
 

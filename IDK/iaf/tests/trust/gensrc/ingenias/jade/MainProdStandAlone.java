@@ -120,6 +120,38 @@ public class MainProdStandAlone {
         }.start();
 
         // Create a new agent
+        final jade.wrapper.AgentController agcConfigurableAutonomousCollaborator = ac.createNewAgent("ConfigurableAutonomousCollaborator",
+            "ingenias.jade.agents.ConfigurableAutonomousCollaboratorJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up ConfigurableAutonomousCollaborator...");
+              agcConfigurableAutonomousCollaborator.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcGaussianSourcesAlfaInspector = ac.createNewAgent("GaussianSourcesAlfaInspector",
+            "ingenias.jade.agents.GaussianSourcesAlfaInspectorJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up GaussianSourcesAlfaInspector...");
+              agcGaussianSourcesAlfaInspector.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
         final jade.wrapper.AgentController agcResearcherAssistant = ac.createNewAgent("ResearcherAssistant",
             "ingenias.jade.agents.ResearcherAssistantJADEAgent", new Object[0]);	
 	
@@ -177,6 +209,22 @@ public class MainProdStandAlone {
             try {
                System.out.println("Starting up SourcesInspector...");
               agcSourcesInspector.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcPerfectSourcesAlfaInspector = ac.createNewAgent("PerfectSourcesAlfaInspector",
+            "ingenias.jade.agents.PerfectSourcesAlfaInspectorJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up PerfectSourcesAlfaInspector...");
+              agcPerfectSourcesAlfaInspector.start();
             } catch (Exception e){
               e.printStackTrace();
             }

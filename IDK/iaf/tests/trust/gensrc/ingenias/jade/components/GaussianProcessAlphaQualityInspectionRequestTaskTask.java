@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class SeekSourcesTaskTask extends Task{
+public class GaussianProcessAlphaQualityInspectionRequestTaskTask extends Task{
 
- public SeekSourcesTaskTask(String id){
-  super(id,"SeekSourcesTask");
+ public GaussianProcessAlphaQualityInspectionRequestTaskTask(String id){
+  super(id,"GaussianProcessAlphaQualityInspectionRequestTask");
  }
 
 
@@ -45,7 +45,7 @@ public class SeekSourcesTaskTask extends Task{
  public void execute() throws TaskException{
 
 
-        NewCycleEvent  eiNewCycleEvent=(NewCycleEvent)this.getFirstInputOfType("NewCycleEvent");             
+        InspectQualityOfSourceInTesting  eiInspectQualityOfSourceInTesting=(InspectQualityOfSourceInTesting)this.getFirstInputOfType("InspectQualityOfSourceInTesting");             
 
 
 
@@ -64,26 +64,22 @@ public class SeekSourcesTaskTask extends Task{
   																			outputs);
   		
 		
-		NewProposalToBeSent outputsdefaultNewProposalToBeSent=
-			(NewProposalToBeSent)
-				outputsdefault.getEntityByType("NewProposalToBeSent");
+		QualityDegreeOfSourceInTesting outputsdefaultQualityDegreeOfSourceInTesting=
+			(QualityDegreeOfSourceInTesting)
+				outputsdefault.getEntityByType("QualityDegreeOfSourceInTesting");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:SeekSourcesTaskImpl <--- DO NOT REMOVE THIS	
-System.out.println(this.getClass().getName()+" << ");
-	
-        tws.demo.autonomouscollaborator.Tasks.seekSourcesTaskTask(this.getAgentID(),
-                eiNewCycleEvent,
-                outputsdefaultNewProposalToBeSent,
+//#start_node:GaussianProcessAlphaQualityInspectionRequestTaskImpl <--- DO NOT REMOVE THIS	
+        System.out.println(this.getClass().getName()+" << ");
+        tws.demo.alphainspector.Tasks.gaussianprocessAlphaQualityInspectionRequestTaskTask(eiInspectQualityOfSourceInTesting,
+                outputsdefaultQualityDegreeOfSourceInTesting,
                 outputsdefault);
         System.out.println(this.getClass().getName()+" >> ");
-        outputsdefaultNewProposalToBeSent.setdeclaredQuality(eiNewCycleEvent.getdeclaredQuality());
-
-//#end_node:SeekSourcesTaskImpl <--- DO NOT REMOVE THIS
+//#end_node:GaussianProcessAlphaQualityInspectionRequestTaskImpl <--- DO NOT REMOVE THIS
 
  }
  

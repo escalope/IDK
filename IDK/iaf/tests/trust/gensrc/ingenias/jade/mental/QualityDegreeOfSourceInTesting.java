@@ -34,6 +34,14 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 public class QualityDegreeOfSourceInTesting extends ingenias.editor.entities.RuntimeFact{
    
     java.lang.Object data;   
+   
+    java.lang.Double declaredQuality;   
+   
+    java.lang.Double objectCriteria;   
+   
+    java.lang.Double processCriteria;   
+   
+    java.lang.Double subjectCriteria;   
     
    
   public QualityDegreeOfSourceInTesting (String id){
@@ -68,6 +76,42 @@ public class QualityDegreeOfSourceInTesting extends ingenias.editor.entities.Run
    
    public java.lang.Object getdata(){
      return data;      
+   }
+   
+
+   public void setdeclaredQuality(java.lang.Double value){
+     declaredQuality=value;   
+   };
+   
+   public java.lang.Double getdeclaredQuality(){
+     return declaredQuality;      
+   }
+   
+
+   public void setobjectCriteria(java.lang.Double value){
+     objectCriteria=value;   
+   };
+   
+   public java.lang.Double getobjectCriteria(){
+     return objectCriteria;      
+   }
+   
+
+   public void setprocessCriteria(java.lang.Double value){
+     processCriteria=value;   
+   };
+   
+   public java.lang.Double getprocessCriteria(){
+     return processCriteria;      
+   }
+   
+
+   public void setsubjectCriteria(java.lang.Double value){
+     subjectCriteria=value;   
+   };
+   
+   public java.lang.Double getsubjectCriteria(){
+     return subjectCriteria;      
    }
      
     

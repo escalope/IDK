@@ -24,54 +24,25 @@
 */
 
 
-package ingenias.testing;
+package ingenias.jade;
 
-
-import java.util.Vector;
-
-import org.junit.Before;
-import org.junit.After;
-import org.junit.Test;
-
-import jade.core.*;
-import jade.wrapper.StaleProxyException;
-import jade.wrapper.State;
-import ingenias.exception.TimeOut;
-import ingenias.jade.mental.*;
-import ingenias.tests.*;
-import ingenias.jade.IAFProperties;
-import ingenias.jade.graphics.MainInteractionManager;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
+
+import jade.core.*;
+import ingenias.jade.mental.*;
+
+import ingenias.jade.graphics.MainInteractionManager;
 
 
+public class MainGausianInformationSourceEvaluators {
 
 
-public class TestingPackageForLearnNotToTrustByReputationTest extends LearnNotToTrustByReputationTest{
-jade.wrapper.AgentContainer ac=null;
- 
-  @Before
-  public void agentSetup() throws StaleProxyException, TimeOut{
-  
-  
-        IAFProperties.setGraphicsOn(false); // disable graphics
-         MainInteractionManager.goManual(); // Stop task execution
-         
-         new Thread(){
-			public void run(){
-				String[] args1=new String[4];
-				args1[0]="-port";
-				args1[1]="60000";
-				args1[2]="-file-dir";
-				args1[3]="jade/";								 				
-				jade.Boot.main(args1);		
-			}
-		}.start();
+  public static void main(String args[]) throws Exception{
+
 
         // Get a hold on JADE runtime
         jade.core.Runtime rt = jade.core.Runtime.instance();
@@ -84,61 +55,22 @@ jade.wrapper.AgentContainer ac=null;
         p.setParameter("preload","a*");
         p.setParameter(Profile.MAIN_PORT, "60000");
         p.setParameter(Profile.FILE_DIR, "jade/");
-        
-        
-        // Waits for JADE to start
-        boolean notConnected=true;
-		
-		while (notConnected){			
-				try {
-					Socket s=new Socket("localhost",Integer.parseInt("60000"));
-					notConnected=false;
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (UnknownHostException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					
-					System.err.println("Error: "+e.getMessage());
-					System.err.println("Reconnecting in one second");
-					try {
-						Thread.currentThread().sleep(1000);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-				}
 
-		}
-        
-     
-        // Exit the JVM when there are no more containers around
-        rt.setCloseVM(false);
-        
         // Create a new non-main container, connecting to the default
         // main container (i.e. on this host, port 1099)
-        ac = rt.createAgentContainer(p);
+        final jade.wrapper.AgentContainer ac = rt.createAgentContainer(p);
 
 {
         // Create a new agent
-        final jade.wrapper.AgentController agcSourcesAlfaInspector_0SourcesAlphaInspectorDU = ac.createNewAgent("SourcesAlfaInspector_0SourcesAlphaInspectorDU",
-            "ingenias.jade.agents.SourcesAlfaInspectorJADEAgent", new Object[0]);	
+        final jade.wrapper.AgentController agcGaussianSourcesAlfaInspector_0GaussianSourceAlphaInspectorsDU = ac.createNewAgent("GaussianSourcesAlfaInspector_0GaussianSourceAlphaInspectorsDU",
+            "ingenias.jade.agents.GaussianSourcesAlfaInspectorJADEAgent", new Object[0]);	
 	
 	
         new Thread(){
           public void run(){
             try {
-                addStartedAgent("SourcesAlfaInspector_0SourcesAlphaInspectorDU");
-                
-                addAgentRole("SourcesAlfaInspector_0SourcesAlphaInspectorDU","SourcesAlphaQualityInspectorRole");   
-    			             
-    			             
-               System.out.println("Starting up SourcesAlfaInspector_0SourcesAlphaInspectorDU...");
-              agcSourcesAlfaInspector_0SourcesAlphaInspectorDU.start();
-              
+               System.out.println("Starting up GaussianSourcesAlfaInspector_0GaussianSourceAlphaInspectorsDU...");
+              agcGaussianSourcesAlfaInspector_0GaussianSourceAlphaInspectorsDU.start();
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -153,14 +85,8 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
-                addStartedAgent("AutonomousCollaborator_0AutonomousCollaboratorDU");
-                
-                addAgentRole("AutonomousCollaborator_0AutonomousCollaboratorDU","CollaboratorRole");   
-    			             
-    			             
                System.out.println("Starting up AutonomousCollaborator_0AutonomousCollaboratorDU...");
               agcAutonomousCollaborator_0AutonomousCollaboratorDU.start();
-              
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -175,14 +101,8 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
-                addStartedAgent("SourcesSupervisor_0SourcesSupervisorDU");
-                
-                addAgentRole("SourcesSupervisor_0SourcesSupervisorDU","SupervisorRole");   
-    			             
-    			             
                System.out.println("Starting up SourcesSupervisor_0SourcesSupervisorDU...");
               agcSourcesSupervisor_0SourcesSupervisorDU.start();
-              
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -197,14 +117,8 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
-                addStartedAgent("SourcesSupervisor_1SourcesSupervisorDU");
-                
-                addAgentRole("SourcesSupervisor_1SourcesSupervisorDU","SupervisorRole");   
-    			             
-    			             
                System.out.println("Starting up SourcesSupervisor_1SourcesSupervisorDU...");
               agcSourcesSupervisor_1SourcesSupervisorDU.start();
-              
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -219,14 +133,8 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
-                addStartedAgent("SourcesManager_0SourcesManagerDU");
-                
-                addAgentRole("SourcesManager_0SourcesManagerDU","SourcesManagerRole");   
-    			             
-    			             
                System.out.println("Starting up SourcesManager_0SourcesManagerDU...");
               agcSourcesManager_0SourcesManagerDU.start();
-              
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -241,14 +149,8 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
-                addStartedAgent("ResearcherAssistant_0ResearcherAssistantDU");
-                
-                addAgentRole("ResearcherAssistant_0ResearcherAssistantDU","CollaboratorRole");   
-    			             
-    			             
                System.out.println("Starting up ResearcherAssistant_0ResearcherAssistantDU...");
               agcResearcherAssistant_0ResearcherAssistantDU.start();
-              
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -263,14 +165,8 @@ jade.wrapper.AgentContainer ac=null;
         new Thread(){
           public void run(){
             try {
-                addStartedAgent("SourcesInspector_0SourcesInspectorDU");
-                
-                addAgentRole("SourcesInspector_0SourcesInspectorDU","SourceQualityInspectorRole");   
-    			             
-    			             
                System.out.println("Starting up SourcesInspector_0SourcesInspectorDU...");
               agcSourcesInspector_0SourcesInspectorDU.start();
-              
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -278,17 +174,8 @@ jade.wrapper.AgentContainer ac=null;
         }.start();
 
 }
-	      MainInteractionManager.getInstance().setTitle("node TestDeployment");
-	    
+	      MainInteractionManager.getInstance().setTitle("node GausianInformationSourceEvaluators");
      }
-     
-     
-     @After
-	public void endTest() throws StaleProxyException{
-	 ac.kill();	
-	};
-	
-
 }
 
  

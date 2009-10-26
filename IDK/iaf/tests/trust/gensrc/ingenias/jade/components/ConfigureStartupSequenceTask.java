@@ -72,7 +72,10 @@ public class ConfigureStartupSequenceTask extends Task{
 
 
 //#start_node:ConfigureStartupSequenceImpl <--- DO NOT REMOVE THIS	
-//REPLACE THIS COMMENT WITH YOUR CODE
+        if (eiPreConfiguredInformationSourceList.getdeclaredQualityList()!=null){
+        eaNewCycleEventGenerator.setNewCycleEventSequence(eiPreConfiguredInformationSourceList.getdeclaredQualityList());
+        } else 
+        	eaNewCycleEventGenerator.setNewCycleEventSequence(eiPreConfiguredInformationSourceList.getnumberOfDocuments(),eiPreConfiguredInformationSourceList.getdistribution());
 //#end_node:ConfigureStartupSequenceImpl <--- DO NOT REMOVE THIS
 
  }

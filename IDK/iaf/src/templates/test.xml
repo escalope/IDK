@@ -49,7 +49,7 @@ import ingenias.testing.MSMRepository;
 import ingenias.testing.TestUtils;
 import ingenias.testing.*;
 import ingenias.jade.IAFProperties;
-
+import ingenias.testing.BasicMASTest;
 
 public class @@@v@@@test@@@/v@@@ extends BasicMASTest{
 

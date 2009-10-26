@@ -35,7 +35,10 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import jade.proto.AchieveREInitiator;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -115,7 +118,10 @@ public class YellowPages extends Application {
 		}
 		if (searchResult==null)
 			new Exception("Null returned by DFService").printStackTrace();
-		return searchResult;
+		List<DFAgentDescription> list = Arrays.asList(searchResult);
+		Collections.shuffle(list);
+		return list.toArray(new DFAgentDescription[list.size()]);
+	
 
 		/*int k=0;
 		while (result==null && k<10){

@@ -26,7 +26,7 @@ public class ManageExtensions {
 		this.resources=resources;
 	}
 
-	public void addToolEntry(ingenias.editor.extension.BasicTool bt) {
+	public void addToolEntry(ingenias.editor.extension.BasicTool bt) {		
 		Log.getInstance().logSYS("Added new module with name \"" + bt.getName() +
 		"\"");
 		JMenuItem nentry = new JMenuItem(bt.getName());

@@ -141,6 +141,7 @@ implements java.io.Serializable,IDEUpdater
 	}
 
 	public void updateIDEState(IDEState nids){
+		System.err.println("Actualizando el sistema");
 		if (update!=null&&abackup!=null){
 			update.stopUpdate();
 			abackup.stop();
@@ -268,7 +269,8 @@ implements java.io.Serializable,IDEUpdater
 
 
 	public void initialiseActionHandlers() {
-
+try {
+	System.err.println("initialiseActionHandlers1");
 		ids.addStateChangelistener(new IDEChangesHandler(ids,resources));
 		ManageExtensions me=new ManageExtensions(ids,resources);
 
@@ -280,18 +282,24 @@ implements java.io.Serializable,IDEUpdater
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		update = new UpdateToolsAndCG(me,ml,ids);
-		update.readLibs("ext");
-		update.start();
-
+		System.err.println("initialiseActionHandlers2");
+		
+		System.err.println("initialiseActionHandlers3");
 		diagramLocator = new HyperlinkAction(ids,resources);		
 		searchDiagramPanel.addHyperlinkListener(diagramLocator);    
 		logs.addHyperlinkListener(diagramLocator);
 
 		this.abackup=new AutomaticBackupAction(ids,resources,5);
-
+		System.err.println("initialiseActionHandlers4");
 		
 		me=new ManageExtensions(ids,resources);
+		update = new UpdateToolsAndCG(me,ml,ids);
+		update.readLibs("ext");
+		update.start();
+		System.err.println("Terminado");
+}catch (Throwable t){
+	t.printStackTrace();
+}
 
 	}
 

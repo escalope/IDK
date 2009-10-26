@@ -16,6 +16,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.jgraph.JGraph;
+
 public class CaptureAction {
 	private IDEState ids;
 	private GUIResources resources;
@@ -27,7 +29,8 @@ public class CaptureAction {
 	
 	public void capture_action() {
 		try {
-			if (this.ids.gm.getCurrent() == null) {
+			JGraph graph = this.ids.editor.getGraph();
+			if (graph == null) {			
 				JOptionPane.showMessageDialog(resources.getMainFrame(), "Please, open a diagram first");
 			}
 			else {
@@ -46,9 +49,10 @@ public class CaptureAction {
 
 				String[] validformats = javax.imageio.ImageIO.getWriterFormatNames();
 				final HashSet hs = new HashSet();
-				for (int k = 0; k < validformats.length; k++) {
+				/*for (int k = 0; k < validformats.length; k++) {
 					hs.add(validformats[k].toLowerCase());
-				}
+				}*/ // other formats are ignored
+				hs.add("png");
 				hs.add("svg");
 				hs.add("eps");
 
@@ -82,12 +86,12 @@ public class CaptureAction {
 					}					
 
 					JPanel temp=new JPanel(new BorderLayout());
-					Container parent = this.ids.gm.getCurrent().getParent();
-					temp.add(this.ids.gm.getCurrent(), BorderLayout.CENTER);
+					Container parent = graph.getParent();
+					temp.add(graph, BorderLayout.CENTER);
 					ingenias.editor.export.Diagram2SVG.diagram2SVG(temp,
 							sel, selectedFormat);
-					temp.remove(this.ids.gm.getCurrent());
-					parent.add(this.ids.gm.getCurrent());
+					temp.remove(graph);
+					parent.add(graph);
 					parent.repaint();
 					ids.setCurrentImageFolder(sel);
 				}

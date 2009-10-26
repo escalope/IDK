@@ -94,7 +94,7 @@ public class Diagram2SVG {
 		g.setRenderingHint(
 				RenderingHints.KEY_TEXT_ANTIALIASING,
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			g.setRenderingHint(
+		g.setRenderingHint(
 				RenderingHints.KEY_FRACTIONALMETRICS,
 				RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 		g.setClip( region );
@@ -103,43 +103,48 @@ public class Diagram2SVG {
 		component.setOpaque( opaqueValue );	
 		return image;
 	}
-	
+
 	public  static void createEPS(JComponent graph, File output) throws FileNotFoundException, SVGGraphics2DIOException{
 
 		// Get a DOMImplementation
-		
-		
-		FileOutputStream fos=new FileOutputStream(output);
-		
-		try {
-				
-			JWindow jw=new JWindow();
 
+
+		FileOutputStream fos=new FileOutputStream(output);
+
+		try {
+
+			JWindow jw=new JWindow();
+			RepaintManager currentManager =
+				RepaintManager.currentManager(jw);
+			boolean dBufferOn = currentManager.isDoubleBufferingEnabled();
+			currentManager.setDoubleBufferingEnabled(false);
+			
 			jw.getContentPane().add(graph);
 			jw.pack();
 			EpsGraphics2D g2d=new EpsGraphics2D("prueba",fos,2,2,jw.getSize().width-2,jw.getSize().height-2);
-			
+
 			if (jw.getSize().width!=0 && jw.getSize().height!=0){
 
 				//svgGenerator.setSVGCanvasSize(new Dimension(2000,2000));      
-				graph.setDoubleBuffered(false);
+				graph.setDoubleBuffered(false);				
 				jw.setVisible(true);
 				jw.paint(g2d);
 				jw.setVisible(false);
-				
+
 				jw.getContentPane().remove(graph);
 				// Finally, stream out SVG to the standard output using UTF-8
 				// character to byte encoding
 				g2d.flush();
 				g2d.close();
-				
+
 			}
+			currentManager.setDoubleBufferingEnabled (dBufferOn);
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}		
 
-		
+
 
 	}
 
@@ -152,15 +157,19 @@ public class Diagram2SVG {
 
 		// Create an instance of org.w3c.dom.Document
 		String svgNS = "http://www.w3.org/2000/svg";
-		
+
 		Document document = domImpl.createDocument(svgNS, "svg", null);
 		JWindow jw=new JWindow();
+		RepaintManager currentManager =
+			RepaintManager.currentManager(jw);
+		boolean dBufferOn = currentManager.isDoubleBufferingEnabled();
+		currentManager.setDoubleBufferingEnabled(false);
 
 		// Create an instance of the SVG Generator
 		SVGGeneratorContext ctx = SVGGeneratorContext.createDefault(document);
 		ctx.setEmbeddedFontsOn(true);
-		
-		
+
+
 		GenericImageHandler ihandler = new CachedImageHandlerBase64Encoder();
 		ctx.setGenericImageHandler(ihandler);
 		SVGGraphics2D svgGenerator = new SVGGraphics2D(ctx,true);
@@ -169,8 +178,10 @@ public class Diagram2SVG {
 		if (jw.getSize().width!=0 && jw.getSize().height!=0){
 
 			//svgGenerator.setSVGCanvasSize(new Dimension(2000,2000));      
-			graph.setDoubleBuffered(false);      
-			SwingSVGPrettyPrint.print(graph,svgGenerator);
+			graph.setDoubleBuffered(false);
+
+			graph.paint(svgGenerator);
+			//SwingSVGPrettyPrint.print(graph,svgGenerator);
 			jw.getContentPane().remove(graph);
 			// Finally, stream out SVG to the standard output using UTF-8
 			// character to byte encoding
@@ -178,6 +189,7 @@ public class Diagram2SVG {
 			Writer out = new OutputStreamWriter(new FileOutputStream(output));
 			svgGenerator.stream(out, useCSS);
 		}
+		currentManager.setDoubleBufferingEnabled (dBufferOn);
 
 	}
 
@@ -189,8 +201,8 @@ public class Diagram2SVG {
 					BufferedImage.TYPE_3BYTE_BGR);
 
 			//Graphics2D g = im.createGraphics();
-						
-				        
+
+
 			JWindow fakeFrame=new javax.swing.JWindow();
 			fakeFrame.getContentPane().setLayout(new java.awt.BorderLayout());
 
@@ -222,12 +234,12 @@ public class Diagram2SVG {
 				new Diagram2SVG().createSVG(graph,output);
 			} else
 				if (format.toLowerCase().equals("eps"))
-				 createEPS(graph,output);
+					createEPS(graph,output);
 				else 
 					createPNG(graph,output);
 			if (container!=null){
-			 container.add(graph);
-			 container.repaint();
+				container.add(graph);
+				container.repaint();
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

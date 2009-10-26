@@ -82,26 +82,7 @@
   <target name="emptyTarget"/>
    
   <target name="alljunit" depends="@@@repeat id="testingnode"@@@junit@@@v@@@testingconfig@@@/v@@@,@@@/repeat@@@emptyTarget"/>
-  
-  @@@repeat id="testingnode"@@@
-
-   @@@repeat id="deploynode"@@@
-   
-    <target name="junit@@@v@@@testingconfig@@@/v@@@" depends="compile">
-    <java fork="true" failonerror="true" maxmemory="@@@v@@@memory@@@/v@@@"
-    classname="org.junit.runner.JUnitCore">
-    <arg line="ingenias.testing.@@@v@@@testingconfig@@@/v@@@Launcher"/>    
-      <classpath>
-
-		<pathelement path="${temp}" />        
-        <fileset dir="${lib}">
-          <include name="**/*.jar" />
-        </fileset>
-
-      </classpath>
-
-    </java>
-  </target>
+ 
    <target name="test" depends="compile">
         <mkdir dir="${test.results.dir}"/>
         <junit showoutput="true"
@@ -126,6 +107,27 @@
             <formatter type="xml"/>
         </junit>
     </target>
+    
+  @@@repeat id="testingnode"@@@
+
+   @@@repeat id="deploynode"@@@
+   
+    <target name="junit@@@v@@@testingconfig@@@/v@@@" depends="compile">
+    <java fork="true" failonerror="true" maxmemory="@@@v@@@memory@@@/v@@@"
+    classname="org.junit.runner.JUnitCore">
+    <arg line="ingenias.testing.@@@v@@@testingconfig@@@/v@@@Launcher"/>    
+      <classpath>
+
+		<pathelement path="${temp}" />        
+        <fileset dir="${lib}">
+          <include name="**/*.jar" />
+        </fileset>
+
+      </classpath>
+
+    </java>
+  </target>
+
    
 
   	  @@@/repeat@@@

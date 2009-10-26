@@ -427,11 +427,11 @@ public class InterfaceAgentJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyerAssignmentProposal");
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Accept_assistency_proposal");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("BuyerAssignmentProposal");
+				nonExistingInputs.add("Accept_assistency_proposal");
 			else {
-			    addExpectedInputs(tobject, "BuyerAssignmentProposal","1",expectedInput);
+			    addExpectedInputs(tobject, "Accept_assistency_proposal","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -445,11 +445,11 @@ public class InterfaceAgentJADEAgent
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	      
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Accept_assistency_proposal");
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyerAssignmentProposal");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Accept_assistency_proposal");
+				nonExistingInputs.add("BuyerAssignmentProposal");
 			else {
-			    addExpectedInputs(tobject, "Accept_assistency_proposal","1",expectedInput);
+			    addExpectedInputs(tobject, "BuyerAssignmentProposal","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -668,15 +668,6 @@ public class InterfaceAgentJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Movie");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Movie");
-			else {
-			    addExpectedInputs(tobject, "Movie","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Ticket_data");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("Ticket_data");
@@ -691,6 +682,15 @@ public class InterfaceAgentJADEAgent
 				nonExistingInputs.add("Find_a_movie");
 			else {
 			    addExpectedInputs(tobject, "Find_a_movie","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Movie");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Movie");
+			else {
+			    addExpectedInputs(tobject, "Movie","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -774,20 +774,20 @@ public class InterfaceAgentJADEAgent
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	      
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Find_a_movie");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Find_a_movie");
-			else {
-			    addExpectedInputs(tobject, "Find_a_movie","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Movie");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("Movie");
 			else {
 			    addExpectedInputs(tobject, "Movie","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Find_a_movie");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Find_a_movie");
+			else {
+			    addExpectedInputs(tobject, "Find_a_movie","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;

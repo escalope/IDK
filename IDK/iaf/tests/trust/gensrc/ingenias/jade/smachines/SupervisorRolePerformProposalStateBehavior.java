@@ -86,12 +86,12 @@ private MentalStateReader msr=null;
 			    
 			     // States involved in message deliver
 			     
-			      smf.add("DeniedProposalIU", "endDeniedProposalIU");
+			      smf.add("AcceptedProposalIU", "endAcceptedProposalIU");
 			      
 			    
 			     // States involved in message deliver
 			     
-			      smf.add("AcceptedProposalIU", "endAcceptedProposalIU");
+			      smf.add("DeniedProposalIU", "endDeniedProposalIU");
 			      
 			    
 			
@@ -172,52 +172,6 @@ private MentalStateReader msr=null;
   
   
   // Sends a message and synchronization commands
-  if (this.isState("DeniedProposalIU")) {
-     
-     try {
-      AID[] actors=null;
-      Vector actorsv=new Vector();
-      Vector<String> rolesv=new Vector<String>();
-      
-      {      
-       Vector<AID> receivers=this.getActor("CollaboratorRole");      
-       actorsv.addAll(receivers);
-       for (AID aid:receivers){
-        rolesv.add("CollaboratorRole");
-       }
-      }
-      
-      actors=new AID[actorsv.size()];
-      actorsv.toArray(actors);
-      Vector options=new Vector();      
-      
-      options.add("endDeniedProposalIU");      
-      
-      String[] optionsA=new String[options.size()];
-      options.toArray(optionsA);
-      if (this.getDCC().notifyMessageSent("DeniedProposalIU",optionsA,this)){
-           //If mental state conditions are met, the message is send and state changed
-            CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
-           "DeniedProposalIU","PerformProposal",this.getContentForNextMessage());
-           getTimeout().stop();
-            this.notifyStateTransitionExecuted("DeniedProposalIU", options.firstElement().toString());
-      } else {
-    	  if (getTimeout().isStarted() && getTimeout().isFinished()){
-    	    		 this.abortDueTimeout();   	        
-    	    		  this.notifyStateTransitionExecuted("DeniedProposalIU", "ABORTED");
-    	  } else  {
-    		  if (!getTimeout().isStarted())
-    		  getTimeout().start(0);
-    	  }
-      }
-      additionalRound=true; // To enable a reevaluation of the state since this is a cyclicbehavior
-
-      } catch (NoAgentsFound e) {
-      e.printStackTrace();
-  	}
-  } 
-  
-  // Sends a message and synchronization commands
   if (this.isState("AcceptedProposalIU")) {
      
      try {
@@ -263,18 +217,64 @@ private MentalStateReader msr=null;
   	}
   } 
   
+  // Sends a message and synchronization commands
+  if (this.isState("DeniedProposalIU")) {
+     
+     try {
+      AID[] actors=null;
+      Vector actorsv=new Vector();
+      Vector<String> rolesv=new Vector<String>();
+      
+      {      
+       Vector<AID> receivers=this.getActor("CollaboratorRole");      
+       actorsv.addAll(receivers);
+       for (AID aid:receivers){
+        rolesv.add("CollaboratorRole");
+       }
+      }
+      
+      actors=new AID[actorsv.size()];
+      actorsv.toArray(actors);
+      Vector options=new Vector();      
+      
+      options.add("endDeniedProposalIU");      
+      
+      String[] optionsA=new String[options.size()];
+      options.toArray(optionsA);
+      if (this.getDCC().notifyMessageSent("DeniedProposalIU",optionsA,this)){
+           //If mental state conditions are met, the message is send and state changed
+            CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
+           "DeniedProposalIU","PerformProposal",this.getContentForNextMessage());
+           getTimeout().stop();
+            this.notifyStateTransitionExecuted("DeniedProposalIU", options.firstElement().toString());
+      } else {
+    	  if (getTimeout().isStarted() && getTimeout().isFinished()){
+    	    		 this.abortDueTimeout();   	        
+    	    		  this.notifyStateTransitionExecuted("DeniedProposalIU", "ABORTED");
+    	  } else  {
+    		  if (!getTimeout().isStarted())
+    		  getTimeout().start(0);
+    	  }
+      }
+      additionalRound=true; // To enable a reevaluation of the state since this is a cyclicbehavior
+
+      } catch (NoAgentsFound e) {
+      e.printStackTrace();
+  	}
+  } 
+  
    
 
   
   // Finishes this state machine
-  if (this.isState("endDeniedProposalIU")) {
+  if (this.isState("endAcceptedProposalIU")) {
     this.setFinished(); // End of transitions
     this.notifyProtocolFinished();
     this.getDCC().removeDefaultLocks();
   }
   
   // Finishes this state machine
-  if (this.isState("endAcceptedProposalIU")) {
+  if (this.isState("endDeniedProposalIU")) {
     this.setFinished(); // End of transitions
     this.notifyProtocolFinished();
     this.getDCC().removeDefaultLocks();

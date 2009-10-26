@@ -174,22 +174,6 @@ public class Main {
         }.start();
 
         // Create a new agent
-        final jade.wrapper.AgentController agcAutonomousCollaborator = ac.createNewAgent("AutonomousCollaborator",
-            "ingenias.jade.agents.AutonomousCollaboratorJADEAgent", new Object[0]);	
-	
-	
-        new Thread(){
-          public void run(){
-            try {
-               System.out.println("Starting up AutonomousCollaborator...");
-              agcAutonomousCollaborator.start();
-            } catch (Exception e){
-              e.printStackTrace();
-            }
-          }
-        }.start();
-
-        // Create a new agent
         final jade.wrapper.AgentController agcPerfectSourcesAlfaInspector = ac.createNewAgent("PerfectSourcesAlfaInspector",
             "ingenias.jade.agents.PerfectSourcesAlfaInspectorJADEAgent", new Object[0]);	
 	
@@ -199,6 +183,22 @@ public class Main {
             try {
                System.out.println("Starting up PerfectSourcesAlfaInspector...");
               agcPerfectSourcesAlfaInspector.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcAutonomousCollaborator = ac.createNewAgent("AutonomousCollaborator",
+            "ingenias.jade.agents.AutonomousCollaboratorJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up AutonomousCollaborator...");
+              agcAutonomousCollaborator.start();
             } catch (Exception e){
               e.printStackTrace();
             }

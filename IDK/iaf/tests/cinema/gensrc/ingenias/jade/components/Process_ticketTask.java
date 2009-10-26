@@ -45,9 +45,9 @@ public class Process_ticketTask extends Task{
  public void execute() throws TaskException{
 
 
-        Transaction_payment  eiTransaction_payment=(Transaction_payment)this.getFirstInputOfType("Transaction_payment");             
-
         Ticket  eiTicket=(Ticket)this.getFirstInputOfType("Ticket");             
+
+        Transaction_payment  eiTransaction_payment=(Transaction_payment)this.getFirstInputOfType("Transaction_payment");             
 
 
 

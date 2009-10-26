@@ -45,11 +45,11 @@ public class Make_Buyer_an_AssitantTask extends Task{
  public void execute() throws TaskException{
 
 
-        BuyerAssignmentProposal  eiBuyerAssignmentProposal=(BuyerAssignmentProposal)this.getFirstInputOfType("BuyerAssignmentProposal");             
+        BuyersToConsult  eiBuyersToConsult=(BuyersToConsult)this.getFirstInputOfType("BuyersToConsult");             
 
         Accept_assistency_proposal  eiAccept_assistency_proposal=(Accept_assistency_proposal)this.getFirstInputOfType("Accept_assistency_proposal");             
 
-        BuyersToConsult  eiBuyersToConsult=(BuyersToConsult)this.getFirstInputOfType("BuyersToConsult");             
+        BuyerAssignmentProposal  eiBuyerAssignmentProposal=(BuyerAssignmentProposal)this.getFirstInputOfType("BuyerAssignmentProposal");             
 
 
 

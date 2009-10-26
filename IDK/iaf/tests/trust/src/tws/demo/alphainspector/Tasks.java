@@ -7,6 +7,7 @@ package tws.demo.alphainspector;
 
 import java.util.Random;
 
+import ingenias.jade.MyMath;
 import ingenias.jade.components.TaskOutput;
 import ingenias.jade.mental.QualityDegreeOfSourceInTesting;
 import ingenias.jade.mental.InspectQualityOfSourceInTesting;
@@ -51,7 +52,7 @@ public class Tasks {
 
 		outputsdefaultGradoCalidadFuenteCuarentena.setdata(inspeccion);
 
-		System.out.println("Inspector: "+eval.getSubjectCriteria());
+		System.out.println("Inspector real: "+eval.getSubjectCriteria()+ " known value :"+eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
 	}
 
 	public static void gaussianprocessAlphaQualityInspectionRequestTaskTask(
@@ -63,9 +64,9 @@ public class Tasks {
 		String fuenteURL = (String) inspeccion.getFuenteInfo().getData();
 		EvaluationValue eval = new EvaluationValue();
 
-		eval.setObjectCriteria(Math.abs(randomSubject.nextGaussian()));
-		eval.setProcessCriteria(Math.abs(randomProcess.nextGaussian()));
-		eval.setSubjectCriteria(Math.abs(randomSubject.nextGaussian()));
+		eval.setObjectCriteria(MyMath.gaussian(0.5, 0.5));
+		eval.setProcessCriteria(MyMath.gaussian(0.5, 0.5));
+		eval.setSubjectCriteria(MyMath.gaussian(0.5, 0.5));
 
 		inspeccion.getFuenteInfo().setEval(eval);
 		outputsdefaultGradoCalidadFuenteCuarentena.setprocessCriteria(eval.getProcessCriteria());
@@ -74,7 +75,7 @@ public class Tasks {
 		outputsdefaultGradoCalidadFuenteCuarentena.setdeclaredQuality(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
 		outputsdefaultGradoCalidadFuenteCuarentena.setdata(inspeccion);
 
-		System.out.println("Inspector: "+eval.getSubjectCriteria());
+		System.out.println("Inspector gaussian: "+eval.getSubjectCriteria()+ " known value :"+eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
 	}
 
 
@@ -99,7 +100,7 @@ public class Tasks {
 
 		outputsdefaultGradoCalidadFuenteCuarentena.setdata(inspeccion);
 
-		System.out.println("Inspector: "+eval.getSubjectCriteria());
+		System.out.println("Inspector perfect: "+eval.getSubjectCriteria()+ " known value :"+eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
 	}
 
 }

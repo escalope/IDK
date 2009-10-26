@@ -444,9 +444,9 @@ public class BuyerAgentJADEAgent
 		tobject.setConversationContext(conversation);
 		boolean allEntitiesExist=true;
 	     
-	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"RequestedMovie");
+	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Movie");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("RequestedMovie");
+				nonExistingInputs.add("Movie");
 			else
 				addExpectedInputs(tobject, "", 
 				"1", expectedInput);
@@ -460,9 +460,9 @@ public class BuyerAgentJADEAgent
 				"1", expectedInput);
 		    allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	     
-	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Movie");
+	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"RequestedMovie");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Movie");
+				nonExistingInputs.add("RequestedMovie");
 			else
 				addExpectedInputs(tobject, "", 
 				"1", expectedInput);
@@ -584,20 +584,20 @@ public class BuyerAgentJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Transaction_payment");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Transaction_payment");
-			else {
-			    addExpectedInputs(tobject, "Transaction_payment","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Ticket");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("Ticket");
 			else {
 			    addExpectedInputs(tobject, "Ticket","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Transaction_payment");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Transaction_payment");
+			else {
+			    addExpectedInputs(tobject, "Transaction_payment","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -753,17 +753,17 @@ public class BuyerAgentJADEAgent
 		tobject.setConversationContext(conversation);
 		boolean allEntitiesExist=true;
 	     
-	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Movie");
+	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"CinemaProfile");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Movie");
+				nonExistingInputs.add("CinemaProfile");
 			else
 				addExpectedInputs(tobject, "", 
 				"1", expectedInput);
 		    allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	     
-	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"CinemaProfile");
+	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Movie");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("CinemaProfile");
+				nonExistingInputs.add("Movie");
 			else
 				addExpectedInputs(tobject, "", 
 				"1", expectedInput);
@@ -882,17 +882,17 @@ public class BuyerAgentJADEAgent
 		tobject.setConversationContext(conversation);
 		boolean allEntitiesExist=true;
 	     
-	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"RequestedMovie");
+	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"CinemaProfile");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("RequestedMovie");
+				nonExistingInputs.add("CinemaProfile");
 			else
 				addExpectedInputs(tobject, "", 
 				"1", expectedInput);
 		    allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	     
-	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"CinemaProfile");
+	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"RequestedMovie");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("CinemaProfile");
+				nonExistingInputs.add("RequestedMovie");
 			else
 				addExpectedInputs(tobject, "", 
 				"1", expectedInput);
@@ -1011,17 +1011,17 @@ public class BuyerAgentJADEAgent
 		tobject.setConversationContext(conversation);
 		boolean allEntitiesExist=true;
 	     
-	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"RequestedMovie");
+	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"CinemaProfile");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("RequestedMovie");
+				nonExistingInputs.add("CinemaProfile");
 			else
 				addExpectedInputs(tobject, "", 
 				"1", expectedInput);
 		    allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	     
-	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"CinemaProfile");
+	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"RequestedMovie");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("CinemaProfile");
+				nonExistingInputs.add("RequestedMovie");
 			else
 				addExpectedInputs(tobject, "", 
 				"1", expectedInput);

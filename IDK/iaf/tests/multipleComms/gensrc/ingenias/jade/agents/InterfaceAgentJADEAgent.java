@@ -313,20 +313,20 @@ public class InterfaceAgentJADEAgent
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	      
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyersToConsult");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("BuyersToConsult");
-			else {
-			    addExpectedInputs(tobject, "BuyersToConsult","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyerAssignmentProposal");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("BuyerAssignmentProposal");
 			else {
 			    addExpectedInputs(tobject, "BuyerAssignmentProposal","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"BuyersToConsult");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("BuyersToConsult");
+			else {
+			    addExpectedInputs(tobject, "BuyersToConsult","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;

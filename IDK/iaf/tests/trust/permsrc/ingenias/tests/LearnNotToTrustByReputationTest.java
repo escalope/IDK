@@ -36,7 +36,7 @@ import tws.demo.testing.Assertion;
 import static tws.demo.testing.TestUtils2.*;
 import static org.junit.Assert.*;
 
-public class LearnNotToTrustByReputationTest {
+public class LearnNotToTrustByReputationTest extends BasicMASTest {
 
     @Test
     public void testDemo() throws Exception {

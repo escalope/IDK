@@ -33,7 +33,7 @@ import ingenias.jade.mental.*;
 import ingenias.testing.*;
 import tws.demo.supervisor.ReGreTInfo;
 
-public class LearnToTrustTest {
+public class LearnToTrustTest extends BasicMASTest {
 
     @Test
     public void testDemo() throws Exception {

@@ -34,7 +34,7 @@ import ingenias.testing.*;
 import tws.demo.supervisor.ReGreTInfo;
 import static org.junit.Assert.*;
 
-public class LearnNotToTrustTest {
+public class LearnNotToTrustTest extends BasicMASTest {
 
     @Test
     public void testDemo() throws Exception {

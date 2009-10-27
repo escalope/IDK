@@ -81,6 +81,7 @@ System.out.println(this.getClass().getName()+" << ");
                 outputsdefaultNewProposalToBeSent,
                 outputsdefault);
         System.out.println(this.getClass().getName()+" >> ");
+        System.out.println("-SeekSourcesTaskTask:"+eiNewCycleEvent.getdeclaredQuality());
         outputsdefaultNewProposalToBeSent.setdeclaredQuality(eiNewCycleEvent.getdeclaredQuality());
 
 //#end_node:SeekSourcesTaskImpl <--- DO NOT REMOVE THIS

@@ -38,7 +38,8 @@ public  class NewCycleEventGeneratorAppImp extends NewCycleEventGeneratorApp{
 			public void run(){
 				for (int k=0;k<documentQuality.length;k++){
 					NewCycleEvent nevent = new NewCycleEvent();				
-					nevent.setdeclaredQuality(documentQuality[k]);		
+					nevent.setdeclaredQuality(filter(documentQuality[k]));
+                                        System.out.println("DQ:"+nevent.getdeclaredQuality());
 					BigInteger nvalue=new BigInteger(32, random);
 					while (documentsTable.containsKey(nvalue.toString())){
 						nvalue=new BigInteger(32, random);
@@ -54,8 +55,8 @@ public  class NewCycleEventGeneratorAppImp extends NewCycleEventGeneratorApp{
 					System.err.println(getOwner().getLocalName()+" agent inserting event with quality "+documentQuality[k]);
 					long wait=(long) (3000*randomQuality.nextGaussian());
 					
-					TestUtils.doNothing(Math.abs(wait));		
-
+					TestUtils.doNothing(Math.abs(wait));
+                                        //TestUtils.doNothing(4000);
 
 				}
 			}
@@ -70,14 +71,17 @@ public  class NewCycleEventGeneratorAppImp extends NewCycleEventGeneratorApp{
 				for (int k=0;k<size;k++){
 					NewCycleEvent nevent = new NewCycleEvent();
 					if (distribution.equalsIgnoreCase("good")){
-						nevent.setdeclaredQuality(0.5+Math.abs(randomQuality.nextGaussian()));					
+						nevent.setdeclaredQuality(filter(0.3+Math.abs(randomQuality.nextGaussian())));
 					}
 					if (distribution.equalsIgnoreCase("bad")){
-						nevent.setdeclaredQuality(Math.abs(randomQuality.nextGaussian())-0.5);					
+						nevent.setdeclaredQuality(filter(Math.abs(randomQuality.nextGaussian())-0.3));
 					}
 					if (distribution.equalsIgnoreCase("mixture")){
-						nevent.setdeclaredQuality(Math.abs(randomQuality.nextGaussian()));					
+						nevent.setdeclaredQuality(filter(0.3+randomQuality.nextGaussian()));
 					}
+
+                                        
+                                        System.out.println("DQ:"+nevent.getdeclaredQuality());
 
 					BigInteger nvalue=new BigInteger(32, random);
 					while (documentsTable.containsKey(nvalue.toString())){
@@ -92,7 +96,8 @@ public  class NewCycleEventGeneratorAppImp extends NewCycleEventGeneratorApp{
 						e.printStackTrace();
 					}
 
-					TestUtils.doNothing((long) (3000*Math.abs(randomQuality.nextGaussian())));		
+					TestUtils.doNothing((long) (3000*Math.abs(randomQuality.nextGaussian())));
+                                       // TestUtils.doNothing(4000);
 
 
 				}
@@ -101,6 +106,12 @@ public  class NewCycleEventGeneratorAppImp extends NewCycleEventGeneratorApp{
 
 	}
 
+
+        private static double filter(double value){
+            if(value>1) value=1;
+            if(value<-1) value=-1;
+            return value;
+        }
 
 }
 

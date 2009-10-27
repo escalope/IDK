@@ -312,7 +312,7 @@ public class Tasks {
         ReGreTInfo regret = (ReGreTInfo) eiValoresConfianzaReputacion.getdata();
         SourceInfo fuente = (SourceInfo) eiGradoCalidadFuente.getdata();
 
-        VisualizationAppInit.getInstance().update(0, id + ": Nuevo dato de inspeccion para:" + fuente.getCollaboradorId());
+        //VisualizationAppInit.getInstance().update(0, id + ": Nuevo dato de inspeccion para:" + fuente.getCollaboradorId());
 
         if (!regret.getOdb().containsKey(fuente.getCollaboradorId())) {
             regret.getOdb().put(fuente.getCollaboradorId(), new Vector<EvaluationValue>());

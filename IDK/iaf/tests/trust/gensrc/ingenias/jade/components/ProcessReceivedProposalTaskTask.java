@@ -99,6 +99,7 @@ public class ProcessReceivedProposalTaskTask extends Task{
                 outputsdefaultAgentReputationInfoNeeded,
                 outputsdefault);
         System.out.println(this.getClass().getName()+" >> ");
+        System.out.println("-ProcessReceivedProposalTask:"+eiSourceInfoProposal.getdeclaredQuality());
         outputsdefaultSourceToTesting.setdeclaredQuality(eiSourceInfoProposal.getdeclaredQuality());
         outputsdefaultSourceToProcess.setdeclaredQuality(eiSourceInfoProposal.getdeclaredQuality());
 

@@ -88,6 +88,8 @@ public class ProcessResultAlphaQualityInspectionTask extends Task{
                 outputsdefaultSourceToProcess,
                 outputsdefault);
         System.out.println(this.getClass().getName()+" >> ");
+        outputsdefaultSourceToProcess.setdeclaredQuality(eiQualityDegreeOfSourceInTesting.getdeclaredQuality());
+        
 
 //#end_node:ProcessResultAlphaQualityInspectionImpl <--- DO NOT REMOVE THIS
 

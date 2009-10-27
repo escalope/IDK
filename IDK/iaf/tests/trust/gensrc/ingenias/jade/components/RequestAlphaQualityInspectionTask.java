@@ -97,6 +97,7 @@ public class RequestAlphaQualityInspectionTask extends Task{
                 outputsdefaultInspectQualityOfSourceInTesting,
                 outputsdefault);
         System.out.println(this.getClass().getName()+" >> ");
+        System.out.println("-RequestAlphaQualityInspectionTask:"+eiSourceToTesting.getdeclaredQuality());
         outputsdefaultInspectQualityOfSourceInTesting.setdeclaredQuality(eiSourceToTesting.getdeclaredQuality());
 //#end_node:RequestAlphaQualityInspectionImpl <--- DO NOT REMOVE THIS
 

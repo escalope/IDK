@@ -66,7 +66,7 @@ public class Tasks {
 
 		eval.setObjectCriteria(0.6);
 		eval.setProcessCriteria(0.8);
-		eval.setSubjectCriteria(MyMath.gaussian(0.5, 0.5));
+		eval.setSubjectCriteria(filter(MyMath.gaussian(0.3, 0.8)));
 
 		inspeccion.getFuenteInfo().setEval(eval);
 		outputsdefaultGradoCalidadFuenteCuarentena.setprocessCriteria(eval.getProcessCriteria());
@@ -102,5 +102,11 @@ public class Tasks {
 
 		System.out.println("Inspector perfect: "+eval.getSubjectCriteria()+ " known value :"+eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
 	}
+
+        private static double filter(double value){
+            if(value>1) value=1;
+            if(value<-1) value=-1;
+            return value;
+        }
 
 }

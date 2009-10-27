@@ -63,6 +63,7 @@ import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.mental.*;
 import ingenias.testing.*;
 import ingenias.jade.IAFProperties;
+import tws.demo.AlphaInspection;
 
 
 public class Experimenting_with_evaluators extends BasicMASTest{
@@ -119,26 +120,31 @@ public class Experimenting_with_evaluators extends BasicMASTest{
 						if (me.getType().equalsIgnoreCase("AcceptedProposal")){
 							// A new source has been included
 							AcceptedProposal ap=(AcceptedProposal)me;
-							createEntry(logFile, "acceptedsource");
+                                                        SourceInfo si = (SourceInfo) ap.getdata();
+							createEntry(logFile, "acceptedsource,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria());
 						}
 						if (me.getType().equalsIgnoreCase("DeniedProposal")){
 							// A new source has been included
 							DeniedProposal ap=(DeniedProposal)me;
-							createEntry(logFile, "deniedsource");
+                                                        SourceInfo si = (SourceInfo) ap.getdata();
+							createEntry(logFile, "deniedsource,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria());
 						}
 
 						if (me.getType().equalsIgnoreCase("InspectQualityOfSourceInTesting")){
 							// Requested a new evaluation
 							InspectQualityOfSourceInTesting iq=(InspectQualityOfSourceInTesting)me;
-							createEntry(logFile, "requestedevaluation");
+                                                        AlphaInspection ai = (AlphaInspection) iq.getdata();
+							createEntry(logFile, "requestedevaluation,"+ai.getFuenteInfo().getCollaboradorId()+","+ai.getFuenteInfo().getData());
 						}
 						if (me.getType().equalsIgnoreCase("QualityDegreeOfSourceInTesting")){
 							// A new source has been evaluated 
 							QualityDegreeOfSourceInTesting qd=(QualityDegreeOfSourceInTesting)me;
+                                                        AlphaInspection ai = (AlphaInspection) qd.getdata();
+                                                        SourceInfo si = ai.getFuenteInfo();
 							if (qd.getdeclaredQuality()>qd.getsubjectCriteria()){
-								createEntry(logFile, "badevaluated");
+								createEntry(logFile, "badevaluated,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria());
 							} else
-								createEntry(logFile, "wellevaluated");						
+								createEntry(logFile, "wellevaluated,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria());
 						}						
 					}					
 				}
@@ -153,15 +159,20 @@ public class Experimenting_with_evaluators extends BasicMASTest{
 					ReGreTInfo regret = (ReGreTInfo) eiTrustInformation.getdata();
 					SourceInfo fuente = (SourceInfo) eiSourceQualityDegree.getdata();
 					Trust currentValue=regret.getConfianzas().get(fuente.getCollaboradorId());
-					createEntry(logFile, "trust,"+fuente.getCollaboradorId()+","+currentValue.getSubjectCriteriaGoodQuality().getReliability());
+					createEntry(logFile, "trust,"+fuente.getCollaboradorId()+","
+                                                +currentValue.getSubjectCriteriaGoodQuality().getValue()+","
+                                                +currentValue.getSubjectCriteriaGoodQuality().getReliability()+","
+                                                +fuente.getData()+","
+                                                +fuente.getEval().getSubjectCriteria());
 				}
 
 				if (event.getEventKind().equals(EventKind.TaskExecutionFinished) &&
 						event.getInvolvedTasks()[0].getType().equalsIgnoreCase("GenerateProposalTask")){
 					// After terminating ProcessInspectionResult, trust values for each collaborator are recomputed
 					Task task=event.getInvolvedTasks()[0];
-					NewProposalToBeSent  eiproposal=(NewProposalToBeSent)task.getFirstInputOfType("NewProposalToBeSent");             
-					createEntry(logFile, "createdproposal");
+
+					NewProposalToBeSent  eiproposal=(NewProposalToBeSent)task.getFirstInputOfType("NewProposalToBeSent");
+					createEntry(logFile, "createdproposal,"+task.getAgentID()+","+eiproposal.getdata());
 				}
 
 

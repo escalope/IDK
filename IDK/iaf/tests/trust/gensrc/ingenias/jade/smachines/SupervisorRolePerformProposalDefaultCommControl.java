@@ -54,14 +54,14 @@ import ingenias.exception.NotFound;
     
     // Facts that cannot be removed because they must be sent
      
-     lw.addDeletionLockExpectedType("AcceptedProposal");
+     lw.addDeletionLockExpectedType("DeniedProposal");
      
     
        // Facts that cannot be removed because they are part of guards
     
     // Facts that cannot be removed because they must be sent
      
-     lw.addDeletionLockExpectedType("DeniedProposal");
+     lw.addDeletionLockExpectedType("AcceptedProposal");
      
      
     }
@@ -73,14 +73,14 @@ import ingenias.exception.NotFound;
     
     // Facts that cannot be removed because they must be sent
      
-     locks.add("AcceptedProposal");
+     locks.add("DeniedProposal");
      
     
        // Facts that cannot be removed because they are part of guards
     
     // Facts that cannot be removed because they must be sent
      
-     locks.add("DeniedProposal");
+     locks.add("AcceptedProposal");
      
      
     return locks;
@@ -125,37 +125,6 @@ import ingenias.exception.NotFound;
   
   
    
-    if (stateToEvaluate.equals("AcceptedProposalIU") &&
-    	 sb.isState("AcceptedProposalIU")&& options.length>0) {         
-         boolean allexist=true;
-         Vector<MentalEntity> mfcontent=null;
-         
-		 
-		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"AcceptedProposal").isEmpty();
-		   
-         if (allexist && true){
-           sb.clearContentNextMessage();
-           sb.removeState("AcceptedProposalIU");
-           
-           
-	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"AcceptedProposal");
-	   	   for (MentalEntity me:mfcontent)             
-             sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLockType("AcceptedProposal");
-	       lockProcessed("AcceptedProposal");
-           //MainInteractionManager.log("Removing lock AcceptedProposal",this.getAgent().getLocalName()+"-"+sb.getConversationID());
-            
-             
-           
-  		   //sb.clearState();         
-	              
-		   futureStates.add("endAcceptedProposalIU");
-          
-          processed = true;
-      	 }
-     
-    } 
-   
     if (stateToEvaluate.equals("DeniedProposalIU") &&
     	 sb.isState("DeniedProposalIU")&& options.length>0) {         
          boolean allexist=true;
@@ -181,6 +150,37 @@ import ingenias.exception.NotFound;
   		   //sb.clearState();         
 	              
 		   futureStates.add("endDeniedProposalIU");
+          
+          processed = true;
+      	 }
+     
+    } 
+   
+    if (stateToEvaluate.equals("AcceptedProposalIU") &&
+    	 sb.isState("AcceptedProposalIU")&& options.length>0) {         
+         boolean allexist=true;
+         Vector<MentalEntity> mfcontent=null;
+         
+		 
+		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"AcceptedProposal").isEmpty();
+		   
+         if (allexist && true){
+           sb.clearContentNextMessage();
+           sb.removeState("AcceptedProposalIU");
+           
+           
+	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"AcceptedProposal");
+	   	   for (MentalEntity me:mfcontent)             
+             sb.addContentForNextMessage(me);    
+	       getLR().removeDeletionLockType("AcceptedProposal");
+	       lockProcessed("AcceptedProposal");
+           //MainInteractionManager.log("Removing lock AcceptedProposal",this.getAgent().getLocalName()+"-"+sb.getConversationID());
+            
+             
+           
+  		   //sb.clearState();         
+	              
+		   futureStates.add("endAcceptedProposalIU");
           
           processed = true;
       	 }

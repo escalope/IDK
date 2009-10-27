@@ -45,8 +45,8 @@ public class Tasks {
 
     static {
         expectedQuality = new ExpectedQuality();
-        expectedQuality.setObjectGoodQualityValue(0.7);
-        expectedQuality.setProcessGoodQualityValue(0.55);
+        expectedQuality.setObjectGoodQualityValue(0.3);
+        expectedQuality.setProcessGoodQualityValue(0.3);
         expectedQuality.setSubjectGoodQualityValue(0.3);
 
     }

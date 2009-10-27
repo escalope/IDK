@@ -71,8 +71,8 @@ public class Tasks {
         EvaluationValue eval = new EvaluationValue();
         
         eval.setObjectCriteria(MyMath.gaussian(0.5, 0.5));
-		eval.setProcessCriteria(MyMath.gaussian(0.5, 0.5));
-		eval.setSubjectCriteria(MyMath.gaussian(0.5, 0.5));
+	eval.setProcessCriteria(MyMath.gaussian(0.5, 0.5));
+	eval.setSubjectCriteria(MyMath.gaussian(0.5, 0.5));
 		
         fuente.setEval(eval);
         outputsdefaultGradoCalidadFuente.setdata(fuente);

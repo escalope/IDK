@@ -64,8 +64,8 @@ public class Tasks {
 		String fuenteURL = (String) inspeccion.getFuenteInfo().getData();
 		EvaluationValue eval = new EvaluationValue();
 
-		eval.setObjectCriteria(MyMath.gaussian(0.5, 0.5));
-		eval.setProcessCriteria(MyMath.gaussian(0.5, 0.5));
+		eval.setObjectCriteria(0.6);
+		eval.setProcessCriteria(0.8);
 		eval.setSubjectCriteria(MyMath.gaussian(0.5, 0.5));
 
 		inspeccion.getFuenteInfo().setEval(eval);
@@ -88,8 +88,8 @@ public class Tasks {
 		String fuenteURL = (String) inspeccion.getFuenteInfo().getData();
 		EvaluationValue eval = new EvaluationValue();
 
-		eval.setObjectCriteria(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
-		eval.setProcessCriteria(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
+		eval.setObjectCriteria(0.6);
+		eval.setProcessCriteria(0.7);
 		eval.setSubjectCriteria(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
 
 		inspeccion.getFuenteInfo().setEval(eval);

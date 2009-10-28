@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.Icon;
 import java.awt.*;
 import java.net.*;
+import ingenias.editor.FontConfiguration;
 
 /**
  * <p>Title: </p>
@@ -23,11 +24,12 @@ public class JLabelStereotype extends JLabel {
 
 
   public JLabelStereotype() {
-
+      this.setFont(FontConfiguration.getConfiguration().getStandardFont());
   }
 
   public void setText(String text){
-    super.setText("<html><body>&laquo;"+text+"&raquo;</body></html>");
+
+    super.setText("<html>&laquo;"+text+"&raquo;</html>");
   }
 
 

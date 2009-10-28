@@ -53,7 +53,7 @@ import ingenias.editor.persistence.*;
 import java.awt.image.*;
 import java.awt.datatransfer.*;
 import java.awt.geom.Rectangle2D;
-
+import java.awt.Font;
 import ingenias.editor.cell.*;
 import ingenias.exception.NullEntity;
 import ingenias.generator.browser.BrowserImp;
@@ -71,6 +71,7 @@ import ingenias.editor.actions.diagram.InteractionModelActionsFactory;
 import ingenias.editor.actions.diagram.OrganizationModelActionsFactory;
 import ingenias.editor.actions.diagram.TasksAndGoalsModelActionsFactory;
 import ingenias.editor.actions.diagram.UseCaseDiagramActionsFactory;
+import ingenias.editor.FontConfiguration;
 
 public class IDE
 extends ingenias.editor.IDEAbs {
@@ -84,9 +85,28 @@ extends ingenias.editor.IDEAbs {
 	}
 
 
+        public static void setUIFont (javax.swing.plaf.FontUIResource f){
+    //
+    // sets the default font for all Swing components.
+    // ex. 
+    //  setUIFont (new javax.swing.plaf.FontUIResource
+    //   ("Serif",Font.ITALIC,12));
+    //
+           java.util.Enumeration keys = UIManager.getDefaults().keys();
+           while (keys.hasMoreElements()) {
+              Object key = keys.nextElement();
+              Object value = UIManager.get (key);
+           if (value instanceof javax.swing.plaf.FontUIResource)
+           UIManager.put (key, f);
+        }
+       }    
 
 
 	public static void main(String args[]) throws Exception {
+
+                setUIFont(new javax.swing.plaf.FontUIResource(FontConfiguration.getConfiguration().getGUIFont()));                
+
+
 		if (args.length != 0) {			
 			if (args[0].equalsIgnoreCase("testing")){
 				StaticPreferences.setTesting(true);

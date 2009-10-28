@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.Icon;
 import java.awt.*;
 import java.net.*;
+import ingenias.editor.FontConfiguration;
 
 /**
  * <p>Title: </p>
@@ -23,12 +24,12 @@ public class JLabelHTML extends JLabel {
 
 
   public JLabelHTML() {
-
+     this.setFont(FontConfiguration.getConfiguration().getStandardFont());
   }
 
   public void setText(String text){
    //System.err.println(text);
-    super.setText("<HTML>"+text+"</HTML>");
+    super.setText("<html>"+text+"</html>");
   }
 
 

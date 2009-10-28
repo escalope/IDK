@@ -10,7 +10,7 @@
 ##panel layout="FlowLayout(FlowLayout.CENTER,0,0)" Background="white"  #
 ##label Foreground="blue" icon="images/cmstate.gif" HorizontalAlignment="CENTER" /#
 ##/panel# 
-##textpane id="Condition" Columns="20" HorizontalAlignment="CENTER" /#
+##mytextpane id="Condition" Columns="20" HorizontalAlignment="CENTER" /#
 ##/vbox#
 ##/panel#
 					

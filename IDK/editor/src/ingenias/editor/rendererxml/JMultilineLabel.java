@@ -28,7 +28,7 @@ public class JMultilineLabel extends JLabel {
     public void setText(String text) {
         String old = this.text;
         this.text = text;
-        firePropertyChange("text", old, this.text);
+        firePropertyChange("text", old,this.text);
         if ((old == null) ? text!=null : !old.equals(text))
             morph();
     }

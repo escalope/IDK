@@ -88,7 +88,7 @@ public class CaptureAction {
 					JPanel temp=new JPanel(new BorderLayout());
 					Container parent = graph.getParent();
 					temp.add(graph, BorderLayout.CENTER);
-					ingenias.editor.export.Diagram2SVG.diagram2SVG(temp,
+					ingenias.editor.export.Diagram2SVG.diagram2SVG(graph,
 							sel, selectedFormat);
 					temp.remove(graph);
 					parent.add(graph);

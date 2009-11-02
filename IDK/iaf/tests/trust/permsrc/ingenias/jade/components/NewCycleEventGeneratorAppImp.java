@@ -17,6 +17,7 @@ import java.security.SecureRandom;
 import java.util.*;
 
 import ingenias.exception.InvalidEntity;
+import ingenias.jade.MyMath;
 import ingenias.jade.exception.*;
 import ingenias.jade.mental.NewCycleEvent;
 import ingenias.testing.TestUtils;
@@ -53,7 +54,7 @@ public  class NewCycleEventGeneratorAppImp extends NewCycleEventGeneratorApp{
 						e.printStackTrace();
 					}				
 					System.err.println(getOwner().getLocalName()+" agent inserting event with quality "+documentQuality[k]);
-					long wait=(long) (3000*randomQuality.nextGaussian());
+					long wait=(long) (3000*(randomQuality.nextDouble()+.01));
 					
 					TestUtils.doNothing(Math.abs(wait));
                                         //TestUtils.doNothing(4000);
@@ -71,17 +72,16 @@ public  class NewCycleEventGeneratorAppImp extends NewCycleEventGeneratorApp{
 				for (int k=0;k<size;k++){
 					NewCycleEvent nevent = new NewCycleEvent();
 					if (distribution.equalsIgnoreCase("good")){
-						nevent.setdeclaredQuality(filter(0.3+Math.abs(randomQuality.nextGaussian())));
+						nevent.setdeclaredQuality(filter(MyMath.gaussian(0.1, 0.1)));
 					}
 					if (distribution.equalsIgnoreCase("bad")){
-						nevent.setdeclaredQuality(filter(Math.abs(randomQuality.nextGaussian())-0.3));
+						nevent.setdeclaredQuality(filter(MyMath.gaussian(-0.1, 0.1)));
 					}
 					if (distribution.equalsIgnoreCase("mixture")){
-						nevent.setdeclaredQuality(filter(0.3+randomQuality.nextGaussian()));
+						nevent.setdeclaredQuality(filter(MyMath.gaussian(0.0, 0.1)));
 					}
 
                                         
-                                        System.out.println("DQ:"+nevent.getdeclaredQuality());
 
 					BigInteger nvalue=new BigInteger(32, random);
 					while (documentsTable.containsKey(nvalue.toString())){
@@ -96,7 +96,7 @@ public  class NewCycleEventGeneratorAppImp extends NewCycleEventGeneratorApp{
 						e.printStackTrace();
 					}
 
-					TestUtils.doNothing((long) (3000*Math.abs(randomQuality.nextGaussian())));
+					TestUtils.doNothing((long) (3000*Math.abs(randomQuality.nextDouble())+0.1));
                                        // TestUtils.doNothing(4000);
 
 

@@ -81,7 +81,7 @@ public class Experimenting_with_evaluators extends BasicMASTest{
 		EventSequenceChecker esc=new EventSequenceChecker();
 		esc.registerEvaluator(esm);
 		MainInteractionManager.goAutomatic();			
-		TestUtils.doNothing(60000);
+		TestUtils.doNothing(120000);
 	}
 
 
@@ -121,7 +121,8 @@ public class Experimenting_with_evaluators extends BasicMASTest{
 							// A new source has been included
 							AcceptedProposal ap=(AcceptedProposal)me;
                                                         SourceInfo si = (SourceInfo) ap.getdata();
-							createEntry(logFile, "acceptedsource,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria());
+							createEntry(logFile, "acceptedsource,"+si.getCollaboradorId()+","+si.getData()
+                                                                +","+si.getEval().getSubjectCriteria());
 						}
 						if (me.getType().equalsIgnoreCase("DeniedProposal")){
 							// A new source has been included
@@ -136,15 +137,22 @@ public class Experimenting_with_evaluators extends BasicMASTest{
                                                         AlphaInspection ai = (AlphaInspection) iq.getdata();
 							createEntry(logFile, "requestedevaluation,"+ai.getFuenteInfo().getCollaboradorId()+","+ai.getFuenteInfo().getData());
 						}
+                                                if(me.getType().equalsIgnoreCase("SourceQualityDegree")){
+                                                    SourceQualityDegree sqd = (SourceQualityDegree)me;
+                                                    SourceInfo si = (SourceInfo)sqd.getdata();
+                                                    createEntry(logFile,"evaluation,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria()+","+sqd.getdeclaredQuality());
+
+                                                }
 						if (me.getType().equalsIgnoreCase("QualityDegreeOfSourceInTesting")){
 							// A new source has been evaluated 
 							QualityDegreeOfSourceInTesting qd=(QualityDegreeOfSourceInTesting)me;
                                                         AlphaInspection ai = (AlphaInspection) qd.getdata();
                                                         SourceInfo si = ai.getFuenteInfo();
-							if (qd.getdeclaredQuality()>qd.getsubjectCriteria()){
-								createEntry(logFile, "badevaluated,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria());
-							} else
-								createEntry(logFile, "wellevaluated,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria());
+                                                        createEntry(logFile, "testevaluation,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria()+","+qd.getdeclaredQuality());
+							//if (qd.getdeclaredQuality()>qd.getsubjectCriteria()){
+							//	createEntry(logFile, "badevaluated,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria()+","+qd.getdeclaredQuality());
+							//} else
+							//	createEntry(logFile, "wellevaluated,"+si.getCollaboradorId()+","+si.getData()+","+si.getEval().getSubjectCriteria()+","+qd.getdeclaredQuality());
 						}						
 					}					
 				}

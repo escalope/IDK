@@ -55,11 +55,12 @@ public class Tasks {
         String fuenteURL = (String) fuente.getData();
         EvaluationValue eval = new EvaluationValue();
         eval.setObjectCriteria(0.6);
-	eval.setProcessCriteria(0.8);
-        
-	eval.setSubjectCriteria(eiInspeccionarCalidadFuente.getdeclaredQuality());
+	eval.setProcessCriteria(0.8);       
+	eval.setSubjectCriteria(filter(MyMath.gaussian(0.2, 0.4)+eiInspeccionarCalidadFuente.getdeclaredQuality()));
+
         fuente.setEval(eval);
         outputsdefaultGradoCalidadFuente.setdata(fuente);
+        outputsdefaultGradoCalidadFuente.setdeclaredQuality(eval.getSubjectCriteria());
         System.out.println("Inspector: "+eval.getSubjectCriteria());
     }
     
@@ -73,10 +74,11 @@ public class Tasks {
         
         eval.setObjectCriteria(0.6);
 	eval.setProcessCriteria(0.7);
-	eval.setSubjectCriteria(filter(MyMath.gaussian(0.3, 0.8)));
+	eval.setSubjectCriteria(filter(MyMath.gaussian(0.2, 0.4)));
 		
         fuente.setEval(eval);
         outputsdefaultGradoCalidadFuente.setdata(fuente);
+        outputsdefaultGradoCalidadFuente.setdeclaredQuality(filter(eiInspeccionarCalidadFuente.getdeclaredQuality()+eval.getSubjectCriteria()));
         System.out.println("Inspector: "+eval.getSubjectCriteria());
     }
     

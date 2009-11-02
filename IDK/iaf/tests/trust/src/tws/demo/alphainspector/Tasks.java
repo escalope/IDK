@@ -66,16 +66,15 @@ public class Tasks {
 
 		eval.setObjectCriteria(0.6);
 		eval.setProcessCriteria(0.8);
-		eval.setSubjectCriteria(filter(MyMath.gaussian(0.3, 0.8)));
+	        eval.setSubjectCriteria(filter(MyMath.gaussian(0.2, 0.4)));
 
 		inspeccion.getFuenteInfo().setEval(eval);
 		outputsdefaultGradoCalidadFuenteCuarentena.setprocessCriteria(eval.getProcessCriteria());
 		outputsdefaultGradoCalidadFuenteCuarentena.setsubjectCriteria(eval.getSubjectCriteria());
 		outputsdefaultGradoCalidadFuenteCuarentena.setobjectCriteria(eval.getObjectCriteria());
-		outputsdefaultGradoCalidadFuenteCuarentena.setdeclaredQuality(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
+		outputsdefaultGradoCalidadFuenteCuarentena.setdeclaredQuality(filter(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality()+eval.getSubjectCriteria()));
 		outputsdefaultGradoCalidadFuenteCuarentena.setdata(inspeccion);
 
-		System.out.println("Inspector gaussian: "+eval.getSubjectCriteria()+ " known value :"+eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
 	}
 
 
@@ -90,17 +89,16 @@ public class Tasks {
 
 		eval.setObjectCriteria(0.6);
 		eval.setProcessCriteria(0.7);
-		eval.setSubjectCriteria(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
+		eval.setSubjectCriteria(filter(MyMath.gaussian(0.2, 0.4)+eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality()));
 
 		inspeccion.getFuenteInfo().setEval(eval);
 		outputsdefaultGradoCalidadFuenteCuarentena.setprocessCriteria(eval.getProcessCriteria());
 		outputsdefaultGradoCalidadFuenteCuarentena.setsubjectCriteria(eval.getSubjectCriteria());
 		outputsdefaultGradoCalidadFuenteCuarentena.setobjectCriteria(eval.getObjectCriteria());
-		outputsdefaultGradoCalidadFuenteCuarentena.setdeclaredQuality(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
+		outputsdefaultGradoCalidadFuenteCuarentena.setdeclaredQuality(eval.getSubjectCriteria());
 
 		outputsdefaultGradoCalidadFuenteCuarentena.setdata(inspeccion);
 
-		System.out.println("Inspector perfect: "+eval.getSubjectCriteria()+ " known value :"+eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
 	}
 
         private static double filter(double value){

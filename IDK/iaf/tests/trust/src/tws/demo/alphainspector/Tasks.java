@@ -66,13 +66,13 @@ public class Tasks {
 
 		eval.setObjectCriteria(0.6);
 		eval.setProcessCriteria(0.8);
-	        eval.setSubjectCriteria(filter(MyMath.gaussian(0.2, 0.4)));
+	        eval.setSubjectCriteria(filter(MyMath.gaussian(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality()-0.2, 0.2)));
 
 		inspeccion.getFuenteInfo().setEval(eval);
 		outputsdefaultGradoCalidadFuenteCuarentena.setprocessCriteria(eval.getProcessCriteria());
 		outputsdefaultGradoCalidadFuenteCuarentena.setsubjectCriteria(eval.getSubjectCriteria());
 		outputsdefaultGradoCalidadFuenteCuarentena.setobjectCriteria(eval.getObjectCriteria());
-		outputsdefaultGradoCalidadFuenteCuarentena.setdeclaredQuality(filter(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality()+eval.getSubjectCriteria()));
+		outputsdefaultGradoCalidadFuenteCuarentena.setdeclaredQuality(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
 		outputsdefaultGradoCalidadFuenteCuarentena.setdata(inspeccion);
 
 	}
@@ -89,13 +89,13 @@ public class Tasks {
 
 		eval.setObjectCriteria(0.6);
 		eval.setProcessCriteria(0.7);
-		eval.setSubjectCriteria(filter(MyMath.gaussian(0.2, 0.4)+eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality()));
+		eval.setSubjectCriteria(filter(MyMath.gaussian(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality(), 0.0)));
 
 		inspeccion.getFuenteInfo().setEval(eval);
 		outputsdefaultGradoCalidadFuenteCuarentena.setprocessCriteria(eval.getProcessCriteria());
 		outputsdefaultGradoCalidadFuenteCuarentena.setsubjectCriteria(eval.getSubjectCriteria());
 		outputsdefaultGradoCalidadFuenteCuarentena.setobjectCriteria(eval.getObjectCriteria());
-		outputsdefaultGradoCalidadFuenteCuarentena.setdeclaredQuality(eval.getSubjectCriteria());
+		outputsdefaultGradoCalidadFuenteCuarentena.setdeclaredQuality(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality());
 
 		outputsdefaultGradoCalidadFuenteCuarentena.setdata(inspeccion);
 

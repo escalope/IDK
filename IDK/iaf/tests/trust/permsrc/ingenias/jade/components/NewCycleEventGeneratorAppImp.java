@@ -54,7 +54,7 @@ public  class NewCycleEventGeneratorAppImp extends NewCycleEventGeneratorApp{
 						e.printStackTrace();
 					}				
 					System.err.println(getOwner().getLocalName()+" agent inserting event with quality "+documentQuality[k]);
-					long wait=(long) (3000*(randomQuality.nextDouble()+.01));
+					long wait=(long) (3000*(randomQuality.nextDouble()+0.1));
 					
 					TestUtils.doNothing(Math.abs(wait));
                                         //TestUtils.doNothing(4000);
@@ -72,13 +72,13 @@ public  class NewCycleEventGeneratorAppImp extends NewCycleEventGeneratorApp{
 				for (int k=0;k<size;k++){
 					NewCycleEvent nevent = new NewCycleEvent();
 					if (distribution.equalsIgnoreCase("good")){
-						nevent.setdeclaredQuality(filter(MyMath.gaussian(0.1, 0.1)));
+						nevent.setdeclaredQuality(filter(MyMath.gaussian(0.5, 0.1)));
 					}
 					if (distribution.equalsIgnoreCase("bad")){
-						nevent.setdeclaredQuality(filter(MyMath.gaussian(-0.1, 0.1)));
+						nevent.setdeclaredQuality(filter(MyMath.gaussian(0.0, 0.1)));
 					}
 					if (distribution.equalsIgnoreCase("mixture")){
-						nevent.setdeclaredQuality(filter(MyMath.gaussian(0.0, 0.1)));
+						nevent.setdeclaredQuality(filter(MyMath.gaussian(0.3, 0.2)));
 					}
 
                                         

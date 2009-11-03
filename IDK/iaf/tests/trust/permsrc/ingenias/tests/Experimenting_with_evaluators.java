@@ -180,7 +180,7 @@ public class Experimenting_with_evaluators extends BasicMASTest{
 					Task task=event.getInvolvedTasks()[0];
 
 					NewProposalToBeSent  eiproposal=(NewProposalToBeSent)task.getFirstInputOfType("NewProposalToBeSent");
-					createEntry(logFile, "createdproposal,"+task.getAgentID()+","+eiproposal.getdata());
+					createEntry(logFile, "createdproposal,"+task.getAgentID()+","+eiproposal.getdata()+","+eiproposal.getdeclaredQuality());
 				}
 
 

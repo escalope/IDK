@@ -22,6 +22,7 @@ import tws.demo.SourceInfo;
  */
 public class Tasks {
 
+
     public static void processQualityInspectionRequestTaskTask(
     		InspectQualitySource eiInspeccionarCalidadFuente,
             SourceQualityDegree outputsdefaultGradoCalidadFuente,
@@ -56,11 +57,11 @@ public class Tasks {
         EvaluationValue eval = new EvaluationValue();
         eval.setObjectCriteria(0.6);
 	eval.setProcessCriteria(0.8);       
-	eval.setSubjectCriteria(filter(MyMath.gaussian(0.2, 0.4)+eiInspeccionarCalidadFuente.getdeclaredQuality()));
+	eval.setSubjectCriteria(filter(MyMath.gaussian(eiInspeccionarCalidadFuente.getdeclaredQuality(), 0.0)));
 
         fuente.setEval(eval);
         outputsdefaultGradoCalidadFuente.setdata(fuente);
-        outputsdefaultGradoCalidadFuente.setdeclaredQuality(eval.getSubjectCriteria());
+        outputsdefaultGradoCalidadFuente.setdeclaredQuality(eiInspeccionarCalidadFuente.getdeclaredQuality());
         System.out.println("Inspector: "+eval.getSubjectCriteria());
     }
     
@@ -74,11 +75,11 @@ public class Tasks {
         
         eval.setObjectCriteria(0.6);
 	eval.setProcessCriteria(0.7);
-	eval.setSubjectCriteria(filter(MyMath.gaussian(0.2, 0.4)));
+	eval.setSubjectCriteria(filter(MyMath.gaussian(eiInspeccionarCalidadFuente.getdeclaredQuality()-0.2, 0.2)));
 		
         fuente.setEval(eval);
         outputsdefaultGradoCalidadFuente.setdata(fuente);
-        outputsdefaultGradoCalidadFuente.setdeclaredQuality(filter(eiInspeccionarCalidadFuente.getdeclaredQuality()+eval.getSubjectCriteria()));
+        outputsdefaultGradoCalidadFuente.setdeclaredQuality(eiInspeccionarCalidadFuente.getdeclaredQuality());
         System.out.println("Inspector: "+eval.getSubjectCriteria());
     }
     

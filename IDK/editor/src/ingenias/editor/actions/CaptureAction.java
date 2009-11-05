@@ -88,8 +88,10 @@ public class CaptureAction {
 					JPanel temp=new JPanel(new BorderLayout());
 					Container parent = graph.getParent();
 					temp.add(graph, BorderLayout.CENTER);
+					graph.setPortsVisible(false);
 					ingenias.editor.export.Diagram2SVG.diagram2SVG(graph,
 							sel, selectedFormat);
+					graph.setPortsVisible(true);
 					temp.remove(graph);
 					parent.add(graph);
 					parent.repaint();

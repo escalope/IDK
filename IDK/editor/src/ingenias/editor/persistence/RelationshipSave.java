@@ -1102,6 +1102,22 @@ public class RelationshipSave extends RelationshipSaveAbs{
 
     }
     
+     if (en.getClass().equals(ingenias.editor.entities.ValidatessourceRole.class)){
+      ingenias.editor.entities.ValidatessourceRole nen=(ingenias.editor.entities.ValidatessourceRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.ValidatestargetRole.class)){
+      ingenias.editor.entities.ValidatestargetRole nen=(ingenias.editor.entities.ValidatestargetRole)en;
+      
+      
+
+
+    }
+    
      if (en.getClass().equals(ingenias.editor.entities.UIPrecedessourceRole.class)){
       ingenias.editor.entities.UIPrecedessourceRole nen=(ingenias.editor.entities.UIPrecedessourceRole)en;
       

@@ -1764,6 +1764,12 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+         if (en.getClass().equals(ingenias.editor.entities.Validates.class)){
+          ingenias.editor.entities.Validates nen=(ingenias.editor.entities.Validates)en;
+          
+          
+        }
+        
          if (en.getClass().equals(ingenias.editor.entities.UIPrecedes.class)){
           ingenias.editor.entities.UIPrecedes nen=(ingenias.editor.entities.UIPrecedes)en;
           

@@ -102,6 +102,8 @@ public class ComponentDiagramPanel extends JGraph {
 
  entities.add("Test");
 
+ entities.add("Goal");
+
  entities.add("UMLComment");
 
    return entities;
@@ -174,6 +176,15 @@ public class ComponentDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("Goal")) {
+    Goal nentity=new Goal(((Model)getModel()).getNewId("Goal"));
+      DefaultGraphCell vertex = new
+          GoalCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("UMLComment")) {
     UMLComment nentity=new UMLComment(((Model)getModel()).getNewId("UMLComment"));
       DefaultGraphCell vertex = new
@@ -220,6 +231,11 @@ public class ComponentDiagramPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("Test")) {
       return TestView.getSize((Test)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Goal")) {
+      return GoalView.getSize((Goal)entity);      
     }
     else
 
@@ -324,6 +340,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new TestCell( (Test) entity);
       // Default Size for the new Vertex with the new entity within
       size = TestView.getSize((Test) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Goal.class)) {
+      vertex = new GoalCell( (Goal) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = GoalView.getSize((Goal) entity);
     }
     else
 

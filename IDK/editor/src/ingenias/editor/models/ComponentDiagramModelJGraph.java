@@ -253,6 +253,26 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
     jb.setToolTipText("Test");
     toolbar.add(jb);
 
+    Image img_Goal =
+        ImageLoader.getImage("images/mgoal.gif");
+    undoIcon = new ImageIcon(img_Goal);
+    Action Goal=
+        new AbstractAction("Goal", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "Goal");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    Goal.setEnabled(true);
+    jb = new JButton(Goal);
+    jb.setText("");
+    jb.setName("Goal");	
+    jb.setToolTipText("Goal");
+    toolbar.add(jb);
+
     Image img_UMLComment =
         ImageLoader.getImage("images/mumlcomment.gif");
     undoIcon = new ImageIcon(img_UMLComment);
@@ -285,6 +305,8 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
 
           relationships.add("UMLRealizes");
 
+          relationships.add("Validates");
+
           relationships.add("UMLAnnotatedElement");
 
    return relationships;
@@ -307,6 +329,8 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
  entities.add("Task");
 
  entities.add("Test");
+
+ entities.add("Goal");
 
  entities.add("UMLComment");
 
@@ -358,6 +382,11 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
 	  }
 
         // N-ary relationships. Sometimes they can be also binary.
+        if (ValidatesEdge.acceptConnection(this.getModel(), selected)) {
+          v.add("Validates");
+	  }
+
+        // N-ary relationships. Sometimes they can be also binary.
         if (UMLAnnotatedElementEdge.acceptConnection(this.getModel(), selected)) {
           v.add("UMLAnnotatedElement");
 	  }
@@ -373,6 +402,11 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
         if (selectedEdge instanceof UMLRealizesEdge &&
         (UMLRealizesEdge.acceptConnection(this.getModel(), selected))) {
           v.add("UMLRealizes");
+        }
+
+        if (selectedEdge instanceof ValidatesEdge &&
+        (ValidatesEdge.acceptConnection(this.getModel(), selected))) {
+          v.add("Validates");
         }
 
         if (selectedEdge instanceof UMLAnnotatedElementEdge &&
@@ -424,6 +458,17 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
         // There is no NAryEdges in selected.
         else if (nAryEdgesNum == 0) {
           return new UMLRealizesEdge(new UMLRealizes(getMJGraph().getNewId()));
+        }
+      }
+
+      if (relacion.equalsIgnoreCase("Validates")) {
+        // ResponsibleNEdge already exists.
+        if (nAryEdgesNum == 1 && selectedEdge instanceof ValidatesEdge) {
+          return selectedEdge;
+        }
+        // There is no NAryEdges in selected.
+        else if (nAryEdgesNum == 0) {
+          return new ValidatesEdge(new Validates(getMJGraph().getNewId()));
         }
       }
 
@@ -508,6 +553,15 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("Goal")) {
+    Goal nentity=getOM().createGoal(getMJGraph().getNewId("Goal"));
+      DefaultGraphCell vertex = new
+          GoalCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("UMLComment")) {
     UMLComment nentity=getOM().createUMLComment(getMJGraph().getNewId("UMLComment"));
       DefaultGraphCell vertex = new
@@ -554,6 +608,11 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
 
     if (entity.getType().equalsIgnoreCase("Test")) {
       return TestView.getSize((Test)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Goal")) {
+      return GoalView.getSize((Goal)entity);      
     }
     else
 
@@ -667,6 +726,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new TestCell( (Test) entity);
       // Default Size for the new Vertex with the new entity within
       size = TestView.getSize((Test) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Goal.class)) {
+      vertex = new GoalCell( (Goal) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = GoalView.getSize((Goal) entity);
     }
     else
 

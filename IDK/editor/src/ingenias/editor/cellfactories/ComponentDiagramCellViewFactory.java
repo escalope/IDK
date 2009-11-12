@@ -106,6 +106,10 @@ public ComponentDiagramCellViewFactory() {}
            return new TestView(v);
    }
 
+   if (userObject.getClass().equals(Goal.class)){
+           return new GoalView(v);
+   }
+
    if (userObject.getClass().equals(UMLComment.class)){
            return new UMLCommentView(v);
    }
@@ -119,6 +123,10 @@ public ComponentDiagramCellViewFactory() {}
 
    if (v.getClass().equals(UMLRealizesEdge.class)){
            return new UMLRealizesView(v);
+   }
+
+   if (v.getClass().equals(ValidatesEdge.class)){
+           return new ValidatesView(v);
    }
 
    if (v.getClass().equals(UMLAnnotatedElementEdge.class)){

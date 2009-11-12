@@ -265,6 +265,33 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 			
 			
 			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Goal")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Goal")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.UMLComment")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -364,6 +391,48 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 			
                      
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.UMLRealizes")){
+			
+                   possibleViews.add(new AbstractAction("LABEL") {
+                     public void actionPerformed(ActionEvent e) {
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
+	
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                     
+		 
+			
+		    
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Validates")){
+			
+                   possibleViews.add(new AbstractAction("NOICON") {
+                     public void actionPerformed(ActionEvent e) {
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
+	
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                     
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Validates")){
+			
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
+	
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                     
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Validates")){
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
@@ -520,6 +589,20 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(graph, "Object type Test is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+
+		// Insert an object of type Goal
+		nobjects.add(
+			new AbstractAction("Insert Goal") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "Goal");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type Goal is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

@@ -86,7 +86,7 @@ public class LoadFileAction {
 					.start();*/
 				}
 			}
-			catch (Exception e1) {
+			catch (Throwable e1) {
 				e1.printStackTrace();
 
 			}

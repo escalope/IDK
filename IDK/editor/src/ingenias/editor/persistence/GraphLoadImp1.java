@@ -664,6 +664,9 @@ public class GraphLoadImp1
     if (en instanceof IAccesses)
      return  new IAccessesEdge((IAccesses)en);
 
+    if (en instanceof Validates)
+     return  new ValidatesEdge((Validates)en);
+
     if (en instanceof UIPrecedes)
      return  new UIPrecedesEdge((UIPrecedes)en);
 

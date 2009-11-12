@@ -56,12 +56,16 @@
 
 			<entity>Test</entity>
 
+			<entity>Goal</entity>
+
 			<entity>UMLComment</entity>
 
 
           		<relationship>CDUsesCode</relationship>
 
           		<relationship>UMLRealizes</relationship>
+
+          		<relationship>Validates</relationship>
 
           		<relationship>UMLAnnotatedElement</relationship>
 

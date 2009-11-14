@@ -57,7 +57,7 @@ public class Tasks {
         EvaluationValue eval = new EvaluationValue();
         eval.setObjectCriteria(0.6);
 	eval.setProcessCriteria(0.8);       
-	eval.setSubjectCriteria(filter(MyMath.gaussian(eiInspeccionarCalidadFuente.getdeclaredQuality(), 0.0)));
+	eval.setSubjectCriteria(filter(MyMath.gaussian(eiInspeccionarCalidadFuente.getdeclaredQuality(), 0.1)));
 
         fuente.setEval(eval);
         outputsdefaultGradoCalidadFuente.setdata(fuente);

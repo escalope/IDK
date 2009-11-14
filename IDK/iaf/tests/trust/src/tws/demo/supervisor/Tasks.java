@@ -42,7 +42,6 @@ public class Tasks {
 
     private static ExpectedQuality expectedQuality = null;
 
-
     static {
         expectedQuality = new ExpectedQuality();
         expectedQuality.setObjectGoodQualityValue(0.3);
@@ -58,7 +57,7 @@ public class Tasks {
     }
 
     public static void addSourceIntoSystemTask(String id, SourceToProcess eiFuenteParaProcesado,
-    		InspectQualitySource outputsdefaultSolicitudInspeccionCalidad,
+            InspectQualitySource outputsdefaultSolicitudInspeccionCalidad,
             RuntimeConversation outputsdefaultPeticionIntroducirFuente,
             ingenias.jade.mental.NewSource outputsdefaultFuenteNueva,
             ingenias.jade.mental.InspectQualitySource outputsdefaultInspeccionarCalidadFuente,
@@ -152,37 +151,54 @@ public class Tasks {
 
             Trust trust = regret.getConfianzas().get(colaborador);
 
-            assert VisualizationAppInit.getInstance()!=null;
-            assert fuente!=null;
-            assert fuente.getCollaboradorId()!=null;
-            assert trust!=null;
+            assert VisualizationAppInit.getInstance() != null;
+            assert fuente != null;
+            assert fuente.getCollaboradorId() != null;
+            assert trust != null;
 
-          //  VisualizationAppInit.getInstance().update(0, id + ": Trust en Subject-criteria de: " + fuente.getColaboradorId() + " " +
-          //          trust.getSubjectCriteriaGoodQuality().getValue() + "%" + trust.getSubjectCriteriaGoodQuality().getReliability());
+            //  VisualizationAppInit.getInstance().update(0, id + ": Trust en Subject-criteria de: " + fuente.getColaboradorId() + " " +
+            //          trust.getSubjectCriteriaGoodQuality().getValue() + "%" + trust.getSubjectCriteriaGoodQuality().getReliability());
 
-            if (trust.getObjectCriteriaGoodQuality().getReliability() >= 0.5) {
-                if (trust.getObjectCriteriaGoodQuality().getValue() < 0) {
-                    necesitaInspAlfa = true;
-                    inspeccion.setDeObjectCriteria(true);
-                }
-            }
+
+//            if (trust.getObjectCriteriaGoodQuality().getReliability() >= 0.5) {
+//                if (trust.getObjectCriteriaGoodQuality().getValue() < 0.15) {
+//                    necesitaInspAlfa = true;
+//                    inspeccion.setDeObjectCriteria(true);
+//                }
+//            } else {
+//                necesitaInspAlfa = true;
+//                inspeccion.setDeObjectCriteria(true);
+//            }
             if (trust.getSubjectCriteriaGoodQuality().getReliability() >= 0.5) {
-                if (trust.getSubjectCriteriaGoodQuality().getValue() < 0) {
+                if (trust.getSubjectCriteriaGoodQuality().getValue() < 0.13) {
                     necesitaInspAlfa = true;
                     inspeccion.setDeSubjectCriteria(true);
                 }
+            } else {
+                necesitaInspAlfa = true;
+                inspeccion.setDeSubjectCriteria(true);
+
             }
-            if (trust.getProcessCriteriaGoodQuality().getReliability() >= 0.5) {
-                if (trust.getProcessCriteriaGoodQuality().getValue() < 0) {
-                    necesitaInspAlfa = true;
-                    inspeccion.setDeProcessCriteria(true);
-                }
-            }
+//            if (trust.getProcessCriteriaGoodQuality().getReliability() >= 0.5) {
+//                if (trust.getProcessCriteriaGoodQuality().getValue() < 0.15) {
+//                    necesitaInspAlfa = true;
+//                    inspeccion.setDeProcessCriteria(true);
+//                }
+//            } else {
+//                necesitaInspAlfa = true;
+//                inspeccion.setDeProcessCriteria(true);
+//
+//            }
         }
+
+        Trust trust = regret.getConfianzas().get(colaborador);
+   /*     System.out.println("Fiabilidades: "+trust.getProcessCriteriaGoodQuality().getReliability()+","+
+                trust.getSubjectCriteriaGoodQuality().getReliability()+","+
+                trust.getObjectCriteriaGoodQuality().getReliability());*/
 
         if (!necesitaInspAlfa) {
             VisualizationAppInit.getInstance().update(0, id + ": No se le aplica filtro a " + fuente.getData());
-            VisualizationAppInit.getInstance().update(0, id + ": fuente " + fuente.getData()+" ACEPTADA");
+            VisualizationAppInit.getInstance().update(0, id + ": fuente " + fuente.getData() + " ACEPTADA");
             outputsdefault.removeEntity(outputsdefaultPropuestaRechazada);
             outputsdefault.removeEntity(outputsdefaultFuenteParaCuarentena);
             outputsdefaultFuenteParaProcesado.setdata(fuente);
@@ -205,10 +221,14 @@ public class Tasks {
     public static void updateReputationInfoTaskTask(String id, AgentReputation eiReputacionAgente,
             TrustInformation eiValoresConfianzaReputacion) {
 
-        if(eiReputacionAgente.getdata()==null) return;
+        if (eiReputacionAgente.getdata() == null) {
+            return;
+        }
 
         ReputationInfo reputacion = (ReputationInfo) eiReputacionAgente.getdata();
-        if(reputacion.getTrust().getWitnessId().equals(id)) return;
+        if (reputacion.getTrust().getWitnessId().equals(id)) {
+            return;
+        }
 
         VisualizationAppInit.getInstance().update(0, id + ": Reputacion recibida para:" + reputacion.getCollaboradorId() + " " + reputacion.getTrust().getSubjectCriteriaGoodQuality().getValue() + "%" + reputacion.getTrust().getSubjectCriteriaGoodQuality().getReliability());
 
@@ -248,7 +268,7 @@ public class Tasks {
         AlphaInspection inspeccion = (AlphaInspection) eiGradoCalidadFuenteCuarentena.getdata();
         VisualizationAppInit.getInstance().update(0, id + ": Nuevo dato de inspeccion alfa para:" + inspeccion.getFuenteInfo().getCollaboradorId());
         EvaluationValue eval = inspeccion.getFuenteInfo().getEval();
-        System.out.println("Supervisor: Evaluacion:"+eval.getSubjectCriteria());
+        System.out.println("Supervisor: Evaluacion:" + eval.getSubjectCriteria());
         ReGreTInfo regret = (ReGreTInfo) eiValoresConfianzaReputacion.getdata();
         boolean esAceptada = true;
 
@@ -318,7 +338,7 @@ public class Tasks {
             regret.getOdb().put(fuente.getCollaboradorId(), new Vector<EvaluationValue>());
         }
 
-        System.out.println("Supervisor: Evaluacion:"+fuente.getEval().getSubjectCriteria());
+        System.out.println("Supervisor: Evaluacion:" + fuente.getEval().getSubjectCriteria());
 
         regret.getOdb().get(fuente.getCollaboradorId()).add(fuente.getEval());
         ITrustCalculation tc = ReGreTServicesFactory.createTrustCalculationService();

@@ -204,6 +204,93 @@ jade.wrapper.AgentContainer ac=null;
         }.start();
 
         // Create a new agent
+        final jade.wrapper.AgentController agcConfigurableAutonomousCollaborator_2ConfigurableCollaboratorAllGoodGaussianDU = ac.createNewAgent("ConfigurableAutonomousCollaborator_2ConfigurableCollaboratorAllGoodGaussianDU",
+            "ingenias.jade.agents.ConfigurableAutonomousCollaboratorJADEAgent", new Object[0]);	
+	
+	{ PreConfiguredInformationSourceList ment=new PreConfiguredInformationSourceList();
+	   
+	     ment.setdistribution("good");
+	   
+	     ment.setnumberOfDocuments(20);
+	   	   
+	   agcConfigurableAutonomousCollaborator_2ConfigurableCollaboratorAllGoodGaussianDU.putO2AObject(ment, false);
+	}
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+                addStartedAgent("ConfigurableAutonomousCollaborator_2ConfigurableCollaboratorAllGoodGaussianDU");
+                             
+    			             
+               System.out.println("Starting up ConfigurableAutonomousCollaborator_2ConfigurableCollaboratorAllGoodGaussianDU...");
+              agcConfigurableAutonomousCollaborator_2ConfigurableCollaboratorAllGoodGaussianDU.start();
+              
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcConfigurableAutonomousCollaborator_3ConfigurableCollaboratorAllGoodGaussianDU = ac.createNewAgent("ConfigurableAutonomousCollaborator_3ConfigurableCollaboratorAllGoodGaussianDU",
+            "ingenias.jade.agents.ConfigurableAutonomousCollaboratorJADEAgent", new Object[0]);	
+	
+	{ PreConfiguredInformationSourceList ment=new PreConfiguredInformationSourceList();
+	   
+	     ment.setdistribution("good");
+	   
+	     ment.setnumberOfDocuments(20);
+	   	   
+	   agcConfigurableAutonomousCollaborator_3ConfigurableCollaboratorAllGoodGaussianDU.putO2AObject(ment, false);
+	}
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+                addStartedAgent("ConfigurableAutonomousCollaborator_3ConfigurableCollaboratorAllGoodGaussianDU");
+                             
+    			             
+               System.out.println("Starting up ConfigurableAutonomousCollaborator_3ConfigurableCollaboratorAllGoodGaussianDU...");
+              agcConfigurableAutonomousCollaborator_3ConfigurableCollaboratorAllGoodGaussianDU.start();
+              
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcConfigurableAutonomousCollaborator_4ConfigurableCollaboratorAllGoodGaussianDU = ac.createNewAgent("ConfigurableAutonomousCollaborator_4ConfigurableCollaboratorAllGoodGaussianDU",
+            "ingenias.jade.agents.ConfigurableAutonomousCollaboratorJADEAgent", new Object[0]);	
+	
+	{ PreConfiguredInformationSourceList ment=new PreConfiguredInformationSourceList();
+	   
+	     ment.setdistribution("good");
+	   
+	     ment.setnumberOfDocuments(20);
+	   	   
+	   agcConfigurableAutonomousCollaborator_4ConfigurableCollaboratorAllGoodGaussianDU.putO2AObject(ment, false);
+	}
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+                addStartedAgent("ConfigurableAutonomousCollaborator_4ConfigurableCollaboratorAllGoodGaussianDU");
+                             
+    			             
+               System.out.println("Starting up ConfigurableAutonomousCollaborator_4ConfigurableCollaboratorAllGoodGaussianDU...");
+              agcConfigurableAutonomousCollaborator_4ConfigurableCollaboratorAllGoodGaussianDU.start();
+              
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
         final jade.wrapper.AgentController agcPerfectSourceQualityInspector_0PerfectSourceInspectorsDU = ac.createNewAgent("PerfectSourceQualityInspector_0PerfectSourceInspectorsDU",
             "ingenias.jade.agents.PerfectSourceQualityInspectorJADEAgent", new Object[0]);	
 	

@@ -60,13 +60,16 @@ public class Tasks {
 			QualityDegreeOfSourceInTesting outputsdefaultGradoCalidadFuenteCuarentena,
 			TaskOutput outputsdefault) {
 
+            double sesgo = 0.2;//0.2,-0.2,0.0,0.0
+            double variabilidad=0.2;//0.2,0.2,0.3,0.1
+
 		AlphaInspection inspeccion = (AlphaInspection) eiInspeccionarCalidadFuenteCuarentena.getdata();
 		String fuenteURL = (String) inspeccion.getFuenteInfo().getData();
 		EvaluationValue eval = new EvaluationValue();
 
 		eval.setObjectCriteria(0.6);
 		eval.setProcessCriteria(0.8);
-	        eval.setSubjectCriteria(filter(MyMath.gaussian(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality()-0.2, 0.2)));
+	        eval.setSubjectCriteria(filter(MyMath.gaussian(eiInspeccionarCalidadFuenteCuarentena.getdeclaredQuality()+sesgo, variabilidad)));
 
 		inspeccion.getFuenteInfo().setEval(eval);
 		outputsdefaultGradoCalidadFuenteCuarentena.setprocessCriteria(eval.getProcessCriteria());

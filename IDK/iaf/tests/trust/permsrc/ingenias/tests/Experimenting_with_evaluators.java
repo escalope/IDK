@@ -81,7 +81,7 @@ public class Experimenting_with_evaluators extends BasicMASTest{
 		EventSequenceChecker esc=new EventSequenceChecker();
 		esc.registerEvaluator(esm);
 		MainInteractionManager.goAutomatic();			
-		TestUtils.doNothing(120000);
+		TestUtils.doNothing(15*60*1000);
 	}
 
 

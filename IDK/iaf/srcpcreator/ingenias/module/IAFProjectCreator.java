@@ -18,6 +18,7 @@
 package ingenias.module;
 
 import ingenias.editor.ProjectProperty;
+import ingenias.editor.actions.LoadFileSwingTask;
 import ingenias.exception.NullEntity;
 import ingenias.generator.browser.*;
 import ingenias.genproject.ProjectGenerator;
@@ -60,6 +61,7 @@ import org.jgraph.JGraph;
 
 
 import sun.awt.VerticalBagLayout;
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 /**
  *  This class generates a project folder
@@ -68,7 +70,7 @@ import sun.awt.VerticalBagLayout;
  */
 public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 
-	private JFrame dialog=null;
+	private JDialog dialog=null;
 	private JRadioButton rad1;
 	private JRadioButton rad2;
 	private JRadioButton rad3;
@@ -120,12 +122,13 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 	 *  for specific tags. These tags mark the beginning and the end of the modification
 	 */
 	public void run() {
-		if (dialog==null){
+		
 
 
 			final JFileChooser chooser=new JFileChooser();
 			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // To choose only directories
-			dialog=new JFrame();
+			dialog=new JDialog(getResources().getMainFrame());
+			
 
 			dialog.setTitle("Project creation wizard");
 			final JTextField directory=new JTextField(50);
@@ -137,21 +140,21 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 
 						createProjectInLocation(directory);	
 					}
-					
+
 				}
 
 				@Override
 				public void keyReleased(KeyEvent arg0) {
 					// TODO Auto-generated method stub
-					
+
 				}
 
 				@Override
 				public void keyTyped(KeyEvent arg0) {
 					// TODO Auto-generated method stub
-					
+
 				}
-				
+
 			});
 			directory.setText(chooser.getCurrentDirectory().toString()+"/");
 			JButton browse=new JButton("Browse");
@@ -176,10 +179,10 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 				}
 
 			});
-			
+
 			JPanel buttonPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));			
 			ButtonGroup exampleSelGroup=new ButtonGroup();			
-			
+
 			JPanel exampleSelection = new JPanel(new GridLayout(5,1));
 			GridBagConstraints gbc=new GridBagConstraints();
 			JLabel exampleSelectionLabel=new JLabel("Choose a template for the specification:");
@@ -187,7 +190,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			gbc.gridx=0;
 			gbc.gridy=0;
 			exampleSelection.add(exampleSelectionLabel);
-			
+
 			JPanel option1=new JPanel(new FlowLayout(FlowLayout.LEFT));	
 			gbc=new GridBagConstraints();
 			gbc.gridx=0;
@@ -197,7 +200,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			option1.add(rad1);
 			option1.add(new javax.swing.JLabel("Empty specification"));
 			exampleSelection.add(option1);
-			
+
 			JPanel option2=new JPanel(new FlowLayout(FlowLayout.LEFT));
 			gbc=new GridBagConstraints();
 			gbc.gridx=0;
@@ -207,7 +210,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			option2.add(rad2);			
 			option2.add(new javax.swing.JLabel("Hello world"));
 			exampleSelection.add(option2);
-			
+
 			JPanel option3=new JPanel(new FlowLayout(FlowLayout.LEFT));
 			gbc=new GridBagConstraints();
 			gbc.gridx=0;
@@ -217,7 +220,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			option3.add(rad3);
 			option3.add(new javax.swing.JLabel("Example GUI agent"));
 			exampleSelection.add(option3);
-			
+
 			JPanel option4=new JPanel(new FlowLayout(FlowLayout.LEFT));
 			gbc=new GridBagConstraints();
 			gbc.gridx=0;
@@ -227,9 +230,9 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			option4.add(rad4);
 			option4.add(new javax.swing.JLabel("Example Interaction"));
 			exampleSelection.add(option4);
-			
+
 			rad1.setSelected(true);
-			
+
 			buttonPanel.add(cancel);
 			JButton create=new JButton("Create project in selected location");
 			create.addActionListener(new ActionListener(){
@@ -240,7 +243,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 					createProjectInLocation(directory);
 				}
 
-				
+
 
 			});
 			Box mainPanel = Box.createVerticalBox();
@@ -256,6 +259,10 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			mainPanel.add(buttonPanel);
 			dialog.add(mainPanel);
 			dialog.pack();
+			
+			dialog.setLocation(
+					ingenias.editor.utils.DialogWindows.getCenter(dialog.getSize(), getResources().getMainFrame()));
+			
 			dialog.setVisible(true);
 
 
@@ -274,31 +281,10 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 							mainPanel.add(folderSelectionPanel);
 							mainPanel.add(create);
 							dialog.add(mainPanel);*/
-		}
-	}
-	private void copyResourceFromTo(
-			String from, String to)
-			throws FileNotFoundException, IOException {
 		
-		InputStream streamToModiaf =this.getClass().getClassLoader().getResourceAsStream(from);
-		if (streamToModiaf==null)
-			throw new FileNotFoundException(from+" resource not found");
-		File destination = new File(to);
-		if (destination.isDirectory() && !destination.exists())
-			destination.mkdirs();
-		FileOutputStream target=new FileOutputStream(destination);
-		byte[] bytes=new byte[8000];
-		int read=0;
-		do {
-			read=streamToModiaf.read(bytes);
-			if (read>0){
-				target.write(bytes,0,read);
-			}
-		} while (read!=-1);
-		target.close();
-		streamToModiaf.close();
 	}
 	
+
 	private void createProjectInLocation(final JTextField directory) {
 		if (directory.getText()!=null && !directory.getText().equals("")){
 			File newFolder=new File(directory.getText());
@@ -318,82 +304,21 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			} else {
 				newFolder.mkdirs(); // Creates new folders and subfolders if required
 			}
-			Runnable antinvocation=new Runnable(){
-				public void run(){
-					try {
-						// creating basic folders
-						new File(directory.getText()+"/lib").mkdir();
-						new File(directory.getText()+"/spec").mkdir();
-						new File(directory.getText()+"/src").mkdir();
-						new File(directory.getText()+"/gensrc").mkdir();
-						new File(directory.getText()+"/permsrc").mkdir();
-						new File(directory.getText()+"/bin").mkdir();
-						new File(directory.getText()+"/jade").mkdir();
-						new File(directory.getText()+"/config").mkdir();
-						
-						if (rad1.isSelected())
-							ProjectGenerator.main(new String[]{directory.getText()}); // generates empty spec
-						if (rad2.isSelected())
-							copyResourceFromTo("examples/exampleHelloWorld.idk",directory.getText()+"/spec/specification.xml");
-						if (rad3.isSelected())
-							copyResourceFromTo("examples/exampleGUIAgent.idk",directory.getText()+"/spec/specification.xml");
-						if (rad4.isSelected())
-							copyResourceFromTo("examples/exampleInteraction.idk",directory.getText()+"/spec/specification.xml");
-						
-						copyResourceFromTo("generate.xml",directory.getText()+"/generate.xml");
-						copyResourceFromTo("lib/modiaf.jar",directory.getText()+"/lib/modiaf.jar");
-						copyResourceFromTo("config/Properties.prop",directory.getText()+"/config/Properties.prop");
-						copyResourceFromTo("lib/Base64.jar",directory.getText()+"/lib/Base64.jar");
-						copyResourceFromTo("lib/commons-codec-1.3.jar",directory.getText()+"/lib/commons-codec-1.3.jar");
-						copyResourceFromTo("lib/ingeniaseditor.jar",directory.getText()+"/lib/ingeniaseditor.jar");
-						copyResourceFromTo("lib/jdom.jar",directory.getText()+"/lib/jdom.jar");
-						copyResourceFromTo("lib/swixml.jar",directory.getText()+"/lib/swixml.jar");
-						copyResourceFromTo("lib/xercesImpl.jar",directory.getText()+"/lib/xercesImpl.jar");
-						copyResourceFromTo("lib/http.jar",directory.getText()+"/lib/http.jar");
-						copyResourceFromTo("lib/iiop.jar",directory.getText()+"/lib/iiop.jar");
-						copyResourceFromTo("lib/jade.jar",directory.getText()+"/lib/jade.jar");
-						copyResourceFromTo("lib/junit.jar",directory.getText()+"/lib/junit.jar");
-						copyResourceFromTo("lib/jadeTools.jar",directory.getText()+"/lib/jadeTools.jar");
-						copyResourceFromTo("lib/jgraph.jar",directory.getText()+"/lib/jgraph.jar");
-						copyResourceFromTo("lib/xstream-1.2.jar",directory.getText()+"/lib/xstream-1.2.jar");
-						copyResourceFromTo("lib/gnujaxp.jar",directory.getText()+"/lib/gnujaxp.jar");
-						copyResourceFromTo("lib/iText-2.1.5.jar",directory.getText()+"/lib/iText-2.1.5.jar");
-						copyResourceFromTo("lib/jcommon-1.0.16.jar",directory.getText()+"/lib/jcommon-1.0.16.jar");
-						copyResourceFromTo("lib/jfreechart-1.0.13-experimental.jar",directory.getText()+"/lib/jfreechart-1.0.13-experimental.jar");
-						copyResourceFromTo("lib/jfreechart-1.0.13.jar",directory.getText()+"/lib/jfreechart-1.0.13.jar");
-						copyResourceFromTo("lib/swtgraphics2d.jar",directory.getText()+"/lib/swtgraphics2d.jar");
-
-						
-						File buildFile = new File(directory.getText()+"/generate.xml");
-						Project p = new Project();
-						p.setUserProperty("ant.file", buildFile.getAbsolutePath());
-						p.init();
-						ProjectHelper helper = ProjectHelper.getProjectHelper();
-						p.addReference("ant.projectHelper", helper);
-						p.setProperty("specfile", directory.getText()+"/spec/specification.xml");
-						p.setProperty("mainP", directory.getText());
-						helper.parse(p, buildFile);
-						
-						DefaultLogger consoleLogger = new DefaultLogger();
-						consoleLogger.setErrorPrintStream(System.err);
-						consoleLogger.setOutputPrintStream(System.out);
-						consoleLogger.setMessageOutputLevel(Project.MSG_INFO);
-						p.addBuildListener(consoleLogger);
-
-						p.executeTarget(p.getDefaultTarget());
-
-						JOptionPane.showMessageDialog(dialog, "Project created successfully ","Project created",JOptionPane.INFORMATION_MESSAGE);
-						dialog.setVisible(false);
-						dialog=null;
-					}
-					catch (Throwable ex) {
-						ex.printStackTrace();
-					}	
-				}
-
+			dialog.setVisible(false);
+			
+			SpecificationTemplateKind stk = SpecificationTemplateKind.NoTemplate;
 				
-			};
-			SwingUtilities.invokeLater(antinvocation);
+			if (rad2.isSelected())
+				stk=SpecificationTemplateKind.HelloWorld;
+			if (rad3.isSelected())
+				stk=SpecificationTemplateKind.GUIAgent;
+			if (rad4.isSelected())
+				stk=SpecificationTemplateKind.Interaction;
+			new IAFProjectCreatorSwingTask(directory.getText(),stk,getIdeUpdater(),getIds(),getResources()).execute();		
+
+
+			
+			
 
 		} else {
 			JOptionPane.showMessageDialog(dialog, "No directory has been chosen. Please, press on the browse button to select one","No directory selected",JOptionPane.ERROR_MESSAGE);

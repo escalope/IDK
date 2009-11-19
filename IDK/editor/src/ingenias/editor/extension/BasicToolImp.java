@@ -18,7 +18,9 @@
 
 package ingenias.editor.extension;
 
+import ingenias.editor.GUIResources;
 import ingenias.editor.IDEState;
+import ingenias.editor.IDEUpdater;
 import ingenias.editor.ProjectProperty;
 import ingenias.exception.NotInitialised;
 import ingenias.generator.browser.Browser;
@@ -41,6 +43,28 @@ public abstract class BasicToolImp
         implements BasicTool {
     private Properties prop = new Properties();
     public Browser browser=null;
+    public IDEUpdater ideUpdater=null;
+    
+	public IDEUpdater getIdeUpdater() {
+		return ideUpdater;
+	}
+	public void setIdeUpdater(IDEUpdater ideUpdater) {
+		this.ideUpdater = ideUpdater;
+	}
+	private IDEState ids;
+	public IDEState getIds() {
+		return ids;
+	}
+	public void setIds(IDEState ids) {
+		this.ids = ids;
+	}
+	public GUIResources getResources() {
+		return resources;
+	}
+	public void setResources(GUIResources resources) {
+		this.resources = resources;
+	}
+	private GUIResources resources;
     
     /**
      *  A description of the purpose of this tool

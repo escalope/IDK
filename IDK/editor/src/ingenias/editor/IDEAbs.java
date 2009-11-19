@@ -272,7 +272,7 @@ implements java.io.Serializable,IDEUpdater
 try {
 	System.err.println("initialiseActionHandlers1");
 		ids.addStateChangelistener(new IDEChangesHandler(ids,resources));
-		ManageExtensions me=new ManageExtensions(ids,resources);
+		ManageExtensions me=new ManageExtensions(ids,resources,this);
 
 		ModuleLoader.cleanExtensionFolder();
 		ModuleLoader ml=null;
@@ -292,7 +292,7 @@ try {
 		this.abackup=new AutomaticBackupAction(ids,resources,5);
 		System.err.println("initialiseActionHandlers4");
 		
-		me=new ManageExtensions(ids,resources);
+		me=new ManageExtensions(ids,resources,this);
 		update = new UpdateToolsAndCG(me,ml,ids);
 		update.readLibs("ext");
 		update.start();
@@ -344,15 +344,15 @@ try {
 	}*/	
 
 	protected void addToolEntry(ingenias.editor.extension.BasicTool bt) {
-		new ManageExtensions(ids,resources).addToolEntry(bt);		
+		new ManageExtensions(ids,resources,this).addToolEntry(bt);		
 	}
 	protected void removeEntry(ingenias.editor.extension.BasicTool bt) {
-		new ManageExtensions(ids,resources).removeEntry(bt);
+		new ManageExtensions(ids,resources,this).removeEntry(bt);
 
 	}
 
 	protected void addCGEntry(ingenias.editor.extension.BasicCodeGenerator bcg) {
-		new ManageExtensions(ids,resources).addCGEntry(bcg);
+		new ManageExtensions(ids,resources,this).addCGEntry(bcg);
 	}
 
 

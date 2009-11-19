@@ -20,15 +20,22 @@ public class ManageExtensions {
 
 	private IDEState ids;
 	private GUIResources resources;
+	private IDEUpdater updater;
 
-	public ManageExtensions(IDEState ids, GUIResources resources){
+	public ManageExtensions(IDEState ids, GUIResources resources, IDEUpdater updater){
 		this.ids=ids;
 		this.resources=resources;
+		this.updater=updater;
 	}
 
 	public void addToolEntry(ingenias.editor.extension.BasicTool bt) {		
 		Log.getInstance().logSYS("Added new module with name \"" + bt.getName() +
 		"\"");
+		
+		((BasicToolImp)bt).setIds(ids);// enables access to the editor
+		((BasicToolImp)bt).setResources(resources);// enables access to the editor
+		((BasicToolImp)bt).setIdeUpdater(updater);// enables access to the editor
+		
 		JMenuItem nentry = new JMenuItem(bt.getName());
 		nentry.setToolTipText(bt.getDescription());
 		resources.getTools().add(nentry);
@@ -81,6 +88,10 @@ public class ManageExtensions {
 		nentry.add(generate);
 		nentry.setToolTipText(bcg.getDescription());
 		resources.getCodeGenerator().add(nentry);
+		
+		((BasicToolImp)bcg).setIds(ids); // enables access to the editor
+		((BasicToolImp)bcg).setResources(resources);// enables access to the editor
+		((BasicToolImp)bcg).setIdeUpdater(updater);// enables access to the editor
 
 		HistoryManager.updateProperties(bcg.getProperties(),ids);
 		final BasicCodeGenerator bcg1 = bcg;

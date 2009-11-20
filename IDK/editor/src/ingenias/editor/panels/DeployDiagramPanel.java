@@ -92,6 +92,8 @@ public class DeployDiagramPanel extends JGraph {
 
  entities.add("DeploymentPackage");
 
+ entities.add("SimulationPackage");
+
  entities.add("INGENIASComponent");
 
  entities.add("Application");
@@ -128,6 +130,15 @@ public class DeployDiagramPanel extends JGraph {
     DeploymentPackage nentity=new DeploymentPackage(((Model)getModel()).getNewId("DeploymentPackage"));
       DefaultGraphCell vertex = new
           DeploymentPackageCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("SimulationPackage")) {
+    SimulationPackage nentity=new SimulationPackage(((Model)getModel()).getNewId("SimulationPackage"));
+      DefaultGraphCell vertex = new
+          SimulationPackageCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -217,6 +228,11 @@ public class DeployDiagramPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("DeploymentPackage")) {
       return DeploymentPackageView.getSize((DeploymentPackage)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("SimulationPackage")) {
+      return SimulationPackageView.getSize((SimulationPackage)entity);      
     }
     else
 
@@ -321,6 +337,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new DeploymentPackageCell( (DeploymentPackage) entity);
       // Default Size for the new Vertex with the new entity within
       size = DeploymentPackageView.getSize((DeploymentPackage) entity);
+    }
+    else
+
+    if (entity.getClass().equals(SimulationPackage.class)) {
+      vertex = new SimulationPackageCell( (SimulationPackage) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = SimulationPackageView.getSize((SimulationPackage) entity);
     }
     else
 

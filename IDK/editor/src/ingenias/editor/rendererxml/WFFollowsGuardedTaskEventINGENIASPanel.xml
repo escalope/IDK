@@ -1,0 +1,14 @@
+
+
+
+##panel layout="FlowLayout" Background="white"#
+##label text="["/#
+##label id="OccurringEvent"/#
+##label text=","/#
+##label id="Condition"  /#
+##label text=","/#
+##label id="ActionToExecute"/#
+##label text="]"/#
+##/panel#
+					
+		

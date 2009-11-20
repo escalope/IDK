@@ -64,6 +64,10 @@ this.addClass("WFEndssource","ingenias.editor.entities.Task");
      
 this.addClass("WFEndssource","ingenias.editor.entities.InitialNode");
      
+this.addClass("WFEndssource","ingenias.editor.entities.MentalState");
+     
+this.addClass("WFEndssource","ingenias.editor.entities.ConditionalMentalState");
+     
     
      this.addRole("WFEndstarget");
      this.setArity("WFEndstarget",true,1);

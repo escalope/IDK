@@ -237,6 +237,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode INGENIASCodeComponentNode=null;
 
+  public javax.swing.tree.DefaultMutableTreeNode SimulationPackageNode=null;
+
   public javax.swing.tree.DefaultMutableTreeNode UMLClassifierNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode CommunicationEventNode=null;
@@ -468,6 +470,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
   MentalStateManagerNode=new javax.swing.tree.DefaultMutableTreeNode("MentalStateManager");
 
   INGENIASCodeComponentNode=new javax.swing.tree.DefaultMutableTreeNode("INGENIASCodeComponent");
+
+  SimulationPackageNode=new javax.swing.tree.DefaultMutableTreeNode("SimulationPackage");
 
   UMLClassifierNode=new javax.swing.tree.DefaultMutableTreeNode("UMLClassifier");
 
@@ -702,6 +706,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     addNodeInSortedOrder( AgentComponentNode,MentalStateManagerNode);
 
     addNodeInSortedOrder( INGENIASObjectNode,INGENIASCodeComponentNode);
+
+    addNodeInSortedOrder( INGENIASObjectNode,SimulationPackageNode);
 
     addNodeInSortedOrder( GeneralEventNode,CommunicationEventNode);
 
@@ -2041,6 +2047,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return o;
   }
   
+  public SimulationPackage createSimulationPackage(String id){
+    SimulationPackage object=new     SimulationPackage(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    SimulationPackageNode.insert(nn, SimulationPackageNode.getChildCount());
+    nn.setParent(SimulationPackageNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getSimulationPackage(String object){
+    Object o=findUserObject(SimulationPackageNode,object);
+    return o;
+  }
+  
   public CommunicationEvent createCommunicationEvent(String id){
     CommunicationEvent object=new     CommunicationEvent(id);
     DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
@@ -2416,6 +2437,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     result.add(MentalStateManager.class);
 
     result.add(INGENIASCodeComponent.class);
+
+    result.add(SimulationPackage.class);
 
     result.add(UMLClassifier.class);
 

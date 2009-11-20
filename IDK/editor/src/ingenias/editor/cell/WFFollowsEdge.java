@@ -54,6 +54,10 @@ this.addClass("WFFollowssource","ingenias.editor.entities.Task");
      
 this.addClass("WFFollowssource","ingenias.editor.entities.ForkNode");
      
+this.addClass("WFFollowssource","ingenias.editor.entities.MentalState");
+     
+this.addClass("WFFollowssource","ingenias.editor.entities.ConditionalMentalState");
+     
     
      this.addRole("WFFollowstarget");
      this.setArity("WFFollowstarget",true,1);
@@ -64,6 +68,10 @@ this.addClass("WFFollowstarget","ingenias.editor.entities.DecisionNode");
 this.addClass("WFFollowstarget","ingenias.editor.entities.ForkNode");
      
 this.addClass("WFFollowstarget","ingenias.editor.entities.Task");
+     
+this.addClass("WFFollowstarget","ingenias.editor.entities.MentalState");
+     
+this.addClass("WFFollowstarget","ingenias.editor.entities.ConditionalMentalState");
      
     
     // Add ports for every role.

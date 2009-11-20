@@ -284,6 +284,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
    	if (en.getClass().equals(ingenias.editor.entities.INGENIASCodeComponent.class))
 	  return  new ingenias.editor.cell.INGENIASCodeComponentCell((INGENIASCodeComponent)en);
 
+   	if (en.getClass().equals(ingenias.editor.entities.SimulationPackage.class))
+	  return  new ingenias.editor.cell.SimulationPackageCell((SimulationPackage)en);
+
    	if (en.getClass().equals(ingenias.editor.entities.CommunicationEvent.class))
 	  return  new ingenias.editor.cell.CommunicationEventCell((CommunicationEvent)en);
 
@@ -375,6 +378,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
 
     if (en instanceof ParticipatesInUseCase)
      return  new ParticipatesInUseCaseEdge((ParticipatesInUseCase)en);
+
+    if (en instanceof WFFollowsGuardedTaskEvent)
+     return  new WFFollowsGuardedTaskEventEdge((WFFollowsGuardedTaskEvent)en);
 
     if (en instanceof GTCreates)
      return  new GTCreatesEdge((GTCreates)en);

@@ -71,6 +71,10 @@ this.addClass("WFStartstarget","ingenias.editor.entities.ForkNode");
      
 this.addClass("WFStartstarget","ingenias.editor.entities.Task");
      
+this.addClass("WFStartstarget","ingenias.editor.entities.MentalState");
+     
+this.addClass("WFStartstarget","ingenias.editor.entities.ConditionalMentalState");
+     
     
     // Add ports for every role.
     // Roles are obtained from the static roleData.

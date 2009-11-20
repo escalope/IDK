@@ -292,6 +292,46 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
     jb.setToolTipText("TextNote");
     toolbar.add(jb);
 
+    Image img_MentalState =
+        ImageLoader.getImage("images/mmstate.gif");
+    undoIcon = new ImageIcon(img_MentalState);
+    Action MentalState=
+        new AbstractAction("MentalState", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "MentalState");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    MentalState.setEnabled(true);
+    jb = new JButton(MentalState);
+    jb.setText("");
+    jb.setName("MentalState");	
+    jb.setToolTipText("MentalState");
+    toolbar.add(jb);
+
+    Image img_ConditionalMentalState =
+        ImageLoader.getImage("images/mcmstate.gif");
+    undoIcon = new ImageIcon(img_ConditionalMentalState);
+    Action ConditionalMentalState=
+        new AbstractAction("ConditionalMentalState", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "ConditionalMentalState");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    ConditionalMentalState.setEnabled(true);
+    jb = new JButton(ConditionalMentalState);
+    jb.setText("");
+    jb.setName("ConditionalMentalState");	
+    jb.setToolTipText("ConditionalMentalState");
+    toolbar.add(jb);
+
     }
 
   }
@@ -311,6 +351,8 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
           relationships.add("WFFollows");
 
           relationships.add("WFFollowsGuarded");
+
+          relationships.add("WFFollowsGuardedTaskEvent");
 
    return relationships;
   }
@@ -336,6 +378,10 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
  entities.add("UMLComment");
 
  entities.add("TextNote");
+
+ entities.add("MentalState");
+
+ entities.add("ConditionalMentalState");
 
    return entities;
   }
@@ -404,6 +450,11 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
           v.add("WFFollowsGuarded");
 	  }
 
+        // N-ary relationships. Sometimes they can be also binary.
+        if (WFFollowsGuardedTaskEventEdge.acceptConnection(this.getModel(), selected)) {
+          v.add("WFFollowsGuardedTaskEvent");
+	  }
+
       }
       else if (nAryEdgesNum == 1) {
 
@@ -435,6 +486,11 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
         if (selectedEdge instanceof WFFollowsGuardedEdge &&
         (WFFollowsGuardedEdge.acceptConnection(this.getModel(), selected))) {
           v.add("WFFollowsGuarded");
+        }
+
+        if (selectedEdge instanceof WFFollowsGuardedTaskEventEdge &&
+        (WFFollowsGuardedTaskEventEdge.acceptConnection(this.getModel(), selected))) {
+          v.add("WFFollowsGuardedTaskEvent");
         }
 
       }
@@ -528,6 +584,17 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
         }
       }
 
+      if (relacion.equalsIgnoreCase("WFFollowsGuardedTaskEvent")) {
+        // ResponsibleNEdge already exists.
+        if (nAryEdgesNum == 1 && selectedEdge instanceof WFFollowsGuardedTaskEventEdge) {
+          return selectedEdge;
+        }
+        // There is no NAryEdges in selected.
+        else if (nAryEdgesNum == 0) {
+          return new WFFollowsGuardedTaskEventEdge(new WFFollowsGuardedTaskEvent(getMJGraph().getNewId()));
+        }
+      }
+
     }
 
     return null;
@@ -616,6 +683,24 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("MentalState")) {
+    MentalState nentity=getOM().createMentalState(getMJGraph().getNewId("MentalState"));
+      DefaultGraphCell vertex = new
+          MentalStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ConditionalMentalState")) {
+    ConditionalMentalState nentity=getOM().createConditionalMentalState(getMJGraph().getNewId("ConditionalMentalState"));
+      DefaultGraphCell vertex = new
+          ConditionalMentalStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
 	  throw new ingenias.exception.InvalidEntity("Entity type "+entity+" is not allowed in this diagram"); 
   }
   
@@ -663,6 +748,16 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
 
     if (entity.getType().equalsIgnoreCase("TextNote")) {
       return TextNoteView.getSize((TextNote)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("MentalState")) {
+      return MentalStateView.getSize((MentalState)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ConditionalMentalState")) {
+      return ConditionalMentalStateView.getSize((ConditionalMentalState)entity);      
     }
     else
 
@@ -785,6 +880,20 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new TextNoteCell( (TextNote) entity);
       // Default Size for the new Vertex with the new entity within
       size = TextNoteView.getSize((TextNote) entity);
+    }
+    else
+
+    if (entity.getClass().equals(MentalState.class)) {
+      vertex = new MentalStateCell( (MentalState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = MentalStateView.getSize((MentalState) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ConditionalMentalState.class)) {
+      vertex = new ConditionalMentalStateCell( (ConditionalMentalState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ConditionalMentalStateView.getSize((ConditionalMentalState) entity);
     }
     else
 

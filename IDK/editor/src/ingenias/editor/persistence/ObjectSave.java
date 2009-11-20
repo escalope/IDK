@@ -1068,6 +1068,33 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+        if (en instanceof ingenias.editor.entities.SimulationPackage){
+          ingenias.editor.entities.SimulationPackage nen=(ingenias.editor.entities.SimulationPackage)en;
+	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("Test");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getTest()!=null)
+           saveObject(nen.getTest(),os);
+          os.write("</objectproperty>\n");
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("SimulationDeployment");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getSimulationDeployment()!=null)
+           saveObject(nen.getSimulationDeployment(),os);
+          os.write("</objectproperty>\n");
+          
+          
+          os.write("<objectproperty id=\"Parameters\" collection=\"true\">\n");
+             enumeration=nen.getParametersElements();
+          while (enumeration.hasMoreElements()){
+            ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+           saveObject(next,os);
+          }
+          os.write("</objectproperty>\n");
+          
+        }
+        
         if (en instanceof ingenias.editor.entities.UMLClassifier){
           ingenias.editor.entities.UMLClassifier nen=(ingenias.editor.entities.UMLClassifier)en;
 	  String _name;
@@ -1429,6 +1456,22 @@ public class ObjectSave extends ObjectSaveAbs{
         
          if (en.getClass().equals(ingenias.editor.entities.ParticipatesInUseCase.class)){
           ingenias.editor.entities.ParticipatesInUseCase nen=(ingenias.editor.entities.ParticipatesInUseCase)en;
+          
+          
+        }
+        
+         if (en.getClass().equals(ingenias.editor.entities.WFFollowsGuardedTaskEvent.class)){
+          ingenias.editor.entities.WFFollowsGuardedTaskEvent nen=(ingenias.editor.entities.WFFollowsGuardedTaskEvent)en;
+          
+          os.write("<objectproperty id=\"OccurringEvent\">\n");
+          if (nen.getOccurringEvent()!=null)
+           saveObject(nen.getOccurringEvent(),os);
+          os.write("</objectproperty>\n");
+          
+          os.write("<objectproperty id=\"ActionToExecute\">\n");
+          if (nen.getActionToExecute()!=null)
+           saveObject(nen.getActionToExecute(),os);
+          os.write("</objectproperty>\n");
           
           
         }

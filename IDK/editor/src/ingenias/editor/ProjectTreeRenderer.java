@@ -217,6 +217,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
  static ImageIcon INGENIASCodeComponentIcon=new ImageIcon(ImageLoader.getImage("images/miccomponent.gif"));
 	
+ static ImageIcon SimulationPackageIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
+	
  static ImageIcon CommunicationEventIcon=new ImageIcon(ImageLoader.getImage("images/meventa.gif"));
 	
  static ImageIcon TaskWSIcon=new ImageIcon(ImageLoader.getImage("images/mtaskws.gif"));
@@ -499,6 +501,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
         if (userObject.getClass().equals(INGENIASCodeComponent.class))
           return "images/miccomponent.gif";
+	
+        if (userObject.getClass().equals(SimulationPackage.class))
+          return "images/mdepl.gif";
 	
         if (userObject.getClass().equals(CommunicationEvent.class))
           return "images/meventa.gif";
@@ -784,6 +789,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
         if (userObject.getClass().equals(INGENIASCodeComponent.class))
           return INGENIASCodeComponentIcon;
+	
+        if (userObject.getClass().equals(SimulationPackage.class))
+          return SimulationPackageIcon;
 	
         if (userObject.getClass().equals(CommunicationEvent.class))
           return CommunicationEventIcon;

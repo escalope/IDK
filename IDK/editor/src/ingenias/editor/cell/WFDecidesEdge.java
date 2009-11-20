@@ -75,6 +75,10 @@ this.addClass("WFDecidestarget","ingenias.editor.entities.InitialNode");
      
 this.addClass("WFDecidestarget","ingenias.editor.entities.EndNode");
      
+this.addClass("WFDecidestarget","ingenias.editor.entities.MentalState");
+     
+this.addClass("WFDecidestarget","ingenias.editor.entities.ConditionalMentalState");
+     
     
     // Add ports for every role.
     // Roles are obtained from the static roleData.

@@ -434,6 +434,9 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.INGENIASCodeComponent)
 	  return  new ingenias.editor.cell.INGENIASCodeComponentCell((INGENIASCodeComponent)en);
 
+   	if (en instanceof ingenias.editor.entities.SimulationPackage)
+	  return  new ingenias.editor.cell.SimulationPackageCell((SimulationPackage)en);
+
    	if (en instanceof ingenias.editor.entities.CommunicationEvent)
 	  return  new ingenias.editor.cell.CommunicationEventCell((CommunicationEvent)en);
 
@@ -525,6 +528,9 @@ public class GraphLoadImp1
 
     if (en instanceof ParticipatesInUseCase)
      return  new ParticipatesInUseCaseEdge((ParticipatesInUseCase)en);
+
+    if (en instanceof WFFollowsGuardedTaskEvent)
+     return  new WFFollowsGuardedTaskEventEdge((WFFollowsGuardedTaskEvent)en);
 
     if (en instanceof GTCreates)
      return  new GTCreatesEdge((GTCreates)en);

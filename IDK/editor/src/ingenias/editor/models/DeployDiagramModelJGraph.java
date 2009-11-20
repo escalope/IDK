@@ -152,6 +152,26 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     jb.setToolTipText("DeploymentPackage");
     toolbar.add(jb);
 
+    Image img_SimulationPackage =
+        ImageLoader.getImage("images/mdepl.gif");
+    undoIcon = new ImageIcon(img_SimulationPackage);
+    Action SimulationPackage=
+        new AbstractAction("SimulationPackage", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "SimulationPackage");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    SimulationPackage.setEnabled(true);
+    jb = new JButton(SimulationPackage);
+    jb.setText("");
+    jb.setName("SimulationPackage");	
+    jb.setToolTipText("SimulationPackage");
+    toolbar.add(jb);
+
     Image img_INGENIASComponent =
         ImageLoader.getImage("images/micomponent.gif");
     undoIcon = new ImageIcon(img_INGENIASComponent);
@@ -335,6 +355,8 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
 
  entities.add("DeploymentPackage");
 
+ entities.add("SimulationPackage");
+
  entities.add("INGENIASComponent");
 
  entities.add("Application");
@@ -483,6 +505,15 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("SimulationPackage")) {
+    SimulationPackage nentity=getOM().createSimulationPackage(getMJGraph().getNewId("SimulationPackage"));
+      DefaultGraphCell vertex = new
+          SimulationPackageCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("INGENIASComponent")) {
     INGENIASComponent nentity=getOM().createINGENIASComponent(getMJGraph().getNewId("INGENIASComponent"));
       DefaultGraphCell vertex = new
@@ -567,6 +598,11 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
 
     if (entity.getType().equalsIgnoreCase("DeploymentPackage")) {
       return DeploymentPackageView.getSize((DeploymentPackage)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("SimulationPackage")) {
+      return SimulationPackageView.getSize((SimulationPackage)entity);      
     }
     else
 
@@ -680,6 +716,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new DeploymentPackageCell( (DeploymentPackage) entity);
       // Default Size for the new Vertex with the new entity within
       size = DeploymentPackageView.getSize((DeploymentPackage) entity);
+    }
+    else
+
+    if (entity.getClass().equals(SimulationPackage.class)) {
+      vertex = new SimulationPackageCell( (SimulationPackage) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = SimulationPackageView.getSize((SimulationPackage) entity);
     }
     else
 

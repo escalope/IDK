@@ -86,6 +86,10 @@ public DeployDiagramCellViewFactory() {}
            return new DeploymentPackageView(v);
    }
 
+   if (userObject.getClass().equals(SimulationPackage.class)){
+           return new SimulationPackageView(v);
+   }
+
    if (userObject.getClass().equals(INGENIASComponent.class)){
            return new INGENIASComponentView(v);
    }

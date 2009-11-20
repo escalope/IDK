@@ -114,6 +114,14 @@ public ActivityDiagramCellViewFactory() {}
            return new TextNoteView(v);
    }
 
+   if (userObject.getClass().equals(MentalState.class)){
+           return new MentalStateView(v);
+   }
+
+   if (userObject.getClass().equals(ConditionalMentalState.class)){
+           return new ConditionalMentalStateView(v);
+   }
+
 
    // Diagram Relationships start here
 
@@ -139,6 +147,10 @@ public ActivityDiagramCellViewFactory() {}
 
    if (v.getClass().equals(WFFollowsGuardedEdge.class)){
            return new WFFollowsGuardedView(v);
+   }
+
+   if (v.getClass().equals(WFFollowsGuardedTaskEventEdge.class)){
+           return new WFFollowsGuardedTaskEventView(v);
    }
 
 

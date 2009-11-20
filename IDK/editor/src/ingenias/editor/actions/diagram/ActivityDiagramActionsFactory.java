@@ -317,6 +317,60 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 			
                   
 			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.MentalState")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.MentalState")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ConditionalMentalState")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.UML);
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ConditionalMentalState")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {				
+		     ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				//ingenias.editor.cell.TextUseCaseRenderer.setCurrent(ViewPreferences.ViewType.INGENIAS);
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                  
+			
     		      
 			
 		  
@@ -572,6 +626,48 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 			
                      
 		 
+			
+		    
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.WFFollowsGuardedTaskEvent")){
+			
+                   possibleViews.add(new AbstractAction("NOICON") {
+                     public void actionPerformed(ActionEvent e) {
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
+	
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                     
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.WFFollowsGuardedTaskEvent")){
+			
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
+	
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                     
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.WFFollowsGuardedTaskEvent")){
+			
+                   possibleViews.add(new AbstractAction("LABEL") {
+                     public void actionPerformed(ActionEvent e) {
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
+	
+				graph.repaint();
+                     }
+                   });
+			 }
+			
+                     
+		 
 		 return possibleViews;
 		 }
 		 
@@ -701,6 +797,34 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(graph, "Object type TextNote is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+
+		// Insert an object of type MentalState
+		nobjects.add(
+			new AbstractAction("Insert MentalState") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "MentalState");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type MentalState is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+
+		// Insert an object of type ConditionalMentalState
+		nobjects.add(
+			new AbstractAction("Insert ConditionalMentalState") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "ConditionalMentalState");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type ConditionalMentalState is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

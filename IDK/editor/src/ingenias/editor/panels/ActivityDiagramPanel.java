@@ -106,6 +106,10 @@ public class ActivityDiagramPanel extends JGraph {
 
  entities.add("TextNote");
 
+ entities.add("MentalState");
+
+ entities.add("ConditionalMentalState");
+
    return entities;
   }
 
@@ -194,6 +198,24 @@ public class ActivityDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("MentalState")) {
+    MentalState nentity=new MentalState(((Model)getModel()).getNewId("MentalState"));
+      DefaultGraphCell vertex = new
+          MentalStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ConditionalMentalState")) {
+    ConditionalMentalState nentity=new ConditionalMentalState(((Model)getModel()).getNewId("ConditionalMentalState"));
+      DefaultGraphCell vertex = new
+          ConditionalMentalStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
 	  throw new ingenias.exception.InvalidEntity("Entity type "+entity+" is not allowed in this diagram"); 
   }
   
@@ -241,6 +263,16 @@ public class ActivityDiagramPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("TextNote")) {
       return TextNoteView.getSize((TextNote)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("MentalState")) {
+      return MentalStateView.getSize((MentalState)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ConditionalMentalState")) {
+      return ConditionalMentalStateView.getSize((ConditionalMentalState)entity);      
     }
     else
 
@@ -354,6 +386,20 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new TextNoteCell( (TextNote) entity);
       // Default Size for the new Vertex with the new entity within
       size = TextNoteView.getSize((TextNote) entity);
+    }
+    else
+
+    if (entity.getClass().equals(MentalState.class)) {
+      vertex = new MentalStateCell( (MentalState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = MentalStateView.getSize((MentalState) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ConditionalMentalState.class)) {
+      vertex = new ConditionalMentalStateCell( (ConditionalMentalState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ConditionalMentalStateView.getSize((ConditionalMentalState) entity);
     }
     else
 

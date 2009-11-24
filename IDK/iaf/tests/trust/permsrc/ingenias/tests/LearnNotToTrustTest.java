@@ -38,7 +38,7 @@ public class LearnNotToTrustTest extends BasicMASTest {
 
     @Test
     public void testDemo() throws Exception {
-        int delay=4000;
+        int delay=5000;
         IAFProperties.setGarbageCollectionInterval(100);
 
         // Involved agent local ids for this test are:

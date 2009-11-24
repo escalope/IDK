@@ -58,7 +58,7 @@ public class LearnToTrustTest extends BasicMASTest {
         // MentalStateManager msm = MSMRepository.getInstance().get("MY_AGENT_ID"); // provides access to the
         // For current agents, these are the variables containing their mental states
 
-        int delay=4000;
+        int delay=5000;
 
         IAFProperties.setGarbageCollectionInterval(100);
 

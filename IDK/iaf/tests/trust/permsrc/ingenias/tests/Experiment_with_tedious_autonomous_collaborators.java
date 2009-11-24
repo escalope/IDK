@@ -55,6 +55,7 @@ import ingenias.exception.InvalidEntity;
 import ingenias.exception.TimeOut;
 import ingenias.jade.MentalStateManager;
 import ingenias.jade.MentalStateProcessor;
+import ingenias.jade.MyMath;
 import ingenias.jade.components.Task;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.mental.*;
@@ -104,7 +105,7 @@ public class Experiment_with_tedious_autonomous_collaborators extends BasicMASTe
 
 			for (int k=0;k<10;k++){
 				NewCycleEvent evento = new NewCycleEvent();
-				evento.setdeclaredQuality(Math.abs(randomQuality.nextGaussian()));		
+				evento.setdeclaredQuality(MyMath.gaussian(0.5, 0.5));		
 				BigInteger nvalue=new BigInteger(32, random);
 				while (documentsTable.containsKey(nvalue.toString())){
 					nvalue=new BigInteger(32, random);
@@ -210,6 +211,7 @@ public class Experiment_with_tedious_autonomous_collaborators extends BasicMASTe
 				"Analysing all events",processingEvents,new State[]{processingEvents});
 		return esm;
 	}
+	
 }
 
  

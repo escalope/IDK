@@ -106,6 +106,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		try {
 			this.generateIndex(seq);
 			this.generatePages(seq);
+			copyResourceFromTo("logograsia.jpg", ( (ProjectProperty)this.getProperty("htmldoc")).
+				value+"/logograsia.jpg");
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -326,7 +328,33 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		}
 	}
 	
-
+	private File copyResourceFromTo(
+			String from, String to)
+	throws FileNotFoundException, IOException {
+		// the resource files are packaged in the same jar as this class.
+		// hence, it is not recommendable to move this method to another
+		// class to facilitate reuse unless a class loader is passed
+		// as parameter
+		InputStream streamToModiaf =this.getClass().getClassLoader().getResourceAsStream(from);
+		if (streamToModiaf==null)
+			throw new FileNotFoundException(from+" resource not found");
+		File destination = new File(to);
+		if (destination.isDirectory() && !destination.exists())
+			destination.mkdirs();
+		FileOutputStream target=new FileOutputStream(destination);
+		byte[] bytes=new byte[8000];
+		int read=0;
+		do {
+			read=streamToModiaf.read(bytes);
+			if (read>0){
+				target.write(bytes,0,read);
+			}
+		} while (read!=-1);
+		target.close();
+		streamToModiaf.close();
+		return destination;
+	}
+	
 	
 	/**
 	 *  Generates HTMLdoc from a INGENIAS specification file (1st param), a diagram

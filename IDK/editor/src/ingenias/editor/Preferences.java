@@ -37,7 +37,13 @@ public class Preferences {
 	private RelationshipLayout relationshiplayout=RelationshipLayout.AUTOMATIC;	
 	private String selectedFilter="";
 	private boolean filtersEnabled=false;
+	private String workspacePath=System.getProperty("user.dir");
 
+
+
+	public String getWorkspacePath() {
+		return workspacePath;
+	}
 
 	public String toXML(){
 		StringBuffer sb=new StringBuffer();
@@ -56,6 +62,10 @@ public class Preferences {
 		sb.append("<modeling>");
 		sb.append(modelingLanguage);
 		sb.append("</modeling>\n");
+		sb.append("<workspace>");
+		sb.append(workspacePath);
+		sb.append("</workspace>\n");
+		
 		if (filtersEnabled){
 			sb.append("<selectedfilter>");
 			sb.append(selectedFilter);
@@ -87,6 +97,10 @@ public class Preferences {
 			if (children.item(k).getNodeName().equalsIgnoreCase("selectedfilter")){
 				prefs.filtersEnabled=true;
 				prefs.selectedFilter=children.item(k).getChildNodes().item(0).getNodeValue();
+			}
+			
+			if (children.item(k).getNodeName().equalsIgnoreCase("workspace")){				
+				prefs.setWorkspacePath(children.item(k).getChildNodes().item(0).getNodeValue());
 			}
 		}
 		return prefs;
@@ -133,6 +147,11 @@ public class Preferences {
 
 	public void setModelingLanguage(ModelingLanguage modelingLanguage) {
 		this.modelingLanguage = modelingLanguage;
+	}
+
+	public void setWorkspacePath(String path) {
+		this.workspacePath=path;
+		
 	}
 
 }

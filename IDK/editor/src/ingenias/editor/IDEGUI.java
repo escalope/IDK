@@ -522,6 +522,16 @@ public abstract class IDEGUI extends javax.swing.JFrame  {
 			}
 		});
 
+		JMenuItem workspaceEntry=new JMenuItem("Switch workspace");
+		workspaceEntry.setToolTipText("Change current workspace");
+		workspaceEntry.setText("Switch workspace");
+		workspaceEntry.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changeWorkspace(e);
+			}
+		});
+		
+		preferences.add(workspaceEntry);
 		preferences.add( resizeAll);
 		preferences.add( resizeAllDiagrams);
 		{
@@ -716,6 +726,12 @@ public abstract class IDEGUI extends javax.swing.JFrame  {
 		});
 		splitPanelDiagramMessagesPaneSeparator.setDividerLocation(400);
 	}
+	
+	void changeWorkspace(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	void jScrollPane3_keyPressed(KeyEvent e) {
 		/*   System.err.println("pulsado");
 		 */

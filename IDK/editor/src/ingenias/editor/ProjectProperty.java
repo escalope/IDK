@@ -43,6 +43,14 @@ public class ProjectProperty implements java.io.Serializable {
 		this.module=module;
 	}
 
+	public ProjectProperty(ProjectProperty oldProjProperty) {
+		this.key=oldProjProperty.key;
+		this.name=oldProjProperty.name;
+		this.value=oldProjProperty.value;
+		this.tooltip=oldProjProperty.tooltip;
+		this.module=oldProjProperty.module;		
+	}
+
 	public String toXML(){
 		String prop="<projectproperty id=\""+key+"\""+
 		" module=\""+ingenias.editor.entities.Entity.encodeutf8Text(module)+"\" "+

@@ -28,26 +28,52 @@ import java.io.IOException;
 
 public class ProjectGenerator {
 	
+	public static String getDefaultProjectDefinitionAbsolute(String projectFolder){
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
+		"<project cid=\"0\" version=\"1.1\">\n"+
+		"<projectproperties>\n"+
+		"<projectproperty id=\"jadeout\" module=\"Ingenias Agent Framework generator\"  name=\"JADE generated output folder\" value=\"gensrc\"  tooltip=\"The folder that will hold generated JADE agents\" />\n"+
+		"<projectproperty id=\"proysrc\" module=\"Ingenias Agent Framework generator\"  name=\"Main source folder for the project\" value=\"src\"  tooltip=\"The folder containing the sources of the project\" />\n"+
+		"<projectproperty id=\"jadeproject\" module=\"Ingenias Agent Framework generator\"  name=\"JADE main project folder\" value=\""+projectFolder+"\"  tooltip=\"The folder that will contain the project for this development\" />\n"+
+		"<projectproperty id=\"jadeperm\" module=\"Ingenias Agent Framework generator\"  name=\"JADE generate only once folder\" value=\"permsrc\"  tooltip=\"The folder that will hold generated elements that should not be regenerated\" />\n"+
+		" <projectproperty id=\"htmldoc\" module=\"HTML Document generator\"  name=\"HTML document folder\" value=\""+projectFolder+"/html\"  tooltip=\"The document folder that will contain HTML version of this specification\" />\n"+
+		"</projectproperties>\n"+
+		"<leafpackages>\n"+
+		"</leafpackages>\n"+
+		"<objects>\n"+
+		"</objects>\n"+
+		"<relationships>\n"+
+		"</relationships>\n"+
+		"<models>\n"+ 
+		"</models>\n"+
+		"</project>\n";
+	}
+	
+	public static String getDefaultProjectDefinitionWorkspace( String projectName){
+		
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
+		"<project cid=\"0\" version=\"1.1\">\n"+
+		"<projectproperties>\n"+
+		"<projectproperty id=\"jadeout\" module=\"Ingenias Agent Framework generator\"  name=\"JADE generated output folder\" value=\"gensrc\"  tooltip=\"The folder that will hold generated JADE agents\" />\n"+
+		"<projectproperty id=\"proysrc\" module=\"Ingenias Agent Framework generator\"  name=\"Main source folder for the project\" value=\"src\"  tooltip=\"The folder containing the sources of the project\" />\n"+
+		"<projectproperty id=\"jadeproject\" module=\"Ingenias Agent Framework generator\"  name=\"JADE main project folder\" value=\"{workspace}/"+projectName+"\"  tooltip=\"The folder that will contain the project for this development\" />\n"+
+		"<projectproperty id=\"jadeperm\" module=\"Ingenias Agent Framework generator\"  name=\"JADE generate only once folder\" value=\"permsrc\"  tooltip=\"The folder that will hold generated elements that should not be regenerated\" />\n"+
+		" <projectproperty id=\"htmldoc\" module=\"HTML Document generator\"  name=\"HTML document folder\" value=\"{workspace}/"+projectName+"/html\"  tooltip=\"The document folder that will contain HTML version of this specification\" />\n"+
+		"</projectproperties>\n"+
+		"<leafpackages>\n"+
+		"</leafpackages>\n"+
+		"<objects>\n"+
+		"</objects>\n"+
+		"<relationships>\n"+
+		"</relationships>\n"+
+		"<models>\n"+ 
+		"</models>\n"+
+		"</project>\n";
+	}
+	
 	public static void main(String args[]) throws IOException{
 		FileOutputStream fos=new FileOutputStream(new File(args[0]+"/spec/specification.xml"));
-		fos.write(("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
-"<project cid=\"0\" version=\"1.1\">\n"+
-"<projectproperties>\n"+
-"<projectproperty id=\"jadeout\" module=\"Ingenias Agent Framework generator\"  name=\"JADE generated output folder\" value=\"gensrc\"  tooltip=\"The folder that will hold generated JADE agents\" />\n"+
-"<projectproperty id=\"proysrc\" module=\"Ingenias Agent Framework generator\"  name=\"Main source folder for the project\" value=\"src\"  tooltip=\"The folder containing the sources of the project\" />\n"+
-"<projectproperty id=\"jadeproject\" module=\"Ingenias Agent Framework generator\"  name=\"JADE main project folder\" value=\""+args[0]+"\"  tooltip=\"The folder that will contain the project for this development\" />\n"+
-"<projectproperty id=\"jadeperm\" module=\"Ingenias Agent Framework generator\"  name=\"JADE generate only once folder\" value=\"permsrc\"  tooltip=\"The folder that will hold generated elements that should not be regenerated\" />\n"+
-" <projectproperty id=\"htmldoc\" module=\"HTML Document generator\"  name=\"HTML document folder\" value=\""+args[0]+"/html\"  tooltip=\"The document folder that will contain HTML version of this specification\" />\n"+
-"</projectproperties>\n"+
-"<leafpackages>\n"+
-"</leafpackages>\n"+
-"<objects>\n"+
-"</objects>\n"+
-"<relationships>\n"+
-"</relationships>\n"+
-"<models>\n"+ 
-"</models>\n"+
-"</project>\n").getBytes());
+		fos.write((getDefaultProjectDefinitionAbsolute(args[0])).getBytes());
 		
 	}
 

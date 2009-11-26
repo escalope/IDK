@@ -15,6 +15,7 @@ import java.awt.Rectangle;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,7 +37,7 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 
 public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implements ProgressListener{
-	private File current;
+	private File newSpec;
 	private IDEUpdater updater;
 	private IDEState ids;
 	private GUIResources resources;
@@ -45,8 +46,7 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 	private SpecificationTemplateKind stk;
 
 	public IAFProjectCreatorSwingTask(String directory, SpecificationTemplateKind stk, IDEUpdater updater, IDEState ids, final GUIResources resources){
-		this.directory=directory;
-		this.current=current;
+		this.directory=directory;		
 		this.updater=updater;
 		this.ids=ids;
 		this.stk=stk;
@@ -93,11 +93,11 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 			new File(directory+"/jade").mkdir();
 			new File(directory+"/config").mkdir();
 			this.setProgress(0);
-			//resources.getProgressBar().setString("Creating spec ..."+((getProgress()))+"%");
-			File newSpec=null;
+			//resources.getProgressBar().setString("Creating spec ..."+((getProgress()))+"%");			
 			switch (stk){
 			case NoTemplate:
-				ProjectGenerator.main(new String[]{directory}); // generates empty spec
+		
+				ProjectGenerator.getDefaultProjectDefinitionWorkspace(new File(directory).getName()); // generates empty spec
 				newSpec=new File(directory+"/spec/specification.xml");
 				break;
 			case HelloWorld:
@@ -110,6 +110,7 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 				newSpec=copyResourceFromTo("examples/exampleInteraction.idk",directory+"/spec/specification.xml");
 				break;			
 			}	
+			replace("{projectLocation}","{workspace}/"+new File(directory).getName(),newSpec);
 			this.setProgress(getProgress()+2);			
 			//resources.getProgressBar().setString("Creating libraries ..."+((getProgress()))+"%");
 			copyResourceFromTo("generate.xml",directory+"/generate.xml");			
@@ -164,82 +165,19 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 			p.init();
 			ProjectHelper helper = ProjectHelper.getProjectHelper();
 			p.addReference("ant.projectHelper", helper);
-			p.setProperty("specfile", directory+"/spec/specification.xml");
+			p.setProperty("specfile", directory+"/spec/specification.xml");		
 			p.setProperty("mainP", directory);
 			helper.parse(p, buildFile);
 
 			
 			DefaultLogger consoleLogger = new DefaultLogger();
 			consoleLogger.setErrorPrintStream(new PrintStream(
-					new OutputStream()
-				       { JTextPane ta=resources.getLogs() ;
-				         public void write(int b) //minimum implementation of an OutputStream
-				          { byte[] bs = new byte[1]; bs[0] = (byte) b;
-				          /*
-				          Core SWING Advanced Programming 
-				          By Kim Topley
-				          ISBN: 0 13 083292 8       
-				          Publisher: Prentice Hall  
-				          */
-				          try {
-				              Document doc = ta.getDocument();
-
-				              // Move the insertion point to the end
-				              ta.setCaretPosition(doc.getLength());
-
-				              // Insert the text
-				              ta.replaceSelection(new String(bs));
-
-				              // Convert the new end location
-				              // to view co-ordinates
-				              Rectangle r = ta.modelToView(doc.getLength());
-
-				              // Finally, scroll so that the new text is visible
-				              if (r != null) {
-				                ta.scrollRectToVisible(r);
-				              }
-				            } catch (BadLocationException e) {
-				              System.out.println("Failed to append text: " + e);
-				            }				          
-				          }//write
-				       }));
-		
+					System.err));		
 		
 
 					//new TextAreaOutputStream(resources.getLogs())));
-			consoleLogger.setOutputPrintStream(new PrintStream(new OutputStream()
-		       { JTextPane ta=resources.getLogs() ;
-		         public void write(int b) //minimum implementation of an OutputStream
-		          { byte[] bs = new byte[1]; bs[0] = (byte) b;
-		          /*
-		          Core SWING Advanced Programming 
-		          By Kim Topley
-		          ISBN: 0 13 083292 8       
-		          Publisher: Prentice Hall  
-		          */
-		          try {
-		              Document doc = ta.getDocument();
-
-		              // Move the insertion point to the end
-		              ta.setCaretPosition(doc.getLength());
-
-		              // Insert the text
-		              ta.replaceSelection(new String(bs));
-
-		              // Convert the new end location
-		              // to view co-ordinates
-		              Rectangle r = ta.modelToView(doc.getLength());
-
-		              // Finally, scroll so that the new text is visible
-		              if (r != null) {
-		                ta.scrollRectToVisible(r);
-		              }
-		            } catch (BadLocationException e) {
-		              System.out.println("Failed to append text: " + e);
-		            }				          
-		          }//write
-		       }));
-			consoleLogger.setMessageOutputLevel(Project.MSG_DEBUG);
+			consoleLogger.setOutputPrintStream(new PrintStream(System.out));
+						consoleLogger.setMessageOutputLevel(Project.MSG_DEBUG);
 			p.addBuildListener(consoleLogger);
 
 			p.executeTarget(p.getDefaultTarget());
@@ -252,6 +190,21 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 		return null;
 	}
 
+	public void replace(String string, String string2, File newSpec) {
+		try {
+			String content=readString(new FileInputStream(newSpec));
+			content=content.replace(string, string2);
+			FileOutputStream fos=new FileOutputStream(newSpec);
+			fos.write(content.getBytes());
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/*
 	 * Executed in event dispatching thread
 	 */
@@ -281,10 +234,10 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 									JOptionPane.WARNING_MESSAGE);
 							if (result == JOptionPane.OK_OPTION) {	
 
-								new LoadFileSwingTask(current,updater,ids,resources).execute();
+								new LoadFileSwingTask(newSpec,updater,ids,resources).execute();
 							}
 						} else
-							new LoadFileSwingTask(current,updater,ids,resources).execute();
+							new LoadFileSwingTask(newSpec,updater,ids,resources).execute();
 					}
 				};
 				new Thread(launchLoadAction).start();
@@ -327,6 +280,22 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 		target.close();
 		streamToModiaf.close();
 		return destination;
+	}
+	
+	public static String readString(FileInputStream streamToModiaf) throws IOException{
+		byte[] bytes=new byte[8000];
+		StringBuffer sb=new StringBuffer();
+		int read=0;
+		do {
+			read=streamToModiaf.read(bytes);
+			if (read>0){
+				for (int k=0;k<read;k++){
+					sb.append((char)bytes[k]);
+				}
+			}
+		} while (read!=-1);
+		streamToModiaf.close();
+		return sb.toString();
 	}
 }
 

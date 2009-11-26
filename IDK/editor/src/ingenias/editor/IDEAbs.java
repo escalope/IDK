@@ -51,21 +51,32 @@ import ingenias.editor.utils.DialogWindows;
 import ingenias.exception.CannotLoad;
 import ingenias.exception.UnknowFormat;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.HyperlinkListener;
@@ -612,6 +623,103 @@ try {
 	public void editOnMessages_selected() {
 		ids.prefs.setEditPropertiesMode(Preferences.EditPropertiesMode.PANEL);
 	};
+	
+	void changeWorkspace(ActionEvent e) {
+		final JDialog workspaceChange=new JDialog(this,true);
+		final JFileChooser chooser=new JFileChooser();
+		if (!this.getIds().prefs.getWorkspacePath().equals("")){
+			chooser.setCurrentDirectory(new File(ids.prefs.getWorkspacePath()));	
+		}
+		
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // To choose only directories
+		
+		final JTextField directory=new JTextField(30);
+		directory.addKeyListener(new KeyListener(){
+
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode()==KeyEvent.VK_ENTER){
+					performWorkspaceSwitch(directory,workspaceChange);
+					
+				}
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
+		directory.setText(ids.prefs.getWorkspacePath());
+		JButton browse=new JButton("Browse");
+		browse.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				chooser.setDialogType(chooser.OPEN_DIALOG);
+				chooser.showOpenDialog(null);
+				if (chooser.getSelectedFile()==null)
+					JOptionPane.showMessageDialog(workspaceChange, 
+							"A directory has to be chosen",
+							"No directory selected",JOptionPane.ERROR_MESSAGE);
+				else
+					directory.setText(chooser.getSelectedFile().toString());
+			}
+
+		});
+		JButton cancel=new JButton("Cancel");
+		cancel.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				workspaceChange.setVisible(false);	
+			}
+		});
+		JButton accept=new JButton("Accept");
+		accept.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				performWorkspaceSwitch(directory,workspaceChange);
+			}
+		});
+
+		JPanel buttons=new JPanel(new FlowLayout(FlowLayout.CENTER));
+		buttons.add(accept);
+		buttons.add(cancel);
+		JPanel input=new JPanel(new FlowLayout(FlowLayout.LEFT));
+		input.add(new JLabel("Current workspace:"));
+		input.add(directory);
+		input.add(browse);
+		Box vbox=Box.createVerticalBox();
+		vbox.add(input);
+		vbox.add(buttons);
+		workspaceChange.getContentPane().add(vbox);
+		workspaceChange.pack();
+		workspaceChange.setLocation(ingenias.editor.utils.DialogWindows.getCenter(workspaceChange.getSize(), resources.getMainFrame()));
+		workspaceChange.setVisible(true);
+	}
+
+
+
+	protected void performWorkspaceSwitch(JTextField directory,
+			JDialog workspaceChange) {
+		File newWorkspace=new File(directory.getText());
+		if (newWorkspace.exists() && newWorkspace.isDirectory()){
+			 ids.prefs.setWorkspacePath(directory.getText());	
+			 workspaceChange.setVisible(false);
+			} else {
+				JOptionPane.showMessageDialog(resources.getMainFrame(),
+						"That folder does not exist. The workspace must be an existing folder",
+						"Folder does not exist",JOptionPane.ERROR_MESSAGE);
+			}
+		
+	}
 
 }
 

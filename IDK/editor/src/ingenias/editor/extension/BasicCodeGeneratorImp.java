@@ -21,12 +21,15 @@ package ingenias.editor.extension;
 
 import ingenias.editor.GUIResources;
 import ingenias.editor.ProgressListener;
+import ingenias.editor.ProjectProperty;
 import ingenias.exception.CannotLoad;
 import ingenias.exception.DamagedFormat;
 import ingenias.exception.NotInitialised;
 import ingenias.exception.UnknowFormat;
 import ingenias.generator.browser.Browser;
 import java.util.*;
+import java.util.Map.Entry;
+
 import ingenias.generator.datatemplate.*;
 import ingenias.generator.interpreter.TemplateTree;
 import ingenias.generator.util.Conversor;
@@ -240,8 +243,19 @@ implements BasicCodeGenerator {
 	 *
 	 */
 	public final void run() {
-
-		setProperties(browser.getState().prop);
+		Properties props=browser.getState().prop;
+		Properties nprops=new Properties();
+		for (Entry entry:props.entrySet()){
+			 ingenias.editor.ProjectProperty oldProjProperty=(ProjectProperty) entry.getValue();
+			 ingenias.editor.ProjectProperty newProjProperty=new ingenias.editor.ProjectProperty(
+					 oldProjProperty);
+			if (getIds()!=null && getIds().prefs!=null) // executed within the gui
+				newProjProperty.value=newProjProperty.value.replace("{workspace}", getIds().prefs.getWorkspacePath());
+			nprops.put(entry.getKey(), newProjProperty);
+		}
+		
+		
+		setProperties(nprops);
 		
 		Sequences seq = this.generate();
 		if (templates.size() == 0) {

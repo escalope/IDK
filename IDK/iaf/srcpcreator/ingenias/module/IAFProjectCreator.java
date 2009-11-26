@@ -126,18 +126,22 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 
 
 			final JFileChooser chooser=new JFileChooser();
+			if (!this.getIds().prefs.getWorkspacePath().equals("")){
+				chooser.setCurrentDirectory(new File(this.getIds().prefs.getWorkspacePath()));	
+			}
+			
 			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // To choose only directories
 			dialog=new JDialog(getResources().getMainFrame());
 			
 
 			dialog.setTitle("Project creation wizard");
 			final JTextField directory=new JTextField(50);
+			directory.setText(this.getIds().prefs.getWorkspacePath());
 			directory.addKeyListener(new KeyListener(){
 
 				@Override
 				public void keyPressed(KeyEvent arg0) {
 					if (arg0.getKeyCode()==KeyEvent.VK_ENTER){
-
 						createProjectInLocation(directory);	
 					}
 
@@ -156,7 +160,6 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 				}
 
 			});
-			directory.setText(chooser.getCurrentDirectory().toString()+"/");
 			JButton browse=new JButton("Browse");
 			browse.addActionListener(new ActionListener(){
 				@Override

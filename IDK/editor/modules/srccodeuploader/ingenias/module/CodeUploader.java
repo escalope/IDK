@@ -85,6 +85,7 @@ public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 			String folderForTasks=((ProjectProperty) this.getProperties().get("Ingenias Agent Framework generator:jadeproject")).value+"/"+
 			((ProjectProperty) this.getProperties().get("Ingenias Agent Framework generator:jadeout")).value+"/ingenias/jade/components/";
 			System.err.println(folderForTasks);
+			folderForTasks=folderForTasks.replace("{workspace}",this.getIds().prefs.getWorkspacePath());
 			File folderDir=new File(folderForTasks);
 			File[] taskFiles=folderDir.listFiles();
 			for (File task:taskFiles){

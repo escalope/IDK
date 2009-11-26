@@ -382,6 +382,9 @@
 		<fileset dir="${modhtmldoc}/templates"></fileset>
 		
 	</copy>
+	<copy todir="${temp}" file="${modhtmldoc}/logograsia.jpg">
+		
+	</copy>
 	
 	<jar jarfile="${modhtmldoc}/modhtmldoc.jar"
 	     
@@ -648,11 +651,6 @@
 			<fileset dir="lib">
 				
 				<include name="*.jar" />
-				
-			</fileset>
-			<fileset dir="testlibs">
-				
-				<include name="**/*.jar" />
 				
 			</fileset>
 			

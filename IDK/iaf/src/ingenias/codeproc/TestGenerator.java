@@ -19,7 +19,7 @@
     along with INGENIAS Agent Framework; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-*/
+ */
 
 package ingenias.codeproc;
 
@@ -43,26 +43,81 @@ public class TestGenerator {
 	public TestGenerator(Browser browser){
 		this.browser=browser;
 	}
-	
+
 	public void generateTests(Sequences p, BasicCodeGenerator generator){
 		try {
 			GraphEntity[] testEntities = Utils
 			.generateEntitiesOfType("Test",browser);
-			
+
 			for (GraphEntity test:testEntities){
 				Repeat testingDepl = new Repeat("testdefinition");
 				p.addRepeat(testingDepl);
 				testingDepl.add(new Var("test", Utils.replaceBadChars(test.getID())));
 				addAgentIdsToBeLaunchedAtTest(testingDepl, test,generator,browser);
+				addAgentIdsToBeLaunchedAtSimulation(testingDepl, test,generator,browser);
+
 			}
-			
+
 		} catch (NotInitialised e) {			
 			e.printStackTrace();
 		}
 
 	}
 
+	private void addAgentIdsToBeLaunchedAtSimulation(Repeat testingDepl,
+			GraphEntity test,BasicCodeGenerator bcg,Browser browser) throws NotInitialised {
+		GraphEntity[] deployPacks = Utils
+		.generateEntitiesOfType("SimulationPackage",browser);
+		if (deployPacks.length > 0) {
+			for (int k = 0; k < deployPacks.length; k++) {
+				try {
 
+					GraphAttribute deplPackageAttr = deployPacks[k]
+					                                             .getAttributeByName("SimulationDeployment");
+					GraphAttribute testAttr = deployPacks[k].getAttributeByName("Test");
+
+
+					if (deplPackageAttr != null) {
+						GraphEntity deplPackage = deplPackageAttr.getEntityValue();
+						if (deplPackage != null) {
+							Repeat depl = new Repeat("deploynode");
+							DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for build.xml script generation
+							if (testAttr!=null && 
+									testAttr.getEntityValue()!=null ){
+								GraphEntity localTest = testAttr.getEntityValue();
+
+								if (localTest.equals(test)){
+									testingDepl.add(depl);				
+								}
+
+
+							} else {
+								bcg.fatalError();
+								Log.getInstance()
+								.logERROR(
+										"The testing deployment has not defined a test","", deployPacks[k].getID());
+							}
+						} else {
+							bcg.fatalError();
+							Log.getInstance()
+							.logERROR(
+									"The simulation deployment has not defined a deployment package",
+									"", deployPacks[k].getID());
+						};
+
+					}					
+
+				} catch (NullEntity e) {					
+					e.printStackTrace();
+				} catch (Exception e) {					
+					e.printStackTrace();
+				}
+
+
+			}
+		}
+
+	}
 	private void addAgentIdsToBeLaunchedAtTest(Repeat testingDepl,
 			GraphEntity test,BasicCodeGenerator bcg,Browser browser) throws NotInitialised {
 		GraphEntity[] deployPacks = Utils
@@ -70,31 +125,31 @@ public class TestGenerator {
 		if (deployPacks.length > 0) {
 			for (int k = 0; k < deployPacks.length; k++) {
 				try {
-					
+
 					GraphAttribute deplPackageAttr = deployPacks[k]
 					                                             .getAttributeByName("TestingDeployment");
 					GraphAttribute testAttr = deployPacks[k].getAttributeByName("Tests");
-			
+
 
 					if (deplPackageAttr != null) {
 						GraphEntity deplPackage = deplPackageAttr.getEntityValue();
 						if (deplPackage != null) {
-						Repeat depl = new Repeat("deploynode");
-						DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for build.xml script generation
-		
-							
+							Repeat depl = new Repeat("deploynode");
+							DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for build.xml script generation
+
+
 							if (testAttr!=null && 
 									testAttr.getCollectionValue()!=null && 
 									testAttr.getCollectionValue().size()>0){
 								GraphCollection tests = testAttr.getCollectionValue();
-								
+
 								for (int j=0;j<tests.size();j++){								
 									GraphEntity localTest=tests.getElementAt(j);		
 									if (localTest.equals(test)){
 										testingDepl.add(depl);				
 									}
 								}
-								
+
 							} else {
 								bcg.fatalError();
 								Log.getInstance()
@@ -120,7 +175,7 @@ public class TestGenerator {
 
 			}
 		}
-		
+
 	}
 
 	/**
@@ -139,13 +194,13 @@ public class TestGenerator {
 				try {
 					Repeat testingDepl = new Repeat("testingnode");
 					p.addRepeat(testingDepl);
-					
+
 					testingDepl.add(new Var("testingconfig",Utils.replaceBadChars(deployPacks[k].getID())));
 
 					GraphAttribute deplPackageAttr = deployPacks[k]
 					                                             .getAttributeByName("TestingDeployment");
 					GraphAttribute testAttr = deployPacks[k].getAttributeByName("Tests");
-					
+
 
 					if (deplPackageAttr != null) {
 						GraphEntity deplPackage = deplPackageAttr.getEntityValue();
@@ -153,17 +208,17 @@ public class TestGenerator {
 						testingDepl.add(depl);
 						DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for build.xml script generation
 						if (deplPackage != null) {
-							
+
 							if (testAttr!=null && testAttr.getCollectionValue()!=null && testAttr.getCollectionValue().size()>0){
 								GraphCollection tests = testAttr.getCollectionValue();
-								
+
 								for (int j=0;j<tests.size();j++){								
 									Repeat testRepeat=new Repeat("testunit");									
 									testingDepl.add(testRepeat);
 									depl = new Repeat("deploynode");
 									testRepeat.add(depl);
 									DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for JUnit class initialization per test
-									
+
 									GraphEntity test=tests.getElementAt(j);																											
 									testRepeat.add(new Var("test", Utils.replaceBadChars(test.getID())));
 									GraphEntity[] relatedComponents = Utils.getRelatedElements(test, "UMLRealizes", "UMLRealizestarget");
@@ -181,16 +236,16 @@ public class TestGenerator {
 											//		testRepeat);
 										}
 									} else {
-										 if (relatedComponents!=null && 
-													relatedComponents.length>0){
-												bcg.fatalError();
-												Log.getInstance().logERROR(
-														"The test element must be associated to one INGENIAS Component","", test.getID());
-												 
-										 }
+										if (relatedComponents!=null && 
+												relatedComponents.length>0){
+											bcg.fatalError();
+											Log.getInstance().logERROR(
+													"The test element must be associated to one INGENIAS Component","", test.getID());
+
+										}
 									}
 								}
-								
+
 							} else {
 								bcg.fatalError();
 								Log.getInstance()
@@ -219,6 +274,106 @@ public class TestGenerator {
 
 
 	}
+
+
+	/**
+	 * 
+	 * 
+	 * @param p
+	 * @throws NotInitialised
+	 */
+	public  void generateSimulationDeployment(Sequences p, BasicCodeGenerator bcg,Browser browser)
+	throws NotInitialised {
+		GraphEntity[] deployPacks = Utils
+		.generateEntitiesOfType("SimulationPackage",browser);
+		String port = "60000";
+		if (deployPacks.length > 0) {
+			for (int k = 0; k < deployPacks.length; k++) {
+				try {
+					Repeat testingDepl = new Repeat("simulationnode");
+					p.addRepeat(testingDepl);
+
+					testingDepl.add(new Var("simulationconfig",Utils.replaceBadChars(deployPacks[k].getID())));
+
+					GraphAttribute deplPackageAttr = deployPacks[k]
+					                                             .getAttributeByName("SimulationDeployment");
+					GraphAttribute testAttr = deployPacks[k].getAttributeByName("Test");
+
+
+					if (deplPackageAttr != null) {
+						GraphEntity deplPackage = deplPackageAttr.getEntityValue();
+						Repeat depl = new Repeat("deploynode");
+						testingDepl.add(depl);
+						DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for build.xml script generation
+						if (deplPackage != null) {
+
+							if (testAttr!=null && 
+									testAttr.getSimpleValue()!=null){
+								GraphEntity test = testAttr.getEntityValue();
+
+
+								Repeat testRepeat=new Repeat("testunit");									
+								testingDepl.add(testRepeat);
+								depl = new Repeat("deploynode");
+								testRepeat.add(depl);
+								DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for JUnit class initialization per test
+								testingDepl.add(new Var("test", Utils.replaceBadChars(test.getID())));
+
+								testRepeat.add(new Var("test", Utils.replaceBadChars(test.getID())));
+								GraphEntity[] relatedComponents = Utils.getRelatedElements(test, "UMLRealizes", "UMLRealizestarget");
+								if (relatedComponents!=null && 
+										relatedComponents.length>0){
+									if (relatedComponents.length>1){
+										bcg.fatalError();
+										Log.getInstance().logERROR(
+												"The test element can be associated only to one INGENIAS Component","", test.getID());
+									} else {	
+										//String className=permfolder+"/ingenias/tests/"+test.getID()+".java";
+										//testingDepl.add(new Var("classname",className));
+										//analyzeComponent(relatedComponents[0], testRepeat);
+										//DeploymentGenerator.generateDeploymentPack(deplPackage,
+										//		testRepeat);
+									}
+								} else {
+									if (relatedComponents!=null && 
+											relatedComponents.length>0){
+										bcg.fatalError();
+										Log.getInstance().logERROR(
+												"The test element must be associated to one INGENIAS Component","", test.getID());
+
+									}
+								}
+
+
+							} else {
+								bcg.fatalError();
+								Log.getInstance()
+								.logERROR(
+										"The simulation deployment has not defined a test","", deployPacks[k].getID());
+							}
+						} else {
+							bcg.fatalError();
+							Log.getInstance()
+							.logERROR(
+									"The simulation deployment has not defined a deployment package",
+									"", deployPacks[k].getID());
+						};
+
+					}					
+
+				} catch (NullEntity e) {					
+					e.printStackTrace();
+				} catch (Exception e) {					
+					e.printStackTrace();
+				}
+
+
+			}
+		}
+
+
+	}
+
 
 	private  void analyzeComponent(GraphEntity component, Repeat testingDepl,BasicCodeGenerator bcg) throws Exception{
 		GraphAttribute files;

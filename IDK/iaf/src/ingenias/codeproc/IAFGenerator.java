@@ -96,6 +96,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			this.addTemplate("templates/customlocks.xml");
 			this.addTemplate("templates/agentprotocols.xml");
 			this.addTemplate("templates/testinglauncher.xml");
+			this.addTemplate("templates/simulationlauncher.xml");
 			this.addTemplate("templates/test.xml");
 			this.addTemplate("templates/events.xml");
 			this.addTemplate("templates/launcherProd.xml");
@@ -126,6 +127,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			this.addTemplate("templates/customlocks.xml");
 			this.addTemplate("templates/agentprotocols.xml");
 			this.addTemplate("templates/testinglauncher.xml");
+			this.addTemplate("templates/simulationlauncher.xml");
 			this.addTemplate("templates/test.xml");
 			this.addTemplate("templates/events.xml");
 			this.addTemplate("templates/launcherProd.xml");
@@ -289,6 +291,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			TestGenerator tg=new TestGenerator(getBrowser()); 
 			DeploymentGenerator.generateDeployment(p,this,getBrowser());
 			tg.generateTestingDeployment(p,this,getBrowser());
+			tg.generateSimulationDeployment(p,this,getBrowser());
 			tg.generateTests(p,this);
 			if (!getError()) {
 				this.ig.generateActorActions(p);

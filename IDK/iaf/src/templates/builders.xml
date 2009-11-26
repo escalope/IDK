@@ -107,7 +107,34 @@
             <formatter type="xml"/>
         </junit>
     </target>
-    
+    <!--  Targets to run simulations defined in the system -->
+   @@@repeat id="simulationnode"@@@
+
+   @@@repeat id="deploynode"@@@
+   
+    <target name="simulate@@@v@@@simulationconfig@@@/v@@@" depends="compile">
+    <java fork="true" failonerror="true" maxmemory="@@@v@@@memory@@@/v@@@"
+    classname="org.junit.runner.JUnitCore">
+    <arg line="ingenias.simulation.@@@v@@@simulationconfig@@@/v@@@For@@@v@@@test@@@/v@@@"/>    
+      <classpath>
+
+		<pathelement path="${temp}" />        
+        <fileset dir="${lib}">
+          <include name="**/*.jar" />
+        </fileset>
+
+      </classpath>
+
+    </java>
+  </target>
+
+   
+
+  	  @@@/repeat@@@
+
+  @@@/repeat@@@
+  
+    <!--  Targets to run tests defined in the system -->
   @@@repeat id="testingnode"@@@
 
    @@@repeat id="deploynode"@@@

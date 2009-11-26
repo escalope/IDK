@@ -53,6 +53,7 @@ public class LoadFileAction {
 				JFileChooser jfc = null;
 				if (ids.getCurrentFileFolder() == null) {
 					jfc = new JFileChooser();
+					jfc.setCurrentDirectory(new File(ids.prefs.getWorkspacePath()));
 				}
 				else {
 					jfc = new JFileChooser(ids.getCurrentFileFolder().getPath());

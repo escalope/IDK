@@ -1,0 +1,25 @@
+<project name="installer" default="installer.izpack" basedir=".">
+	 
+<property name="installer.izpack.dir" value="${user.home}/IzPack/"/>
+
+<property name="installer.launch4j.dir" value="c:\\Program Files\\Launch4j" />
+
+<target name="installer.izpack" description="build release a izpack installer">
+        <mkdir dir="${basedir}/installer/" />
+        <taskdef name="IzPack"
+                classpath="${installer.izpack.dir}/lib/standalone-compiler.jar"
+                classname="com.izforge.izpack.ant.IzPackTask"/>
+           
+        <IzPack input="${basedir}/IDK-install.xml" output="${basedir}/IDK-installer.jar"
+                installerType="standard" izPackDir="${installer.izpack.dir}" basedir="${basedir}"/>
+               
+        <!--taskdef name="launch4j"
+                classpath="${installer.launch4j.dir}/launch4j.jar:${installer.launch4j.dir}/lib /xstream.jar"
+                classname="net.sf.launch4j.ant.Launch4jTask"/>
+               
+        <launch4j configFile="${basedir}/build/installer/spark.xml" tmpdir="c:\tmp" /-->
+    </target>
+
+</project>
+
+

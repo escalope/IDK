@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+<langpack>
+	<str id="core.package" txt="Núcleo"/>
+	<str id="core.package.description" txt="Algunos archivos básicos para realizar la instalación. "/>
+	<str id="idk.package" txt="IDK"/>
+	<str id="idk.package.description" txt="El código fuente del IDK. Este paquete es necesario para ejecutar el IDK. "/>	
+	<str id="docs.package" txt="Documentación"/>
+	<str id="docs.package.description" txt="Documentación básica para usar el INGENIAS Development Kit (IDK). Incluye el manual del IDK 2.8, y la guía para usar el generador de código del INGENIAS Agent Framework (IAF)."/>	
+</langpack>

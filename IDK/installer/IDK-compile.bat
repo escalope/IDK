@@ -1,0 +1,1 @@
+..\..\bin\compile IDK-install.xml -b . -o IDK-install.jar -k standard

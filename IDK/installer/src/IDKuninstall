@@ -1,0 +1,40 @@
+#!/bin/sh
+prog_path=$(
+cd -P -- "$(dirname -- "$0")" &&
+pwd -P
+) 
+cd $prog_path
+cd ..
+cd ..
+echo "----------------------------------------------------------------"
+echo "|                  * Uninstallation Script *                   |"
+echo "|                                                              |"
+echo "| The phd student Ivan Garcia-Magarino did this uninstallation |"
+echo "| script in order to provide the missing functionality of      |"
+echo "| IzPack in Linux.                                             |"
+echo "| Enjoy it!                                                    |"
+echo "----------------------------------------------------------------"    
+echo "Force deletion of all the files within the installation folder? (y/n)"
+answer="false"
+while [ "$answer" = "false" ] 
+do
+  read myline
+  #echo "myline=$myline, answer=$answer"
+  if [ "$myline" = "y" ];  
+  then
+     java -jar $prog_path/../Uninstaller/uninstaller.jar -c -f
+     answer="true"
+  elif  [ "$myline" = "n" ];  
+  then
+     java -jar $prog_path/../Uninstaller/uninstaller.jar -c
+     answer="true"
+  else
+     echo "Please introduce 'y' or 'n'"
+  fi
+done
+# Wait until the program ins uninstalled
+for i in 0 10 20 30 40 50 60 70 80 90 100
+do
+  echo "$i %"
+  sleep 5
+done

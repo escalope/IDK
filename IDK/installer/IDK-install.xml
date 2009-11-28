@@ -1,0 +1,237 @@
+<!--
+    $Id: IzPack-install.xml 2804 2009-06-16 16:57:47Z jponge $
+
+    IzPack installer XML file
+
+    By Julien PONGE
+
+    In order to build an installer for IzPack, let's create a directory
+    named '_dist' in the IzPack root directory. Then copy the files from
+    'src/dist-files' into '_dist'. Copy your IzPack image, that is all
+    the files present at the IzPack root directory. To make it clear,
+    you'll get bin/, lib/, ... and text files like Versions.txt and so
+    on. Now you can invoke the IzPack compiler and it will generate the
+    installer.
+
+    Alternatively, you can use the IzPack Ant makefile and run 'ant dist'. It's
+    much simpler :-)
+-->
+
+<!-- The installation -->
+<installation version="1.0">
+
+    <!-- The info section -->
+    <info>
+        <appname>IDK</appname>
+        <appversion>3.0.0</appversion>
+        <authors>
+            <author name="Jorge Gomez Sanz" email="jjgomez@sip.ucm.es"/>
+            <author name="Juan Pavon" email="jpavon@fdi.ucm.es"/>
+            <author name="Ruben Fuentes" email="ruben@fdi.ucm.es"/>
+            <author name="Ivan Garcia-Magarino" email="ivan_gmg@fdi.ucm.es"/>
+	    <author name="Carlos Rodriguez Fernandez" email="carlosrf82@gmail.com"/>
+        </authors>
+        <url>http://grasia.fdi.ucm.es/main/</url>
+        <javaversion>1.6.0</javaversion>
+        <requiresjdk> yes </requiresjdk>
+        <!--run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/-->
+        <summarylogfilepath>$INSTALL_PATH/installinfo/Summary.htm</summarylogfilepath>
+	<uninstaller>uninstall</uninstaller> 
+    </info>
+
+    <!-- Flexible and in the screen proportions -->
+    <guiprefs height="700" resizable="yes" width="870">
+        <!-- GUI addaption for more informations see "Modifying the GUI" in the documentation -->
+        <modifier key="layoutAnchor" value="CENTER"/>
+        <modifier key="headingPanelCounter" value="progressbar"/>
+        <modifier key="headingPanelCounterPos" value="inNavigationPanel"/>
+        <modifier key="allYGap" value="4"/>
+        <modifier key="paragraphYGap" value="10"/>
+        <modifier key="filler1YGap" value="5"/>
+        <modifier key="filler3XGap" value="10"/>
+    </guiprefs>
+
+    <variables>
+        <variable name="DesktopShortcutCheckboxEnabled" value="true"/>
+        <variable name="ApplicationShortcutPath" value="ApplicationShortcuts"/>
+    </variables>
+
+    <!-- We include every langpack -->
+    <locale>
+        <langpack iso3="eng"/>
+        <langpack iso3="spa"/>       
+        <langpack iso3="fra"/>
+        <langpack iso3="deu"/>
+        <langpack iso3="ita"/>
+        <langpack iso3="jpn"/>
+         <langpack iso3="dan"/>
+        <langpack iso3="ell"/>
+        <langpack iso3="cat"/>
+        <langpack iso3="ned"/>
+        <langpack iso3="fin"/>
+        <langpack iso3="swe"/>
+        <langpack iso3="por"/>
+        <langpack iso3="pol"/>
+        <langpack iso3="rus"/>
+        <langpack iso3="ukr"/>
+        <langpack iso3="hun"/>
+        <langpack iso3="svk"/>
+        <langpack iso3="rom"/>
+        <langpack iso3="mys"/>
+        <langpack iso3="nor"/>
+        <langpack iso3="chn"/>
+        <langpack iso3="scg"/>
+        <langpack iso3="cze"/>
+        <langpack iso3="kor"/>
+        <langpack iso3="glg"/>
+    </locale>
+
+    <!-- The resources needed by the various panels -->
+    <resources>
+        <res src="resources/readme/install-readme.html" id="HTMLInfoPanel.info"/>
+        <res src="resources/readme/install-readme-spa.html" id="HTMLInfoPanel.info_spa"/>
+        <res src="License.txt" id="HTMLLicencePanel.licence"/>
+        <res src="resources/images/splash-3.10.png" id="installer.langsel.img"/>
+        <res src="resources/shortcuts/shortcutSpec.xml" id="shortcutSpec.xml"/>
+        <res src="resources/shortcuts/Unix_shortcutSpec.xml" id="Unix_shortcutSpec.xml"/>
+        <res src="resources/images/info-border.png" id="Installer.image.0"/>
+        <res src="resources/images/info-border.png" id="Installer.image.1"/>
+        <res src="resources/images/info-border.png" id="Installer.image.2"/>
+        <res src="resources/images/pack-border.png" id="Installer.image.3"/>
+        <res src="resources/images/pack-border.png" id="Installer.image.4"/>
+        <res src="resources/images/installing-border.png" id="Installer.image.5"/>
+        <res src="resources/images/installing-border.png" id="Installer.image.6"/>
+        <res src="resources/images/installing-border.png" id="Installer.image.7"/>
+        <res src="resources/images/finished-border.png" id="Installer.image.8"/>
+        <res src="RegistrySpec.xml" id="RegistrySpec.xml"/>
+        <!-- Added the following for languages of packages-->
+        <res src="resources/lang/packsLang.xml_spa" id="packsLang.xml_spa"/>
+    </resources>
+
+    <!-- The panels in a classic order -->
+    <panels>
+        <!--panel classname="CheckedHelloPanel" id="hellopanel"/-->
+        <panel classname="HelloPanel" id="hellopanel"/>
+        <!--panel classname="HTMLInfoPanel" id="infopanel" encoding="ISO-8859-1"/-->
+        <panel classname="HTMLInfoPanel" id="infopanel" encoding="UTF-8"/>
+        <panel classname="HTMLLicencePanel" id="licensepanel"/>
+        <panel classname="TargetPanel" id="targetpanel"/>
+        <panel classname="PacksPanel" id="packspanel"/>
+        <panel classname="SummaryPanel" id="summarypanel"/>
+        <panel classname="InstallPanel" id="installpanel"/>
+        <panel classname="ShortcutPanel" id="shortcutpanel"/>
+        <panel classname="SimpleFinishPanel" id="finishpanel"/>
+    </panels>
+
+    <!-- The listeners section for CustomActions -->
+    <listeners>
+        <listener installer="SummaryLoggerInstallerListener"/>
+        <!-- Removed the following for avoiding RUBISH in WindowsRegister -->
+        <!--listener installer="RegistryInstallerListener"
+                  uninstaller="RegistryUninstallerListener">
+            <os family="windows"/>
+        </listener-->
+        
+        <!-- Added for Trying Linux Uninstaller, the following: -->
+        <!--listener installer="AntActionInstallerListener"
+        	uninstaller="AntActionUninstallerListener" /-->
+    </listeners>
+
+    <!-- The packs section -->
+    <packs>
+    	<!-- The core files -->
+        <!--pack name="Core" id="core.package" required="yes">
+            <description>
+            Some basic files for performing the installation.
+            </description-->
+            <!--fileset dir="" targetdir="$INSTALL_PATH">
+                <include name="*.txt"/>
+                <include name="compile"/>
+                <include name="start.sh"/>
+                <include name="bin/**/*"/>
+                <include name="lib/**/*"/>
+                <include name="legal/**/*"/>
+            </fileset-->
+            <!--executable targetfile="$INSTALL_PATH/bin/compile" stage="never"/>
+            <executable targetfile="$INSTALL_PATH/bin/start.sh" stage="never"/-->
+            <!--executable targetfile="$INSTALL_PATH/compile" stage="never"/-->
+            <!--executable targetfile="$INSTALL_PATH/start.sh" stage="never"/-->
+            <!--executable targetfile="$INSTALL_PATH/src/IDK" stage="never"/--> 
+            <!--executable targetfile="$INSTALL_PATH/src/IDKuninstall" stage="never"/--> 
+        <!--/pack-->
+    	<!-- Packages for the IDK -->
+    	<pack name="IDK" id="idk.package" required="yes">
+            <description>The sources of the INGENIAS Development Kit (IDK). This package is necessary for running the IDK. </description>
+            <file src="src" targetdir="$INSTALL_PATH"/>
+        </pack>
+        <pack name="Docs" id="docs.package" required="no">
+            <description>Basic documentation for using the INGENIAS Development Kit (IDK). It includes the manual of the IDK 2.8, and the guide for the INGENIAS Agent Framework (IAF) code generator.</description>
+            <file src="doc" targetdir="$INSTALL_PATH"/>
+            <!-- Reccursive adding -->
+        </pack>
+        <!--pack name="Ant" required="no">
+            <description>The Apache Ant 1.7.1 software. You may need this software for compiling and running your multi-agent systems from a console.
+            </description>
+            <file src="apache-ant-1.7.1" targetdir="$INSTALL_PATH"/>
+        </pack-->
+        
+
+        <!-- The documentation -->
+        <!--pack name="HTML Documentation" required="no">
+            <description>The IzPack documentation (HTML version).</description>
+            <fileset dir="" targetdir="$INSTALL_PATH">
+                <include name="doc/izpack/html/**/*"/>
+            </fileset>
+        </pack-->
+        <!--pack name="PDF Documentation" required="no">
+            <description>The IzPack documentation (PDF version).</description>
+            <fileset dir="" targetdir="$INSTALL_PATH">
+                <include name="doc/izpack/pdf/**/*"/>
+            </fileset>
+        </pack-->
+        <!--pack name="Javadocs Documentation" required="no">
+            <description>The IzPack Java documentation (Javadocs for IzPack developers).</description>
+            <fileset dir="" targetdir="$INSTALL_PATH">
+                <include name="doc/izpack/javadoc/**/*"/>
+            </fileset>
+        </pack-->
+
+        <!-- Utilities pack -->
+        <!--pack name="Utilities" required="no">
+            <description>IzPack utilities (izpack2exe, izpack2app, izpack2jnlp)</description>
+            <fileset dir="" targetdir="$INSTALL_PATH">
+                <include name="utils/**/*"/>
+            </fileset>
+            <executable 
+                targetfile="$INSTALL_PATH/utils/wrappers/izpack2app/Mac-App-Template/Contents/MacOS/JavaApplicationStub"
+                stage="never"/>
+        </pack-->
+
+        <!-- A trivial sample to get started -->
+        <!--pack name="Sample" required="no">
+            <description>A sample installation.</description>
+            <fileset dir="" targetdir="$INSTALL_PATH">
+                <include name="sample/**/*"/>
+            </fileset>
+        </pack-->
+        
+        <!-- The source code of this version -->
+        <!--pack name="Sources" required="no">
+            <description>The full IzPack source code.</description>
+            <fileset dir="" targetdir="$INSTALL_PATH">
+                <include name="src/**/*"/>
+                <exclude name="src/*.manifest"/>
+            </fileset>
+        </pack-->
+
+    </packs>
+
+    <!-- The native libraries to add -->
+    <native type="izpack" name="ShellLink.dll"/>
+    <native type="izpack" name="ShellLink_x64.dll"/>
+    <native type="3rdparty" name="COIOSHelper.dll" stage="both">
+        <os family="windows"/>
+    </native>
+
+
+</installation>

@@ -114,7 +114,7 @@
 	</target>
 
     
-    <target name="--dist-ingenias-installer-all" depends="init,--pre-dist,--dist-ingenias-all">
+    <target name="--dist-ingenias-installer" depends="init,--pre-dist,--dist-ingenias-all">
 
          <!-- Preparacion de directorios -->
 

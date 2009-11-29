@@ -133,20 +133,12 @@
        src="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}.zip" dest="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}/src">
        </unzip>
        
-       <move todir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}/src">
-	       <fileset dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}/src/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}">
-		       <include name="**/*"/>
-	       </fileset>
-       </move>
-       
-       <delete dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}/src/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}"/>
-       
        
        <!-- recompilar el modulo iaf dentro del editor-->
        <ant antfile="build.xml" dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}"/>
 
        <!-- Preparacion del zip -->
-       <copy to="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}.jar" 
+       <copy toFile="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}.jar" 
 	      file="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}/IDK-installer.jar">
        </copy>
 

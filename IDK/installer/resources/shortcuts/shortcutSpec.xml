@@ -4,7 +4,7 @@
 
     <skipIfNotSupported/>
 
-    <programGroup defaultName="IDK 2.8.2" location="applications"/>
+    <programGroup defaultName="IDK" location="applications"/>
 
     <!--
       <shortcut
@@ -27,16 +27,16 @@
     -->
 
     <shortcut
-            name="IDK 2.8"
+            name="IDK"
             programGroup="yes"
             desktop="yes"
             applications="no"
             startMenu="no"
             startup="no"
-            workingDirectory="$INSTALL_PATH\src"
-            target="$INSTALL_PATH\src\IDK.bat"
+            workingDirectory="$INSTALL_PATH"
+            target="$INSTALL_PATH\installFiles\scripts\IDK.bat"
             commandLine=""
-            iconFile="$INSTALL_PATH\src\icon.ico"
+            iconFile="$INSTALL_PATH\installFiles\images\icon.ico"
             description="This starts the IDK.">
             <createForPack name="IDK"/>
     </shortcut>
@@ -79,9 +79,9 @@
             applications="no"
             startMenu="no"
             startup="no"
-            target="$INSTALL_PATH\doc\IDKmanual-2.8.pdf"
+            target="$INSTALL_PATH\doc\IDKmanual.pdf"
             commandLine=""
-            iconFile="$INSTALL_PATH\src\pdf.ico"
+            iconFile="$INSTALL_PATH\installFiles\images\pdf.ico"
             description="This opens Adobe (Acrobat) Reader (if available) to look into or print the IDK (PDF) user documentation">
 
         <createForPack name="Docs"/>
@@ -95,7 +95,7 @@
             startup="no"
             target="$INSTALL_PATH\doc\IAFDevelopmentGuide.pdf"
             commandLine=""
-            iconFile="$INSTALL_PATH\src\pdf.ico"
+            iconFile="$INSTALL_PATH\installFiles\images\pdf.ico"
             description="This opens Adobe (Acrobat) Reader (if available) to look into or print the IDK (PDF) user documentation">
 
         <createForPack name="Docs"/>
@@ -113,7 +113,8 @@
             iconIndex="31"
             description="This uninstalls IzPack @build.number@">
 
-        <createForPack name="Core"/>
+        <createForPack name="IDK"/>
+	<createForPack name="Docs"/>
     </shortcut>
 
 </shortcuts>

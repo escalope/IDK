@@ -1,0 +1,21 @@
+<processing>
+  <job name="compile sources">
+  <executefile
+                name="$JDKPath/bin/java"                                
+              >
+	      
+		 <arg>-jar</arg>
+		 <arg>$INSTALL_PATH/installFiles/lib/ant-launcher.jar </arg>
+	 	 <arg>-f</arg>
+		 <arg>$INSTALL_PATH/build.xml</arg>
+	        <arg>compile</arg>
+	        <arg>modules</arg>
+	        <onFail previous="true" next="true" />
+  		<onSuccess previous="true" next="true"/>
+  		<onSuccess previous="false" next="true" />
+
+	      </executefile>
+    
+  </job>
+ 
+</processing>

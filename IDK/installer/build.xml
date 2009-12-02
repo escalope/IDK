@@ -1,6 +1,6 @@
 <project name="installer" default="installer.izpack" basedir=".">
 	 
-<property name="installer.izpack.dir" value="${user.home}/IzPack/"/>
+<property name="installer.izpack.dir" value="${user.home}/izpack-src-trunk/_dist"/>
 
 <property name="installer.launch4j.dir" value="c:\\Program Files\\Launch4j" />
 
@@ -8,7 +8,13 @@
         <mkdir dir="${basedir}/installer/" />
         <taskdef name="IzPack"
                 classpath="${installer.izpack.dir}/lib/standalone-compiler.jar"
-                classname="com.izforge.izpack.ant.IzPackTask"/>
+                classname="com.izforge.izpack.ant.IzPackTask">
+		 <classpath>
+      <pathelement location="${installer.izpack.dir}/lib/standalone-compiler.jar"/>
+      <pathelement location="${installer.izpack.dir}/lib/compiler.jar"/>
+    </classpath>
+
+	</taskdef>
            
         <IzPack input="${basedir}/IDK-install.xml" output="${basedir}/IDK-installer.jar"
                 installerType="standard" izPackDir="${installer.izpack.dir}" basedir="${basedir}"/>

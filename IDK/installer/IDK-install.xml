@@ -33,14 +33,14 @@
         </authors>
         <url>http://grasia.fdi.ucm.es/main/</url>
         <javaversion>1.6.0</javaversion>
-        <requiresjdk> yes </requiresjdk>
+        <requiresjdk>yes</requiresjdk>
         <!--run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/-->
         <summarylogfilepath>$INSTALL_PATH/installinfo/Summary.htm</summarylogfilepath>
 	<uninstaller>uninstall</uninstaller> 
     </info>
 
     <!-- Flexible and in the screen proportions -->
-    <guiprefs height="700" resizable="yes" width="870">
+    <guiprefs height="400" resizable="yes" width="600">
         <!-- GUI addaption for more informations see "Modifying the GUI" in the documentation -->
         <modifier key="layoutAnchor" value="CENTER"/>
         <modifier key="headingPanelCounter" value="progressbar"/>
@@ -54,14 +54,16 @@
     <variables>
         <variable name="DesktopShortcutCheckboxEnabled" value="true"/>
         <variable name="ApplicationShortcutPath" value="ApplicationShortcuts"/>
+  	<variable name="JDKPathPanel.minVersion" value="1.6.0" />
+    	<variable name="JDKPathPanel.skipIfValid" value="yes" />
     </variables>
 
     <!-- We include every langpack -->
     <locale>
         <langpack iso3="eng"/>
         <langpack iso3="spa"/>       
-        <langpack iso3="fra"/>
-        <langpack iso3="deu"/>
+        <!--langpack iso3="fra"/-->
+        <!--langpack iso3="deu"/>
         <langpack iso3="ita"/>
         <langpack iso3="jpn"/>
          <langpack iso3="dan"/>
@@ -83,7 +85,7 @@
         <langpack iso3="scg"/>
         <langpack iso3="cze"/>
         <langpack iso3="kor"/>
-        <langpack iso3="glg"/>
+        <langpack iso3="glg"/-->
     </locale>
 
     <!-- The resources needed by the various panels -->
@@ -104,6 +106,7 @@
         <res src="resources/images/installing-border.png" id="Installer.image.7"/>
         <res src="resources/images/finished-border.png" id="Installer.image.8"/>
         <res src="RegistrySpec.xml" id="RegistrySpec.xml"/>
+	<res id="ProcessPanel.Spec.xml" src="ProcessPanel.Spec.xml"/> 
         <!-- Added the following for languages of packages-->
         <res src="resources/lang/packsLang.xml_spa" id="packsLang.xml_spa"/>
     </resources>
@@ -111,14 +114,16 @@
     <!-- The panels in a classic order -->
     <panels>
         <!--panel classname="CheckedHelloPanel" id="hellopanel"/-->
-        <panel classname="HelloPanel" id="hellopanel"/>
+	<panel classname="JDKPathPanel" id="jdkpanel"/>
+        <panel classname="HelloPanel" id="hellopanel"/>	
         <!--panel classname="HTMLInfoPanel" id="infopanel" encoding="ISO-8859-1"/-->
         <panel classname="HTMLInfoPanel" id="infopanel" encoding="UTF-8"/>
-        <panel classname="HTMLLicencePanel" id="licensepanel"/>
+        <panel classname="HTMLLicencePanel" id="licensepanel"/>	 
         <panel classname="TargetPanel" id="targetpanel"/>
-        <panel classname="PacksPanel" id="packspanel"/>
+        <panel classname="PacksPanel" id="packspanel"/>	
         <panel classname="SummaryPanel" id="summarypanel"/>
         <panel classname="InstallPanel" id="installpanel"/>
+	<panel classname="ProcessPanel" id="processpanel"/>
         <panel classname="ShortcutPanel" id="shortcutpanel"/>
         <panel classname="SimpleFinishPanel" id="finishpanel"/>
     </panels>
@@ -133,8 +138,8 @@
         </listener-->
         
         <!-- Added for Trying Linux Uninstaller, the following: -->
-        <!--listener installer="AntActionInstallerListener"
-        	uninstaller="AntActionUninstallerListener" /-->
+        <listener installer="AntActionInstallerListener"
+        	uninstaller="AntActionUninstallerListener" />
     </listeners>
 
     <!-- The packs section -->
@@ -162,7 +167,27 @@
     	<!-- Packages for the IDK -->
     	<pack name="IDK" id="idk.package" required="yes">
             <description>The sources of the INGENIAS Development Kit (IDK). This package is necessary for running the IDK. </description>
-            <file src="src" targetdir="$INSTALL_PATH"/>
+	    <fileset dir="src" targetdir="$INSTALL_PATH">
+                <include name="**/*"/>
+                <exclude name="*.manifest"/>
+            </fileset>
+	      <!--executable
+                targetfile="$JDKPath/bin/java"
+                stage="postinstall"
+                keep="true"
+		type="bin"
+		failure="ask"
+              >
+	      <args>		      
+		 <arg value="-jar"/>
+		<arg value="$INSTALL_PATH/installFiles/lib/ant-launcher.jar"/>
+	 	<arg value="-f"/>
+		<arg value="$INSTALL_PATH/build.xml"/>
+	       <arg value="compile"/>
+	       <arg value="modules"/>
+	      </args>
+	      </executable-->
+            <!--file src="src/**" targetdir="$INSTALL_PATH"/-->	   
         </pack>
         <pack name="Docs" id="docs.package" required="no">
             <description>Basic documentation for using the INGENIAS Development Kit (IDK). It includes the manual of the IDK 2.8, and the guide for the INGENIAS Agent Framework (IAF) code generator.</description>

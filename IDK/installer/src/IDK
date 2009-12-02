@@ -1,7 +1,0 @@
-#!/bin/sh
-prog_path=$(
-cd -P -- "$(dirname -- "$0")" &&
-pwd -P
-) 
-cd $prog_path
-java -jar ./lib/antl.jar

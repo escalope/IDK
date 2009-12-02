@@ -1,6 +1,6 @@
 <project name="installer" default="installer.izpack" basedir=".">
 	 
-<property name="installer.izpack.dir" value="${user.home}/izpack-src-trunk/_dist"/>
+<property name="installer.izpack.dir" value="${user.home}/IzPack"/>
 
 <property name="installer.launch4j.dir" value="c:\\Program Files\\Launch4j" />
 

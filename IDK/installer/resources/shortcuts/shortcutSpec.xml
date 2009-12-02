@@ -34,8 +34,8 @@
             startMenu="no"
             startup="no"
             workingDirectory="$INSTALL_PATH"
-            target="$INSTALL_PATH\installFiles\scripts\IDK.bat"
-            commandLine=""
+	    target="$INSTALL_PATH/installFiles/lib/ant-launcher.jar"
+            commandLine="-f $INSTALL_PATH/build.xml"
             iconFile="$INSTALL_PATH\installFiles\images\icon.ico"
             description="This starts the IDK.">
             <createForPack name="IDK"/>

@@ -20,6 +20,7 @@
   <target name="compile" >
 
     
+    <mkdir dir="jade" />
     <mkdir dir="${temp}" />
     <mkdir dir="${main}" />
     <mkdir dir="${permsrc}" />

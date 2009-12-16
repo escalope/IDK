@@ -34,8 +34,8 @@
             startMenu="no"
             startup="no"
             workingDirectory="$INSTALL_PATH"
-	    target="$INSTALL_PATH/installFiles/lib/ant-launcher.jar"
-            commandLine="-f $INSTALL_PATH/build.xml"
+	    target="$JDKPath\bin\java.exe"
+            commandLine="-jar $INSTALL_PATH\installFiles\lib\ant-launcher.jar -f $INSTALL_PATH\build.xml"
             iconFile="$INSTALL_PATH\installFiles\images\icon.ico"
             description="This starts the IDK.">
             <createForPack name="IDK"/>
@@ -107,8 +107,8 @@
             applications="no"
             startMenu="no"
             startup="no"
-            target="$INSTALL_PATH\Uninstaller\uninstaller.jar"
-            commandLine=""
+	    target="$JDKPath\bin\java.exe"
+            commandLine="-f $INSTALL_PATH\Uninstaller\uninstaller.jar"            
             iconFile="%SystemRoot%\system32\SHELL32.dll"
             iconIndex="31"
             description="This uninstalls IzPack @build.number@">

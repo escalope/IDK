@@ -48,7 +48,7 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 
 	public IAFProjectCreatorSwingTask(String projectName, SpecificationTemplateKind stk, IDEUpdater updater, IDEState ids, final GUIResources resources){
 		this.projectName=projectName;
-		this.directory=ids.prefs.getWorkspacePath()+"/+"+projectName;		
+		this.directory=ids.prefs.getWorkspacePath()+"/"+projectName;		
 		this.updater=updater;
 		this.ids=ids;
 		this.stk=stk;

@@ -147,7 +147,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 
 				@Override
 				public void keyPressed(KeyEvent arg0) {
-					finalProjectPath.setText("To be created at: "+getIds().prefs.getWorkspacePath()+"/"+projectName.getText());
+					
 					if (arg0.getKeyCode()==KeyEvent.VK_ENTER){						
 						createProjectInLocation(projectName);	
 					}
@@ -162,6 +162,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 
 				@Override
 				public void keyTyped(KeyEvent arg0) {
+					finalProjectPath.setText("To be created at: "+getIds().prefs.getWorkspacePath()+"/"+projectName.getText()+arg0.getKeyChar());
 					// TODO Auto-generated method stub
 
 				}
@@ -258,7 +259,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			});
 			Box mainPanel = Box.createVerticalBox();
 			JPanel folderSelectionPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
-			JLabel directoryLabel=new JLabel("Project folder:");
+			JLabel directoryLabel=new JLabel("Project name:");
 			folderSelectionPanel.add(directoryLabel);
 			folderSelectionPanel.add(projectName);			
 			mainPanel.add(folderSelectionPanel);

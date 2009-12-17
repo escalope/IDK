@@ -267,7 +267,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			moreInfoOnProjectPanel.add(finalProjectPath);
 			mainPanel.add(moreInfoOnProjectPanel);
 			moreInfoOnProjectPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));			
-			moreInfoOnProjectPanel.add(new JLabel("To change the project path, use preferences ->set workspace"));
+			moreInfoOnProjectPanel.add(new JLabel("To change the project path, use preferences ->switch workspace"));
 			mainPanel.add(moreInfoOnProjectPanel);			
 			buttonPanel.add(create);
 			buttonPanel.add(cancel);

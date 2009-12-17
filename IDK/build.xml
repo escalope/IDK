@@ -123,7 +123,7 @@
 	
 	<target name="compile">
 		<ant antfile="build.xml" target="compile"  dir="editor"/>
-		<ant antfile="build.xml" target="modules" dir="editor"/>
+
 		<copy file="editor/lib/ingeniaseditor.jar" todir="iaf/lib"/>
 		<ant antfile="build.xml" target="compile" dir="iaf"/>
 		<copy file="iaf/modiaf.jar" todir="workspace/cinema/lib"/>

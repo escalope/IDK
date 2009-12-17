@@ -26,6 +26,10 @@ public class JLabelStereotype extends JLabel {
   public JLabelStereotype() {
       this.setFont(FontConfiguration.getConfiguration().getStandardFont());
   }
+  public JLabelStereotype(String text) {
+	  this.setText(text);
+      this.setFont(FontConfiguration.getConfiguration().getStandardFont());
+  }
 
   public void setText(String text){
 

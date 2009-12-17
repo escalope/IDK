@@ -4,6 +4,8 @@ package ingenias.editor.rendererxml;
 * author PaulFMendler http://forum.java.sun.com/profile.jspa?userID=27581
 */
 
+import ingenias.editor.FontConfiguration;
+
 import java.awt.*;
 import java.awt.font.*;
 import java.text.*;
@@ -15,6 +17,19 @@ public class JMultilineLabel extends JLabel {
     private int maxWidth = Integer.MAX_VALUE;
     private boolean justify;
     private final FontRenderContext frc = new FontRenderContext(null, false, false);
+    
+	public JMultilineLabel() {
+		//    DashedBorder db=new DashedBorder(Color.black);
+		//    this.setBorder(db);
+	//	this.setFont(FontConfiguration.getConfiguration().getStandardFont());
+	}
+
+	public JMultilineLabel(String text) {
+		//    DashedBorder db=new DashedBorder(Color.black);
+		//    this.setBorder(db);
+	//	this.setFont(FontConfiguration.getConfiguration().getStandardFont());
+		setText(text);
+	}
  
     private void morph() {
         revalidate();
@@ -68,7 +83,10 @@ public class JMultilineLabel extends JLabel {
     }
  
     protected void paintComponent(Graphics g) {
+    	String text=getText();
+    	setText("");
         super.paintComponent(g);
+        setText(text);
         paintOrGetSize((Graphics2D)g, getWidth());
     }
  

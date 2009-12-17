@@ -53,6 +53,11 @@ public class AppLinker extends BasicToolImp {
 	}
 
 	@Override
+	public String getVersion() {
+		return "@modapplinker.ver@";
+	}
+
+	@Override
 	public String getDescription() {
 		return "It updates Application entities with the methods of Java classes";
 	}

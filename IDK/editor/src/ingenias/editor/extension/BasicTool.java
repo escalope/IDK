@@ -48,6 +48,13 @@ public interface BasicTool {
 	 *@return    The name
 	 */
 	public String getName();
+	
+	/**
+	 *  The version of this tool. 
+	 *
+	 *@return    The name
+	 */
+	public String getVersion();
 
 
 	/**

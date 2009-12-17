@@ -1,6 +1,6 @@
 <project name="ingenias" default="compile" basedir=".">
 	
-		
+	
 	<property name="specfile" location=""/>
 	
 	<property name="mainP" location="project"/>		
@@ -9,7 +9,15 @@
 	<property name="javac.deprecation"        value="on"/>
 	<property name="javac.debug"              value="true"/>
 	<property name="project.version" value="3.0.0-devel"/>
-
+	<property name="iaf.revision" value="miversion"/>
+	
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml"> 
+		<classpath>
+			<fileset dir="lib">
+				<include name="**/*.jar"/>
+			</fileset>
+		</classpath>
+	</typedef>
 	
 	<target name="init">
 		
@@ -17,6 +25,101 @@
 		
 		
 	</target>
+	
+	<target name="getIAFInfo">	
+		<svn javahl="false" SVNKit="false">
+			<info target="iaf" verbose="true" propPrefix="iaf."/>		
+		</svn>		
+		<echo message="${iaf.rev}"/>
+	</target>
+	
+	<target name="getEditorInfo">	
+		<svn javahl="false" SVNKit="false"><!-- this forces the use of command line svn. SVNkit,svn,  and javahl are not returning the same values--> 
+			<info target="editor" verbose="true" propPrefix="editor."/>		
+		</svn>		
+		<echo message="${editor.rev}"/>
+	</target>
+	
+	<target name="getmodapplinkerInfo">	
+		<svn javahl="false" SVNKit="false">
+			<info target="modules/applinker" verbose="true" propPrefix="editor."/>		
+		</svn>		
+		<echo message="${modapplinker.rev}"/>
+	</target>
+	<target name="getmodexampleInfo">	
+		<svn javahl="false" SVNKit="false">
+			<info target="modules/example" verbose="true" propPrefix="modexample."/>		
+		</svn>		
+		<echo message="${modexample.rev}"/>
+	</target>
+	<target name="getmodcodeuploaderInfo">	
+		<svn javahl="false" SVNKit="false">
+			<info target="modules/codeuploader" verbose="true" propPrefix="modcodeuploader."/>		
+		</svn>		
+		<echo message="${modcodeuploader.rev}"/>
+	</target>
+	<target name="getmodhtmldocInfo">	
+		<svn javahl="false" SVNKit="false">
+			<info target="modules/htmldoc" verbose="true" propPrefix="modhtmldoc."/>		
+		</svn>		
+		<echo message="${modhtmldoc.rev}"/>
+	</target>
+	<target name="getmodrefdemoInfo">	
+		<svn javahl="false" SVNKit="false">
+			<info target="modules/refdemo" verbose="true" propPrefix="modrefdemo."/>		
+		</svn>		
+		<echo message="${modrefdemo.rev}"/>
+	</target>
+	
+	
+	<target name="getAllProperties" depends="getmodhtmldocInfo,getmodrefdemoInfo,getmodhtmldocInfo,getmodcodeuploaderInfo,getmodexampleInfo,getmodapplinkerInfo,getEditorInfo,getIAFInfo"/>
+	
+	<target name="setVersionInfoIngeniasIAF" depends="getAllProperties" >
+		
+		<replace
+			dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}" value="">
+			<include name="**/*.java"/>
+			<replacefilter token="@modapplinker.ver@"  value="${project.version}-rev-${modapplinker.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@modhtmldoc.ver@"  value="${project.version}-rev-${modhtmldoc.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@modrefdemo.ver@"  value="${project.version}-rev-${modrefdemo.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@modcodeuploader.ver@"  value="${project.version}-rev-${modcodeuploader.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@modexample.ver@"  value="${project.version}-rev-${modexample.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@editor.ver@"  value="${project.version}-rev-${editor.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@iaf.ver@"  value="${project.version}-rev-${iaf.rev}-${DSTAMP}${TSTAMP}"/>				 		 
+	</replace>
+	</target>
+	
+	<target name="setVersionInfoIngeniasEditor" depends="getAllProperties" >
+		<replace
+			dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}" value="">
+			<include name="**/*.java"/>
+			<replacefilter token="@modapplinker.ver@"  value="${project.version}-rev-${modapplinker.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@modhtmldoc.ver@"  value="${project.version}-rev-${modhtmldoc.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@modrefdemo.ver@"  value="${project.version}-rev-${modrefdemo.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@modcodeuploader.ver@"  value="${project.version}-rev-${modcodeuploader.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@modexample.ver@"  value="${project.version}-rev-${modexample.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@editor.ver@"  value="${project.version}-rev-${editor.rev}-${DSTAMP}${TSTAMP}"/>
+			<replacefilter token="@iaf.ver@"  value="${project.version}-rev-${iaf.rev}-${DSTAMP}${TSTAMP}"/>		 		 
+	</replace>
+	</target>
+		
+	 <target name="setVersionInfoIngeniasAll" depends="getAllProperties" >		 
+        
+        <replace
+            dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}" value="">
+		<include name="**/*.java"/>
+		<replacefilter token="@modapplinker.ver@"  value="${project.version}-rev-${modapplinker.rev}-${DSTAMP}${TSTAMP}"/>
+		 <replacefilter token="@modhtmldoc.ver@"  value="${project.version}-rev-${modhtmldoc.rev}-${DSTAMP}${TSTAMP}"/>
+		 <replacefilter token="@modrefdemo.ver@"  value="${project.version}-rev-${modrefdemo.rev}-${DSTAMP}${TSTAMP}"/>
+		 <replacefilter token="@modcodeuploader.ver@"  value="${project.version}-rev-${modcodeuploader.rev}-${DSTAMP}${TSTAMP}"/>
+		 <replacefilter token="@modexample.ver@"  value="${project.version}-rev-${modexample.rev}-${DSTAMP}${TSTAMP}"/>
+		 <replacefilter token="@editor.ver@"  value="${project.version}-rev-${editor.rev}-${DSTAMP}${TSTAMP}"/>
+		 <replacefilter token="@iaf.ver@"  value="${project.version}-rev-${iaf.rev}-${DSTAMP}${TSTAMP}"/>		 		 
+	</replace>
+	
+        
+    </target>
+
 	
 	<target name="compile">
 		<ant antfile="build.xml" target="compile"  dir="editor"/>
@@ -33,7 +136,7 @@
 		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/perceptionExample/lib"/>
 		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/testInteractions/lib"/>
 		<copy file="editor/lib/ingeniaseditor.jar" todir="workspace/testTasks/lib"/>		
-	<!--	<ant antfile="build.xml" target="compile" dir="workspace/cinema"/>
+		<!--	<ant antfile="build.xml" target="compile" dir="workspace/cinema"/>
 		<ant antfile="build.xml" target="compile" dir="workspace/requestExample"/>
 		<ant antfile="build.xml" target="compile" dir="workspace/perceptionExample"/>
 		<ant antfile="build.xml" target="compile" dir="workspace/testInteractions"/>		
@@ -112,184 +215,227 @@
 		
 		
 	</target>
+	
+	
+	<target name="--dist-ingenias-installer" depends="init,--pre-dist,--dist-ingenias-all">
+		
+		<!-- Preparacion de directorios -->
+		
+		<mkdir dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}"/>
+		
+		<!-- Preparacion de editor -->
+		
+		
+		<copy todir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}">
+			<fileset dir="installer">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		
+		<unzip
+		      src="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}.zip" dest="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}/src">
+		</unzip>
+		
+		
+		<!-- recompilar el modulo iaf dentro del editor-->
+		<ant antfile="build.xml" dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}"/>
+		
+		<!-- Preparacion del zip -->
+		<copy toFile="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}.jar" 
+		      file="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}/IDK-installer.jar">
+		</copy>
+		
+		<!-- Eliminacion de temporales -->
+		
+		<!--delete dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}"/-->
+		
+	</target>
+	
+	
+	<target name="--dist-ingenias-all" depends="init,--pre-dist">
+		
+		<!-- Preparacion de directorios -->
+		
+		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
+		
+		<!-- Preparacion de editor -->
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}">
+			<fileset dir="editor">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+				<exclude name="tests/**/*"/>
+				<exclude name="testlibs/**/*"/>
+			</fileset>
+		</copy>
+		
+		<!-- Preparacion de iaf -->       
+		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiaf"/>
+		
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiaf">
+			<fileset dir="iaf/src">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		
+		<!-- Preparacion de iaf project creator -->       
+		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator"/>
+		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/lib"/>
+		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/config"/>
+		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcexample"/>
+		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srccodeuploader"/>
+		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcrefdemo"/>
+		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcapplinker"/>
+		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srchtmldoc"/>
+		
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcexample">
+			<fileset dir="modules/example">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srchtmldoc">
+			<fileset dir="modules/htmldoc">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srccodeuploader">
+			<fileset dir="modules/codeuploader">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcrefdemo">
+			<fileset dir="modules/refdemo">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcapplinker">
+			<fileset dir="modules/applinker">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		
+		<copy file="iaf/modiaf.jar" todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/lib"/>
+		
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator">
+			<fileset dir="iaf/srcpcreator">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/lib">
+			<fileset dir="iaf/lib">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		
+		
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/config">
+			<fileset dir="iaf/config">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/">
+			<fileset dir="iaf/">
+				<include name="generate.xml"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/examples">
+			<fileset dir="iaf/examples">
+				<include name="*.idk"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		
+		<antcall target="setVersionInfoIngeniasAll"/>
 
-    
-    <target name="--dist-ingenias-installer" depends="init,--pre-dist,--dist-ingenias-all">
-
-         <!-- Preparacion de directorios -->
-
-       <mkdir dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}"/>
-
-       <!-- Preparacion de editor -->
-       
-       
-       <copy todir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}">
-	       <fileset dir="installer">
-		       <include name="**/*"/>
-	       </fileset>
-       </copy>
-       
-       <unzip
-       src="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}.zip" dest="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}/src">
-       </unzip>
-       
-       
-       <!-- recompilar el modulo iaf dentro del editor-->
-       <ant antfile="build.xml" dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}"/>
-
-       <!-- Preparacion del zip -->
-       <copy toFile="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}.jar" 
-	      file="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}/IDK-installer.jar">
-       </copy>
-
-       <!-- Eliminacion de temporales -->
-
-       <delete dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}"/>
-
-    </target>
-    
-    
-        <target name="--dist-ingenias-all" depends="init,--pre-dist">
-
-         <!-- Preparacion de directorios -->
-
-       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
-
-       <!-- Preparacion de editor -->
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}">
-	       <fileset dir="editor">
-		       <include name="**/*"/>
-		       <exclude name="**/.svn/**"/>
-		       <exclude name="tests/**/*"/>
-		       <exclude name="testlibs/**/*"/>
-	       </fileset>
-       </copy>
-
-       <!-- Preparacion de iaf -->       
-       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiaf"/>
-    
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiaf">
-	       <fileset dir="iaf/src">
-		       <include name="**/*"/>
-		       <exclude name="**/.svn/**"/>
-	       </fileset>
-       </copy>
-       
-       <!-- Preparacion de iaf project creator -->       
-       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator"/>
-       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/lib"/>
-       <mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/config"/>
-       
-       <copy file="iaf/modiaf.jar" todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/lib"/>
-       
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator">
-	       <fileset dir="iaf/srcpcreator">
-		       <include name="**/*"/>
-		       <exclude name="**/.svn/**"/>
-	       </fileset>
-       </copy>
-       
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/lib">
-	       <fileset dir="iaf/lib">
-		       <include name="**/*"/>
-		       <exclude name="**/.svn/**"/>
-	       </fileset>
-       </copy>
-       
-       
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/config">
-	       <fileset dir="iaf/config">
-		       <include name="**/*"/>
-		       <exclude name="**/.svn/**"/>
-	       </fileset>
-       </copy>
-       
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/">
-	       <fileset dir="iaf/">
-		       <include name="generate.xml"/>
-		       <exclude name="**/.svn/**"/>
-	       </fileset>
-       </copy>
-       
-       <copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcmodiafpcreator/examples">
-	       <fileset dir="iaf/examples">
-		       <include name="*.idk"/>
-		       <exclude name="**/.svn/**"/>
-	       </fileset>
-       </copy>
-       
-       <!-- recompilar el modulo iaf dentro del editor-->
-       <ant antfile="build.xml" target="modules" dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
-
-       <!-- Preparacion del zip -->
-       <zip
-       destfile="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}.zip">
-	       <zipfileset dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
-       </zip>
-
-       <!-- Eliminacion de temporales -->
-
-       <delete dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
-
-    </target>
-
-
-    <target name="--pre-dist" depends="compile">
-      <mkdir dir="dist"/>
-      <delete>
-        <fileset dir="dist" includes="**/*"/>
-     </delete>
- 
-    </target>
-    
-    <target name="--dist-editor" depends="--pre-dist">
-       <mkdir dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
-       <copy todir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}/">
-           <fileset dir="editor">
-              <include name="**/*"/>
-               <exclude name="**/.svn/**"/>
-           </fileset>
-       </copy>         
-       <zip 
-	    destfile="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}.zip">
-	       <zipfileset dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
-       </zip>
-       <delete dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
-    </target>
-
-    <target name="--dist-iaf" depends="--pre-dist">
-       <mkdir dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
-       <copy todir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}/">
-           <fileset dir="iaf">
-              <include name="**/*"/>
-               <exclude name="**/.svn/**"/>
-           </fileset>
-       </copy>
-       <zip 
-	    destfile="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}.zip">
-	       <zipfileset dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
-       </zip>
-
-       <delete dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
-    </target>
-    <target name="dist" depends="--pre-dist,--dist-ingenias-all,--dist-editor,--dist-iaf, --dist-ingenias-installer">
-    </target>
-   
-   <target name="--pre-test" depends="compile">
-     
-   </target>
-   
-   <target name="test-editor-all" depends="--pre-test">
-	   <ant antfile="build.xml" target="runMarathonTests"  dir="editor"/>	   
-   </target>
-
-   <target name="test-iaf-all" depends="--pre-test">
-	   <ant antfile="build.xml" target="generatetests"  dir="iaf"/>   
-     <ant antfile="build.xml" target="test"  dir="iaf/tests/testTasks"/>
-     <ant antfile="build.xml" target="test"  dir="iaf/tests/commsonetomany"/>
-     <ant antfile="build.xml" target="test"  dir="iaf/tests/trust"/>
-     <ant antfile="build.xml" target="test"  dir="iaf/tests/cinema"/>
-     <ant antfile="build.xml" target="test"  dir="iaf/tests/multipleComms"/>
-   </target>
+		<!-- recompilar el modulo iaf dentro del editor-->
+		<ant antfile="build.xml" target="compile" dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
+		
+		<ant antfile="build.xml" target="modules" dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
+		
+		<!-- Preparacion del zip -->
+		<zip
+		    destfile="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}.zip">
+			<zipfileset dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
+		</zip>
+		
+		<!-- Eliminacion de temporales -->
+		
+		<delete dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}"/>
+		
+	</target>
+	
+	
+	<target name="--pre-dist" depends="compile">
+		<mkdir dir="dist"/>
+		<delete>
+			<fileset dir="dist" includes="**/*"/>
+		</delete>
+		
+	</target>
+	
+	<target name="--dist-editor" depends="--pre-dist">
+		<mkdir dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
+		<copy todir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}/">
+			<fileset dir="editor">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>         
+		<antcall target="setVersionInfoIngeniasEditor"/>
+		<zip 
+		     destfile="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}.zip">
+			<zipfileset dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
+		</zip>
+		<delete dir="dist/ingenias-editor-${project.version}-${DSTAMP}${TSTAMP}"/>
+	</target>
+	
+	<target name="--dist-iaf" depends="--pre-dist">
+		<mkdir dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
+		<copy todir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}/">
+			<fileset dir="iaf">
+				<include name="**/*"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+		</copy>
+		<antcall target="setVersionInfoIngeniasIAF"/>
+		<zip 
+		     destfile="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}.zip">
+			<zipfileset dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
+		</zip>
+		
+		<delete dir="dist/ingenias-iaf-${project.version}-${DSTAMP}${TSTAMP}"/>
+	</target>
+	<target name="dist" depends="--pre-dist,--dist-ingenias-all,--dist-editor,--dist-iaf, --dist-ingenias-installer">
+		
+	</target>
+	
+	<target name="--pre-test" depends="compile">
+		
+	</target>
+	
+	<target name="test-editor-all" depends="--pre-test">
+		<ant antfile="build.xml" target="runMarathonTests"  dir="editor"/>	   
+	</target>
+	
+	<target name="test-iaf-all" depends="--pre-test">
+		<ant antfile="build.xml" target="generatetests"  dir="iaf"/>   
+		<ant antfile="build.xml" target="test"  dir="iaf/tests/testTasks"/>
+		<ant antfile="build.xml" target="test"  dir="iaf/tests/commsonetomany"/>
+		<ant antfile="build.xml" target="test"  dir="iaf/tests/trust"/>
+		<ant antfile="build.xml" target="test"  dir="iaf/tests/cinema"/>
+		<ant antfile="build.xml" target="test"  dir="iaf/tests/multipleComms"/>
+	</target>
 </project>
 

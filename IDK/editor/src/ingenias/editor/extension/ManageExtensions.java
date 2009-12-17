@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JWindow;
 
 public class ManageExtensions {
@@ -38,6 +39,8 @@ public class ManageExtensions {
 		
 		JMenuItem nentry = new JMenuItem(bt.getName());
 		nentry.setToolTipText(bt.getDescription());
+		JMenuItem version = new JMenuItem("version");
+		resources.getTools().add(version);
 		resources.getTools().add(nentry);
 		HistoryManager.updateProperties(bt.getProperties(),ids);
 		final BasicTool bt1 = bt;
@@ -48,6 +51,12 @@ public class ManageExtensions {
 				System.gc();
 			}
 		});
+		version.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				JOptionPane.showMessageDialog(jf, bt1.getVersion(),"Version",JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+
 	}
 	public void removeEntry(ingenias.editor.extension.BasicTool bt) {
 		int k = 0;
@@ -85,7 +94,10 @@ public class ManageExtensions {
 		"\"");
 		JMenu nentry = new JMenu(bcg.getName());
 		JMenuItem generate = new JMenuItem("generate");
+		JMenuItem version = new JMenuItem("version");
+		nentry.add(version);
 		nentry.add(generate);
+		
 		nentry.setToolTipText(bcg.getDescription());
 		resources.getCodeGenerator().add(nentry);
 		
@@ -103,6 +115,13 @@ public class ManageExtensions {
 				System.gc();
 			}
 		});
+		
+		version.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				JOptionPane.showMessageDialog(jf, bcg1.getVersion(),"Version",JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+
 
 	}
 

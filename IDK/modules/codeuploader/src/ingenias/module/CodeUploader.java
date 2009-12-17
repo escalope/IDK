@@ -54,6 +54,10 @@ public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 		super(browser);
 	}
 
+	@Override
+	public String getVersion() {
+		return "@modcodeuploader.ver@";
+	}
 
 
 	/**

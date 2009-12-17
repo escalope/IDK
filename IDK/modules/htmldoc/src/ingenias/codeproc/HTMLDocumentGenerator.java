@@ -73,6 +73,11 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		this.addTemplate("templates/diagram.xml");
 	}
 	
+	@Override
+	public String getVersion() {
+		return "@modhtmldoc.ver@";
+	}
+	
 	public boolean verify() {
 		return true;
 	}

@@ -45,6 +45,11 @@ public class ReflectionDemo extends BasicToolImp {
 	}
 	
 	@Override
+	public String getVersion() {
+		return "@modrefdemo.ver@";
+	}
+	
+	@Override
 	public String getName() {
 		return "ReflectionDemo";
 	}

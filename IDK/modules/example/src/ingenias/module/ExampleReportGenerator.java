@@ -49,6 +49,10 @@ public class ExampleReportGenerator extends ingenias.editor.extension.BasicToolI
 		super(browser);
 	}
 	
+	@Override
+	public String getVersion() {
+		return "@modexample.ver@";
+	}
 	
 	
 	/**

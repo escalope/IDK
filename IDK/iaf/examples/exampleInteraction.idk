@@ -5,8 +5,8 @@
 <projectproperty id="jadeout" module="Ingenias Agent Framework generator"  name="JADE generated output folder" value="gensrc"  tooltip="The folder that will hold generated JADE agents" />
 <projectproperty id="proysrc" module="Ingenias Agent Framework generator"  name="Main source folder for the project" value="src"  tooltip="The folder containing the sources of the project" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
-<projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="/home/jj/idk/idklipse/runtime-New_configuration/p15"  tooltip="The folder that will contain the project for this development" />
-<projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="/home/jj/idk/idklipse/runtime-New_configuration/p15/html"  tooltip="The document folder that will contain HTML version of this specification" />
+<projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="{projectLocation}"  tooltip="The folder that will contain the project for this development" />
+<projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="{projectLocation}/html"  tooltip="The document folder that will contain HTML version of this specification" />
  <openeddiagram>Initiator and Colaborator definition</openeddiagram> <openeddiagram>Tasks definition</openeddiagram> <openeddiagram>Interaction definition</openeddiagram> <openeddiagram>Task code</openeddiagram></projectproperties>
 <leafpackages>
    <path>

@@ -95,6 +95,11 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 		super(browser);
 	}
 
+	
+	@Override
+	public String getVersion() {
+		return "@iaf.ver@";
+	}
 
 
 	/**
@@ -135,14 +140,15 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			
 
 			dialog.setTitle("Project creation wizard");
-			final JTextField directory=new JTextField(50);
-			directory.setText(this.getIds().prefs.getWorkspacePath());
-			directory.addKeyListener(new KeyListener(){
+			final JTextField projectName=new JTextField(20);
+			final JLabel finalProjectPath=new JLabel(this.getIds().prefs.getWorkspacePath());
+						
+			projectName.addKeyListener(new KeyListener(){
 
 				@Override
 				public void keyPressed(KeyEvent arg0) {
 					if (arg0.getKeyCode()==KeyEvent.VK_ENTER){
-						createProjectInLocation(directory);	
+						createProjectInLocation(getIds().prefs.getWorkspacePath()+"/"+projectName.getText());	
 					}
 
 				}

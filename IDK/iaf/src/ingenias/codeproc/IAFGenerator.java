@@ -138,6 +138,11 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 		ig = new InteractionGeneration(this,getBrowser());
 	}
+	
+	@Override
+	public String getVersion() {
+		return "@iaf.ver@";
+	}
 
 	/**
 	 * There is only one default property of this module. It is called "jadeout" and represents the path

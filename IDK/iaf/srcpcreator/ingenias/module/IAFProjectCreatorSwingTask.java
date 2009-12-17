@@ -99,7 +99,7 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 			switch (stk){
 			case NoTemplate:
 		
-				ProjectGenerator.getDefaultProjectDefinitionWorkspace(new File(directory).getName()); // generates empty spec
+				ProjectGenerator.getDefaultProjectDefinitionWorkspace(projectName); // generates empty spec
 				newSpec=new File(directory+"/spec/specification.xml");
 				break;
 			case HelloWorld:

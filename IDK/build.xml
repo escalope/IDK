@@ -42,7 +42,7 @@
 	
 	<target name="getmodapplinkerInfo">	
 		<svn javahl="false" SVNKit="false">
-			<info target="modules/applinker" verbose="true" propPrefix="editor."/>		
+			<info target="modules/applinker" verbose="true" propPrefix="modapplinker."/>		
 		</svn>		
 		<echo message="${modapplinker.rev}"/>
 	</target>

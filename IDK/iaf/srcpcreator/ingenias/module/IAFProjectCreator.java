@@ -261,10 +261,14 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			JPanel folderSelectionPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
 			JLabel directoryLabel=new JLabel("Project name:");
 			folderSelectionPanel.add(directoryLabel);
-			folderSelectionPanel.add(projectName);			
+			folderSelectionPanel.add(projectName);				
 			mainPanel.add(folderSelectionPanel);
-			mainPanel.add(finalProjectPath);
-			mainPanel.add(new JLabel("To change the project path, use preferences ->set workspace"));
+			JPanel moreInfoOnProjectPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
+			moreInfoOnProjectPanel.add(finalProjectPath);
+			mainPanel.add(moreInfoOnProjectPanel);
+			moreInfoOnProjectPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));			
+			moreInfoOnProjectPanel.add(new JLabel("To change the project path, use preferences ->set workspace"));
+			mainPanel.add(moreInfoOnProjectPanel);			
 			buttonPanel.add(create);
 			buttonPanel.add(cancel);
 			mainPanel.add(exampleSelection);

@@ -141,14 +141,15 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 
 			dialog.setTitle("Project creation wizard");
 			final JTextField projectName=new JTextField(20);
-			final JLabel finalProjectPath=new JLabel(this.getIds().prefs.getWorkspacePath());
+			final JLabel finalProjectPath=new JLabel("To be created at: ?");
 						
 			projectName.addKeyListener(new KeyListener(){
 
 				@Override
 				public void keyPressed(KeyEvent arg0) {
-					if (arg0.getKeyCode()==KeyEvent.VK_ENTER){
-						createProjectInLocation(getIds().prefs.getWorkspacePath()+"/"+projectName.getText());	
+					finalProjectPath.setText("To be created at: "+getIds().prefs.getWorkspacePath()+"/"+projectName.getText());
+					if (arg0.getKeyCode()==KeyEvent.VK_ENTER){						
+						createProjectInLocation(projectName);	
 					}
 
 				}
@@ -166,7 +167,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 				}
 
 			});
-			JButton browse=new JButton("Browse");
+			/*JButton browse=new JButton("Browse");
 			browse.addActionListener(new ActionListener(){
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -178,7 +179,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 						directory.setText(chooser.getSelectedFile().toString());
 				}
 
-			});
+			});*/
 			JButton cancel=new JButton("Cancel");
 			cancel.addActionListener(new ActionListener(){
 				@Override
@@ -249,7 +250,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 
-					createProjectInLocation(directory);
+					createProjectInLocation(projectName);
 				}
 
 
@@ -259,9 +260,10 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 			JPanel folderSelectionPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
 			JLabel directoryLabel=new JLabel("Project folder:");
 			folderSelectionPanel.add(directoryLabel);
-			folderSelectionPanel.add(directory);
-			folderSelectionPanel.add(browse);
+			folderSelectionPanel.add(projectName);			
 			mainPanel.add(folderSelectionPanel);
+			mainPanel.add(finalProjectPath);
+			mainPanel.add(new JLabel("To change the project path, use preferences ->set workspace"));
 			buttonPanel.add(create);
 			buttonPanel.add(cancel);
 			mainPanel.add(exampleSelection);
@@ -294,17 +296,17 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 	}
 	
 
-	private void createProjectInLocation(final JTextField directory) {
-		if (directory.getText()!=null && !directory.getText().equals("")){
-			File newFolder=new File(directory.getText());
+	private void createProjectInLocation(final JTextField projectName) {		
+		if (projectName.getText()!=null && !projectName.getText().equals("")){			
+			File newFolder=new File(getIds().prefs.getWorkspacePath()+"/"+projectName.getText());
 			if (newFolder.exists()){
 				if (!newFolder.isDirectory()){
-					JOptionPane.showMessageDialog(dialog, "A directory has to be chosen and "+
-							directory.getText()+" is not a folder","No directory selected",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(dialog, "A directory has to be chosen and a project name "+
+							projectName.getText()+" conflicts with an existing file which is not a directory","No directory selected",JOptionPane.ERROR_MESSAGE);					
 					return;
 				} else {
 					if (JOptionPane.showConfirmDialog(dialog, 
-							"The folder already exists. Do you want to reuse it?",
+							"There is already a folder matching the name of the project at "+newFolder.getAbsolutePath()+". Do you want to reuse it?",
 							"Confirm overwrite",
 							JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE)!=JOptionPane.OK_OPTION){
 						return;
@@ -323,7 +325,7 @@ public class IAFProjectCreator extends ingenias.editor.extension.BasicToolImp {
 				stk=SpecificationTemplateKind.GUIAgent;
 			if (rad4.isSelected())
 				stk=SpecificationTemplateKind.Interaction;
-			new IAFProjectCreatorSwingTask(directory.getText(),stk,getIdeUpdater(),getIds(),getResources()).execute();		
+			new IAFProjectCreatorSwingTask(projectName.getText(),stk,getIdeUpdater(),getIds(),getResources()).execute();		
 
 
 			

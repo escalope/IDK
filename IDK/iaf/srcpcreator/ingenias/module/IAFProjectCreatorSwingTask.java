@@ -38,6 +38,7 @@ import org.apache.tools.ant.ProjectHelper;
 
 public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implements ProgressListener{
 	private File newSpec;
+	private String projectName="";
 	private IDEUpdater updater;
 	private IDEState ids;
 	private GUIResources resources;
@@ -45,8 +46,9 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 	private String directory;
 	private SpecificationTemplateKind stk;
 
-	public IAFProjectCreatorSwingTask(String directory, SpecificationTemplateKind stk, IDEUpdater updater, IDEState ids, final GUIResources resources){
-		this.directory=directory;		
+	public IAFProjectCreatorSwingTask(String projectName, SpecificationTemplateKind stk, IDEUpdater updater, IDEState ids, final GUIResources resources){
+		this.projectName=projectName;
+		this.directory=ids.prefs.getWorkspacePath()+"/+"+projectName;		
 		this.updater=updater;
 		this.ids=ids;
 		this.stk=stk;
@@ -110,7 +112,7 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 				newSpec=copyResourceFromTo("examples/exampleInteraction.idk",directory+"/spec/specification.xml");
 				break;			
 			}	
-			replace("{projectLocation}","{workspace}/"+new File(directory).getName(),newSpec);
+			replace("{projectLocation}","{workspace}/"+projectName,newSpec);
 			this.setProgress(getProgress()+2);			
 			//resources.getProgressBar().setString("Creating libraries ..."+((getProgress()))+"%");
 			copyResourceFromTo("generate.xml",directory+"/generate.xml");			

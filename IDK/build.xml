@@ -289,31 +289,31 @@
 		<mkdir dir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srchtmldoc"/>
 		
 		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcexample">
-			<fileset dir="modules/example">
+			<fileset dir="modules/example/src">
 				<include name="**/*"/>
 				<exclude name="**/.svn/**"/>
 			</fileset>
 		</copy>
 		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srchtmldoc">
-			<fileset dir="modules/htmldoc">
+			<fileset dir="modules/htmldoc/src">
 				<include name="**/*"/>
 				<exclude name="**/.svn/**"/>
 			</fileset>
 		</copy>
 		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srccodeuploader">
-			<fileset dir="modules/codeuploader">
+			<fileset dir="modules/codeuploader/src">
 				<include name="**/*"/>
 				<exclude name="**/.svn/**"/>
 			</fileset>
 		</copy>
 		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcrefdemo">
-			<fileset dir="modules/refdemo">
+			<fileset dir="modules/refdemo/src">
 				<include name="**/*"/>
 				<exclude name="**/.svn/**"/>
 			</fileset>
 		</copy>
 		<copy todir="dist/ingenias-all-${project.version}-${DSTAMP}${TSTAMP}/modules/srcapplinker">
-			<fileset dir="modules/applinker">
+			<fileset dir="modules/applinker/src">
 				<include name="**/*"/>
 				<exclude name="**/.svn/**"/>
 			</fileset>

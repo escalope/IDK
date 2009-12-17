@@ -247,7 +247,7 @@
 		
 		<!-- Eliminacion de temporales -->
 		
-		<!--delete dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}"/-->
+		<delete dir="dist/ingenias-installer-${project.version}-${DSTAMP}${TSTAMP}"/>
 		
 	</target>
 	

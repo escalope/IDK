@@ -72,6 +72,7 @@ public abstract class ModelJGraph extends JGraph implements Cloneable{
 
 	public ModelJGraph(ModelDataEntity mde,String nombre,Model m,BasicMarqueeHandler mh, ObjectManager om){
 		super(m,mh);
+                this.setAntiAliased(true);
 		this.mde=mde;
 		this.name=nombre;
 		this.setId(name);

@@ -61,7 +61,6 @@ public class UseCaseDiagramPanel extends JGraph {
                                String nombre, Model
                                m, BasicMarqueeHandler mh) {
     super(m, mh);
-    
     this.getGraphLayoutCache().setFactory(new ingenias.editor.cellfactories.UseCaseDiagramCellViewFactory());
   }
 

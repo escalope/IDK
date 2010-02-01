@@ -176,7 +176,7 @@ public class GraphManager implements java.io.Serializable {
 
 	public void setCurrent(JGraph jg){
 		this.current=jg;
-
+                
 	}
 
 	public JGraph getCurrent(){

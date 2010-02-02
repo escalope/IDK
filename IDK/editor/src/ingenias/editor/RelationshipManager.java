@@ -298,10 +298,11 @@ public class RelationshipManager implements java.io.Serializable {
 
 				// Add a Line End Attribute
 				GraphConstants.setLineEnd(attr, GraphConstants.ARROW_SIMPLE);
+                                GraphConstants.setEndSize(attr, 7);
 				// Associate the Edge with its Attributes
 			}
 			GraphConstants.setDisconnectable(attr,false);
-
+                        GraphConstants.setLineWidth(attr, 1);
 			GraphConstants.setBendable(attr,false);
 			edgesAttributes.put(edges[i], attr);
 		}

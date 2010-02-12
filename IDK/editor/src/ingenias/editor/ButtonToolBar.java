@@ -192,7 +192,7 @@ public class ButtonToolBar extends JToolBar {
 									int res = JOptionPane.showConfirmDialog(ButtonToolBar.this.editor.getGraph(),
 											"Element " + ent.getId() +
 											" of type " + ent.getType() + " is no longer used in other diagrams." +
-											" Do you want to remove it from the objects database (y/n)?",
+											" \n Do you want to remove it from the objects database (y/n)?",
 											"Remove?",
 											JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 									if (res == JOptionPane.OK_OPTION) {										

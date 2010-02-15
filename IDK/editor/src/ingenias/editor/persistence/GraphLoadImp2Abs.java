@@ -405,7 +405,10 @@ implements GraphLoad {
 							// Add a Line End Attribute
 							GraphConstants.setLineEnd(attr, GraphConstants.ARROW_SIMPLE);
 							// Associate the Edge with its Attributes
-						}
+                                                        GraphConstants.setEndSize(attr, 7);
+			                        }
+
+                                                GraphConstants.setLineWidth(attr,1);
 						GraphConstants.setDisconnectable(attr,false);
 
 						GraphConstants.setBendable(attr,false);

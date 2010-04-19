@@ -36,6 +36,7 @@ import ingenias.generator.datatemplate.Sequences;
 import ingenias.generator.datatemplate.Var;
 
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Vector;
 
 public class DeploymentGenerator {
@@ -61,7 +62,7 @@ public class DeploymentGenerator {
 				Repeat depl = new Repeat("deploynode");
 				p.addRepeat(depl);
 
-				int nagents = generateDeploymentPack(deploymentPack, depl,bcg);
+				int nagents = generateDeploymentPack(deploymentPack, depl,bcg).size();
 
 			}
 		}
@@ -86,10 +87,11 @@ public class DeploymentGenerator {
 
 	}
 
-	public static int generateDeploymentPack(GraphEntity deploymentPack, Repeat depl, BasicCodeGenerator bcg) {
+	public static Hashtable<String,String> generateDeploymentPack(GraphEntity deploymentPack, Repeat depl, BasicCodeGenerator bcg) {
 		String port = "60000";
 		String memory = "128m";
 		int nagents=0;
+		Hashtable<String,String> agentIds=new Hashtable<String,String>();
 		try {
 			GraphCollection params = deploymentPack.getAttributeByName(
 			"Parameters").getCollectionValue();
@@ -166,6 +168,10 @@ public class DeploymentGenerator {
 										.replaceBadChars(atype.getID())
 										+ "_" + l+Utils
 										.replaceBadChars(depunit.getID())));
+								agentIds.put( Utils
+										.replaceBadChars(atype.getID())
+										+ "_" + l+Utils
+										.replaceBadChars(depunit.getID()),depunit.getID());
 								agentsR.add(new Var("agenttype", Utils
 										.replaceBadChars(atype.getID())));
 								Repeat rolesR = new Repeat("roles");
@@ -190,6 +196,7 @@ public class DeploymentGenerator {
 				if (depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeEnumInitMS")) {
 					processDeploymentUnitBypeEnumInitMS(depl, depunit);
 				}
+				
 			}
 
 		} catch (NullEntity e) {
@@ -199,7 +206,7 @@ public class DeploymentGenerator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return nagents;
+		return agentIds;
 	}
 
 	private static void processDeploymentUnitBypeEnumInitMS(Repeat depl,

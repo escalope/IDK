@@ -2,10 +2,8 @@
 @@@program xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../plantilla.xsd"@@@
  @@@repeat id="simulationnode"@@@
 
- @@@repeat id="testunit"@@@
-   @@@repeat id="deploynode"@@@
  @@@saveto@@@
-  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeout@@@/v@@@/ingenias/simulation/@@@v@@@simulationconfig@@@/v@@@For@@@v@@@test@@@/v@@@.java@@@/file@@@
+  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeout@@@/v@@@/ingenias/simulation/@@@v@@@simulationconfig@@@/v@@@.java@@@/file@@@
   @@@text@@@
 
 /*
@@ -47,6 +45,7 @@ import jade.wrapper.State;
 import ingenias.exception.TimeOut;
 import ingenias.jade.mental.*;
 import ingenias.tests.*;
+import ingenias.simulation.*;
 import ingenias.jade.IAFProperties;
 import ingenias.jade.graphics.MainInteractionManager;
 
@@ -60,11 +59,64 @@ import java.net.UnknownHostException;
 
 
 
-public class @@@v@@@simulationconfig@@@/v@@@For@@@v@@@test@@@/v@@@ extends @@@v@@@test@@@/v@@@{
+public abstract class @@@v@@@simulationconfig@@@/v@@@{
 jade.wrapper.AgentContainer ac=null;
  
-  @Before
-  public void agentSetup() throws StaleProxyException, TimeOut{
+
+  protected void launchSimulation(){
+ 			 // Involved agent local ids for this test are:
+  			@@@repeat id="deploynode"@@@@@@repeat id="agents"@@@  			
+        	// -@@@v@@@agentid@@@/v@@@
+        	@@@/repeat@@@@@@/repeat@@@
+  			// write here the agent id whose 
+  			// mental state manager you want to get access to
+			// MentalStateManager msm = MSMRepository.getInstance().get("MY_AGENT_ID"); // provides access to the
+			// For current agents, these are the variables containing their mental states
+			@@@repeat id="deploynode"@@@@@@repeat id="agents"@@@  			
+        	MentalStateManager msm@@@v@@@agentid@@@/v@@@=MSMRepository.getInstance().get("@@@v@@@agentid@@@/v@@@");
+        	@@@/repeat@@@@@@/repeat@@@
+        	
+        	
+        	for (int simTime=0;simTime<@@@v@@@simlength@@@/v@@@;simTime++){
+        	 Simulation
+        	}
+        	
+        	// Injected events
+			@@@repeat id="injectedevents"@@@
+			@@@v@@@simtime@@@/v@@@, @@@v@@@informationid@@@/v@@@
+			@@@repeat id="affectedagent"@@@
+			@@@v@@@agentid@@@/v@@@
+			@@@/repeat@@@
+			@@@/repeat@@@
+			
+			// Observed events
+			@@@repeat id="simextractedinformation"@@@
+			@@@v@@@simtime@@@/v@@@
+			@@@repeat id="surveyedagent"@@@
+			@@@v@@@agentid@@@/v@@@
+			@@@repeat id="extractedinfo"@@@
+			@@@v@@@extractedinfotype@@@/v@@@
+			@@@/repeat@@@
+			@@@/repeat@@@
+			
+			
+			@@@/repeat@@@
+			
+			
+			// mental state of the agent
+			Vector<MentalEntity> frameFactEntitiesBefore = msm
+					.getMentalEntityByType("MY_TYPE"); // Obtains entities of a given type
+						
+			assertTrue("There should be two MY_TYPE entities",frameFactEntitiesBefore.size()==2);
+						
+			MainInteractionManager.goAutomatic(); // tells the agents to start working
+			TestUtils.doNothing(1000); // waits for 1 second
+			@@@repeat id="injectedevents"@@@
+			 
+			@@@/repeat@@@			
+  }
+ 
+  public static void main(String args[]) throws StaleProxyException, TimeOut{
   
   
         IAFProperties.setGraphicsOn(false); // disable graphics
@@ -162,21 +214,14 @@ jade.wrapper.AgentContainer ac=null;
 @@@/repeat@@@
 }
 	      MainInteractionManager.getInstance().setTitle("node @@@v@@@node@@@/v@@@");
-	    
+	    launchSimulation();
      }
      
-     
-     @After
-	public void endTest() throws StaleProxyException{
-	 ac.kill();	
-	};
 	
 
 }
 
  @@@/text@@@
  @@@/saveto@@@
-  @@@/repeat@@@
-      @@@/repeat@@@    
-    @@@/repeat@@@
+  @@@/repeat@@@   
 @@@/program@@@

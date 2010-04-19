@@ -87,9 +87,8 @@ public class MentalStateProcessor implements LocksListener {
 		public void run() {
 			while (true) {
 				boolean repeat = true;
-				//System.err.println("Starting a cycle "+ja.getName());
+
 				while (repeat) {
-					//System.err.println("1replanning "+doReplan.size());
 					msm.processNewEntitiesInConversations();
 					repeat = isReplanRequestQueueEmpty();
 					try {
@@ -97,56 +96,34 @@ public class MentalStateProcessor implements LocksListener {
 					} catch (InterruptedException e) {
 					}
 				}
-				//System.err.println("phase2 "+ja.getName());
-				//System.err.println("1replanning "+doReplan.size());
-				//	removeFirstReplanRequest();
-				//System.err.println("phase3 "+ja.getName());
+
 
 				letAllJadeBehaviorsReevaluate();
-				//System.err.println("phase4 "+ja.getName());
 
-				//System.err.println("replanning "+doReplan.size()+ " "+ja.getLocalName());
-				//if (tem.isInteractionsProcessed()) { // Do nothing until all interactions are processed
-				// this way, convenient locks for each interaction are created prior to the planning
-				// of new tasks. Also, this will permit to abort those scheduled tasks which use as input
-				// lo2cked elements.
 				replan();
-				if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents")){
-	//				queues.printQueues();					
-				}
-			
-				//System.err.println("phase5 "+ja.getName());
-
-				// Do not execute other tasks until the interactions associated
-				// with the current one are processed.
-				//OneShotBehaviour osb = new OneShotBehaviour() {
-
-				//	@Override
-				//	public void action() {
-				MSPState = AgentStates.DECISION_FINISHED;
 				
-			/*	if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
-					System.err.println("phase5 "+ja.getName());*/
+
+				MSPState = AgentStates.DECISION_FINISHED;
+
 
 				processQueues();
 				
 			//	msm.checkNullFieldsInMentalEntities();
 
 				msm.cleanConversations();
-/*				if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
-							System.err.println("phase6 "+ja.getName());*/
 
 				MSPState = AgentStates.EXECUTION_FINISHED;
 				letAllJadeBehaviorsReevaluate();
 
-	/*			if (ja.getLocalName().equalsIgnoreCase("InterfaceAgent_5multipleInterfaceAgents"))
-							System.err.println("phase7 "+ja.getName());*/
-				//	}
-				//};
-				//osb.setBehaviourName("Processing queues for " + ja.getAID().getLocalName());
-				//ja.addBehaviour(osb);
-				//System.err.println("Cycle finished "+ja.getName());		
-				//				}
+				// When simulation mode is on, the next task execution has to
+				// wait for the next cycle.
+				// isSimulationModelEnabled is invoked beforehand so as not
+				// to enter the synchronized method in the waitNextCycle unless
+				// it is necessary. The synchronized method of a singleton object
+				// induces a bottleneck in the execution since all threads
+				// accesing to it would have to wait their turn
+				if (Simulation.getInstance().isSimulationModeEnabled())
+					Simulation.getInstance().waitNextCycle(ja.getAID().getLocalName());
 
 			}
 
@@ -161,11 +138,7 @@ public class MentalStateProcessor implements LocksListener {
 				int k=0;
 				while (!sb.getExecutionState().equals(StateBehavior.STATE_BLOCKED) 
 						&& !sb.getFinished()){
-					/*k++;
-							if (k>100)
-								System.err.println("Blocked at behavior "+
-										sb.getBehaviourName()+" in agent "+
-										sb.getAgentName()+ " "+sb.getStates()+" \n"+sb.getExecutionState());*/
+	
 					try {
 						Thread.currentThread().sleep((long)(200*Math.random()));
 					} catch (InterruptedException e) {
@@ -208,17 +181,7 @@ public class MentalStateProcessor implements LocksListener {
 
 
 	}
-	/*
-    public void awakeBlockedBehaviors(){
-    jade.core.Scheduler scheduler = ja.getScheduler();
-    Behaviour[] behaviors=scheduler.getBehaviours();
-    for (Behaviour behavior:behaviors){
-    if (behavior.getExecutionState().equalsIgnoreCase(Behaviour.STATE_BLOCKED) && (behavior instanceof StateBehavior ||
-    behavior instanceof ProtocolManagerBehavior)){
-    behavior.restart();
-    }
-    }
-    }*/
+
 
 	public MentalStateProcessor(MentalStateManager msm, JADEAgent ja, AgentGraphics graphics) {
 		this.msm = msm;
@@ -315,16 +278,7 @@ public class MentalStateProcessor implements LocksListener {
 			}
 			oldtask = t;
 		}
-		//if (delay<0)
-		//	delay=5000;
-		//replan();
-		//try {
-		//this.wait();
-		//	Thread.currentThread().sleep(delay);
 
-		//} catch (InterruptedException e) {
-		//	e.printStackTrace();
-		//}
 	}
 
 	/**
@@ -424,38 +378,7 @@ public class MentalStateProcessor implements LocksListener {
 			StateGoal sg = (StateGoal) enumeration.nextElement();
 
 			Vector<Task> tasks = this.ja.tasksThatSatisfyGoal(sg.getId());
-			/*	// schedule first those tasks affecting conversations not finished/aborted
-            Vector<Task> finishedTasks=new Vector<Task>();
-            for (Task t:tasks){
-            if (t.getConversationContext()!=null){
-            if	(t.getConversationContext().getState().equalsIgnoreCase("finished") ||
-            t.getConversationContext().getState().equalsIgnoreCase("aborted")){
-            finishedTasks.add(t);
-            }
-            }
-            }
-            // remove those tasks associated to finished/aborted conversations if there is another
-            // task of the same type and same conversation context type and with a non finished/aborted
-            // conversation
-            tasks.removeAll(finishedTasks);
-            Vector<Task> removeFromFinished=new Vector<Task>();
-            for (Task t:finishedTasks){
-            boolean found=false;
-            for (Task original:tasks){
-            found= found ||
-            (original.getType().equalsIgnoreCase(t.getType())
-            && t.getConversationContext()!=null
-            && original.getConversationContext()!=null
-            && t.getConversationContext().getInteraction().getId().equalsIgnoreCase(
-            original.getConversationContext().getInteraction().getId()));
-
-            }
-            if (found)
-            removeFromFinished.add(t);
-            }
-            finishedTasks.removeAll(removeFromFinished);
-            tasks.addAll(finishedTasks); // So that tasks associated a finished/aborted conversations are
-            // scheduled at the end*/
+	
 			Vector nonactive = new Vector();
 			for (int k = 0; k < tasks.size(); k++) {
 				Task t = (Task) tasks.elementAt(k);

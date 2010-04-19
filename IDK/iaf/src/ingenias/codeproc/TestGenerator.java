@@ -251,7 +251,7 @@ public class TestGenerator {
 
 					if (deplPackageAttr != null && deplPackageAttr.getEntityValue()!=null) {
 						GraphEntity deplPackage = deplPackageAttr.getEntityValue();
-						
+
 						Repeat depl = new Repeat("deploynode");
 						testingDepl.add(depl);
 						Hashtable<String,String> agentIds=DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); 
@@ -259,10 +259,13 @@ public class TestGenerator {
 
 						GraphAttribute extractedInfoAttr = deployPacks[k].getAttributeByName("ExtractedInformation");
 						GraphAttribute simLengthAttr = deployPacks[k].getAttributeByName("SimLength");
+						GraphAttribute deltaTAttr = deployPacks[k].getAttributeByName("DeltaT");
+
 						if (simLengthAttr!=null && simLengthAttr.getSimpleValue()!=null){
 							try {
-							int simLength=Integer.parseInt(simLengthAttr.getSimpleValue());
-							testingDepl.add(new Var("simlength",simLengthAttr.getSimpleValue()));
+								int simLength=Integer.parseInt(simLengthAttr.getSimpleValue());
+								testingDepl.add(new Var("simlength",simLengthAttr.getSimpleValue()));
+								testingDepl.add(new Var("deltat",deltaTAttr.getSimpleValue()));
 							} catch (NumberFormatException nfe){
 								bcg.fatalError();
 								Log.getInstance()
@@ -271,8 +274,8 @@ public class TestGenerator {
 										"positive integer. Please fill in the SimLength field of entity "+deployPacks[k].getID(),
 										"", deployPacks[k].getID());
 							}
-							
-						}else {
+
+						} else {
 							bcg.fatalError();
 							Log.getInstance()
 							.logERROR(
@@ -315,13 +318,14 @@ public class TestGenerator {
 	private void defineObservedInformations(BasicCodeGenerator bcg,
 			GraphEntity[] deployPacks, int k, Repeat testingDepl,
 			Hashtable<String, String> agentIds, GraphAttribute extractedInfoAttr)
-			throws NullEntity, NotFound {
+	throws NullEntity, NotFound {
 		if (extractedInfoAttr!=null && extractedInfoAttr.getCollectionValue()!=null &&
 				extractedInfoAttr.getCollectionValue().size()>0){
 			for (int j=0;j<extractedInfoAttr.getCollectionValue().size();j++){
 				Repeat extractedPiecesInformation=new Repeat("simextractedinformation");
 				testingDepl.add(extractedPiecesInformation);
 				GraphEntity extractedInfo = extractedInfoAttr.getCollectionValue().getElementAt(j);
+				Vector<GraphEntity> associatedCode = Utils.getRelatedElementsVector(extractedInfo, "CDUsesCode", "CDUsesCodetarget");
 				GraphAttribute pollEachSimTimeUnitsAttr = extractedInfo.getAttributeByName("PollEachSimTimeUnits");
 				GraphAttribute pollAgentsInDeploymentAttr = extractedInfo.getAttributeByName("PollAgentsInDeployment");
 				GraphAttribute EntitiesToExtractAttr = extractedInfo.getAttributeByName("EntitiesToExtract");
@@ -333,19 +337,32 @@ public class TestGenerator {
 							GraphEntity receivers = pollAgentsInDeploymentAttr.getEntityValue();
 							Vector<String> aids=getAffectedAgents(receivers.getID(),agentIds);
 							if (!aids.isEmpty()){
-							for (String aid:aids){
-								Repeat affectedAgent=new Repeat("surveyedagent");
-								extractedPiecesInformation.add(affectedAgent);
-								affectedAgent.add(new Var("agentid",aid));
-								if (EntitiesToExtractAttr!=null &&EntitiesToExtractAttr.getCollectionValue()!=null ){
-									for (int l=0;l<EntitiesToExtractAttr.getCollectionValue().size();l++){
-										Repeat infoToAssert=new Repeat("extractedinfo");
-										affectedAgent.add(infoToAssert);
-										GraphEntity information=EntitiesToExtractAttr.getCollectionValue().getElementAt(l);
-										extractedPiecesInformation.add(new Var("extractedinfotype",information.getID()));
+								for (String aid:aids){
+									Repeat affectedAgent=new Repeat("surveyedagent");
+									extractedPiecesInformation.add(affectedAgent);
+									affectedAgent.add(new Var("agentid",aid));
+									if (EntitiesToExtractAttr!=null &&EntitiesToExtractAttr.getCollectionValue()!=null ){
+										for (int l=0;l<EntitiesToExtractAttr.getCollectionValue().size();l++){
+											Repeat infoToAssert=new Repeat("extractedinfo");
+											affectedAgent.add(infoToAssert);
+											GraphEntity information=EntitiesToExtractAttr.getCollectionValue().getElementAt(l);
+											infoToAssert.add(new Var("extractedinfotype",information.getID()));
+											if (associatedCode.size()>0){
+												if (associatedCode.size()==1){
+													infoToAssert.add(new Var("extractioncode",associatedCode.elementAt(0).getAttributeByName("Code").getSimpleValue()));
+												} else {
+													bcg.fatalError();
+													Log.getInstance()
+													.logERROR(
+															"There cannot be more than one code components associated to the  information extraction entity "+extractedInfo.getID()
+															,"", extractedInfo.getID());
+												}
+											}
+											
+											
+										}
 									}
 								}
-							}
 							}  else {
 								bcg.fatalError();
 								Log.getInstance()

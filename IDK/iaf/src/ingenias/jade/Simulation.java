@@ -32,7 +32,7 @@ public class Simulation {
 		try {
 			wait();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	

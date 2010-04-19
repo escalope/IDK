@@ -32,7 +32,7 @@
 
 package ingenias.simulation;
 
-
+import java.util.Date;
 import java.util.Vector;
 import ingenias.testing.*;
 import org.junit.Before;
@@ -44,8 +44,10 @@ import jade.wrapper.StaleProxyException;
 import jade.wrapper.State;
 import ingenias.exception.TimeOut;
 import ingenias.jade.mental.*;
+import ingenias.jade.*;
 import ingenias.tests.*;
 import ingenias.simulation.*;
+import ingenias.exception.*;
 import ingenias.jade.IAFProperties;
 import ingenias.jade.graphics.MainInteractionManager;
 
@@ -55,16 +57,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import ingenias.editor.entities.MentalEntity;
 
 
 
+public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
 
-public abstract class @@@v@@@simulationconfig@@@/v@@@{
-jade.wrapper.AgentContainer ac=null;
- 
-
-  protected void launchSimulation(){
+ jade.wrapper.AgentContainer ac=null;
+  
+  protected  void launchSimulation() throws TimeOut{
  			 // Involved agent local ids for this test are:
+ 			 Date init=new Date();
   			@@@repeat id="deploynode"@@@@@@repeat id="agents"@@@  			
         	// -@@@v@@@agentid@@@/v@@@
         	@@@/repeat@@@@@@/repeat@@@
@@ -72,56 +75,69 @@ jade.wrapper.AgentContainer ac=null;
   			// mental state manager you want to get access to
 			// MentalStateManager msm = MSMRepository.getInstance().get("MY_AGENT_ID"); // provides access to the
 			// For current agents, these are the variables containing their mental states
-			@@@repeat id="deploynode"@@@@@@repeat id="agents"@@@  			
-        	MentalStateManager msm@@@v@@@agentid@@@/v@@@=MSMRepository.getInstance().get("@@@v@@@agentid@@@/v@@@");
+			@@@repeat id="deploynode"@@@@@@repeat id="agents"@@@  					
+        	MentalStateManager msm@@@v@@@agentid@@@/v@@@=MSMRepository.getInstance().waitFor("@@@v@@@agentid@@@/v@@@");
+        	TestUtils.waitForAgentInitialised(msm@@@v@@@agentid@@@/v@@@);
         	@@@/repeat@@@@@@/repeat@@@
         	
         	
-        	for (int simTime=0;simTime<@@@v@@@simlength@@@/v@@@;simTime++){
-        	 Simulation
-        	}
-        	
-        	// Injected events
-			@@@repeat id="injectedevents"@@@
-			@@@v@@@simtime@@@/v@@@, @@@v@@@informationid@@@/v@@@
-			@@@repeat id="affectedagent"@@@
-			@@@v@@@agentid@@@/v@@@
-			@@@/repeat@@@
-			@@@/repeat@@@
-			
-			// Observed events
-			@@@repeat id="simextractedinformation"@@@
-			@@@v@@@simtime@@@/v@@@
-			@@@repeat id="surveyedagent"@@@
-			@@@v@@@agentid@@@/v@@@
-			@@@repeat id="extractedinfo"@@@
-			@@@v@@@extractedinfotype@@@/v@@@
-			@@@/repeat@@@
-			@@@/repeat@@@
-			
-			
-			@@@/repeat@@@
-			
-			
-			// mental state of the agent
-			Vector<MentalEntity> frameFactEntitiesBefore = msm
-					.getMentalEntityByType("MY_TYPE"); // Obtains entities of a given type
-						
-			assertTrue("There should be two MY_TYPE entities",frameFactEntitiesBefore.size()==2);
-						
 			MainInteractionManager.goAutomatic(); // tells the agents to start working
-			TestUtils.doNothing(1000); // waits for 1 second
-			@@@repeat id="injectedevents"@@@
-			 
-			@@@/repeat@@@			
+		
+        	for (int simTime=0;simTime<@@@v@@@simlength@@@/v@@@;simTime++){
+        	 System.out.println("Simulated time:"+simTime);
+        	// Injected events
+        	try {
+			@@@repeat id="injectedevents"@@@			
+			@@@repeat id="affectedagent"@@@
+			 if (simTime==@@@v@@@simtime@@@/v@@@)
+			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(new @@@v@@@informationid@@@/v@@@());
+			@@@/repeat@@@
+			@@@/repeat@@@
+			} catch (InvalidEntity e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+			// Observed events
+			// to reuse the same variables the scope of the variables are limited
+			// to a concrete block
+			@@@repeat id="simextractedinformation"@@@
+			@@@repeat id="surveyedagent"@@@
+			@@@repeat id="extractedinfo"@@@
+			 if (simTime%@@@v@@@simtime@@@/v@@@==0){
+			    Vector<MentalEntity> identifiedEntities=msm@@@v@@@agentid@@@/v@@@.getMentalEntityByType("@@@v@@@extractedinfotype@@@/v@@@");
+			    String agentId="@@@v@@@agentid@@@/v@@@";
+			    @@@v@@@extractioncode@@@/v@@@
+			 }
+			@@@/repeat@@@
+			@@@/repeat@@@				
+			@@@/repeat@@@
+        	Vector<String> agentsWereWaiting = Simulation.getInstance().proceedNextCycle();
+			System.out.println("agents were waiting:"+agentsWereWaiting);
+        	 try {
+        	  Thread.currentThread().sleep(@@@v@@@deltat@@@/v@@@);
+        	 } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	}
+        	try {
+				ac.kill();
+			} catch (StaleProxyException e) {
+				e.printStackTrace();
+			}	
+  	       	Date end=new Date();
+        	System.out.println("***********************");
+        	System.out.println("Simulation finished");
+        	System.out.println("Elapsed time:"+((end.getTime()-init.getTime())/1000f)+" seconds");
+        	System.out.println("***********************");
+        	System.exit(0);
   }
- 
-  public static void main(String args[]) throws StaleProxyException, TimeOut{
   
-  
-        IAFProperties.setGraphicsOn(false); // disable graphics
+  public void initiateSimulation(String args[]) throws StaleProxyException{
+      IAFProperties.setGraphicsOn(false); // disable graphics
          MainInteractionManager.goManual(); // Stop task execution
-         
+         Simulation.getInstance().setSimulationMode(true); // enable simulation mode
+  @@@repeat id="deploynode"@@@       
          new Thread(){
 			public void run(){
 				String[] args1=new String[4];
@@ -180,6 +196,7 @@ jade.wrapper.AgentContainer ac=null;
         
         // Create a new non-main container, connecting to the default
         // main container (i.e. on this host, port 1099)
+      
         ac = rt.createAgentContainer(p);
 
 {@@@repeat id="agents"@@@
@@ -213,8 +230,15 @@ jade.wrapper.AgentContainer ac=null;
         }.start();
 @@@/repeat@@@
 }
-	      MainInteractionManager.getInstance().setTitle("node @@@v@@@node@@@/v@@@");
-	    launchSimulation();
+@@@/repeat@@@
+  }
+ 
+  public static void main(String args[]) throws StaleProxyException, TimeOut{
+  
+  		@@@v@@@simulationconfig@@@/v@@@ n@@@v@@@simulationconfig@@@/v@@@=new  @@@v@@@simulationconfig@@@/v@@@(); 
+     	n@@@v@@@simulationconfig@@@/v@@@.initiateSimulation(args);
+	    MainInteractionManager.getInstance().setTitle("node @@@v@@@node@@@/v@@@");
+	    n@@@v@@@simulationconfig@@@/v@@@.launchSimulation();
      }
      
 	

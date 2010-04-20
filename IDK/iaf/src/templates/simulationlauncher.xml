@@ -50,11 +50,7 @@ import ingenias.simulation.*;
 import ingenias.exception.*;
 import ingenias.jade.IAFProperties;
 import ingenias.jade.graphics.MainInteractionManager;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import ingenias.editor.entities.MentalEntity;
@@ -64,6 +60,19 @@ import ingenias.editor.entities.MentalEntity;
 public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
 
  jade.wrapper.AgentContainer ac=null;
+ private Date initiatingExperimentDate=new Date();
+ private FileOutputStream logFile;
+ 
+ private void createEntry(FileOutputStream fos,String message){
+
+		long milliseconds=(new Date().getTime()-initiatingExperimentDate.getTime());
+		try {
+			fos.write((""+milliseconds+","+message+"\n").getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
   
   protected  void launchSimulation() throws TimeOut{
  			 // Involved agent local ids for this test are:
@@ -130,10 +139,24 @@ public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
         	System.out.println("Simulation finished");
         	System.out.println("Elapsed time:"+((end.getTime()-init.getTime())/1000f)+" seconds");
         	System.out.println("***********************");
+        	try {
+				this.logFile.close();
+			} catch (IOException e) {				
+				e.printStackTrace();
+			}
         	System.exit(0);
   }
   
   public void initiateSimulation(String args[]) throws StaleProxyException{
+  	java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MMddyyHHmm");
+		Date d=new Date();
+		new File("logs").mkdir();
+		try {
+			this.logFile=new FileOutputStream("logs/simulationData"+df.format(d)+".log");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
       IAFProperties.setGraphicsOn(false); // disable graphics
          MainInteractionManager.goManual(); // Stop task execution
          Simulation.getInstance().setSimulationMode(true); // enable simulation mode

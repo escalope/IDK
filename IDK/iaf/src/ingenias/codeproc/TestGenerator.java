@@ -266,6 +266,7 @@ public class TestGenerator {
 								int simLength=Integer.parseInt(simLengthAttr.getSimpleValue());
 								testingDepl.add(new Var("simlength",simLengthAttr.getSimpleValue()));
 								testingDepl.add(new Var("deltat",deltaTAttr.getSimpleValue()));
+								
 							} catch (NumberFormatException nfe){
 								bcg.fatalError();
 								Log.getInstance()
@@ -349,6 +350,7 @@ public class TestGenerator {
 											infoToAssert.add(new Var("extractedinfotype",information.getID()));
 											if (associatedCode.size()>0){
 												if (associatedCode.size()==1){
+													infoToAssert.add(new Var("codeid",associatedCode.elementAt(0).getID()));
 													infoToAssert.add(new Var("extractioncode",associatedCode.elementAt(0).getAttributeByName("Code").getSimpleValue()));
 												} else {
 													bcg.fatalError();
@@ -397,6 +399,7 @@ public class TestGenerator {
 				Repeat injectedEvents=new Repeat("injectedevents");
 				testingDepl.add(injectedEvents);
 				GraphEntity injectedEvent = injectedEventsAttr.getCollectionValue().getElementAt(j);
+				Vector<GraphEntity> associatedCode = Utils.getRelatedElementsVector(injectedEvent, "CDUsesCode", "CDUsesCodetarget");
 				GraphAttribute producedAtSimTimeAttr = injectedEvent.getAttributeByName("ProducedAtSimTime");
 				GraphAttribute receivedByAgentsInDeploymentAttr = injectedEvent.getAttributeByName("ReceivedByAgentsInDeployment");
 				GraphAttribute newInformationAttr = injectedEvent.getAttributeByName("NewInformation");
@@ -411,6 +414,19 @@ public class TestGenerator {
 								Repeat affectedAgent=new Repeat("affectedagent");
 								injectedEvents.add(affectedAgent);
 								affectedAgent.add(new Var("agentid",aid));
+								if (associatedCode.size()>0){
+									if (associatedCode.size()==1){
+										affectedAgent.add(new Var("codeid",associatedCode.elementAt(0).getID()));
+										affectedAgent.add(new Var("eventcreationcode",associatedCode.elementAt(0).getAttributeByName("Code").getSimpleValue()));
+									} else {
+										bcg.fatalError();
+										Log.getInstance()
+										.logERROR(
+												"There cannot be more than one code components associated to the  information extraction entity "+injectedEvent.getID()
+												,"", injectedEvent.getID());
+									}
+								}
+								
 							}
 						}
 						if (newInformationAttr!=null &&newInformationAttr.getEntityValue()!=null ){

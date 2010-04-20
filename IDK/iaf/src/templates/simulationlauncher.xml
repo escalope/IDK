@@ -98,8 +98,13 @@ public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
         	try {
 			@@@repeat id="injectedevents"@@@			
 			@@@repeat id="affectedagent"@@@
-			 if (simTime==@@@v@@@simtime@@@/v@@@)
-			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(new @@@v@@@informationid@@@/v@@@());
+			 if (simTime==@@@v@@@simtime@@@/v@@@){
+			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
+			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
+			  @@@v@@@extractioncode@@@/v@@@
+			  //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
+			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(information);
+			 }
 			@@@/repeat@@@
 			@@@/repeat@@@
 			} catch (InvalidEntity e) {
@@ -115,7 +120,9 @@ public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
 			 if (simTime%@@@v@@@simtime@@@/v@@@==0){
 			    Vector<MentalEntity> identifiedEntities=msm@@@v@@@agentid@@@/v@@@.getMentalEntityByType("@@@v@@@extractedinfotype@@@/v@@@");
 			    String agentId="@@@v@@@agentid@@@/v@@@";
+			    //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
 			    @@@v@@@extractioncode@@@/v@@@
+			    //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
 			 }
 			@@@/repeat@@@
 			@@@/repeat@@@				

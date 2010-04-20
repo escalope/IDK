@@ -87,11 +87,12 @@ public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 	public void run() {
 		try {
 			String folderForTasks=((ProjectProperty) this.getProperties().get("Ingenias Agent Framework generator:jadeproject")).value+"/"+
-			((ProjectProperty) this.getProperties().get("Ingenias Agent Framework generator:jadeout")).value+"/ingenias/jade/components/";
+			((ProjectProperty) this.getProperties().get("Ingenias Agent Framework generator:jadeout")).value;
+			
 			System.err.println(folderForTasks);
 			folderForTasks=folderForTasks.replace("{workspace}",this.getIds().prefs.getWorkspacePath());
 			File folderDir=new File(folderForTasks);
-			File[] taskFiles=folderDir.listFiles();
+			Vector<File> taskFiles=obtainAllFiles(folderDir);
 			for (File task:taskFiles){
 				if (task.isFile()){
 					String content=getContent(task);
@@ -121,6 +122,19 @@ public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 		}
 	}
 
+
+	private Vector<File> obtainAllFiles(File folderDir) {
+		Vector<File> currentFiles=new Vector<File>();
+		for (File file:folderDir.listFiles()){
+			if (file.isDirectory()){
+				Vector<File> obtainedFiles=obtainAllFiles(file);
+				currentFiles.addAll(obtainedFiles);
+			} else {
+				currentFiles.add(file);
+			}
+		}
+		return currentFiles;
+	}
 
 	private String getContent(File task) {
 

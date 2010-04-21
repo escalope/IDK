@@ -96,7 +96,7 @@ public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
         	 System.out.println("Simulated time:"+simTime);
         	// Injected events
         	try {
-			@@@repeat id="injectedevents"@@@			
+			@@@repeat id="injectedevents"@@@	
 			@@@repeat id="affectedagent"@@@
 			 if ((simTime==@@@v@@@simtime@@@/v@@@ && @@@v@@@insertfreq@@@/v@@@==0) 
 			 || (@@@v@@@insertfreq@@@/v@@@!=0 &&	simTime>=@@@v@@@simtime@@@/v@@@ && 

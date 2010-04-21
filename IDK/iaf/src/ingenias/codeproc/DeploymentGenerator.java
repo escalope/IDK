@@ -191,10 +191,10 @@ public class DeploymentGenerator {
 					}
 				}
 				if (depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeMSEntity")) {
-					processDeploymentUnitByTypeMSEntity(depl, depunit);
+					processDeploymentUnitByTypeMSEntity(depl, depunit,agentIds);
 				}
 				if (depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeEnumInitMS")) {
-					processDeploymentUnitBypeEnumInitMS(depl, depunit);
+					processDeploymentUnitBypeEnumInitMS(depl, depunit,agentIds);
 				}
 				
 			}
@@ -210,7 +210,7 @@ public class DeploymentGenerator {
 	}
 
 	private static void processDeploymentUnitBypeEnumInitMS(Repeat depl,
-			GraphEntity depunit) throws NullEntity, NotFound {
+			GraphEntity depunit, Hashtable<String, String> agentIds) throws NullEntity, NotFound {
 		System.err.println("by enum");
 		GraphEntity atype = depunit.getAttributeByName(
 		"AgentTypeDeployed").getEntityValue();
@@ -224,6 +224,10 @@ public class DeploymentGenerator {
 					.replaceBadChars(atype.getID())
 					+ "_" + l+Utils
 					.replaceBadChars(depunit.getID())));
+			agentIds.put( Utils
+					.replaceBadChars(atype.getID())
+					+ "_" + l+Utils
+					.replaceBadChars(depunit.getID()),depunit.getID());
 			agentsR.add(new Var("agenttype", Utils
 					.replaceBadChars(atype.getID())));
 
@@ -240,7 +244,7 @@ public class DeploymentGenerator {
 	}
 
 	private static void processDeploymentUnitByTypeMSEntity(Repeat depl,
-			GraphEntity depunit) throws NullEntity, NotFound {
+			GraphEntity depunit, Hashtable<String, String> agentIds) throws NullEntity, NotFound {
 		System.err.println("by ms entity");
 		GraphEntity atype = depunit.getAttributeByName(
 		"AgentTypeDeployed").getEntityValue();
@@ -254,6 +258,10 @@ public class DeploymentGenerator {
 					.replaceBadChars(atype.getID())
 					+ "_" + l+Utils
 					.replaceBadChars(depunit.getID())));
+			agentIds.put( Utils
+					.replaceBadChars(atype.getID())
+					+ "_" + l+Utils
+					.replaceBadChars(depunit.getID()),depunit.getID());
 			agentsR.add(new Var("agenttype", Utils
 					.replaceBadChars(atype.getID())));
 

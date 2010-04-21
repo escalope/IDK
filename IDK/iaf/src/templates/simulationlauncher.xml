@@ -98,7 +98,9 @@ public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
         	try {
 			@@@repeat id="injectedevents"@@@			
 			@@@repeat id="affectedagent"@@@
-			 if (simTime==@@@v@@@simtime@@@/v@@@){
+			 if ((simTime==@@@v@@@simtime@@@/v@@@ && @@@v@@@insertfreq@@@/v@@@==0) 
+			 || (@@@v@@@insertfreq@@@/v@@@!=0 &&	simTime>=@@@v@@@simtime@@@/v@@@ && 
+			       (simTime-@@@v@@@simtime@@@/v@@@)%@@@v@@@insertfreq@@@/v@@@==0)){
 			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
 			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
 			  @@@v@@@extractioncode@@@/v@@@

@@ -266,7 +266,7 @@ public class TestGenerator {
 								int simLength=Integer.parseInt(simLengthAttr.getSimpleValue());
 								testingDepl.add(new Var("simlength",simLengthAttr.getSimpleValue()));
 								testingDepl.add(new Var("deltat",deltaTAttr.getSimpleValue()));
-								
+
 							} catch (NumberFormatException nfe){
 								bcg.fatalError();
 								Log.getInstance()
@@ -360,8 +360,8 @@ public class TestGenerator {
 															,"", extractedInfo.getID());
 												}
 											}
-											
-											
+
+
 										}
 									}
 								}
@@ -401,12 +401,30 @@ public class TestGenerator {
 				GraphEntity injectedEvent = injectedEventsAttr.getCollectionValue().getElementAt(j);
 				Vector<GraphEntity> associatedCode = Utils.getRelatedElementsVector(injectedEvent, "CDUsesCode", "CDUsesCodetarget");
 				GraphAttribute producedAtSimTimeAttr = injectedEvent.getAttributeByName("ProducedAtSimTime");
+				GraphAttribute insertFreqAttr = injectedEvent.getAttributeByName("InsertionFrequency");
+
 				GraphAttribute receivedByAgentsInDeploymentAttr = injectedEvent.getAttributeByName("ReceivedByAgentsInDeployment");
 				GraphAttribute newInformationAttr = injectedEvent.getAttributeByName("NewInformation");
 				if (producedAtSimTimeAttr!=null && producedAtSimTimeAttr.getSimpleValue()!=null){
 					try {
 						int simTime=Integer.parseInt(producedAtSimTimeAttr.getSimpleValue());
+
+						int freqTime=0;
+						if (!(insertFreqAttr.getSimpleValue()==null || insertFreqAttr.getSimpleValue().equals(""))){
+							try{ 
+								freqTime=Integer.parseInt(insertFreqAttr.getSimpleValue());
+							} catch (NumberFormatException nfe){
+								bcg.fatalError();
+								Log.getInstance()
+								.logERROR(
+										"The InsertionFrequency field of event injection entity  "+injectedEvent.getID()
+										+" has to be an integer greater or equal to 0"
+										
+										,"", injectedEvent.getID());
+							}
+						}
 						injectedEvents.add(new Var("simtime", ""+simTime));
+						injectedEvents.add(new Var("insertfreq", ""+simTime));
 						if (receivedByAgentsInDeploymentAttr.getEntityValue()!=null){
 							GraphEntity receivers = receivedByAgentsInDeploymentAttr.getEntityValue();
 							Vector<String> aids=getAffectedAgents(receivers.getID(),agentIds);
@@ -426,7 +444,7 @@ public class TestGenerator {
 												,"", injectedEvent.getID());
 									}
 								}
-								
+
 							}
 						}
 						if (newInformationAttr!=null &&newInformationAttr.getEntityValue()!=null ){

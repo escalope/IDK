@@ -2243,6 +2243,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 	public void fatalError(){
 		error = true;
+		this.setError(true);
 	}
 
 	/**

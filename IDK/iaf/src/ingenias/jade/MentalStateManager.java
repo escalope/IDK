@@ -750,6 +750,20 @@ MentalStateUpdater {
 		return findEntityTypeInstances(type);
 	}
 
+	/**
+	 * It returns the mental entity stored in the mental state with type "type".
+	 * This method is equivalent to the findEntityTypeInstances method, but
+	 * adding a cast to the MentalEntity type.
+	 */
+	public synchronized Vector<MentalEntity>  getMentalEntityByTypeIncludingConversations(String type) {
+		
+		HashSet<MentalEntity> globalStateInstances = new HashSet(findEntityTypeInstances(type));
+		Vector<RuntimeConversation> conversations = getConversations();
+		for (RuntimeConversation conv:conversations)
+			globalStateInstances.addAll(obtainConversationalMentalEntityByType(conv, type));
+		return new Vector<MentalEntity>(globalStateInstances);
+	}
+	
 	public synchronized Vector<MentalEntity>  getAllMentalEntities() {
 		return new Vector<MentalEntity> (state.values());
 	}

@@ -98,15 +98,40 @@ public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
         	try {
 			@@@repeat id="injectedevents"@@@	
 			@@@repeat id="affectedagent"@@@
-			 if ((simTime==@@@v@@@simtime@@@/v@@@ && @@@v@@@insertfreq@@@/v@@@==0) 
-			 || (@@@v@@@insertfreq@@@/v@@@!=0 &&	simTime>=@@@v@@@simtime@@@/v@@@ && 
-			       (simTime-@@@v@@@simtime@@@/v@@@)%@@@v@@@insertfreq@@@/v@@@==0)){
+			
+			@@@repeat id="closeperiodinsertionwithfreq"@@@
+			 if (	simTime>=@@@v@@@simtime@@@/v@@@ && 
+			 		simTime<=@@@v@@@endsimtime@@@/v@@@ &&
+			       (simTime-@@@v@@@simtime@@@/v@@@)%@@@v@@@insertfreq@@@/v@@@==0){
 			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
 			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
 			  @@@v@@@extractioncode@@@/v@@@
 			  //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
 			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(information);
 			 }
+			@@@/repeat@@@
+			
+			@@@repeat id="openperiodinsertionwithfreq"@@@
+			 if (simTime>=@@@v@@@simtime@@@/v@@@ && 
+			       (simTime-@@@v@@@simtime@@@/v@@@)%@@@v@@@insertfreq@@@/v@@@==0){
+			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
+			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
+			  @@@v@@@extractioncode@@@/v@@@
+			  //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
+			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(information);
+			 }
+			@@@/repeat@@@
+			
+			@@@repeat id="instantinsertion"@@@
+			 if (simTime==@@@v@@@simtime@@@/v@@@){
+			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
+			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
+			  @@@v@@@extractioncode@@@/v@@@
+			  //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
+			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(information);
+			 }
+			@@@/repeat@@@
+			
 			@@@/repeat@@@
 			@@@/repeat@@@
 			} catch (InvalidEntity e) {
@@ -120,7 +145,7 @@ public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
 			@@@repeat id="surveyedagent"@@@
 			@@@repeat id="extractedinfo"@@@
 			 if (simTime%@@@v@@@simtime@@@/v@@@==0){
-			    Vector<MentalEntity> identifiedEntities=msm@@@v@@@agentid@@@/v@@@.getMentalEntityByType("@@@v@@@extractedinfotype@@@/v@@@");
+			    Vector<MentalEntity> identifiedEntities=msm@@@v@@@agentid@@@/v@@@.getMentalEntityByTypeIncludingConversations("@@@v@@@extractedinfotype@@@/v@@@");
 			    String agentId="@@@v@@@agentid@@@/v@@@";
 			    //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
 			    @@@v@@@extractioncode@@@/v@@@

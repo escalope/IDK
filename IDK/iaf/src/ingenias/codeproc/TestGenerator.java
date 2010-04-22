@@ -402,7 +402,7 @@ public class TestGenerator {
 				Vector<GraphEntity> associatedCode = Utils.getRelatedElementsVector(injectedEvent, "CDUsesCode", "CDUsesCodetarget");
 				GraphAttribute producedAtSimTimeAttr = injectedEvent.getAttributeByName("ProducedAtSimTime");
 				GraphAttribute insertFreqAttr = injectedEvent.getAttributeByName("InsertionFrequency");
-
+				GraphAttribute finishedAtSimTimeAttr = injectedEvent.getAttributeByName("FinishedAtSimTime");
 				GraphAttribute receivedByAgentsInDeploymentAttr = injectedEvent.getAttributeByName("ReceivedByAgentsInDeployment");
 				GraphAttribute newInformationAttr = injectedEvent.getAttributeByName("NewInformation");
 				if (producedAtSimTimeAttr!=null && producedAtSimTimeAttr.getSimpleValue()!=null){
@@ -419,12 +419,12 @@ public class TestGenerator {
 								.logERROR(
 										"The InsertionFrequency field of event injection entity  "+injectedEvent.getID()
 										+" has to be an integer greater or equal to 0"
-										
+
 										,"", injectedEvent.getID());
 							}
 						}
 						injectedEvents.add(new Var("simtime", ""+simTime));
-						injectedEvents.add(new Var("insertfreq", ""+simTime));
+						injectedEvents.add(new Var("insertfreq", ""+freqTime));
 						if (receivedByAgentsInDeploymentAttr.getEntityValue()!=null){
 							GraphEntity receivers = receivedByAgentsInDeploymentAttr.getEntityValue();
 							Vector<String> aids=getAffectedAgents(receivers.getID(),agentIds);
@@ -432,6 +432,49 @@ public class TestGenerator {
 								Repeat affectedAgent=new Repeat("affectedagent");
 								injectedEvents.add(affectedAgent);
 								affectedAgent.add(new Var("agentid",aid));
+								int endperiod=0;
+								try {
+									endperiod=Integer.parseInt(finishedAtSimTimeAttr.getSimpleValue());
+								}catch (NumberFormatException nfe){
+
+								}
+								if (endperiod==0 && freqTime==0){
+									Repeat insertionR=new Repeat("instantinsertion");
+									affectedAgent.add(insertionR);
+								}
+								if (endperiod>0 && freqTime==0){
+									bcg.fatalError();
+									Log.getInstance()
+									.logERROR(
+											"The FinishedAtSimTime field of event injection entity  "+injectedEvent.getID()
+											+" cannot be used when there is not a InsertionFrequency field used"
+
+											,"", injectedEvent.getID());
+								}
+								if (endperiod==0 && freqTime>0){
+									Repeat insertionR=new Repeat("openperiodinsertionwithfreq");
+									affectedAgent.add(insertionR);
+								}
+									
+								if (endperiod>0 && freqTime>0){
+									Repeat insertionR=new Repeat("closeperiodinsertionwithfreq");
+									affectedAgent.add(insertionR);
+									insertionR.add(new Var("endsimtime",""+endperiod));
+								}
+								
+								
+								if (endperiod!=0 && simTime>endperiod){
+									bcg.fatalError();
+									Log.getInstance()
+									.logERROR(
+											"The FinishedAtSimTime field of event injection entity  "+injectedEvent.getID()
+											+" cannot be less than the ProducedAtSimTime field"
+
+											,"", injectedEvent.getID());
+								}
+
+
+
 								if (associatedCode.size()>0){
 									if (associatedCode.size()==1){
 										affectedAgent.add(new Var("codeid",associatedCode.elementAt(0).getID()));

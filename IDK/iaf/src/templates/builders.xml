@@ -116,7 +116,7 @@
     <target name="simulate@@@v@@@simulationconfig@@@/v@@@" depends="compile">
     <java fork="true" failonerror="true" maxmemory="@@@v@@@memory@@@/v@@@"
     classname="org.junit.runner.JUnitCore">
-    <arg line="ingenias.simulation.@@@v@@@simulationconfig@@@/v@@@For@@@v@@@test@@@/v@@@"/>    
+    <arg line="ingenias.simulation.@@@v@@@simulationconfig@@@/v@@@"/>    
       <classpath>
 
 		<pathelement path="${temp}" />        

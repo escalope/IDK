@@ -86,6 +86,9 @@ public class MentalStateProcessor implements LocksListener {
 
 		public void run() {
 			while (true) {
+				
+				
+				
 				boolean repeat = true;
 
 				while (repeat) {
@@ -102,7 +105,16 @@ public class MentalStateProcessor implements LocksListener {
 
 				replan();
 				
-
+				// When simulation mode is on, the next task execution has to
+				// wait for the next cycle.
+				// isSimulationModelEnabled is invoked beforehand so as not
+				// to enter the synchronized method in the waitNextCycle unless
+				// it is necessary. The synchronized method of a singleton object
+				// induces a bottleneck in the execution since all threads
+				// accesing to it would have to wait their turn
+				if (Simulation.getInstance().isSimulationModeEnabled())
+					Simulation.getInstance().waitNextCycle(ja.getAID().getLocalName());
+				
 				MSPState = AgentStates.DECISION_FINISHED;
 
 
@@ -115,15 +127,6 @@ public class MentalStateProcessor implements LocksListener {
 				MSPState = AgentStates.EXECUTION_FINISHED;
 				letAllJadeBehaviorsReevaluate();
 
-				// When simulation mode is on, the next task execution has to
-				// wait for the next cycle.
-				// isSimulationModelEnabled is invoked beforehand so as not
-				// to enter the synchronized method in the waitNextCycle unless
-				// it is necessary. The synchronized method of a singleton object
-				// induces a bottleneck in the execution since all threads
-				// accesing to it would have to wait their turn
-				if (Simulation.getInstance().isSimulationModeEnabled())
-					Simulation.getInstance().waitNextCycle(ja.getAID().getLocalName());
 
 			}
 

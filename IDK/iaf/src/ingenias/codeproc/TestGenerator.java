@@ -451,18 +451,7 @@ public class TestGenerator {
 
 											,"", injectedEvent.getID());
 								}
-								if (endperiod==0 && freqTime>0){
-									Repeat insertionR=new Repeat("openperiodinsertionwithfreq");
-									affectedAgent.add(insertionR);
-								}
-									
-								if (endperiod>0 && freqTime>0){
-									Repeat insertionR=new Repeat("closeperiodinsertionwithfreq");
-									affectedAgent.add(insertionR);
-									insertionR.add(new Var("endsimtime",""+endperiod));
-								}
-								
-								
+
 								if (endperiod!=0 && simTime>endperiod){
 									bcg.fatalError();
 									Log.getInstance()
@@ -471,20 +460,36 @@ public class TestGenerator {
 											+" cannot be less than the ProducedAtSimTime field"
 
 											,"", injectedEvent.getID());
-								}
+								} else {
+
+									Repeat insertionR=null;
+									if (endperiod==0 && freqTime>0){
+										insertionR=new Repeat("openperiodinsertionwithfreq");
+										affectedAgent.add(insertionR);
+									}
+
+									if (endperiod>0 && freqTime>0){
+										insertionR=new Repeat("closeperiodinsertionwithfreq");
+										affectedAgent.add(insertionR);
+										insertionR.add(new Var("endsimtime",""+endperiod));
+									}
 
 
 
-								if (associatedCode.size()>0){
-									if (associatedCode.size()==1){
-										affectedAgent.add(new Var("codeid",associatedCode.elementAt(0).getID()));
-										affectedAgent.add(new Var("eventcreationcode",associatedCode.elementAt(0).getAttributeByName("Code").getSimpleValue()));
-									} else {
-										bcg.fatalError();
-										Log.getInstance()
-										.logERROR(
-												"There cannot be more than one code components associated to the  information extraction entity "+injectedEvent.getID()
-												,"", injectedEvent.getID());
+
+
+
+									if (associatedCode.size()>0){
+										if (associatedCode.size()==1){
+											insertionR.add(new Var("codeid",associatedCode.elementAt(0).getID()));
+											insertionR.add(new Var("eventcreationcode",associatedCode.elementAt(0).getAttributeByName("Code").getSimpleValue()));
+										} else {
+											bcg.fatalError();
+											Log.getInstance()
+											.logERROR(
+													"There cannot be more than one code components associated to the  information extraction entity "+injectedEvent.getID()
+													,"", injectedEvent.getID());
+										}
 									}
 								}
 

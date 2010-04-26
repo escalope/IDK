@@ -105,7 +105,7 @@ public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
 			       (simTime-@@@v@@@simtime@@@/v@@@)%@@@v@@@insertfreq@@@/v@@@==0){
 			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
 			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
-			  @@@v@@@extractioncode@@@/v@@@
+			  @@@v@@@eventcreationcode@@@/v@@@
 			  //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
 			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(information);
 			 }
@@ -116,7 +116,7 @@ public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
 			       (simTime-@@@v@@@simtime@@@/v@@@)%@@@v@@@insertfreq@@@/v@@@==0){
 			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
 			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
-			  @@@v@@@extractioncode@@@/v@@@
+			  @@@v@@@eventcreationcode@@@/v@@@
 			  //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
 			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(information);
 			 }
@@ -126,7 +126,7 @@ public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
 			 if (simTime==@@@v@@@simtime@@@/v@@@){
 			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
 			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
-			  @@@v@@@extractioncode@@@/v@@@
+			  @@@v@@@eventcreationcode@@@/v@@@
 			  //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
 			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(information);
 			 }

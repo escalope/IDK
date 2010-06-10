@@ -164,6 +164,12 @@ public class IAFProjectCreatorSwingTask extends SwingWorker<Void, Void> implemen
 			copyResourceFromTo("lib/swtgraphics2d.jar",directory+"/lib/swtgraphics2d.jar");
 			this.setProgress(getProgress()+2);
 			
+			copyResourceFromTo("lib/ant-contrib-1.0b3.jar",directory+"/lib/ant-contrib-1.0b3.jar");
+			this.setProgress(getProgress()+2);
+
+			copyResourceFromTo("lib/AntelopeTasks_3.5.1.jar",directory+"/lib/AntelopeTasks_3.5.1.jar");
+			this.setProgress(getProgress()+2);
+
 			resources.getProgressBar().setString("Generating sources with the IAF ..."+((getProgress()))+"%");
 			File buildFile = new File(directory+"/generate.xml");
 			Project p = new Project();

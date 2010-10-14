@@ -1,0 +1,2 @@
+<file src="installer-resources\shortcuts\default-@{deployment}.ico" targetdir="$INSTALL_PATH"/>
+<file src="launcher-@{deployment}.jar" targetdir="$INSTALL_PATH"/>

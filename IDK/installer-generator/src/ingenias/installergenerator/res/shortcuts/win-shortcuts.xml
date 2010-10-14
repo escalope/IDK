@@ -1,0 +1,26 @@
+<shortcuts>
+  <skipIfNotSupported/>
+  <defaultCurrentUser/>
+  <programGroup defaultName="INGENIAS Application X"
+                location="applications"/>
+ 
+ @{shortcuts}
+
+  <shortcut
+     name="Uninstaller"
+     programGroup="yes"
+     desktop="no"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="$INSTALL_PATH\Uninstaller\uninstaller.jar"
+     commandLine=""
+     initialState="noShow"
+     iconFile="trashcan_full"
+     iconIndex="0"
+     workingDirectory=""
+     type="Application"
+     description="Uninstaller">
+   </shortcut>
+  
+</shortcuts>

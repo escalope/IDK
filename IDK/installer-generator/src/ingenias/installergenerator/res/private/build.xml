@@ -1,0 +1,7 @@
+<project name="ingenias-launchers" default="generate-launchers">
+
+<target name="generate-launchers" depends="@{target-list}" />
+
+@{targets}
+
+</project>

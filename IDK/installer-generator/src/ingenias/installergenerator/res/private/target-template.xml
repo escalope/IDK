@@ -1,0 +1,35 @@
+<target name="generate-launcher-@{deployment}" description="Create jar and MANIFEST.MF">
+
+  <!-- create a property containing all .jar files, prefix lib/, and seperated with a space -->
+  <pathconvert property="libs.project" pathsep=" ">
+    <mapper>
+      <chainedmapper>
+
+        <!-- remove absolute path -->
+        <flattenmapper />
+
+        <!-- add lib/ prefix -->
+        <globmapper from="*" to="lib/*" />
+      </chainedmapper>
+    </mapper>
+
+    <path>
+
+      <!-- lib.home contains all jar files, in several subdirectories -->
+      <fileset dir="lib">
+        <include name="**/*.jar" />
+      </fileset>
+    </path>
+  </pathconvert>
+
+  <!-- create the jar -->
+  <jar jarfile="launcher-@{deployment}.jar" basedir="tmp">
+    <!-- define MANIFEST.MF -->
+    <manifest>
+      <attribute name="Built-By" value="${user.name}" />
+      <attribute name="Main-Class" value="ingenias.jade.Main@{deployment}ProdStandAlone" />
+      <!-- finally, use the magically generated libs path -->
+      <attribute name="Class-Path" value="${libs.project}" />
+    </manifest>
+  </jar>
+</target>

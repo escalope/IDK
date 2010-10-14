@@ -1,0 +1,30 @@
+ <shortcut
+    name="Start Application X @{deployment} (console)"
+    target="java.exe"
+    commandLine="-jar $INSTALL_PATH\launcher-@{deployment}.jar"
+    description="This starts Application X @{deployment}"
+    iconFile="$INSTALL_PATH\default-@{deployment}.ico"
+    iconIndex="0"
+    initialState="normal"
+    programGroup="yes"
+    desktop="no"
+    applications="no"
+    startMenu="no"
+    startup="no">
+  </shortcut>
+
+ <shortcut
+    name="Start Application X @{deployment} (no console)"
+    target="$INSTALL_PATH\launcher-@{deployment}.jar"
+    commandLine=""
+    description="This starts Application X @{deployment}"
+    iconFile="$INSTALL_PATH\default-@{deployment}.ico"
+    iconIndex="0"
+    initialState="normal"
+    programGroup="yes"
+    desktop="no"
+    applications="no"
+    startMenu="no"
+    startup="no">
+  </shortcut>
+

@@ -496,7 +496,7 @@
 	<java fork="true" failonerror="true" maxmemory="300m"
 	      classname="ingenias.editor.IDE">
 		<!--jvmarg value="-Dswing.defaultlaf=com.jgoodies.looks.plastic.PlasticLookAndFeel"/-->
-		<!--jvmarg value="-Dswing.defaultlaf=com.nilo.plaf.nimrod.NimRODLookAndFeel"/-->
+		<!--jvmarg value="-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"/-->
 		<classpath>
 			<!--pathelement path="bin" /-->
 			

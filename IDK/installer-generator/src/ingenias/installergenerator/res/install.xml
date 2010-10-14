@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+
+<installation version="1.0">
+
+    <!-- 
+        The info section.
+        The meaning of the tags should be natural ...
+    -->
+    <info>
+        <appname>INGENIAS Application X</appname>
+        <appversion>1.0.0</appversion>
+        <authors>
+            <author name="You" email="name@address"/>
+        </authors>
+        <url>http://www.somewhere.com/</url>
+    </info>
+
+    <!-- 
+        The gui preferences indication.
+        Sets the installer window to 640x480. It will not be able to change the size.
+    -->
+    <guiprefs width="640" height="480" resizable="yes"/>
+
+    <!-- 
+        The locale section.
+        Asks here to include the English and French langpacks.
+    -->
+    <locale>
+        <langpack iso3="eng"/>
+    </locale>
+
+    <!-- 
+        The resources section.
+        The ids must be these ones if you want to use the LicencePanel and/or the InfoPanel.
+    -->
+    <resources>
+        <res id="LicencePanel.licence" src="installer-resources\Licence.txt"/>
+        <res id="InfoPanel.info" src="installer-resources\Readme.txt"/>
+        <res src="installer-resources\shortcuts\win-shortcuts.xml" id="Win_shortcutSpec.xml"/>
+    </resources>
+
+    <!-- 
+        The panels section.
+        We indicate here which panels we want to use. The order will be respected.
+    -->
+    <panels>
+        <panel classname="HelloPanel"/>
+        <panel classname="InfoPanel"/>
+        <panel classname="LicencePanel"/>
+        <panel classname="TargetPanel"/>
+        <panel classname="PacksPanel"/>
+        <panel classname="InstallPanel"/>
+        <panel classname="ShortcutPanel"/>
+        <panel classname="FinishPanel"/>
+    </panels>
+	
+	
+
+    <!-- 
+        The packs section.
+        We specify here our packs.
+    -->
+    <packs>
+        <pack name="Base" required="yes">
+            <description>The executable files</description>
+            <file src="lib" targetdir="$INSTALL_PATH"/>
+@{deployments-file}
+        </pack>
+        <pack name="Sources" required="no">
+            <description>The sources</description>
+            <file src="src" targetdir="$INSTALL_PATH"/>
+            <file src="permsrc" targetdir="$INSTALL_PATH"/>
+            <file src="gensrc" targetdir="$INSTALL_PATH"/>
+            <file src="spec" targetdir="$INSTALL_PATH"/>
+        </pack>
+    </packs>
+
+    <native type="izpack" name="ShellLink.dll"/>
+	
+</installation>

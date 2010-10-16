@@ -50,6 +50,7 @@ public class BrowserImp implements Browser {
 		this.ids=ids;
 		if (ids==null)
 			throw new RuntimeException("The ids parameter cannot be null");
+		this.currentProject=ids.getCurrentFile();
 	}
 
 

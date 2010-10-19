@@ -7,6 +7,10 @@ package ingenias.installergenerator.control.actions;
 
 import ingenias.installergenerator.control.AbstractEvent;
 import ingenias.installergenerator.control.Action;
+import ingenias.installergenerator.view.ProgressingUpdateCommand;
+import ingenias.installergenerator.view.UpdateCommand;
+import ingenias.installergenerator.view.commands.UpdateCommandFactory;
+import ingenias.installergenerator.view.commands.UpdateCommandId;
 
 /**
  *
@@ -14,6 +18,8 @@ import ingenias.installergenerator.control.Action;
  */
 public class CancelExit implements Action{
     public void execute(AbstractEvent event) {
-        System.exit(0);
+        UpdateCommandFactory factory = UpdateCommandFactory.getInstance();
+        UpdateCommand command = factory.createCommand(UpdateCommandId.CloseWindows);
+        command.execute();
     }
 }

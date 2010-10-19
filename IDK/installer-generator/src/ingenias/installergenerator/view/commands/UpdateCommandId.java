@@ -13,4 +13,5 @@ public enum UpdateCommandId {
     ProcessingView,ProcessingViewWithProgress,
     DeploymentsView,ShowAbortReasonsView,
     ShowInstallerGenerationResultsView,
-    IzPackAntPathFormView}
+    IzPackAntPathFormView,
+CloseWindows}

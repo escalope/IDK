@@ -37,6 +37,7 @@
     <resources>
         <res id="LicencePanel.licence" src="installer-resources\Licence.txt"/>
         <res id="InfoPanel.info" src="installer-resources\Readme.txt"/>
+        <res id="TargetPanel.dir" src="installer-resources\private\DefaultInstallDir.txt" />
         <res src="installer-resources\shortcuts\win-shortcuts.xml" id="Win_shortcutSpec.xml"/>
     </resources>
 

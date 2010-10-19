@@ -13,18 +13,15 @@ import ingenias.installergenerator.model.Context;
 import ingenias.installergenerator.view.*;
 import ingenias.installergenerator.view.commands.UpdateCommandFactory;
 import ingenias.installergenerator.view.commands.UpdateCommandId;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
+import java.net.URISyntaxException;
 import java.util.List;
+import static ingenias.installergenerator.utils.ResourcesUtil.*;
 
 /**
  *
@@ -47,7 +44,8 @@ public class GenerateInstallers implements Action {
         String targetTemplate = "";
         try {
             targetTemplate = getTargetTemplate();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             Controller.getController().event(new BasicEvent(EventId.ErrorGeneratingInstaller, "Internal error getting the target-template file"));
             return;
         }
@@ -55,14 +53,16 @@ public class GenerateInstallers implements Action {
         String shortcutsTemplate = "";
         try {
             shortcutsTemplate = getShortcutsTemplate();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             Controller.getController().event(new BasicEvent(EventId.ErrorGeneratingInstaller, "Internal error getting the shortcut-template file"));
         }
         command.setAdvance(10);
         String packFileTemplate = "";
         try {
             packFileTemplate = getPackFileTemplate();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             Controller.getController().event(new BasicEvent(EventId.ErrorGeneratingInstaller, "Internal error getting the pack-file-template file"));
         }
         command.setAdvance(15);
@@ -101,19 +101,22 @@ public class GenerateInstallers implements Action {
         String buildXML = "";
         try {
             buildXML = getBuildXML();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             Controller.getController().event(new BasicEvent(EventId.ErrorGeneratingInstaller, "Internal error getting the private build.xml file"));
         }
         String winShortcutsXML = "";
         try {
             winShortcutsXML = getWinShortcutsXML();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             Controller.getController().event(new BasicEvent(EventId.ErrorGeneratingInstaller, "Internal error getting the win-shortcuts.xml file"));
         }
         String installXML = "";
         try {
             installXML = getInstallXML();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             Controller.getController().event(new BasicEvent(EventId.ErrorGeneratingInstaller, "Internal error getting the install.xml file"));
         }
 
@@ -122,7 +125,7 @@ public class GenerateInstallers implements Action {
         winShortcutsXML = winShortcutsXML.replace("@{shortcuts}", shortcuts.toString());
         installXML = installXML.replace("@{deployments-file}", deploymentsFile.toString());
         try {
-            writeInstallerConfigurations(buildXML, winShortcutsXML, installXML);
+            writeInstallerConfigurations(projectDir,buildXML, winShortcutsXML, installXML);
         } catch (Exception ex) {
             Controller.getController().event(new BasicEvent(EventId.ErrorGeneratingInstaller, "Error writing the installation files"));
             ex.printStackTrace();
@@ -200,58 +203,59 @@ public class GenerateInstallers implements Action {
 
     }
 
-    private String getTargetTemplate() throws IOException {
+    private String getTargetTemplate() throws Exception {
         return reader("/ingenias/installergenerator/res/private/target-template.xml");
     }
 
-    private String getShortcutsTemplate() throws IOException {
+    private String getShortcutsTemplate() throws Exception {
         return reader("/ingenias/installergenerator/res/shortcuts/shortcut-template.xml");
     }
 
-    private String getPackFileTemplate() throws IOException {
+    private String getPackFileTemplate() throws Exception {
         return reader("/ingenias/installergenerator/res/pack-file-dep-template.xml");
     }
 
-    private String getBuildXML() throws IOException {
+    private String getBuildXML() throws Exception {
         return reader("/ingenias/installergenerator/res/private/build.xml");
     }
 
-    private String getWinShortcutsXML() throws IOException {
+    private String getWinShortcutsXML() throws Exception {
         return reader("/ingenias/installergenerator/res/shortcuts/win-shortcuts.xml");
     }
 
-    private String getInstallXML() throws IOException {
+    private String getInstallXML() throws Exception {
         return reader("/ingenias/installergenerator/res/install.xml");
     }
 
-    private void writeInstallerConfigurations(String buildXML, String winShortcutsXML, String installXML) throws FileNotFoundException, IOException {
-        File installerResourcesPrivateDir = new File("installer-resources/private");
+    private void writeInstallerConfigurations(String projectDir, String buildXML, String winShortcutsXML, String installXML) throws FileNotFoundException, IOException, URISyntaxException {
+        File installerResourcesPrivateDir = new File(projectDir+"/installer-resources/private");
         installerResourcesPrivateDir.mkdirs();
 
-        File installerResourcesShortcutsDir = new File("installer-resources/shortcuts");
+        File installerResourcesShortcutsDir = new File(projectDir+"/installer-resources/shortcuts");
         installerResourcesShortcutsDir.mkdirs();
-        copy("/ingenias/installergenerator/res/Readme.txt", new File("installer-resources/Readme.txt"));
-        copy("/ingenias/installergenerator/res/Licence.txt", new File("installer-resources/Licence.txt"));
+        copy("/ingenias/installergenerator/res/Readme.txt", new File(projectDir+"/installer-resources/Readme.txt"));
+        copy("/ingenias/installergenerator/res/Licence.txt", new File(projectDir+"/installer-resources/Licence.txt"));
+        copy("/ingenias/installergenerator/res/private/DefaultInstallDir.txt", new File(projectDir+"/installer-resources/private/DefaultInstallDir.txt"));
         for (String selectedDeployment : selectedDeployments) {
             copy("/ingenias/installergenerator/res/shortcuts/default.ico",
-                    new File("installer-resources/shortcuts/default-" + selectedDeployment + ".ico"));
+                    new File(projectDir+"/installer-resources/shortcuts/default-" + selectedDeployment + ".ico"));
         }
 
-        File installXMLFile = new File("install.xml");
+        File installXMLFile = new File(projectDir+"/install.xml");
         if (!installXMLFile.exists()) {
             installXMLFile.createNewFile();
         }
 
         writeToFile(installXML, installXMLFile);
 
-        File buildXMLFile = new File("installer-resources/private/build.xml");
+        File buildXMLFile = new File(projectDir+"/installer-resources/private/build.xml");
         if (!buildXMLFile.exists()) {
             buildXMLFile.createNewFile();
         }
 
         writeToFile(buildXML, buildXMLFile);
 
-        File winShortcutsXMLFile = new File("installer-resources/shortcuts/win-shortcuts.xml");
+        File winShortcutsXMLFile = new File(projectDir+"/installer-resources/shortcuts/win-shortcuts.xml");
         if (!winShortcutsXMLFile.exists()) {
             winShortcutsXMLFile.createNewFile();
         }
@@ -259,50 +263,5 @@ public class GenerateInstallers implements Action {
         writeToFile(winShortcutsXML, winShortcutsXMLFile);
 
 
-    }
-
-    private void writeToFile(String text, File dest) throws IOException {
-        FileWriter fw = new FileWriter(dest);
-        StringReader sr = new StringReader(text);
-        char[] data = new char[1024];
-        int len = sr.read(data);
-        while (len > 0) {
-            fw.write(data, 0, len);
-            len = sr.read(data);
-        }
-        fw.close();
-        sr.close();
-    }
-
-    private void copy(String res, File dest) throws FileNotFoundException, IOException {
-        InputStream is = System.class.getResourceAsStream(res);
-        BufferedInputStream bis = new BufferedInputStream(is);
-        if (!dest.exists()) {
-            dest.createNewFile();
-        }
-        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(dest));
-        byte[] buf = new byte[1024];
-        int len = bis.read(buf);
-        while (len > 0) {
-            bos.write(buf, 0, len);
-            len = bis.read(buf);
-        }
-        bos.flush();
-        bos.close();
-        bis.close();
-    }
-
-    private String reader(String resource) throws IOException {
-        InputStream is = System.class.getResourceAsStream(resource);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        String line = reader.readLine();
-        StringBuffer result = new StringBuffer("");
-        while (line != null) {
-            result.append(line);
-            result.append("\n");
-            line = reader.readLine();
-        }
-        reader.close();
-        return result.toString();
     }
 }

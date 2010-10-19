@@ -8,14 +8,17 @@
  *
  * Created on 04-oct-2010, 15:38:50
  */
-
 package ingenias.installergenerator.view;
+
+import ingenias.installergenerator.control.BasicEvent;
+import ingenias.installergenerator.control.Controller;
+import ingenias.installergenerator.control.EventId;
 
 /**
  *
  * @author Carlos
  */
-public class InstallationAbortedView extends javax.swing.JPanel implements WizardEventListener{
+public class InstallationAbortedView extends javax.swing.JPanel implements WizardEventListener {
 
     /** Creates new form InstallationAbortedView */
     public InstallationAbortedView() {
@@ -62,8 +65,6 @@ public class InstallationAbortedView extends javax.swing.JPanel implements Wizar
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -78,15 +79,12 @@ public class InstallationAbortedView extends javax.swing.JPanel implements Wizar
     }
 
     public void next() {
-
+        Controller.getController().event(new BasicEvent(EventId.Next));
     }
 
     public void back() {
-
     }
 
     public void cancel() {
-
     }
-
 }

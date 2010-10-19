@@ -45,7 +45,7 @@ public class ProcessSpec implements Action {
         }
 
         XMLInputFactory xmlFactory = XMLInputFactory.newInstance();
-        File spec = new File(projectDir+"spec/specification.xml");
+        File spec = new File(projectDir+"/spec/specification.xml");
         try {
             XMLEventReader xmlReader = xmlFactory.createXMLEventReader(new FileReader(spec));
             ArrayList<String> deployments = new ArrayList<String>();

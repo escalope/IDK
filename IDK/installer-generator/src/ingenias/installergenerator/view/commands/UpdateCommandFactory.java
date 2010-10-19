@@ -49,6 +49,9 @@ public class UpdateCommandFactory {
             case IzPackAntPathFormView:
                 command = new IzPackAntPathFormVC(wizardWindow);
                 break;
+            case CloseWindows:
+                command = new CloseWindowsVC(wizardWindow);
+                break;
 
         }
         return command;

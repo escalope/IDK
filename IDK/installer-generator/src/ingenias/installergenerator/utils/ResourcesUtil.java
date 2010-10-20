@@ -88,11 +88,11 @@ public class ResourcesUtil {
 
         InputStream is = null;
         //TODO: arreglar chapuza
-        JarFile jar = new JarFile("ext/InstallerGenerator.jar", true);
+        JarFile jar = new JarFile("ext/modinstallergenerator.jar", true);
         JarEntry entry = jar.getJarEntry(resource);
         jar.close();
         if (entry != null) {
-            JarInputStream jis = new JarInputStream(new FileInputStream("ext/InstallerGenerator.jar"));
+            JarInputStream jis = new JarInputStream(new FileInputStream("ext/modinstallergenerator.jar"));
             boolean found = false;
             JarEntry entryIS = null;
             byte[] b = null;

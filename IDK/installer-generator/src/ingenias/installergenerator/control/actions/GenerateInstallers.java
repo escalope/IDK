@@ -30,6 +30,7 @@ import static ingenias.installergenerator.utils.ResourcesUtil.*;
 public class GenerateInstallers implements Action {
 
     private List<String> selectedDeployments;
+    
 
     public void execute(AbstractEvent event) {
         UpdateCommandFactory factory = UpdateCommandFactory.getInstance();

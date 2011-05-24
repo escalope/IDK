@@ -182,10 +182,12 @@ public class CustomizedNewJavaProjectWizardPageOne extends WizardPage {
 		public LocationGroup() {
 			fWorkspaceRadio= new SelectionButtonDialogField(SWT.RADIO);
 			fWorkspaceRadio.setDialogFieldListener(this);
-			fWorkspaceRadio.setLabelText(NewWizardMessages.NewJavaProjectWizardPageOne_LocationGroup_workspace_desc);
+			//fWorkspaceRadio.setLabelText(NewWizardMessages.NewJavaProjectWizardPageOne_LocationGroup_workspace_desc);
+			fWorkspaceRadio.setLabelText(NewWizardMessages.NewJavaProjectWizardPageOne_LocationGroup_location_desc);
 
 			fExternalRadio= new SelectionButtonDialogField(SWT.RADIO);
-			fExternalRadio.setLabelText(NewWizardMessages.NewJavaProjectWizardPageOne_LocationGroup_external_desc);
+			//fExternalRadio.setLabelText(NewWizardMessages.NewJavaProjectWizardPageOne_LocationGroup_external_desc);
+		    fExternalRadio.setLabelText(NewWizardMessages.NewJavaProjectWizardPageOne_LocationGroup_location_desc);
 
 			fLocation= new StringButtonDialogField(this);
 			fLocation.setDialogFieldListener(this);
@@ -205,7 +207,8 @@ public class CustomizedNewJavaProjectWizardPageOne extends WizardPage {
 
 			final Group group= new Group(composite, SWT.NONE);
 			group.setLayout(initGridLayout(new GridLayout(numColumns, false), true));
-			group.setText(NewWizardMessages.NewJavaProjectWizardPageOne_LocationGroup_title);
+			//group.setText(NewWizardMessages.NewJavaProjectWizardPageOne_LocationGroup_title);
+			group.setText(NewWizardMessages.NewJavaProjectWizardPage_title);
 
 			fWorkspaceRadio.doFillIntoGrid(group, numColumns);
 			fExternalRadio.doFillIntoGrid(group, numColumns);
@@ -1046,13 +1049,15 @@ public class CustomizedNewJavaProjectWizardPageOne extends WizardPage {
 			if (projectPath.toFile().exists()) {//create from existing source
 				if (Platform.getLocation().isPrefixOf(projectPath)) { //create from existing source in workspace
 					if (!Platform.getLocation().equals(projectPath.removeLastSegments(1))) {
-						setErrorMessage(NewWizardMessages.NewJavaProjectWizardPageOne_Message_notOnWorkspaceRoot);
+						//setErrorMessage(NewWizardMessages.NewJavaProjectWizardPageOne_Message_notOnWorkspaceRoot);
+						setErrorMessage(NewWizardMessages.NewJavaProjectWizardPageOne_Message_invalidDirectory);
 						setPageComplete(false);
 						return;
 					}
 
 					if (!projectPath.toFile().exists()) {
-						setErrorMessage(NewWizardMessages.NewJavaProjectWizardPageOne_Message_notExisingProjectOnWorkspaceRoot);
+						//setErrorMessage(NewWizardMessages.NewJavaProjectWizardPageOne_Message_notExisingProjectOnWorkspaceRoot);
+						setErrorMessage(NewWizardMessages.NewJavaProjectWizardPageOne_Message_invalidProjectNameForWorkspaceRoot);
 						setPageComplete(false);
 						return;
 					}

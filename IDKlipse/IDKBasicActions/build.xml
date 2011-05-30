@@ -1,0 +1,67 @@
+<project name="IDKlipse Component" default="help" basedir=".">
+
+<property name="version" value="3.1.0"/>
+<property name="classes" value="bin" />
+<property name="target.name" value="IDKBasicActions" />
+<property name="dist" value="dist" />
+<property name="src" value="src" />
+<property name="lib" value="lib" />
+<property name="eclipse-lib" value="../eclipse-lib" />
+<property name="IDKEditor-lib" value="../IDKEditor/lib" />
+<property name="IDKEditor-plugin" value="../IDKEditor/dist/IDKEditor_${version}.jar" />
+
+
+<target name="help">
+    <echo message="Common build targets:" />
+    <echo message="dist        - Builds a jar" />
+    <echo message="build       - Same as clean+dist" />
+    <echo message="compile     - Compiles all classes" />
+    <echo message="clean       - Remove all *.class and jars" />
+</target>
+
+
+
+<path id="classpath">
+    <pathelement path="${classes}" />
+	<pathelement path="${IDKEditor-plugin}" />
+    <fileset dir="${lib}">
+        <include name="*.jar" />
+    </fileset>
+	<fileset dir="${eclipse-lib}">
+        <include name="*.jar" />
+    </fileset>
+    <fileset dir="${IDKEditor-lib}">
+        <include name="*.jar" />
+    </fileset>
+</path>
+
+<target name="build" depends="clean,dist"/>
+
+<target name="dist" depends="compile">
+    <mkdir dir="${dist}"/>
+    <jar jarfile="${dist}/${target.name}_${version}.jar" manifest="META-INF/MANIFEST.MF">
+        <fileset dir="${classes}"/>
+        <fileset dir=".">
+		   <include name="icons/**"/>
+		   <include name="fragment.xml"/>
+		</fileset>
+    </jar>
+</target>
+
+<target name="compile">
+    <mkdir dir="${classes}"/>
+    <javac
+        srcdir="${src}"
+        destdir="${classes}"
+		classpathref="classpath"/>    
+</target>
+
+<target name="clean">
+    <delete dir="${classes}"/>
+	<delete dir="${dist}"/>
+	<delete>
+      <fileset dir="." includes="**/*.class"/>
+    </delete>
+</target>
+
+</project>

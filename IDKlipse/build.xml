@@ -1,0 +1,64 @@
+<project name="INGENIAS Development Kit" default="help" basedir=".">
+
+<property name="version" value="3.1.0"/>
+
+<property name="IDKlipse.dist" value="IDKlipse/dist" />
+<property name="IDKlipse.target.name" value="IDKlipse" />
+
+
+<target name="help">
+    <echo message="Common build targets:" />
+    <echo message="build                        - Compile everything" />
+    <echo message="clean                        - Remove all deliverables" />
+</target>
+
+<target name="clean">
+   <ant antfile="build.xml" target="clean"  dir="IDKAntRunner"/>
+   <ant antfile="build.xml" target="clean"  dir="IDKBasicActions"/>
+   <ant antfile="build.xml" target="clean"  dir="IDKEditor"/>
+   <ant antfile="build.xml" target="clean"  dir="IDKNewProjectWizard"/>
+   <ant antfile="build.xml" target="clean"  dir="IDKObjectView"/>
+   <ant antfile="build.xml" target="clean"  dir="IDKPerspective"/>
+   <ant antfile="build.xml" target="clean"  dir="IDKProjectView"/>
+   <ant antfile="build.xml" target="clean"  dir="IDKRefreshLibraries"/>
+   <ant antfile="build.xml" target="clean"  dir="IDKSearchView"/>
+   <delete>
+     <fileset dir="IDKlipse" includes="dist/IDKlipse_${version}.jar" />
+	 <fileset dir="IDKlipseUpdateSite" includes="features/**" />
+	 <fileset dir="IDKlipseUpdateSite" includes="plugins/**" />
+   </delete>
+</target>
+
+<target name="build">
+   <ant antfile="build.xml" target="build"  dir="IDKEditor"/>
+   <ant antfile="build.xml" target="build"  dir="IDKAntRunner"/>
+   <ant antfile="build.xml" target="build"  dir="IDKBasicActions"/>
+   <ant antfile="build.xml" target="build"  dir="IDKNewProjectWizard"/>
+   <ant antfile="build.xml" target="build"  dir="IDKObjectView"/>
+   <ant antfile="build.xml" target="build"  dir="IDKPerspective"/>
+   <ant antfile="build.xml" target="build"  dir="IDKProjectView"/>
+   <ant antfile="build.xml" target="build"  dir="IDKRefreshLibraries"/>
+   <ant antfile="build.xml" target="build"  dir="IDKSearchView"/>
+   <jar jarfile="IDKlipse/dist/IDKlipse_${version}.jar">
+		<fileset dir="IDKlipse">
+		   <include name="feature.xml"/>
+		</fileset>
+    </jar>
+</target>
+
+<target name="site">
+    <copy overwrite="true" todir="IDKlipseUpdateSite/plugins">
+	   <fileset dir="IDKAntRunner/dist" includes="*_${version}.jar"/>
+	   <fileset dir="IDKBasicActions/dist" includes="*_${version}.jar"/>
+	   <fileset dir="IDKEditor/dist" includes="*_${version}.jar"/>
+	   <fileset dir="IDKNewProjectWizard/dist" includes="*_${version}.jar"/>
+	   <fileset dir="IDKObjectView/dist" includes="*_${version}.jar"/>
+	   <fileset dir="IDKPerspective/dist" includes="*_${version}.jar"/>
+	   <fileset dir="IDKProjectView/dist" includes="*_${version}.jar"/>
+	   <fileset dir="IDKRefreshLibraries/dist" includes="*_${version}.jar"/>
+	   <fileset dir="IDKSearchView/dist" includes="*_${version}.jar"/>
+	</copy>
+	<copy overwrite="true" todir="IDKlipseUpdateSite/features" file="IDKlipse/dist/IDKlipse_${version}.jar"/>
+</target>
+
+</project>

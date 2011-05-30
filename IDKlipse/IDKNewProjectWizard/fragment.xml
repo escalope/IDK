@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<fragment>
+  <extension
+         point="org.eclipse.ui.newWizards">
+         <category id="ingenias.plugin.idk" name="IDK"/>
+          
+      <wizard
+            canFinishEarly="false"
+            category="ingenias.plugin.idk"
+            class="ingenias.plugin.wizard.IDKProjectCreationWizard"
+            finalPerspective="ingenias.plugin.perspective.IDKPerspective"
+            hasPages="true"
+            icon="icons/idkicon.gif"
+            id="ingenias.plugin.wizard.IDKProjectCreationWizard"
+            name="IDKProject"
+            project="true">
+      </wizard>
+   </extension>
+ 
+
+</fragment>

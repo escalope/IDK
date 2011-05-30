@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: IDKSearchView Fragment
+Bundle-SymbolicName: IDKSearchView;singleton:=true
+Bundle-Version: 3.1.0
+Fragment-Host: IDKEditor;bundle-version="3.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

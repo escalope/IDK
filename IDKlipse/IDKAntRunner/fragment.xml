@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<fragment>
+   <extension
+         id="ingenias.plugin.views.IDKAntRunView"
+         name="ingenias.plugin.views.IDKAntRunView"
+         point="org.eclipse.ui.views">
+      <category id="ingenias.plugin.idk" name="IDK"/>
+
+      <view
+            category="ingenias.plugin.idk"
+            class="ingenias.plugin.views.IDKAntRunView"
+            icon="icons/idkicon.gif"
+            id="ingenias.plugin.views.IDKAntRunView"
+            name="run"
+            restorable="true">
+      </view>
+   </extension>
+
+
+</fragment>

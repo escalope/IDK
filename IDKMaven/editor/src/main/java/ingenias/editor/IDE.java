@@ -86,7 +86,9 @@ extends ingenias.editor.IDEAbs {
 
 
 	public static void main(String args[]) throws Exception {
-
+		System.out.println("INGENIAS Development Kit (C) 2012 Jorge Gomez");
+		System.out.println("This program comes with ABSOLUTELY NO WARRANTY; for details check www.gnu.org/copyleft/gpl.html.");
+		System.out.println("This is free software, and you are welcome to redistribute it under certain conditions;; for details check www.gnu.org/copyleft/gpl.html.");
                 setUIFont(new javax.swing.plaf.FontUIResource(FontConfiguration.getConfiguration().getGUIFont()));   
                 try {
                  UIManager.setLookAndFeel(

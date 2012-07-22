@@ -143,6 +143,11 @@ public class IAFMerger {
 	
 
 	public static void main(String args[]) throws SAXException, IOException, ParserConfigurationException, UnknowFormat, DamagedFormat, CannotLoad{
+
+ System.out.println("INGENIAS Merge (C) 2012 Jorge Gomez");
+                System.out.println("This program comes with ABSOLUTELY NO WARRANTY; for details check www.gnu.org/copyleft/gpl.html.");
+                System.out.println("This is free software, and you are welcome to redistribute it under certain conditions;; for details check www.gnu.org/copyleft/gpl.html.");
+
 		if (args.length==0)
 			System.err.println("You need to use as argument the path to a XML file containing the merge instructions");
 		else {

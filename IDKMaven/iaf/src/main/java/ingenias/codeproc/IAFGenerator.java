@@ -2269,8 +2269,10 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 *@exception  Exception  Description of Exception
 	 */
 	public static void main(String args[]) throws Exception {	
+ System.out.println("INGENIAS Agent Framework generator  (C) 2012 Jorge Gomez");
+                System.out.println("This program comes with ABSOLUTELY NO WARRANTY; for details check www.gnu.org/copyleft/gpl.html.");
+                System.out.println("This is free software, and you are welcome to redistribute it under certain conditions;; for details check www.gnu.org/copyleft/gpl.html.");
 
-		System.err.println("ejecutando.....");	
 		if (args.length==0){
 			System.err.println("The first argument (mandatory) has to be the specification file and the second (optional) " +
 			"the project folder");

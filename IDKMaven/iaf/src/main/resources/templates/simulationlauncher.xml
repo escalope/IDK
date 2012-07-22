@@ -1,0 +1,308 @@
+
+@@@program xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../plantilla.xsd"@@@
+ @@@repeat id="simulationnode"@@@
+
+ @@@saveto@@@
+  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeout@@@/v@@@/ingenias/simulation/@@@v@@@simulationconfig@@@/v@@@.java@@@/file@@@
+  @@@text@@@
+
+/*
+    Copyright (C) 2005 Jorge Gomez Sanz
+
+    This file is part of INGENIAS Agent Framework, an agent infrastructure linked
+    to the INGENIAS Development Kit, and availabe at http://grasia.fdi.ucm.es/ingenias or
+    http://ingenias.sourceforge.net. 
+
+    INGENIAS Agent Framework is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    INGENIAS Agent Framework is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with INGENIAS Agent Framework; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*/
+
+
+package ingenias.simulation;
+
+import java.util.Date;
+import java.util.Vector;
+import ingenias.testing.*;
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+
+import jade.core.*;
+import jade.wrapper.StaleProxyException;
+import jade.wrapper.State;
+import ingenias.exception.TimeOut;
+import ingenias.jade.mental.*;
+import ingenias.jade.*;
+import ingenias.tests.*;
+import ingenias.simulation.*;
+import ingenias.exception.*;
+import ingenias.jade.IAFProperties;
+import ingenias.jade.graphics.MainInteractionManager;
+import java.io.*;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import ingenias.editor.entities.MentalEntity;
+
+
+
+public  class @@@v@@@simulationconfig@@@/v@@@ extends BasicMASTest{
+
+ jade.wrapper.AgentContainer ac=null;
+ private Date initiatingExperimentDate=new Date();
+ private FileOutputStream logFile;
+ 
+ private void createEntry(FileOutputStream fos,String message){
+
+		long milliseconds=(new Date().getTime()-initiatingExperimentDate.getTime());
+		try {
+			fos.write((""+milliseconds+","+message+"\n").getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+  
+  protected  void launchSimulation() throws TimeOut{
+ 			 // Involved agent local ids for this test are:
+ 			 Date init=new Date();
+  			@@@repeat id="deploynode"@@@@@@repeat id="agents"@@@  			
+        	// -@@@v@@@agentid@@@/v@@@
+        	@@@/repeat@@@@@@/repeat@@@
+  			// write here the agent id whose 
+  			// mental state manager you want to get access to
+			// MentalStateManager msm = MSMRepository.getInstance().get("MY_AGENT_ID"); // provides access to the
+			// For current agents, these are the variables containing their mental states
+			@@@repeat id="deploynode"@@@@@@repeat id="agents"@@@  					
+        	MentalStateManager msm@@@v@@@agentid@@@/v@@@=MSMRepository.getInstance().waitFor("@@@v@@@agentid@@@/v@@@");
+        	TestUtils.waitForAgentInitialised(msm@@@v@@@agentid@@@/v@@@);
+        	@@@/repeat@@@@@@/repeat@@@
+        	
+        	
+			MainInteractionManager.goAutomatic(); // tells the agents to start working
+		
+        	for (int simTime=0;simTime<@@@v@@@simlength@@@/v@@@;simTime++){
+        	 System.out.println("Simulated time:"+simTime);
+        	// Injected events
+        	try {
+			@@@repeat id="injectedevents"@@@	
+			@@@repeat id="affectedagent"@@@
+			
+			@@@repeat id="closeperiodinsertionwithfreq"@@@
+			 if (	simTime>=@@@v@@@simtime@@@/v@@@ && 
+			 		simTime<=@@@v@@@endsimtime@@@/v@@@ &&
+			       (simTime-@@@v@@@simtime@@@/v@@@)%@@@v@@@insertfreq@@@/v@@@==0){
+			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
+			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
+			  @@@v@@@eventcreationcode@@@/v@@@
+			  //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
+			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(information);
+			 }
+			@@@/repeat@@@
+			
+			@@@repeat id="openperiodinsertionwithfreq"@@@
+			 if (simTime>=@@@v@@@simtime@@@/v@@@ && 
+			       (simTime-@@@v@@@simtime@@@/v@@@)%@@@v@@@insertfreq@@@/v@@@==0){
+			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
+			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
+			  @@@v@@@eventcreationcode@@@/v@@@
+			  //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
+			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(information);
+			 }
+			@@@/repeat@@@
+			
+			@@@repeat id="instantinsertion"@@@
+			 if (simTime==@@@v@@@simtime@@@/v@@@){
+			  @@@v@@@informationid@@@/v@@@ information= new @@@v@@@informationid@@@/v@@@();
+			  //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS	
+			  @@@v@@@eventcreationcode@@@/v@@@
+			  //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
+			  msm@@@v@@@agentid@@@/v@@@.addMentalEntity(information);
+			 }
+			@@@/repeat@@@
+			
+			@@@/repeat@@@
+			@@@/repeat@@@
+			} catch (InvalidEntity e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+			// Observed events
+			// to reuse the same variables the scope of the variables are limited
+			// to a concrete block
+			@@@repeat id="simextractedinformation"@@@
+			@@@repeat id="surveyedagent"@@@
+			@@@repeat id="extractedinfo"@@@
+			 if (simTime%@@@v@@@simtime@@@/v@@@==0){
+			    Vector<MentalEntity> identifiedEntities=msm@@@v@@@agentid@@@/v@@@.getMentalEntityByTypeIncludingConversations("@@@v@@@extractedinfotype@@@/v@@@");
+			    String agentId="@@@v@@@agentid@@@/v@@@";
+			    //#start_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
+			    @@@v@@@extractioncode@@@/v@@@
+			    //#end_node:@@@v@@@codeid@@@/v@@@ <--- DO NOT REMOVE THIS
+			 }
+			@@@/repeat@@@
+			@@@/repeat@@@				
+			@@@/repeat@@@
+        	Vector<String> agentsWereWaiting = Simulation.getInstance().proceedNextCycle();
+			System.out.println("agents were waiting:"+agentsWereWaiting);
+        	 try {
+        	  Thread.currentThread().sleep(@@@v@@@deltat@@@/v@@@);
+        	 } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	}
+        	try {
+				ac.kill();
+			} catch (StaleProxyException e) {
+				e.printStackTrace();
+			}	
+  	       	Date end=new Date();
+        	System.out.println("***********************");
+        	System.out.println("Simulation finished");
+        	System.out.println("Elapsed time:"+((end.getTime()-init.getTime())/1000f)+" seconds");
+        	System.out.println("***********************");
+        	try {
+				this.logFile.close();
+			} catch (IOException e) {				
+				e.printStackTrace();
+			}
+        	System.exit(0);
+  }
+  
+  public void initiateSimulation(String args[]) throws StaleProxyException{
+  	java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MMddyyHHmm");
+		Date d=new Date();
+		new File("logs").mkdir();
+		try {
+			this.logFile=new FileOutputStream("logs/simulationData"+df.format(d)+".log");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+      IAFProperties.setGraphicsOn(false); // disable graphics
+         MainInteractionManager.goManual(); // Stop task execution
+         Simulation.getInstance().setSimulationMode(true); // enable simulation mode
+  @@@repeat id="deploynode"@@@       
+         new Thread(){
+			public void run(){
+				String[] args1=new String[4];
+				args1[0]="-port";
+				args1[1]="@@@v@@@port@@@/v@@@";
+				args1[2]="-file-dir";
+				args1[3]="jade/";								 				
+				jade.Boot.main(args1);		
+			}
+		}.start();
+
+        // Get a hold on JADE runtime
+        jade.core.Runtime rt = jade.core.Runtime.instance();
+
+        // Exit the JVM when there are no more containers around
+        rt.setCloseVM(true);
+
+        // Create a default profile
+        Profile p = new ProfileImpl();
+        p.setParameter("preload","a*");
+        p.setParameter(Profile.MAIN_PORT, "@@@v@@@port@@@/v@@@");
+        p.setParameter(Profile.FILE_DIR, "jade/");
+        
+        
+        // Waits for JADE to start
+        boolean notConnected=true;
+		
+		while (notConnected){			
+				try {
+					Socket s=new Socket("localhost",Integer.parseInt("@@@v@@@port@@@/v@@@"));
+					notConnected=false;
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UnknownHostException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					System.err.println("Error: "+e.getMessage());
+					System.err.println("Reconnecting in one second");
+					try {
+						Thread.currentThread().sleep(1000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}
+
+		}
+        
+     
+        // Exit the JVM when there are no more containers around
+        rt.setCloseVM(false);
+        
+        // Create a new non-main container, connecting to the default
+        // main container (i.e. on this host, port 1099)
+      
+        ac = rt.createAgentContainer(p);
+
+{@@@repeat id="agents"@@@
+        // Create a new agent
+        final jade.wrapper.AgentController agc@@@v@@@agentid@@@/v@@@ = ac.createNewAgent("@@@v@@@agentid@@@/v@@@",
+            "ingenias.jade.agents.@@@v@@@agenttype@@@/v@@@JADEAgent", new Object[0]);	
+	@@@repeat id="initialentities"@@@
+	{ @@@v@@@mentalentityname@@@/v@@@ ment=new @@@v@@@mentalentityname@@@/v@@@();
+	   @@@repeat id="slotvalue"@@@
+	     ment.set@@@v@@@slotname@@@/v@@@(@@@v@@@slotvalue@@@/v@@@);
+	   @@@/repeat@@@	   
+	   agc@@@v@@@agentid@@@/v@@@.putO2AObject(ment, false);
+	}
+	@@@/repeat@@@
+	
+        new Thread(){
+          public void run(){
+            try {
+                addStartedAgent("@@@v@@@agentid@@@/v@@@");
+                @@@repeat id="roles"@@@
+                addAgentRole("@@@v@@@agentid@@@/v@@@","@@@v@@@roleid@@@/v@@@");   
+    			@@@/repeat@@@             
+    			             
+               System.out.println("Starting up @@@v@@@agentid@@@/v@@@...");
+              agc@@@v@@@agentid@@@/v@@@.start();
+              
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+@@@/repeat@@@
+}
+@@@/repeat@@@
+  }
+ 
+  public static void main(String args[]) throws StaleProxyException, TimeOut{
+  
+  		@@@v@@@simulationconfig@@@/v@@@ n@@@v@@@simulationconfig@@@/v@@@=new  @@@v@@@simulationconfig@@@/v@@@(); 
+     	n@@@v@@@simulationconfig@@@/v@@@.initiateSimulation(args);
+	    MainInteractionManager.getInstance().setTitle("node @@@v@@@node@@@/v@@@");
+	    n@@@v@@@simulationconfig@@@/v@@@.launchSimulation();
+     }
+     
+	
+
+}
+
+ @@@/text@@@
+ @@@/saveto@@@
+  @@@/repeat@@@   
+@@@/program@@@

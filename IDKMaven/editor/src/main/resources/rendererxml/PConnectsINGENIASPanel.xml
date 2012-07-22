@@ -1,0 +1,17 @@
+
+
+##panel layout="BorderLayout" Background="white"#
+##vbox Background="white" constraints="BorderLayout.CENTER"#
+##label id="Label" /#
+##stereotype text="PConnects" HorizontalAlignment="CENTER" /#
+##linepanel Background="white" /#
+##collectionpanel Background="white" id="Inputs" #
+##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
+##iconlabel icon="images/attribute.gif" /#
+##label text="input:"/#
+##label name="Inputs_InstanceName"/#
+##/panel#
+##/collectionpanel#
+##/vbox#
+          ##/panel#
+		

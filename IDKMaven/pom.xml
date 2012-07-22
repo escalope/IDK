@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.sf.ingenias</groupId>
+    <artifactId>ingenias</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>ingenias</name>
+    <description>The INGENIAS Development Kit</description>
+    <url>http://ingenias.sf.net</url>
+<licenses>
+    <license>
+      <name>The GPL V3</name>
+      <url>http://www.gnu.org/copyleft/gpl.html</url>
+      <distribution></distribution>
+    </license>
+  </licenses>
+<scm>
+    <url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven</url>
+    <connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven</connection>
+  </scm>
+<developers>
+    <developer>
+      <id>escalope</id>
+      <name>Jorge Gomez-Sanz</name>
+      <email>jjgomez@fdi.ucm.es</email>
+    </developer>
+  </developers>
+<properties/>
+    <modules>
+        <module>codegen</module>
+        <module>editor</module>
+        <module>iaf</module>
+        <module>iafarch</module>
+  </modules>
+<profiles>
+  <profile>
+    <id>release-sign-artifacts</id>
+    <activation>
+      <property>
+        <name>performRelease</name>
+        <value>true</value>
+      </property>
+    </activation>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.1</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+</profiles>
+
+</project>

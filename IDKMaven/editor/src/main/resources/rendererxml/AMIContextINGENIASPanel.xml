@@ -1,0 +1,28 @@
+
+
+##panel layout="BorderLayout(0,0)" Background="white" border="LineBorder(Color.black,1)"#
+##vbox Background="white" constraints="BorderLayout.CENTER" #
+##panel Background="white" HorizontalAlignment="CENTER"
+          layout="FlowLayout(FlowLayout.CENTER,0,0)" #
+##stereotype text="AMIContext" HorizontalAlignment="CENTER" /#
+##/panel #
+##panel Background="white" HorizontalAlignment="CENTER" layout="FlowLayout(FlowLayout.CENTER,0,0)" #
+##label id="Id"/#
+          ##/panel#
+##linepanel Background="white"/#
+##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
+##iconlabel icon="images/attribute.gif" /#
+##label text="model:"/#
+##label id="Model"/#
+##/panel#
+##collectionpanel Background="white" id="Applications"#
+##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
+##iconlabel icon="images/attribute.gif" /#
+##label text="application:"/#
+##label name="Applications_Id"/#
+##/panel#
+##/collectionpanel#
+##/vbox#
+##/panel#
+
+		

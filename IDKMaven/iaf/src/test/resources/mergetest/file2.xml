@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project cid="8" version="1.2">
+<projectproperties>
+<projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="ext"  tooltip="Folder where the IDE will find its new modules" />
+ <openeddiagram>a1</openeddiagram></projectproperties>
+<leafpackages>
+   <path>
+    <package id="Project"/>
+    <package id="a1"/>
+   </path>
+</leafpackages>
+<objects>
+<object id="Agent0" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="Code"></key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objects>
+<relationships>
+</relationships>
+<models> 
+ <model id="a1" type="ingenias.editor.models.AgentModelModelJGraph">
+<object id="a1" type="ingenias.editor.entities.AgentModelDataEntity">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="Agent0" nid="node0" type="Agent">
+		<attr name="bounds">
+			<rectangle x="0" y="0" width="45" height="57"></rectangle>		</attr>
+
+
+	</node><parentship>
+</parentship>
+<entityconstraints>
+</entityconstraints>
+
+
+	</graph>
+
+
+	<layout>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="0" y="0" width="45" height="57"></rectangle>		</attr>
+
+
+	</node>
+	</layout>
+</gxl> </model>
+</models>
+</project>

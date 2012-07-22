@@ -1,0 +1,265 @@
+<project name="ingenias" default="compile" basedir=".">
+	
+
+	
+	<property name="src" location="src" />				
+	
+	<property name="temp" location="tmp" />
+	
+	<property name="IDK" location="../editor" />
+	
+	<property name="specfile" location=""/>
+	
+	<property name="mainP" location="project"/>		
+		
+	<property name="javac.optimize"           value="off"/>
+	<property name="javac.deprecation"        value="on"/>
+	<property name="javac.debug"              value="true"/>
+	
+	
+	<!--taskdef resource="ise.antelope.tasks.antelope.taskdefs">
+  <classpath>
+    <pathelement location="lib/AntelopeTasks_3.5.1.jar"/>
+  </classpath>
+</taskdef-->
+
+<taskdef name="repeat" classname="ise.antelope.tasks.Repeat">
+<classpath>
+    <pathelement location="lib/AntelopeTasks_3.5.1.jar"/>
+  </classpath>
+</taskdef>
+
+	
+	
+	<target name="init">
+		
+		<tstamp />
+		<copy file="${IDK}/lib/ingeniaseditor.jar" toDir="lib" />
+		
+	</target>
+	
+	
+
+	
+<!-- ************************************** -->
+<!--   MODULE INGENIAS AGENT FRAMEWORK      -->
+<!-- ************************************** -->
+
+<!--   Compiles and deploys the jade module     -->
+<target name="compile" depends="init">
+	
+	<delete dir="${temp}" />
+	
+	<mkdir dir="${temp}/templates" />
+
+	
+	<javac compiler="modern" depend="true" destdir="${temp}" debug="true">
+		
+		<src path="${src}" />
+		
+		<classpath>
+			
+			
+			<fileset dir="lib">
+				
+				<include name="**/*.jar" />
+				
+			</fileset>
+			
+		</classpath>
+		
+	</javac>
+	
+	<copy todir="${temp}/templates">
+		
+		<fileset dir="${src}/templates"></fileset>
+		
+	</copy>
+	
+	<jar jarfile="modiaf.jar" basedir="${temp}" />
+	<delete dir="${temp}" />
+	
+	<copy file="modiaf.jar" toDir="${IDK}/ext" />
+	<copy file="modiaf.jar" toDir="tests/commsonetomany/lib" />
+	<copy file="modiaf.jar" toDir="tests/trust/lib" />	
+	<copy file="modiaf.jar" toDir="tests/testTasks/lib" />
+	<copy file="modiaf.jar" toDir="tests/cinema/lib" />
+	<copy file="modiaf.jar" toDir="tests/multipleComms/lib" />
+
+	<delete dir="${temp}" />
+	<mkdir dir="${temp}" />
+	
+	<javac compiler="modern" depend="true" destdir="${temp}" debug="true">
+		
+		<src path="srcpcreator" />
+		
+		<classpath>
+			
+			
+			<fileset dir="lib">
+				
+				<include name="**/*.jar" />
+				
+			</fileset>
+			
+		</classpath>
+		
+	</javac>
+	<mkdir dir="${temp}/examples" />
+	<copy todir="${temp}/examples">		
+		<fileset dir="examples"></fileset>		
+	</copy>
+	<copy file="modiaf.jar" toDir="${temp}/lib" />
+	<copy file="generate.xml" todir="${temp}/"/>	
+	<copy file="config/Properties.prop" todir="${temp}/config"/>
+	<copy todir="${temp}/lib">		
+		<fileset dir="lib"></fileset>		
+	</copy>
+	
+	<jar jarfile="modpcreator.jar" basedir="${temp}" />
+	<copy file="modpcreator.jar" toDir="${IDK}/ext" />	
+	
+</target>
+
+
+<!--   Creates an empty project    -->
+
+<target name="create">
+	
+	<mkdir dir="${mainP}" />
+	<mkdir dir="${mainP}/bin" />
+	<mkdir dir="${mainP}/lib" />
+	<copy file="modiaf.jar" todir="${mainP}/lib/"/>
+	<mkdir dir="${mainP}/spec" />
+	<mkdir dir="${mainP}/src" />
+	<mkdir dir="${mainP}/permsrc" />
+	<mkdir dir="${mainP}/gensrc" />
+	<mkdir dir="${mainP}/config" />
+	<mkdir dir="${mainP}/jade" />
+	
+	<java fork="true" failonerror="true" maxmemory="300m"
+	      classname="ingenias.genproject.ProjectGenerator">				
+		<arg value="${mainP}"/>
+		<classpath>
+			
+			<!--pathelement path="${classpath}" /-->
+			
+			<fileset dir=".">
+				
+				<include name="**/*.jar" />
+				
+			</fileset>
+			
+		</classpath>
+		
+	</java>
+
+	
+	<copy file="generate.xml" todir="${mainP}/"/>
+	
+	<copy file="config/Properties.prop" todir="${mainP}/config"/>
+	<copy file="lib/Base64.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/commons-codec-1.3.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/ingeniaseditor.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/jdom.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/swixml.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/xercesImpl.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/http.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/iiop.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/jade.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/junit.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/jadeTools.jar" todir="${mainP}/lib/"/>	
+	<copy file="lib/jgraph.jar" todir="${mainP}/lib/"/>
+	<copy file="lib/xstream-1.2.jar" todir="${mainP}/lib/"/>
+	
+</target>
+
+<target name="generatetests" depends="compile">
+	<copy file="modiaf.jar" todir="tests/commsonetomany/lib/"/>
+	<copy file="lib/ingeniaseditor.jar" todir="tests/commsonetomany/lib/"/>
+	<java fork="true" failonerror="true" maxmemory="200m"
+	      classname="ingenias.codeproc.IAFGenerator">		
+		<arg value="tests/commsonetomany/spec/specification.idk"/>
+		<arg value="tests/commsonetomany"/>		
+		<classpath>
+			<fileset dir="tests/commsonetomany/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>		
+	</java>
+	<java fork="true" failonerror="true" maxmemory="200m"
+	      classname="ingenias.codeproc.IAFGenerator">		
+		<arg value="tests/trust/spec/specification.xml"/>
+		<arg value="tests/trust"/>		
+		<classpath>
+			<fileset dir="tests/trust/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>		
+	</java>
+	<java fork="true" failonerror="true" maxmemory="200m"
+	      classname="ingenias.codeproc.IAFGenerator">		
+		<arg value="tests/testTasks/spec/specification.xml"/>
+		<arg value="tests/testTasks"/>		
+		<classpath>
+			<fileset dir="tests/testTasks/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>		
+	</java>
+	<java fork="true" failonerror="true" maxmemory="200m"
+	      classname="ingenias.codeproc.IAFGenerator">		
+		<arg value="tests/cinema/spec/specification.xml"/>
+		<arg value="tests/cinema"/>		
+		<classpath>
+			<fileset dir="tests/cinema/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>		
+	</java>
+
+	<java fork="true" failonerror="true" maxmemory="200m"
+	      classname="ingenias.codeproc.IAFGenerator">		
+		<arg value="tests/multipleComms/spec/specification.xml"/>
+		<arg value="tests/multipleComms"/>		
+		<classpath>
+			<fileset dir="tests/multipleComms/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>		
+	</java>
+	
+
+</target>
+
+
+<target name="calltests">
+	<repeat count="3" >
+		<ant dir="tests/commsonetomany" antfile="build.xml" target="alljunit"/> 
+	</repeat>
+	<repeat count="3" >
+		<ant dir="tests/cinema" antfile="build.xml" target="alljunit"/> 
+	</repeat>
+	<repeat count="3" >
+		<ant dir="tests/trust" antfile="build.xml" target="alljunit"/> 
+	</repeat>
+	<repeat count="3" >
+		<ant dir="tests/multipleComms" antfile="build.xml" target="alljunit"/> 
+	</repeat>
+	<repeat count="3" >
+		<ant dir="tests/testTasks" antfile="build.xml" target="alljunit"/> 
+	</repeat>
+</target>
+
+<target name="runtests" depends="generatetests,calltests"/>
+
+<target name="clean">
+	
+	
+	<delete dir="${tmp}" />
+
+	
+</target>
+
+</project>
+

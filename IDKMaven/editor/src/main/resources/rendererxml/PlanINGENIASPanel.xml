@@ -1,0 +1,11 @@
+
+
+##panel layout="BorderLayout" Background="white"#
+##panel Background="white" HorizontalAlignment="CENTER"  constraints="BorderLayout.NORTH" layout="FlowLayout(FlowLayout.CENTER,0,0)" #
+##label id="Id"/#
+##/panel#
+##container id="Tasks" border="MatteBorder(1,1,1,1,black)" constraints="BorderLayout.CENTER" background="white" foreground="white" preferredsize="80,80"#
+##/container#
+##/panel#
+	
+		

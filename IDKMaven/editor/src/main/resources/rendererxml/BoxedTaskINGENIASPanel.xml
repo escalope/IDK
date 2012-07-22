@@ -1,0 +1,15 @@
+
+
+##panel layout="BorderLayout" Background="white"#
+##panel constraints="BorderLayout.NORTH" Background="white" layout="GridBagLayout"#
+##htmllabel id="Id"/#
+##/panel#
+##vbox Background="white" constraints="BorderLayout.CENTER" #
+##hcontainer id="Inputs" Background="white" preferredsize="80,80"/#
+##linepanel Background="white" /#
+##linepanel Background="white" /#
+##hcontainer id="Outputs" Background="white" preferredsize="80,80"/#
+##/vbox#
+##/panel#
+
+		

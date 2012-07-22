@@ -1,0 +1,9 @@
+
+
+##panel layout="BorderLayout" Background="white"#
+##panel constraints="BorderLayout.NORTH" Background="white" layout="FlowLayout(FlowLayout.CENTER,0,0)"#
+##htmllabel id="Id"/#
+##/panel#
+##label Foreground="blue" icon="images/task.gif" constraints="BorderLayout.CENTER" HorizontalAlignment="CENTER" /#
+##/panel#
+		

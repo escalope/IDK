@@ -1,0 +1,84 @@
+
+@@@program xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../plantilla.xsd"@@@
+ @@@repeat id="ffacts"@@@
+ @@@saveto@@@
+  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeout@@@/v@@@/ingenias/jade/mental/@@@v@@@fname@@@/v@@@.java@@@/file@@@
+  @@@text@@@
+
+/*
+    Copyright (C) 2005 Jorge Gomez Sanz
+
+    This file is part of INGENIAS Agent Framework, an agent infrastructure linked
+    to the INGENIAS Development Kit, and availabe at http://grasia.fdi.ucm.es/ingenias or
+    http://ingenias.sourceforge.net. 
+
+    INGENIAS Agent Framework is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    INGENIAS Agent Framework is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with INGENIAS Agent Framework; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*/
+
+
+package ingenias.jade.mental;
+
+import java.util.*;
+import ingenias.jade.components.*;
+import ingenias.editor.entities.*;
+import ingenias.editor.entities.ViewPreferences.ViewType;
+
+public class @@@v@@@fname@@@/v@@@ extends ingenias.editor.entities.RuntimeFact{
+   @@@repeat id="slot"@@@
+    @@@v@@@slottype@@@/v@@@ @@@v@@@slotname@@@/v@@@;   
+   @@@/repeat@@@ 
+   
+  public @@@v@@@fname@@@/v@@@ (String id){
+   super(id);
+   this.getPrefs(null).setView(ViewType.UML);
+   this.type="@@@v@@@fname@@@/v@@@";
+  }
+  
+
+  public @@@v@@@fname@@@/v@@@ (){
+   super(ingenias.jade.MentalStateManager.generateMentalEntityID());
+   this.getPrefs(null).setView(ViewType.UML);
+  }
+  
+  public String toString(){
+   return this.getId()+":"+this.getType();
+  }
+  
+  public String getType(){
+   return "@@@v@@@fname@@@/v@@@";
+  }
+  
+  public String getParentType(){
+   return "RuntimeFact";
+  }
+  
+   @@@repeat id="slot"@@@
+
+   public void set@@@v@@@slotname@@@/v@@@(@@@v@@@slottype@@@/v@@@ value){
+     @@@v@@@slotname@@@/v@@@=value;   
+   };
+   
+   public @@@v@@@slottype@@@/v@@@ get@@@v@@@slotname@@@/v@@@(){
+     return @@@v@@@slotname@@@/v@@@;      
+   }
+   @@@/repeat@@@  
+    
+}
+
+ @@@/text@@@
+ @@@/saveto@@@
+ @@@/repeat@@@
+@@@/program@@@

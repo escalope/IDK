@@ -3,15 +3,33 @@
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>iafarch</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>iafarch-empty</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 <packaging>maven-archetype</packaging>
 	<name>Archetype - iafarch - empty project</name>
-	<url>http://maven.apache.org</url>
+ <url>http://ingenias.sf.net</url>
+<licenses>
+    <license>
+      <name>The GPL V3</name>
+      <url>http://www.gnu.org/copyleft/gpl.html</url>
+      <distribution></distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven/iafarch/iafarch-empty</url>
+    <connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven/iafarch/iafarch-empty</connection>
+  </scm>
+<developers>
+    <developer>
+      <id>escalope</id>
+      <name>Jorge Gomez-Sanz</name>
+      <email>jjgomez@fdi.ucm.es</email>
+    </developer>
+  </developers>
 	<build>
  <plugins>
             <plugin>

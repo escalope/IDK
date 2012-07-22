@@ -11,7 +11,25 @@
 	<version>1.0-SNAPSHOT</version>
 <packaging>maven-archetype</packaging>
 	<name>Archetype - iafarch - GUI example</name>
-	<url>http://maven.apache.org</url>
+ <url>http://ingenias.sf.net</url>
+<licenses>
+    <license>
+      <name>The GPL V3</name>
+      <url>http://www.gnu.org/copyleft/gpl.html</url>
+      <distribution></distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven/iafarch/iafarch-gui</url>
+    <connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven/iafarch/iafarch-gui</connection>
+  </scm>
+<developers>
+    <developer>
+      <id>escalope</id>
+      <name>Jorge Gomez-Sanz</name>
+      <email>jjgomez@fdi.ucm.es</email>
+    </developer>
+</developers>
 	<build>
  <plugins>
             <plugin>

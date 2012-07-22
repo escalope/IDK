@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>ingenias</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>editor</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>ingenias editor</name>
 	<description>The INGENIAS Development Kit</description>
 	<url>http://ingenias.sf.net</url>
@@ -22,8 +22,8 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven</url>
-		<connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven</connection>
+		<url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven/editor</url>
+		<connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven/editor</connection>
 	</scm>
 	<developers>
 		<developer>

@@ -2,12 +2,12 @@
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>iafarch</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>iafarch-interaction</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 <packaging>maven-archetype</packaging>
 	<name>Archetype - iafarch - interaction example</name>
  <url>http://ingenias.sf.net</url>

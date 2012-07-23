@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>ingenias</artifactId>
@@ -18,12 +16,12 @@
 		<license>
 			<name>The GPL V3</name>
 			<url>http://www.gnu.org/copyleft/gpl.html</url>
-			<distribution></distribution>
+			<distribution />
 		</license>
 	</licenses>
 	<scm>
-		<url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven/editor</url>
-		<connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven/editor</connection>
+		<url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0/editor</url>
+		<connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0/editor</connection>
 	</scm>
 	<developers>
 		<developer>

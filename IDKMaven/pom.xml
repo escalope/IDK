@@ -17,12 +17,12 @@
     <license>
       <name>The GPL V3</name>
       <url>http://www.gnu.org/copyleft/gpl.html</url>
-      <distribution></distribution>
+      <distribution />
     </license>
   </licenses>
   <scm>
-    <url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven</url>
-    <connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven</connection>
+    <url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0</url>
+    <connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0</connection>
   </scm>
 <developers>
     <developer>
@@ -31,7 +31,7 @@
       <email>jjgomez@fdi.ucm.es</email>
     </developer>
   </developers>
-<properties/>
+<properties />
     <modules>
         <module>codegen</module>
         <module>editor</module>
@@ -67,5 +67,4 @@
     </build>
   </profile>
 </profiles>
-
 </project>

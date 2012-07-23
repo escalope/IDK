@@ -1,14 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>iafarch</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>iafarch-helloworld</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 <packaging>maven-archetype</packaging>
 	<name>Archetype - iafarch - hello world example</name>
  <url>http://ingenias.sf.net</url>
@@ -16,12 +15,12 @@
     <license>
       <name>The GPL V3</name>
       <url>http://www.gnu.org/copyleft/gpl.html</url>
-      <distribution></distribution>
+      <distribution />
     </license>
   </licenses>
   <scm>
-    <url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven/iafarch/iafarch-helloworld</url>
-    <connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKmaven/iafarch/iafarch-helloworld</connection>
+    <url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0/iafarch/iafarch-helloworld</url>
+    <connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0/iafarch/iafarch-helloworld</connection>
   </scm>
 <developers>
     <developer>

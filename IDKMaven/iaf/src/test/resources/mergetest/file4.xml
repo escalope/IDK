@@ -270,52 +270,35 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 </object>
 </objects>
 <relationships>
-<relationship id="0" type="ingenias.editor.entities.GTPursues">
-<object id="0" type="ingenias.editor.entities.GTPursues">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="GUIAgent" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="1440758369">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="ProcessGUIEvents" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="120478868">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="9" type="ingenias.editor.entities.WFResponsable">
 <object id="9" type="ingenias.editor.entities.WFResponsable">
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="ProcessAGUIEvent" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="124350028">
+<role idEntity="ProcessAGUIEvent" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1795574656">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="GUIAgent" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1440758369">
+</role><role idEntity="GUIAgent" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="489731554">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="1" type="ingenias.editor.entities.ApplicationBelongsTo">
-<object id="1" type="ingenias.editor.entities.ApplicationBelongsTo">
+<relationship id="0" type="ingenias.editor.entities.GTPursues">
+<object id="0" type="ingenias.editor.entities.GTPursues">
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="GUIAgent" class="ingenias.editor.entities.Agent" roleName="ApplicationBelongsTosource" type="ingenias.editor.entities.ApplicationBelongsTosourceRole" dgcid="1668695240">
+<role idEntity="ProcessGUIEvents" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="797440764">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="GUI" class="ingenias.editor.entities.InternalApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="551962517">
+</role><role idEntity="GUIAgent" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="489731554">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -344,12 +327,12 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 <key id="Label"></key>
 </mapproperties>
 </object>
-<role idEntity="GUIAgent" class="ingenias.editor.entities.Agent" roleName="EPerceivessource" type="ingenias.editor.entities.EPerceivessourceRole" dgcid="1668695240">
+<role idEntity="GUI" class="ingenias.editor.entities.InternalApplication" roleName="EPerceivestarget" type="ingenias.editor.entities.EPerceivestargetRole" dgcid="112793090">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="GUI" class="ingenias.editor.entities.InternalApplication" roleName="EPerceivestarget" type="ingenias.editor.entities.EPerceivestargetRole" dgcid="551962517">
+</role><role idEntity="GUIAgent" class="ingenias.editor.entities.Agent" roleName="EPerceivessource" type="ingenias.editor.entities.EPerceivessourceRole" dgcid="733367152">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -361,12 +344,29 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="UMLComment4" class="ingenias.editor.entities.UMLComment" roleName="HasCommentsource" type="ingenias.editor.entities.HasCommentsourceRole" dgcid="2104442583">
+<role idEntity="UMLComment4" class="ingenias.editor.entities.UMLComment" roleName="HasCommentsource" type="ingenias.editor.entities.HasCommentsourceRole" dgcid="450608779">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="GUI" class="ingenias.editor.entities.InternalApplication" roleName="HasCommenttarget" type="ingenias.editor.entities.HasCommenttargetRole" dgcid="551962517">
+</role><role idEntity="GUI" class="ingenias.editor.entities.InternalApplication" roleName="HasCommenttarget" type="ingenias.editor.entities.HasCommenttargetRole" dgcid="112793090">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="1" type="ingenias.editor.entities.ApplicationBelongsTo">
+<object id="1" type="ingenias.editor.entities.ApplicationBelongsTo">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GUI" class="ingenias.editor.entities.InternalApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="112793090">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GUIAgent" class="ingenias.editor.entities.Agent" roleName="ApplicationBelongsTosource" type="ingenias.editor.entities.ApplicationBelongsTosourceRole" dgcid="733367152">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -380,12 +380,12 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="ProcessGUIEvents" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1906659577">
+<role idEntity="ProcessGUIEvents" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="532231462">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="ProcessAGUIEvent" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="110894892">
+</role><role idEntity="ProcessAGUIEvent" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1877676958">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -399,30 +399,30 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="SampleGUIEvent" class="ingenias.editor.entities.ApplicationEventSlots" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="545376805">
+<role idEntity="ProcessAGUIEvent" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1877676958">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="SampleGUIEvent" class="ingenias.editor.entities.ApplicationEventSlots" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1955678730">
 <mapproperties>
 <key id="Cardinality"></key>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="ProcessAGUIEvent" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="110894892">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
 </role></relationship>
-<relationship id="13" type="ingenias.editor.entities.UMLAnnotatedElement">
-<object id="13" type="ingenias.editor.entities.UMLAnnotatedElement">
+<relationship id="7" type="ingenias.editor.entities.CDUsesCode">
+<object id="7" type="ingenias.editor.entities.CDUsesCode">
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="UMLComment3" class="ingenias.editor.entities.UMLComment" roleName="HasCommentsource" type="ingenias.editor.entities.HasCommentsourceRole" dgcid="15670774">
+<role idEntity="ProcessAGUIEvent" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="2012029025">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="INGENIASCodeComponent0" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="HasCommenttarget" type="ingenias.editor.entities.HasCommenttargetRole" dgcid="1569335671">
+</role><role idEntity="INGENIASCodeComponent0" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="832074392">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -434,29 +434,29 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="INGENIASComponent0" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="2087548342">
+<role idEntity="INGENIASComponent0" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="389926741">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="GUI" class="ingenias.editor.entities.InternalApplication" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="2111597213">
+</role><role idEntity="GUI" class="ingenias.editor.entities.InternalApplication" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="1205252169">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="7" type="ingenias.editor.entities.CDUsesCode">
-<object id="7" type="ingenias.editor.entities.CDUsesCode">
+<relationship id="13" type="ingenias.editor.entities.UMLAnnotatedElement">
+<object id="13" type="ingenias.editor.entities.UMLAnnotatedElement">
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="ProcessAGUIEvent" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="1312420207">
+<role idEntity="INGENIASCodeComponent0" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="HasCommenttarget" type="ingenias.editor.entities.HasCommenttargetRole" dgcid="832074392">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="INGENIASCodeComponent0" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="1569335671">
+</role><role idEntity="UMLComment3" class="ingenias.editor.entities.UMLComment" roleName="HasCommentsource" type="ingenias.editor.entities.HasCommentsourceRole" dgcid="1287294926">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -468,29 +468,12 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="UMLComment2" class="ingenias.editor.entities.UMLComment" roleName="HasCommentsource" type="ingenias.editor.entities.HasCommentsourceRole" dgcid="1283782245">
+<role idEntity="UMLComment2" class="ingenias.editor.entities.UMLComment" roleName="HasCommentsource" type="ingenias.editor.entities.HasCommentsourceRole" dgcid="994617574">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="INGENIASComponent0" class="ingenias.editor.entities.INGENIASComponent" roleName="HasCommenttarget" type="ingenias.editor.entities.HasCommenttargetRole" dgcid="2087548342">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="3" type="ingenias.editor.entities.CDUsesCode">
-<object id="3" type="ingenias.editor.entities.CDUsesCode">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="INGENIASCodeComponent1" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="773390119">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="GUI" class="ingenias.editor.entities.InternalApplication" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="736259394">
+</role><role idEntity="INGENIASComponent0" class="ingenias.editor.entities.INGENIASComponent" roleName="HasCommenttarget" type="ingenias.editor.entities.HasCommenttargetRole" dgcid="389926741">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -502,12 +485,29 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="INGENIASCodeComponent1" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="HasCommenttarget" type="ingenias.editor.entities.HasCommenttargetRole" dgcid="773390119">
+<role idEntity="UMLComment0" class="ingenias.editor.entities.UMLComment" roleName="HasCommentsource" type="ingenias.editor.entities.HasCommentsourceRole" dgcid="887252469">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="UMLComment0" class="ingenias.editor.entities.UMLComment" roleName="HasCommentsource" type="ingenias.editor.entities.HasCommentsourceRole" dgcid="932179105">
+</role><role idEntity="INGENIASCodeComponent1" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="HasCommenttarget" type="ingenias.editor.entities.HasCommenttargetRole" dgcid="1759440573">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="3" type="ingenias.editor.entities.CDUsesCode">
+<object id="3" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GUI" class="ingenias.editor.entities.InternalApplication" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="1709947408">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASCodeComponent1" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="1759440573">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -519,12 +519,12 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="DeploymentUnitByType0" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="1260681385">
+<role idEntity="SampleDeployment" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="1197875792">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="SampleDeployment" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="430126690">
+</role><role idEntity="DeploymentUnitByType0" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="43231621">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -546,49 +546,6 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<graph>
 			
-	<node id="GUIAgent" nid="node2" type="Agent">
-		<attr name="bounds">
-			<rectangle x="74" y="171" width="58" height="57"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="9" nid="node1" type="WFResponsable">
-		<attr name="bounds">
-			<rectangle x="154" y="193" width="113" height="15"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	<connected id="node2">
-
-
-
-
-	</connected>
-	<connected id="node5">
-
-
-
-
-
-	</connected>
-	</node>
-			
-	<node id="UMLComment6" nid="node4" type="UMLComment">
-		<attr name="bounds">
-			<rectangle x="180" y="72" width="399" height="67"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
 	<node id="ProcessGUIEvents" nid="node3" type="Goal">
 		<attr name="bounds">
 			<rectangle x="61" y="52" width="113" height="50"></rectangle>		</attr>
@@ -599,7 +556,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="0" nid="node0" type="GTPursues">
+	<node id="0" nid="node1" type="GTPursues">
 		<attr name="bounds">
 			<rectangle x="69" y="129" width="81" height="15"></rectangle>		</attr>
 		<attr name="view">
@@ -607,7 +564,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 		</attr>
 
 
-	<connected id="node2">
+	<connected id="node5">
 
 
 
@@ -622,9 +579,52 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 	</connected>
 	</node>
 			
-	<node id="ProcessAGUIEvent" nid="node5" type="Task">
+	<node id="ProcessAGUIEvent" nid="node2" type="Task">
 		<attr name="bounds">
 			<rectangle x="285" y="183" width="114" height="43"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="9" nid="node0" type="WFResponsable">
+		<attr name="bounds">
+			<rectangle x="154" y="193" width="113" height="15"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	<connected id="node5">
+
+
+
+
+	</connected>
+	<connected id="node2">
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GUIAgent" nid="node5" type="Agent">
+		<attr name="bounds">
+			<rectangle x="74" y="171" width="58" height="57"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="UMLComment6" nid="node4" type="UMLComment">
+		<attr name="bounds">
+			<rectangle x="180" y="72" width="399" height="67"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -641,36 +641,6 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<layout>
 			
-	<node id="node2">
-		<attr name="bounds">
-			<rectangle x="74" y="171" width="58" height="57"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="node1">
-		<attr name="bounds">
-			<rectangle x="154" y="193" width="113" height="15"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="180" y="72" width="399" height="67"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
 	<node id="node3">
 		<attr name="bounds">
 			<rectangle x="61" y="52" width="113" height="50"></rectangle>		</attr>
@@ -681,7 +651,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="node0">
+	<node id="node1">
 		<attr name="bounds">
 			<rectangle x="69" y="129" width="81" height="15"></rectangle>		</attr>
 		<attr name="view">
@@ -691,9 +661,39 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="node5">
+	<node id="node2">
 		<attr name="bounds">
 			<rectangle x="285" y="183" width="114" height="43"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="154" y="193" width="113" height="15"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="74" y="171" width="58" height="57"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="180" y="72" width="399" height="67"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -716,19 +716,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<graph>
 			
-	<node id="GUI" nid="node5" type="InternalApplication">
+	<node id="14" nid="node1" type="UMLAnnotatedElement">
 		<attr name="bounds">
-			<rectangle x="430" y="69" width="41" height="46"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="1" nid="node0" type="ApplicationBelongsTo">
-		<attr name="bounds">
-			<rectangle x="201" y="31" width="169" height="17"></rectangle>		</attr>
+			<rectangle x="389" y="146" width="0" height="0"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -749,9 +739,32 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 	</connected>
 	</node>
 			
-	<node id="GUIAgent" nid="node4" type="Agent">
+	<node id="2" nid="node0" type="EPerceivesNotification">
 		<attr name="bounds">
-			<rectangle x="56" y="45" width="58" height="57"></rectangle>		</attr>
+			<rectangle x="168" y="86" width="188" height="47"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	<connected id="node5">
+
+
+
+
+
+	</connected>
+	<connected id="node3">
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="UMLComment4" nid="node4" type="UMLComment">
+		<attr name="bounds">
+			<rectangle x="62" y="181" width="399" height="127"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -759,9 +772,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="14" nid="node2" type="UMLAnnotatedElement">
+	<node id="1" nid="node2" type="ApplicationBelongsTo">
 		<attr name="bounds">
-			<rectangle x="389" y="146" width="0" height="0"></rectangle>		</attr>
+			<rectangle x="201" y="31" width="169" height="17"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -782,9 +795,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 	</connected>
 	</node>
 			
-	<node id="UMLComment4" nid="node3" type="UMLComment">
+	<node id="GUI" nid="node5" type="InternalApplication">
 		<attr name="bounds">
-			<rectangle x="62" y="181" width="399" height="127"></rectangle>		</attr>
+			<rectangle x="430" y="69" width="41" height="46"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -792,27 +805,14 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="2" nid="node1" type="EPerceivesNotification">
+	<node id="GUIAgent" nid="node3" type="Agent">
 		<attr name="bounds">
-			<rectangle x="168" y="86" width="188" height="47"></rectangle>		</attr>
+			<rectangle x="56" y="45" width="58" height="57"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
 
 
-	<connected id="node5">
-
-
-
-
-
-	</connected>
-	<connected id="node4">
-
-
-
-
-	</connected>
 	</node><parentship>
 </parentship>
 <entityconstraints>
@@ -824,6 +824,46 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<layout>
 			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="389" y="146" width="0" height="0"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="168" y="86" width="188" height="47"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="62" y="181" width="399" height="127"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="201" y="31" width="169" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
 	<node id="node5">
 		<attr name="bounds">
 			<rectangle x="430" y="69" width="41" height="46"></rectangle>		</attr>
@@ -834,49 +874,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="node0">
-		<attr name="bounds">
-			<rectangle x="201" y="31" width="169" height="17"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="56" y="45" width="58" height="57"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="node2">
-		<attr name="bounds">
-			<rectangle x="389" y="146" width="0" height="0"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="62" y="181" width="399" height="127"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="node1">
-		<attr name="bounds">
-			<rectangle x="168" y="86" width="188" height="47"></rectangle>		</attr>
+			<rectangle x="56" y="45" width="58" height="57"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -899,7 +899,40 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<graph>
 			
-	<node id="ProcessGUIEvents" nid="node4" type="Goal">
+	<node id="4" nid="node0" type="GTSatisfies">
+		<attr name="bounds">
+			<rectangle x="71" y="111" width="100" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	<connected id="node4">
+
+
+
+
+	</connected>
+	<connected id="node2">
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="SampleGUIEvent" nid="node3" type="ApplicationEventSlots">
+		<attr name="bounds">
+			<rectangle x="324" y="136" width="102" height="83"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="ProcessGUIEvents" nid="node2" type="Goal">
 		<attr name="bounds">
 			<rectangle x="61" y="32" width="113" height="50"></rectangle>		</attr>
 		<attr name="view">
@@ -909,19 +942,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="ProcessAGUIEvent" nid="node3" type="Task">
+	<node id="ProcessAGUIEvent" nid="node4" type="Task">
 		<attr name="bounds">
 			<rectangle x="58" y="154" width="114" height="43"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="SampleGUIEvent" nid="node2" type="ApplicationEventSlots">
-		<attr name="bounds">
-			<rectangle x="324" y="136" width="102" height="83"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -937,36 +960,13 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 		</attr>
 
 
-	<connected id="node3">
-
-
-
-
-	</connected>
-	<connected id="node2">
-
-
-
-
-
-	</connected>
-	</node>
-			
-	<node id="4" nid="node0" type="GTSatisfies">
-		<attr name="bounds">
-			<rectangle x="71" y="111" width="100" height="17"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	<connected id="node3">
-
-
-
-
-	</connected>
 	<connected id="node4">
+
+
+
+
+	</connected>
+	<connected id="node3">
 
 
 
@@ -984,9 +984,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<layout>
 			
-	<node id="node4">
+	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="61" y="32" width="113" height="50"></rectangle>		</attr>
+			<rectangle x="71" y="111" width="100" height="17"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -996,7 +996,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="58" y="154" width="114" height="43"></rectangle>		</attr>
+			<rectangle x="324" y="136" width="102" height="83"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1006,7 +1006,17 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="324" y="136" width="102" height="83"></rectangle>		</attr>
+			<rectangle x="61" y="32" width="113" height="50"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="58" y="154" width="114" height="43"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1017,16 +1027,6 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 	<node id="node1">
 		<attr name="bounds">
 			<rectangle x="198" y="168" width="116" height="17"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="node0">
-		<attr name="bounds">
-			<rectangle x="71" y="111" width="100" height="17"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1049,9 +1049,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<graph>
 			
-	<node id="INGENIASCodeComponent0" nid="node5" type="INGENIASCodeComponent">
+	<node id="ProcessAGUIEvent" nid="node5" type="Task">
 		<attr name="bounds">
-			<rectangle x="348" y="88" width="204" height="57"></rectangle>		</attr>
+			<rectangle x="57" y="98" width="114" height="43"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1059,14 +1059,37 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="GUI" nid="node9" type="InternalApplication">
+	<node id="UMLComment3" nid="node9" type="UMLComment">
 		<attr name="bounds">
-			<rectangle x="103" y="168" width="41" height="46"></rectangle>		</attr>
+			<rectangle x="119" y="0" width="399" height="67"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
 
 
+	</node>
+			
+	<node id="6" nid="node1" type="UMLRealizes">
+		<attr name="bounds">
+			<rectangle x="207" y="184" width="75" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	<connected id="node8">
+
+
+
+
+	</connected>
+	<connected id="node6">
+
+
+
+
+
+	</connected>
 	</node>
 			
 	<node id="INGENIASComponent0" nid="node6" type="INGENIASComponent">
@@ -1079,9 +1102,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="UMLComment2" nid="node4" type="UMLComment">
+	<node id="INGENIASCodeComponent0" nid="node4" type="INGENIASCodeComponent">
 		<attr name="bounds">
-			<rectangle x="103" y="258" width="399" height="112"></rectangle>		</attr>
+			<rectangle x="348" y="88" width="204" height="57"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1097,7 +1120,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 		</attr>
 
 
-	<connected id="node4">
+	<connected id="node7">
 
 
 
@@ -1112,32 +1135,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 	</connected>
 	</node>
 			
-	<node id="13" nid="node0" type="UMLAnnotatedElement">
+	<node id="13" nid="node2" type="UMLAnnotatedElement">
 		<attr name="bounds">
 			<rectangle x="395" y="77" width="0" height="0"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	<connected id="node7">
-
-
-
-
-	</connected>
-	<connected id="node5">
-
-
-
-
-
-	</connected>
-	</node>
-			
-	<node id="6" nid="node1" type="UMLRealizes">
-		<attr name="bounds">
-			<rectangle x="207" y="184" width="75" height="17"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1149,7 +1149,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 
 	</connected>
-	<connected id="node6">
+	<connected id="node4">
 
 
 
@@ -1158,7 +1158,17 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 	</connected>
 	</node>
 			
-	<node id="7" nid="node2" type="CDUsesCode">
+	<node id="UMLComment2" nid="node7" type="UMLComment">
+		<attr name="bounds">
+			<rectangle x="103" y="258" width="399" height="112"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="7" nid="node0" type="CDUsesCode">
 		<attr name="bounds">
 			<rectangle x="211" y="110" width="94" height="15"></rectangle>		</attr>
 		<attr name="view">
@@ -1166,34 +1176,24 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 		</attr>
 
 
-	<connected id="node8">
-
-
-
-
-	</connected>
 	<connected id="node5">
 
 
 
 
+	</connected>
+	<connected id="node4">
+
+
+
+
 
 	</connected>
 	</node>
 			
-	<node id="ProcessAGUIEvent" nid="node8" type="Task">
+	<node id="GUI" nid="node8" type="InternalApplication">
 		<attr name="bounds">
-			<rectangle x="57" y="98" width="114" height="43"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="UMLComment3" nid="node7" type="UMLComment">
-		<attr name="bounds">
-			<rectangle x="119" y="0" width="399" height="67"></rectangle>		</attr>
+			<rectangle x="103" y="168" width="41" height="46"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1212,7 +1212,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 			
 	<node id="node5">
 		<attr name="bounds">
-			<rectangle x="348" y="88" width="204" height="57"></rectangle>		</attr>
+			<rectangle x="57" y="98" width="114" height="43"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1222,7 +1222,17 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 			
 	<node id="node9">
 		<attr name="bounds">
-			<rectangle x="103" y="168" width="41" height="46"></rectangle>		</attr>
+			<rectangle x="119" y="0" width="399" height="67"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="207" y="184" width="75" height="17"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1242,7 +1252,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="103" y="258" width="399" height="112"></rectangle>		</attr>
+			<rectangle x="348" y="88" width="204" height="57"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1260,7 +1270,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="node0">
+	<node id="node2">
 		<attr name="bounds">
 			<rectangle x="395" y="77" width="0" height="0"></rectangle>		</attr>
 		<attr name="view">
@@ -1270,9 +1280,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="node1">
+	<node id="node7">
 		<attr name="bounds">
-			<rectangle x="207" y="184" width="75" height="17"></rectangle>		</attr>
+			<rectangle x="103" y="258" width="399" height="112"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1280,7 +1290,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="node2">
+	<node id="node0">
 		<attr name="bounds">
 			<rectangle x="211" y="110" width="94" height="15"></rectangle>		</attr>
 		<attr name="view">
@@ -1292,17 +1302,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 			
 	<node id="node8">
 		<attr name="bounds">
-			<rectangle x="57" y="98" width="114" height="43"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="node7">
-		<attr name="bounds">
-			<rectangle x="119" y="0" width="399" height="67"></rectangle>		</attr>
+			<rectangle x="103" y="168" width="41" height="46"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1326,27 +1326,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<graph>
 			
-	<node id="INGENIASCodeComponent1" nid="node3" type="INGENIASCodeComponent">
-		<attr name="bounds">
-			<rectangle x="172" y="79" width="204" height="57"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="UMLComment1" nid="node2" type="UMLComment">
-		<attr name="bounds">
-			<rectangle x="81" y="0" width="399" height="67"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="3" nid="node0" type="CDUsesCode">
+	<node id="3" nid="node1" type="CDUsesCode">
 		<attr name="bounds">
 			<rectangle x="67" y="135" width="94" height="15"></rectangle>		</attr>
 		<attr name="view">
@@ -1354,13 +1334,13 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 		</attr>
 
 
-	<connected id="node4">
+	<connected id="node2">
 
 
 
 
 	</connected>
-	<connected id="node3">
+	<connected id="node5">
 
 
 
@@ -1369,7 +1349,40 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 	</connected>
 	</node>
 			
-	<node id="GUI" nid="node4" type="InternalApplication">
+	<node id="11" nid="node0" type="UMLAnnotatedElement">
+		<attr name="bounds">
+			<rectangle x="294" y="163" width="0" height="0"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	<connected id="node3">
+
+
+
+
+	</connected>
+	<connected id="node5">
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="UMLComment0" nid="node3" type="UMLComment">
+		<attr name="bounds">
+			<rectangle x="140" y="191" width="399" height="202"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="GUI" nid="node2" type="InternalApplication">
 		<attr name="bounds">
 			<rectangle x="45" y="83" width="41" height="46"></rectangle>		</attr>
 		<attr name="view">
@@ -1379,32 +1392,19 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="11" nid="node1" type="UMLAnnotatedElement">
+	<node id="INGENIASCodeComponent1" nid="node5" type="INGENIASCodeComponent">
 		<attr name="bounds">
-			<rectangle x="294" y="163" width="0" height="0"></rectangle>		</attr>
+			<rectangle x="172" y="79" width="204" height="57"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
 
 
-	<connected id="node5">
-
-
-
-
-	</connected>
-	<connected id="node3">
-
-
-
-
-
-	</connected>
 	</node>
 			
-	<node id="UMLComment0" nid="node5" type="UMLComment">
+	<node id="UMLComment1" nid="node4" type="UMLComment">
 		<attr name="bounds">
-			<rectangle x="140" y="191" width="399" height="202"></rectangle>		</attr>
+			<rectangle x="81" y="0" width="399" height="67"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1421,27 +1421,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<layout>
 			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="172" y="79" width="204" height="57"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="node2">
-		<attr name="bounds">
-			<rectangle x="81" y="0" width="399" height="67"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="node0">
+	<node id="node1">
 		<attr name="bounds">
 			<rectangle x="67" y="135" width="94" height="15"></rectangle>		</attr>
 		<attr name="view">
@@ -1451,17 +1431,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="45" y="83" width="41" height="46"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
-	<node id="node1">
+	<node id="node0">
 		<attr name="bounds">
 			<rectangle x="294" y="163" width="0" height="0"></rectangle>		</attr>
 		<attr name="view">
@@ -1471,9 +1441,39 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="node5">
+	<node id="node3">
 		<attr name="bounds">
 			<rectangle x="140" y="191" width="399" height="202"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="45" y="83" width="41" height="46"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="172" y="79" width="204" height="57"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="81" y="0" width="399" height="67"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1496,16 +1496,6 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<graph>
 			
-	<node id="DeploymentUnitByType0" nid="node3" type="DeploymentUnitByType">
-		<attr name="bounds">
-			<rectangle x="59" y="146" width="150" height="46"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
 	<node id="10" nid="node0" type="DefinesDeployment">
 		<attr name="bounds">
 			<rectangle x="77" y="97" width="135" height="15"></rectangle>		</attr>
@@ -1520,7 +1510,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 
 	</connected>
-	<connected id="node1">
+	<connected id="node2">
 
 
 
@@ -1529,9 +1519,9 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 	</connected>
 	</node>
 			
-	<node id="SampleDeployment" nid="node1" type="DeploymentPackage">
+	<node id="UMLComment5" nid="node1" type="UMLComment">
 		<attr name="bounds">
-			<rectangle x="81" y="22" width="120" height="46"></rectangle>		</attr>
+			<rectangle x="276" y="58" width="399" height="82"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1539,9 +1529,19 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	</node>
 			
-	<node id="UMLComment5" nid="node2" type="UMLComment">
+	<node id="DeploymentUnitByType0" nid="node3" type="DeploymentUnitByType">
 		<attr name="bounds">
-			<rectangle x="276" y="58" width="399" height="82"></rectangle>		</attr>
+			<rectangle x="59" y="146" width="150" height="46"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="SampleDeployment" nid="node2" type="DeploymentPackage">
+		<attr name="bounds">
+			<rectangle x="81" y="22" width="120" height="46"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1558,16 +1558,6 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 
 	<layout>
 			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="59" y="146" width="150" height="46"></rectangle>		</attr>
-		<attr name="view">
-			<string>INGENIAS</string>
-		</attr>
-
-
-	</node>
-			
 	<node id="node0">
 		<attr name="bounds">
 			<rectangle x="77" y="97" width="135" height="15"></rectangle>		</attr>
@@ -1580,7 +1570,17 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="81" y="22" width="120" height="46"></rectangle>		</attr>
+			<rectangle x="276" y="58" width="399" height="82"></rectangle>		</attr>
+		<attr name="view">
+			<string>INGENIAS</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="59" y="146" width="150" height="46"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>
@@ -1590,7 +1590,7 @@ The agent is expected to receive instances of SampleGUIEvents.</key>
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="276" y="58" width="399" height="82"></rectangle>		</attr>
+			<rectangle x="81" y="22" width="120" height="46"></rectangle>		</attr>
 		<attr name="view">
 			<string>INGENIAS</string>
 		</attr>

@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>ingenias</artifactId>
-		<version>1.0</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>iaf</artifactId>
-	<version>1.0</version>
+	<version>1.0-SNAPSHOT</version>
 	<name>ingenias agent platform</name>
 	<description>The INGENIAS Development Kit</description>
 	<url>http://ingenias.sf.net</url>
@@ -73,7 +73,7 @@
 		<dependency>
 			<groupId>net.sf.ingenias</groupId>
 			<artifactId>editor</artifactId>
-			<version>1.0</version>
+			<version>1.0-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>

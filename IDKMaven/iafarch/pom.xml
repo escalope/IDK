@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-<parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>7</version>
-  </parent>
+	<parent>
+		<groupId>net.sf.ingenias</groupId>
+		<artifactId>ingenias</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sf.ingenias</groupId>
     <artifactId>iafarch</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <name>iafarch</name>
     <description>The INGENIAS Development Kit</description>
     <url>http://ingenias.sf.net</url>
@@ -20,10 +20,12 @@
       <distribution />
     </license>
   </licenses>
-<scm>
-    <url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0/iafarch</url>
-    <connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0/iafarch</connection>
-  </scm>
+	<scm>
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch</url>		
+	</scm>
+
 <developers>
     <developer>
       <id>escalope</id>

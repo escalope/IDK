@@ -12,7 +12,7 @@
 	<version>${version}</version>
 	<name>The name of my project</name>
 	<url>http://maven.apache.org</url>
-<packaging>jar</packaging>
+	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>org.codehaus.izpack</groupId>

@@ -9,7 +9,7 @@
     <groupId>net.sf.ingenias</groupId>
     <artifactId>ingenias</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <name>ingenias</name>
     <description>The INGENIAS Development Kit</description>
     <url>http://ingenias.sf.net</url>
@@ -20,10 +20,12 @@
       <distribution />
     </license>
   </licenses>
-  <scm>
-    <url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0</url>
-    <connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0</connection>
-  </scm>
+	<scm>
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven</url>		
+	</scm>
+
 <developers>
     <developer>
       <id>escalope</id>

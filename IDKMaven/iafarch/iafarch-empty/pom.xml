@@ -2,12 +2,12 @@
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>iafarch</artifactId>
-		<version>1.0</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>iafarch-empty</artifactId>
-	<version>1.0</version>
+	<version>1.0-SNAPSHOT</version>
 <packaging>maven-archetype</packaging>
 	<name>Archetype - iafarch - empty project</name>
  <url>http://ingenias.sf.net</url>
@@ -18,10 +18,12 @@
       <distribution />
     </license>
   </licenses>
-  <scm>
-    <url>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0/iafarch/iafarch-empty</url>
-    <connection>https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.0/iafarch/iafarch-empty</connection>
-  </scm>
+	<scm>
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch/iafarch-empty</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch/iafarch-empty</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch/iafarch-empty</url>		
+	</scm>
+
 <developers>
     <developer>
       <id>escalope</id>

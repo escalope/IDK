@@ -9,7 +9,7 @@
     <groupId>net.sf.ingenias</groupId>
     <artifactId>iafarch</artifactId>
     <packaging>pom</packaging>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <name>iafarch</name>
     <description>The INGENIAS Development Kit</description>
     <url>http://ingenias.sf.net</url>
@@ -21,9 +21,9 @@
     </license>
   </licenses>
 	<scm>
-		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/iafarch-1.1</connection>
-		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/iafarch-1.1</developerConnection>
-		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/iafarch-1.1</url>		
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch</url>		
 	</scm>
 
 <developers>

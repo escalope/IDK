@@ -2,5 +2,5 @@
 	<file id="myid1" src="src/test/resources/mergetest/file1.xml" />
 	<file id="myid2" src="src/test/resources/mergetest/file2.xml" />
 	<file id="myid3" src="src/test/resources/mergetest/file3.xml" />
-	<merge value="((myid1,myid2),myid3)" target="src/test/resources/mergetest/file4.xml" />
+	<merge value="((myid1,myid2),myid3)" target="target/file4.xml" />
 </mergespec>

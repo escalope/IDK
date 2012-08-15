@@ -194,9 +194,7 @@ implements GraphLoad {
 					System.err.println(ie.getMessage());
 				}
 			}
-			graph.getListenerContainer().setEnabled(true);
-			graph.getListenerContainer().setToFrontVisibleChildren();
-
+			
 			return graph;
 		}
 		catch (Exception e) {
@@ -592,6 +590,13 @@ implements GraphLoad {
 		}
 		if (!allrecovered)
 			throw new CannotLoadDiagram(failureMessage);
+		for (ModelJGraph mjg:ids.gm.getUOModels()){
+			mjg.getListenerContainer().setEnabled(true);
+			mjg.getListenerContainer().setToFrontVisibleChildren();
+			mjg.getListenerContainer().graphChanged(null); // to refresh the container layout
+		}
+		ids.editor.setEnabled(true);
+		
 	}
 
 	private void restoreModel(IDEState ids,GUIResources resources,RelationshipManager rm,
@@ -670,9 +675,7 @@ implements GraphLoad {
 		//mjg.setId(id);
 		this.fromGXL(ids.om,rm, mjg, graph, layout);		
 		ids.gm.addModel(path, id, mjg);
-		ids.editor.setEnabled(true);
-		mjg.getListenerContainer().setEnabled(true);
-		mjg.getListenerContainer().graphChanged(null); // to refresh the container layout
+		
 	}
 
 

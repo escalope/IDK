@@ -136,8 +136,16 @@ public class IAFMerger {
 				resources);
 		
 		pm.save(target,ide.getIds());
-		
-		Log.getInstance().logSYS("Project imported successfully");
+			System.err.println("primero");
+/*ide. setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+		 java.awt.event.WindowEvent wev = new 		 java.awt.event.WindowEvent(ide, java.awt.event.WindowEvent.WINDOW_CLOSING);*/
+		ide.stop();
+		ide.dispose();
+//                java.awt.Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+	//	for ( java.awt.event.WindowListener listener:listeners)
+	//	 ide.removeWindowListener(listener);// to prevent close dialog
+
+		Log.getInstance().logSYS("Project imported successfully");//		ide.dispose();
 	}
 	
 	
@@ -183,6 +191,15 @@ public class IAFMerger {
 			FileOutputStream fos=new FileOutputStream(targetFile);
 			fos.write(content.toString().getBytes());
 			fos.close();
+
+			System.err.println("segundo");
+			for (Frame f:Frame.getFrames()){
+				System.err.println(""+f.getClass().getName()+":"+f.getName());
+				f.dispose();
+
+			}
+			System.err.println("tercero");
+
 			
 		}
 	}

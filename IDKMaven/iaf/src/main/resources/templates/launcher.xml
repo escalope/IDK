@@ -59,6 +59,9 @@ public class Main@@@v@@@node@@@/v@@@ {
         Profile p = new ProfileImpl();
         p.setParameter("preload","a*");
         p.setParameter(Profile.MAIN_PORT, "@@@v@@@port@@@/v@@@");
+	if (args.length==2 && args[1].equalsIgnoreCase("pause")){
+ 	  ingenias.jade.graphics.MainInteractionManager.goManual();
+	}
 		if (new File("target/jade").exists() && new File("target/jade").isDirectory())
 			p.setParameter(Profile.FILE_DIR, "target/jade/");
 		else {

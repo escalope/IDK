@@ -92,6 +92,17 @@
 		</classpath>
     </java>
   </target>
+
+  <target name="runPause@@@v@@@node@@@/v@@@" depends="test">
+    <java fork="true" failonerror="true" maxmemory="@@@v@@@memory@@@/v@@@"
+    classname="ingenias.jade.Main@@@v@@@node@@@/v@@@">
+    <arg line="@@@v@@@port@@@/v@@@ pause"/> 
+    	<classpath>			  
+			<path refid="build.classpath" />        
+			<pathelement path="${maven.build.outputDir}" />     
+		</classpath>
+    </java>
+  </target>
   
    <target name="runjade@@@v@@@node@@@/v@@@">
    <mkdir dir="target/jade"/>

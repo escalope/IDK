@@ -1,0 +1,212 @@
+---
+layout: pagewithoutposts
+title: Quick Start
+---
+
+
+INGENIAS is the name of an Agent Oriented Software Engineering
+ Methodology. It is supported by the INGENIAS Development Kit. This
+tutorial will introduce how to use this kit to develop a simple
+Multi-Agent System. In general, a MAS in INGENIAS will have a
+specification made with the INGENIAS MAS modeling language, a set of
+Java files (some of them automatically generated) and resources
+(images, html, etc.).
+
+
+All the artifacts being part of the INGENIAS support tools are
+already uploaded to the <a target="_blank" title="Maven Central Repository"
+href="http://search.maven.org/">Maven central repository</a>. Also,
+since INGENIAS projects are Maven projects, it is possible to include
+any software available in this repository. This does not imply that
+can be easily integrated, but this tutorial will give some hints. For
+integrating software not available in the Maven repository, some
+additional steps are required. Since these steps lead to locally
+installed software, rather than the globally available software in
+Maven repository, we recommend to follow sonatype instructions to
+create your own Maven repository or to<a target="_blank" title="Sonatype
+instructions to upload third party software"
+href="http://www.sonatype.com/books/nexus-book/reference/using-sect-uploading.
+html"> upload this particular software to the official one</a>. It is
+highly recommended that you include the sources for those binaries.
+Besides, this alternative requires <a target="_blank" title="Instructions for
+registering in Sonatype"
+href="https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository
++Usage+Guide">having
+registered your project in sonatype</a>.&nbsp;
+
+There are several development scenarios considered in this
+tutorial
+ 
+- Starting a project from one template</li>
+- Running a project
+- Modifying a project</li>
+
+
+The scenarios consider a GUI Agent. This GUI agent shows one window
+having one button. The agent is behind the GUI, processing the events.
+In this case, the events are button click events. The processing
+consists in printing a message in the console.
+
+# Contents
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding the "Contents" header
+{:toc}
+
+# Required software
+
+The INGENIAS requires three pieces of software which, if you are used
+to develop, probably already have: Java SDK (1.6), Ant, and Maven
+(v3). The MAS is built and deployed using <a target="_blank" title="Maven site"
+href="http://www.maven.org">Maven</a>. The execution of the system
+itself is made using <a target="_blank" title="ANT site"
+href="http://ant.apache.org">ant</a>.
+
+## Installing Java SDK
+
+First, The Java SDK has to be installed. It needs to be the sun
+version, not the openjdk.
+<b>Linux</b>: just type in a console 
+<code>sudo apt-get install sun-java6-jdk</code> 
+
+and to be sure this is the version being executed, run
+
+<code>sudo update-alternatives --config java</code> 
+
+And 
+
+<code>sudo update-alternatives --config javac</code>
+
+In both cases, check that the java-sun-6 version is selected.
+
+<b>Windows and others:</b><a target="_blank" title="Ant download and install
+instructions"
+href="http://ant.apache.org/manual/install.html"> </a><a target="_blank"
+title="Ant download and install instructions"
+href="http://ant.apache.org/manual/install.html">Check
+the Java SDK download and installation guide</a><a target="_blank" title="Java
+SDK install instructions"
+href="http://www.oracle.com/technetwork/java/javase/index-137561.html">.
+</a>
+ 
+## Installing Ant
+
+Ant software has to be installed as well. To do so:
+<b>Linux:</b> just type in a console 
+
+<code>sudo apt-get install ant</code> 
+
+If you install ant, you may want to use also the bash shell complete
+feature. This feature permits to complete commands using the tab key. To
+install this type:
+
+<code>sudo apt-get install bash-completion</code> 
+
+<b>Windows and others</b>:<a target="_blank" title="Ant download and install
+instructions"
+href="http://ant.apache.org/manual/install.html"> </a><a target="_blank"
+title="Ant download and install instructions"
+href="http://ant.apache.org/manual/install.html">Check
+the ant download and installation guide</a><a target="_blank" title="Ant
+download and install instructions"
+href="http://ant.apache.org/manual/install.html">. </a>
+
+
+## Installing Maven
+
+<b>Linux</b>: just type in a console 
+
+<code>sudo apt-get install maven3</code>
+<b>
+</b>
+<b>Windows and others:</b> <a title="Maven download and install instructions"
+href="http://maven.apache.org/download.html">Check the maven
+download and installation guide</a>.&nbsp;
+
+## Starting a project from one template
+The example shows how to create one project. In general, to access
+the project templates of INGENIAS, you have to write
+<code>mvn archetype:generate</code>
+
+
+And select the ingenias project among the ones shown .... which tend
+to be hundreds. To make things easier, you can filter project
+templates with:
+<code>mvn archetype:generate -Dfilter=iaf</code>
+
+
+or
+<code>mvn archetype:generate -Dfilter=ingenias.</code>
+
+ 
+Following, it is necessary to choose a groupID and an artifactID that
+identifies your development. <a target="_blank" title="Maven naming conventions"
+href="http://maven.apache.org/guides/mini/guide-naming-conventions.html">There
+are some guidelines that may help to decide which names to assign to
+each one</a>. For the sake of a small development, just write the
+same value in both. The version number can be left as it is. It makes
+sense in long term developments, though.&nbsp;
+<video controls="controls" type="video/webm" preload="auto"
+poster="/assets/videos/posterdemorapida0.png"
+src="/assets/videos/demorapida0.webm"></video>
+
+# Running the project
+
+After creating a project, to run the software, by default the command
+is:
+<code>ant runProdStandAlone</code>
+
+This command starts the system, but it may fail the first time. If you
+see some exception initially, just write:
+<code>mvn test; ant runProdStandAlone</code> 
+The reason for the failure is that Maven needs to download the first
+time a file ant needs. After this first time, you will not need to do
+this again for any project, unless you delete the maven repository. 
+
+In the video, it is shown different ways of launching the application. 
+<ul>
+<li>ant runXXXXProdStandAlone. It means "launching the system using an
+embedded non-visible JADE instance". If there is an already opened
+JADE instance, whether it is visible or not, it will connect to it
+automatically.</li>
+</ul>
+<ul>
+<li>ant runXXXX. It means, "launch the system but do not include an
+embedded JADE instance". It will fail if there is no opened JADE
+instance . </li>
+</ul>
+The XXXX stands for the name of the deployment. In INGENIAS, you can
+specify how many agents you want to run, of what type, and what kind of
+initial state you want to assume from them. Each deployment has a
+specific name which you assign in the specification. This name replaces
+the XXXX in the example.&nbsp; When there is no XXXX, it is assumed one
+instance of each defined agent is launched assuming a default initial
+state.
+
+<video controls="controls" type="video/webm" preload="none"
+poster="/assets/videos/posterdemorapida1.png"
+src="/assets/videos/demorapida1.webm"></video>
+
+# Modifying the specification
+A development is usually requiring creating or modifying a
+specification. The video shows how to access the specification, how a
+new deployment is defined, and how to run this new deployment.
+The specification is modified using the editor. The editor is
+launched with:
+<code>ant edit</code>
+After modifying the specification, it needs to be saved to be
+considered in the execution. Then, type your preferred launch command,
+like:
+
+<code>ant run</code> 
+When the specification is modified, the next time ant is invoked, it
+will take longer to execute. The reason is the need to regenerate the
+code for several Java classes to take into account the changes made.
+
+<video controls="controls" type="video/webm" preload="none"
+poster="/assets/videos/posterdemorapida2.png"
+src="/assets/videos/demorapida2.webm"></video>
+
+
+
+

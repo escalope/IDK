@@ -1,0 +1,10 @@
+permalink: :title.html
+destination: ../web/
+markdown:    kramdown
+kramdown:
+  use_coderay: true
+auto: true
+exclude:
+  - Rakefile
+  - Gemfile
+  - .gitignore

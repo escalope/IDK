@@ -247,6 +247,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
  static ImageIcon GoalStateWSIcon=new ImageIcon(ImageLoader.getImage("images/mgoalstatews.png"));
 	
+ static ImageIcon RuntimeCommFailureIcon=new ImageIcon(ImageLoader.getImage("images/mconv.png"));
+	
  static ImageIcon StateGoalIcon=new ImageIcon(ImageLoader.getImage("images/msgoal.gif"));
 	
  static ImageIcon ConversationIcon=new ImageIcon(ImageLoader.getImage("images/mconv.png"));
@@ -586,6 +588,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(GoalStateWS.class))
           return "images/mgoalstatews.png";
 	
+        if (userObject.getClass().equals(RuntimeCommFailure.class))
+          return "images/mconv.png";
+	
         if (userObject.getClass().equals(StateGoal.class))
           return "images/msgoal.gif";
 	
@@ -924,6 +929,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
         if (userObject.getClass().equals(GoalStateWS.class))
           return GoalStateWSIcon;
+	
+        if (userObject.getClass().equals(RuntimeCommFailure.class))
+          return RuntimeCommFailureIcon;
 	
         if (userObject.getClass().equals(StateGoal.class))
           return StateGoalIcon;

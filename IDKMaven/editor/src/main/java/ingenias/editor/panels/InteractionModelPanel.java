@@ -115,6 +115,8 @@ public class InteractionModelPanel extends JGraph {
 
  entities.add("UMLComment");
 
+ entities.add("RuntimeCommFailure");
+
  entities.add("Conversation");
 
  entities.add("Fact");
@@ -129,9 +131,9 @@ public class InteractionModelPanel extends JGraph {
 
  entities.add("GoalStateWS");
 
- entities.add("FrameFact");
-
  entities.add("GeneralEvent");
+
+ entities.add("FrameFact");
 
  entities.add("RuntimeEvent");
 
@@ -293,6 +295,15 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
+    RuntimeCommFailure nentity=new RuntimeCommFailure(((Model)getModel()).getNewId("RuntimeCommFailure"));
+      DefaultGraphCell vertex = new
+          RuntimeCommFailureCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("Conversation")) {
     Conversation nentity=new Conversation(((Model)getModel()).getNewId("Conversation"));
       DefaultGraphCell vertex = new
@@ -356,19 +367,19 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("FrameFact")) {
-    FrameFact nentity=new FrameFact(((Model)getModel()).getNewId("FrameFact"));
+    if (entity.equalsIgnoreCase("GeneralEvent")) {
+    GeneralEvent nentity=new GeneralEvent(((Model)getModel()).getNewId("GeneralEvent"));
       DefaultGraphCell vertex = new
-          FrameFactCell(nentity);
+          GeneralEventCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
     else
 
-    if (entity.equalsIgnoreCase("GeneralEvent")) {
-    GeneralEvent nentity=new GeneralEvent(((Model)getModel()).getNewId("GeneralEvent"));
+    if (entity.equalsIgnoreCase("FrameFact")) {
+    FrameFact nentity=new FrameFact(((Model)getModel()).getNewId("FrameFact"));
       DefaultGraphCell vertex = new
-          GeneralEventCell(nentity);
+          FrameFactCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -535,6 +546,11 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
+      return RuntimeCommFailureView.getSize((RuntimeCommFailure)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("Conversation")) {
       return ConversationView.getSize((Conversation)entity);      
     }
@@ -570,13 +586,13 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("FrameFact")) {
-      return FrameFactView.getSize((FrameFact)entity);      
+    if (entity.getType().equalsIgnoreCase("GeneralEvent")) {
+      return GeneralEventView.getSize((GeneralEvent)entity);      
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("GeneralEvent")) {
-      return GeneralEventView.getSize((GeneralEvent)entity);      
+    if (entity.getType().equalsIgnoreCase("FrameFact")) {
+      return FrameFactView.getSize((FrameFact)entity);      
     }
     else
 
@@ -780,6 +796,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(RuntimeCommFailure.class)) {
+      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
+    }
+    else
+
     if (entity.getClass().equals(Conversation.class)) {
       vertex = new ConversationCell( (Conversation) entity);
       // Default Size for the new Vertex with the new entity within
@@ -829,17 +852,17 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(FrameFact.class)) {
-      vertex = new FrameFactCell( (FrameFact) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = FrameFactView.getSize((FrameFact) entity);
-    }
-    else
-
     if (entity.getClass().equals(GeneralEvent.class)) {
       vertex = new GeneralEventCell( (GeneralEvent) entity);
       // Default Size for the new Vertex with the new entity within
       size = GeneralEventView.getSize((GeneralEvent) entity);
+    }
+    else
+
+    if (entity.getClass().equals(FrameFact.class)) {
+      vertex = new FrameFactCell( (FrameFact) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FrameFactView.getSize((FrameFact) entity);
     }
     else
 

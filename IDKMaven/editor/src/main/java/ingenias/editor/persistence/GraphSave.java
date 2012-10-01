@@ -243,12 +243,7 @@ public class GraphSave {
 				DefaultEdge[] edges=edge.getRepresentation();
 				AttributeMap am=edges[0].getAttributes();
 				Object[] labels = GraphConstants.getExtraLabels(am);
-//				System.err.println("Labels "+labels.length);
-				/*Point2D[] positions = GraphConstants.getExtraLabelPositions(am);
-				 if (labels!=null && positions!=null){
-					attributes.put("label",labels);
-					attributes.put("poslabel",positions);
-				}*/
+
 				//attributes.put("label",)
 			}
 			if (attributes != null) {
@@ -256,10 +251,7 @@ public class GraphSave {
 			}
 			gxl = gxl + "\n\t</node>";
 
-		/*} else {
-			System.err.println("!!!! WARNING: " + id +
-					" could not be saved properly due to unexpected error " + vertex);
-		}*/
+	
 		return gxl;
 	}
 
@@ -317,7 +309,7 @@ public class GraphSave {
 
 							}
 						}
-						System.err.println("-----------_"+_enid+" tipo "+en.getType());
+						
 					}
 					// The other attributes.
 					gxl += "\n\t</node>";
@@ -362,9 +354,10 @@ public class GraphSave {
 			 *  "\n\t\t\t<string>" + object.toString() + "</string>" +
 			 *  "</attr>";
 			 */
-		} else {
+		} else {			
+			// if the entity is not recognised, nothing is done with it
+			//throw new RuntimeException("Could not convert xml to object with "+object.toString());
 			
-			System.err.println(object);
 		}
 		return gxl;
 	}

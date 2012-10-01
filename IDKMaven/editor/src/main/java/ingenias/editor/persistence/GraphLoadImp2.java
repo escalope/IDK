@@ -336,6 +336,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
    	if (en.getClass().equals(ingenias.editor.entities.GoalStateWS.class))
 	  return  new ingenias.editor.cell.GoalStateWSCell((ingenias.editor.entities.GoalStateWS)en);
 
+   	if (en.getClass().equals(ingenias.editor.entities.RuntimeCommFailure.class))
+	  return  new ingenias.editor.cell.RuntimeCommFailureCell((ingenias.editor.entities.RuntimeCommFailure)en);
+
    	if (en.getClass().equals(ingenias.editor.entities.StateGoal.class))
 	  return  new ingenias.editor.cell.StateGoalCell((ingenias.editor.entities.StateGoal)en);
 
@@ -650,6 +653,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
     if (en instanceof ingenias.editor.entities.UIColaborates)
      return  new ingenias.editor.cell.UIColaboratesEdge((ingenias.editor.entities.UIColaborates)en);
 
+    if (en instanceof ingenias.editor.entities.TriggersFailure)
+     return  new ingenias.editor.cell.TriggersFailureEdge((ingenias.editor.entities.TriggersFailure)en);
+
     if (en instanceof ingenias.editor.entities.WFPlays)
      return  new ingenias.editor.cell.WFPlaysEdge((ingenias.editor.entities.WFPlays)en);
 
@@ -683,11 +689,11 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
     if (en instanceof ingenias.editor.entities.GTSatisfies)
      return  new ingenias.editor.cell.GTSatisfiesEdge((ingenias.editor.entities.GTSatisfies)en);
 
-    if (en instanceof ingenias.editor.entities.AGOCondSubordinationRelationshipMember)
-     return  new ingenias.editor.cell.AGOCondSubordinationRelationshipMemberEdge((ingenias.editor.entities.AGOCondSubordinationRelationshipMember)en);
-
     if (en instanceof ingenias.editor.entities.WFUses)
      return  new ingenias.editor.cell.WFUsesEdge((ingenias.editor.entities.WFUses)en);
+
+    if (en instanceof ingenias.editor.entities.AGOCondSubordinationRelationshipMember)
+     return  new ingenias.editor.cell.AGOCondSubordinationRelationshipMemberEdge((ingenias.editor.entities.AGOCondSubordinationRelationshipMember)en);
 
     if (en instanceof ingenias.editor.entities.WFDecides)
      return  new ingenias.editor.cell.WFDecidesEdge((ingenias.editor.entities.WFDecides)en);

@@ -135,6 +135,10 @@ public InteractionModelCellViewFactory() {}
            return new ingenias.editor.cell.UMLCommentView(v);
    }
 
+   if (userObject.getClass().equals(RuntimeCommFailure.class)){
+           return new ingenias.editor.cell.RuntimeCommFailureView(v);
+   }
+
    if (userObject.getClass().equals(Conversation.class)){
            return new ingenias.editor.cell.ConversationView(v);
    }
@@ -163,12 +167,12 @@ public InteractionModelCellViewFactory() {}
            return new ingenias.editor.cell.GoalStateWSView(v);
    }
 
-   if (userObject.getClass().equals(FrameFact.class)){
-           return new ingenias.editor.cell.FrameFactView(v);
-   }
-
    if (userObject.getClass().equals(GeneralEvent.class)){
            return new ingenias.editor.cell.GeneralEventView(v);
+   }
+
+   if (userObject.getClass().equals(FrameFact.class)){
+           return new ingenias.editor.cell.FrameFactView(v);
    }
 
    if (userObject.getClass().equals(RuntimeEvent.class)){
@@ -256,6 +260,10 @@ public InteractionModelCellViewFactory() {}
 
    if (v.getClass().equals(IAccessesEdge.class)){
            return new ingenias.editor.cell.IAccessesView(v);
+   }
+
+   if (v.getClass().equals(TriggersFailureEdge.class)){
+           return new ingenias.editor.cell.TriggersFailureView(v);
    }
 
 

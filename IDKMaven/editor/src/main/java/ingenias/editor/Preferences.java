@@ -45,7 +45,7 @@ public class Preferences {
 	public enum DefaultRelationshipView {INGENIAS,UML};
 	public enum EditPropertiesMode {POPUP,PANEL};
 	public enum ModelingLanguage {UML,INGENIAS};
-	public enum RelationshipLayout {AUTOMATIC,MANUAL};
+	public enum RelationshipLayout {AUTOMATIC_STRAIGHT,AUTOMATIC_RADIAL, MANUAL};
 	public enum RelationshipsLookAndFeel {LABELS,NOTHING,FULL};
 
 
@@ -53,7 +53,7 @@ public class Preferences {
 	private EditPropertiesMode editPropertiesMode=EditPropertiesMode.PANEL;
 	private RelationshipsLookAndFeel relationshipsLookAndFeel=RelationshipsLookAndFeel.NOTHING;
 	private ModelingLanguage modelingLanguage=ModelingLanguage.INGENIAS;
-	private RelationshipLayout relationshiplayout=RelationshipLayout.AUTOMATIC;	
+	private RelationshipLayout relationshiplayout=RelationshipLayout.AUTOMATIC_STRAIGHT;	
 	private String selectedFilter="";
 	private boolean filtersEnabled=false;
 	private String workspacePath=System.getProperty("user.dir");
@@ -108,7 +108,11 @@ public class Preferences {
 				prefs.relationshipsLookAndFeel=RelationshipsLookAndFeel.valueOf(children.item(k).getChildNodes().item(0).getNodeValue());
 			}
 			if (children.item(k).getNodeName().equalsIgnoreCase("relationshiplayout")){
+				try {
 				prefs.relationshiplayout=RelationshipLayout.valueOf(children.item(k).getChildNodes().item(0).getNodeValue());
+				} catch (java.lang.IllegalArgumentException iae){
+					prefs.relationshiplayout=RelationshipLayout.AUTOMATIC_STRAIGHT;
+				}
 			}
 			if (children.item(k).getNodeName().equalsIgnoreCase("modeling")){
 				prefs.modelingLanguage=ModelingLanguage.valueOf(children.item(k).getChildNodes().item(0).getNodeValue());

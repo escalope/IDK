@@ -103,28 +103,12 @@ public class HistoryManager {
 						
 
 						new LoadFileSwingTask(current,updater,ids,resources).execute();
-					/*	Runnable loadAction=new Runnable(){
-							public void run(){
-								IDEState nids=new LoadFileAction(ids,resources).loadFileAction(current,updater);
-
-								if (nids!=null){
-									//updater.updateIDEState(nids);
-									new IDEFactory(nids,resources).updateButtonBars();
-								}	
-								resources.getProgressBar().setVisible(false);
-								resources.getProgressBar().invalidate();
-								resources.getProgressBar().validate();
-								resources.getProgressBar().repaint();	
-							}
-						};
-						SwingUtilities.invokeLater(loadAction);*/
-						//		new Thread(loadAction).start();
 					}
 				});
 
 				resources.getFile().add(vfmi);
 			}
 		}
-		//System.err.println("despues:"+ids.getLastFiles());
+		
 	}
 }

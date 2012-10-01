@@ -52,6 +52,7 @@ import org.jgraph.plaf.basic.*;
 
 import com.languageExplorer.widgets.ScrollableBar;
 
+import ingenias.editor.Preferences.RelationshipLayout;
 import ingenias.editor.editiondialog.GeneralEditionPanel;
 import ingenias.editor.entities.*;
 import ingenias.editor.cell.*;
@@ -67,7 +68,7 @@ import java.awt.geom.*;
 
 public class Editor
 extends JPanel
-implements GraphSelectionListener, java.io.Serializable {
+implements  java.io.Serializable {
 
 	/*public void setCommonButtons(ButtonToolBar commonButtons) {
 		this.commonButtons = commonButtons;
@@ -115,7 +116,7 @@ implements GraphSelectionListener, java.io.Serializable {
 	private GraphManager gm;
 
 	private Vector<GraphModelListener> graphModelListeners=new 
-	Vector<GraphModelListener>();
+			Vector<GraphModelListener>();
 
 	private MouseListener lastMouseListener;
 
@@ -170,8 +171,8 @@ implements GraphSelectionListener, java.io.Serializable {
 		this.om = om;
 		this.gm=gm;
 		this.prefs=prefs;
-		graphPanel = new JTabbedPaneWithCloseIcons();
-		System.err.println(graphPanel.getUI().getClass().getName());
+		graphPanel = new DraggableTabbedPane();		
+		
 		//graphPanel.setUI(new JTabbedPaneWithCloseIconsUI());
 		graphPanel.setName("DiagramsPanel");		
 		// Use Border Layout
@@ -183,7 +184,7 @@ implements GraphSelectionListener, java.io.Serializable {
 		//
 		// Create a GraphUndoManager which also Updates the ToolBar
 		undoManager =
-			new GraphUndoManager() {
+				new GraphUndoManager() {
 			// Override Superclass
 			/**
 			 *  Description of the Method
@@ -244,11 +245,8 @@ implements GraphSelectionListener, java.io.Serializable {
 	}
 
 	public ModelJGraph getGraph() {
-		if (graphPanel.getTabCount()>0){
+		if (graphPanel.getTabCount()>0 && graphPanel.getComponentAt(graphPanel.getSelectedIndex()) instanceof JScrollPane){
 			JScrollPane comp=(JScrollPane)(graphPanel.getComponentAt(graphPanel.getSelectedIndex()));
-			//System.err.println(comp);
-			/*if (comp!=null)
-			System.err.println("view:"+comp.getViewport().getView());*/
 			if (comp!=null && comp.getViewport().getView()!=null){
 				//System.err.println(comp.getViewport().getView().getClass().getName());
 				return (ModelJGraph)(comp.getViewport().getView());
@@ -264,142 +262,145 @@ implements GraphSelectionListener, java.io.Serializable {
 	// This method can be invoked by pressing the project tree and the state
 	// change listener (when the tab changes)
 	public synchronized void changeGraph(final ModelJGraph graph) {		
-		if (graph != null) {
-			graph.setPortsVisible(true);
+		if (ModelJGraph.getEnabledAllListeners()){
+			if (graph != null) {
+				graph.setPortsVisible(true);
 
-			if (this.graphPanel.indexOfTab(graph.getID()) < 0) {
-				this.graphPanel.addTab(graph.getID(),  ProjectTreeRenderer.selectIconByUserObject(graph),new JScrollPane(graph));
-				graph.getModel().addGraphModelListener(new GraphModelListener(){
-					public void graphChanged(GraphModelEvent e) {
-						selectedGraphModelHasChanged(e);
-					}
-				});
-			}
-			if (lastMouseListener!=null)
-				graph.removeMouseListener(lastMouseListener);
-		}
-
-		this.graphPanel.setSelectedIndex(this.graphPanel.indexOfTab(graph.getID()));
-
-		updateBars(graph);
-		lastMouseListener=new MouseListener(){
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				
-				if (graph.getSelectionCells().length==1 && 
-						!graph.getListenerContainer().getParentRelationships().containsKey(graph.getSelectionCells()[0])){
-					Object selectedCell=graph.getSelectionCells()[0];					
-					Object currentCell=null;
-					Object oldCell=null;
-					HashSet cells=new HashSet();				
-					int oldSize=0;
-					do {			
-						oldCell=currentCell;
-						oldSize=cells.size();
-						currentCell=graph.getNextCellForLocation(oldCell, arg0.getPoint().getX(), arg0.getPoint().getY());
-						if (currentCell!=null)
-							cells.add(currentCell);				
-					}while (currentCell!=null && !currentCell.equals(oldCell) && cells.size()>oldSize);
-					cells.remove(selectedCell);
-					if (cells.size()>=1){
-						// check if the cell underneath is a container									
-						Hashtable<Object,Hashtable<String, CollectionPanel>> containerCandidates= new Hashtable<Object,Hashtable<String, CollectionPanel>>();
-						for (Object cell:cells){
-							if (cell instanceof DefaultGraphCell){
-								Hashtable<String, CollectionPanel> candidate = graph.getListenerContainer().parentHasVisibleContainers((DefaultGraphCell) cell);
-								if (!candidate.isEmpty())
-									containerCandidates.put(cell, candidate);
-							}
+				if (this.graphPanel.indexOfTab(graph.getID()) < 0) {
+					this.graphPanel.addTab(graph.getID(),  ProjectTreeRenderer.selectIconByUserObject(graph),new JScrollPane(graph));
+					graph.getModel().addGraphModelListener(new GraphModelListener(){
+						public void graphChanged(GraphModelEvent e) {
+							selectedGraphModelHasChanged(e);
 						}
-						if (!containerCandidates.isEmpty()){
-							DefaultGraphCell container = (DefaultGraphCell) containerCandidates.keys().nextElement();
-							Hashtable<String, CollectionPanel> fields = containerCandidates.get(container);
-							DefaultGraphCell newEntityInContainer = (DefaultGraphCell) selectedCell;
-							Vector<Field> candidateField=new Vector<Field>();
-
-							System.err.println("container:"+container.getClass().getName()+" new:"+newEntityInContainer.getClass().getName());
-
-							for (String fieldName:fields.keySet()){
-								try {
-									String mname = "add" + fieldName.substring(0, 1).toUpperCase()
-									+ fieldName.substring(1, fieldName.length());
-									System.err.println(mname);
-									Class vclass = newEntityInContainer.getUserObject().getClass();
-									Class params[] = new Class[]{newEntityInContainer.getUserObject().getClass()};
-									Method fieldMethod = null;//
-									while (fieldMethod == null && !vclass.equals(Object.class)) {
-										try {
-											params = new Class[] { vclass };
-											fieldMethod = container.getUserObject().getClass().getMethod(mname, params);											
-										} catch (NoSuchMethodException nsme) {
-											vclass = vclass.getSuperclass();
-										}
-									}
-									if (fieldMethod!=null){
-										Field currentField = container.getUserObject().getClass().getField(fieldName);
-										candidateField.add(currentField);
-									}
-								} catch (NoSuchFieldException nsfe){
-									nsfe.printStackTrace();
-								}
-							}				
-							if (candidateField.size()>=1){
-								Vector<ActionListener> actionConfirm=new Vector<ActionListener>();
-								Vector<ActionListener> actionDecline=new Vector<ActionListener>();
-								GeneralEditionPanel.addValue(newEntityInContainer.getUserObject(),
-										candidateField.firstElement(), 
-										(Entity) container.getUserObject(),
-										actionConfirm,actionDecline,graph,gm);
-								actionConfirm.firstElement().actionPerformed(null);
-								Vector<DefaultGraphCell> toRemove = graph.getListenerContainer().getChildren(newEntityInContainer);
-								toRemove.add(newEntityInContainer);
-								graph.getModel().remove(toRemove.toArray());
-								for (DefaultGraphCell dgc:toRemove){
-									graph.getListenerContainer().removeCellFromParentShip(dgc);
-								}
-							} else
-								System.err.println("Candidatos "+candidateField);
-
-						}
-
-
-					}
+					});
 				}
-				graph.refresh(); // to eliminate pieces of graphics left in the panel
-			}};
-			graph.addMouseListener(lastMouseListener);
+				if (lastMouseListener!=null)
+					graph.removeMouseListener(lastMouseListener);
+			}
+
+			this.graphPanel.setSelectedIndex(this.graphPanel.indexOfTab(graph.getID()));
+
+			updateBars(graph);
+			lastMouseListener=new MouseListener(){
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+
+
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+
+
+				}
+
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+
+
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+
+					if (graph.getSelectionCells().length==1 && 
+							!graph.getListenerContainer().getParentRelationships().containsKey(graph.getSelectionCells()[0])){
+						Object selectedCell=graph.getSelectionCells()[0];					
+						Object currentCell=null;
+						Object oldCell=null;
+						HashSet cells=new HashSet();				
+						int oldSize=0;
+						do {			
+							oldCell=currentCell;
+							oldSize=cells.size();
+							currentCell=graph.getNextCellForLocation(oldCell, arg0.getPoint().getX(), arg0.getPoint().getY());
+							if (currentCell!=null)
+								cells.add(currentCell);				
+						}while (currentCell!=null && !currentCell.equals(oldCell) && cells.size()>oldSize);
+						cells.remove(selectedCell);
+						if (cells.size()>=1){
+							// check if the cell underneath is a container									
+							Hashtable<Object,Hashtable<String, CollectionPanel>> containerCandidates= new Hashtable<Object,Hashtable<String, CollectionPanel>>();
+							for (Object cell:cells){
+								if (cell instanceof DefaultGraphCell){
+									Hashtable<String, CollectionPanel> candidate = graph.getListenerContainer().parentHasVisibleContainers((DefaultGraphCell) cell);
+									if (!candidate.isEmpty())
+										containerCandidates.put(cell, candidate);
+								}
+							}
+							if (!containerCandidates.isEmpty()){
+								DefaultGraphCell container = (DefaultGraphCell) containerCandidates.keys().nextElement();
+								Hashtable<String, CollectionPanel> fields = containerCandidates.get(container);
+								DefaultGraphCell newEntityInContainer = (DefaultGraphCell) selectedCell;
+								Vector<Field> candidateField=new Vector<Field>();
+
+								System.err.println("container:"+container.getClass().getName()+" new:"+newEntityInContainer.getClass().getName());
+
+								for (String fieldName:fields.keySet()){
+									try {
+										String mname = "add" + fieldName.substring(0, 1).toUpperCase()
+												+ fieldName.substring(1, fieldName.length());
+										System.err.println(mname);
+										Class vclass = newEntityInContainer.getUserObject().getClass();
+										Class params[] = new Class[]{newEntityInContainer.getUserObject().getClass()};
+										Method fieldMethod = null;//
+										while (fieldMethod == null && !vclass.equals(Object.class)) {
+											try {
+												params = new Class[] { vclass };
+												fieldMethod = container.getUserObject().getClass().getMethod(mname, params);											
+											} catch (NoSuchMethodException nsme) {
+												vclass = vclass.getSuperclass();
+											}
+										}
+										if (fieldMethod!=null){
+											Field currentField = container.getUserObject().getClass().getField(fieldName);
+											candidateField.add(currentField);
+										}
+									} catch (NoSuchFieldException nsfe){
+										nsfe.printStackTrace();
+									}
+								}				
+								if (candidateField.size()>=1){
+									Vector<ActionListener> actionConfirm=new Vector<ActionListener>();
+									Vector<ActionListener> actionDecline=new Vector<ActionListener>();
+									GeneralEditionPanel.addValue(newEntityInContainer.getUserObject(),
+											candidateField.firstElement(), 
+											(Entity) container.getUserObject(),
+											actionConfirm,actionDecline,graph,gm);
+									actionConfirm.firstElement().actionPerformed(null);
+									Vector<DefaultGraphCell> toRemove = graph.getListenerContainer().getChildren(newEntityInContainer);
+									toRemove.add(newEntityInContainer);
+									graph.getModel().remove(toRemove.toArray());
+									for (DefaultGraphCell dgc:toRemove){
+										graph.getListenerContainer().removeCellFromParentShip(dgc);
+									}
+								} else
+									System.err.println("Candidatos "+candidateField);
+
+							}
+
+
+						}
+					}
+					graph.refresh(); // to eliminate pieces of graphics left in the panel
+				}};
+				graph.addMouseListener(lastMouseListener);
+		}
 
 	}
 
 
-	protected void selectedGraphModelHasChanged(GraphModelEvent e) {
-		for (GraphModelListener gml:this.graphModelListeners){
-			gml.graphChanged(e);			
-		}
+	protected void selectedGraphModelHasChanged(GraphModelEvent e) {		
+		if (ModelJGraph.getEnabledAllListeners())
+			for (GraphModelListener gml:this.graphModelListeners){
+				gml.graphChanged(e);			
+			}
+
 	}
 
 	// This method can be invoked by pressing the project tree and the state
@@ -407,7 +408,7 @@ implements GraphSelectionListener, java.io.Serializable {
 	public synchronized boolean isOpened(ModelJGraph graph) {
 
 		return 
-		(this.graphPanel.indexOfTab(graph.getID()) >= 0);
+				(this.graphPanel.indexOfTab(graph.getID()) >= 0);
 	}
 
 
@@ -431,7 +432,7 @@ implements GraphSelectionListener, java.io.Serializable {
 		GraphModel gm = graph.getModel();
 		gm.addUndoableEditListener(undoManager);
 		// Update ToolBar based on Selection Changes
-		graph.getSelectionModel().addGraphSelectionListener(this);
+		//graph.getSelectionModel().addGraphSelectionListener(this);
 
 		// Listen for Delete Keystroke when the Graph has Focus
 
@@ -666,11 +667,11 @@ implements GraphSelectionListener, java.io.Serializable {
 	 *
 	 *@param  e  Description of Parameter
 	 */
-	public void valueChanged(GraphSelectionEvent e) {
+	/*public void valueChanged(GraphSelectionEvent e) {
 		// Group Button only Enabled if more than One Cell Selected
 		//		group.setEnabled(graph.getSelectionCount() > 1);
 		// Update Button States based on Current Selection
-		boolean enabled = !getGraph().isSelectionEmpty();
+		boolean enabled = !((JGraph)e.getSource()).isSelectionEmpty();
 		/*	if (this.commonButtons!=null)
 		this.commonButtons.getRemove().setEnabled(enabled);*/
 		//		ungroup.setEnabled(enabled);
@@ -678,7 +679,7 @@ implements GraphSelectionListener, java.io.Serializable {
 		//		toback.setEnabled(enabled);
 		//copy.setEnabled(enabled);
 		//cut.setEnabled(enabled);
-	}
+	//}
 
 
 	// End of Editor.MyMarqueeHandler
@@ -722,7 +723,7 @@ implements GraphSelectionListener, java.io.Serializable {
 		frame.getContentPane().add(new Editor(null,null,null));
 		// Fetch URL to Icon Resource
 		URL jgraphUrl =
-			Editor.class.getClassLoader().getResource("images/jgraph.gif");
+				Editor.class.getClassLoader().getResource("images/jgraph.gif");
 		// If Valid URL
 		if (jgraphUrl != null) {
 			// Load Icon
@@ -750,7 +751,7 @@ implements GraphSelectionListener, java.io.Serializable {
 			if (gc instanceof DefaultEdge) {
 
 				RoleEntity r = (RoleEntity) ( (org.jgraph.graph.DefaultEdge) gc).
-				getUserObject();
+						getUserObject();
 				r.hide();
 			}
 		}
@@ -758,6 +759,7 @@ implements GraphSelectionListener, java.io.Serializable {
 	}
 
 	private void showRoleLabels() {
+		
 		Object[] cells = this.getGraph().getSelectionCells();
 		if (cells == null || cells.length == 0) {
 			cells = this.getGraph().getRoots();
@@ -766,7 +768,7 @@ implements GraphSelectionListener, java.io.Serializable {
 			Object gc = cells[k];
 			if (gc instanceof DefaultEdge) {
 				RoleEntity r = (RoleEntity) ( (org.jgraph.graph.DefaultEdge) gc).
-				getUserObject();
+						getUserObject();
 				r.show(r.getAttributeToShow() + 1);
 
 			}
@@ -785,12 +787,14 @@ implements GraphSelectionListener, java.io.Serializable {
 	public void enableAutomaticLayout() {
 		if (this.getGraph()!=null){
 			GraphModelListener[] gml = ( (DefaultGraphModel)this.getGraph().getModel()).
-			getGraphModelListeners();
+					getGraphModelListeners();
 			for (int k = 0; k < gml.length; k++) {
-				if (ingenias.editor.events.ChangeNARYEdgeLocation.class.isAssignableFrom(
-						gml[k].getClass())) {
-					( (ingenias.editor.events.ChangeNARYEdgeLocation) gml[k]).
-					enableAutomaticAllocation();
+				if (prefs.getRelationshiplayout()==RelationshipLayout.AUTOMATIC_RADIAL){
+					if (ingenias.editor.events.ChangeNARYEdgeLocation.class.isAssignableFrom(
+							gml[k].getClass())) {
+						( (ingenias.editor.events.ChangeNARYEdgeLocation) gml[k]).
+						enableAutomaticAllocation();
+					}
 				}
 				if (ingenias.editor.events.ChangeEntityLocation.class.isAssignableFrom(
 						gml[k].getClass())) {
@@ -806,7 +810,7 @@ implements GraphSelectionListener, java.io.Serializable {
 	public void disableAutomaticLayout() {
 		if (this.getGraph()!=null){
 			GraphModelListener[] gml = ( (DefaultGraphModel)this.getGraph().getModel()).
-			getGraphModelListeners();
+					getGraphModelListeners();
 			for (int k = 0; k < gml.length; k++) {
 				if (ingenias.editor.events.ChangeNARYEdgeLocation.class.isAssignableFrom(
 						gml[k].getClass())) {

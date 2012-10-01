@@ -207,6 +207,10 @@ public AgentModelCellViewFactory() {}
            return new ingenias.editor.cell.ApplicationWSView(v);
    }
 
+   if (userObject.getClass().equals(RuntimeCommFailure.class)){
+           return new ingenias.editor.cell.RuntimeCommFailureView(v);
+   }
+
    if (userObject.getClass().equals(RuntimeEvent.class)){
            return new ingenias.editor.cell.RuntimeEventView(v);
    }

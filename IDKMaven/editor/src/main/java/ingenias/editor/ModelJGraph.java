@@ -141,7 +141,6 @@ public abstract class ModelJGraph extends JGraph implements Cloneable{
 			this.getModel().addGraphModelListener(changeEntityLocation);
 			this.getModel().addGraphModelListener(lc);
 			this.addKeyListener(new KeyListener() {
-
 				@Override
 				public void keyTyped(KeyEvent arg0) {
 					if (arg0.getKeyChar()=='H' ||arg0.getKeyChar()=='h'){
@@ -167,7 +166,6 @@ public abstract class ModelJGraph extends JGraph implements Cloneable{
 				@Override
 				public void keyPressed(KeyEvent arg0) {
 					// TODO Auto-generated method stub
-
 				}
 			});
 		}
@@ -177,23 +175,29 @@ public abstract class ModelJGraph extends JGraph implements Cloneable{
 	}
 
 	public void disableChangeEntityLocation(){
-		this.getModel().removeGraphModelListener(changeEntityLocation);
+		if (enabledAllListeners)
+			this.getModel().removeGraphModelListener(changeEntityLocation);
 	}
 
 	public void disableNARYEdgeLocation(){
-		this.getModel().removeGraphModelListener(naryEdgeLocation);
+		if (enabledAllListeners)
+			this.getModel().removeGraphModelListener(naryEdgeLocation);
 	}
 
 	public void enableChangeEntityLocation(){
-		this.getModel().removeGraphModelListener(lc);
-		this.getModel().addGraphModelListener(changeEntityLocation);
-		this.getModel().addGraphModelListener(lc); // listenercontainer must be always the last event listener
+		if (enabledAllListeners){
+			this.getModel().removeGraphModelListener(lc);
+			this.getModel().addGraphModelListener(changeEntityLocation);
+			this.getModel().addGraphModelListener(lc); // listenercontainer must be always the last event listener
+		}
 	}
 
 	public void enableNARYEdgeLocation(){
-		this.getModel().removeGraphModelListener(lc);
-		this.getModel().addGraphModelListener(naryEdgeLocation);
-		this.getModel().addGraphModelListener(lc); // listenercontainer must be always the last event listener
+		if (enabledAllListeners){
+			this.getModel().removeGraphModelListener(lc);
+			this.getModel().addGraphModelListener(naryEdgeLocation);
+			this.getModel().addGraphModelListener(lc); // listenercontainer must be always the last event listener
+		}
 	}
 
 	public Model getMJGraph(){
@@ -289,9 +293,9 @@ public abstract class ModelJGraph extends JGraph implements Cloneable{
 		boolean occupied=true;
 		while (occupied){
 			occupied=model.getFirstCellForLocation(j, y)!=null ||
-			model.getFirstCellForLocation(j+20, y)!=null ||
-			model.getFirstCellForLocation(j, y+20)!=null ||
-			model.getFirstCellForLocation(j+20, y+20)!=null;
+					model.getFirstCellForLocation(j+20, y)!=null ||
+					model.getFirstCellForLocation(j, y+20)!=null ||
+					model.getFirstCellForLocation(j+20, y+20)!=null;
 			if (occupied){
 				j=j+10;
 			}
@@ -315,6 +319,11 @@ public abstract class ModelJGraph extends JGraph implements Cloneable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public static boolean getEnabledAllListeners() {
+		
+		return enabledAllListeners;
 	}
 
 

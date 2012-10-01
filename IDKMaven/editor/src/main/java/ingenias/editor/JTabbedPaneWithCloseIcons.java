@@ -6,6 +6,7 @@ package ingenias.editor;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -17,11 +18,14 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 /**
@@ -41,6 +45,7 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 class PSTabbedPaneUI extends BasicTabbedPaneUI
 {
 	private static final Insets NO_INSETS = new Insets(2, 0, 0, 0);
@@ -67,6 +72,21 @@ class PSTabbedPaneUI extends BasicTabbedPaneUI
 	public static ComponentUI createUI(JComponent c)
 	{
 		return new PSTabbedPaneUI();
+	}
+
+	@Override
+	protected JButton createScrollButton(int arg0) {
+		JButton result= new BasicArrowButton(arg0,
+				UIManager.getColor("TabbedPane.selected"),
+				UIManager.getColor("TabbedPane.shadow"),
+				UIManager.getColor("TabbedPane.darkShadow"),
+				UIManager.getColor("TabbedPane.highlight")) {
+			 
+				public Dimension getPreferredSize() {
+					return new Dimension(50, 50);
+				}
+			};
+			return result;
 	}
 
 	protected void installDefaults()
@@ -232,12 +252,47 @@ class PSTabbedPaneUI extends BasicTabbedPaneUI
 	}
 }
 
+/**
+ * Code from http://stackoverflow.com/questions/10539013/swing-jtabbedpane-how-to-set-scroll-width
+ * @author Max
+ *
+ */
+
+ class ExtendedTabbedPaneUI extends BasicTabbedPaneUI {
+
+    @Override
+    protected JButton createScrollButton(int direction) {
+         if (direction != SOUTH && direction != NORTH && direction != EAST &&
+                                   direction != WEST) {
+             throw new IllegalArgumentException("Direction must be one of: " +
+                                                "SOUTH, NORTH, EAST or WEST");
+         }
+
+         //return new ScrollableTabButton(direction);
+
+         return new BasicArrowButton(direction,
+            UIManager.getColor("TabbedPane.selected"),
+            UIManager.getColor("TabbedPane.shadow"),
+            UIManager.getColor("TabbedPane.darkShadow"),
+            UIManager.getColor("TabbedPane.highlight")) {
+
+            @Override
+            public Dimension getPreferredSize() {
+                int maxWidth = calculateMaxTabWidth(JTabbedPane.LEFT);
+                return new Dimension(maxWidth, super.getPreferredSize().height);
+            }
+        };
+    }
+}
+
+
 public class JTabbedPaneWithCloseIcons extends JTabbedPane {
 	
 	
   public JTabbedPaneWithCloseIcons() {
     super();    
- //   this.setUI(new PSTabbedPaneUI());
+    this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);   
+   //this.setUI(new ExtendedTabbedPaneUI());
  //   addMouseListener(this);            
  //   this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
   }
@@ -258,7 +313,10 @@ public class JTabbedPaneWithCloseIcons extends JTabbedPane {
 		this.setTabComponentAt(this.getTabCount()-1, new ButtonTabComponent((JTabbedPane)this,icon));		
 	  }
   
-  protected static ImageIcon createImageIcon(String path) {
+ 
+
+
+protected static ImageIcon createImageIcon(String path) {
       java.net.URL imgURL=null;
 	try {
 		imgURL = new URL("file:"+path);

@@ -139,8 +139,8 @@ extends URLClassLoader {
 			}
 			else {
 				if (!alreadyWarned)
-				 ingenias.editor.Log.getInstance().logERROR(
-					"\""+folder+"\" has to be a folder. If it does not exist, please create it");
+				 ingenias.editor.Log.getInstance().logWARNING(
+					"\""+folder+"\" has to be a folder. If it does not exist, please create it. If you use modules, these have to be put inside a folder called ext. Otherwise, you will not be able to use any embedded module");
 				alreadyWarned=true;
 			}
 

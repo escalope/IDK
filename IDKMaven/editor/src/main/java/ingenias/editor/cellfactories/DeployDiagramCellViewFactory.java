@@ -155,6 +155,10 @@ public DeployDiagramCellViewFactory() {}
            return new ingenias.editor.cell.DeploymentUnitByTypeWithInitMSView(v);
    }
 
+   if (userObject.getClass().equals(RuntimeCommFailure.class)){
+           return new ingenias.editor.cell.RuntimeCommFailureView(v);
+   }
+
    if (userObject.getClass().equals(ApplicationEvent.class)){
            return new ingenias.editor.cell.ApplicationEventView(v);
    }

@@ -1312,6 +1312,27 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+        if (en instanceof ingenias.editor.entities.RuntimeCommFailure){
+          ingenias.editor.entities.RuntimeCommFailure nen=(ingenias.editor.entities.RuntimeCommFailure)en;
+	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("Conversation");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getConversation()!=null)
+           saveObject(nen.getConversation(),os);
+          os.write("</objectproperty>\n");
+          
+          
+          os.write("<objectproperty id=\"Stack\" collection=\"true\">\n");
+             enumeration=nen.getStackElements();
+          while (enumeration.hasMoreElements()){
+            ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+           saveObject(next,os);
+          }
+          os.write("</objectproperty>\n");
+          
+        }
+        
         if (en instanceof ingenias.editor.entities.StateGoal){
           ingenias.editor.entities.StateGoal nen=(ingenias.editor.entities.StateGoal)en;
 	  String _name;
@@ -2204,6 +2225,12 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+         if (en.getClass().equals(ingenias.editor.entities.TriggersFailure.class)){
+          ingenias.editor.entities.TriggersFailure nen=(ingenias.editor.entities.TriggersFailure)en;
+          
+          
+        }
+        
          if (en.getClass().equals(ingenias.editor.entities.WFPlays.class)){
           ingenias.editor.entities.WFPlays nen=(ingenias.editor.entities.WFPlays)en;
           
@@ -2290,6 +2317,12 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+         if (en.getClass().equals(ingenias.editor.entities.WFUses.class)){
+          ingenias.editor.entities.WFUses nen=(ingenias.editor.entities.WFUses)en;
+          
+          
+        }
+        
          if (en.getClass().equals(ingenias.editor.entities.AGOCondSubordinationRelationshipMember.class)){
           ingenias.editor.entities.AGOCondSubordinationRelationshipMember nen=(ingenias.editor.entities.AGOCondSubordinationRelationshipMember)en;
           
@@ -2297,12 +2330,6 @@ public class ObjectSave extends ObjectSaveAbs{
           if (nen.getCondition()!=null)
            saveObject(nen.getCondition(),os);
           os.write("</objectproperty>\n");
-          
-          
-        }
-        
-         if (en.getClass().equals(ingenias.editor.entities.WFUses.class)){
-          ingenias.editor.entities.WFUses nen=(ingenias.editor.entities.WFUses)en;
           
           
         }

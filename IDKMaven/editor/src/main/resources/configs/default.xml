@@ -25,6 +25,24 @@
 
 			<entity>UMLComment</entity>
 
+			<entity>Organization</entity>
+
+			<entity>AMIContext</entity>
+
+			<entity>FAERIEContext</entity>
+
+			<entity>FAERIECtxtModel</entity>
+
+			<entity>FAERIECtxtAttribute</entity>
+
+			<entity>FAERIECtxtEntity</entity>
+
+			<entity>FAERIECtxtRelationship</entity>
+
+			<entity>FAERIECtxtValue</entity>
+
+			<entity>RoleWS</entity>
+
 
           		<relationship>EPerceives</relationship>
 
@@ -38,36 +56,25 @@
 
           		<relationship>UMLAnnotatedElement</relationship>
 
-		</diagram>
+          		<relationship>OHasGroup</relationship>
 
-		<diagram name="ComponentDiagram">
+          		<relationship>ODecomposesGroup</relationship>
 
-			<entity>INGENIASComponent</entity>
+          		<relationship>CtxtNotifies</relationship>
 
-			<entity>INGENIASCodeComponent</entity>
+          		<relationship>CtxtUpdates</relationship>
 
-			<entity>Application</entity>
+          		<relationship>FAERIEAppliedTo</relationship>
 
-			<entity>EnvironmentApplication</entity>
+          		<relationship>FAERIEHasValue</relationship>
 
-			<entity>InternalApplication</entity>
+          		<relationship>FAERIEGeneratedBy</relationship>
 
-			<entity>Task</entity>
+          		<relationship>FAERIESrcEntity</relationship>
 
-			<entity>Test</entity>
+          		<relationship>FAERIETrgtEntity</relationship>
 
-			<entity>Goal</entity>
-
-			<entity>UMLComment</entity>
-
-
-          		<relationship>CDUsesCode</relationship>
-
-          		<relationship>UMLRealizes</relationship>
-
-          		<relationship>Validates</relationship>
-
-          		<relationship>UMLAnnotatedElement</relationship>
+          		<relationship>HasCtxModel</relationship>
 
 		</diagram>
 
@@ -132,6 +139,14 @@
 			<entity>AgentWS</entity>
 
 			<entity>WorkflowBox</entity>
+
+			<entity>ApplicationWS</entity>
+
+			<entity>BoxedTask</entity>
+
+			<entity>ContextBindingTask</entity>
+
+			<entity>ContextReleaseTask</entity>
 
 
           		<relationship>UMLAnnotatedElement</relationship>
@@ -198,6 +213,10 @@
 
           		<relationship>WFResponsable</relationship>
 
+          		<relationship>IInitiates</relationship>
+
+          		<relationship>IColaborates</relationship>
+
           		<relationship>WFParticipates</relationship>
 
           		<relationship>WFPlays</relationship>
@@ -207,6 +226,35 @@
           		<relationship>UMLAnnotatedElement</relationship>
 
           		<relationship>WSConnects</relationship>
+
+		</diagram>
+
+		<diagram name="ComponentDiagram">
+
+			<entity>INGENIASComponent</entity>
+
+			<entity>INGENIASCodeComponent</entity>
+
+			<entity>FileSpecPatternMapping</entity>
+
+			<entity>Application</entity>
+
+			<entity>EnvironmentApplication</entity>
+
+			<entity>InternalApplication</entity>
+
+			<entity>Task</entity>
+
+			<entity>Test</entity>
+
+			<entity>UMLComment</entity>
+
+
+          		<relationship>CDUsesCode</relationship>
+
+          		<relationship>UMLRealizes</relationship>
+
+          		<relationship>UMLAnnotatedElement</relationship>
 
 		</diagram>
 
@@ -238,6 +286,8 @@
 
 			<entity>FrameFact</entity>
 
+			<entity>RuntimeCommFailure</entity>
+
 			<entity>Believe</entity>
 
 			<entity>Compromise</entity>
@@ -254,6 +304,12 @@
 
 			<entity>Plan</entity>
 
+			<entity>BoxedTask</entity>
+
+			<entity>MentalEntityInstanceCreation</entity>
+
+			<entity>MentalEntityInstanceAccess</entity>
+
 			<entity>Conversation</entity>
 
 			<entity>UMLComment</entity>
@@ -269,6 +325,28 @@
 			<entity>ApplicationWS</entity>
 
 			<entity>Interaction</entity>
+
+			<entity>RemoteProcedureCall</entity>
+
+			<entity>RuntimeEvent</entity>
+
+			<entity>IUIterate</entity>
+
+			<entity>MessagePassing</entity>
+
+			<entity>ShareTouple</entity>
+
+			<entity>RuntimeConversation</entity>
+
+			<entity>ContextBindingTask</entity>
+
+			<entity>ContextReleaseTask</entity>
+
+			<entity>RuntimeFact</entity>
+
+			<entity>IUConcurrence</entity>
+
+			<entity>InteractionUnit</entity>
 
 
           		<relationship>GTPursues</relationship>
@@ -294,6 +372,8 @@
           		<relationship>WFUses</relationship>
 
           		<relationship>WFUsesMethod</relationship>
+
+          		<relationship>PConnects</relationship>
 
           		<relationship>WFProduces</relationship>
 
@@ -327,6 +407,8 @@
 
           		<relationship>IAccesses</relationship>
 
+          		<relationship>TriggersFailure</relationship>
+
 		</diagram>
 
 		<diagram name="InteractionModel">
@@ -355,13 +437,49 @@
 
 			<entity>UMLSpecification</entity>
 
-			<entity>AUMLSpecification</entity>
-
 			<entity>GRASIASpecification</entity>
 
 			<entity>TextNote</entity>
 
 			<entity>UMLComment</entity>
+
+			<entity>RuntimeCommFailure</entity>
+
+			<entity>Conversation</entity>
+
+			<entity>Fact</entity>
+
+			<entity>RuntimeConversation</entity>
+
+			<entity>CommunicationEvent</entity>
+
+			<entity>ApplicationEvent</entity>
+
+			<entity>RemoteProcedureCall</entity>
+
+			<entity>GoalStateWS</entity>
+
+			<entity>FrameFact</entity>
+
+			<entity>GeneralEvent</entity>
+
+			<entity>RuntimeEvent</entity>
+
+			<entity>StateGoal</entity>
+
+			<entity>RuntimeFact</entity>
+
+			<entity>MessagePassing</entity>
+
+			<entity>ShareTouple</entity>
+
+			<entity>Believe</entity>
+
+			<entity>AgentModelBelieve</entity>
+
+			<entity>ApplicationEventSlots</entity>
+
+			<entity>Compromise</entity>
 
 
           		<relationship>IInitiates</relationship>
@@ -388,6 +506,8 @@
 
           		<relationship>IAccesses</relationship>
 
+          		<relationship>TriggersFailure</relationship>
+
 		</diagram>
 
 		<diagram name="ActivityDiagram">
@@ -410,9 +530,19 @@
 
 			<entity>TextNote</entity>
 
-			<entity>MentalState</entity>
+			<entity>TaskWS</entity>
 
-			<entity>ConditionalMentalState</entity>
+			<entity>Workflow</entity>
+
+			<entity>BoxedTask</entity>
+
+			<entity>RoleWS</entity>
+
+			<entity>ContextBindingTask</entity>
+
+			<entity>ContextReleaseTask</entity>
+
+			<entity>Plan</entity>
 
 
           		<relationship>UMLAnnotatedElement</relationship>
@@ -426,8 +556,6 @@
           		<relationship>WFFollows</relationship>
 
           		<relationship>WFFollowsGuarded</relationship>
-
-          		<relationship>WFFollowsGuardedTaskEvent</relationship>
 
 		</diagram>
 
@@ -496,6 +624,26 @@
 			<entity>AgentWS</entity>
 
 			<entity>MentalInstanceSpecification</entity>
+
+			<entity>ApplicationWS</entity>
+
+			<entity>RuntimeCommFailure</entity>
+
+			<entity>RuntimeEvent</entity>
+
+			<entity>Interaction</entity>
+
+			<entity>BoxedTask</entity>
+
+			<entity>RuntimeConversation</entity>
+
+			<entity>CommunicationEvent</entity>
+
+			<entity>ContextBindingTask</entity>
+
+			<entity>ContextReleaseTask</entity>
+
+			<entity>RuntimeFact</entity>
 
 
           		<relationship>GTPursues</relationship>
@@ -567,46 +715,25 @@
 
 		</diagram>
 
-		<diagram name="AUMLInteractionDiagram">
-
-			<entity>Protocol</entity>
-
-			<entity>SubProtocol</entity>
-
-			<entity>Lifeline</entity>
-
-			<entity>Column</entity>
-
-			<entity>AUMLPort</entity>
-
-			<entity>AUMLAlternativeBox</entity>
-
-			<entity>AUMLAlternativeRow</entity>
-
-			<entity>TextNote</entity>
-
-			<entity>UMLComment</entity>
-
-
-          		<relationship>AUMLSendSimple</relationship>
-
-          		<relationship>AUMLSelection</relationship>
-
-          		<relationship>AUMLUseProtocol</relationship>
-
-		</diagram>
-
 		<diagram name="DeployDiagram">
 
 			<entity>TestingPackage</entity>
 
 			<entity>DeploymentPackage</entity>
 
-			<entity>SimulationPackage</entity>
+			<entity>DeploymentPackageWithContext</entity>
 
 			<entity>INGENIASComponent</entity>
 
 			<entity>Application</entity>
+
+			<entity>SimulationPackage</entity>
+
+			<entity>SimulationEvent</entity>
+
+			<entity>SimExtractedInformation</entity>
+
+			<entity>INGENIASCodeComponent</entity>
 
 			<entity>EnvironmentApplication</entity>
 
@@ -614,16 +741,80 @@
 
 			<entity>UMLComment</entity>
 
+			<entity>Goal</entity>
+
 			<entity>DeploymentUnitByType</entity>
 
 			<entity>DeploymentUnitByTypeEnumInitMS</entity>
 
 			<entity>DeploymentUnitByTypeMSEntity</entity>
 
+			<entity>AMIContext</entity>
+
+			<entity>Fact</entity>
+
+			<entity>ApplicationWS</entity>
+
+			<entity>DeploymentUnitByTypeWithInitMS</entity>
+
+			<entity>RuntimeCommFailure</entity>
+
+			<entity>ApplicationEvent</entity>
+
+			<entity>MentalState</entity>
+
+			<entity>GoalStateWS</entity>
+
+			<entity>FrameFact</entity>
+
+			<entity>Test</entity>
+
+			<entity>RuntimeEvent</entity>
+
+			<entity>FAERIEContext</entity>
+
+			<entity>AgentWS</entity>
+
+			<entity>AgentModelBelieve</entity>
+
+			<entity>AMIContextBindingData</entity>
+
+			<entity>ApplicationEventSlots</entity>
+
+			<entity>Compromise</entity>
+
+			<entity>FileSpecPatternMapping</entity>
+
+			<entity>Conversation</entity>
+
+			<entity>FAERIECtxtModel</entity>
+
+			<entity>Agent</entity>
+
+			<entity>RuntimeConversation</entity>
+
+			<entity>CommunicationEvent</entity>
+
+			<entity>MentalInstanceSpecification</entity>
+
+			<entity>GeneralEvent</entity>
+
+			<entity>ConditionalMentalState</entity>
+
+			<entity>StateGoal</entity>
+
+			<entity>RuntimeFact</entity>
+
+			<entity>Believe</entity>
+
 
           		<relationship>UMLAnnotatedElement</relationship>
 
           		<relationship>DefinesDeployment</relationship>
+
+          		<relationship>CDUsesCode</relationship>
+
+          		<relationship>SimulationPursues</relationship>
 
 		</diagram>
 

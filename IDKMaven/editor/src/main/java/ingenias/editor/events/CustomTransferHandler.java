@@ -66,7 +66,8 @@ public class CustomTransferHandler extends GraphTransferHandler{
 
 	static {
 		try {
-			defaultFilter=
+			if (FilterManager.getDefaultFilterFromClassLoader(FilterManager.class.getClassLoader())!=null)
+				defaultFilter=
 				FilterManager.obtainDiagramFilter(
 						FilterManager.getDefaultFilterFromClassLoader(FilterManager.class.getClassLoader()));
 		} catch (FileNotFoundException e) {
@@ -127,14 +128,14 @@ public class CustomTransferHandler extends GraphTransferHandler{
 
 					// Get Local Machine Flavor
 					Object obj = t
-					.getTransferData(GraphTransferable.dataFlavor);
+							.getTransferData(GraphTransferable.dataFlavor);
 					GraphTransferable gt = (GraphTransferable) obj;
 					transferredparentship=
-						(Hashtable<DefaultGraphCell, DefaultGraphCell>) 
-						gt.getAttributeMap().get("parentshiprelationships");
+							(Hashtable<DefaultGraphCell, DefaultGraphCell>) 
+							gt.getAttributeMap().get("parentshiprelationships");
 					entityConstraints=
-						(Hashtable<String, Hashtable<DefaultGraphCell, Dimension>>) 
-						gt.getAttributeMap().get("entityconstraints");
+							(Hashtable<String, Hashtable<DefaultGraphCell, Dimension>>) 
+							gt.getAttributeMap().get("entityconstraints");
 					// Get Transferred Cells
 					final Object[] cells = gt.getCells();
 
@@ -155,17 +156,17 @@ public class CustomTransferHandler extends GraphTransferHandler{
 
 							}
 							ingenias.editor.entities.Entity ent=
-								(Entity) ((DefaultGraphCell)cells[i]).getUserObject();
+									(Entity) ((DefaultGraphCell)cells[i]).getUserObject();
 							System.err.println("Validating "+diagramType+" "+ent.getType()+" "+defaultFilter.isValidEntity(diagramType, ent.getType()));
 							allInModel=allInModel && 
-							defaultFilter.isValidEntity(diagramType, ent.getType());
+									defaultFilter.isValidEntity(diagramType, ent.getType());
 						} else 
 							if (cells[i] instanceof NAryEdge){
 								ingenias.editor.entities.Entity ent=
-									(Entity) ((DefaultGraphCell)cells[i]).getUserObject();
+										(Entity) ((DefaultGraphCell)cells[i]).getUserObject();
 
 								allInModel=allInModel && 
-								defaultFilter.isValidRelationship(diagramType, ent.getType());
+										defaultFilter.isValidRelationship(diagramType, ent.getType());
 							}						
 					}
 					if (!allInModel)
@@ -181,7 +182,7 @@ public class CustomTransferHandler extends GraphTransferHandler{
 											!(currentCell instanceof DefaultEdge) &&
 											!(currentCell instanceof DefaultPort)){
 										ingenias.editor.entities.Entity ent=
-											(Entity) ((DefaultGraphCell)currentCell).getUserObject();
+												(Entity) ((DefaultGraphCell)currentCell).getUserObject();
 										if ( 
 												om.findUserObject(ent.getId()).isEmpty())
 											try {
@@ -273,7 +274,7 @@ public class CustomTransferHandler extends GraphTransferHandler{
 		Iterator it = cs.connections();
 		while (it.hasNext()) {
 			ConnectionSet.Connection conn = (ConnectionSet.Connection) it
-			.next();
+					.next();
 			if (!pm.getChangedNodes().contains(conn.getPort())
 					&& !graph.getModel().contains(conn.getPort())) {
 				it.remove();
@@ -283,12 +284,12 @@ public class CustomTransferHandler extends GraphTransferHandler{
 		for (Object cell:cells){
 			if (cell instanceof DefaultEdge){
 				DefaultEdge de=(DefaultEdge)cell;
-					if (!(((DefaultPort)de.getSource()).getParent() instanceof NAryEdge) &&
-							!(((DefaultPort)de.getTarget()).getParent() instanceof NAryEdge))
-						dashedEdgesToRemove.add(de);
+				if (!(((DefaultPort)de.getSource()).getParent() instanceof NAryEdge) &&
+						!(((DefaultPort)de.getTarget()).getParent() instanceof NAryEdge))
+					dashedEdgesToRemove.add(de);
 			}
 		}
-		
+
 		HashSet<Object> finalCells=new HashSet<Object>();
 		ListenerContainer lc = ((ModelJGraph)graph).getListenerContainer();
 

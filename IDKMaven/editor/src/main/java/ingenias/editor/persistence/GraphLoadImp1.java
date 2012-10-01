@@ -491,6 +491,9 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.GoalStateWS)
 	  return  new ingenias.editor.cell.GoalStateWSCell((ingenias.editor.entities.GoalStateWS)en);
 
+   	if (en instanceof ingenias.editor.entities.RuntimeCommFailure)
+	  return  new ingenias.editor.cell.RuntimeCommFailureCell((ingenias.editor.entities.RuntimeCommFailure)en);
+
    	if (en instanceof ingenias.editor.entities.StateGoal)
 	  return  new ingenias.editor.cell.StateGoalCell((ingenias.editor.entities.StateGoal)en);
 
@@ -805,6 +808,9 @@ public class GraphLoadImp1
     if (en instanceof ingenias.editor.entities.UIColaborates)
      return  new UIColaboratesEdge((ingenias.editor.entities.UIColaborates)en);
 
+    if (en instanceof ingenias.editor.entities.TriggersFailure)
+     return  new TriggersFailureEdge((ingenias.editor.entities.TriggersFailure)en);
+
     if (en instanceof ingenias.editor.entities.WFPlays)
      return  new WFPlaysEdge((ingenias.editor.entities.WFPlays)en);
 
@@ -838,11 +844,11 @@ public class GraphLoadImp1
     if (en instanceof ingenias.editor.entities.GTSatisfies)
      return  new GTSatisfiesEdge((ingenias.editor.entities.GTSatisfies)en);
 
-    if (en instanceof ingenias.editor.entities.AGOCondSubordinationRelationshipMember)
-     return  new AGOCondSubordinationRelationshipMemberEdge((ingenias.editor.entities.AGOCondSubordinationRelationshipMember)en);
-
     if (en instanceof ingenias.editor.entities.WFUses)
      return  new WFUsesEdge((ingenias.editor.entities.WFUses)en);
+
+    if (en instanceof ingenias.editor.entities.AGOCondSubordinationRelationshipMember)
+     return  new AGOCondSubordinationRelationshipMemberEdge((ingenias.editor.entities.AGOCondSubordinationRelationshipMember)en);
 
     if (en instanceof ingenias.editor.entities.WFDecides)
      return  new WFDecidesEdge((ingenias.editor.entities.WFDecides)en);
@@ -1112,16 +1118,16 @@ public class GraphLoadImp1
   
   private DefaultGraphCell getGraphCell(ModelJGraph mj, String id) {
     for (int k = 0; k < mj.getModel().getRootCount(); k++) {
-//      System.err.println("k:"+k+mj.getModel().getRootCount());
+
       DefaultGraphCell dgc = (DefaultGraphCell) mj.getModel().getRootAt(k);
       ingenias.editor.entities.Entity ent = (ingenias.editor.entities.Entity)
           dgc.getUserObject();
       if (ent.getId().equalsIgnoreCase(id)) {
         return dgc;
       }
-//      System.err.println("Identiddad:"+ent.getId());
+
     }
-//    System.err.println("no pude encontrar " + id);
+
     return null;
   }
 

@@ -403,6 +403,28 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     }
 
    if (true){
+    Image img_RuntimeCommFailure =
+        ImageLoader.getImage("images/mconv.png");
+    undoIcon = new ImageIcon(img_RuntimeCommFailure);
+    Action RuntimeCommFailure=
+        new AbstractAction("RuntimeCommFailure", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "RuntimeCommFailure");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    RuntimeCommFailure.setEnabled(true);
+    jb = new JButton(RuntimeCommFailure);
+    jb.setText("");
+    jb.setName("RuntimeCommFailure");	
+    jb.setToolTipText("RuntimeCommFailure");
+    toolbar.add(jb);
+    }
+
+   if (true){
     Image img_Believe =
         ImageLoader.getImage("images/mbel.gif");
     undoIcon = new ImageIcon(img_Believe);
@@ -1128,6 +1150,8 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
 
           relationships.add("IAccesses");
 
+          relationships.add("TriggersFailure");
+
    return relationships;
   }
 
@@ -1160,6 +1184,8 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
  entities.add("Fact");
 
  entities.add("FrameFact");
+
+ entities.add("RuntimeCommFailure");
 
  entities.add("Believe");
 
@@ -1403,6 +1429,11 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
           v.add("IAccesses");
 	  }
 
+        // N-ary relationships. Sometimes they can be also binary.
+        if (TriggersFailureEdge.acceptConnection(this.getModel(), selected)) {
+          v.add("TriggersFailure");
+	  }
+
       }
       else if (nAryEdgesNum == 1) {
 
@@ -1549,6 +1580,11 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
         if (selectedEdge instanceof IAccessesEdge &&
         (IAccessesEdge.acceptConnection(this.getModel(), selected))) {
           v.add("IAccesses");
+        }
+
+        if (selectedEdge instanceof TriggersFailureEdge &&
+        (TriggersFailureEdge.acceptConnection(this.getModel(), selected))) {
+          v.add("TriggersFailure");
         }
 
       }
@@ -1895,6 +1931,17 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
         }
       }
 
+      if (relacion.equalsIgnoreCase("TriggersFailure")) {
+        // ResponsibleNEdge already exists.
+        if (nAryEdgesNum == 1 && selectedEdge instanceof TriggersFailureEdge) {
+          return selectedEdge;
+        }
+        // There is no NAryEdges in selected.
+        else if (nAryEdgesNum == 0) {
+          return new TriggersFailureEdge(new ingenias.editor.entities.TriggersFailure(getMJGraph().getNewId()));
+        }
+      }
+
     }
 
     return null;
@@ -2014,6 +2061,15 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     FrameFact nentity=getOM().createFrameFact(getMJGraph().getNewId("FrameFact"));
       DefaultGraphCell vertex = new
           FrameFactCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
+    RuntimeCommFailure nentity=getOM().createRuntimeCommFailure(getMJGraph().getNewId("RuntimeCommFailure"));
+      DefaultGraphCell vertex = new
+          RuntimeCommFailureCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -2359,6 +2415,11 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
+      return RuntimeCommFailureView.getSize((ingenias.editor.entities.RuntimeCommFailure)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("Believe")) {
       return BelieveView.getSize((ingenias.editor.entities.Believe)entity);      
     }
@@ -2626,6 +2687,10 @@ public class TasksAndGoalsModelModelJGraph extends ModelJGraph {
       	return IAccessesView.getSize((ingenias.editor.entities.IAccesses)entity);
       }
 
+      if (entity.getType().equalsIgnoreCase("TriggersFailure")) {
+      	return TriggersFailureView.getSize((ingenias.editor.entities.TriggersFailure)entity);
+      }
+
     throw new ingenias.exception.InvalidEntity("Entity type "+entity+" is not allowed in this diagram"); 
 	    
   }
@@ -2788,6 +2853,14 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new FrameFactCell( (FrameFact) entity);
       // Default Size for the new Vertex with the new entity within
       size = FrameFactView.getSize((FrameFact) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(RuntimeCommFailure.class)) {
+      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
       
     }
     else

@@ -36,17 +36,17 @@ public class BrowserImp implements Browser {
 
 	private static Browser browser = null;
 	private ingenias.editor.IDEState ids;
-        File currentProject=null;
+	File currentProject=null;
 
 	/**
 	 *  Constructor for the BrowserImp object
 	 */
 	/*private BrowserImp() {
 		ids=ingenias.editor.IDEAbs.ide.ids;
-				
+
 	}*/
-	
-	
+
+
 	public BrowserImp(IDEState ids) {
 		this.ids=ids;
 		if (ids==null)
@@ -61,14 +61,17 @@ public class BrowserImp implements Browser {
 	 *@exception  Exception  Description of Exception
 	 */
 	private BrowserImp(String file) throws ingenias.exception.UnknowFormat, ingenias.exception.DamagedFormat, ingenias.exception.CannotLoad{
-		
+		// This is a method to be run in headless mode
+
 		ingenias.editor.persistence.PersistenceManager p = new ingenias.editor.persistence.PersistenceManager();
 		ids=IDEState.emptyIDEState();
-		p.load(file, new GUIResources(),new Properties(),ids);
-		/*ingenias.editor.GraphManager.updateCopy(ids.gm);
-		ingenias.editor.ObjectManager.updateCopy(ids.om);*/
-		
-          this.currentProject=new File(file);
+		try {
+			p.loadWithoutListeners(file, new GUIResources(),new Properties(),ids);
+		} catch (Throwable t){
+			t.printStackTrace();
+		}
+
+		this.currentProject=new File(file);
 	}
 
 
@@ -161,21 +164,21 @@ public class BrowserImp implements Browser {
 	 *@exception  Exception  Description of Exception
 	 */
 	public static Browser initialise(String file) throws
-             ingenias.exception.UnknowFormat,
-             ingenias.exception.DamagedFormat,
-             ingenias.exception.CannotLoad {
-                
-		browser = new BrowserImp(IDEState.emptyIDEState());
-		
+	ingenias.exception.UnknowFormat,
+	ingenias.exception.DamagedFormat,
+	ingenias.exception.CannotLoad {
+
+		//browser = new BrowserImp(IDEState.emptyIDEState());
+
 		browser = new BrowserImp(file);
 		return browser;
-                
+
 	}
 
 
 	/**
-         *  Performs an empty initialisation. Only works when there is an already existing
-         *  instance of GraphManager
+	 *  Performs an empty initialisation. Only works when there is an already existing
+	 *  instance of GraphManager
 	 *
 	 *@exception  Exception  Description of Exception
 	 */
@@ -183,23 +186,23 @@ public class BrowserImp implements Browser {
 		ingenias.editor.GraphManager.getInstance();
 		// To check if it is initialised
 		browser = new BrowserImp();
-		
+
 	}*/
-	
+
 
 	/**
-         *  Performs an empty initialisation. Only works when there is an already existing
-         *  instance of GraphManager
+	 *  Performs an empty initialisation. Only works when there is an already existing
+	 *  instance of GraphManager
 	 *
 	 *@exception  Exception  Description of Exception
 	 */
 	public static void initialise(IDEState ids) {
-		
+
 		// To check if it is initialised
 		browser = new BrowserImp(ids);
-		
+
 	}
-	
+
 	public GraphEntity findEntity(String id){
 		GraphEntity[] ents=this.getAllEntities();
 		boolean found=false;
@@ -212,11 +215,11 @@ public class BrowserImp implements Browser {
 		else 
 			return null;
 	}
-	
+
 	public ingenias.editor.IDEState getState(){
 		return this.ids;
 	}
-	
+
 	public Graph findFirstEntityOccurrence(String id){
 		Graph[] gs=this.getGraphs();
 		boolean found=false;
@@ -235,14 +238,14 @@ public class BrowserImp implements Browser {
 				e.printStackTrace();
 			}
 		}
-		
-			return result;
-		
+
+		return result;
+
 	}
-        
-        public File getProjectFilePath(){
-            return this.currentProject;
-        }
+
+	public File getProjectFilePath(){
+		return this.currentProject;
+	}
 
 
 
@@ -259,6 +262,120 @@ public class BrowserImp implements Browser {
 		for (int k = 0; k < gs.length; k++) {
 			System.err.println(gs[k].getType() + ":" + gs[k].getName());
 		}
+	}
+
+	public static boolean containedInto(Browser bimp1, Browser bimp2){
+		GraphEntity[] entities = bimp1.getAllEntities();
+		boolean allIncluded=true;
+		int k=0;
+		while (allIncluded && k<entities.length){
+			GraphEntity ent1 = entities[k];
+			GraphEntity ent2 = bimp2.findEntity(ent1.getID());
+			allIncluded=allIncluded && ent2!=null;			
+			allIncluded = allIncluded &&  containedIntoAttributes(allIncluded, ent1, ent2);			
+			Vector<GraphRelationship> relationships1 = ent1.getAllRelationships();
+			Vector<GraphRelationship> relationships2 = ent2.getAllRelationships();
+			int j=0;
+			allIncluded=allIncluded && relationships1.size()==relationships2.size();
+			while (allIncluded && j<relationships1.size()){
+				GraphRelationship gr1=relationships1.elementAt(j);
+				boolean found=false;
+				for (int l=0;l<relationships2.size() && !found;l++){
+					GraphRelationship gr2=relationships2.elementAt(l);
+					found=found || (gr2.getID().equals(gr1.getID()) && 
+							containedIntoAttributes(allIncluded, gr1, gr2));
+				}
+				allIncluded=allIncluded && found;
+				j++;	
+			}			
+			k++;
+		}		
+		return allIncluded;		
+	}
+
+
+	private static boolean containedIntoAttributes(boolean allIncluded,
+			AttributedElement ent1, AttributedElement ent2) {
+		GraphAttribute[] attributes1 = ent1.getAllAttrs();
+		GraphAttribute[] attributes2 = ent2.getAllAttrs();
+		int j=0;
+		allIncluded=allIncluded && attributes1.length==attributes2.length;
+		while (allIncluded && j<attributes1.length){
+			boolean found=false;
+			GraphAttribute attr1=attributes2[j];
+			for (int l=0;l<attributes2.length && !found;l++){
+				GraphAttribute attr2=attributes2[l];												
+					found=found || 
+							attr1.getName().equals(attr2.getName());
+					if (found){
+						found = found || (attr1.getSimpleValue()!=null && 
+								attr2.getSimpleValue()!=null && 
+								attr1.getSimpleValue().equals(attr2.getSimpleValue()));
+						if (!found){									
+							try {
+								attr1.getEntityValue();
+								try {
+									attr2.getEntityValue();
+									found = found || 
+											attr1.getEntityValue().getID().equals(attr2.getEntityValue().getID());
+								} catch (NullEntity e1) {
+									// Not OK.											
+								}
+							} catch (NullEntity e) {
+								try {
+									attr2.getEntityValue();
+									// Not ok.
+								} catch (NullEntity e1) {
+									// It's ok
+									found = true;
+								}
+							}
+							
+						}								
+					}
+			}
+			allIncluded=allIncluded && found;
+			j++;
+		}
+		return allIncluded;
+	}
+
+	public static Vector<String> findAllDifferences(Browser bimp1, Browser bimp2){
+		GraphEntity[] entities = bimp1.getAllEntities();
+		boolean allIncluded=true;
+		Vector<String> differences=new Vector<String>();
+		int k=0;
+		while (k<entities.length){
+			GraphEntity ent1 = entities[k];
+			GraphEntity ent2 = bimp2.findEntity(ent1.getID());
+			allIncluded=allIncluded && ent2!=null;
+			if (ent2==null){
+				differences.add("entity "+ent1.getID()+":"+ent1.getType()+" does not exist");
+			} else {
+				Vector<GraphRelationship> relationships1 = ent1.getAllRelationships();
+				Vector<GraphRelationship> relationships2 = ent2.getAllRelationships();
+				int j=0;
+				allIncluded=allIncluded && relationships1.size()==relationships2.size();
+				while (j<relationships1.size()){
+					GraphRelationship gr1=relationships1.elementAt(j);
+					boolean found=false;
+					for (int l=0;l<relationships2.size() && !found;l++){
+						GraphRelationship gr2=relationships2.elementAt(l);
+						found=found || gr2.getID().equals(gr1.getID());
+					}
+					if (!found){
+						differences.add("relationships "+gr1.getID()+":"+gr1.getType()+" does not exist");
+					}
+					j++;	
+				}
+			}
+			k++;
+		}		
+		return differences;		
+	}
+
+	public static boolean compare(Browser bimp1, Browser bimp2) {
+		return containedInto(bimp1, bimp2) && containedInto(bimp2, bimp1);
 	}
 
 }

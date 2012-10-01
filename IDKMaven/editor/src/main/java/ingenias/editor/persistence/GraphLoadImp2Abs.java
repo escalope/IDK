@@ -113,15 +113,11 @@ implements GraphLoad {
 							attributes.put(vertex, vertexAttr);
 							// Add Vertex to new Cells
 							try {
-								((ModelJGraph)graph).getDefaultSize((Entity)vertex.getUserObject()); // to check if the entity is allowed in the diagram
+							//	((ModelJGraph)graph).getDefaultSize((Entity)vertex.getUserObject()); // to check if the entity is allowed in the diagram
 								graph.getModel().insert(new Object[]{vertex}, attributes,cs, null, null);
 								graph.getGraphLayoutCache().setVisible(vertex, true);
 
-							} catch (InvalidEntity ie){
-								System.err.println("Error creating node "+id+" of type "+type+" in graph "+graph.getID()+" of type "+graph.getClass().getName()+" \n"+attributes+"\n");
-								System.err.println(ie.getMessage());
-							}
-							catch (Exception ex){
+							} catch (Exception ex){
 								System.err.println("Error creating node "+id+" of type "+type+" in graph "+graph.getID()+" of type "+graph.getClass().getName()+" \n"+attributes+"\n");
 								ex.printStackTrace();
 
@@ -160,7 +156,6 @@ implements GraphLoad {
 					NAryEdge ne = (NAryEdge) enumeration.nextElement();
 					NAryEdgeEntity ent = (NAryEdgeEntity) ne.getUserObject();
 					Map eas = (Map) enumeration1.nextElement();
-					// System.err.println("attributes from edge:" +eas);
 					Vector idscon = ( (Vector) enumeration1.nextElement());
 					GraphCell gcs[] = null;
 					Hashtable[] attsEdges=null;
@@ -173,7 +168,7 @@ implements GraphLoad {
 							String id = idscon.elementAt(2*k).toString();
 							gcs[k] = (GraphCell) ids.get(id);
 							
-							graph.getDefaultSize((Entity)((DefaultGraphCell)gcs[k]).getUserObject()); // to check if the entity is allowed in the diagram
+							//graph.getDefaultSize((Entity)((DefaultGraphCell)gcs[k]).getUserObject()); // to check if the entity is allowed in the diagram
 							attsEdges[k]=(Hashtable)idscon.elementAt(2*k+1);
 							//this.getGraphCell(graph,id);
 
@@ -191,7 +186,7 @@ implements GraphLoad {
 
 					this.connect(graph, gcs, ne, eas,attsEdges);
 				} catch (InvalidEntity ie){
-					System.err.println(ie.getMessage());
+					ie.printStackTrace();
 				}
 			}
 			
@@ -358,7 +353,6 @@ implements GraphLoad {
 
 
 				} else {
-					//System.err.println("connecting "+auxiliaryEdges.length+ " "+newSelected.length+ "  "+selected.length);
 					Hashtable edgesAttributes = new Hashtable();
 					for (int i = 0; i < newSelected.length; i++) {
 						RoleEntity re = nEdgeObject.getRoleEntity(""+newSelected[i].hashCode());
@@ -371,7 +365,6 @@ implements GraphLoad {
 							Point2D.Double[] points=new Point2D.Double[poslabels.length];
 							for (int j=0;j<points.length;j++){
 								points[j]=(Point2D.Double)poslabels[j];
-								//System.err.println("Storing in point "+points[j]);
 							}
 							GraphConstants.setExtraLabelPositions(attr, points);
 
@@ -392,18 +385,6 @@ implements GraphLoad {
 					attributes.put(nEdge, eas);
 
 
-					//////////			-----------------------------------//////////
-
-					/*if (labels !=null && poslabels!=null){
-					Map attr = auxiliaryEdges[0].getAttributes();
-					GraphConstants.setExtraLabels(attr, labels);
-					Point[] points=new Point[poslabels.length];
-					for (int j=0;j<points.length;j++){
-						points[j]=(Point)poslabels[j];
-						System.err.println("Storing in point "+points[j]);
-					}
-					GraphConstants.setExtraLabelPositions(attr, points);
-				}*/
 
 					for (int i = 0; i < selectedAssignation.length; i++) {
 						// Create a Map that holds the attributes for the edge
@@ -507,16 +488,14 @@ implements GraphLoad {
 	 */
 	private GraphCell getGraphCell(ModelJGraph mj, String id) {
 		for (int k = 0; k < mj.getModel().getRootCount(); k++) {
-			//		System.err.println("k:"+k+mj.getModel().getRootCount());
 			DefaultGraphCell dgc = (DefaultGraphCell) mj.getModel().getRootAt(k);
 			ingenias.editor.entities.Entity ent = (ingenias.editor.entities.Entity)
 			dgc.getUserObject();
 			if (ent.getId().equalsIgnoreCase(id)) {
 				return dgc;
 			}
-			//		System.err.println("Identiddad:"+ent.getId());
 		}
-		//	System.err.println("no pude encontrar " + id);
+
 		return null;
 	}
 
@@ -569,7 +548,6 @@ implements GraphLoad {
 		for (int k = 0; k < models.getLength(); k++) {
 			org.w3c.dom.Node model = models.item(k);			
 			resources.setCurrentProgress((int)(initialValue+increment*k));
-			//System.err.println("Progreso "+resources.getProgressBarValue());
 			String id="";
 			String type="";
 			try {
@@ -590,12 +568,7 @@ implements GraphLoad {
 		}
 		if (!allrecovered)
 			throw new CannotLoadDiagram(failureMessage);
-		for (ModelJGraph mjg:ids.gm.getUOModels()){
-			mjg.getListenerContainer().setEnabled(true);
-			mjg.getListenerContainer().setToFrontVisibleChildren();
-			mjg.getListenerContainer().graphChanged(null); // to refresh the container layout
-		}
-		ids.editor.setEnabled(true);
+
 		
 	}
 
@@ -668,7 +641,7 @@ implements GraphLoad {
 			Constructor cons = Class.forName(type).getConstructor(conspar);
 			mjg = (ModelJGraph) cons.newInstance(valpar);
 		}
-		mjg.getListenerContainer().setEnabled(false);
+		mjg.disableAllListeners();
 
 		//mjg.setEditor(ids.editor);
 		//   mjg.setOM(ids.om);
@@ -687,7 +660,6 @@ implements GraphLoad {
 	 *@exception  WrongTypedDOMNode  Description of Exception
 	 */
 	private Object[] GXL2Array(org.w3c.dom.Node node) throws WrongTypedDOMNode {
-		//  System.err.println("init array");
 		if (node.getNodeName().equals("array")) {
 			try {
 				Vector children = new Vector();
@@ -702,9 +674,6 @@ implements GraphLoad {
 						// It is not a valid child.
 					}
 				}
-				// System.err.println("retrieved array "+children.size());
-
-				// System.err.println("end array");
 				// Construct the Array
 				return children.toArray();
 			}
@@ -833,7 +802,6 @@ implements GraphLoad {
 	 */
 	private Object GXL2Object(org.w3c.dom.Node node) throws WrongTypedDOMNode {
 		Object object = null;
-		//System.err.println("Procssing "+node.getNodeName());
 		if (node.getNodeName().equals("point")) {
 			object = GXL2Point(node);
 		}
@@ -899,10 +867,8 @@ implements GraphLoad {
 		String[] ids = nEdgeObject.getIds();
 		Vector<DefaultGraphCell> newselectedv=new Vector<DefaultGraphCell>();
 
-		//	System.err.println("connecting ..."+nEdgeObject.getType());
 		int i = 0;
 		for (int k = 0; k < ids.length; k++) {			
-			//	System.err.println("Looking for "+ids[k]);
 			for (int j = 0; j < selected.length; j++) {
 				Entity userObject = (ingenias.editor.entities.Entity) ( (DefaultGraphCell) selected[j]).getUserObject();			
 				try {
@@ -911,7 +877,6 @@ implements GraphLoad {
 						nEdgeObject.updateCell(ids[k], "" + selected[j].hashCode());
 						// Old id's are prefixed "old" to avoid collision among old id's and new ones
 						newselectedv.add((DefaultGraphCell) selected[j]);
-						//		System.err.println("Found  "+ids[k]);
 						i++;
 					}
 				}
@@ -956,19 +921,23 @@ implements GraphLoad {
 			// Common attributes
 			hashAttr.put(new String("id"),
 					node.getAttributes().getNamedItem("id").getNodeValue());
-			hashAttr.put(new String("type"),
+			if (node.getAttributes().getNamedItem("type")!=null)
+			 hashAttr.put(new String("type"),
 					node.getAttributes().getNamedItem("type").getNodeValue());
 			// Edge attributes
+			if (node.getAttributes().getNamedItem("fqrom")!=null)
 			hashAttr.put("from",
 					node.getAttributes().getNamedItem("from").getNodeValue());
-			hashAttr.put("to", node.getAttributes().getNamedItem("to").getNodeValue());
+			if (node.getAttributes().getNamedItem("to")!=null)
+			 hashAttr.put("to", node.getAttributes().getNamedItem("to").getNodeValue());
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			// If the node is a vertex there is neither from nor to attributes.
 		}
 		// Node specific attributes
 		retrieveNodeGenericAttributes(node, hashAttr);
-		// System.err.println(node.getAttributes().getNamedItem("id").getNodeValue()+ " Retrieved "+hashAttr+ " "+hashAttr.size());
+
 		//////////return (lab != null) ? lab : new String("");
 		return hashAttr;
 	}
@@ -978,12 +947,12 @@ implements GraphLoad {
 		for (int j = 0; j < children.getLength(); j++) {
 			org.w3c.dom.Node attr = children.item(j);
 			try {
-				//  System.err.println("analizing "+attr.getAttributes().getNamedItem("name").getNodeValue());
+
 				Object object = GXL2Object(attr);
-				// System.err.println("analisys finished for "+attr.getAttributes().getNamedItem("name").getNodeValue());
+
 				hashAttr.put(attr.getAttributes().getNamedItem("name").getNodeValue(),
 						object);
-				// System.err.println("after analysis "+hashAttr+" and inserted "+attr.getAttributes().getNamedItem("name").getNodeValue());
+
 			}
 			catch (Exception e) {
 				// The node is not a valid attribute.

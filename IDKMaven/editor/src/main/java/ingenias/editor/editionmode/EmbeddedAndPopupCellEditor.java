@@ -332,7 +332,9 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 						main.setLayout(new BorderLayout());
 						main.add(south, BorderLayout.SOUTH);
 						final Entity ent=(Entity) ((DefaultGraphCell)cell).getUserObject();
-						final GeneralEditionPanel gep=new GeneralEditionPanel(null, resources.getMainFrame(), ids.om,ids.gm, ent);
+						final GeneralEditionPanel gep=new GeneralEditionPanel(
+								ids.editor, 
+								resources.getMainFrame(), ids.om,ids.gm, ent);
 						jsp.getViewport().add(gep,null);
 						main.add(jsp, BorderLayout.CENTER);
 						createIndependentEditDialogPopup(cell, accept, cancel, main,

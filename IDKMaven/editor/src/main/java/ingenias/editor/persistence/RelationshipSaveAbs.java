@@ -72,7 +72,6 @@ public abstract class RelationshipSaveAbs {
         for (int k = 0; k < idEnt.length; k++) {
           RoleEntity re = en.getRoleEntity(idEnt[k]);
           if (re != null) {
-            ingenias.editor.Log.getInstance().log(idEnt[k]);
             tempOutput.write( ("<role idEntity=\"" + 
             		ingenias.generator.util.Conversor.replaceInvalidChar(en.getEntity(idEnt[k]).getId()) + "\" class=\"" +
                                ingenias.generator.util.Conversor.replaceInvalidChar(en.getClass(idEnt[k])) + "\" roleName=\"" +

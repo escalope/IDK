@@ -1558,6 +1558,22 @@ public class RelationshipSave extends RelationshipSaveAbs{
 
     }
     
+     if (en.getClass().equals(ingenias.editor.entities.TriggersFailuresourceRole.class)){
+      ingenias.editor.entities.TriggersFailuresourceRole nen=(ingenias.editor.entities.TriggersFailuresourceRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.TriggersFailuretargetRole.class)){
+      ingenias.editor.entities.TriggersFailuretargetRole nen=(ingenias.editor.entities.TriggersFailuretargetRole)en;
+      
+      
+
+
+    }
+    
      if (en.getClass().equals(ingenias.editor.entities.WFPlayssourceRole.class)){
       ingenias.editor.entities.WFPlayssourceRole nen=(ingenias.editor.entities.WFPlayssourceRole)en;
       
@@ -1734,22 +1750,6 @@ public class RelationshipSave extends RelationshipSaveAbs{
 
     }
     
-     if (en.getClass().equals(ingenias.editor.entities.AGORelationship3sourceRole.class)){
-      ingenias.editor.entities.AGORelationship3sourceRole nen=(ingenias.editor.entities.AGORelationship3sourceRole)en;
-      
-      
-
-
-    }
-    
-     if (en.getClass().equals(ingenias.editor.entities.AGORelationship3targetRole.class)){
-      ingenias.editor.entities.AGORelationship3targetRole nen=(ingenias.editor.entities.AGORelationship3targetRole)en;
-      
-      
-
-
-    }
-    
      if (en.getClass().equals(ingenias.editor.entities.WFUsessourceRole.class)){
       ingenias.editor.entities.WFUsessourceRole nen=(ingenias.editor.entities.WFUsessourceRole)en;
       
@@ -1760,6 +1760,22 @@ public class RelationshipSave extends RelationshipSaveAbs{
     
      if (en.getClass().equals(ingenias.editor.entities.WFUsestargetRole.class)){
       ingenias.editor.entities.WFUsestargetRole nen=(ingenias.editor.entities.WFUsestargetRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.AGORelationship3sourceRole.class)){
+      ingenias.editor.entities.AGORelationship3sourceRole nen=(ingenias.editor.entities.AGORelationship3sourceRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.AGORelationship3targetRole.class)){
+      ingenias.editor.entities.AGORelationship3targetRole nen=(ingenias.editor.entities.AGORelationship3targetRole)en;
       
       
 

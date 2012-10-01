@@ -67,7 +67,7 @@ public class IDEState  implements java.io.Serializable, DiagramChangeHandler {
 	private File currentFileFolder;
 	// stores last folder associated with images
 
-	public static boolean changed = false;
+	private  boolean changed = false;
 	// true if some change was performed
 
 	private boolean busy=false;
@@ -141,12 +141,12 @@ public class IDEState  implements java.io.Serializable, DiagramChangeHandler {
 		this.currentFileFolder = currentFileFolder;
 	}
 
-	public static boolean isChanged() {
+	public  boolean isChanged() {
 		return changed;
 	}
 
-	public static void setChanged(boolean changed) {
-		IDEState.changed = changed;
+	public void setChanged(boolean changed) {
+		this.changed = changed;
 	}
 
 	
@@ -171,7 +171,13 @@ public class IDEState  implements java.io.Serializable, DiagramChangeHandler {
 		prop.putAll(oldProperties);
 		currentFile=null;
 		try {
-		this.setDiagramFilter(FilterManager.getINGENIASConfiguration(this.getClass().getClassLoader()));
+		 Vector<DiagramFilter> confs = FilterManager.listAvailableConfigurations();
+		 for (DiagramFilter df:confs){				
+				if (df.getName().equalsIgnoreCase("Full INGENIAS")){
+					this.setDiagramFilter(df);			
+				}
+		 }
+		//this.setDiagramFilter(FilterManager.getINGENIASConfiguration(this.getClass().getClassLoader()));
 		} catch (Throwable t){
 			System.err.println("Could not load the default filter from classpath");
 			System.err.println(t.getMessage());

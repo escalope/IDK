@@ -57,10 +57,10 @@ public class RelationshipFactory  {
 				else if (nAryEdgesNum == 0) {
 					Class relEntity;
 					try {
-						relEntity = Class.forName(relationshipName);
+						relEntity = Class.forName("ingenias.editor.entities."+relationshipName);
 						Constructor relEntityCons = relEntity.getConstructor(new Class[]{String.class});					
 						Object relEntityInstance = relEntityCons.newInstance(new Object[]{Editor.getNewId(browser)});					
-						Class edgeEntity=Class.forName(relationshipName+"Edge");
+						Class edgeEntity=Class.forName("ingenias.editor.cell."+relationshipName+"Edge");
 						Constructor edgeEntityCons = edgeEntity.getConstructor(new Class[]{relEntity});
 						Object edgeEntityIns = edgeEntityCons.newInstance(new Object[]{relEntityInstance});
 						return (DefaultGraphCell)edgeEntityIns;

@@ -31,6 +31,7 @@ import ingenias.editor.actions.HistoryManager;
 import ingenias.editor.actions.HyperlinkAction;
 import ingenias.editor.actions.ImportFileAction;
 import ingenias.editor.actions.LoadFileAction;
+import ingenias.editor.actions.LoadFileSwingTask;
 import ingenias.editor.actions.NewProjectAction;
 import ingenias.editor.actions.OpenManualAction;
 import ingenias.editor.actions.PasteObjectFromClipboardAction;
@@ -109,6 +110,7 @@ class UMLOptions {}
  * It bases on the definition of an IDEState instance. Hence, it
  * can be resconstructed from any new instance.
  **/
+
 public class IDEAbs
 extends ingenias.editor.IDEGUI
 implements java.io.Serializable,IDEUpdater
@@ -225,6 +227,7 @@ implements java.io.Serializable,IDEUpdater
 			this.profiles.add(menuEntry);							
 		}		
 		ids.setDiagramFilter(defaultFilter);
+
 		defaultMenuEntry.setSelected(true);
 
 		resources.getPprin().invalidate();
@@ -256,7 +259,7 @@ implements java.io.Serializable,IDEUpdater
 				resources.getCommonButtons().getJc().setSelectedIndex(1);
 
 			}
-			if (ids.prefs.getRelationshiplayout().equals(Preferences.RelationshipLayout.AUTOMATIC)){
+			if (ids.prefs.getRelationshiplayout().equals(Preferences.RelationshipLayout.AUTOMATIC_STRAIGHT)){
 				resources.getCommonButtons().getJc().setSelectedIndex(0);
 			}
 		}
@@ -310,6 +313,21 @@ implements java.io.Serializable,IDEUpdater
 		}catch (Throwable t){
 			t.printStackTrace();
 		}
+
+	}
+
+	public void stop(){
+		if (update!=null)
+			update.stopUpdate();
+		System.err.println("finalizado");
+	}
+
+
+	protected void finalize() throws Throwable{
+		if (update!=null)
+			update.stopUpdate();
+		System.err.println("finalizado");
+		super.finalize();
 
 	}
 
@@ -421,7 +439,7 @@ implements java.io.Serializable,IDEUpdater
 					JGraph jg = ids.gm.getCurrent();
 					javax.swing.tree.DefaultMutableTreeNode dmtn =
 
-						(javax.swing.tree.DefaultMutableTreeNode) tp.getLastPathComponent();
+							(javax.swing.tree.DefaultMutableTreeNode) tp.getLastPathComponent();
 					// jg.setSelectionCell(dmtnetUserObject());
 					this.getContentPane().validate();
 
@@ -442,7 +460,7 @@ implements java.io.Serializable,IDEUpdater
 
 
 	void load_actionPerformed(ActionEvent e) {
-		System.err.println("Cargando");
+
 		new LoadFileAction(ids,resources).loadNewFile(this);
 		//updateIDEState(nids);
 		//em.updateButtonBars();

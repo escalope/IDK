@@ -1433,7 +1433,7 @@ java.io.Serializable {
 				if (value instanceof ingenias.editor.entities.Entity
 						&& edgraph != null
 						&& edgraph.getAllowedEntities()
-						.contains(entity.getClass().getSimpleName())) {
+						.contains(value.getClass().getSimpleName())) {
 					for (Object obj : graph.getRoots()) {
 						if (obj instanceof DefaultGraphCell
 								&& ((DefaultGraphCell) obj).getUserObject()!=null &&
@@ -1446,6 +1446,7 @@ java.io.Serializable {
 							// to
 							// all
 							// cells containing entity
+							System.err.println("entity "+entity.getId()+":"+entity.getType());
 							DefaultGraphCell cell = graph.insertDuplicated(new Point(1,
 									1), (Entity) value);
 							graph.getListenerContainer().setParent(cell,

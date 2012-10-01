@@ -24,6 +24,7 @@ import ingenias.editor.DiagramPaneInitialization;
 import ingenias.editor.IDEState;
 import ingenias.editor.IDEUpdater;
 import ingenias.editor.ProgressListener;
+import ingenias.editor.persistence.PersistenceManager;
 
 import java.awt.Cursor;
 import java.beans.PropertyChangeEvent;
@@ -74,7 +75,11 @@ public class LoadFileSwingTask extends SwingWorker<Void, Void> implements Progre
 	 */
 	@Override
 	public Void doInBackground() {
+		try {
 		nids=new LoadFileAction(ids,resources).loadFileAction(current);
+		} catch (Throwable t){
+			t.printStackTrace();
+		}
 		return null;
 	}
 
@@ -85,10 +90,15 @@ public class LoadFileSwingTask extends SwingWorker<Void, Void> implements Progre
 	public void done() {
 		if (nids!=null){
 			resources.getMainFrame().setTitle("Project:" + current.getAbsolutePath());
-			nids.getLastFiles().addAll(ids.getLastFiles());
-			HistoryManager.updateHistory(current, resources, nids, updater);
+			HistoryManager.updateHistory(current, resources, ids, updater);
+			PersistenceManager pm=new PersistenceManager();
+			pm.savePreferences(ids);
+			
+			//nids.getLastFiles().addAll(ids.getLastFiles());
+						
 			nids.setCurrentFile(current);
 			nids.setCurrentFileFolder(nids.getCurrentFile().getParentFile());
+			
 			//jw.setVisible(false);
 			
 			//new IDEFactory(nids,resources).updateButtonBars();

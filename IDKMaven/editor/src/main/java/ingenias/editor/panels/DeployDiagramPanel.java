@@ -125,6 +125,8 @@ public class DeployDiagramPanel extends JGraph {
 
  entities.add("DeploymentUnitByTypeWithInitMS");
 
+ entities.add("RuntimeCommFailure");
+
  entities.add("ApplicationEvent");
 
  entities.add("MentalState");
@@ -355,6 +357,15 @@ public class DeployDiagramPanel extends JGraph {
     DeploymentUnitByTypeWithInitMS nentity=new DeploymentUnitByTypeWithInitMS(((Model)getModel()).getNewId("DeploymentUnitByTypeWithInitMS"));
       DefaultGraphCell vertex = new
           DeploymentUnitByTypeWithInitMSCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
+    RuntimeCommFailure nentity=new RuntimeCommFailure(((Model)getModel()).getNewId("RuntimeCommFailure"));
+      DefaultGraphCell vertex = new
+          RuntimeCommFailureCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -681,6 +692,11 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
+      return RuntimeCommFailureView.getSize((RuntimeCommFailure)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("ApplicationEvent")) {
       return ApplicationEventView.getSize((ApplicationEvent)entity);      
     }
@@ -988,6 +1004,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new DeploymentUnitByTypeWithInitMSCell( (DeploymentUnitByTypeWithInitMS) entity);
       // Default Size for the new Vertex with the new entity within
       size = DeploymentUnitByTypeWithInitMSView.getSize((DeploymentUnitByTypeWithInitMS) entity);
+    }
+    else
+
+    if (entity.getClass().equals(RuntimeCommFailure.class)) {
+      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
     }
     else
 

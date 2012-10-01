@@ -271,6 +271,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode GoalStateWSNode=null;
 
+  public javax.swing.tree.DefaultMutableTreeNode RuntimeCommFailureNode=null;
+
   public javax.swing.tree.DefaultMutableTreeNode StateGoalNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode ConversationNode=null;
@@ -539,6 +541,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   GoalStateWSNode=new javax.swing.tree.DefaultMutableTreeNode("GoalStateWS");
 
+  RuntimeCommFailureNode=new javax.swing.tree.DefaultMutableTreeNode("RuntimeCommFailure");
+
   StateGoalNode=new javax.swing.tree.DefaultMutableTreeNode("StateGoal");
 
   ConversationNode=new javax.swing.tree.DefaultMutableTreeNode("Conversation");
@@ -806,6 +810,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     addNodeInSortedOrder( SlotNode,ObjectSlotNode);
 
     addNodeInSortedOrder( GoalNode,GoalStateWSNode);
+
+    addNodeInSortedOrder( RuntimeEventNode,RuntimeCommFailureNode);
 
     addNodeInSortedOrder( GoalNode,StateGoalNode);
 
@@ -2385,6 +2391,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return o;
   }
   
+  public RuntimeCommFailure createRuntimeCommFailure(String id){
+    RuntimeCommFailure object=new     RuntimeCommFailure(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    RuntimeCommFailureNode.insert(nn, RuntimeCommFailureNode.getChildCount());
+    nn.setParent(RuntimeCommFailureNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getRuntimeCommFailure(String object){
+    Object o=findUserObject(RuntimeCommFailureNode,object);
+    return o;
+  }
+  
   public StateGoal createStateGoal(String id){
     StateGoal object=new     StateGoal(id);
     DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
@@ -2798,6 +2819,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     result.add(ObjectSlot.class);
 
     result.add(GoalStateWS.class);
+
+    result.add(RuntimeCommFailure.class);
 
     result.add(StateGoal.class);
 

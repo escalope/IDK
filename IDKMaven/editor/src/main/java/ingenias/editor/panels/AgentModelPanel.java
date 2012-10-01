@@ -151,6 +151,8 @@ public class AgentModelPanel extends JGraph {
 
  entities.add("ApplicationWS");
 
+ entities.add("RuntimeCommFailure");
+
  entities.add("RuntimeEvent");
 
  entities.add("Interaction");
@@ -471,6 +473,15 @@ public class AgentModelPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
+    RuntimeCommFailure nentity=new RuntimeCommFailure(((Model)getModel()).getNewId("RuntimeCommFailure"));
+      DefaultGraphCell vertex = new
+          RuntimeCommFailureCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("RuntimeEvent")) {
     RuntimeEvent nentity=new RuntimeEvent(((Model)getModel()).getNewId("RuntimeEvent"));
       DefaultGraphCell vertex = new
@@ -710,6 +721,11 @@ public class AgentModelPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("ApplicationWS")) {
       return ApplicationWSView.getSize((ApplicationWS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
+      return RuntimeCommFailureView.getSize((RuntimeCommFailure)entity);      
     }
     else
 
@@ -1031,6 +1047,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new ApplicationWSCell( (ApplicationWS) entity);
       // Default Size for the new Vertex with the new entity within
       size = ApplicationWSView.getSize((ApplicationWS) entity);
+    }
+    else
+
+    if (entity.getClass().equals(RuntimeCommFailure.class)) {
+      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
     }
     else
 

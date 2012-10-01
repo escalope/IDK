@@ -20,8 +20,11 @@
 package ingenias.editor.utils;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import org.swixml.SwingEngine;
@@ -49,11 +52,26 @@ public class XMLGUITester {
     result = sb.toString();
     result = result.replaceAll("##", "<");
     result = result.replaceAll("#", ">");
-    JFrame jf=new JFrame();
+    final JFrame jf=new JFrame();
+    
+    JFrame packFrame =new JFrame("Pack");
+    JButton packbutton=new JButton("pack");
+    packFrame.getContentPane().add(packbutton);
+    
+    packFrame.pack();
+    packbutton.addActionListener(new ActionListener() {		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			jf.pack();
+			jf.invalidate();
+		}
+	});
     jf.getContentPane().setLayout(new BorderLayout());
     jf.getContentPane().add(se.render(new java.io.StringReader(result)), BorderLayout.CENTER);
     jf.pack();
     jf.show();
+    packFrame.setVisible(true);
+
 ;
   }
 }

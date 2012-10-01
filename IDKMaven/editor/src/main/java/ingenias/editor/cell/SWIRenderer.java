@@ -86,8 +86,8 @@ public class SWIRenderer {
                                       ingenias.editor.rendererxml.CollectionPanel.class);
     swiengine.getTaglib().registerTag("linepanel",
                                       ingenias.editor.rendererxml.LinePanel.class);
-    swiengine.getTaglib().registerTag("htmllabel",
-                                      ingenias.editor.rendererxml.HTMLLabel.class);
+   /* swiengine.getTaglib().registerTag("htmllabel",
+                                      ingenias.editor.rendererxml.HTMLLabel.class);*/
     swiengine.getTaglib().registerTag("wraplabel",
                                       ingenias.editor.rendererxml.JMultilineLabel.class);
     swiengine.getTaglib().registerTag("dashedpanel",

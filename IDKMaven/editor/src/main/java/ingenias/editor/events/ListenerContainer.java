@@ -149,8 +149,9 @@ public class ListenerContainer implements GraphModelListener {
 							moveChildrenToParent(map, children, changed,
 									attsparent, newAtts);
 					}
-				applyChanges(map); // applies these translations
+				applyChanges(map); // applies these translations				
 			}
+			if (ModelJGraph.getEnabledAllListeners())
 			refreshContainer();
 
 		}
@@ -170,7 +171,7 @@ public class ListenerContainer implements GraphModelListener {
 				 */
 				// now apply the constraints of the different panels
 				try {
-					if (enabled){
+					if (!enabled){
 						hideOrShowChildrenAndDrawExtraEdges();
 						// toFront contains the leaves. Recursively invoking toback will
 						// cause a reorder
@@ -179,6 +180,7 @@ public class ListenerContainer implements GraphModelListener {
 						processInternalConstraints();
 						jg.enableChangeEntityLocation();
 						jg.enableNARYEdgeLocation();
+					
 					}
 
 				} catch (Throwable t) {
@@ -187,7 +189,7 @@ public class ListenerContainer implements GraphModelListener {
 
 				// applyChanges(nmap); // applies changes to satisfy
 				// constraints
-				//enabled = true;
+				enabled = true;
 			}
 		});
 	}
@@ -462,7 +464,7 @@ public class ListenerContainer implements GraphModelListener {
 				}
 			}
 			moveChildrenToNewLocation(map);
-			ChangeNARYEdgeLocation.solveOverlappings(jg, map);
+			//ChangeNARYEdgeLocation.solveOverlappings(jg, map);
 			applyChanges(map);
 			map = new Hashtable<DefaultGraphCell, Map>();
 

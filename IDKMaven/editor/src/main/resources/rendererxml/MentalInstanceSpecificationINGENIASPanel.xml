@@ -29,13 +29,14 @@
 ##label text="="#
 ##gridbagconstraints gridx="3" gridy="0" ipadx="5" ipady="1" /#
 ##/label#
-##scrollpane autoscroll="true"#
+
+
+##textarea name="SlotsValues_Value" editable="false"  LineWrap="true"
+          border="MatteBorder(1,1,1,1,gray)" Background="white" #
 ##gridbagconstraints
           gridx="4" gridy="0" ipadx="5" ipady="1" weightx="2" weighty="1" fill="1"/#
-##myeditor name="SlotsValues_Value" editable="false" AlignmentY="1" text="dos este es otro texto del que me gustaria disponer" LineWrap="true"
-          border="MatteBorder(1,1,1,1,gray)"#
-##/myeditor#
-##/scrollpane#
+##/textarea#
+
 ##/panel#
 ##/collectionpanel#
 ##/vbox#

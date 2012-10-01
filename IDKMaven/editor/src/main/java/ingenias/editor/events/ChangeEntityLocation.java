@@ -96,7 +96,7 @@ implements org.jgraph.event.GraphModelListener {
 
 				}
 				if (changes.size()>0){
-					ChangeNARYEdgeLocation.solveOverlappings((ModelJGraph) mjg, changes);
+			//		ChangeNARYEdgeLocation.solveOverlappings((ModelJGraph) mjg, changes);
 					mjg.getModel().edit(changes, null, null, null);
 				}
 				

@@ -46,7 +46,6 @@ public class PropertyLoadImp1
   }
 
   private Map restoreMap(org.w3c.dom.Node propertiesNode) {
-	  //System.err.println("restoring map");
     Hashtable result = new Hashtable();
     NodeList keys = propertiesNode.getChildNodes();
     for (int k = 0; k < keys.getLength(); k++) {
@@ -56,14 +55,11 @@ public class PropertyLoadImp1
         String value = "";
         if (current.getAttributes().getNamedItem("value") != null) {
           value = current.getAttributes().getNamedItem("value").getNodeValue();
-        //  System.err.println("reading 1"+value);
         }
         else
         if (current.getFirstChild() != null) {
           value = current.getFirstChild().getNodeValue();
-          //System.err.println("reading 2"+value);
         }
-       // System.err.println("reading 3"+value);
         result.put(id, value);
       }
     }

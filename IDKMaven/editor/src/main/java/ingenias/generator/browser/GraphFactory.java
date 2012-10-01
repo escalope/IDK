@@ -18,7 +18,9 @@
 
 package ingenias.generator.browser;
 
+import ingenias.editor.DiagramMenuEntriesActionsFactory;
 import ingenias.editor.Editor;
+import ingenias.editor.GUIResources;
 import ingenias.editor.IDE;
 import ingenias.editor.IDEState;
 import ingenias.editor.Log;
@@ -26,6 +28,7 @@ import ingenias.editor.MarqueeHandler;
 import ingenias.editor.Model;
 import ingenias.editor.ModelJGraph;
 import ingenias.editor.ObjectManager;
+import ingenias.editor.Preferences;
 import ingenias.editor.TypedVector;
 import ingenias.editor.cell.NAryEdge;
 import ingenias.editor.cell.RenderComponentManager;
@@ -69,6 +72,7 @@ import org.jgraph.graph.Port;
 
 public class GraphFactory {
 	private IDEState ids;
+
 
 	public static GraphFactory createDefaultEmptyGraphFactory(){
 		return new GraphFactory(IDEState.emptyIDEState());
@@ -266,21 +270,39 @@ public class GraphFactory {
 				
 			}
 			Class modelData = Class.forName("ingenias.editor.entities."+type+"DataEntity");
-			Constructor constructorModelData=modelData.getConstructor(new Class[]{String.class});
-			Object mde = constructorModelData.newInstance(new Object[]{name});
-
-			Constructor constructorGraph = Class.forName("ingenias.editor."+type+"ModelJGraph").getConstructor(new Class[]{	  
-					modelData,Editor.class,String.class,ObjectManager.class,
-					Model.class,BasicMarqueeHandler.class});
-
-			Constructor constructorMarquee = Class.forName("ingenias.editor."+type+"MarqueeHandler").getConstructor(new Class[]{	  
-					Editor.class});
-
-			MarqueeHandler marquee = (MarqueeHandler) constructorMarquee.newInstance(new Object[]{ids.editor});
-
+			Constructor constructorModelDataEntity=modelData.getConstructor(new Class[]{String.class});
+			Object mde = constructorModelDataEntity.newInstance(new Object[]{name});
+			Constructor constructorGraph = Class.forName("ingenias.editor.models."+type+"ModelJGraph").
+				getConstructor(new Class[]{	  
+					modelData,String.class,
+					ObjectManager.class,
+					Model.class,
+					BasicMarqueeHandler.class,
+					Preferences.class});
+			Model m=new Model(ids);
 			ModelJGraph ndiagram=(ModelJGraph) constructorGraph.newInstance(new Object[]{
-					mde,ids.editor,name,ids.om,
-					new Model(ids),marquee});
+					mde,
+					name,
+					ids.om,					
+					m,
+					new BasicMarqueeHandler(),
+					ids.prefs});
+			
+			Constructor constructorMarquee = Class.forName("ingenias.editor.MarqueeHandler").getConstructor(
+					new Class[]{	  
+					ModelJGraph.class,
+					GUIResources.class, 
+					IDEState.class, 
+					DiagramMenuEntriesActionsFactory.class});
+			
+			MarqueeHandler marquee = (MarqueeHandler) constructorMarquee.newInstance(new Object[]{
+					ndiagram,
+					null, 
+					ids, 
+					null});
+
+			ndiagram.setMarqueeHandler(marquee);
+			
 			String[] npath=null;
 			if (path.length==0 || !path[0].equals("Project")){
 				npath=new String[path.length+1];

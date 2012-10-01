@@ -111,6 +111,8 @@ public class TasksAndGoalsModelPanel extends JGraph {
 
  entities.add("FrameFact");
 
+ entities.add("RuntimeCommFailure");
+
  entities.add("Believe");
 
  entities.add("Compromise");
@@ -290,6 +292,15 @@ public class TasksAndGoalsModelPanel extends JGraph {
     FrameFact nentity=new FrameFact(((Model)getModel()).getNewId("FrameFact"));
       DefaultGraphCell vertex = new
           FrameFactCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
+    RuntimeCommFailure nentity=new RuntimeCommFailure(((Model)getModel()).getNewId("RuntimeCommFailure"));
+      DefaultGraphCell vertex = new
+          RuntimeCommFailureCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -635,6 +646,11 @@ public class TasksAndGoalsModelPanel extends JGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
+      return RuntimeCommFailureView.getSize((RuntimeCommFailure)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("Believe")) {
       return BelieveView.getSize((Believe)entity);      
     }
@@ -923,6 +939,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new FrameFactCell( (FrameFact) entity);
       // Default Size for the new Vertex with the new entity within
       size = FrameFactView.getSize((FrameFact) entity);
+    }
+    else
+
+    if (entity.getClass().equals(RuntimeCommFailure.class)) {
+      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
     }
     else
 

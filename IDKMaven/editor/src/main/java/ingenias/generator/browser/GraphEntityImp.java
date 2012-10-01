@@ -79,8 +79,8 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 		this.browser=new BrowserImp(ids);
 	}
 
-	private Vector getCells(org.jgraph.JGraph graph){
-		int max=graph.getModel().getRootCount();
+	private Vector getCells(org.jgraph.JGraph graph){		
+		List roots=new Vector(((DefaultGraphModel)graph.getModel()).getRoots());
 		Vector v=new Vector();
 
 		boolean found=false;
@@ -88,8 +88,8 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 		Vector dgcs=new Vector();
 		org.jgraph.graph.DefaultGraphCell dgc=null;
 
-		while (k<max){
-			Object o=graph.getModel().getRootAt(k);
+		while (k<roots.size()){
+			Object o=roots.get(k);
 			if (o instanceof org.jgraph.graph.DefaultGraphCell){
 				dgc=(org.jgraph.graph.DefaultGraphCell)o;
 				found=((ingenias.editor.entities.Entity)dgc.getUserObject()).getId().equals(ent.getId());
@@ -104,15 +104,15 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 
 
 	private DefaultGraphCell getCell(org.jgraph.JGraph graph){
-		int max=graph.getModel().getRootCount();
+		List roots=new Vector(((DefaultGraphModel)graph.getModel()).getRoots());
 		Vector v=new Vector();
 
 		boolean found=false;
 		int k=0;
 		Vector dgcs=getCells(graph);
 		org.jgraph.graph.DefaultGraphCell dgc=null;
-		while (k<max &&!found){
-			Object o=graph.getModel().getRootAt(k);
+		while (k<roots.size() &&!found){
+			Object o=roots.get(k);
 			if (o instanceof org.jgraph.graph.DefaultGraphCell){
 				dgc=(org.jgraph.graph.DefaultGraphCell)o;
 				found=((ingenias.editor.entities.Entity)dgc.getUserObject()).getId().equals(ent.getId());
@@ -135,10 +135,8 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 
 
 
-	private HashSet getRelationshipsFromAGraph(ingenias.editor.ModelJGraph graph){
-		//		System.err.println("studying "+graph.getID());
-		int max=graph.getModel().getRootCount();
-		HashSet v=new HashSet();
+	private HashSet<GraphRelationshipImp> getRelationshipsFromAGraph(ingenias.editor.ModelJGraph graph){
+		HashSet<GraphRelationshipImp> v=new HashSet<GraphRelationshipImp>();
 		Enumeration dgcs=this.getCells(graph).elements();
 		while (dgcs.hasMoreElements()){
 
@@ -156,7 +154,6 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 						DefaultGraphCell extr=this.getExtreme(current);
 						ingenias.editor.entities.NAryEdgeEntity nary=
 							(ingenias.editor.entities.NAryEdgeEntity)extr.getUserObject();
-						//						System.err.println("adding "+nary.getType());
 						v.add(new GraphRelationshipImp(nary,graph,ids));
 					}
 
@@ -169,8 +166,8 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 
 	}
 
-	public Vector getAllRelationships(){
-		HashSet result=new HashSet();
+	public Vector<GraphRelationshipImp> getAllRelationships(){
+		HashSet<GraphRelationshipImp> result=new HashSet<GraphRelationshipImp>();
 		Graph[] g=null;
 
 		g = browser.getGraphs();
@@ -179,15 +176,13 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 			HashSet rel=this.getRelationshipsFromAGraph(((GraphImp)g[k]).getGraph());
 			result.addAll(rel);
 		}
-		return new Vector(result);
+		return new Vector<GraphRelationshipImp>(result);
 	}
 
 
 
 
-	public GraphRelationship[] getRelationships(){
-
-		int max=graph.getModel().getRootCount();
+	public GraphRelationship[] getRelationships(){	
 
 		Vector v=new Vector();
 
@@ -247,7 +242,6 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 			GraphAttribute oldga=this.getAttributeByName(ga.getName());
 			((GraphAttributeImp)oldga).setValue(((GraphAttributeImp)ga).getValue());
 			Object nvalue=((GraphAttributeImp)ga).getValue();
-			System.err.println(nvalue.getClass());
 			if (nvalue instanceof GraphCollection){
 				nvalue=((GraphCollectionImp)nvalue).getValue();
 				Class nvalueclass=((TypedVector)nvalue).getType();

@@ -843,6 +843,28 @@ public class AgentModelModelJGraph extends ModelJGraph {
     }
 
    if (false){
+    Image img_RuntimeCommFailure =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_RuntimeCommFailure);
+    Action RuntimeCommFailure=
+        new AbstractAction("RuntimeCommFailure", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "RuntimeCommFailure");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    RuntimeCommFailure.setEnabled(true);
+    jb = new JButton(RuntimeCommFailure);
+    jb.setText("");
+    jb.setName("RuntimeCommFailure");	
+    jb.setToolTipText("RuntimeCommFailure");
+    toolbar.add(jb);
+    }
+
+   if (false){
     Image img_RuntimeEvent =
         ImageLoader.getImage("");
     undoIcon = new ImageIcon(img_RuntimeEvent);
@@ -1126,6 +1148,8 @@ public class AgentModelModelJGraph extends ModelJGraph {
  entities.add("MentalInstanceSpecification");
 
  entities.add("ApplicationWS");
+
+ entities.add("RuntimeCommFailure");
 
  entities.add("RuntimeEvent");
 
@@ -1806,6 +1830,15 @@ public class AgentModelModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
+    RuntimeCommFailure nentity=getOM().createRuntimeCommFailure(getMJGraph().getNewId("RuntimeCommFailure"));
+      DefaultGraphCell vertex = new
+          RuntimeCommFailureCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("RuntimeEvent")) {
     RuntimeEvent nentity=getOM().createRuntimeEvent(getMJGraph().getNewId("RuntimeEvent"));
       DefaultGraphCell vertex = new
@@ -2045,6 +2078,11 @@ public class AgentModelModelJGraph extends ModelJGraph {
 
     if (entity.getType().equalsIgnoreCase("ApplicationWS")) {
       return ApplicationWSView.getSize((ingenias.editor.entities.ApplicationWS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
+      return RuntimeCommFailureView.getSize((ingenias.editor.entities.RuntimeCommFailure)entity);      
     }
     else
 
@@ -2467,6 +2505,14 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new ApplicationWSCell( (ApplicationWS) entity);
       // Default Size for the new Vertex with the new entity within
       size = ApplicationWSView.getSize((ApplicationWS) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(RuntimeCommFailure.class)) {
+      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
       
     }
     else

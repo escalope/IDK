@@ -127,6 +127,10 @@ public TasksAndGoalsModelCellViewFactory() {}
            return new ingenias.editor.cell.FrameFactView(v);
    }
 
+   if (userObject.getClass().equals(RuntimeCommFailure.class)){
+           return new ingenias.editor.cell.RuntimeCommFailureView(v);
+   }
+
    if (userObject.getClass().equals(Believe.class)){
            return new ingenias.editor.cell.BelieveView(v);
    }
@@ -364,6 +368,10 @@ public TasksAndGoalsModelCellViewFactory() {}
 
    if (v.getClass().equals(IAccessesEdge.class)){
            return new ingenias.editor.cell.IAccessesView(v);
+   }
+
+   if (v.getClass().equals(TriggersFailureEdge.class)){
+           return new ingenias.editor.cell.TriggersFailureView(v);
    }
 
 

@@ -230,9 +230,13 @@ public class DiagramPaneInitialization {
 			private boolean enabled = true;
 			public void actionPerformed(ActionEvent e) {
 				if (resources.getCommonButtons().getJc().getSelectedIndex() == 0) {					
-					ids.prefs.setRelationshiplayout(Preferences.RelationshipLayout.AUTOMATIC);
+					ids.prefs.setRelationshiplayout(Preferences.RelationshipLayout.AUTOMATIC_STRAIGHT);
 					ids.editor.enableAutomaticLayout();
-				}
+				} else
+					if (resources.getCommonButtons().getJc().getSelectedIndex() == 1) {
+						ids.prefs.setRelationshiplayout(Preferences.RelationshipLayout.AUTOMATIC_RADIAL);
+						ids.editor.enableAutomaticLayout();
+					}
 				else {
 					ids.prefs.setRelationshiplayout(Preferences.RelationshipLayout.MANUAL);
 					ids.editor.disableAutomaticLayout();

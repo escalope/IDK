@@ -47,9 +47,10 @@ import org.jgraph.event.*;
 public class ChangeNARYEdgeLocation
 implements org.jgraph.event.GraphModelListener {
 	private Object workingObject = null;
-	private boolean enabled = true;
+	private boolean alreadyExecuting = true;
 	private int counter = 0;
 	JGraph graph = null;
+	private boolean enabled=true;
 
 	public ChangeNARYEdgeLocation(JGraph graph) {
 		this.graph = graph;
@@ -57,9 +58,9 @@ implements org.jgraph.event.GraphModelListener {
 
 	public void graphChanged(org.jgraph.event.GraphModelEvent gme) {
 
-		if (enabled && (gme.getChange().getInserted()==null
+		if (enabled && alreadyExecuting && (gme.getChange().getInserted()==null
 				||gme.getChange().getInserted().length==0 )) {
-			enabled=false;
+			alreadyExecuting=false;
 			Hashtable<DefaultGraphCell, Map> changes = new Hashtable<DefaultGraphCell,Map>();
 			Map old = gme.getChange().getPreviousAttributes();
 			Map newAt = gme.getChange().getAttributes();
@@ -96,37 +97,37 @@ implements org.jgraph.event.GraphModelListener {
 					graph.getModel().edit(changes, null, null, null);					
 				}
 			}
-			enabled=true;
+			alreadyExecuting=true;
 		}
 
 	}
 
 	public static void solveOverlappings(ModelJGraph graph,
-			Hashtable<DefaultGraphCell, Map> map) {
-		Hashtable<Object,Map> naryedgeatts=new  Hashtable<Object,Map>();
-		for (int k=0;k<graph.getModel().getRootCount();k++){
-			if (graph.getModel().getRootAt(k) instanceof NAryEdge){
-				/*if (changes.get(graph.getModel().getRootAt(k))!=null)
+			Hashtable<DefaultGraphCell, Map> map) {		
+				Hashtable<Object,Map> naryedgeatts=new  Hashtable<Object,Map>();
+			for (int k=0;k<graph.getModel().getRootCount();k++){
+				if (graph.getModel().getRootAt(k) instanceof NAryEdge){
+					/*if (changes.get(graph.getModel().getRootAt(k))!=null)
 					naryedgeatts.put(graph.getModel().getRootAt(k),
 							changes.get(graph.getModel().getRootAt(k)));
 				else*/
-				naryedgeatts.put(graph.getModel().getRootAt(k),
-						graph.getModel().getAttributes(graph.getModel().getRootAt(k)));
+					naryedgeatts.put(graph.getModel().getRootAt(k),
+							graph.getModel().getAttributes(graph.getModel().getRootAt(k)));
+				}
 			}
-		}
 
 
 
-		Set<DefaultGraphCell> naries = map.keySet();
-		for (Object currentnary:naries){
-			if (currentnary instanceof NAryEdge){
-				Rectangle2D rect1= GraphConstants.getBounds(map.get(currentnary));
-				detectingOverlappingsAndRadialLayout(map, naryedgeatts,
-						currentnary, rect1,graph);
+			Set<DefaultGraphCell> naries = map.keySet();
+			for (Object currentnary:naries){
+				if (currentnary instanceof NAryEdge){
+					Rectangle2D rect1= GraphConstants.getBounds(map.get(currentnary));
+					detectingOverlappingsAndRadialLayout(map, naryedgeatts,
+							currentnary, rect1,graph);
 
+				}
 			}
-		}
-
+	
 	}
 
 
@@ -260,34 +261,38 @@ implements org.jgraph.event.GraphModelListener {
 			Rectangle b2 = GraphConstants.getBounds(atsourceport).getBounds();
 			Float line = new Line2D.Float(new Point((int)b1.getCenterX(),(int)b1.getCenterY()),new Point((int)b2.getCenterX(),(int)b2.getCenterY()));					    
 			intersectsline=intersectsline||line.intersects(rect1);
-		    if (!(graph.getModel().getParent(targetport) instanceof NAryEdge) && 
-		    		!ListenerContainer.isContainer((DefaultGraphCell) graph.getModel().getParent(targetport), 
-		    				graph)){
+			if (!(graph.getModel().getParent(targetport) instanceof NAryEdge) && 
+					!ListenerContainer.isContainer((DefaultGraphCell) graph.getModel().getParent(targetport), 
+							graph)){
 				intersectsline=intersectsline || b1.intersects(rect1);
-			//		System.err.println("overlapping1 with "+targetport+","+graph.getModel().getParent(targetport)+" "+rect1+":"+b1);
+				//		System.err.println("overlapping1 with "+targetport+","+graph.getModel().getParent(targetport)+" "+rect1+":"+b1);
 			} else
-			if (!(graph.getModel().getParent(sourceport) instanceof NAryEdge) && 
-		    		!ListenerContainer.isContainer((DefaultGraphCell) graph.getModel().getParent(sourceport), 
-		    				graph)){
-				intersectsline=intersectsline || b2.intersects(rect1);
-			//	System.err.println("overlapping2 with "+sourceport+","+graph.getModel().getParent(sourceport)+" "+rect1+":"+b2);
-			}
+				if (!(graph.getModel().getParent(sourceport) instanceof NAryEdge) && 
+						!ListenerContainer.isContainer((DefaultGraphCell) graph.getModel().getParent(sourceport), 
+								graph)){
+					intersectsline=intersectsline || b2.intersects(rect1);
+					//	System.err.println("overlapping2 with "+sourceport+","+graph.getModel().getParent(sourceport)+" "+rect1+":"+b2);
+				}
 		}
 		return intersectsline;
 	}
 
 	public void processChange(Object naryedge,Hashtable changes) {
 		NAryEdge nary = (NAryEdge)naryedge;		
-		//	LocationChange.centerNAryEdge(graph, (Model)graph.getModel(), changes, nary);
+		LocationChange.centerNAryEdge(graph, (Model)graph.getModel(), changes, nary);
 
 	}
 
+
+
 	public void disableAutomaticAllocation() {
-		enabled = false;
+		alreadyExecuting = false;
+		enabled=false;
 	}
 
 	public void enableAutomaticAllocation() {
-		enabled = true;
+		alreadyExecuting = true;
+		enabled=true;
 	}
 
 }

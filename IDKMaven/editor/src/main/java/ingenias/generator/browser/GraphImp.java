@@ -166,7 +166,7 @@ implements Graph {
 		boolean found = false;
 		int k = 0;
 		org.jgraph.graph.DefaultGraphCell dgc = null;
-		while (k < max) {
+		while (k <  mjg.getModel().getRootCount()) {
 			Object o = mjg.getModel().getRootAt(k);
 			if (o instanceof org.jgraph.graph.DefaultGraphCell) {
 				dgc = (org.jgraph.graph.DefaultGraphCell) o;

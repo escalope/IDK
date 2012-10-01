@@ -71,91 +71,97 @@ public class RenderComponentManager {
 
 
 	public static void register(String classname, ingenias.editor.entities.ViewPreferences.ViewType kind, JPanel component,Hashtable ids){
-		//System.err.println("REgistered ("+classname+","+kind+")"+ ids);
-		renderer.put(new RenderIndex(classname,kind),component);
+		synchronized (renderer){
+			//System.err.println("REgistered ("+classname+","+kind+")"+ ids);
+			renderer.put(new RenderIndex(classname,kind),component);
 
-		components.put(new RenderIndex(classname,kind),ids);
+			components.put(new RenderIndex(classname,kind),ids);
+		}
 	}
 
 	public static JPanel retrievePanel(String classname, ingenias.editor.entities.ViewPreferences.ViewType kind){
-		//System.err.println("Retrieving "+classname+ " "+ kind);
-		return renderer.get(new RenderIndex(classname,kind));
+		synchronized (renderer){
+			//System.err.println("Retrieving "+classname+ " "+ kind);
+			return renderer.get(new RenderIndex(classname,kind));
+		}
 	}
 
 
 	public static Hashtable retrieveIDs(String classname, ingenias.editor.entities.ViewPreferences.ViewType kind){
-		//System.err.println("retrieved ("+classname+","+kind+")" +" with "+components.get(new RenderIndex(classname,kind)));
-		return components.get(new RenderIndex(classname,kind));
+		synchronized (renderer){
+			//System.err.println("retrieved ("+classname+","+kind+")" +" with "+components.get(new RenderIndex(classname,kind)));
+			return components.get(new RenderIndex(classname,kind));
+		}
 	}
 	public static JPanel loadRenderFile(String classname, ingenias.editor.entities.ViewPreferences.ViewType kind, String file) throws IOException, ParseException {
-		InputStream fis = null;
-		StringBuffer sb = null;
-		int read = 0;
-		String result = "";
-		SwingEngine se = null;
-		se = SWIRenderer.getAnotherSWIEngine();
+		synchronized (renderer){
+			InputStream fis = null;
+			StringBuffer sb = null;
+			int read = 0;
+			String result = "";
+			SwingEngine se = null;
+			se = SWIRenderer.getAnotherSWIEngine();
 
-		se.cleanup();
+			se.cleanup();
 
-		
-		
-		fis =	RenderComponentManager.class.getResource(file).openStream();
 
-		sb = new StringBuffer();
-		read = 0;
-		while (read != -1) {
-			read = fis.read();
-			if (read != -1) {
-				sb.append( (char) read);
+			fis =	RenderComponentManager.class.getResource(file).openStream();
+
+			sb = new StringBuffer();
+			read = 0;
+			while (read != -1) {
+				read = fis.read();
+				if (read != -1) {
+					sb.append( (char) read);
+				}
 			}
-		}
-		;
-		fis.close();
+			;
+			fis.close();
 
 
 
-		result = sb.toString(); 
-		result = result.replaceAll("##", "<");
-		result = result.replaceAll("#", ">");
+			result = sb.toString(); 
+			result = result.replaceAll("##", "<");
+			result = result.replaceAll("#", ">");
 
 
-		JPanel panel;
-		try {
+			JPanel panel;
+			try {
 
-			// For assigning each component a unique identifier. It can be the field "name" in the descriptor
-			// or the "id" field. In future releases, only "name" field will be valid 
+				// For assigning each component a unique identifier. It can be the field "name" in the descriptor
+				// or the "id" field. In future releases, only "name" field will be valid 
 
-			panel = new DefaultPanel((JPanel)se.render(new java.io.StringReader(result)));
-			Iterator compIt = se.getAllComponentItertor();
-			Map ids=(Map) se.getIdMap();
-			Set<String> compKeys = ids.keySet();
+				panel = new DefaultPanel((JPanel)se.render(new java.io.StringReader(result)));
+				Iterator compIt = se.getAllComponentItertor();
+				Map ids=(Map) se.getIdMap();
+				Set<String> compKeys = ids.keySet();
 
-			Hashtable compNames=new Hashtable();
-			while (compIt.hasNext()){
-				Component comp=(Component) compIt.next();
-				if (comp.getName()!=null){					
-					compNames.put(comp.getName(), comp);
-				} else {
-					for (String id:compKeys){
-						if (ids.get(id)==comp){
-							comp.setName(id);
-							compNames.put(id, comp);
+				Hashtable compNames=new Hashtable();
+				while (compIt.hasNext()){
+					Component comp=(Component) compIt.next();
+					if (comp.getName()!=null){					
+						compNames.put(comp.getName(), comp);
+					} else {
+						for (String id:compKeys){
+							if (ids.get(id)==comp){
+								comp.setName(id);
+								compNames.put(id, comp);
+							}
 						}
 					}
+
 				}
-
+				RenderComponentManager.register(classname,kind,
+						panel,
+						compNames);
+				return panel;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			RenderComponentManager.register(classname,kind,
-					panel,
-					compNames);
-			return panel;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			throw new ingenias.exception.ParseException("Review XML compliance in file "+file+" with content "+result);
 		}
-
-		throw new ingenias.exception.ParseException("Review XML compliance in file "+file+" with content "+result);
-
 	}
 
 	public static Dimension getSize(Entity entity,
@@ -164,43 +170,46 @@ public class RenderComponentManager {
 		/*if (retrievePanel(classname,kind)==null){
 			System.err.println(renderer);
 		}*/
-		try {
-			helperFrame.getContentPane().removeAll();
-			// Determine the renderer
-			Class renderer;
+		synchronized (renderer){
+			try {
+				helperFrame.getContentPane().removeAll();
+				// Determine the renderer
+				Class renderer;
 
-			renderer = Class.forName("ingenias.editor.cell."+classname+"Renderer");
-			Class entityClass=Class.forName("ingenias.editor.entities."+classname);
+				renderer = Class.forName("ingenias.editor.cell."+classname+"Renderer");
+				Class entityClass=Class.forName("ingenias.editor.entities."+classname);
 
-			// Tell the specific renderer to focus on the entity
-			Method method=renderer.getMethod("setEntity", new Class[]{entityClass,Map.class});
-			Map m=new Hashtable();
-			m.put("view", kind.toString());
-			method.invoke(renderer, new Object[]{entity,m});
-			// Obtains the panel to be drawn. The size of elements has been set for current entity
-			JPanel entPanel=(JPanel)retrievePanel(classname,kind);
-			//entPanel.getClass().getMethod(", parameterTypes)
-			helperFrame.getContentPane().add((JPanel)retrievePanel(classname,kind));
-			helperFrame.pack();
-			return helperFrame.getSize();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				// Tell the specific renderer to focus on the entity
+				Method method=renderer.getMethod("setEntity", new Class[]{entityClass,Map.class});
+				Map m=new Hashtable();
+				m.put("view", kind.toString());
+				method.invoke(renderer, new Object[]{entity,m});
+				// Obtains the panel to be drawn. The size of elements has been set for current entity
+				JPanel entPanel=(JPanel)retrievePanel(classname,kind);
+				//entPanel.getClass().getMethod(", parameterTypes)
+				helperFrame.getContentPane().add((JPanel)retrievePanel(classname,kind));
+				helperFrame.pack();
+				helperFrame.pack();
+				return helperFrame.getSize();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return new Dimension(0,0);
 
@@ -211,106 +220,111 @@ public class RenderComponentManager {
 		/*if (retrievePanel(classname,kind)==null){
 			System.err.println(renderer);
 		}*/
-		helperFrame.getContentPane().removeAll();
-		if (retrievePanel(classname,kind)==null){
-			throw new RuntimeException("Error: there is no renderer defined for \""+classname+"\" for the notation "+kind+". Existing renderers are :"+renderer.keySet());
+		synchronized (renderer) {
+			helperFrame.getContentPane().removeAll();
+			if (retrievePanel(classname,kind)==null){
+				throw new RuntimeException("Error: there is no renderer defined for \""+classname+"\" for the notation "+kind+". Existing renderers are :"+renderer.keySet());
+			}
+			helperFrame.getContentPane().add((JPanel)retrievePanel(classname,kind));
+			helperFrame.pack();
 		}
-		helperFrame.getContentPane().add((JPanel)retrievePanel(classname,kind));
-		helperFrame.pack();
+
 		return helperFrame.getSize();
 	}
 
 	public static void setRelationshipView(ViewPreferences.ViewType viewtype, 
 			Entity ent, 
 			DefaultGraphCell cell, JGraph graph){
-		if (viewtype==ViewPreferences.ViewType.LABEL){
-			graph.getModel().getAttributes(cell).put("view", "label");
-			//ent.getPrefs(null).setView(ViewPreferences.ViewType.LABEL);
-			//System.err.println("Acting on "+ent.getType()+" "+ent.getPrefs().getView());
-			NAryEdge naryedge=(NAryEdge)cell;
-			DefaultEdge[] edge=naryedge.getRepresentation();
-			Hashtable nmap=new Hashtable();
-
-			// Clean previous labels
-			for (int k=0;k<edge.length;k++){
-				AttributeMap am=edge[k].getAttributes();
-				GraphConstants.setExtraLabels(am,new Object[]{""});
-				nmap.put(edge[k],am);				
-			}
-
-			AttributeMap am=edge[0].getAttributes();
-			GraphConstants.setLabelAlongEdge(am,true);
-			if (((ingenias.editor.entities.NAryEdgeEntity)ent).getLabel()!=null)
-				GraphConstants.setExtraLabels(am,new Object[]{((ingenias.editor.entities.NAryEdgeEntity)ent).getLabel()});
-			else
-				GraphConstants.setExtraLabels(am,new Object[]{""});
-			if (GraphConstants.getExtraLabelPositions(am)==null)
-				GraphConstants.setExtraLabelPositions(am,new Point[]{new Point(0, 20)});
-			Hashtable naryEdgeAtts=naryedge.getAttributes();
-
-			Rectangle2D loc=GraphConstants.getBounds(naryEdgeAtts);			  
-			loc.setRect(loc.getX(),loc.getY(),0,0);
-			GraphConstants.setBounds(naryEdgeAtts,loc);			  		
-
-			nmap.put(edge[0],am);
-			nmap.put(naryedge,naryEdgeAtts);
-			ingenias.editor.events.LocationChange.centerNAryEdge(graph, 
-					(Model) graph.getModel(), nmap, naryedge);
-			graph.getModel().edit(nmap,null,null,null);
-		}
-		if (viewtype==ViewPreferences.ViewType.NOICON){
-			ent.getPrefs(null).setView(ViewPreferences.ViewType.NOICON);
-			//System.err.println("Acting on "+ent.getType()+" "+ent.getPrefs().getView());
-			NAryEdge naryedge=(NAryEdge)cell;
-			DefaultEdge[] edge=naryedge.getRepresentation();
-			AttributeMap am=edge[0].getAttributes();
-			GraphConstants.setLabelAlongEdge(am,true);
-			GraphConstants.setExtraLabels(am,new Object[]{});
-			Hashtable naryEdgeAtts=naryedge.getAttributes();
-			Rectangle2D loc=GraphConstants.getBounds(naryEdgeAtts);			  
-			loc.setRect(loc.getX(),loc.getY(),0,0);
-			GraphConstants.setBounds(naryEdgeAtts,loc);			  
-			Hashtable nmap=new Hashtable();
-			nmap.put(edge[0],am);
-			nmap.put(naryedge,naryEdgeAtts);
-			ingenias.editor.events.LocationChange.centerNAryEdge(graph, 
-					(Model) graph.getModel(), nmap, naryedge);
-			graph.getModel().edit(nmap,null,null,null);
-		}
-		if (viewtype==ViewPreferences.ViewType.INGENIAS){
-			graph.getModel().getAttributes(cell).put("view", "ingenias");
-			//ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
-			NAryEdge naryedge=(NAryEdge)cell;
-			Hashtable am=naryedge.getAttributes();
-
-			Rectangle2D loc=GraphConstants.getBounds(am);
-			Dimension nsize;
-			try {
-				nsize = RenderComponentManager.getSize(
-						ent.getType(),
-						ViewType.fromString("ingenias"));
-
-				loc.setRect(loc.getX(),loc.getY(),nsize.width,nsize.height);
-
-				GraphConstants.setBounds(am,loc);			  
+		synchronized (renderer){
+			if (viewtype==ViewPreferences.ViewType.LABEL){
+				graph.getModel().getAttributes(cell).put("view", "label");
+				//ent.getPrefs(null).setView(ViewPreferences.ViewType.LABEL);
+				//System.err.println("Acting on "+ent.getType()+" "+ent.getPrefs().getView());
+				NAryEdge naryedge=(NAryEdge)cell;
 				DefaultEdge[] edge=naryedge.getRepresentation();
-				Hashtable edgesAtts=edge[0].getAttributes();
-				GraphConstants.setExtraLabels(edgesAtts,new Object[]{});
 				Hashtable nmap=new Hashtable();
-				nmap.put(naryedge,am);
-				nmap.put(edge[0],edgesAtts);
 
+				// Clean previous labels
+				for (int k=0;k<edge.length;k++){
+					AttributeMap am=edge[k].getAttributes();
+					GraphConstants.setExtraLabels(am,new Object[]{""});
+					nmap.put(edge[k],am);				
+				}
+
+				AttributeMap am=edge[0].getAttributes();
+				GraphConstants.setLabelAlongEdge(am,true);
+				if (((ingenias.editor.entities.NAryEdgeEntity)ent).getLabel()!=null)
+					GraphConstants.setExtraLabels(am,new Object[]{((ingenias.editor.entities.NAryEdgeEntity)ent).getLabel()});
+				else
+					GraphConstants.setExtraLabels(am,new Object[]{""});
+				if (GraphConstants.getExtraLabelPositions(am)==null)
+					GraphConstants.setExtraLabelPositions(am,new Point[]{new Point(0, 20)});
+				Hashtable naryEdgeAtts=naryedge.getAttributes();
+
+				Rectangle2D loc=GraphConstants.getBounds(naryEdgeAtts);			  
+				loc.setRect(loc.getX(),loc.getY(),0,0);
+				GraphConstants.setBounds(naryEdgeAtts,loc);			  		
+
+				nmap.put(edge[0],am);
+				nmap.put(naryedge,naryEdgeAtts);
 				ingenias.editor.events.LocationChange.centerNAryEdge(graph, 
 						(Model) graph.getModel(), nmap, naryedge);
-
-
 				graph.getModel().edit(nmap,null,null,null);
-			} catch (WrongConversion e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-			//ingenias.editor.cell.UMLAssociationRenderer.setCurrent(ViewPreferences.ViewType.LABEL);
+			if (viewtype==ViewPreferences.ViewType.NOICON){
+				ent.getPrefs(null).setView(ViewPreferences.ViewType.NOICON);
+				//System.err.println("Acting on "+ent.getType()+" "+ent.getPrefs().getView());
+				NAryEdge naryedge=(NAryEdge)cell;
+				DefaultEdge[] edge=naryedge.getRepresentation();
+				AttributeMap am=edge[0].getAttributes();
+				GraphConstants.setLabelAlongEdge(am,true);
+				GraphConstants.setExtraLabels(am,new Object[]{});
+				Hashtable naryEdgeAtts=naryedge.getAttributes();
+				Rectangle2D loc=GraphConstants.getBounds(naryEdgeAtts);			  
+				loc.setRect(loc.getX(),loc.getY(),0,0);
+				GraphConstants.setBounds(naryEdgeAtts,loc);			  
+				Hashtable nmap=new Hashtable();
+				nmap.put(edge[0],am);
+				nmap.put(naryedge,naryEdgeAtts);
+				ingenias.editor.events.LocationChange.centerNAryEdge(graph, 
+						(Model) graph.getModel(), nmap, naryedge);
+				graph.getModel().edit(nmap,null,null,null);
+			}
+			if (viewtype==ViewPreferences.ViewType.INGENIAS){
+				graph.getModel().getAttributes(cell).put("view", "ingenias");
+				//ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+				NAryEdge naryedge=(NAryEdge)cell;
+				Hashtable am=naryedge.getAttributes();
 
+				Rectangle2D loc=GraphConstants.getBounds(am);
+				Dimension nsize;
+				try {
+					nsize = RenderComponentManager.getSize(
+							ent.getType(),
+							ViewType.fromString("ingenias"));
+
+					loc.setRect(loc.getX(),loc.getY(),nsize.width,nsize.height);
+
+					GraphConstants.setBounds(am,loc);			  
+					DefaultEdge[] edge=naryedge.getRepresentation();
+					Hashtable edgesAtts=edge[0].getAttributes();
+					GraphConstants.setExtraLabels(edgesAtts,new Object[]{});
+					Hashtable nmap=new Hashtable();
+					nmap.put(naryedge,am);
+					nmap.put(edge[0],edgesAtts);
+
+					ingenias.editor.events.LocationChange.centerNAryEdge(graph, 
+							(Model) graph.getModel(), nmap, naryedge);
+
+
+					graph.getModel().edit(nmap,null,null,null);
+				} catch (WrongConversion e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//ingenias.editor.cell.UMLAssociationRenderer.setCurrent(ViewPreferences.ViewType.LABEL);
+
+			}
 		}
 
 

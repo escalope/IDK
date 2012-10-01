@@ -1,7 +1,8 @@
 
 
+
 /** 
- * Copyright (C) 2010  Jorge J. Gomez-Sanz over original code from Ruben Fuentes and Juan Pavon
+ * Copyright (C) 2010  Jorge J. Gomez-Sanz 
  * 
  * 
  * This file is part of the INGENME tool. INGENME is an open source meta-editor
@@ -18,8 +19,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  **/
-
-
 
 package ingenias.editor.actions.diagram;
 import java.awt.*;
@@ -65,7 +64,7 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
         }
 
 
-	 protected Vector<AbstractAction> createChangeViewActions(final DefaultGraphCell cell, final ModelJGraph graph) {
+	 public Vector<AbstractAction> createChangeViewActions(final DefaultGraphCell cell, final ModelJGraph graph) {
 		 Vector<AbstractAction> possibleViews=new Vector<AbstractAction>();
 		final ingenias.editor.entities.Entity ent=((ingenias.editor.entities.Entity)cell.getUserObject());
 		
@@ -75,9 +74,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -90,9 +89,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -108,9 +107,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -123,9 +122,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -141,9 +140,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -156,9 +155,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -174,9 +173,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -189,9 +188,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -207,9 +206,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -222,9 +221,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -240,9 +239,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -255,9 +254,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -273,9 +272,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -288,9 +287,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -306,9 +305,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -321,9 +320,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -339,9 +338,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -354,9 +353,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -372,9 +371,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -387,9 +386,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -405,9 +404,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -420,9 +419,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -438,9 +437,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -453,9 +452,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -471,9 +470,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -486,9 +485,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -504,9 +503,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -519,9 +518,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -537,9 +536,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -552,9 +551,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -570,9 +569,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -585,9 +584,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -603,9 +602,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -618,9 +617,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -636,9 +635,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -651,9 +650,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -669,9 +668,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -684,9 +683,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -702,9 +701,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -717,9 +716,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -735,9 +734,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -750,9 +749,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -768,9 +767,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -783,9 +782,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -801,9 +800,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -816,9 +815,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -834,9 +833,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -849,9 +848,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -867,9 +866,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -882,9 +881,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -900,9 +899,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -915,9 +914,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -933,9 +932,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -948,9 +947,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -966,9 +965,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -981,9 +980,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -999,9 +998,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1014,9 +1013,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1032,9 +1031,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1047,9 +1046,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1065,9 +1064,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1080,9 +1079,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1098,9 +1097,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1113,9 +1112,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1131,9 +1130,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1146,9 +1145,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1164,9 +1163,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "UML");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.UML);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1179,9 +1178,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                     graph.getListenerContainer().storeContraints(cell);      
-                     graph.getModel().getAttributes(cell).put("view", "INGENIAS");               				
-			    	 //ent.getPrefs().setView(ViewPreferences.ViewType.INGENIAS);
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 				 graph.getListenerContainer().restoreContraints(cell);
 				graph.invalidate();
 				graph.refresh();
@@ -1200,9 +1199,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1214,9 +1212,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1228,9 +1225,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1245,9 +1241,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1259,9 +1254,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1273,9 +1267,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1290,9 +1283,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1304,9 +1296,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1318,9 +1309,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1335,9 +1325,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1349,9 +1338,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1363,9 +1351,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1380,9 +1367,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1394,9 +1380,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1408,9 +1393,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1425,9 +1409,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1439,9 +1422,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1453,9 +1435,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1470,9 +1451,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1484,9 +1464,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1498,9 +1477,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1515,9 +1493,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1529,9 +1506,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1543,9 +1519,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1560,9 +1535,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1574,9 +1548,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1588,9 +1561,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1605,9 +1577,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1619,9 +1590,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1633,9 +1603,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1650,9 +1619,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1664,9 +1632,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1678,9 +1645,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1695,9 +1661,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1709,9 +1674,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1723,9 +1687,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1740,9 +1703,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1754,9 +1716,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1768,9 +1729,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1785,9 +1745,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1799,9 +1758,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1813,9 +1771,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1830,9 +1787,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1844,9 +1800,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1858,9 +1813,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1875,9 +1829,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1889,9 +1842,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1903,9 +1855,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1920,9 +1871,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1934,9 +1884,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1948,9 +1897,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1965,9 +1913,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1979,9 +1926,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -1993,9 +1939,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2010,9 +1955,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2024,9 +1968,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2038,9 +1981,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2055,9 +1997,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2069,9 +2010,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2083,9 +2023,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2100,9 +2039,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2114,9 +2052,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2128,9 +2065,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2145,9 +2081,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2159,9 +2094,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2173,9 +2107,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2190,9 +2123,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2204,9 +2136,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2218,9 +2149,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2235,9 +2165,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2249,9 +2178,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2263,9 +2191,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2280,9 +2207,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2294,9 +2220,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2308,9 +2233,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2325,9 +2249,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2339,9 +2262,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2353,9 +2275,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2370,9 +2291,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2384,9 +2304,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2398,9 +2317,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2415,9 +2333,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2429,9 +2346,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2443,9 +2359,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2460,9 +2375,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2474,9 +2388,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2488,9 +2401,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2505,9 +2417,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2519,9 +2430,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2533,9 +2443,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2550,9 +2459,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2564,9 +2472,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2578,9 +2485,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2595,9 +2501,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2609,9 +2514,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2623,9 +2527,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2640,9 +2543,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2654,9 +2556,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2668,9 +2569,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2685,9 +2585,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2699,9 +2598,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2713,9 +2611,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2730,9 +2627,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2744,9 +2640,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2758,9 +2653,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2775,9 +2669,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2789,9 +2682,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2803,9 +2695,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2820,9 +2711,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2834,9 +2724,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2848,9 +2737,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2865,9 +2753,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2879,9 +2766,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2893,9 +2779,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2910,9 +2795,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("NOICON") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "NOICON");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.NOICON,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2924,9 +2808,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.INGENIAS,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }
@@ -2938,9 +2821,8 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 			
                    possibleViews.add(new AbstractAction("LABEL") {
                      public void actionPerformed(ActionEvent e) {
-                      graph.getModel().getAttributes(cell).put("view", "LABEL");     
-		  /*   ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
-                    			 ent, cell, graph);*/
+		     ingenias.editor.cell.RenderComponentManager.setRelationshipView(ViewPreferences.ViewType.LABEL,
+                    			 ent, cell, graph);
 	
 				graph.refresh();
                      }

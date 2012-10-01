@@ -382,6 +382,7 @@ public class GraphRelationshipFactory {
 				// Insert the Edge and its Attributes. The order matters.
 				graph.getModel().insert(new Object[] {nEdge},attributes
 						, null, null, null);
+				Class.forName("ingenias.editor.cell."+relType+"Renderer"); // to force the static initialization
 				GraphConstants.setBounds(m,new Rectangle(centerP,
 						RenderComponentManager.getSize(
 								((Entity)nEdge.getUserObject()).getType(),
@@ -409,6 +410,9 @@ public class GraphRelationshipFactory {
 				Log.getInstance().logSYS(
 						"WARNING: internal error on connecting elements. " +
 				" Cannot produce edges for this connection");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			Entity entNEdge=(Entity)nEdge.getUserObject();
 			RenderComponentManager.setRelationshipView(entNEdge.getPrefs(graph.getModel().getAttributes(nEdge)).getView(),entNEdge,nEdge,graph);

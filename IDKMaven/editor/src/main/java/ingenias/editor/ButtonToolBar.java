@@ -46,7 +46,7 @@ public class ButtonToolBar extends JToolBar {
 	 * 
 	 */
 	private final Editor editor;
-	JComboBox jc = new JComboBox(new Object[] {"automatic", "manual"});
+	JComboBox jc = new JComboBox(new Object[] {"automatic straight", "automatic radial", "manual"});
 	// Actions which Change State
 	/**
 	 *  Description of the Field

@@ -446,6 +446,28 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     toolbar.add(jb);
     }
 
+   if (true){
+    Image img_RuntimeCommFailure =
+        ImageLoader.getImage("images/mconv.png");
+    undoIcon = new ImageIcon(img_RuntimeCommFailure);
+    Action RuntimeCommFailure=
+        new AbstractAction("RuntimeCommFailure", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "RuntimeCommFailure");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    RuntimeCommFailure.setEnabled(true);
+    jb = new JButton(RuntimeCommFailure);
+    jb.setText("");
+    jb.setName("RuntimeCommFailure");	
+    jb.setToolTipText("RuntimeCommFailure");
+    toolbar.add(jb);
+    }
+
    if (false){
     Image img_Conversation =
         ImageLoader.getImage("");
@@ -601,28 +623,6 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
 
    if (false){
-    Image img_FrameFact =
-        ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_FrameFact);
-    Action FrameFact=
-        new AbstractAction("FrameFact", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "FrameFact");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    FrameFact.setEnabled(true);
-    jb = new JButton(FrameFact);
-    jb.setText("");
-    jb.setName("FrameFact");	
-    jb.setToolTipText("FrameFact");
-    toolbar.add(jb);
-    }
-
-   if (false){
     Image img_GeneralEvent =
         ImageLoader.getImage("");
     undoIcon = new ImageIcon(img_GeneralEvent);
@@ -641,6 +641,28 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     jb.setText("");
     jb.setName("GeneralEvent");	
     jb.setToolTipText("GeneralEvent");
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_FrameFact =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_FrameFact);
+    Action FrameFact=
+        new AbstractAction("FrameFact", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "FrameFact");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    FrameFact.setEnabled(true);
+    jb = new JButton(FrameFact);
+    jb.setText("");
+    jb.setName("FrameFact");	
+    jb.setToolTipText("FrameFact");
     toolbar.add(jb);
     }
 
@@ -874,6 +896,8 @@ public class InteractionModelModelJGraph extends ModelJGraph {
 
           relationships.add("IAccesses");
 
+          relationships.add("TriggersFailure");
+
    return relationships;
   }
 
@@ -911,6 +935,8 @@ public class InteractionModelModelJGraph extends ModelJGraph {
 
  entities.add("UMLComment");
 
+ entities.add("RuntimeCommFailure");
+
  entities.add("Conversation");
 
  entities.add("Fact");
@@ -925,9 +951,9 @@ public class InteractionModelModelJGraph extends ModelJGraph {
 
  entities.add("GoalStateWS");
 
- entities.add("FrameFact");
-
  entities.add("GeneralEvent");
+
+ entities.add("FrameFact");
 
  entities.add("RuntimeEvent");
 
@@ -1044,6 +1070,11 @@ public class InteractionModelModelJGraph extends ModelJGraph {
           v.add("IAccesses");
 	  }
 
+        // N-ary relationships. Sometimes they can be also binary.
+        if (TriggersFailureEdge.acceptConnection(this.getModel(), selected)) {
+          v.add("TriggersFailure");
+	  }
+
       }
       else if (nAryEdgesNum == 1) {
 
@@ -1105,6 +1136,11 @@ public class InteractionModelModelJGraph extends ModelJGraph {
         if (selectedEdge instanceof IAccessesEdge &&
         (IAccessesEdge.acceptConnection(this.getModel(), selected))) {
           v.add("IAccesses");
+        }
+
+        if (selectedEdge instanceof TriggersFailureEdge &&
+        (TriggersFailureEdge.acceptConnection(this.getModel(), selected))) {
+          v.add("TriggersFailure");
         }
 
       }
@@ -1264,6 +1300,17 @@ public class InteractionModelModelJGraph extends ModelJGraph {
         }
       }
 
+      if (relacion.equalsIgnoreCase("TriggersFailure")) {
+        // ResponsibleNEdge already exists.
+        if (nAryEdgesNum == 1 && selectedEdge instanceof TriggersFailureEdge) {
+          return selectedEdge;
+        }
+        // There is no NAryEdges in selected.
+        else if (nAryEdgesNum == 0) {
+          return new TriggersFailureEdge(new ingenias.editor.entities.TriggersFailure(getMJGraph().getNewId()));
+        }
+      }
+
     }
 
     return null;
@@ -1406,6 +1453,15 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
+    RuntimeCommFailure nentity=getOM().createRuntimeCommFailure(getMJGraph().getNewId("RuntimeCommFailure"));
+      DefaultGraphCell vertex = new
+          RuntimeCommFailureCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("Conversation")) {
     Conversation nentity=getOM().createConversation(getMJGraph().getNewId("Conversation"));
       DefaultGraphCell vertex = new
@@ -1469,19 +1525,19 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("FrameFact")) {
-    FrameFact nentity=getOM().createFrameFact(getMJGraph().getNewId("FrameFact"));
+    if (entity.equalsIgnoreCase("GeneralEvent")) {
+    GeneralEvent nentity=getOM().createGeneralEvent(getMJGraph().getNewId("GeneralEvent"));
       DefaultGraphCell vertex = new
-          FrameFactCell(nentity);
+          GeneralEventCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
     else
 
-    if (entity.equalsIgnoreCase("GeneralEvent")) {
-    GeneralEvent nentity=getOM().createGeneralEvent(getMJGraph().getNewId("GeneralEvent"));
+    if (entity.equalsIgnoreCase("FrameFact")) {
+    FrameFact nentity=getOM().createFrameFact(getMJGraph().getNewId("FrameFact"));
       DefaultGraphCell vertex = new
-          GeneralEventCell(nentity);
+          FrameFactCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1648,6 +1704,11 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
+      return RuntimeCommFailureView.getSize((ingenias.editor.entities.RuntimeCommFailure)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("Conversation")) {
       return ConversationView.getSize((ingenias.editor.entities.Conversation)entity);      
     }
@@ -1683,13 +1744,13 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("FrameFact")) {
-      return FrameFactView.getSize((ingenias.editor.entities.FrameFact)entity);      
+    if (entity.getType().equalsIgnoreCase("GeneralEvent")) {
+      return GeneralEventView.getSize((ingenias.editor.entities.GeneralEvent)entity);      
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("GeneralEvent")) {
-      return GeneralEventView.getSize((ingenias.editor.entities.GeneralEvent)entity);      
+    if (entity.getType().equalsIgnoreCase("FrameFact")) {
+      return FrameFactView.getSize((ingenias.editor.entities.FrameFact)entity);      
     }
     else
 
@@ -1785,6 +1846,10 @@ public class InteractionModelModelJGraph extends ModelJGraph {
 
       if (entity.getType().equalsIgnoreCase("IAccesses")) {
       	return IAccessesView.getSize((ingenias.editor.entities.IAccesses)entity);
+      }
+
+      if (entity.getType().equalsIgnoreCase("TriggersFailure")) {
+      	return TriggersFailureView.getSize((ingenias.editor.entities.TriggersFailure)entity);
       }
 
     throw new ingenias.exception.InvalidEntity("Entity type "+entity+" is not allowed in this diagram"); 
@@ -1969,6 +2034,14 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(RuntimeCommFailure.class)) {
+      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
+      
+    }
+    else
+
     if (entity.getClass().equals(Conversation.class)) {
       vertex = new ConversationCell( (Conversation) entity);
       // Default Size for the new Vertex with the new entity within
@@ -2025,18 +2098,18 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(FrameFact.class)) {
-      vertex = new FrameFactCell( (FrameFact) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = FrameFactView.getSize((FrameFact) entity);
-      
-    }
-    else
-
     if (entity.getClass().equals(GeneralEvent.class)) {
       vertex = new GeneralEventCell( (GeneralEvent) entity);
       // Default Size for the new Vertex with the new entity within
       size = GeneralEventView.getSize((GeneralEvent) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(FrameFact.class)) {
+      vertex = new FrameFactCell( (FrameFact) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FrameFactView.getSize((FrameFact) entity);
       
     }
     else

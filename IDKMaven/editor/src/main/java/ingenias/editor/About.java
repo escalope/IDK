@@ -64,7 +64,7 @@ public class About extends JDialog  implements java.io.Serializable {
     jTextPane1.setEditable(false);
     jTextPane1.setText("<html><body>" +
     		"<Font color=\"#ffffcc\"><b><CENTER>IDK-INGENME</CENTER><br>\n" +    		
-    		"Version 1 of the language created by Jorge J. Gomez-Sanz <br>\n"+
+    		"Version "+System.getProperty("editor.version")+" of the language created by Jorge J. Gomez-Sanz <br>\n"+
     		"New versions of the editor can be created in <br>http://ingenias.sourceforge.net<br>\n"+
     		"<p>This editor was created using the INGENME <br>" +
     		"(ingenme.sourceforge.net) framework.</p>" +

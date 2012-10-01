@@ -3,12 +3,12 @@
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>ingenias</artifactId>
-		<version>1.1-SNAPSHOT</version>
+		<version>1.1</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>editor</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<name>ingenias editor</name>
 	<description>The INGENIAS Development Kit</description>
 	<url>http://ingenias.sf.net</url>
@@ -23,9 +23,9 @@
 
 
 	<scm>
-		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/editor</connection>
-		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/editor</developerConnection>
-		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/editor</url>		
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.1/editor</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.1/editor</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.1/editor</url>		
 	</scm>
 
 	<developers>
@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>net.sf.ingenias</groupId>
 			<artifactId>codegen</artifactId>
-			<version>1.2-SNAPSHOT</version>
+			<version>1.2</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -282,8 +282,7 @@
 								</filter>
 							</filters>
 							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>ingenias.editor.IDE</mainClass>
 								</transformer>
 							</transformers>

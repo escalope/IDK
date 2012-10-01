@@ -9,7 +9,7 @@
     <groupId>net.sf.ingenias</groupId>
     <artifactId>ingenias</artifactId>
     <packaging>pom</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <name>ingenias</name>
     <description>The INGENIAS Development Kit</description>
     <url>http://ingenias.sf.net</url>
@@ -17,13 +17,13 @@
     <license>
       <name>The GPL V3</name>
       <url>http://www.gnu.org/copyleft/gpl.html</url>
-      <distribution/>
+      <distribution />
     </license>
   </licenses>
 	<scm>
-		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven</connection>
-		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven</developerConnection>
-		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven</url>		
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.1</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.1</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.1</url>		
 	</scm>
 
 <developers>
@@ -33,7 +33,7 @@
       <email>jjgomez@fdi.ucm.es</email>
     </developer>
   </developers>
-<properties/>
+<properties />
     <modules>
         <module>codegen</module>
         <module>editor</module>

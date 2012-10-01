@@ -17,7 +17,7 @@
     <license>
       <name>The GPL V3</name>
       <url>http://www.gnu.org/copyleft/gpl.html</url>
-      <distribution />
+      <distribution/>
     </license>
   </licenses>
 	<scm>
@@ -33,12 +33,15 @@
       <email>jjgomez@fdi.ucm.es</email>
     </developer>
   </developers>
-<properties />
+<properties/>
     <modules>
         <module>codegen</module>
         <module>editor</module>
         <module>iaf</module>
         <module>iafarch</module>
+        <module>codeuploader</module>
+        <module>htmldoc</module>
+        <module>applinker</module>
   </modules>
 <profiles>
   <profile>

@@ -2,7 +2,7 @@
 @@@program xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../plantilla.xsd"@@@
 @@@repeat id="testdefinition"@@@
   @@@saveto@@@
-  @@@file overwrite="no"@@@@@@v@@@jadeproject@@@/v@@@/src/test/javapermsrc/ingenias/tests/@@@v@@@test@@@/v@@@Test.java@@@/file@@@
+  @@@file overwrite="no"@@@@@@v@@@jadeproject@@@/v@@@/src/test/javapermsrc/ingenias/testing/@@@v@@@test@@@/v@@@Test.java@@@/file@@@
   @@@text@@@
 
 /*
@@ -29,7 +29,7 @@
 */
 
 
-package ingenias.tests;
+package ingenias.testing;
 
 import static org.junit.Assert.*;
 

@@ -29,6 +29,7 @@ import ingenias.editor.Model;
 import ingenias.editor.ModelJGraph;
 import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.MentalEntity;
+import ingenias.editor.entities.ViewPreferences.ViewType;
 
 import ingenias.jade.components.Task;
 
@@ -41,6 +42,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -62,6 +65,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import org.jgraph.event.GraphModelEvent;
+import org.jgraph.event.GraphModelListener;
 import org.jgraph.graph.GraphConstants;
 
 public class AgentGraphics {
@@ -90,6 +95,23 @@ public class AgentGraphics {
 			diagram = new AgentModelPanelIAF(
 					new ingenias.editor.entities.AgentModelDataEntity("1"), 
 					"1", new Model(ids));
+			
+			diagram.addKeyListener(new KeyAdapter() {
+				
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if (e.getKeyCode()==KeyEvent.VK_F5)
+					{
+						diagram.resizeEntities();
+					}
+				}
+			});
+			diagram.getModel().addGraphModelListener(new GraphModelListener() {
+				@Override
+				public void graphChanged(GraphModelEvent e) {
+					diagram.resizeEntities();
+				}
+			});
 
 			this.insert(diagram, event);
 			this.add(diagram);		
@@ -165,7 +187,8 @@ public class AgentGraphics {
 			while (enumeration.hasMoreElements()) {
 
 				ingenias.editor.entities.Entity ent =
-					(ingenias.editor.entities.Entity) enumeration.nextElement();			
+					(ingenias.editor.entities.Entity) enumeration.nextElement();	
+				ent.getPrefs(null).setView(ViewType.UML);
 				int k=ModelJGraph.findEmptyPlace(input2);
 
 				if (ent==null)
@@ -258,7 +281,7 @@ public class AgentGraphics {
 
 	}
 
-	public void setMentalStatePanel(String agentName, ingenias.editor.panels.AgentModelPanel amm ) {
+	public void setMentalStatePanel(final String agentName, ingenias.editor.panels.AgentModelPanel amm ) {
 		Border border1 = BorderFactory.createLineBorder(Color.black, 2);
 		TitledBorder nametask = new TitledBorder(border1,agentName);
 		amm.setBorder(nametask);
@@ -269,7 +292,7 @@ public class AgentGraphics {
 		JButton jb = new JButton("Show mental state");
 		jb.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainInteractionManager.setMainMS(ammpanel);
+				MainInteractionManager.setMainMS(agentName,ammpanel);
 			}
 		});
 		mspanel.add(jb);
@@ -319,6 +342,7 @@ public class AgentGraphics {
 		for (int k=0;k<events.size();k++){
 
 			MentalEntity event=events.elementAt(k);
+			event.getPrefs(null).setView(ViewType.UML);
 			ActionListener al=actions.elementAt(k);
 			// One vertical panel per perceives relationship
 			// Each perception relationship provides info about

@@ -1,6 +1,10 @@
 package ingenias.jade;
 
+import ingenias.editor.entities.FrameFact;
+import ingenias.editor.entities.Interaction;
+import ingenias.editor.entities.MentalEntity;
 import ingenias.editor.entities.RuntimeConversation;
+import ingenias.exception.InvalidEntity;
 import ingenias.exception.NotFound;
 import ingenias.jade.comm.ActiveConversation;
 import ingenias.jade.comm.StateBehavior;
@@ -40,7 +44,7 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 	}
 
 	Date last=new Date();
-        private boolean doSomething=false;
+	private boolean doSomething=false;
 	public void action() {
 		/*cycledTimes=(cycledTimes+1)%maxCyclesWithoutGarbageCollection;
 		if (cycledTimes==0)
@@ -50,12 +54,12 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 		// If there are finished protocols, then those are removed
 		//System.out.println(ja.getAID().getLocalName()+" starting another protocol handling round");
 
-            ja.getCM().removedFinishedProtocols();
+		ja.getCM().removedFinishedProtocols();
 		determineMessagesWhichCanBeProcessed();
 		processNotProcessedMessages();
 		ja.getCM().launchScheduledProtocols();
 		addActiveMachinesAListener();
-                
+
 		/*	if (completedLast
 				&& 
 				(ja.getMSP().getScheduledTasks().size()!=0 
@@ -125,9 +129,9 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 									acl.getSender().getLocalName().equalsIgnoreCase("ams")||
 									acl.getSender().getLocalName().equalsIgnoreCase("rma")){
 								ja.putBack(acl);// Some messages are to be processed by internal
-							// components, like the DF service. Search consults to the DF requires
-							// admiting this kind of messages.
-							//	System.err.println("Putting back "+acl);
+								// components, like the DF service. Search consults to the DF requires
+								// admiting this kind of messages.
+								//	System.err.println("Putting back "+acl);
 							} else
 								System.err.println("Rejected "+acl);
 						}
@@ -190,76 +194,80 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 			ACLMessage acl=(ACLMessage)enumeration.nextElement();
 			//System.err.println("PRocesando .... "+acl);
 			String requestedRole=acl.getUserDefinedParameter("requestedRole");
+			String playedRole=acl.getUserDefinedParameter("senderPlayedRole");
 			String sequence=acl.getUserDefinedParameter("sequence");
 			if (ja.getCM().isKnownProtocol(acl.getProtocol()) 
 					&& 
-					!ja.getCM().contains(acl.getConversationId(),requestedRole) ){                                                                                                                                                                                              
-				boolean initialised=false;                                                                                                                                                                                                                  
-				while (!initialised){                                                                                                                                                                                                                       
-					try {                                                                                                                                                                                                                                       
-						/*if (getMSM().findEntity(requestedRole+"-"+conv.getConversationID())!=null)
-							JOptionPane.showMessageDialog(null, "Ya existia "+requestedRole+"-"+conv.getConversationID());*/
-						try {			
-							//System.out.println(ja.getLocalName()+"..."+ja.getMSM().getAllMentalEntities());
-							//System.out.println(ja.getLocalName()+"..."+requestedRole+"-"+acl.getConversationId());
-							ja.getMSM().findEntity(requestedRole+"-"+acl.getConversationId());
-							//	System.out.println(ja.getMSM().getAllMentalEntities());
-							EventManager.getInstance().alreadyHadAConversationCreatedForThatMesssage(ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),acl);
-
-						}  catch (NotFound e) {			
-							EventManager.getInstance().startingInteractionAsCollaborator(ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),acl);
-							/*Vector<ingenias.jade.AgentExternalDescription> vector=null;
-							try {
-								vector = (Vector<ingenias.jade.AgentExternalDescription>)acl.getContentObject();
-							} catch (UnreadableException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							Object[] elementos = vector.toArray();
-							System.err.println("tipo "+elementos[0].getClass().getName());
-							AgentExternalDescription[] externalDescriptors=vector.toArray(new ingenias.jade.AgentExternalDescription[vector.size()]);
-							DFAgentDescription[] actors=new DFAgentDescription[vector.size()];
-							for (int k=0;k<externalDescriptors.length;k++){
-							 actors[k]=new DFAgentDescription();
-							 actors[k].setName(externalDescriptors[k].id);
-							 ServiceDescription sd = new ServiceDescription();
-								sd.setName(externalDescriptors[k].id.getLocalName() + "-sub-df");
-								sd.setName(externalDescriptors[k].role);								
-								sd.setOwnership("JADE");
-							 actors[k].addServices(sd);
-							}*/
-							try {
-								ActiveConversation actconv=ja.getCM().launchAsCollaborator(
-										acl.getProtocol(),
-										requestedRole,
-										acl.getConversationId(),
-										null);
-								actconv.getSb().addListener(behaviorChangesListener);
-
-								RuntimeConversation conv=actconv.getConv();
-								/*try {
-								System.err.println("convid "+conv.getId());
-								getMSM().addMentalEntity(conv);
-
-							} catch (InvalidEntity e1) {												
-								e1.printStackTrace();
-							}*/
-								ja.getCM().addCID(acl.getConversationId(),requestedRole);   
-							} catch (WrongInteraction wi){
-								System.err.println("The message cannot be processed "+acl);
-								wi.printStackTrace();
-							}
+					!ja.getCM().contains(acl.getConversationId(),requestedRole) ){      
+				if (acl.getSender().getLocalName().equalsIgnoreCase("ams")){
+					// it is a failure message sent by the AMS
+					try {
+						ingenias.editor.entities.RuntimeCommFailure failure=null;						
+						RuntimeConversation conv=ja.getCM().getConversation(
+								acl.getConversationId(), playedRole);
+						StateBehavior machine = ja.getCM().getStateMachine(conv);
+						String failureid=MentalStateManager.generateMentalEntityID()+"ErrorComm";
+						failure=machine.createFailure(failureid);
+						if (failure==null) {// no predefined failures 
+							failure=
+							new ingenias.editor.entities.RuntimeCommFailure(failureid);
+							failure.setStage("any");
 						}
+						if (acl.getContent().toLowerCase().contains("agent not found"))
+							failure.setFailureType("agentdoesnotexist");
+						else
+							failure.setFailureType("unknown");
+						failure.setStage(acl.getUserDefinedParameter("sequence"));
+						failure.setMessage(acl.toString());
+						Vector<MentalEntity> failures=new Vector<MentalEntity>();
+						failures.add(failure);
+						ja.getMSM().addMentalEntityToConversation(conv, failures);
+						ja.getMSM().setModified();
 						ja.getCM().removePending(acl);   
-						processed.add(acl);  
-						initialised=true;                                                                                                                                                                                                                      
+						System.err.println(acl);
+						// the message is not reposted because there are no other protocols
+						// responsible of processing it, like the other messages.
+					} catch (InvalidEntity e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 
+				} else {
+					boolean initialised=false;                                                                                                                                                                                                                  
+					while (!initialised){                                                                                                                                                                                                                       
+						try {                                                                                                                                                                                                                                       
+							try {			
+								ja.getMSM().findEntity(requestedRole+"-"+acl.getConversationId());
+								EventManager.getInstance().alreadyHadAConversationCreatedForThatMesssage(ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),acl);
 
-						//System.err.println("Initiating "+convid+" "+acl.getConversationId()+" "+requestedRole);
-					} catch (NoAgentsFound nf) {                                                                                                                                                                                                                
-						try {
-							Thread.sleep((long)(200*Math.random()));                                                                                                                                                                                                                 
-						} catch (Exception e) {} ;
+							}  catch (NotFound e) {			
+								EventManager.getInstance().startingInteractionAsCollaborator(ja.getLocalName(), ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),acl);
+
+								try {
+									ActiveConversation actconv=ja.getCM().launchAsCollaborator(
+											acl.getProtocol(),
+											requestedRole,
+											acl.getConversationId(),
+											null);
+									actconv.getSb().addListener(behaviorChangesListener);
+
+									RuntimeConversation conv=actconv.getConv();
+									ja.getCM().addCID(acl.getConversationId(),requestedRole);   
+								} catch (WrongInteraction wi){
+									System.err.println("The message cannot be processed "+acl);
+									wi.printStackTrace();
+								}
+							}
+							ja.getCM().removePending(acl);   
+							processed.add(acl);  // to make the message available for the target protocol
+							initialised=true;                                                                                                                                                                                                                      
+
+						} catch (NoAgentsFound nf) {                                                                                                                                                                                                                
+							try {
+								Thread.sleep((long)(200*Math.random()));                                                                                                                                                                                                                 
+							} catch (Exception e) {} ;
+						}
 					}
 				}
 			} else {

@@ -116,6 +116,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			this.addTemplate("templates/test.xml");
 			this.addTemplate("templates/events.xml");
 			this.addTemplate("templates/launcherProd.xml");
+			this.addTemplate("templates/commfailures.xml");
 
 		} catch (java.io.FileNotFoundException fne) {
 			Log.getInstance().logERROR(fne.getMessage());
@@ -147,6 +148,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			this.addTemplate("templates/test.xml");
 			this.addTemplate("templates/events.xml");
 			this.addTemplate("templates/launcherProd.xml");
+			this.addTemplate("templates/commfailures.xml");
 		} catch (java.io.FileNotFoundException fne) {
 			Log.getInstance().logERROR(fne.getMessage());
 			this.fatalError();
@@ -493,13 +495,13 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 						//						slotr.add(new Var("slotvalue",slot.getAttributeByName("Value").getSimpleValue()));
 
 
-						//System.err.println("---------added "+slot);
+
 					}
 				}
 			}
 		} catch (ingenias.exception.NotFound nf) {
 			Log.getInstance().logWARNING("Fact " + fact.getID() + " has no slots define. This may cause some mental state conditions to fail");
-			nf.printStackTrace();
+			//nf.printStackTrace();
 		} catch (NullEntity e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -542,6 +544,14 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			generateFactSlots(r, ffacts[k]);
 			p.addRepeat(r);
 		}
+		ffacts = Utils.generateEntitiesOfType("RuntimeCommFailure",getBrowser());
+		for (int k = 0; k < ffacts.length; k++) {
+			Repeat r = new Repeat("commfailures");
+			r.add(new Var("fname", Utils.replaceBadChars(ffacts[k].getID())));
+			//generateFactSlots(r, ffacts[k]);
+			p.addRepeat(r);
+		}
+		
 		ffacts = Utils.generateEntitiesOfType("ApplicationEvent",getBrowser());
 		for (int k = 0; k < ffacts.length; k++) {
 			Repeat r = new Repeat("events");
@@ -584,7 +594,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			r.add(initialGoals);
 			Vector sattasks = this.solvingTask(goal, agent);
 			Enumeration senumeration = sattasks.elements();
-			//System.err.println("goals"+goals.size());
+
 			while (senumeration.hasMoreElements()) {
 				GraphEntity task = (GraphEntity) senumeration.nextElement();
 				HashSet<GraphEntity> ints = this.getAssociatedInteractions(task);
@@ -596,7 +606,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				} else {
 					Vector<GraphEntity> roles=getRolesPlayedByAgentWhenExecutingTheTask(agent,task);
 					for (GraphEntity role:roles){
-						System.err.println("generar " + agent.getID());
+
 						Repeat convtask = new Repeat("convtask");
 						insertDescedantsOfRoleWithDescendantRolesRepeat(role,
 								convtask);
@@ -614,7 +624,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 						r.add(convtask);
 					}
 					if (roles.isEmpty()){
-						System.err.println("generar " + agent.getID());
+
 						Repeat convtask = new Repeat("convtask");
 						for (GraphEntity conv : ints) {
 							Repeat conversations = new Repeat("conversations");
@@ -700,7 +710,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		HashSet<GraphEntity> accessesTasks = new HashSet<GraphEntity>(Utils.getRelatedElementsVector(task,
 				"IAccesses", "IAccessestarget"));
 		result.addAll(accessesTasks);
-		//System.err.println("Para la tarea " + task.getID() + " hay las siguientes interacciones " + result);
+
 		return result;
 	}
 
@@ -773,21 +783,17 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		Vector tasks = this.getAgentTasks(agent);
 		Enumeration enumeration = tasks.elements();
 		Vector v = goal.getAllRelationships();
-		for (int k = 0; k < v.size(); k++) {
-			//System.err.print(((GraphRelationship)v.elementAt(k)).getType()+",");
-		}
-		//System.err.println();
+
 
 		Vector satisfyingTasks = Utils.getRelatedElementsVector(goal,
 				"GTSatisfies",
 		"GTSatisfiessource");
-		//System.err.println("Testing "+goal +" for agent "+
-		//		agent+ " satisfying"+satisfyingTasks.size());
+
 		Vector solvingTasks = new Vector();
 		enumeration = satisfyingTasks.elements();
 		while (enumeration.hasMoreElements()) {
 			GraphEntity task = (GraphEntity) enumeration.nextElement();
-			//System.err.println("evaluating a:"+agent+" t:"+task+" g:"+goal);
+
 			if (tasks.contains(task)) {
 				solvingTasks.add(task);
 			}
@@ -1039,7 +1045,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 							String cardinality = "1";
 							String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
-							//							System.err.println("Cardinality "+cardString+ " "+fact.getID());
 							if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("*")) {
 								cardinality = "n";
 							}else{
@@ -1061,7 +1066,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 							GraphEntity fact = role.getPlayer();
 							String cardinality = "1";
 							String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
-							//							System.err.println("Cardinality "+cardString+ " "+fact.getID());
 							Repeat expectedInput = null;
 
 							if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("0..*") || cardString.equals("*")) {
@@ -1093,7 +1097,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 							GraphEntity fact = role.getPlayer();
 							String cardinality = "1";
 							String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
-							//							System.err.println("Cardinality "+cardString+ " "+fact.getID());
 							Repeat expectedInput = null;
 
 							if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("0..*") || cardString.equals("*")) {
@@ -1169,7 +1172,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 							Var conversation = new Var("interid", Utils.replaceBadChars(intcontext.getID()));
 							interactioncontext.add(conversation);
 							taskRepeat.add(interactioncontext);
-							//System.err.println("generating conext "+intcontext.getID()+"  for task "+task.getID()+" \n"+r.toString());
 						}
 					}
 				}
@@ -1282,7 +1284,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 								if (model != null) {
 
 									String interactionID = model.getAttributeByName("ModelID").getSimpleValue();
-									//System.err.println("looking for "+interactionID+" "+model.getType());
 									Graph g = this.getBrowser().getGraph(interactionID);
 									if (g == null) {
 										Log.getInstance().logERROR("GRASIASpecification " + specs[k].getID() +
@@ -1314,7 +1315,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			e.printStackTrace();
 		}
 
-		//System.err.println("Tarea "+task.getID()+"asociada a la interacción:"+result);
 		return result;
 	}
 
@@ -1333,7 +1333,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 * @throws NotFound
 	 */
 	private void generateApp(Sequences p, GraphEntity app, Hashtable components) throws NullEntity, NotFound {
-		//System.err.println("           generating "+app);
 		Repeat appsr = new Repeat("applications");
 		p.addRepeat(appsr);
 		//if (doIGenerateComponentAndTaskCode()) {
@@ -1390,15 +1389,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 					if (ge.getAttributeByName("Entity").getEntityValue().equals(appr)) {
 						if (ge.getAttributeByName("File").getSimpleValue() == null ||
 								ge.getAttributeByName("File").getSimpleValue().equals("")) {
-							//							try {
-							//							// this.getProperty("jadeproject").value+"/"+
-							//							String path = getProperty("jadeperm").value + "/ingenias/jade/components/" + appr.getID() + "App.java";
-							//							ge.setAttribute(new GraphAttributeImp("File", path, null));
-							//							System.err.println("Fijado atributo .............." + appr.getID() + " a path " + path + " " + this.getProperties());
-							//							} catch (InvalidAttribute e) {
-							//							// TODO Auto-generated catch block
-							//							e.printStackTrace();
-							//							}
 						}
 					}
 					k++;
@@ -1560,7 +1550,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		Vector components = Utils.getRelatedElementsVector(pathname, element,
 				"CDUsesCode", "CDUsesCodetarget");
 		if (components.size() > 1) {
-			System.err.println("-----------Assigning code to "+element.getID());
+
 			String componentsname = "";
 			for (int k = 0; k < components.size(); k++) {
 				componentsname = componentsname + components.elementAt(k).toString();
@@ -1594,7 +1584,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 					gr.getType().equals("InternalApplication"));
 			if (validType) {
 				apps.add(gr);
-				//System.err.println(gr.getID());
 			}
 		}
 
@@ -1628,8 +1617,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				produced.addAll(new HashSet(getExpectedOutput(task)));
 				produced.addAll(new HashSet(getExpectedOutputCreated(task)));
 				consumed.addAll(new HashSet(this.getCompleteExpectedInput(task)));
-				System.err.println(task.getID()+" "+this.getCompleteExpectedInput(task));
-				//consumed.addAll(this.getConsumedInputs(task));
+
 			}
 			produced.removeAll(consumed);
 			HashSet<GraphEntity> removeConversations = new HashSet<GraphEntity>();
@@ -1908,7 +1896,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			GraphEntity role = (GraphEntity) enumeration.next();			
 			taskPerRole.put(role,this.getRoleTasks(role));			
 		}
-		System.err.println(taskPerRole);
 		return taskPerRole;
 	}
 
@@ -2029,7 +2016,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 								r2.add(new Var("roleid", Utils.replaceBadChars(prole.getID())));
 								// Obtain other roles involved in this interaction
 								generateColaborators(interactions[i], r2);
-								//									//System.err.println(r2);
 							}
 						}
 						interactions = Utils.getRelatedElements(prole,
@@ -2109,14 +2095,11 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 */
 	private HashSet getAgentApplications(GraphEntity entity) throws NullEntity {
 		HashSet result = new HashSet();
-		//System.err.println("---------------------rels"+entity+":"+entity.getAllRelationships());
 		GraphEntity[] agentapps = Utils.getRelatedElements(entity,
 				"ApplicationBelongsTo", "ApplicationBelongsTotarget");
 		for (int k = 0; k < agentapps.length; k++) {
-			//System.err.println(agentapps[k]);
 			result.add(agentapps[k]);
 		}
-		//System.err.println(entity+":"+result);
 		return result;
 	}
 
@@ -2278,13 +2261,12 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			"the project folder");
 		} else {
 			boolean therearenoSources=new File("src/main/javagensrc/ingenias/jade/Main.java").exists();
-			StringBuffer sb =  FileUtils.readFile(args[0]);
-			System.err.println("numero de argumentos:"+args.length+ " arg4"+args[3]);	
+			StringBuffer sb =  FileUtils.readFile(args[0]);			
 			byte[] checksum =getCheckSum(sb.toString());		
-			if (args.length>=3  &&
+			if (args.length>=4  &&
 					(!java.util.Arrays.equals(getLastCheckSum(new File(args[0]).getAbsolutePath()),checksum)
 							// to force code generation if -Dforceiafgen=true parameter is given
-							|| (args.length>=4 && args[3]!=null && args[3].equalsIgnoreCase("true")))
+							|| (args.length>=5 && args[4]!=null && args[4].equalsIgnoreCase("true")))
 							|| !therearenoSources){ 
 
 				storeChecksum(new File(args[0]).getAbsolutePath(),checksum);
@@ -2303,6 +2285,11 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				if (args.length>=3){
 					jadegen.setProperty("jadeout", args[2]);  
 				} 
+				
+				if (args.length>=4){
+					jadegen.setProperty("jadeperm", args[3]);  
+				}
+	
 
 				for (Object key: props.keySet()){
 					System.err.println(((ProjectProperty)props.get(key.toString())).key+":"+

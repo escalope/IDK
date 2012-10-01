@@ -535,6 +535,7 @@ MentalStateUpdater {
 					String superclass=ent.getClass().getSuperclass().getName().substring(ent.getClass().getSuperclass().getName().lastIndexOf(".")+1);
 					Dimension dim=RenderComponentManager.getSize(ent,superclass,ent.getPrefs(null).getView());
 					java.awt.Point j = ModelJGraph.findEmptyPlacePoint(dim,amm);
+					ent.getPrefs(null).setView(ViewType.UML);
 					DefaultGraphCell dgc = amm.insertDuplicated(j, ent);
 					resizeAllMentalEntities();
 				}
@@ -657,7 +658,7 @@ MentalStateUpdater {
 				checkLockChanges();
 			//	System.err.println(" .................. "+agentName);
 				Vector<MentalEntity> localmes = (Vector<MentalEntity>) mes.clone();
-				for (MentalEntity me:mes){
+				for (MentalEntity me:mes){				
 					conv.addCurrentContent(me);
 					//		DebugUtils.logEvent("MEAddedToConversation", new String[]{agentName,me.getType(),me.getId(),conv.getInteraction().getId(),conv.getConversationID()});
 					

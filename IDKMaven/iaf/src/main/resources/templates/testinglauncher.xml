@@ -5,7 +5,7 @@
  @@@repeat id="testunit"@@@
    @@@repeat id="deploynode"@@@
  @@@saveto@@@
-  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeout@@@/v@@@/ingenias/testing/@@@v@@@testingconfig@@@/v@@@For@@@v@@@test@@@/v@@@.java@@@/file@@@
+  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/src/test/javagensrc/ingenias/testing/@@@v@@@testingconfig@@@/v@@@For@@@v@@@test@@@/v@@@.java@@@/file@@@
   @@@text@@@
 
 /*
@@ -46,7 +46,6 @@ import jade.wrapper.StaleProxyException;
 import jade.wrapper.State;
 import ingenias.exception.TimeOut;
 import ingenias.jade.mental.*;
-import ingenias.tests.*;
 import ingenias.jade.IAFProperties;
 import ingenias.jade.graphics.MainInteractionManager;
 
@@ -60,7 +59,7 @@ import java.net.UnknownHostException;
 
 
 
-public class @@@v@@@testingconfig@@@/v@@@For@@@v@@@test@@@/v@@@ extends @@@v@@@test@@@/v@@@{
+public class @@@v@@@testingconfig@@@/v@@@For@@@v@@@test@@@/v@@@ extends @@@v@@@test@@@/v@@@Test{
 jade.wrapper.AgentContainer ac=null;
  
   @Before
@@ -183,7 +182,7 @@ jade.wrapper.AgentContainer ac=null;
      @@@repeat id="testingnode"@@@
  
   @@@saveto@@@
-  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/@@@v@@@jadeout@@@/v@@@/ingenias/testing/@@@v@@@testingconfig@@@/v@@@Launcher.java@@@/file@@@
+  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/src/test/javagensrc/ingenias/testing/@@@v@@@testingconfig@@@/v@@@Launcher.java@@@/file@@@
   @@@text@@@
 
 /*
@@ -213,7 +212,7 @@ package ingenias.testing;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import ingenias.tests.*;
+import ingenias.testing.*;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

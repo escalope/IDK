@@ -53,6 +53,7 @@ import jade.domain.DFService;
 import jade.lang.acl.ACLMessage;
 import java.util.*;
 import ingenias.jade.*;
+import ingenias.jade.mental.*;
 import ingenias.editor.entities.*;
 import ingenias.jade.comm.DefaultCommControl;
 import ingenias.jade.comm.StateBehavior;
@@ -159,7 +160,7 @@ private MentalStateReader msr=null;
       actors=new AID[actorsv.size()];
       actorsv.toArray(actors);
       CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
-       "enable","@@@v@@@interactionid@@@/v@@@",completelistInvolvedActors);
+       "enable","@@@v@@@interactionid@@@/v@@@",completelistInvolvedActors, this.getPlayedRole());
       this.getDCC().notifyMessageSent("disabled",options,this);
      
       this.setRunning();   
@@ -241,7 +242,7 @@ private MentalStateReader msr=null;
       if (this.getDCC().notifyMessageSent("@@@v@@@iud@@@/v@@@",optionsA,this)){
            //If mental state conditions are met, the message is send and state changed
             CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
-           "@@@v@@@iud@@@/v@@@","@@@v@@@interactionid@@@/v@@@",this.getContentForNextMessage());
+           "@@@v@@@iud@@@/v@@@","@@@v@@@interactionid@@@/v@@@",this.getContentForNextMessage(), this.getPlayedRole());
            getTimeout().stop();
             this.notifyStateTransitionExecuted("@@@v@@@iud@@@/v@@@", options.firstElement().toString());
       } else {
@@ -282,6 +283,44 @@ private MentalStateReader msr=null;
     this.block(); // Else wait for some external event
 
 }
+
+
+ public RuntimeCommFailure createFailure(String failureid){
+	 RuntimeCommFailure failure=new RuntimeCommFailure(failureid); 	
+ 	 @@@repeat id="failurecreation"@@@
+ 	 // if there is a concrete failure linked with the interaction
+ 	 failure= new @@@v@@@failurename@@@/v@@@(failureid);     
+ 	 @@@/repeat@@@
+ 	 failure.setStage(this.getStates());
+ 	  
+	 @@@repeat id="receiveaction"@@@
+	 @@@repeat id="failurecreation"@@@
+	if (this.isState("@@@v@@@iud@@@/v@@@")){
+   failure= new @@@v@@@failurename@@@/v@@@(failureid);
+   failure.setStage("@@@v@@@iud@@@/v@@@");
+  }  @@@/repeat@@@
+	 @@@/repeat@@@
+	 @@@repeat id="sendaction"@@@
+	  @@@repeat id="failurecreation"@@@
+  if (this.isState("@@@v@@@iud@@@/v@@@")){
+   failure= new @@@v@@@failurename@@@/v@@@(failureid);
+   failure.setStage("@@@v@@@iud@@@/v@@@");
+  } @@@/repeat@@@
+	  @@@/repeat@@@
+	 @@@repeat id="endstate"@@@
+	  @@@repeat id="failurecreation"@@@
+  if (this.isState("end@@@v@@@stateid@@@/v@@@")){
+   failure= new @@@v@@@failurename@@@/v@@@(failureid);
+   failure.setStage("end@@@v@@@stateid@@@/v@@@");
+  }   @@@/repeat@@@
+  @@@/repeat@@@
+	 if (failure!=null){
+		 failure.setConversationID(this.getConversationID());
+		 failure.setConversation(this.getConversation());		
+	 }
+	 return failure;
+ }
+  
 
 
 }

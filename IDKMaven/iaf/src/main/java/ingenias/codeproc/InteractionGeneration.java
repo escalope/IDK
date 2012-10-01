@@ -115,6 +115,22 @@ public class InteractionGeneration {
         // It is initiator
         Repeat r1 = new Repeat("sendaction");
         r.add(r1);
+        Vector<GraphEntity> failures;
+		try {
+			failures = Utils.getRelatedElementsVector(iu,
+			        "TriggersFailure", "TriggersFailuretarget");
+			for (GraphEntity ge:failures){
+	    		Repeat repeatFailure=new Repeat("failurecreation");
+	        	r1.add(repeatFailure);
+	    		repeatFailure.add(new Var("failurename",ge.getID()));
+	    		System.err.println("----------------------------------------------------------------"+ge.getID());
+	    	}
+		} catch (NullEntity e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
+    	
         r1.add(new Var("iud", Utils.replaceBadChars(iu.getID())));
         GraphRole[] initiatessource=Utils.getRelatedElementsRoles(iu, "UIInitiates", "UIInitiatessource");
         try {
@@ -436,6 +452,19 @@ public class InteractionGeneration {
             GraphEntity interaction, HashVector ius) throws NullEntity {
         Repeat r1 = new Repeat("agentinteractionscols");
         seq.addRepeat(r1);
+        try {
+			Vector<GraphEntity> failures = Utils.getRelatedElementsVector(interaction,
+			        "TriggersFailure", "TriggersFailuretarget");
+			for (GraphEntity ge:failures){
+	    		Repeat repeatFailure=new Repeat("failurecreation");
+	        	r1.add(repeatFailure);
+	    		repeatFailure.add(new Var("failurename",ge.getID()));
+	    		System.err.println("----------------------------------------------------------------end"+ge.getID());
+	    	}
+		} catch (NullEntity e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         r1.add(new Var("interactionid", Utils.replaceBadChars(interaction.getID())));
         // Obtain initiators of this interaction
         r1.add(new Var("roleid", Utils.replaceBadChars(actor.getID())));
@@ -621,6 +650,19 @@ public class InteractionGeneration {
                 Repeat r1 = new Repeat("endstate");
                 r.add(r1);
                 r1.add(new Var("stateid", Utils.replaceBadChars(iu.getID())));
+                try {
+        			Vector<GraphEntity> failures = Utils.getRelatedElementsVector(iu,
+        			        "TriggersFailure", "TriggersFailuretarget");
+        			for (GraphEntity ge:failures){
+        	    		Repeat repeatFailure=new Repeat("failurecreation");
+        	        	r1.add(repeatFailure);
+        	    		repeatFailure.add(new Var("failurename",ge.getID()));
+        	    		System.err.println("----------------------------------------------------------------end"+ge.getID());
+        	    	}
+        		} catch (NullEntity e1) {
+        			// TODO Auto-generated catch block
+        			e1.printStackTrace();
+        		}
             } else {
                 
             }
@@ -729,8 +771,19 @@ public class InteractionGeneration {
         r1.add(new Var("iud", Utils.replaceBadChars(iu.getID())));
         r1.add(new Var("sender", Utils.replaceBadChars(iuinit[0].getID())));
         
+        
        
         try {
+        	Vector<GraphEntity> failures = Utils.getRelatedElementsVector(iu,
+                    "TriggersFailure", "TriggersFailuretarget");
+        	
+        	for (GraphEntity ge:failures){
+        		Repeat repeatFailure=new Repeat("failurecreation");
+            	r1.add(repeatFailure);
+        		repeatFailure.add(new Var("failurename",ge.getID()));
+        		System.err.println("----------------------------------------------------------------1"+ge.getID());
+        	}
+        	
             initiator=Utils.getRelatedElementsVector(iu,
                         "UIInitiates", "UIInitiatestarget");            
             GraphRole[] colaboratessource=Utils.getRelatedElementsRoles(iu, "UIColaborates", "UIColaboratessource");

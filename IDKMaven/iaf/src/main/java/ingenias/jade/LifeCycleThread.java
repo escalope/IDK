@@ -38,8 +38,8 @@ public class LifeCycleThread extends Thread implements GraphModelListener{
 		while (true) {			
 			//msp.wakeup(); // It tells the MSP to take a decision about task execution
 			//while (agent.getMSP().getScheduledTasks().size()>0){
-			//System.err.println("Requesting wakeup "+agent.getAID().getLocalName());
-			agent.getMSP().lifeCycle();
+			//System.err.println("Requesting wakeup "+agent.getAID().getLocalName());			
+			 agent.getMSP().lifeCycle();
 			/*try {
 				Thread.currentThread().sleep(100);
 			} catch (InterruptedException ie) {

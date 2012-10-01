@@ -65,6 +65,8 @@ import jade.proto.states.MsgReceiver;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
@@ -138,6 +140,7 @@ abstract public class JADEAgent extends Agent{
 	private IDEState ids = null;
 	private boolean completedLast=false;
 	private CommsManagementBehavior mainBehavior;
+	private transient AgentModelPanelIAF amm =null;
 
 	private  String synRegister="sinchronization of registering process";
 
@@ -395,12 +398,29 @@ abstract public class JADEAgent extends Agent{
 			 * Creates the GUI for the Mental State Manager
 			 */
 
-			AgentModelPanelIAF amm =null;
+			
 			if (IAFProperties.getGraphicsOn()){
 				ids = IDEState.emptyIDEState();
 				amm = new AgentModelPanelIAF(
 						new ingenias.editor.entities.AgentModelDataEntity("1"), 
 						"1", new Model(ids));
+				
+				amm.addKeyListener(new KeyAdapter() {
+					
+					@Override
+					public void keyPressed(KeyEvent e) {
+						if (e.getKeyCode()==KeyEvent.VK_F5)
+						{
+							amm.resizeEntities();
+						}
+					}
+				});
+				amm.getModel().addGraphModelListener(new GraphModelListener() {
+					@Override
+					public void graphChanged(GraphModelEvent e) {
+						amm.resizeEntities();
+					}
+				});
 				amm.setMarqueeHandler(new AgentModelMarqueeHandlerIAF(amm));
 			}
 			/**
@@ -490,15 +510,7 @@ abstract public class JADEAgent extends Agent{
 
 			behaviorChangesListener=new StateBehaviorChangesListener(){		
 				private void wakeUpCommsManagementBehavior(){
-					/*while (!mainBehavior.getExecutionState().equalsIgnoreCase(CyclicBehaviour.STATE_BLOCKED)){
-					//System.out.println(mainBehavior.getExecutionState());
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}*/
+
 					if (mainBehavior.getExecutionState().equalsIgnoreCase(CyclicBehaviour.STATE_BLOCKED))
 						mainBehavior.restart();
 				}

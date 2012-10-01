@@ -135,47 +135,51 @@ public class AgentModelMarqueeHandlerIAF extends
 			final ViewPreferences.ViewType current1 = ViewPreferences.ViewType.UML;
 			possibleViews.add(new AbstractAction("UML") {
 				public void actionPerformed(ActionEvent e) {
-					ent.getPrefs(null).setView(ViewPreferences.ViewType.UML);
-					getGraph().repaint();
-				}
-			});
-		}
-
-		if (RuntimeEvent.class.isAssignableFrom(ent.getClass())) {
-			final ViewPreferences.ViewType current1 = ViewPreferences.ViewType.INGENIAS;
-			possibleViews.add(new AbstractAction("INGENIAS") {
-				public void actionPerformed(ActionEvent e) {
-					ent.getPrefs(null).setView(ViewPreferences.ViewType.INGENIAS);
-					getGraph().repaint();
-				}
-			});
-		}
-
-		if (RuntimeFact.class.isAssignableFrom(ent.getClass())) {
-			final ViewPreferences.ViewType current1 = ViewPreferences.ViewType.UML;
-			possibleViews.add(new AbstractAction("UML") {
-				public void actionPerformed(ActionEvent e) {
-					ent.getPrefs(null).setView(ViewPreferences.ViewType.UML);
-					getGraph().repaint();
-				}
-			});
-		}
-
-		if (RuntimeFact.class.isAssignableFrom(ent.getClass())) {
-			final ViewPreferences.ViewType current1 = ViewPreferences.ViewType.INGENIAS;
-			possibleViews.add(new AbstractAction("INGENIAS") {
-				public void actionPerformed(ActionEvent e) {
-					ent.getPrefs(null).setView(ViewPreferences.ViewType.INGENIAS);
+					getGraph().getModel().getAttributes(cell).put("view", "UML"); ent.getPrefs(getGraph().getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 					getGraph().repaint();
 				}
 			});
 		}
 		
+
+		if (RuntimeEvent.class.isAssignableFrom(ent.getClass())) {
+			final ViewPreferences.ViewType current1 = ViewPreferences.ViewType.INGENIAS;
+			possibleViews.add(new AbstractAction("INGENIAS") {
+				public void actionPerformed(ActionEvent e) {
+					getGraph().getModel().getAttributes(cell).put("view", "INGENIAS"); ent.getPrefs(getGraph().getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+					getGraph().repaint();
+				}
+			});
+		}
+		
+		if (RuntimeFact.class.isAssignableFrom(ent.getClass())) {
+			final ViewPreferences.ViewType current1 = ViewPreferences.ViewType.UML;
+			possibleViews.add(new AbstractAction("INGENIAS") {
+				public void actionPerformed(ActionEvent e) {
+					getGraph().getModel().getAttributes(cell).put("view", "INGENIAS"); ent.getPrefs(getGraph().getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+					getGraph().repaint();
+				}
+			});
+		}
+
+
+
+		if (RuntimeFact.class.isAssignableFrom(ent.getClass())) {
+			final ViewPreferences.ViewType current1 = ViewPreferences.ViewType.UML;
+			possibleViews.add(new AbstractAction("UML") {
+				public void actionPerformed(ActionEvent e) {
+					getGraph().getModel().getAttributes(cell).put("view", "UML"); ent.getPrefs(getGraph().getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+					getGraph().repaint();
+				}
+			});
+		}
+
+		
 		if (RuntimeConversation.class.isAssignableFrom(ent.getClass())) {
 			final ViewPreferences.ViewType current1 = ViewPreferences.ViewType.UML;
 			possibleViews.add(new AbstractAction("UML") {
 				public void actionPerformed(ActionEvent e) {
-					ent.getPrefs(null).setView(ViewPreferences.ViewType.UML);
+					getGraph().getModel().getAttributes(cell).put("view", "UML"); ent.getPrefs(getGraph().getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
 					getGraph().repaint();
 				}
 			});
@@ -185,7 +189,7 @@ public class AgentModelMarqueeHandlerIAF extends
 			final ViewPreferences.ViewType current1 = ViewPreferences.ViewType.INGENIAS;
 			possibleViews.add(new AbstractAction("INGENIAS") {
 				public void actionPerformed(ActionEvent e) {
-					ent.getPrefs(null).setView(ViewPreferences.ViewType.INGENIAS);
+					getGraph().getModel().getAttributes(cell).put("view", "INGENIAS"); ent.getPrefs(getGraph().getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
 					getGraph().repaint();
 				}
 			});

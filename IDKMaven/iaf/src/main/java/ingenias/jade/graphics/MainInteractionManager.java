@@ -22,6 +22,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package ingenias.jade.graphics;
 
+import ingenias.editor.DraggableTabbedPane;
+import ingenias.editor.JTabbedPaneWithCloseIcons;
 import ingenias.jade.EventManager;
 import ingenias.jade.ChartStatsManager;
 import ingenias.jade.EventPanelLogger;
@@ -85,7 +87,7 @@ import sun.misc.Sort;
 
 public class MainInteractionManager
 extends javax.swing.JFrame {
-
+	static DraggableTabbedPane tabpaneMentalStateManager=new DraggableTabbedPane();
 	private static MainInteractionManager mim = new MainInteractionManager();
 	private static Hashtable intsPanel = new Hashtable();
 	private JTabbedPane jtp = new DraggableTabbedPane();
@@ -96,9 +98,10 @@ extends javax.swing.JFrame {
 	private JButton runWithoutInterruption;
 	private JPanel jPanel1;
 	private String secondMonitor = "secondmonitor";
-	JSplitPane mainInteractions = new JSplitPane();
+	JPanel mainInteractions = new JPanel();
 	JSplitPane mainTasks = new JSplitPane();
 	JSplitPane mainMentalState = new JSplitPane();
+	
 	JPanel mainApplications = new JPanel(new BorderLayout());
 	JScrollPane imcontainerScrollPane = new JScrollPane();
 	JScrollPane mstcontainerscrollpane = new JScrollPane();
@@ -132,7 +135,7 @@ extends javax.swing.JFrame {
 			mim.setVisible(true);
 		
 			mim.setMainTask(new JPanel());
-			mim.setMainMS(new JScrollPane());
+			//mim.setMainMS(new JScrollPane());
 		}
 	}
 
@@ -235,13 +238,17 @@ extends javax.swing.JFrame {
 		}
 	}
 
-	public static void setMainMS(final JScrollPane jp) {
+	public static void setMainMS(final String agentName,final JScrollPane jp) {
 		if (IAFProperties.getGraphicsOn()) {
 			synchronized (getInstance()) {
 				Runnable run = new Runnable() {
 
 					public void run() {
-						getInstance().mainMentalState.add(jp, JSplitPane.RIGHT);
+						if (tabpaneMentalStateManager.indexOfTab(agentName)>=0){
+							tabpaneMentalStateManager.setSelectedIndex(tabpaneMentalStateManager.indexOfTab(agentName));
+						} else
+						 tabpaneMentalStateManager.addTabWithCloseIcon(agentName, jp);
+						//getInstance().mainMentalState.add(jp, JSplitPane.RIGHT);
 					}
 				};
 				SwingUtilities.invokeLater(run);
@@ -465,7 +472,8 @@ extends javax.swing.JFrame {
 	private void jbInit() throws Exception {
 
 		if (IAFProperties.getGraphicsOn()) {
-
+			tabpaneMentalStateManager=new DraggableTabbedPane();
+			
 			imcontainer = Box.createVerticalBox();
 			JSplitPane jsp = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 			this.taskcontainer = Box.createVerticalBox();
@@ -476,8 +484,8 @@ extends javax.swing.JFrame {
 			this.setTitle("Main Interaction Manager");
 			this.getContentPane().setLayout(new BorderLayout());
 			imcontainerScrollPane.setAutoscrolls(false);
-			mainInteractions.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
-			mainInteractions.setDividerLocation(100);
+			//mainInteractions.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
+			//mainInteractions.setDividerLocation(100);
 			//this.mainApplications.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
 			//this.mainApplications.setDividerLocation(100);
 
@@ -542,7 +550,7 @@ extends javax.swing.JFrame {
 
 
 			jtp.add("tasks", mainTasks);
-			jtp.addTab("interactions", null, mainInteractions, null);
+			jtp.addTab("interactions", null, interactionsScrollPane, null);
 
 			ChartStatsManager es = new ChartStatsManager("Stats");
 
@@ -576,9 +584,10 @@ extends javax.swing.JFrame {
 			jPanel1.add(unzoom);
 
 
-			mainInteractions.add(imcontainerScrollPane, JSplitPane.LEFT);
-			mainInteractions.add(interactionsScrollPane, JSplitPane.RIGHT);
+			//mainInteractions.add(imcontainerScrollPane, JSplitPane.LEFT);
+			//mainInteractions.add(interactionsScrollPane, JSplitPane.RIGHT);
 			this.mainMentalState.add(this.mstcontainerscrollpane, JSplitPane.LEFT);
+			this.mainMentalState.add(MainInteractionManager.tabpaneMentalStateManager, JSplitPane.RIGHT);			
 			this.mainTasks.add(this.taskcontainerScrollPane, JSplitPane.LEFT);
 			this.mainApplications.add(this.appcontainerScrollPane, BorderLayout.CENTER);
 			interactionsScrollPane.getViewport().add(interactions, null);

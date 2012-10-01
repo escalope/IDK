@@ -105,7 +105,8 @@ public class MentalStateProcessor implements LocksListener {
 				letAllJadeBehaviorsReevaluate();
 
 
-				replan();
+				if (ja.getMSM().modifiedSinceLastLecture())
+				 replan();
 				
 				// When simulation mode is on, the next task execution has to
 				// wait for the next cycle.
@@ -455,7 +456,6 @@ public class MentalStateProcessor implements LocksListener {
 	}
 
 	public synchronized void doReplan() {
-
 		doReplan.add(true);
 
 	}

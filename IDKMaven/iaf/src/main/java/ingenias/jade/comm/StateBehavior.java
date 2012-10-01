@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package ingenias.jade.comm;
 
 import ingenias.editor.entities.MentalEntity;
+import ingenias.editor.entities.RuntimeCommFailure;
 import ingenias.editor.entities.RuntimeConversation;
 import ingenias.exception.InvalidEntity;
 import ingenias.jade.AgentExternalDescription;
@@ -536,4 +537,6 @@ abstract public class StateBehavior
             listener.protocolStarted();
         }
     }
+    
+    public abstract RuntimeCommFailure createFailure(String id);
 }

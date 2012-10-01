@@ -1,5 +1,7 @@
 package ingenias.jade.graphics;
 
+import ingenias.editor.ButtonTabComponent;
+
 import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,6 +23,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -194,6 +197,12 @@ public class DraggableTabbedPane extends JTabbedPane {
 			
 		}
 	}
+	
+
+	 public void addTabWithCloseIcon(String title, Component component) {
+		super.addTab(title,component);
+		this.setTabComponentAt(this.getTabCount()-1, new ButtonTabComponent((JTabbedPane)this,null));		
+	  }
 
 	public static void main(String[] args) {
 		JFrame test = new JFrame("Tab test");

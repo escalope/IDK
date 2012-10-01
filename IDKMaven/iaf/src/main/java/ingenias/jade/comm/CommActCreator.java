@@ -25,6 +25,7 @@
 package ingenias.jade.comm;
 
 import ingenias.editor.entities.MentalEntity;
+import ingenias.editor.entities.RuntimeConversation;
 import ingenias.editor.entities.RuntimeFact;
 import ingenias.editor.entities.StackEntry;
 import ingenias.jade.EventManager;
@@ -77,7 +78,8 @@ public class CommActCreator {
 			String CID,
 			String seqcode,
 			String protocol,
-			String content) {
+			String content,
+			final String senderPlayedRole) {
 		Vector acts = new Vector();
 		//System.out.println(ag.getAID().getName()+" received "+seqcode);
 		ACLMessage message2BSend = new ACLMessage(ACLMessage.INFORM);
@@ -86,17 +88,18 @@ public class CommActCreator {
 			if (!ag.getAID().equals(receiver[k])) { // To avoid sending messages to itself
 				message2BSend.addReceiver(receiver[k]);
 
-			//	System.out.println("Sending to "+receiver[k]);
+				//	System.out.println("Sending to "+receiver[k]);
 			}
 		}
 
 		message2BSend.setContent(content);
 		message2BSend.addUserDefinedParameter("sequence", seqcode);
+		message2BSend.addUserDefinedParameter("senderPlayedRole", senderPlayedRole);
 		message2BSend.setProtocol(protocol);
 		message2BSend.setConversationId(CID);
 
 		jade.core.behaviours.SenderBehaviour send =
-			new jade.core.behaviours.SenderBehaviour(ag, message2BSend);
+				new jade.core.behaviours.SenderBehaviour(ag, message2BSend);
 
 		acts.add(send);
 
@@ -125,7 +128,8 @@ public class CommActCreator {
 			final String CID,
 			final String seqcode,
 			final String protocol,
-			java.io.Serializable content) {
+			final java.io.Serializable content, 
+			final String senderPlayedRole) {
 		Vector acts = new Vector();
 
 		Field [] fields=content.getClass().getFields();				
@@ -154,48 +158,69 @@ public class CommActCreator {
 		for (int k = 0; k < receiver.length; k++) {
 			final ACLMessage message2BSend = new ACLMessage(ACLMessage.INFORM);
 			message2BSend.addReceiver(receiver[k]);
-		//	try {
-				message2BSend.addUserDefinedParameter("sequence", seqcode);              
-				message2BSend.addUserDefinedParameter("requestedRole", roles.elementAt(k));
-				/*if (roles.elementAt(k).equalsIgnoreCase("SupervisorInterestedInReputationRole")){
+			//	try {
+			message2BSend.addUserDefinedParameter("sequence", seqcode);              
+			message2BSend.addUserDefinedParameter("requestedRole", roles.elementAt(k));
+			message2BSend.addUserDefinedParameter("senderPlayedRole", senderPlayedRole);
+			/*if (roles.elementAt(k).equalsIgnoreCase("SupervisorInterestedInReputationRole")){
                  throw new RuntimeException("Enviando reputation role!!!");	
                 }*/
-				message2BSend.setProtocol(protocol);
-				message2BSend.setConversationId(CID);
-				
-				
-				//System.out.println(ag.getLocalName()+"::::: Enviando "+CID+" seq:"+seqcode+" y role: "+roles.elementAt(k)+" protocolo "+protocol+" a "+receiver[k].getLocalName());
-				if (content instanceof Vector){
-					for (Object obj:(Vector)content){                        
-						if (obj instanceof RuntimeFact){							
-							MentalUtils.addStackEntry((RuntimeFact) obj,"Transferred",CID+":"+protocol,ag.getLocalName());
-						}
+			message2BSend.setProtocol(protocol);
+			message2BSend.setConversationId(CID);
+
+
+			//System.out.println(ag.getLocalName()+"::::: Enviando "+CID+" seq:"+seqcode+" y role: "+roles.elementAt(k)+" protocolo "+protocol+" a "+receiver[k].getLocalName());
+			if (content instanceof Vector){
+				for (Object obj:(Vector)content){                        
+					if (obj instanceof RuntimeFact){							
+						MentalUtils.addStackEntry((RuntimeFact) obj,"Transferred",CID+":"+protocol,ag.getLocalName());
 					}
 				}
-				String messageXML="";
-				XStream xs=new XStream(new DomDriver());
-				messageXML=xs.toXML(content);
-				final String deliveredRole=roles.elementAt(k);
-				//System.out.println(ag.getLocalName()+":::::"+CID+" enviando "+seqcode+" esperando "+);
-				
-				message2BSend.setContent(messageXML);
-				jade.core.behaviours.SenderBehaviour send =
+			}
+			String messageXML="";
+			XStream xs=new XStream(new DomDriver());
+			messageXML=xs.toXML(content);
+			final String deliveredRole=roles.elementAt(k);
+			//System.out.println(ag.getLocalName()+":::::"+CID+" enviando "+seqcode+" esperando "+);
+
+			message2BSend.setContent(messageXML);
+			jade.core.behaviours.SenderBehaviour send =
 					new jade.core.behaviours.SenderBehaviour(ag, message2BSend);           
 
-				jade.core.behaviours.OneShotBehaviour after= new jade.core.behaviours.OneShotBehaviour(ag){
-					@Override
-					public void action() {
-			//			System.out.println(ag.getLocalName()+"::::: Ya enviado "+CID+" seq:"+seqcode+" y role: "+deliveredRole+" protocolo "+protocol+" a ");
-						EventManager.getInstance().messageDelivered(ag.getLocalName(),ag.getClass().getName().substring(0,ag.getClass().getName().indexOf("JADE")),message2BSend);
+			jade.core.behaviours.OneShotBehaviour after= new jade.core.behaviours.OneShotBehaviour(ag){
+				@Override
+				public void action() {
+					//			System.out.println(ag.getLocalName()+"::::: Ya enviado "+CID+" seq:"+seqcode+" y role: "+deliveredRole+" protocolo "+protocol+" a ");
+					EventManager.getInstance().messageDelivered(ag.getLocalName(),ag.getClass().getName().substring(0,ag.getClass().getName().indexOf("JADE")),message2BSend);
+					RuntimeConversation conv=ag.getCM().getConversation(CID, senderPlayedRole);
+					if (content instanceof Vector){
+						Vector contentv=(Vector)content;
+						boolean allMentalEntity=true;
+						for (Object obj:contentv){
+							allMentalEntity=allMentalEntity&& MentalEntity.class.isAssignableFrom(obj.getClass());							
+						}
+						if (allMentalEntity){
+							ag.getLM().getCLM(conv).removeDeletionLock(contentv);		
+							ag.getLM().getCLM(conv).generateNotification();							
+							ag.getMSM().setModified(); // to force a replan
+						}
+					} else {
+						if (MentalEntity.class.isAssignableFrom(content.getClass())){
+							ag.getLM().getCLM(conv).removeDeletionLock((MentalEntity) content);
+							ag.getLM().getCLM(conv).generateNotification();	
+							ag.getMSM().setModified();// to force a replan
+						}
 					}
-				};
-				after.setBehaviourName("Waiting for the message to be delivered");
 
-				SequentialBehaviour seq=new SequentialBehaviour();
-				seq.setBehaviourName("Delivering message");
-				seq.addSubBehaviour(send);
-				seq.addSubBehaviour(after);
-				pbehabior.addSubBehaviour(seq);
+				}
+			};
+			after.setBehaviourName("Waiting for the message to be delivered");
+
+			SequentialBehaviour seq=new SequentialBehaviour();
+			seq.setBehaviourName("Delivering message");
+			seq.addSubBehaviour(send);
+			seq.addSubBehaviour(after);
+			pbehabior.addSubBehaviour(seq);
 			/*} catch (java.io.IOException ioe) {
 				ioe.printStackTrace();
 			}*/
@@ -229,7 +254,7 @@ public class CommActCreator {
 			StateBehavior sb,
 			int multiple,
 			long timeout
-	) {
+			) {
 
 		final String _protocol = protocol;
 		final String _CID = CID;
@@ -244,7 +269,7 @@ public class CommActCreator {
 
 		Vector acts = new Vector();
 
-//		System.out.println(ag.getLocalName()+" esperando "+_seqcode+" y role "+roleToPlay+" protocolo "+protocol);
+		//		System.out.println(ag.getLocalName()+" esperando "+_seqcode+" y role "+roleToPlay+" protocolo "+protocol);
 
 		// Receive a message to start interaction
 		// First message contains the actor list
@@ -253,13 +278,13 @@ public class CommActCreator {
 				// Be careful with reception of sync messages as conventional messages
 
 				return mes.getProtocol() != null && mes.getProtocol().equals(_protocol) &&
-				mes.getConversationId() != null &&
-				mes.getConversationId().equals(_CID) &&
-				mes.getContent() != null &&
-				mes.getUserDefinedParameter("sequence") != null &&
-				mes.getUserDefinedParameter("sequence").equals(_seqcode) &&
-				mes.getUserDefinedParameter("requestedRole") != null &&
-				mes.getUserDefinedParameter("requestedRole").equals(roleToPlay);
+						mes.getConversationId() != null &&
+						mes.getConversationId().equals(_CID) &&
+						mes.getContent() != null &&
+						mes.getUserDefinedParameter("sequence") != null &&
+						mes.getUserDefinedParameter("sequence").equals(_seqcode) &&
+						mes.getUserDefinedParameter("requestedRole") != null &&
+						mes.getUserDefinedParameter("requestedRole").equals(roleToPlay);
 			};
 		};
 
@@ -270,11 +295,11 @@ public class CommActCreator {
 
 
 		jade.core.behaviours.SequentialBehaviour seqBehavior =
-			new jade.core.behaviours.SequentialBehaviour(ag);
+				new jade.core.behaviours.SequentialBehaviour(ag);
 		acts.add(seqBehavior);
 		seqBehavior.setBehaviourName("Expecting to receive "+CID+" at state "+seqcode+" as role "+roleToPlay);
 		jade.core.behaviours.ParallelBehaviour parBehavior=
-			new jade.core.behaviours.ParallelBehaviour(ag, jade.core.behaviours.ParallelBehaviour.WHEN_ALL);
+				new jade.core.behaviours.ParallelBehaviour(ag, jade.core.behaviours.ParallelBehaviour.WHEN_ALL);
 		parBehavior.setBehaviourName("Multiple reception");
 		seqBehavior.addSubBehaviour(parBehavior);
 
@@ -283,15 +308,15 @@ public class CommActCreator {
 		for (int k=0;k<multiple;k++){
 
 			jade.core.behaviours.ReceiverBehaviour rec = new jade.core.behaviours.
-			ReceiverBehaviour(ag, timeout, mt);
+					ReceiverBehaviour(ag, timeout, mt);
 			rec.setBehaviourName("Reception act "+k);
 			parBehavior.addSubBehaviour(rec);
-		
+
 			receiverBehaviors.add(rec);         
 		}
 
 		jade.core.behaviours.SimpleBehaviour sbeh = new jade.core.behaviours.
-		SimpleBehaviour(ag) {
+				SimpleBehaviour(ag) {
 			private boolean done = false;
 			public void action() {
 				Vector<ACLMessage> received=new Vector<ACLMessage>();
@@ -376,11 +401,11 @@ public class CommActCreator {
 			public boolean match(ACLMessage mes) {
 				// Be careful with reception of sync messages as conventional messages
 				return mes.getProtocol() != null && mes.getProtocol().equals(_protocol) &&
-				mes.getContent() != null &&
-				mes.getUserDefinedParameter("sequence") != null &&
-				mes.getUserDefinedParameter("sequence").equals(_seqcode) &&
-				mes.getUserDefinedParameter("requestedRole") != null &&
-				mes.getUserDefinedParameter("requestedRole").equals(roleToPlay);
+						mes.getContent() != null &&
+						mes.getUserDefinedParameter("sequence") != null &&
+						mes.getUserDefinedParameter("sequence").equals(_seqcode) &&
+						mes.getUserDefinedParameter("requestedRole") != null &&
+						mes.getUserDefinedParameter("requestedRole").equals(roleToPlay);
 
 			};
 		};
@@ -388,13 +413,13 @@ public class CommActCreator {
 		MessageTemplate mt = new MessageTemplate(me);
 
 		jade.core.behaviours.SequentialBehaviour seqBehavior =
-			new jade.core.behaviours.SequentialBehaviour(ag);
+				new jade.core.behaviours.SequentialBehaviour(ag);
 
 		final jade.core.behaviours.ReceiverBehaviour rec = new jade.core.behaviours.
-		ReceiverBehaviour(ag, -1, mt);
+				ReceiverBehaviour(ag, -1, mt);
 
 		jade.core.behaviours.SimpleBehaviour sbeh = new jade.core.behaviours.
-		SimpleBehaviour(ag) {
+				SimpleBehaviour(ag) {
 			private boolean done = false;
 			public void action() {
 				try {

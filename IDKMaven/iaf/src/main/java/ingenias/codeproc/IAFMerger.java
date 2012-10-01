@@ -54,6 +54,8 @@ import ingenias.generator.interpreter.SplitHandler;
 import ingenias.generator.util.FileUtils;
 
 import java.awt.Frame;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -117,44 +119,47 @@ public class IAFMerger {
 		else
 			return temp;
 	}
-	
-	
+
+
 	public static void merge(File file1, File file2, File target) throws UnknowFormat, DamagedFormat, CannotLoad, IOException{
-		
+
 		Browser browser=BrowserImp.initialise(file1.getAbsolutePath());
 		GUIResources resources=null;
 		IDEAbs ide=new IDEAbs();
 		resources=ide.getResources();
-		
+
 		ide.updateIDEState(browser.getState());
-		
+
 		PersistenceManager pm = new PersistenceManager();
 		// Merges data from the file	   
-		
+
 		pm.mergeFile(file2.getAbsolutePath(),
 				browser.getState(),
 				resources);
-		
+
 		pm.save(target,ide.getIds());
-			System.err.println("primero");
-/*ide. setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+		System.err.println("primero");
+		/*ide. setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
 		 java.awt.event.WindowEvent wev = new 		 java.awt.event.WindowEvent(ide, java.awt.event.WindowEvent.WINDOW_CLOSING);*/
+		WindowListener[] wls = ide.getWindowListeners();
+		for (WindowListener wl:wls)
+			ide.removeWindowListener(wl);
 		ide.stop();
 		ide.dispose();
-//                java.awt.Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
-	//	for ( java.awt.event.WindowListener listener:listeners)
-	//	 ide.removeWindowListener(listener);// to prevent close dialog
+		//                java.awt.Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+		//	for ( java.awt.event.WindowListener listener:listeners)
+		//	 ide.removeWindowListener(listener);// to prevent close dialog
 
 		Log.getInstance().logSYS("Project imported successfully");//		ide.dispose();
 	}
-	
-	
+
+
 
 	public static void main(String args[]) throws SAXException, IOException, ParserConfigurationException, UnknowFormat, DamagedFormat, CannotLoad{
 
- System.out.println("INGENIAS Merge (C) 2012 Jorge Gomez");
-                System.out.println("This program comes with ABSOLUTELY NO WARRANTY; for details check www.gnu.org/copyleft/gpl.html.");
-                System.out.println("This is free software, and you are welcome to redistribute it under certain conditions;; for details check www.gnu.org/copyleft/gpl.html.");
+		System.out.println("INGENIAS Merge (C) 2012 Jorge Gomez");
+		System.out.println("This program comes with ABSOLUTELY NO WARRANTY; for details check www.gnu.org/copyleft/gpl.html.");
+		System.out.println("This is free software, and you are welcome to redistribute it under certain conditions;; for details check www.gnu.org/copyleft/gpl.html.");
 
 		if (args.length==0)
 			System.err.println("You need to use as argument the path to a XML file containing the merge instructions");
@@ -192,15 +197,15 @@ public class IAFMerger {
 			fos.write(content.toString().getBytes());
 			fos.close();
 
-			System.err.println("segundo");
+
 			for (Frame f:Frame.getFrames()){
 				System.err.println(""+f.getClass().getName()+":"+f.getName());
 				f.dispose();
 
 			}
-			System.err.println("tercero");
 
-			
+
+
 		}
 	}
 }

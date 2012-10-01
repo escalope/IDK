@@ -2,12 +2,12 @@
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>iafarch</artifactId>
-		<version>1.2</version>
+		<version>1.3-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>iafarch-helloworld</artifactId>
-	<version>1.2</version>
+	<version>1.3-SNAPSHOT</version>
 <packaging>maven-archetype</packaging>
 	<name>Archetype - iafarch - hello world example</name>
  <url>http://ingenias.sf.net</url>
@@ -19,9 +19,9 @@
     </license>
   </licenses>
 	<scm>
-		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.1/iafarch/iafarch-helloworld</connection>
-		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.1/iafarch/iafarch-helloworld</developerConnection>
-		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.1/iafarch/iafarch-helloworld</url>		
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch/iafarch-helloworld</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch/iafarch-helloworld</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iafarch/iafarch-helloworld</url>		
 	</scm>
 
 <developers>

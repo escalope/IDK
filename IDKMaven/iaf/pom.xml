@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>ingenias</artifactId>
-		<version>1.2</version>
+		<version>1.3-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>iaf</artifactId>
-	<version>1.2</version>
+	<version>1.3-SNAPSHOT</version>
 	<name>ingenias agent platform</name>
 	<description>The INGENIAS Development Kit</description>
 	<url>http://ingenias.sf.net</url>
@@ -22,9 +22,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.2/iaf</connection>
-		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.2/iaf</developerConnection>
-		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.2/iaf</url>		
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iaf</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iaf</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iaf</url>		
 	</scm>
 	<developers>
 		<developer>
@@ -73,13 +73,13 @@
 		<dependency>
 			<groupId>net.sf.ingenias</groupId>
 			<artifactId>codegen</artifactId>
-			<version>1.3</version>
+			<version>1.4-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.ingenias</groupId>
 			<artifactId>editor</artifactId>
-			<version>1.2</version>
+			<version>1.3-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>

@@ -111,8 +111,6 @@ implements  java.io.Serializable {
 
 	private Preferences prefs;
 
-	private static int state = NONE;
-
 	private GraphManager gm;
 
 	private Vector<GraphModelListener> graphModelListeners=new 
@@ -171,6 +169,7 @@ implements  java.io.Serializable {
 		this.om = om;
 		this.gm=gm;
 		this.prefs=prefs;
+		this.setName("grapheditor");
 		graphPanel = new DraggableTabbedPane();		
 		
 		//graphPanel.setUI(new JTabbedPaneWithCloseIconsUI());

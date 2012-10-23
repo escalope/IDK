@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="tests editor">
+	<test name="testing">
+		<classes>
+			<class name="test.VisualDiagramCreationTest" />
+			<class name="test.TestDiagramCreation" />
+			<class name="test.SpecificationFileModificationTest" />
+			<class name="test.SaveEnableTest" />
+			<class name="test.CompareSpecTest" />
+		</classes>
+	</test>
+</suite>

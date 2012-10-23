@@ -21,56 +21,35 @@
 
 package ingenias.editor;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.text.html.HTMLFrameHyperlinkEvent;
-import javax.swing.tree.*;
-import javax.swing.event.*;
-
-import java.awt.event.*;
-import java.util.Map;
-import java.util.Hashtable;
-import ingenias.editor.extension.*;
-import java.awt.*;
-import java.awt.image.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.net.URL;
-import java.util.*;
-import javax.swing.event.UndoableEditEvent;
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.jgraph.event.*;
-import java.util.Vector;
-import org.jgraph.JGraph;
-import org.jgraph.graph.*;
-import org.jgraph.event.*;
-import org.jgraph.plaf.basic.*;
-import ingenias.editor.entities.*;
-import java.io.*;
-
-import ingenias.editor.persistence.*;
-
-import java.awt.image.*;
-import java.awt.datatransfer.*;
-import java.awt.geom.Rectangle2D;
-
-import ingenias.editor.cell.*;
-import ingenias.exception.NullEntity;
+import ingenias.editor.actions.LoadFileSwingTask;
+import ingenias.editor.persistence.TextAreaOutputStream;
+import ingenias.exception.CannotLoad;
+import ingenias.exception.DamagedFormat;
+import ingenias.exception.UnknowFormat;
+import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.BrowserImp;
-import ingenias.generator.browser.Graph;
-import ingenias.generator.browser.GraphEntity;
-import ingenias.editor.models.*;
-import ingenias.editor.actions.*;
-import ingenias.editor.actions.diagram.*;
 
-class CheckChangesInFile extends Thread{
+import java.awt.Component;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Vector;
+
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
+class CheckChangesInFile extends Thread implements  WindowListener {
 	boolean stop=false;
 	File watchedFile=null;
-	private long lastModified;
+	private long watchedFileLastModified;
 	IDE ide;
+	private boolean closing=false;
 
-	CheckChangesInFile(IDE ide){				
+	CheckChangesInFile(IDE ide){		
+		super("Spec File Monitoring");
 		this.ide=ide;
 	}
 
@@ -88,70 +67,103 @@ class CheckChangesInFile extends Thread{
 	}
 
 	public void run(){
-		while (!stop){
+		boolean isCurrentFileContentDifferentFromIDEContent = true;
+		while (!stop && !closing){
+
 			try {
 				Thread.currentThread().sleep(500);
 				if (watchedFile!=null &&
 						ide.getIds().getCurrentFile()!=null 
 						&& ide.getIds().getCurrentFile().getCanonicalPath().equals(watchedFile.getCanonicalPath())){
-					if (ide.hasFocus()){
-						if (new File(watchedFile.getCanonicalPath()).lastModified()>lastModified){
+					long currentFileLastModified = new File(watchedFile.getCanonicalPath()).lastModified();
+					if (currentFileLastModified>watchedFileLastModified){
+						isCurrentFileContentDifferentFromIDEContent=differentContent();
+						watchedFileLastModified=currentFileLastModified;												
+						if (isCurrentFileContentDifferentFromIDEContent && !closing){
 							if (!ide.getIds().isChanged()){										
 								int result = showConfirmDialog(ide, 
 										"The specification has changed. \n Press OK to " +
-												"load the new one. " +
+												"load the new one from disk. " +
 												" If you cancel, no further action will be taken.","Specification file changed in disk",
 												JOptionPane.OK_CANCEL_OPTION);
 								if (result==JOptionPane.OK_OPTION){
-									lastModified=new File(watchedFile.getCanonicalPath()).lastModified();
+									watchedFileLastModified=currentFileLastModified;
 									new LoadFileSwingTask(watchedFile,ide,ide.getIds(),ide.getResources()).execute();
 								} else {
 									// update data to match the new file
 									watchedFile=ide.getIds().getCurrentFile();
-									lastModified=this.watchedFile.lastModified();
+									watchedFileLastModified=this.watchedFile.lastModified();
 								}
-
 							} else {
 								int result = showConfirmDialog(ide, "The specification has changed in disk." +
 										" Opened one is modified and changes can be lost. Do you want continue?",
 										"Specification file changed in disk", 
 										JOptionPane.OK_CANCEL_OPTION);
 
-								lastModified=new File(watchedFile.getCanonicalPath()).lastModified();
+								watchedFileLastModified=currentFileLastModified;
 								if (result==JOptionPane.OK_OPTION)
 									new LoadFileSwingTask(watchedFile,ide,ide.getIds(),ide.getResources()).execute();
 								else {
 									// update data to match the new file
 									watchedFile=ide.getIds().getCurrentFile();
-									lastModified=this.watchedFile.lastModified();
+									watchedFileLastModified=this.watchedFile.lastModified();
 								}
 							}
-
+						} else {
+							watchedFileLastModified=this.watchedFile.lastModified();
 						}
 					} 
 				} else {
 					if (watchedFile==null && ide.getIds().getCurrentFile()!=null ){
 						// nothing is being watched, but a file is opened
 						watchedFile=ide.getIds().getCurrentFile();
-						lastModified=this.watchedFile.lastModified();
+						watchedFileLastModified=this.watchedFile.lastModified();
 					} else {
 						if (watchedFile!=null &&
 								ide.getIds().getCurrentFile()!=null 
 								&& !ide.getIds().getCurrentFile().getCanonicalPath().equals(watchedFile.getCanonicalPath())){
 							// files have changed and it is required to watch a new one
 							watchedFile=ide.getIds().getCurrentFile();
-							lastModified=this.watchedFile.lastModified();
+							watchedFileLastModified=this.watchedFile.lastModified();
 						}
 					}
 				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			} catch (IOException e) {			
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private boolean differentContent() {		
+		try {
+			Browser bimp=BrowserImp.initialise(watchedFile.getCanonicalPath());
+			ModelJGraph.enableAllListeners(); // a browser initialised through the initialise method is assumed to be
+			//linked to no gui. Therefore, the persistence does load the spec without any listeners
+			// and this prevents some runtime exception due to the event managers acting over elements in the specification
+			// which were not layered out. This causes the listeners to be disabled by default, which is handled by
+			// a static var. So, loading a new spec in headless mode causes a gui to ignore events.
+			//return !BrowserImp.compare(bimp, new BrowserImp(ide.getIds()));
+			Vector<String> diffs2 = BrowserImp.findAllDifferences(bimp, new BrowserImp(ide.getIds()));
+			Vector<String> diffs1=BrowserImp.findAllDifferences(new BrowserImp(ide.getIds()),bimp);
+			return !diffs2.isEmpty() || !diffs1.isEmpty();
+		} catch (UnknowFormat e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DamagedFormat e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CannotLoad e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+
 
 	}
 
@@ -159,9 +171,51 @@ class CheckChangesInFile extends Thread{
 		stop=true;
 	}
 
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		closing=true;
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
-public class IDE
-extends ingenias.editor.IDEAbs {
+
+public class IDE extends ingenias.editor.IDEAbs {
 
 
 	/**
@@ -172,7 +226,9 @@ extends ingenias.editor.IDEAbs {
 		try {
 			System.getProperties().load(getClass().getResourceAsStream("/editor.properties"));
 		} catch (IOException e) {			
+
 		}
+
 	}
 	public static void setUIFont (javax.swing.plaf.FontUIResource f){
 		java.util.Enumeration keys = UIManager.getDefaults().keys();
@@ -183,6 +239,44 @@ extends ingenias.editor.IDEAbs {
 				UIManager.put (key, f);
 		}
 	}    
+
+	public IDE launchIDE(String args[]){
+		IDEState ids=IDEState.emptyIDEState();
+		try {
+			ingenias.generator.browser.BrowserImp.initialise(ids);
+		}	
+		catch (Exception e) {
+			e.printStackTrace();
+		}	;	
+		GUIResources resources=null;
+		IDE ide=this;
+		resources=ide.getResources();
+		Log.initInstance(new PrintWriter(new TextAreaOutputStream(resources.getModuleOutput())),
+				new PrintWriter(new TextAreaOutputStream(resources.getLogs())));
+		ide.updateIDEState(ids);
+
+
+		//ide.initialiseActionHandlers();
+		ide.validate();
+		ide.setLocationByPlatform(true);
+		ide.pack();
+		ide.setVisible(true);
+		ide.setTitle("IDK-INGENME");
+
+		CheckChangesInFile ccif=new CheckChangesInFile(ide);
+		this.addWindowListener(ccif);
+		ccif.start();
+
+		if (args.length != 0 && !args[0].equalsIgnoreCase("testing")) {		
+			new LoadFileSwingTask(new File(args[0]),ide,ide.getIds(),resources).execute();	
+
+		}
+
+		return ide;
+	}
+
+
+
 
 
 	public static void main(String args[]) throws Exception {
@@ -202,37 +296,18 @@ extends ingenias.editor.IDEAbs {
 			}
 		}
 
-		IDEState ids=IDEState.emptyIDEState();
-		try {
-			ingenias.generator.browser.BrowserImp.initialise(ids);
-		}	
-		catch (Exception e) {
-			e.printStackTrace();
-		}	;	
-		GUIResources resources=null;
-		IDE ide=new IDE();
-		resources=ide.getResources();
-		Log.initInstance(new PrintWriter(new TextAreaOutputStream(resources.getModuleOutput())),
-				new PrintWriter(new TextAreaOutputStream(resources.getLogs())));
-		ide.updateIDEState(ids);
+		new IDE().launchIDE(args);
 
+	}
 
-
-		//ide.initialiseActionHandlers();
-		ide.validate();
-		ide.pack();
-		ide.setVisible(true);
-		ide.setTitle("IDK-INGENME");
-
-		if (args.length != 0 && !args[0].equalsIgnoreCase("testing")) {		
-			new LoadFileSwingTask(new File(args[0]),ide,ide.getIds(),resources).execute();	
-			CheckChangesInFile ccif=new CheckChangesInFile(ide);
-			ccif.start();
-			/*ids=new LoadFileAction(ide.getIds(),ide.getResources()).loadNewFile(updater)(new File(args[0]));
-			ide.updateIDEState(ids);*/
+	public void removeExitAction() {
+		WindowListener[] wls = this.getWindowListeners();
+		for (WindowListener wl:wls){
+			if (!(wl instanceof CheckChangesInFile))
+				this.removeWindowListener(wl);
 		}
-
-
+		this.exit.removeActionListener(this.exit.getActionListeners()[0]);
+		
 	}
 }
 

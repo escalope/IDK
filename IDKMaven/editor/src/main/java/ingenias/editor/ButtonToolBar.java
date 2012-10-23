@@ -140,7 +140,7 @@ public class ButtonToolBar extends JToolBar {
 		action = jg.getTransferHandler().getCopyAction();
 		img = ImageLoader.getImage("images/page_copy.png");
 		action.putValue(Action.SMALL_ICON, new ImageIcon(img));
-		copy = new EventRedirector(this.editor, action,new ImageIcon(img));
+		copy = new EventRedirector(this.editor, action,new ImageIcon(img));		
 		this.add(copy);						
 
 		// Paste

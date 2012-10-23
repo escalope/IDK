@@ -174,7 +174,7 @@ public class CommonMenuEntriesActionFactory {
 
 		Vector v=ObjectManager.getInheritors(ent.getClass());
 		if (v.size()>0){
-		
+
 			for (int k = 0; k < v.size(); k++) {
 				final Class current = (Class) v.elementAt(k);
 				actions.add(new AbstractAction(current.getName().substring(current.getName().lastIndexOf(".")+1,current.getName().length())) {
@@ -182,7 +182,7 @@ public class CommonMenuEntriesActionFactory {
 						Log.getInstance().logERROR("Replacing");
 						try {
 							Vector<GraphRelationshipImp> rels = 
-								browser.findEntity(ent.getId()).getAllRelationships();
+									browser.findEntity(ent.getId()).getAllRelationships();
 							Entity newent = ConvertUtils.convert(state,ent.getId(), ent.getType(),
 									current);
 							for (int j=0;j<rels.size();j++){
@@ -255,27 +255,31 @@ public class CommonMenuEntriesActionFactory {
 							ModelDataEntity mde =  graph.getProperties();
 
 							ingenias.editor.editiondialog.GeneralEditionFrame gef = new ingenias.
-							editor.editiondialog.GeneralEditionFrame(state.editor, state.om, state.gm, resources.getMainFrame(),
-									"Edit diagram properties",
-									mde);
+									editor.editiondialog.GeneralEditionFrame(state.editor, state.om, state.gm, resources.getMainFrame(),
+											"Edit diagram properties",
+											mde);							
 							ModelJGraph mjg =
-								state.gm.getModel(mde.getId());
+									state.gm.getModel(mde.getId());
 							//	              Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 							gef.setLocation(GraphicsUtils.getCenter(resources.getMainFrame(),gef.getSize()));
 							gef.pack();
 							gef.setVisible(true);
 							duplicated =
-								state.gm.isDuplicated(mde.getId());
+									state.gm.isDuplicated(mde.getId());
 							if (duplicated) {
 								JOptionPane.showMessageDialog(resources.getMainFrame(),
 										"There exists a model with the same name. Please, select another",
 										"Warning", JOptionPane.WARNING_MESSAGE);
 							} else {						
-								mjg.setName(mde.getId());
-								state.gm.arbolProyecto.storeTreeExpansionPaths();
-								( (DefaultTreeModel) state.gm.arbolProyecto.getModel()).reload();
-								state.gm.arbolProyecto.restoreTreeExpansionPath();																					
-								state.diagramPropertiesChanged(mjg);
+								if (gef.getStatus()==gef.ACCEPTED){
+									mjg.setName(mde.getId());
+									state.gm.arbolProyecto.storeTreeExpansionPaths();
+									( (DefaultTreeModel) state.gm.arbolProyecto.getModel()).reload();
+									state.gm.arbolProyecto.restoreTreeExpansionPath();																					
+									state.diagramPropertiesChanged(mjg);
+									state.setChanged(true);
+									resources.setChanged();
+								}
 							}
 						}
 

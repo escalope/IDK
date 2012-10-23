@@ -187,6 +187,7 @@ public class EmbeddedCellEditor  extends BasicGraphUI implements java.io.Seriali
 				resources.getMainFrame().invalidate();
 				resources.getMainFrame().repaint();
 				ids.setChanged(true);
+				resources.setChanged();
 			};
 		});
 	}
@@ -231,6 +232,7 @@ public class EmbeddedCellEditor  extends BasicGraphUI implements java.io.Seriali
 				resources.getMainFrame().invalidate();
 				resources.getMainFrame().repaint();
 				ids.setChanged(true);
+				resources.setChanged();
 			};
 		});
 

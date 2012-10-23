@@ -123,8 +123,9 @@ public class LoadFileSwingTask extends SwingWorker<Void, Void> implements Progre
 		//setCursor(null); //turn off the wait cursor
 	}
 	public void setCurrentProgress(int progress) {
+		if (progress<0 || progress>100)
+			throw new IllegalArgumentException(" The value for a progress bar should be from 0 to 100 and it is "+progress);
 		setProgress(progress);
-	
 
 	}
 }

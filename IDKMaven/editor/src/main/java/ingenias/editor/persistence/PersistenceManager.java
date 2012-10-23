@@ -44,7 +44,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -163,9 +167,8 @@ public class PersistenceManager {
 	 *            Description of the Parameter
 	 */
 	public void savePreferences(IDEState ids) {
-		try {
-			JFileChooser jfc = new JFileChooser();
-			File homedir = jfc.getCurrentDirectory();
+		try {			
+			File homedir =  new File(System.getProperty("user.home"));
 			String filename = homedir.getPath() + "/.idk/idkproperties.xml";
 			if (!new File(homedir.getPath() + "/.idk").exists() ){
 				new File(homedir.getPath() + "/.idk").mkdir();
@@ -180,7 +183,7 @@ public class PersistenceManager {
 			for (int k = 0; k < v.size(); k++) {
 				File current = (File) v.elementAt(k);
 				if (current!=null)
-				fos.write(("<lastfile>" + ingenias.generator.util.Conversor.replaceInvalidChar(current.getPath()) + "</lastfile>\n").getBytes());
+					fos.write(("<lastfile>" + ingenias.generator.util.Conversor.replaceInvalidChar(current.getPath()) + "</lastfile>\n").getBytes());
 			}
 			if (ids.getCurrentImageFolder() != null) {
 				fos.write(("<lastimage>"
@@ -353,120 +356,194 @@ public class PersistenceManager {
 	 *                Description of Exception
 	 */
 
-	public void loadWithoutListeners(String input,GUIResources resources, Properties oldProperties, IDEState ids)
+	public synchronized void loadWithoutListeners(String input,GUIResources resources, Properties oldProperties, IDEState ids)
 			throws ingenias.exception.UnknowFormat,
 			ingenias.exception.DamagedFormat, CannotLoad {
 
-
-		RelationshipManager.clearRelationships();
+		FileChannel channel=null;
+		FileLock lock=null;
+		File lockFile=new File(System.getProperty("user.home")+"/.idk/lock");
+		if (!lockFile.exists())
+			try {
+				lockFile.createNewFile();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		try {
+			channel = new RandomAccessFile(lockFile, "rw").getChannel();
+			// Use the file channel to create a lock on the file.
+			// This method blocks until it can retrieve the lock.
+			// Being the load method synchronized, it ensures in-jvm consistency. The lock ensures out-jvm consistency
+			int timeout=0;
+			while (timeout<10000 && lock==null){
+				try {
+					lock = channel.lock();
+				} catch (OverlappingFileLockException ofl){
+					try {
+						Thread.currentThread().sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					timeout=timeout+500;
+				}
+			}
+			if (timeout>=10000)
+				throw new CannotLoad("Could not acquire a lock on file "+input);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 		try {
-
-			DOMParser parser = new DOMParser();
-			// Parse the Document
-			// and traverse the DOM
-			InputSource is = new InputSource(new FileInputStream(input));
-			is.setEncoding("UTF-8");
-			parser.parse(is);
-
-			Document doc = parser.getDocument();
-
-			String version = "1.0";
-			try {
-				version = this.getVersion(doc);
-			} catch (VersionNotFound vnf) {
-				// vnf.printStackTrace();
-			}
-
-			this.setVersion(version,ids);
-
-			ids.prop.putAll(oldProperties);			
-			// ol.restoreObject(ids.om, ids.gm, doc);
-			restoreObjects(ids.om, ids.gm, doc);
-			rl.restoreRelationships(ids.om, ids.gm, doc);
+			RelationshipManager.clearRelationships();
 
 			try {
 
-				gl.restoreModels(ids, resources,doc);
-				Vector<ModelJGraph> mjg = ids.gm.getUOModels();
-				for (int k = 0; k < mjg.size(); k++) {
-					mjg.elementAt(k).setSelectionCells(new Object[0]);
-					mjg.elementAt(k).setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+				DOMParser parser = new DOMParser();
+				// Parse the Document
+				// and traverse the DOM
+				InputSource is = new InputSource(new FileInputStream(input));
+				is.setEncoding("UTF-8");
+				parser.parse(is);
+
+				Document doc = parser.getDocument();
+
+				String version = "1.0";
+				try {
+					version = this.getVersion(doc);
+				} catch (VersionNotFound vnf) {
+					// vnf.printStackTrace();
 				}
-			} catch (ingenias.exception.CannotLoadDiagram cld) {
-				throw new ingenias.exception.DamagedFormat(cld.getMessage());
-			}
 
-			NodeList leafpackages = doc.getElementsByTagName("leafpackages");
-			if (leafpackages != null && leafpackages.getLength() > 0) {
-				NodeList paths = leafpackages.item(0).getChildNodes();
-				ids.gm.toExpad = new Vector<TreePath>();
-				for (int k = 0; k < paths.getLength(); k++) {
-					if (paths.item(k).getNodeName().equalsIgnoreCase("path")) {
-						NodeList pathToAdd = paths.item(k).getChildNodes();
-						Vector<String> pathlist = new Vector<String>();
-						for (int j = 0; j < pathToAdd.getLength(); j++) {
-							if (pathToAdd.item(j).getNodeName()
-									.equalsIgnoreCase("package")) {
-								String pname = pathToAdd.item(j)
-										.getAttributes().getNamedItem("id")
-										.getNodeValue();								
-								ids.gm.addPackage(pathlist.toArray(), pname);								
-								pathlist.add(pname);
+				this.setVersion(version,ids);
 
+				ids.prop.putAll(oldProperties);			
+				// ol.restoreObject(ids.om, ids.gm, doc);
+				restoreObjects(ids.om, ids.gm, doc);
+				rl.restoreRelationships(ids.om, ids.gm, doc);
+
+				try {
+
+					gl.restoreModels(ids, resources,doc);
+					Vector<ModelJGraph> mjg = ids.gm.getUOModels();
+					for (int k = 0; k < mjg.size(); k++) {
+						mjg.elementAt(k).setSelectionCells(new Object[0]);
+						mjg.elementAt(k).setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+					}
+				} catch (ingenias.exception.CannotLoadDiagram cld) {
+					throw new ingenias.exception.DamagedFormat(cld.getMessage());
+				}
+
+				NodeList leafpackages = doc.getElementsByTagName("leafpackages");
+				if (leafpackages != null && leafpackages.getLength() > 0) {
+					NodeList paths = leafpackages.item(0).getChildNodes();
+					ids.gm.toExpad = new Vector<TreePath>();
+					for (int k = 0; k < paths.getLength(); k++) {
+						if (paths.item(k).getNodeName().equalsIgnoreCase("path")) {
+							NodeList pathToAdd = paths.item(k).getChildNodes();
+							Vector<String> pathlist = new Vector<String>();
+							for (int j = 0; j < pathToAdd.getLength(); j++) {
+								if (pathToAdd.item(j).getNodeName()
+										.equalsIgnoreCase("package")) {
+									String pname = pathToAdd.item(j)
+											.getAttributes().getNamedItem("id")
+											.getNodeValue();								
+									ids.gm.addPackage(pathlist.toArray(), pname);								
+									pathlist.add(pname);
+
+								}
 							}
+							TreePath tp = getPath(pathlist, ids.gm.arbolProyecto).getParentPath();
+							ids.gm.toExpad.add(tp);
+							ids.gm.getArbolProyecto().expandPath(tp);	
 						}
-						TreePath tp = getPath(pathlist, ids.gm.arbolProyecto).getParentPath();
-						ids.gm.toExpad.add(tp);
-						ids.gm.getArbolProyecto().expandPath(tp);	
 					}
-				}
 
-				for (TreePath tp:ids.gm.toExpad){
-					Vector<Object> npath=new Vector<Object>(); 
-					if (tp!=null){
-						for (Object path:tp.getPath()){
-							npath.add(path);
+					for (TreePath tp:ids.gm.toExpad){
+						Vector<Object> npath=new Vector<Object>(); 
+						if (tp!=null){
+							for (Object path:tp.getPath()){
+								npath.add(path);
+							}
+							npath.remove(0);
+							npath.insertElementAt(ids.gm.getArbolProyecto().getModel().getRoot(), 0);					
+							ids.gm.getArbolProyecto().expandPath(new TreePath(npath.toArray()));	
 						}
-						npath.remove(0);
-						npath.insertElementAt(ids.gm.getArbolProyecto().getModel().getRoot(), 0);					
-						ids.gm.getArbolProyecto().expandPath(new TreePath(npath.toArray()));	
 					}
+					resources.setCurrentProgress(90);
 				}
-				resources.setCurrentProgress(90);
+				//	ids.gm.arbolProyecto.validate();
+				this.restoreProjectProperties(doc, ids); // It has to be done at
+				// this moment to open
+				// the different diagram
+				// tabs
+				// deleteBadRelationships(gm);
+
+			} catch (java.io.FileNotFoundException fnf) {
+				throw new CannotLoad("File " + input + " not found");
+			} catch (java.io.IOException ioe) {
+				throw new CannotLoad("File " + input + " could not be loaded. "
+						+ ioe.getMessage());
+			} catch (org.xml.sax.SAXException se) {
+				throw new UnknowFormat("File " + input + " is not valid xml."
+						+ se.getMessage());
+			} catch (UnknownVersion uv) {
+				throw new ingenias.exception.CannotLoad(
+						"File "
+								+ input
+								+ " version is not recognised. Try downloading a new version of the IDE in http://ingenias.sourceforge.net");
+			} catch (ClassNotFoundException cnf) {
+				cnf.printStackTrace();
+
+			} catch (NoSuchMethodException nsme) {
+				nsme.printStackTrace();
+			} catch (IllegalAccessException iae) {
+				iae.printStackTrace();
+			} catch (InstantiationException ie) {
+				ie.printStackTrace();
+			} catch (InvocationTargetException ite) {
+				ite.printStackTrace();
 			}
-			//	ids.gm.arbolProyecto.validate();
-			this.restoreProjectProperties(doc, ids); // It has to be done at
-			// this moment to open
-			// the different diagram
-			// tabs
-			// deleteBadRelationships(gm);
 
-		} catch (java.io.FileNotFoundException fnf) {
-			throw new CannotLoad("File " + input + " not found");
-		} catch (java.io.IOException ioe) {
-			throw new CannotLoad("File " + input + " could not be loaded. "
-					+ ioe.getMessage());
-		} catch (org.xml.sax.SAXException se) {
-			throw new UnknowFormat("File " + input + " is not valid xml."
-					+ se.getMessage());
-		} catch (UnknownVersion uv) {
-			throw new ingenias.exception.CannotLoad(
-					"File "
-							+ input
-							+ " version is not recognised. Try downloading a new version of the IDE in http://ingenias.sourceforge.net");
-		} catch (ClassNotFoundException cnf) {
-			cnf.printStackTrace();
 
-		} catch (NoSuchMethodException nsme) {
-			nsme.printStackTrace();
-		} catch (IllegalAccessException iae) {
-			iae.printStackTrace();
-		} catch (InstantiationException ie) {
-			ie.printStackTrace();
-		} catch (InvocationTargetException ite) {
-			ite.printStackTrace();
+		} catch (ingenias.exception.UnknowFormat uf){
+			try {
+				ids.editor.setEnabled(true);
+				lock.release();
+				channel.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			throw uf;
+		} catch (ingenias.exception.DamagedFormat df){
+			try {
+				ids.editor.setEnabled(true);
+				lock.release();
+				channel.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			throw df;
+		} catch (CannotLoad cl){
+			try {
+				ids.editor.setEnabled(true);
+				lock.release();
+				channel.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			throw cl;
 		}
+		try {
+			lock.release();
+			channel.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 
 	}
 
@@ -785,9 +862,43 @@ public class PersistenceManager {
 	 * @exception FileNotFoundException
 	 *                Description of Exception
 	 */
-	private void saveAllModels(IDEState ids, RelationshipManager rm, File output)
+	private synchronized void saveAllModels(IDEState ids, RelationshipManager rm, File output)
 			throws IOException, FileNotFoundException {
+		FileChannel channel=null;
+		FileLock lock=null;
+		File lockFile=new File(System.getProperty("user.home")+"/.idk/lock");
+		if (!lockFile.exists())
+			try {
+				lockFile.createNewFile();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 		try {
+
+
+
+			channel = new RandomAccessFile(lockFile, "rw").getChannel();
+			// Use the file channel to create a lock on the file.
+			// This method blocks until it can retrieve the lock.
+			// Being the load method synchronized, it ensures in-jvm consistency. The lock ensures out-jvm consistency
+			int timeout=0;
+			while (timeout<10000 && lock==null){
+				try {
+					lock = channel.lock();
+				} catch (OverlappingFileLockException ofl){
+					try {
+						Thread.currentThread().sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					timeout=timeout+500;
+				}
+			}
+			if (timeout>=10000)
+				throw new IOException("Could not acquire a lock on file "+output.getCanonicalPath());
+
+
 			RelationshipSave rs = new RelationshipSave();
 			ObjectSave objsave = new ObjectSave();
 			Vector<TreeNode[]> models = ids.gm.getModels();
@@ -816,9 +927,22 @@ public class PersistenceManager {
 			fos.write("</models>\n");
 			fos.write("</project>\n");
 			fos.close();
-		} catch (Throwable th) {
+		} catch (IOException th) {
 			th.printStackTrace();
+			try {
+				lock.release();
+				channel.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			throw th;
 
+		} 
+		try {
+			lock.release();
+			channel.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}

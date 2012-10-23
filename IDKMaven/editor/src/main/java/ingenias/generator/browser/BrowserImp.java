@@ -20,10 +20,9 @@ package ingenias.generator.browser;
 
 import ingenias.editor.GUIResources;
 import ingenias.editor.IDEState;
-import ingenias.exception.NullEntity;
-
 import java.util.*;
 import java.io.*;
+import ingenias.exception.*;
 
 /**
  *  Implements a Singleton pattern to gain global access to diagrams contained
@@ -51,6 +50,7 @@ public class BrowserImp implements Browser {
 		this.ids=ids;
 		if (ids==null)
 			throw new RuntimeException("The ids parameter cannot be null");
+		currentProject=ids.getCurrentFile();
 	}
 
 
@@ -305,34 +305,34 @@ public class BrowserImp implements Browser {
 			GraphAttribute attr1=attributes2[j];
 			for (int l=0;l<attributes2.length && !found;l++){
 				GraphAttribute attr2=attributes2[l];												
-					found=found || 
-							attr1.getName().equals(attr2.getName());
-					if (found){
-						found = found || (attr1.getSimpleValue()!=null && 
-								attr2.getSimpleValue()!=null && 
-								attr1.getSimpleValue().equals(attr2.getSimpleValue()));
-						if (!found){									
+				found=found || 
+						attr1.getName().equals(attr2.getName());
+				if (found){
+					found = found || (attr1.getSimpleValue()!=null && 
+							attr2.getSimpleValue()!=null && 
+							attr1.getSimpleValue().equals(attr2.getSimpleValue()));
+					if (!found){									
+						try {
+							attr1.getEntityValue();
 							try {
-								attr1.getEntityValue();
-								try {
-									attr2.getEntityValue();
-									found = found || 
-											attr1.getEntityValue().getID().equals(attr2.getEntityValue().getID());
-								} catch (NullEntity e1) {
-									// Not OK.											
-								}
-							} catch (NullEntity e) {
-								try {
-									attr2.getEntityValue();
-									// Not ok.
-								} catch (NullEntity e1) {
-									// It's ok
-									found = true;
-								}
+								attr2.getEntityValue();
+								found = found || 
+										attr1.getEntityValue().getID().equals(attr2.getEntityValue().getID());
+							} catch (NullEntity e1) {
+								// Not OK.											
 							}
-							
-						}								
-					}
+						} catch (NullEntity e) {
+							try {
+								attr2.getEntityValue();
+								// Not ok.
+							} catch (NullEntity e1) {
+								// It's ok
+								found = true;
+							}
+						}
+
+					}								
+				}
 			}
 			allIncluded=allIncluded && found;
 			j++;
@@ -352,30 +352,191 @@ public class BrowserImp implements Browser {
 			if (ent2==null){
 				differences.add("entity "+ent1.getID()+":"+ent1.getType()+" does not exist");
 			} else {
-				Vector<GraphRelationship> relationships1 = ent1.getAllRelationships();
-				Vector<GraphRelationship> relationships2 = ent2.getAllRelationships();
-				int j=0;
-				allIncluded=allIncluded && relationships1.size()==relationships2.size();
-				while (j<relationships1.size()){
-					GraphRelationship gr1=relationships1.elementAt(j);
-					boolean found=false;
-					for (int l=0;l<relationships2.size() && !found;l++){
-						GraphRelationship gr2=relationships2.elementAt(l);
-						found=found || gr2.getID().equals(gr1.getID());
-					}
-					if (!found){
-						differences.add("relationships "+gr1.getID()+":"+gr1.getType()+" does not exist");
-					}
-					j++;	
-				}
+				differences.addAll(checkEntity(ent1, ent2, new Vector()));
+
+
 			}
 			k++;
 		}		
 		return differences;		
 	}
 
+	private static Vector<String> checkEntity(GraphEntity ent1,
+			GraphEntity ent2, Vector<GraphEntity> alreadyVerified) {
+		boolean allIncluded=true;
+		Vector<String> differences=new Vector<String>();
+		if (!ent1.getClass().equals(ent2.getClass())){
+			differences.add("entity "+ent1.getID()+":"+ent1.getType()+" does not exist but there is one with id "+ent1.getID()+":"+ent2.getType());
+		} else {
+			if (!alreadyVerified.contains(ent1)){
+				alreadyVerified.add(ent1);
+				Vector<String> fieldDifferences=checkFields(ent1,ent2,alreadyVerified);
+				differences.addAll(fieldDifferences);
+				if (!fieldDifferences.isEmpty()){
+					Vector<GraphRelationship> relationships1 = ent1.getAllRelationships();
+					Vector<GraphRelationship> relationships2 = ent2.getAllRelationships();
+					int j=0;
+					allIncluded=allIncluded && relationships1.size()==relationships2.size();
+					while (j<relationships1.size()){
+						GraphRelationship gr1=relationships1.elementAt(j);
+						boolean found=false;
+						for (int l=0;l<relationships2.size() && !found;l++){
+							GraphRelationship gr2=relationships2.elementAt(l);
+							found=found || gr2.getID().equals(gr1.getID());
+						}
+						if (!found){
+							differences.add("relationship "+gr1.getID()+":"+gr1.getType()+" does not exist");
+						}
+						j++;	
+					}
+				}
+			}
+		}
+		return differences;
+	}
+
+	private static Vector<String> checkFields(GraphEntity ent1,
+			GraphEntity ent2, Vector alreadyVerified) {
+		GraphAttribute[] attsEnt1 = ent1.getAllAttrs();
+		GraphAttribute[] attsEnt2 = ent2.getAllAttrs();
+		Vector<String> differences=new Vector<String>();
+
+		for (int k=0;k<attsEnt1.length; k++){
+			boolean found=false;
+			GraphAttribute gaE1=attsEnt1[k];
+			if (!gaE1.getName().equalsIgnoreCase("prefs")){
+				for (int j=0;j<attsEnt2.length && !found;j++) {
+					GraphAttribute gaE2=attsEnt2[j];
+
+					if (gaE1.getName().equals(gaE2.getName())){
+						if (gaE1.isSimpleValue() && gaE2.isSimpleValue()){
+							evaluateSimpleValueField(ent1, differences, gaE1, gaE2);
+						} else
+
+							if (gaE1.isCollectionValue() && gaE2.isCollectionValue()){
+								evaluateCollectionValueField(ent1, alreadyVerified,
+										differences, found, gaE1, gaE2);
+							} else {
+								if (gaE1.isEntityValue() && gaE2.isEntityValue())
+								evaluateEntityValueField(ent1, alreadyVerified,
+										differences, gaE1, gaE2);
+								else {
+									differences.add("entity "+ent1.getID()+":"+ent1.getType()+" has an attribute named "+gaE1.getName()+" with different type in the second spec");
+								}
+							} 
+					}
+				}
+			}
+		}
+		return differences;
+	}
+
+
+	private static void evaluateEntityValueField(GraphEntity ent1,
+			Vector alreadyVerified, Vector<String> differences,
+			GraphAttribute gaE1, GraphAttribute gaE2) {
+		boolean found;
+		if (gaE1.isEntityValue() && gaE2.isEntityValue()){
+			// different types of fields. It sho
+			GraphEntity entValue1=null;
+			GraphEntity entValue2=null;
+			try {
+				entValue1=gaE1.getEntityValue();
+			} catch (NullEntity ne){};
+			try {
+				entValue2=gaE2.getEntityValue();
+			} catch (NullEntity ne){};
+			if (entValue1==null && entValue2==null)
+				found=true;
+			else
+				if (entValue1!=null && entValue2==null){
+					differences.add("entity " +ent1.getID()+":"+ent1.getType()+" has not the same values for attribute "+
+							gaE1.getName()+":"+entValue1+" instead the second spec has null");
+				} else
+					if (entValue1==null && entValue2!=null){
+						differences.add("entity " +ent1.getID()+":"+ent1.getType()+" has not the same values for attribute "+
+								gaE1.getName()+":null instead the second spec has \""+entValue2+"\"");
+					} else
+						if (entValue1!=null && entValue2!=null){
+							Vector<String> cdifferences = checkEntity(entValue1,entValue2,alreadyVerified);
+							differences.addAll(cdifferences);
+							found=cdifferences.isEmpty();
+						} 
+		}
+	}
+
+
+	private static void evaluateCollectionValueField(GraphEntity ent1,
+			Vector alreadyVerified, Vector<String> differences, boolean found,
+			GraphAttribute gaE1, GraphAttribute gaE2)  {
+		GraphCollection colValue1=null;
+		GraphCollection colValue2=null;		
+		try {
+			colValue1=gaE1.getCollectionValue();
+		} catch (ingenias.exception.NullEntity ne){};
+		try {
+			colValue2=gaE2.getCollectionValue();
+		} catch (ingenias.exception.NullEntity ne){};
+		if (colValue1==null && colValue2==null){
+			found=true;
+		} else
+			if (colValue1==null && colValue2!=null){
+				differences.add("entity " +ent1.getID()+":"+ent1.getType()+" has a null value  for attribute "+
+						gaE1.getName()+" instead the second spec has "+colValue2);
+			} else 
+				if (colValue1!=null && colValue2==null){
+					differences.add("entity " +ent1.getID()+":"+ent1.getType()+" has not the same values for attribute "+
+							gaE1.getName()+":"+colValue1+" instead the second spec has null");
+				} else
+					if (colValue1!=null && colValue2!=null &&
+					colValue1.size()==colValue2.size()){
+						Vector<String> cdifferences = new Vector<String>();
+						for (int l=0;l<colValue1.size();l++){
+							try {
+								cdifferences.addAll(checkEntity(colValue1.getElementAt(l), 
+										colValue2.getElementAt(l), 
+										alreadyVerified));
+							} catch (NullEntity e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						differences.addAll(cdifferences);									
+						found=found || cdifferences.isEmpty();
+					} else {
+						differences.add("entity " +ent1.getID()+":"+ent1.getType()+" has not the same number of values for attribute "+
+								gaE1.getName()+" with "+colValue1.size()+" instead the second spec has "+colValue2.size()+" elements");
+					}
+	}
+
+
+	private static void evaluateSimpleValueField(GraphEntity ent1,
+			Vector<String> differences, GraphAttribute gaE1, GraphAttribute gaE2) {
+		boolean found;
+		String simpleValue1=null;
+		String simpleValue2=null;
+		simpleValue1=gaE1.getSimpleValue();
+		simpleValue2=gaE2.getSimpleValue();
+		if (simpleValue1==null && simpleValue1==null){		
+			found=true;
+		} else
+			if (simpleValue1==null && simpleValue2!=null){
+				differences.add("entity " +ent1.getID()+":"+ent1.getType()+" has a null value  for attribute "+
+						gaE1.getName()+" instead the second spec has "+simpleValue2);
+			} else 
+				if (simpleValue1!=null && simpleValue2==null){
+					differences.add("entity " +ent1.getID()+":"+ent1.getType()+" has not the same values for attribute "+
+							gaE1.getName()+":"+simpleValue1+" instead the second spec has null");
+				} else
+					if (simpleValue1!=null && simpleValue2!=null && !simpleValue1.equals(simpleValue2)){
+						differences.add("entity " +ent1.getID()+":"+ent1.getType()+" has a value \""+simpleValue1+"\"  for attribute "+
+								gaE1.getName()+" instead the second spec has \""+simpleValue2+"\"");
+					}
+	}
+
+
 	public static boolean compare(Browser bimp1, Browser bimp2) {
-		return containedInto(bimp1, bimp2) && containedInto(bimp2, bimp1);
+		return findAllDifferences(bimp1, bimp2).isEmpty() && findAllDifferences(bimp2, bimp1).isEmpty();
 	}
 
 }

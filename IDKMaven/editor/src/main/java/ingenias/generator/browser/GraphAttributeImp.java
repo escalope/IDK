@@ -23,61 +23,75 @@ import ingenias.editor.ModelJGraph;
 import ingenias.exception.*;
 
 public class GraphAttributeImp
-    implements GraphAttribute {
+implements GraphAttribute {
 
-  private Object attribute;
-  private String name;
-  private ModelJGraph graph;
-  private IDEState ids;
+	private Object attribute;
+	private String name;
+	private ModelJGraph graph;
+	private IDEState ids;
 
-  public GraphAttributeImp(String name, Object attribute,
-                           ModelJGraph graph, IDEState ids) {
-    this.name = name;
-    this.attribute = attribute;
-    this.graph = graph;
-    this.ids=ids;
-  }
+	public GraphAttributeImp(String name, Object attribute,
+			ModelJGraph graph, IDEState ids) {
+		this.name = name;
+		this.attribute = attribute;
+		this.graph = graph;
+		this.ids=ids;
+	}
 
-  public String getSimpleValue() {
-    if (attribute == null) {
-      return "";
-    }
-    else {
-      return attribute.toString();
-    }
-  }
+	public String getSimpleValue() {
+		if (attribute == null) {
+			return "";
+		}
+		else {
+			return attribute.toString();
+		}
+	}
 
-  public GraphEntity getEntityValue() throws NullEntity {
-    if (attribute == null) {
-      throw new NullEntity();
-    }
-    else {
-      return new GraphEntityImp( (ingenias.editor.entities.Entity) attribute,
-                                graph,ids);
-    }
-  }
+	public GraphEntity getEntityValue() throws NullEntity {
+		if (attribute == null) {
+			throw new NullEntity();
+		}
+		else {
+			return new GraphEntityImp( (ingenias.editor.entities.Entity) attribute,
+					graph,ids);
+		}
+	}
 
-  public GraphCollection getCollectionValue() throws NullEntity {
-    return new GraphCollectionImp( (ingenias.editor.TypedVector) attribute,
-                                  graph,ids);
-  }
+	public GraphCollection getCollectionValue() throws NullEntity {
+		return new GraphCollectionImp( (ingenias.editor.TypedVector) attribute,
+				graph,ids);
+	}
 
-  public String getName() {
-    return name;
-  }
+	public boolean isCollectionValue(){
+		return attribute!=null && ingenias.editor.TypedVector.class.isAssignableFrom(attribute.getClass());
+	}
 
-  public String getType() {
-    return attribute.getClass().getName();
-  }
+	public boolean isEntityValue(){
+		return attribute!=null && ingenias.editor.entities.Entity.class.isAssignableFrom(attribute.getClass());
+	}
 
-  
-  protected Object getValue(){
-	  return this.attribute;
-  }
-  
-  protected void setValue(Object value){
-	   this.attribute=value;
-  }
-  
+	public boolean isSimpleValue(){
+		return !isCollectionValue() && !isEntityValue();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getType() {
+		return attribute.getClass().getName();
+	}
+
+
+	protected Object getValue(){
+		return this.attribute;
+	}
+
+	protected void setValue(Object value){
+		this.attribute=value;
+	}
+
+
+
 
 }

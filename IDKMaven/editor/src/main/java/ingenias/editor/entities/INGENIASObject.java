@@ -26,29 +26,13 @@ import ingenias.editor.TypedVector;
 public class INGENIASObject extends Entity {
 
 
-  public java.lang.String Code;
-
   public java.lang.String Description;
-
-
-
-
 
   public INGENIASObject(String id) {
     super(id);
     this.setHelpDesc("Root concept for ingenias entities");
     this.setHelpRecom("");
   }
-
-
-      public java.lang.String getCode(){
-        return Code;
-      }
-       public void setCode(java.lang.String
-					Code){
-        this.Code=Code;
-      }
-
 
       public java.lang.String getDescription(){
         return Description;
@@ -60,16 +44,8 @@ public class INGENIASObject extends Entity {
 
 
 
-
-
 public void fromMap(Map ht){
 super.fromMap(ht);
-
- if (ht.get("Code")!=null && ht.get("Code").equals(""))
-  this.setCode(null);
- else
-  if (ht.get("Code")!=null)
-   this.setCode(new java.lang.String(ht.get("Code").toString()));
 
  if (ht.get("Description")!=null && ht.get("Description").equals(""))
   this.setDescription(null);
@@ -83,11 +59,6 @@ super.fromMap(ht);
 public void toMap(Map ht){
 super.toMap(ht);
 
-//if (this.getCode() instanceof String)
- if (this.getCode()!=null)
- 	ht.put("Code",this.getCode().toString());
- else	
- 	ht.put("Code","");
 
 //if (this.getDescription() instanceof String)
  if (this.getDescription()!=null)

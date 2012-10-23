@@ -55,12 +55,14 @@ public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.
 				pack();
 			}
 		});
+				
 
 		final JDialog self=this;
 		final GeneralEditionPanel gep=new GeneralEditionPanel(editor,dialogOwner, om,gm,ent);
 		main.add(mainscroll,BorderLayout.CENTER);
 		mainscroll.getViewport().add(gep,null);    
 		JButton cancel=new JButton("Cancel");
+		cancel.setName("cancel");
 		cancel.addActionListener(new java.awt.event.ActionListener(){
 			public void actionPerformed(java.awt.event.ActionEvent ae) {				
 				gep.undo();
@@ -70,6 +72,7 @@ public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.
 		});
 
 		JButton accept=new JButton("Accept");
+		accept.setName("accept");
 		accept.addActionListener(new java.awt.event.ActionListener(){
 			public void actionPerformed(java.awt.event.ActionEvent ae) {				
 				gep.confirmActions();

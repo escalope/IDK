@@ -117,7 +117,6 @@ public class LoadFileAction {
 	}
 
 	public IDEState loadFileAction(File file) {
-		//System.err.println("antes ids:"+ids.getStateChangelistener());
 		final File input = file;
 		assert(file!=null);			
 		
@@ -144,29 +143,23 @@ public class LoadFileAction {
 
 		}
 		catch (ingenias.exception.UnknowFormat e1) {
+			Log.getInstance().logERROR("Failure loading: format unknown. See MESSAGES pane");
 			Log.getInstance().logSYS(e1.getMessage());
-
-			JOptionPane.showMessageDialog(resources.getMainFrame(),
-			"Failure loading: format unknown. See MESSAGES pane");
-
 		}
 		catch (ingenias.exception.DamagedFormat df) {
+			Log.getInstance().logERROR("Failure loading: some diagrams could not be loaded. See MESSAGES pane");
 			Log.getInstance().logSYS(df.getMessage());
-			JOptionPane.showMessageDialog(resources.getMainFrame(),
-			"Failure loading: some diagrams could not be loaded. See MESSAGES pane");
 
 		}
 		catch (ingenias.exception.CannotLoad cl) {
+			Log.getInstance().logERROR("Failure loading: could not load anything. See MESSAGES pane");
 			Log.getInstance().logSYS(cl.getMessage());
-			JOptionPane.showMessageDialog(resources.getMainFrame(),
-			"Failure loading: could not load anything. See MESSAGES pane");
 
 		}
 		catch (Exception ex) {
+			Log.getInstance().logERROR("Failure loading: could not load anything. See MESSAGES pane");
 			Log.getInstance().logSYS(ex.getMessage());
-			JOptionPane.showMessageDialog(resources.getMainFrame(),
-			"Failure loading: could not load anything. See MESSAGES pane");
-
+			ex.printStackTrace();
 		}
 
 		resources.getMainFrame().setEnabled(true);

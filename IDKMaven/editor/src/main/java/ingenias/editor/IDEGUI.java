@@ -66,7 +66,7 @@ import javax.swing.event.MenuKeyListener;
 
 public abstract class IDEGUI extends javax.swing.JFrame  {
 
-	public static JPanel rightPanel=new JPanel();
+	public  JPanel rightPanel=new JPanel();
 	JMenuItem about = new JMenuItem();
 	JTree arbolObjetos =new JTree();;
 	DnDJTree arbolProyectos = new DnDJTree();//rootProject);
@@ -291,6 +291,7 @@ public abstract class IDEGUI extends javax.swing.JFrame  {
 		file.setText("File");
 		save.setEnabled(false);
 		save.setText("Save");
+		save.setName("Savefilemenu");
 		save.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				save_actionPerformed(e);

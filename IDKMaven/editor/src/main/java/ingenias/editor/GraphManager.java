@@ -41,7 +41,6 @@ public class GraphManager implements java.io.Serializable {
 	public Vector<TreePath> toExpad=new Vector<TreePath>();
 	private int idCounter;
 
-	private static GraphManager instance;
 
 
 

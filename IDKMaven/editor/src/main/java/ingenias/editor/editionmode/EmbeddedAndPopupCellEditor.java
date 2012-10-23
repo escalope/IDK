@@ -206,6 +206,8 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 				resources.removePropertiesPane(proppaneltitle);		
 				resources.getMainFrame().invalidate();
 				resources.getMainFrame().repaint();
+				ids.setChanged(true);
+				resources.setChanged();
 			};
 		});
 	}
@@ -249,6 +251,8 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 				graph.repaint();
 				resources.getMainFrame().invalidate();
 				resources.getMainFrame().repaint();
+				ids.setChanged(true);
+				resources.setChanged();
 			};
 		});
 
@@ -324,8 +328,10 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 						JScrollPane jsp=new JScrollPane();
 
 						JPanel south=new JPanel();
-						JButton accept=new JButton("Accept");					
+						JButton accept=new JButton("Accept");		
+						accept.setName("accept");
 						JButton cancel=new JButton("Cancel");
+						cancel.setName("cancel");
 						south.add(accept);
 						south.add(cancel);
 						JPanel main=new JPanel();
@@ -387,6 +393,8 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 				gep.confirmActions();
 				graph.repaint();
 				graph.firePropertyChange(org.jgraph.JGraph.GRAPH_MODEL_PROPERTY,0,0);
+				ids.setChanged(true);
+				resources.setChanged();
 			};
 		});
 

@@ -543,8 +543,9 @@ implements GraphLoad {
 		NodeList models = doc.getElementsByTagName("models").item(0).getChildNodes();
 		boolean allrecovered=true;
 		String failureMessage="";
-		float increment=60f/models.getLength();
+		
 		float initialValue=resources.getProgressBarValue();
+		float increment=(100-initialValue)/models.getLength();
 		for (int k = 0; k < models.getLength(); k++) {
 			org.w3c.dom.Node model = models.item(k);			
 			resources.setCurrentProgress((int)(initialValue+increment*k));

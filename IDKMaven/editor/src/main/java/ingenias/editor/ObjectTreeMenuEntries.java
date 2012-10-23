@@ -43,31 +43,31 @@ import javax.swing.tree.TreePath;
 import org.jgraph.JGraph;
 
 public class ObjectTreeMenuEntries {
-	
+
 	private IDEState ids;
 	private GUIResources resources;
 	private Browser browser;
-	
+
 	public ObjectTreeMenuEntries(IDEState ids, GUIResources resources){
 		this.ids=ids;
 		this.resources=resources;
 		browser=new BrowserImp(ids);
 	}
-	
+
 	public JPopupMenu menuObjectTree(MouseEvent me1) {
 		JPopupMenu menu = new JPopupMenu();
 		final MouseEvent me = me1;
 		final TreePath tp = ids.om.arbolObjetos.getSelectionPath();
 		final TreePath[] tps = ids.om.arbolObjetos.getSelectionPaths();
-		
+
 		if (tp != null && ids.gm.getModel(tp.getPath()) == null) {
 			JGraph jg = ids.gm.getCurrent();
 			final javax.swing.tree.DefaultMutableTreeNode dmtn =
-				(javax.swing.tree.DefaultMutableTreeNode) tp.getLastPathComponent();
-			
+					(javax.swing.tree.DefaultMutableTreeNode) tp.getLastPathComponent();
+
 			if (dmtn != null && dmtn.getUserObject()instanceof Entity) {
 				Entity entity=(Entity) dmtn.getUserObject();
-				
+
 
 				// Edit
 				menu.add(
@@ -94,12 +94,14 @@ public class ObjectTreeMenuEntries {
 
 								jf.setLocation(DialogWindows.getCenter(jf.getSize(),resources.getMainFrame()));
 								jf.pack();
-								jf.show();
-								ids.om.reload();								
-								resources.getArbolObjetos().invalidate();								
-								resources.getMainFrame().repaint();
-								ids.setChanged(true);
-								resources.setUnChanged();
+								jf.setVisible(true);
+								if (jf.getStatus()==jf.ACCEPTED){
+									ids.om.reload();								
+									resources.getArbolObjetos().invalidate();								
+									resources.getMainFrame().repaint();
+									ids.setChanged(true);
+									resources.setUnChanged();
+								}
 							}
 						});
 
@@ -109,7 +111,7 @@ public class ObjectTreeMenuEntries {
 							public void actionPerformed(ActionEvent e) {
 								for (int k=0;k<tps.length;k++){
 									javax.swing.tree.DefaultMutableTreeNode dmtn =
-										(javax.swing.tree.DefaultMutableTreeNode) tps[k].getLastPathComponent();
+											(javax.swing.tree.DefaultMutableTreeNode) tps[k].getLastPathComponent();
 									if (dmtn != null && dmtn.getUserObject()instanceof Entity) {
 										int result = JOptionPane.showConfirmDialog(resources.getMainFrame(),
 												"This will remove permanently " + tps[k].getLastPathComponent() +
@@ -129,35 +131,35 @@ public class ObjectTreeMenuEntries {
 				menu.add(
 						new AbstractAction("Search occurrences") {				
 							public void actionPerformed(ActionEvent e) {
-								
-									if (dmtn.getUserObject()instanceof Entity){
-										Entity ent=(Entity)dmtn.getUserObject();
 
-										StringBuffer result=new StringBuffer();
-										result.append("Diagrams found:<ul>");
-										Graph[] graphs=browser.getGraphs();
-										for (int k=0;k<graphs.length;k++){
-											GraphEntity[] ges;
-											try {
-												ges = graphs[k].getEntities();
-												boolean found=false;
-												for (int j=0;j<ges.length &&!found;j++){
-													found=ges[j].getID().equals(ent.getId());
-												}
-												if (found){
+								if (dmtn.getUserObject()instanceof Entity){
+									Entity ent=(Entity)dmtn.getUserObject();
 
-													result.append("<li><a href=\"http://app/"+graphs[k].getName()+"/"+ent.getId()+"\">"+graphs[k].getName()+"</a>");
-												}
-											} catch (NullEntity e1) {
-												// TODO Auto-generated catch block
-												e1.printStackTrace();
+									StringBuffer result=new StringBuffer();
+									result.append("Diagrams found:<ul>");
+									Graph[] graphs=browser.getGraphs();
+									for (int k=0;k<graphs.length;k++){
+										GraphEntity[] ges;
+										try {
+											ges = graphs[k].getEntities();
+											boolean found=false;
+											for (int j=0;j<ges.length &&!found;j++){
+												found=ges[j].getID().equals(ent.getId());
 											}
+											if (found){
+
+												result.append("<li><a href=\"http://app/"+graphs[k].getName()+"/"+ent.getId()+"\">"+graphs[k].getName()+"</a>");
+											}
+										} catch (NullEntity e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
 										}
-										result.append("</ul>");
-										resources.getSearchDiagramPanel().setText(result.toString());
-										resources.focusSearchPane();
 									}
-								
+									result.append("</ul>");
+									resources.getSearchDiagramPanel().setText(result.toString());
+									resources.focusSearchPane();
+								}
+
 							}
 						});
 			} else {
@@ -170,7 +172,7 @@ public class ObjectTreeMenuEntries {
 									DefaultMutableTreeNode next=enumNodes.nextElement();
 									resources.getArbolObjetos().expandPath(new TreePath(next.getPath()));
 								}
-																
+
 							}
 
 						});

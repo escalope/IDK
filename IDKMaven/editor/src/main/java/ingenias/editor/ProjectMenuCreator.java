@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  **/
- 
+
 
 package ingenias.editor;
 
@@ -55,692 +55,692 @@ public class ProjectMenuCreator {
 
 	public ProjectMenuCreator(IDEState ids, 			
 			Frame owner, GUIResources resources
-	){
+			){
 		this.ids=ids;  		
 		this.owner=owner;
 		this.resources=resources;
 	}
 
-  public Vector<DiagramCreationAction> getDiagramCreation(){
-   
-   Vector<DiagramCreationAction> actions=new Vector<DiagramCreationAction>();
-   DiagramCreationAction ma=null;
-   
-    if (ids.getDiagramFilter().isValidDiagram("EnvironmentModel")){
-   // Menu to add a EnvironmentModel model instance
-		ma=new DiagramCreationAction(){
-			public String getActionName(){
-				return "Add EnvironmentModel";
-			}
-			public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
-				EnvironmentModelModelJGraph mjg =
-					new EnvironmentModelModelJGraph(new
-							EnvironmentModelDataEntity(
-									diagramName), diagramName, ids.om, new Model(ids),
-									new BasicMarqueeHandler(), ids.prefs );
-				EnvironmentModelActionsFactory ema=new  EnvironmentModelActionsFactory(resources,ids);
-				mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-		   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-				mjg.setMarqueeHandler(marquee);
-				ids.gm.addModel(path, diagramName, mjg);
-				ids.addNewDiagram(mjg);
-				return mjg;
-			}
-			public String getIconName() {
-				// TODO Auto-generated method stub
-				return "images/menvdiag.gif";
-			}
-		};
-		actions.add(ma);
-   }
+	public Vector<DiagramCreationAction> getDiagramCreation(){
 
-   
-    if (ids.getDiagramFilter().isValidDiagram("OrganizationModel")){
-   // Menu to add a OrganizationModel model instance
-		ma=new DiagramCreationAction(){
-			public String getActionName(){
-				return "Add OrganizationModel";
-			}
-			public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
-				OrganizationModelModelJGraph mjg =
-					new OrganizationModelModelJGraph(new
-							OrganizationModelDataEntity(
-									diagramName), diagramName, ids.om, new Model(ids),
-									new BasicMarqueeHandler(), ids.prefs );
-				OrganizationModelActionsFactory ema=new  OrganizationModelActionsFactory(resources,ids);
-				mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-		   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-				mjg.setMarqueeHandler(marquee);
-				ids.gm.addModel(path, diagramName, mjg);
-				ids.addNewDiagram(mjg);
-				return mjg;
-			}
-			public String getIconName() {
-				// TODO Auto-generated method stub
-				return "images/morgdiag.gif";
-			}
-		};
-		actions.add(ma);
-   }
+		Vector<DiagramCreationAction> actions=new Vector<DiagramCreationAction>();
+		DiagramCreationAction ma=null;
 
-   
-    if (ids.getDiagramFilter().isValidDiagram("ComponentDiagram")){
-   // Menu to add a ComponentDiagram model instance
-		ma=new DiagramCreationAction(){
-			public String getActionName(){
-				return "Add ComponentDiagram";
-			}
-			public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
-				ComponentDiagramModelJGraph mjg =
-					new ComponentDiagramModelJGraph(new
-							ComponentDiagramDataEntity(
-									diagramName), diagramName, ids.om, new Model(ids),
-									new BasicMarqueeHandler(), ids.prefs );
-				ComponentDiagramActionsFactory ema=new  ComponentDiagramActionsFactory(resources,ids);
-				mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-		   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-				mjg.setMarqueeHandler(marquee);
-				ids.gm.addModel(path, diagramName, mjg);
-				ids.addNewDiagram(mjg);
-				return mjg;
-			}
-			public String getIconName() {
-				// TODO Auto-generated method stub
-				return "images/musediag.gif";
-			}
-		};
-		actions.add(ma);
-   }
+		if (ids.getDiagramFilter().isValidDiagram("EnvironmentModel")){
+			// Menu to add a EnvironmentModel model instance
+			ma=new DiagramCreationAction(){
+				public String getActionName(){
+					return "Add EnvironmentModel";
+				}
+				public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
+					EnvironmentModelModelJGraph mjg =
+							new EnvironmentModelModelJGraph(new
+									EnvironmentModelDataEntity(
+											diagramName), diagramName, ids.om, new Model(ids),
+											new BasicMarqueeHandler(), ids.prefs );
+					EnvironmentModelActionsFactory ema=new  EnvironmentModelActionsFactory(resources,ids);
+					mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+					MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+					mjg.setMarqueeHandler(marquee);
+					ids.gm.addModel(path, diagramName, mjg);
+					ids.addNewDiagram(mjg);
+					return mjg;
+				}
+				public String getIconName() {
+					// TODO Auto-generated method stub
+					return "images/menvdiag.gif";
+				}
+			};
+			actions.add(ma);
+		}
 
-   
-    if (ids.getDiagramFilter().isValidDiagram("TasksAndGoalsModel")){
-   // Menu to add a TasksAndGoalsModel model instance
-		ma=new DiagramCreationAction(){
-			public String getActionName(){
-				return "Add TasksAndGoalsModel";
-			}
-			public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
-				TasksAndGoalsModelModelJGraph mjg =
-					new TasksAndGoalsModelModelJGraph(new
-							TasksAndGoalsModelDataEntity(
-									diagramName), diagramName, ids.om, new Model(ids),
-									new BasicMarqueeHandler(), ids.prefs );
-				TasksAndGoalsModelActionsFactory ema=new  TasksAndGoalsModelActionsFactory(resources,ids);
-				mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-		   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-				mjg.setMarqueeHandler(marquee);
-				ids.gm.addModel(path, diagramName, mjg);
-				ids.addNewDiagram(mjg);
-				return mjg;
-			}
-			public String getIconName() {
-				// TODO Auto-generated method stub
-				return "images/mtaskgoal.gif";
-			}
-		};
-		actions.add(ma);
-   }
 
-   
-    if (ids.getDiagramFilter().isValidDiagram("InteractionModel")){
-   // Menu to add a InteractionModel model instance
-		ma=new DiagramCreationAction(){
-			public String getActionName(){
-				return "Add InteractionModel";
-			}
-			public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
-				InteractionModelModelJGraph mjg =
-					new InteractionModelModelJGraph(new
-							InteractionModelDataEntity(
-									diagramName), diagramName, ids.om, new Model(ids),
-									new BasicMarqueeHandler(), ids.prefs );
-				InteractionModelActionsFactory ema=new  InteractionModelActionsFactory(resources,ids);
-				mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-		   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-				mjg.setMarqueeHandler(marquee);
-				ids.gm.addModel(path, diagramName, mjg);
-				ids.addNewDiagram(mjg);
-				return mjg;
-			}
-			public String getIconName() {
-				// TODO Auto-generated method stub
-				return "images/minterdiag.gif";
-			}
-		};
-		actions.add(ma);
-   }
+		if (ids.getDiagramFilter().isValidDiagram("OrganizationModel")){
+			// Menu to add a OrganizationModel model instance
+			ma=new DiagramCreationAction(){
+				public String getActionName(){
+					return "Add OrganizationModel";
+				}
+				public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
+					OrganizationModelModelJGraph mjg =
+							new OrganizationModelModelJGraph(new
+									OrganizationModelDataEntity(
+											diagramName), diagramName, ids.om, new Model(ids),
+											new BasicMarqueeHandler(), ids.prefs );
+					OrganizationModelActionsFactory ema=new  OrganizationModelActionsFactory(resources,ids);
+					mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+					MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+					mjg.setMarqueeHandler(marquee);
+					ids.gm.addModel(path, diagramName, mjg);
+					ids.addNewDiagram(mjg);
+					return mjg;
+				}
+				public String getIconName() {
+					// TODO Auto-generated method stub
+					return "images/morgdiag.gif";
+				}
+			};
+			actions.add(ma);
+		}
 
-   
-    if (ids.getDiagramFilter().isValidDiagram("ActivityDiagram")){
-   // Menu to add a ActivityDiagram model instance
-		ma=new DiagramCreationAction(){
-			public String getActionName(){
-				return "Add ActivityDiagram";
-			}
-			public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
-				ActivityDiagramModelJGraph mjg =
-					new ActivityDiagramModelJGraph(new
-							ActivityDiagramDataEntity(
-									diagramName), diagramName, ids.om, new Model(ids),
-									new BasicMarqueeHandler(), ids.prefs );
-				ActivityDiagramActionsFactory ema=new  ActivityDiagramActionsFactory(resources,ids);
-				mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-		   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-				mjg.setMarqueeHandler(marquee);
-				ids.gm.addModel(path, diagramName, mjg);
-				ids.addNewDiagram(mjg);
-				return mjg;
-			}
-			public String getIconName() {
-				// TODO Auto-generated method stub
-				return "images/musediag.gif";
-			}
-		};
-		actions.add(ma);
-   }
 
-   
-    if (ids.getDiagramFilter().isValidDiagram("AgentModel")){
-   // Menu to add a AgentModel model instance
-		ma=new DiagramCreationAction(){
-			public String getActionName(){
-				return "Add AgentModel";
-			}
-			public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
-				AgentModelModelJGraph mjg =
-					new AgentModelModelJGraph(new
-							AgentModelDataEntity(
-									diagramName), diagramName, ids.om, new Model(ids),
-									new BasicMarqueeHandler(), ids.prefs );
-				AgentModelActionsFactory ema=new  AgentModelActionsFactory(resources,ids);
-				mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-		   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-				mjg.setMarqueeHandler(marquee);
-				ids.gm.addModel(path, diagramName, mjg);
-				ids.addNewDiagram(mjg);
-				return mjg;
-			}
-			public String getIconName() {
-				// TODO Auto-generated method stub
-				return "images/magdiag.gif";
-			}
-		};
-		actions.add(ma);
-   }
+		if (ids.getDiagramFilter().isValidDiagram("ComponentDiagram")){
+			// Menu to add a ComponentDiagram model instance
+			ma=new DiagramCreationAction(){
+				public String getActionName(){
+					return "Add ComponentDiagram";
+				}
+				public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
+					ComponentDiagramModelJGraph mjg =
+							new ComponentDiagramModelJGraph(new
+									ComponentDiagramDataEntity(
+											diagramName), diagramName, ids.om, new Model(ids),
+											new BasicMarqueeHandler(), ids.prefs );
+					ComponentDiagramActionsFactory ema=new  ComponentDiagramActionsFactory(resources,ids);
+					mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+					MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+					mjg.setMarqueeHandler(marquee);
+					ids.gm.addModel(path, diagramName, mjg);
+					ids.addNewDiagram(mjg);
+					return mjg;
+				}
+				public String getIconName() {
+					// TODO Auto-generated method stub
+					return "images/musediag.gif";
+				}
+			};
+			actions.add(ma);
+		}
 
-   
-    if (ids.getDiagramFilter().isValidDiagram("UseCaseDiagram")){
-   // Menu to add a UseCaseDiagram model instance
-		ma=new DiagramCreationAction(){
-			public String getActionName(){
-				return "Add UseCaseDiagram";
-			}
-			public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
-				UseCaseDiagramModelJGraph mjg =
-					new UseCaseDiagramModelJGraph(new
-							UseCaseDiagramDataEntity(
-									diagramName), diagramName, ids.om, new Model(ids),
-									new BasicMarqueeHandler(), ids.prefs );
-				UseCaseDiagramActionsFactory ema=new  UseCaseDiagramActionsFactory(resources,ids);
-				mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-		   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-				mjg.setMarqueeHandler(marquee);
-				ids.gm.addModel(path, diagramName, mjg);
-				ids.addNewDiagram(mjg);
-				return mjg;
-			}
-			public String getIconName() {
-				// TODO Auto-generated method stub
-				return "images/musediag.gif";
-			}
-		};
-		actions.add(ma);
-   }
 
-   
-    if (ids.getDiagramFilter().isValidDiagram("DeployDiagram")){
-   // Menu to add a DeployDiagram model instance
-		ma=new DiagramCreationAction(){
-			public String getActionName(){
-				return "Add DeployDiagram";
-			}
-			public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
-				DeployDiagramModelJGraph mjg =
-					new DeployDiagramModelJGraph(new
-							DeployDiagramDataEntity(
-									diagramName), diagramName, ids.om, new Model(ids),
-									new BasicMarqueeHandler(), ids.prefs );
-				DeployDiagramActionsFactory ema=new  DeployDiagramActionsFactory(resources,ids);
-				mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-		   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-				mjg.setMarqueeHandler(marquee);
-				ids.gm.addModel(path, diagramName, mjg);
-				ids.addNewDiagram(mjg);
-				return mjg;
-			}
-			public String getIconName() {
-				// TODO Auto-generated method stub
-				return "images/musediag.gif";
-			}
-		};
-		actions.add(ma);
-   }
+		if (ids.getDiagramFilter().isValidDiagram("TasksAndGoalsModel")){
+			// Menu to add a TasksAndGoalsModel model instance
+			ma=new DiagramCreationAction(){
+				public String getActionName(){
+					return "Add TasksAndGoalsModel";
+				}
+				public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
+					TasksAndGoalsModelModelJGraph mjg =
+							new TasksAndGoalsModelModelJGraph(new
+									TasksAndGoalsModelDataEntity(
+											diagramName), diagramName, ids.om, new Model(ids),
+											new BasicMarqueeHandler(), ids.prefs );
+					TasksAndGoalsModelActionsFactory ema=new  TasksAndGoalsModelActionsFactory(resources,ids);
+					mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+					MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+					mjg.setMarqueeHandler(marquee);
+					ids.gm.addModel(path, diagramName, mjg);
+					ids.addNewDiagram(mjg);
+					return mjg;
+				}
+				public String getIconName() {
+					// TODO Auto-generated method stub
+					return "images/mtaskgoal.gif";
+				}
+			};
+			actions.add(ma);
+		}
 
-   
-   return actions;
-}
 
-  public JPopupMenu menuProjectTree(MouseEvent me1) {
- final CommonMenuEntriesActionFactory cme=new CommonMenuEntriesActionFactory(resources,ids);
+		if (ids.getDiagramFilter().isValidDiagram("InteractionModel")){
+			// Menu to add a InteractionModel model instance
+			ma=new DiagramCreationAction(){
+				public String getActionName(){
+					return "Add InteractionModel";
+				}
+				public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
+					InteractionModelModelJGraph mjg =
+							new InteractionModelModelJGraph(new
+									InteractionModelDataEntity(
+											diagramName), diagramName, ids.om, new Model(ids),
+											new BasicMarqueeHandler(), ids.prefs );
+					InteractionModelActionsFactory ema=new  InteractionModelActionsFactory(resources,ids);
+					mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+					MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+					mjg.setMarqueeHandler(marquee);
+					ids.gm.addModel(path, diagramName, mjg);
+					ids.addNewDiagram(mjg);
+					return mjg;
+				}
+				public String getIconName() {
+					// TODO Auto-generated method stub
+					return "images/minterdiag.gif";
+				}
+			};
+			actions.add(ma);
+		}
+
+
+		if (ids.getDiagramFilter().isValidDiagram("ActivityDiagram")){
+			// Menu to add a ActivityDiagram model instance
+			ma=new DiagramCreationAction(){
+				public String getActionName(){
+					return "Add ActivityDiagram";
+				}
+				public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
+					ActivityDiagramModelJGraph mjg =
+							new ActivityDiagramModelJGraph(new
+									ActivityDiagramDataEntity(
+											diagramName), diagramName, ids.om, new Model(ids),
+											new BasicMarqueeHandler(), ids.prefs );
+					ActivityDiagramActionsFactory ema=new  ActivityDiagramActionsFactory(resources,ids);
+					mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+					MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+					mjg.setMarqueeHandler(marquee);
+					ids.gm.addModel(path, diagramName, mjg);
+					ids.addNewDiagram(mjg);
+					return mjg;
+				}
+				public String getIconName() {
+					// TODO Auto-generated method stub
+					return "images/musediag.gif";
+				}
+			};
+			actions.add(ma);
+		}
+
+
+		if (ids.getDiagramFilter().isValidDiagram("AgentModel")){
+			// Menu to add a AgentModel model instance
+			ma=new DiagramCreationAction(){
+				public String getActionName(){
+					return "Add AgentModel";
+				}
+				public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
+					AgentModelModelJGraph mjg =
+							new AgentModelModelJGraph(new
+									AgentModelDataEntity(
+											diagramName), diagramName, ids.om, new Model(ids),
+											new BasicMarqueeHandler(), ids.prefs );
+					AgentModelActionsFactory ema=new  AgentModelActionsFactory(resources,ids);
+					mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+					MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+					mjg.setMarqueeHandler(marquee);
+					ids.gm.addModel(path, diagramName, mjg);
+					ids.addNewDiagram(mjg);
+					return mjg;
+				}
+				public String getIconName() {
+					// TODO Auto-generated method stub
+					return "images/magdiag.gif";
+				}
+			};
+			actions.add(ma);
+		}
+
+
+		if (ids.getDiagramFilter().isValidDiagram("UseCaseDiagram")){
+			// Menu to add a UseCaseDiagram model instance
+			ma=new DiagramCreationAction(){
+				public String getActionName(){
+					return "Add UseCaseDiagram";
+				}
+				public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
+					UseCaseDiagramModelJGraph mjg =
+							new UseCaseDiagramModelJGraph(new
+									UseCaseDiagramDataEntity(
+											diagramName), diagramName, ids.om, new Model(ids),
+											new BasicMarqueeHandler(), ids.prefs );
+					UseCaseDiagramActionsFactory ema=new  UseCaseDiagramActionsFactory(resources,ids);
+					mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+					MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+					mjg.setMarqueeHandler(marquee);
+					ids.gm.addModel(path, diagramName, mjg);
+					ids.addNewDiagram(mjg);
+					return mjg;
+				}
+				public String getIconName() {
+					// TODO Auto-generated method stub
+					return "images/musediag.gif";
+				}
+			};
+			actions.add(ma);
+		}
+
+
+		if (ids.getDiagramFilter().isValidDiagram("DeployDiagram")){
+			// Menu to add a DeployDiagram model instance
+			ma=new DiagramCreationAction(){
+				public String getActionName(){
+					return "Add DeployDiagram";
+				}
+				public ModelJGraph execute(String diagramName,Object[] path, IDEState ids){
+					DeployDiagramModelJGraph mjg =
+							new DeployDiagramModelJGraph(new
+									DeployDiagramDataEntity(
+											diagramName), diagramName, ids.om, new Model(ids),
+											new BasicMarqueeHandler(), ids.prefs );
+					DeployDiagramActionsFactory ema=new  DeployDiagramActionsFactory(resources,ids);
+					mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+					MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+					mjg.setMarqueeHandler(marquee);
+					ids.gm.addModel(path, diagramName, mjg);
+					ids.addNewDiagram(mjg);
+					return mjg;
+				}
+				public String getIconName() {
+					// TODO Auto-generated method stub
+					return "images/musediag.gif";
+				}
+			};
+			actions.add(ma);
+		}
+
+
+		return actions;
+	}
+
+	public JPopupMenu menuProjectTree(MouseEvent me1) {
+		final CommonMenuEntriesActionFactory cme=new CommonMenuEntriesActionFactory(resources,ids);
 		JPopupMenu menu = new JPopupMenu();
 		final MouseEvent me = me1;
 
 		TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
 		if (tp != null) {   
 			DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) 
-			tp.getLastPathComponent();
+					tp.getLastPathComponent();
 
 			if (tp != null && dmtn.getUserObject()instanceof String) {
 				// Menu to add a EnvironmentModel model instance
- 
-   if (ids.getDiagramFilter().isValidDiagram("EnvironmentModel")){
-				menu.add(
-						new AbstractAction("Add EnvironmentModel") {
 
-							public void actionPerformed(ActionEvent e) {
-								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
-								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-								getLastPathComponent();
-								if (tp != null && dmtn.getUserObject()instanceof String) {
-									String diagramName = JOptionPane.showInputDialog(owner,
-											"Type graph name",
-											"New graph",
-											JOptionPane.QUESTION_MESSAGE);
-									if (diagramName != null && ids.gm.existsModel(diagramName)) {
+				if (ids.getDiagramFilter().isValidDiagram("EnvironmentModel")){
+					menu.add(
+							new AbstractAction("Add EnvironmentModel") {
 
-										JOptionPane.showMessageDialog(owner,
-												"There exists a model with the same name. Please, select another",
-												"Warning",
-												JOptionPane.WARNING_MESSAGE);
-									}
-									else
-										if (diagramName != null) {
-											EnvironmentModelModelJGraph mjg =
-												new EnvironmentModelModelJGraph(new
-												EnvironmentModelDataEntity(
-												diagramName), diagramName, ids.om, new Model(ids),
-												new BasicMarqueeHandler(), ids.prefs );
-											EnvironmentModelActionsFactory ema=new  EnvironmentModelActionsFactory(resources,ids);
-											mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-									   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-											mjg.setMarqueeHandler(marquee);
-											ids.gm.addModel(tp.getPath(), diagramName, mjg);
-											ids.addNewDiagram(mjg);
-										
+								public void actionPerformed(ActionEvent e) {
+									TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
+									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
+											getLastPathComponent();
+									if (tp != null && dmtn.getUserObject()instanceof String) {
+										String diagramName = JOptionPane.showInputDialog(owner,
+												"Type graph name",
+												"New graph",
+												JOptionPane.QUESTION_MESSAGE);
+										if (diagramName != null && ids.gm.existsModel(diagramName)) {
+
+											JOptionPane.showMessageDialog(owner,
+													"There exists a model with the same name. Please, select another",
+													"Warning",
+													JOptionPane.WARNING_MESSAGE);
 										}
-								}
+										else
+											if (diagramName != null) {
+												EnvironmentModelModelJGraph mjg =
+														new EnvironmentModelModelJGraph(new
+																EnvironmentModelDataEntity(
+																		diagramName), diagramName, ids.om, new Model(ids),
+																		new BasicMarqueeHandler(), ids.prefs );
+												EnvironmentModelActionsFactory ema=new  EnvironmentModelActionsFactory(resources,ids);
+												mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+												MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+												mjg.setMarqueeHandler(marquee);
+												ids.gm.addModel(tp.getPath(), diagramName, mjg);
+												ids.addNewDiagram(mjg);
 
-							}
-						});
-}
- 
-  
-
-   if (ids.getDiagramFilter().isValidDiagram("OrganizationModel")){
-				menu.add(
-						new AbstractAction("Add OrganizationModel") {
-
-							public void actionPerformed(ActionEvent e) {
-								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
-								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-								getLastPathComponent();
-								if (tp != null && dmtn.getUserObject()instanceof String) {
-									String diagramName = JOptionPane.showInputDialog(owner,
-											"Type graph name",
-											"New graph",
-											JOptionPane.QUESTION_MESSAGE);
-									if (diagramName != null && ids.gm.existsModel(diagramName)) {
-
-										JOptionPane.showMessageDialog(owner,
-												"There exists a model with the same name. Please, select another",
-												"Warning",
-												JOptionPane.WARNING_MESSAGE);
+											}
 									}
-									else
-										if (diagramName != null) {
-											OrganizationModelModelJGraph mjg =
-												new OrganizationModelModelJGraph(new
-												OrganizationModelDataEntity(
-												diagramName), diagramName, ids.om, new Model(ids),
-												new BasicMarqueeHandler(), ids.prefs );
-											OrganizationModelActionsFactory ema=new  OrganizationModelActionsFactory(resources,ids);
-											mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-									   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-											mjg.setMarqueeHandler(marquee);
-											ids.gm.addModel(tp.getPath(), diagramName, mjg);
-											ids.addNewDiagram(mjg);
-										
-										}
+
 								}
+							});
+				}
 
-							}
-						});
-}
- 
-  
 
-   if (ids.getDiagramFilter().isValidDiagram("ComponentDiagram")){
-				menu.add(
-						new AbstractAction("Add ComponentDiagram") {
 
-							public void actionPerformed(ActionEvent e) {
-								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
-								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-								getLastPathComponent();
-								if (tp != null && dmtn.getUserObject()instanceof String) {
-									String diagramName = JOptionPane.showInputDialog(owner,
-											"Type graph name",
-											"New graph",
-											JOptionPane.QUESTION_MESSAGE);
-									if (diagramName != null && ids.gm.existsModel(diagramName)) {
+				if (ids.getDiagramFilter().isValidDiagram("OrganizationModel")){
+					menu.add(
+							new AbstractAction("Add OrganizationModel") {
 
-										JOptionPane.showMessageDialog(owner,
-												"There exists a model with the same name. Please, select another",
-												"Warning",
-												JOptionPane.WARNING_MESSAGE);
+								public void actionPerformed(ActionEvent e) {
+									TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
+									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
+											getLastPathComponent();
+									if (tp != null && dmtn.getUserObject()instanceof String) {
+										String diagramName = JOptionPane.showInputDialog(owner,
+												"Type graph name",
+												"New graph",
+												JOptionPane.QUESTION_MESSAGE);
+										if (diagramName != null && ids.gm.existsModel(diagramName)) {
+
+											JOptionPane.showMessageDialog(owner,
+													"There exists a model with the same name. Please, select another",
+													"Warning",
+													JOptionPane.WARNING_MESSAGE);
+										}
+										else
+											if (diagramName != null) {
+												OrganizationModelModelJGraph mjg =
+														new OrganizationModelModelJGraph(new
+																OrganizationModelDataEntity(
+																		diagramName), diagramName, ids.om, new Model(ids),
+																		new BasicMarqueeHandler(), ids.prefs );
+												OrganizationModelActionsFactory ema=new  OrganizationModelActionsFactory(resources,ids);
+												mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+												MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+												mjg.setMarqueeHandler(marquee);
+												ids.gm.addModel(tp.getPath(), diagramName, mjg);
+												ids.addNewDiagram(mjg);
+
+											}
 									}
-									else
-										if (diagramName != null) {
-											ComponentDiagramModelJGraph mjg =
-												new ComponentDiagramModelJGraph(new
-												ComponentDiagramDataEntity(
-												diagramName), diagramName, ids.om, new Model(ids),
-												new BasicMarqueeHandler(), ids.prefs );
-											ComponentDiagramActionsFactory ema=new  ComponentDiagramActionsFactory(resources,ids);
-											mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-									   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-											mjg.setMarqueeHandler(marquee);
-											ids.gm.addModel(tp.getPath(), diagramName, mjg);
-											ids.addNewDiagram(mjg);
-										
-										}
+
 								}
+							});
+				}
 
-							}
-						});
-}
- 
-  
 
-   if (ids.getDiagramFilter().isValidDiagram("TasksAndGoalsModel")){
-				menu.add(
-						new AbstractAction("Add TasksAndGoalsModel") {
 
-							public void actionPerformed(ActionEvent e) {
-								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
-								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-								getLastPathComponent();
-								if (tp != null && dmtn.getUserObject()instanceof String) {
-									String diagramName = JOptionPane.showInputDialog(owner,
-											"Type graph name",
-											"New graph",
-											JOptionPane.QUESTION_MESSAGE);
-									if (diagramName != null && ids.gm.existsModel(diagramName)) {
+				if (ids.getDiagramFilter().isValidDiagram("ComponentDiagram")){
+					menu.add(
+							new AbstractAction("Add ComponentDiagram") {
 
-										JOptionPane.showMessageDialog(owner,
-												"There exists a model with the same name. Please, select another",
-												"Warning",
-												JOptionPane.WARNING_MESSAGE);
+								public void actionPerformed(ActionEvent e) {
+									TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
+									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
+											getLastPathComponent();
+									if (tp != null && dmtn.getUserObject()instanceof String) {
+										String diagramName = JOptionPane.showInputDialog(owner,
+												"Type graph name",
+												"New graph",
+												JOptionPane.QUESTION_MESSAGE);
+										if (diagramName != null && ids.gm.existsModel(diagramName)) {
+
+											JOptionPane.showMessageDialog(owner,
+													"There exists a model with the same name. Please, select another",
+													"Warning",
+													JOptionPane.WARNING_MESSAGE);
+										}
+										else
+											if (diagramName != null) {
+												ComponentDiagramModelJGraph mjg =
+														new ComponentDiagramModelJGraph(new
+																ComponentDiagramDataEntity(
+																		diagramName), diagramName, ids.om, new Model(ids),
+																		new BasicMarqueeHandler(), ids.prefs );
+												ComponentDiagramActionsFactory ema=new  ComponentDiagramActionsFactory(resources,ids);
+												mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+												MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+												mjg.setMarqueeHandler(marquee);
+												ids.gm.addModel(tp.getPath(), diagramName, mjg);
+												ids.addNewDiagram(mjg);
+
+											}
 									}
-									else
-										if (diagramName != null) {
-											TasksAndGoalsModelModelJGraph mjg =
-												new TasksAndGoalsModelModelJGraph(new
-												TasksAndGoalsModelDataEntity(
-												diagramName), diagramName, ids.om, new Model(ids),
-												new BasicMarqueeHandler(), ids.prefs );
-											TasksAndGoalsModelActionsFactory ema=new  TasksAndGoalsModelActionsFactory(resources,ids);
-											mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-									   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-											mjg.setMarqueeHandler(marquee);
-											ids.gm.addModel(tp.getPath(), diagramName, mjg);
-											ids.addNewDiagram(mjg);
-										
-										}
+
 								}
+							});
+				}
 
-							}
-						});
-}
- 
-  
 
-   if (ids.getDiagramFilter().isValidDiagram("InteractionModel")){
-				menu.add(
-						new AbstractAction("Add InteractionModel") {
 
-							public void actionPerformed(ActionEvent e) {
-								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
-								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-								getLastPathComponent();
-								if (tp != null && dmtn.getUserObject()instanceof String) {
-									String diagramName = JOptionPane.showInputDialog(owner,
-											"Type graph name",
-											"New graph",
-											JOptionPane.QUESTION_MESSAGE);
-									if (diagramName != null && ids.gm.existsModel(diagramName)) {
+				if (ids.getDiagramFilter().isValidDiagram("TasksAndGoalsModel")){
+					menu.add(
+							new AbstractAction("Add TasksAndGoalsModel") {
 
-										JOptionPane.showMessageDialog(owner,
-												"There exists a model with the same name. Please, select another",
-												"Warning",
-												JOptionPane.WARNING_MESSAGE);
+								public void actionPerformed(ActionEvent e) {
+									TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
+									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
+											getLastPathComponent();
+									if (tp != null && dmtn.getUserObject()instanceof String) {
+										String diagramName = JOptionPane.showInputDialog(owner,
+												"Type graph name",
+												"New graph",
+												JOptionPane.QUESTION_MESSAGE);
+										if (diagramName != null && ids.gm.existsModel(diagramName)) {
+
+											JOptionPane.showMessageDialog(owner,
+													"There exists a model with the same name. Please, select another",
+													"Warning",
+													JOptionPane.WARNING_MESSAGE);
+										}
+										else
+											if (diagramName != null) {
+												TasksAndGoalsModelModelJGraph mjg =
+														new TasksAndGoalsModelModelJGraph(new
+																TasksAndGoalsModelDataEntity(
+																		diagramName), diagramName, ids.om, new Model(ids),
+																		new BasicMarqueeHandler(), ids.prefs );
+												TasksAndGoalsModelActionsFactory ema=new  TasksAndGoalsModelActionsFactory(resources,ids);
+												mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+												MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+												mjg.setMarqueeHandler(marquee);
+												ids.gm.addModel(tp.getPath(), diagramName, mjg);
+												ids.addNewDiagram(mjg);
+
+											}
 									}
-									else
-										if (diagramName != null) {
-											InteractionModelModelJGraph mjg =
-												new InteractionModelModelJGraph(new
-												InteractionModelDataEntity(
-												diagramName), diagramName, ids.om, new Model(ids),
-												new BasicMarqueeHandler(), ids.prefs );
-											InteractionModelActionsFactory ema=new  InteractionModelActionsFactory(resources,ids);
-											mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-									   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-											mjg.setMarqueeHandler(marquee);
-											ids.gm.addModel(tp.getPath(), diagramName, mjg);
-											ids.addNewDiagram(mjg);
-										
-										}
+
 								}
+							});
+				}
 
-							}
-						});
-}
- 
-  
 
-   if (ids.getDiagramFilter().isValidDiagram("ActivityDiagram")){
-				menu.add(
-						new AbstractAction("Add ActivityDiagram") {
 
-							public void actionPerformed(ActionEvent e) {
-								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
-								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-								getLastPathComponent();
-								if (tp != null && dmtn.getUserObject()instanceof String) {
-									String diagramName = JOptionPane.showInputDialog(owner,
-											"Type graph name",
-											"New graph",
-											JOptionPane.QUESTION_MESSAGE);
-									if (diagramName != null && ids.gm.existsModel(diagramName)) {
+				if (ids.getDiagramFilter().isValidDiagram("InteractionModel")){
+					menu.add(
+							new AbstractAction("Add InteractionModel") {
 
-										JOptionPane.showMessageDialog(owner,
-												"There exists a model with the same name. Please, select another",
-												"Warning",
-												JOptionPane.WARNING_MESSAGE);
+								public void actionPerformed(ActionEvent e) {
+									TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
+									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
+											getLastPathComponent();
+									if (tp != null && dmtn.getUserObject()instanceof String) {
+										String diagramName = JOptionPane.showInputDialog(owner,
+												"Type graph name",
+												"New graph",
+												JOptionPane.QUESTION_MESSAGE);
+										if (diagramName != null && ids.gm.existsModel(diagramName)) {
+
+											JOptionPane.showMessageDialog(owner,
+													"There exists a model with the same name. Please, select another",
+													"Warning",
+													JOptionPane.WARNING_MESSAGE);
+										}
+										else
+											if (diagramName != null) {
+												InteractionModelModelJGraph mjg =
+														new InteractionModelModelJGraph(new
+																InteractionModelDataEntity(
+																		diagramName), diagramName, ids.om, new Model(ids),
+																		new BasicMarqueeHandler(), ids.prefs );
+												InteractionModelActionsFactory ema=new  InteractionModelActionsFactory(resources,ids);
+												mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+												MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+												mjg.setMarqueeHandler(marquee);
+												ids.gm.addModel(tp.getPath(), diagramName, mjg);
+												ids.addNewDiagram(mjg);
+
+											}
 									}
-									else
-										if (diagramName != null) {
-											ActivityDiagramModelJGraph mjg =
-												new ActivityDiagramModelJGraph(new
-												ActivityDiagramDataEntity(
-												diagramName), diagramName, ids.om, new Model(ids),
-												new BasicMarqueeHandler(), ids.prefs );
-											ActivityDiagramActionsFactory ema=new  ActivityDiagramActionsFactory(resources,ids);
-											mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-									   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-											mjg.setMarqueeHandler(marquee);
-											ids.gm.addModel(tp.getPath(), diagramName, mjg);
-											ids.addNewDiagram(mjg);
-										
-										}
+
 								}
+							});
+				}
 
-							}
-						});
-}
- 
-  
 
-   if (ids.getDiagramFilter().isValidDiagram("AgentModel")){
-				menu.add(
-						new AbstractAction("Add AgentModel") {
 
-							public void actionPerformed(ActionEvent e) {
-								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
-								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-								getLastPathComponent();
-								if (tp != null && dmtn.getUserObject()instanceof String) {
-									String diagramName = JOptionPane.showInputDialog(owner,
-											"Type graph name",
-											"New graph",
-											JOptionPane.QUESTION_MESSAGE);
-									if (diagramName != null && ids.gm.existsModel(diagramName)) {
+				if (ids.getDiagramFilter().isValidDiagram("ActivityDiagram")){
+					menu.add(
+							new AbstractAction("Add ActivityDiagram") {
 
-										JOptionPane.showMessageDialog(owner,
-												"There exists a model with the same name. Please, select another",
-												"Warning",
-												JOptionPane.WARNING_MESSAGE);
+								public void actionPerformed(ActionEvent e) {
+									TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
+									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
+											getLastPathComponent();
+									if (tp != null && dmtn.getUserObject()instanceof String) {
+										String diagramName = JOptionPane.showInputDialog(owner,
+												"Type graph name",
+												"New graph",
+												JOptionPane.QUESTION_MESSAGE);
+										if (diagramName != null && ids.gm.existsModel(diagramName)) {
+
+											JOptionPane.showMessageDialog(owner,
+													"There exists a model with the same name. Please, select another",
+													"Warning",
+													JOptionPane.WARNING_MESSAGE);
+										}
+										else
+											if (diagramName != null) {
+												ActivityDiagramModelJGraph mjg =
+														new ActivityDiagramModelJGraph(new
+																ActivityDiagramDataEntity(
+																		diagramName), diagramName, ids.om, new Model(ids),
+																		new BasicMarqueeHandler(), ids.prefs );
+												ActivityDiagramActionsFactory ema=new  ActivityDiagramActionsFactory(resources,ids);
+												mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+												MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+												mjg.setMarqueeHandler(marquee);
+												ids.gm.addModel(tp.getPath(), diagramName, mjg);
+												ids.addNewDiagram(mjg);
+
+											}
 									}
-									else
-										if (diagramName != null) {
-											AgentModelModelJGraph mjg =
-												new AgentModelModelJGraph(new
-												AgentModelDataEntity(
-												diagramName), diagramName, ids.om, new Model(ids),
-												new BasicMarqueeHandler(), ids.prefs );
-											AgentModelActionsFactory ema=new  AgentModelActionsFactory(resources,ids);
-											mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-									   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-											mjg.setMarqueeHandler(marquee);
-											ids.gm.addModel(tp.getPath(), diagramName, mjg);
-											ids.addNewDiagram(mjg);
-										
-										}
+
 								}
+							});
+				}
 
-							}
-						});
-}
- 
-  
 
-   if (ids.getDiagramFilter().isValidDiagram("UseCaseDiagram")){
-				menu.add(
-						new AbstractAction("Add UseCaseDiagram") {
 
-							public void actionPerformed(ActionEvent e) {
-								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
-								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-								getLastPathComponent();
-								if (tp != null && dmtn.getUserObject()instanceof String) {
-									String diagramName = JOptionPane.showInputDialog(owner,
-											"Type graph name",
-											"New graph",
-											JOptionPane.QUESTION_MESSAGE);
-									if (diagramName != null && ids.gm.existsModel(diagramName)) {
+				if (ids.getDiagramFilter().isValidDiagram("AgentModel")){
+					menu.add(
+							new AbstractAction("Add AgentModel") {
 
-										JOptionPane.showMessageDialog(owner,
-												"There exists a model with the same name. Please, select another",
-												"Warning",
-												JOptionPane.WARNING_MESSAGE);
+								public void actionPerformed(ActionEvent e) {
+									TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
+									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
+											getLastPathComponent();
+									if (tp != null && dmtn.getUserObject()instanceof String) {
+										String diagramName = JOptionPane.showInputDialog(owner,
+												"Type graph name",
+												"New graph",
+												JOptionPane.QUESTION_MESSAGE);
+										if (diagramName != null && ids.gm.existsModel(diagramName)) {
+
+											JOptionPane.showMessageDialog(owner,
+													"There exists a model with the same name. Please, select another",
+													"Warning",
+													JOptionPane.WARNING_MESSAGE);
+										}
+										else
+											if (diagramName != null) {
+												AgentModelModelJGraph mjg =
+														new AgentModelModelJGraph(new
+																AgentModelDataEntity(
+																		diagramName), diagramName, ids.om, new Model(ids),
+																		new BasicMarqueeHandler(), ids.prefs );
+												AgentModelActionsFactory ema=new  AgentModelActionsFactory(resources,ids);
+												mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+												MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+												mjg.setMarqueeHandler(marquee);
+												ids.gm.addModel(tp.getPath(), diagramName, mjg);
+												ids.addNewDiagram(mjg);
+
+											}
 									}
-									else
-										if (diagramName != null) {
-											UseCaseDiagramModelJGraph mjg =
-												new UseCaseDiagramModelJGraph(new
-												UseCaseDiagramDataEntity(
-												diagramName), diagramName, ids.om, new Model(ids),
-												new BasicMarqueeHandler(), ids.prefs );
-											UseCaseDiagramActionsFactory ema=new  UseCaseDiagramActionsFactory(resources,ids);
-											mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-									   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-											mjg.setMarqueeHandler(marquee);
-											ids.gm.addModel(tp.getPath(), diagramName, mjg);
-											ids.addNewDiagram(mjg);
-										
-										}
+
 								}
+							});
+				}
 
-							}
-						});
-}
- 
-  
 
-   if (ids.getDiagramFilter().isValidDiagram("DeployDiagram")){
-				menu.add(
-						new AbstractAction("Add DeployDiagram") {
 
-							public void actionPerformed(ActionEvent e) {
-								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
-								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-								getLastPathComponent();
-								if (tp != null && dmtn.getUserObject()instanceof String) {
-									String diagramName = JOptionPane.showInputDialog(owner,
-											"Type graph name",
-											"New graph",
-											JOptionPane.QUESTION_MESSAGE);
-									if (diagramName != null && ids.gm.existsModel(diagramName)) {
+				if (ids.getDiagramFilter().isValidDiagram("UseCaseDiagram")){
+					menu.add(
+							new AbstractAction("Add UseCaseDiagram") {
 
-										JOptionPane.showMessageDialog(owner,
-												"There exists a model with the same name. Please, select another",
-												"Warning",
-												JOptionPane.WARNING_MESSAGE);
+								public void actionPerformed(ActionEvent e) {
+									TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
+									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
+											getLastPathComponent();
+									if (tp != null && dmtn.getUserObject()instanceof String) {
+										String diagramName = JOptionPane.showInputDialog(owner,
+												"Type graph name",
+												"New graph",
+												JOptionPane.QUESTION_MESSAGE);
+										if (diagramName != null && ids.gm.existsModel(diagramName)) {
+
+											JOptionPane.showMessageDialog(owner,
+													"There exists a model with the same name. Please, select another",
+													"Warning",
+													JOptionPane.WARNING_MESSAGE);
+										}
+										else
+											if (diagramName != null) {
+												UseCaseDiagramModelJGraph mjg =
+														new UseCaseDiagramModelJGraph(new
+																UseCaseDiagramDataEntity(
+																		diagramName), diagramName, ids.om, new Model(ids),
+																		new BasicMarqueeHandler(), ids.prefs );
+												UseCaseDiagramActionsFactory ema=new  UseCaseDiagramActionsFactory(resources,ids);
+												mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+												MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+												mjg.setMarqueeHandler(marquee);
+												ids.gm.addModel(tp.getPath(), diagramName, mjg);
+												ids.addNewDiagram(mjg);
+
+											}
 									}
-									else
-										if (diagramName != null) {
-											DeployDiagramModelJGraph mjg =
-												new DeployDiagramModelJGraph(new
-												DeployDiagramDataEntity(
-												diagramName), diagramName, ids.om, new Model(ids),
-												new BasicMarqueeHandler(), ids.prefs );
-											DeployDiagramActionsFactory ema=new  DeployDiagramActionsFactory(resources,ids);
-											mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
-									   	        MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
-											mjg.setMarqueeHandler(marquee);
-											ids.gm.addModel(tp.getPath(), diagramName, mjg);
-											ids.addNewDiagram(mjg);
-										
-										}
+
 								}
+							});
+				}
 
-							}
-						});
-}
- 
-  
 
-	menu.add(
+
+				if (ids.getDiagramFilter().isValidDiagram("DeployDiagram")){
+					menu.add(
+							new AbstractAction("Add DeployDiagram") {
+
+								public void actionPerformed(ActionEvent e) {
+									TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
+									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
+											getLastPathComponent();
+									if (tp != null && dmtn.getUserObject()instanceof String) {
+										String diagramName = JOptionPane.showInputDialog(owner,
+												"Type graph name",
+												"New graph",
+												JOptionPane.QUESTION_MESSAGE);
+										if (diagramName != null && ids.gm.existsModel(diagramName)) {
+
+											JOptionPane.showMessageDialog(owner,
+													"There exists a model with the same name. Please, select another",
+													"Warning",
+													JOptionPane.WARNING_MESSAGE);
+										}
+										else
+											if (diagramName != null) {
+												DeployDiagramModelJGraph mjg =
+														new DeployDiagramModelJGraph(new
+																DeployDiagramDataEntity(
+																		diagramName), diagramName, ids.om, new Model(ids),
+																		new BasicMarqueeHandler(), ids.prefs );
+												DeployDiagramActionsFactory ema=new  DeployDiagramActionsFactory(resources,ids);
+												mjg.setUI(new EmbeddedAndPopupCellEditor(ids,resources));
+												MarqueeHandler marquee=new MarqueeHandler(mjg, resources,ids,ema);
+												mjg.setMarqueeHandler(marquee);
+												ids.gm.addModel(tp.getPath(), diagramName, mjg);
+												ids.addNewDiagram(mjg);
+
+											}
+									}
+
+								}
+							});
+				}
+
+
+
+				menu.add(
 						new AbstractAction("Add package") {
 
 							public void actionPerformed(ActionEvent e) {
 								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
 								if (tp != null) {
 									String nombre =
-										JOptionPane.showInputDialog(owner,
-												"Type a new package's name",
-												"New package",
-												JOptionPane.QUESTION_MESSAGE);
+											JOptionPane.showInputDialog(owner,
+													"Type a new package's name",
+													"New package",
+													JOptionPane.QUESTION_MESSAGE);
 									if (nombre != null) {
 										ids.gm.addPackage(tp.getPath(), nombre);
 
@@ -748,12 +748,12 @@ public class ProjectMenuCreator {
 										ids.gm.arbolProyecto.expandPath(tp);
 										ids.gm.arbolProyecto.scrollPathToVisible(tp);
 										ids.addNewPackage(tp.getPath(),nombre);
-									
+
 									}
 								}
 							}
 						});
-} 
+			} 
 			else {
 
 				// Edit
@@ -764,7 +764,7 @@ public class ProjectMenuCreator {
 								if (tp != null) {
 
 									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-									getLastPathComponent();
+											getLastPathComponent();
 
 									Object uo = dmtn.getUserObject();
 
@@ -774,46 +774,50 @@ public class ProjectMenuCreator {
 											ModelDataEntity mde = ( (ModelJGraph) uo).getProperties();
 
 											ingenias.editor.editiondialog.GeneralEditionFrame gef = new ingenias.
-											editor.editiondialog.GeneralEditionFrame(ids.editor, ids.om, ids.gm, owner,
-													"Edit diagram properties",
-													mde);
+													editor.editiondialog.GeneralEditionFrame(ids.editor, ids.om, ids.gm, owner,
+															"Edit diagram properties",
+															mde);
 											ModelJGraph mjg =
-												ids.gm.getModel(mde.getId());
+													ids.gm.getModel(mde.getId());
 											//	              Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 											gef.setLocation(GraphicsUtils.getCenter(resources.getMainFrame(),gef.getSize()));
 											gef.pack();
 											gef.show();
+
 											duplicated =
-												ids.gm.isDuplicated(mde.getId());
+													ids.gm.isDuplicated(mde.getId());
 											if (duplicated) {
 												JOptionPane.showMessageDialog(owner,
 														"There exists a model with the same name. Please, select another",
 														"Warning", JOptionPane.WARNING_MESSAGE);
 											} else {
-												ids.gm.arbolProyecto.storeTreeExpansionPaths();
-												( (DefaultTreeModel) ids.gm.arbolProyecto.getModel()).reload();
-												ids.gm.arbolProyecto.restoreTreeExpansionPath();
-												ids.diagramPropertiesChanged(mjg);
-
+												if (gef.getStatus()==gef.ACCEPTED){
+													ids.gm.arbolProyecto.storeTreeExpansionPaths();
+													( (DefaultTreeModel) ids.gm.arbolProyecto.getModel()).reload();
+													ids.gm.arbolProyecto.restoreTreeExpansionPath();
+													ids.diagramPropertiesChanged(mjg);
+													ids.setChanged(true);
+													resources.setChanged();
+												}
 											}
 										}
-										
+
 									}
 								}
 							}
 						});
 			}
 			if (tp.getPathCount()>1){
-			       menu.add(
-				new AbstractAction("rename") {
+				menu.add(
+						new AbstractAction("rename") {
 
 							public void actionPerformed(ActionEvent e) {
 								TreePath tp = ids.gm.arbolProyecto.getSelectionPath();
 								if (tp != null) {
 									DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.
-									getLastPathComponent();
+											getLastPathComponent();
 									Object uo = dmtn.getUserObject();
-									
+
 									String result = JOptionPane.showInputDialog(owner,
 											"Type in the new name", 
 											uo.toString());
@@ -873,9 +877,9 @@ public class ProjectMenuCreator {
 			}
 		}
 		return menu;
-};
-	
-	
+	};
+
+
 
 }
 

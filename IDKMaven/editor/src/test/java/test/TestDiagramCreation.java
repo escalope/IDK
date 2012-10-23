@@ -186,7 +186,6 @@ public class TestDiagramCreation  {
 		Vector<String> validRels = grf.getPossibleRelationships( new String[]{"miid1","miid2"}, g);
 		Vector<Hashtable<String, String>> assignments = 
 				grf.getPossibleRoleAssignment(validRels.firstElement(), new String[]{"miid1","miid2"}, g, browser);
-		System.err.println(assignments);
 		grf.createRelationship("AInherits",g, assignments.firstElement());
 	}
 	

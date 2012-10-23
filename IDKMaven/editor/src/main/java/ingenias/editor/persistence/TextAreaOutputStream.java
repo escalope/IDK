@@ -20,6 +20,7 @@
 package ingenias.editor.persistence;
 
 import java.io.*;
+
 import javax.swing.*;
 import javax.swing.text.*;
 
@@ -57,11 +58,9 @@ public class TextAreaOutputStream
   public void write(char[] parm1, int parm2, int parm3) throws java.io.
       IOException {
     
-    StyledDocument st = output.getStyledDocument();
+    final StyledDocument st = output.getStyledDocument();
     
-    try {
-    
-      String out = new String(parm1).substring(parm2, parm2 + parm3);
+    String out = new String(parm1).substring(parm2, parm2 + parm3);
       
      if (out.indexOf("ERROR:") > -1) {
     	 out="<span style=\"font-weight: bold; color: rgb(255, 0, 0);\">"+out+"</span>";
@@ -81,12 +80,22 @@ public class TextAreaOutputStream
                         out,
                         st.getStyle("regular"));*/
       }
-      output.getEditorKit().read(new StringReader(out),st,st.getLength());
-    }
-    catch (javax.swing.text.BadLocationException ble) {
-      ble.printStackTrace();
-    }
-//    st..append(new String(parm1).substring(parm2,parm2+parm3));
+     final String fout=out;
+      SwingUtilities.invokeLater(new Runnable(){
+    	  public void run(){
+
+    	      try {
+				output.getEditorKit().read(new StringReader(fout),st,st.getLength());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (BadLocationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	  }
+    	  
+      });
 
   }
 

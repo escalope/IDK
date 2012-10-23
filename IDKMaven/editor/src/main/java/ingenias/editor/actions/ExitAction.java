@@ -23,6 +23,7 @@ import ingenias.editor.GUIResources;
 import ingenias.editor.IDEState;
 import ingenias.editor.persistence.PersistenceManager;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
@@ -51,6 +52,7 @@ public class ExitAction {
 			new PersistenceManager().savePreferences(ids);
 			resources.getMainFrame().setVisible(false);
 			System.exit(0);
+			
 		}
 	}
 }

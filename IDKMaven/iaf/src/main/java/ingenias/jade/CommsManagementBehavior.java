@@ -206,8 +206,11 @@ public class CommsManagementBehavior extends CyclicBehaviour {
 						RuntimeConversation conv=ja.getCM().getConversation(
 								acl.getConversationId(), playedRole);
 						StateBehavior machine = ja.getCM().getStateMachine(conv);
+
 						String failureid=MentalStateManager.generateMentalEntityID()+"ErrorComm";
-						failure=machine.createFailure(failureid);
+						if (machine!=null){ // ams is referring to a unknown conversation following a known protocol
+						 failure=machine.createFailure(failureid);
+						}	
 						if (failure==null) {// no predefined failures 
 							failure=
 							new ingenias.editor.entities.RuntimeCommFailure(failureid);

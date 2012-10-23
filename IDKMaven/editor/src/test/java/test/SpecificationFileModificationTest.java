@@ -110,7 +110,7 @@ public class SpecificationFileModificationTest {
 	}
 
 
-	@Test//(dependsOnGroups= {"diagramcreation"})
+	@Test(dependsOnGroups= {"diagramcreation"})
 	@GUITest
 	public void testIndenpendencyOfIDEAndBrowser() throws UnknowFormat, DamagedFormat, CannotLoad{
 		Browser originalSpec=BrowserImp.initialise(fileSpec); // loads the original spec
@@ -188,7 +188,7 @@ public class SpecificationFileModificationTest {
 	 * @throws InvalidGraph
 	 * @throws InvalidEntity
 	 */
-	@Test//(dependsOnGroups= {"diagramcreation"})
+	@Test(dependsOnGroups= {"diagramcreation"})
 	@GUITest
 	public void testModificationDialog() throws FileNotFoundException, IOException, UnknowFormat, DamagedFormat, CannotLoad, InvalidGraph, InvalidEntity{
 

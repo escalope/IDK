@@ -47,6 +47,12 @@ import java.util.*;
  */
 public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 
+	boolean codeChanged=false; 
+	
+	public boolean isCodeChanged() {
+		return codeChanged;
+	}
+
 	/**
 	 *  Initialises the class with a file containing a INGENIAS specification
 	 *
@@ -119,7 +125,7 @@ public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 							String othercode=entity.getAttributeByName("Code").getSimpleValue();
 							if (!code.equals(othercode)){
 								Graph g=browser.findFirstEntityOccurrence(nodeid);
-							/*	System.err.println("node:"+nodeid);
+								/*System.err.println("node:"+nodeid);
 								System.err.println("old:'"+othercode+"'");
 								System.err.println("new:'"+code+"'");*/
 								//System.err.println(g+":"+entity);
@@ -127,7 +133,9 @@ public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 								GraphAttributeFactory gaf = GraphAttributeFactory.createDefaultGraphFactory(browser);
 								entity.setAttribute(gaf.createAttribute("Code", code,g));
 								//System.err.println(entity.getAttributeByName("Code").getSimpleValue());
-								browser.getState().setChanged(true);								
+								browser.getState().setChanged(true);	
+								codeChanged=true;
+								//System.err.println("Cambiado .............");
 							}
 						}
 					}
@@ -270,7 +278,7 @@ public class CodeUploader extends ingenias.editor.extension.BasicToolImp {
 
 				jadegen.run();
 				jadegen.getBrowser().getState().prop=oldprops;
-				if (jadegen.getBrowser().getState().isChanged()){
+				if (jadegen.isCodeChanged()){
 					pm=new PersistenceManager();
 					pm.save(new File(args[2]), jadegen.getBrowser().getState());
 				}

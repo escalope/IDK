@@ -198,7 +198,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			rp2.add(new Var("fname", this.toSafeName(g.getName())));
 			rp2.add(new Var("tipo", g.getType()));
 			rp2.add(new Var("image", toSafeName(g.getName()) + ".png"));
-			g.generateImage( ( (ProjectProperty)this.getProperty("htmldoc")).
+			g.generateImage( ( (ProjectProperty)this.getProperty("htmldoc:output")).
 					value + "/" + toSafeName(g.getName()) + ".png");
 			rp1.add(rp2);
 			

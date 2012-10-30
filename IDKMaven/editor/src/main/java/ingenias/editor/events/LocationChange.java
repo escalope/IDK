@@ -79,75 +79,113 @@ public class LocationChange {
 		while (it.hasNext()) {
 			Rectangle point =  it.next();
 			x =  (x + point.getCenterX());
-			y =  (y + point.getCenterY());
+			y =  (y + point.getCenterY());	
 		}		
 		if (points.size()==0)
 			return new Point(0,0);
 
 		double x2 = x / points.size();
-		double y2= y / points.size();
+		double y2= y / points.size(); 
+
+		// this center point is not enough good. When A connects with B and they have dispare sizes, 
+		// the center point tends to be very close to B. To compesate, it is better to recompute the
+		// center using a point in the perimeter of B and A.
+
+
 
 		// Next, the position is recomputed taking into account
 		// the size of the elements.
 
+
 		it = points.iterator();
 		double ncenterX=0;
 		double ncenterY=0;
+		double m=0;
+		double n=0;
+		double x3=0;
+		double y3=0;
 		while (it.hasNext()) {
 			Rectangle point =  it.next();
 			double x1=point.getCenterX();
-			double y1=point.getCenterY();
-			double x0=point.getX();
-			double y0=point.getY();
-			double m=0;
-			double n=0;
+			double y1=point.getCenterY();			
+			double maxdistance=distance(x1,y1,point.getMinX(),point.getMinY())+10;
 
-			double x3=0;
-			double y3=0;
-			if (x2<x0 || x2> x0+point.getWidth()){
-				if (Math.abs(x2-x0)<Math.abs(x2-x0-point.getWidth())){
-					x3=x0;
+			if (Math.abs(x2-x1)>20){
+				m=(y2-y1)/(x2-x1);
+				n=y2-((y2-y1)/(x2-x1))*x2;				
+				double y3min=m*point.getMinX()+n;
+				double y3max=m*point.getMaxX()+n;
+				double distancey3min=distance(x1,y1,point.getMinX(),y3min);
+				double distancey3max=distance(x1,y1,point.getMaxX(),y3max);
+				System.err.println(distancey3min-distancey3max);
+				if (Math.min(distancey3min,distancey3max )<maxdistance){
+					if (distancey3min<maxdistance && distancey3max<maxdistance){
+						// two sides of the rectangle are intersected. The closer to x2 is chosen
+						if (distance(point.getMinX(),y3min,x2,y2)<distance(point.getMaxX(),y3max,x2,y2)){
+							x3=point.getMinX();
+							y3=y3min;
+						} else {
+							x3=point.getMaxX();
+							y3=y3max;
+						}
+					} else
+						if (distancey3min<distancey3max){
+							x3=point.getMinX();
+							y3=y3min;
+						} else {
+							x3=point.getMaxX();
+							y3=y3max;
+						}
+
 				} else {
-					x3=x0+point.getWidth();
-				}
-				if (Math.abs(x2-x1)<0.01){
-					y3=y2;
-				} else {
-					m=(y2-y1)/(x2-x1);
-					n=y2-((y2-y1)/(x2-x1))*x2;
-					y3=m*x3+n;
-				}
-
-
+					if (Math.abs(m)<=0.001){
+						if (x2>x1)
+							x3=point.getMaxX();
+						else
+							x3=point.getMinX();
+						y3=y2;	
+					} else {
+						double x3min=(point.getMinY()-n)/m;
+						double x3max=(point.getMaxY()-n)/m;
+						double distancex3min=distance(x1,y1,x3min,point.getMinY());
+						double distancex3max=distance(x1,y1,x3max,point.getMaxY());
+						if (distancex3min<maxdistance && distancex3max<maxdistance){
+							// two sides of the rectangle are intersected. The closer to x2 is chosen
+							if (distance(x3min, point.getMinY(),x2,y2)<distance(x3max,point.getMaxY(),x2,y2)){
+								x3=x3min;
+								y3=point.getMinY();
+							} else {
+								x3=x3max;
+								y3=point.getMaxY();
+							}
+						} else
+							if (distancex3min<distancex3max){
+								x3=x3min;
+								y3=point.getMinY();
+							} else {
+								x3=x3max;
+								y3=point.getMaxY();
+							}
+					}
+				}												
 			} else {
-				if (Math.abs(y2-y0)<Math.abs(y2-y0-point.getHeight())){
-					y3=y0;
-				} else {
-					y3=y0+point.getHeight();
-				}
-
-				if (Math.abs(x2-x1)<=2){
-					if (y2>y0){
-						y3=y0+point.getHeight();
-					} else {
-						y3=y0;
-						x3=x0+point.getWidth()/2;
-					}
-				} else {
-					if (Math.abs(x2-x1)<0.01){
-						x3=x2;
-					} else {
-						m=(y2-y1)/(x2-x1);
-						n=y2-((y2-y1)/(x2-x1))*x2;
-						x3=(y3-n)/m;
-					}
-				}
+				if (y2>y1)
+					y3=point.getMaxY();
+				else
+					y3=point.getMinY();
+				x3=x2;				
 			}
 
 			ncenterX=ncenterX+x3;
 			ncenterY=ncenterY+y3;
 		}
 		return new Point((int)(ncenterX/points.size()),(int)(ncenterY/points.size()));
+	}
+
+	private static double distance(double x1, double y1, double minX, double y3min
+			) {
+		// TODO Auto-generated method stub
+		return Math.sqrt((x1-minX)*(x1-minX)+(y1-y3min)*(y1-y3min));
 	}
 
 	public static void centerNAryEdge(JGraph mjg, ingenias.editor.Model m,

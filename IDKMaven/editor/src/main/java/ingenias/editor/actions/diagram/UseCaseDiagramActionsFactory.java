@@ -712,6 +712,7 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 		 protected Vector<AbstractAction> createDiagramSpecificInsertActions(final Point pt, final ModelJGraph graph) {
 			 Vector<AbstractAction> nobjects=new Vector<AbstractAction>();
 
+		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "TextUseCase")){
 		// Insert an object of type TextUseCase
 		nobjects.add(
 			new AbstractAction("Insert TextUseCase") {
@@ -725,7 +726,9 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "INGENIASUseCase")){
 		// Insert an object of type INGENIASUseCase
 		nobjects.add(
 			new AbstractAction("Insert INGENIASUseCase") {
@@ -739,7 +742,9 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "Agent")){
 		// Insert an object of type Agent
 		nobjects.add(
 			new AbstractAction("Insert Agent") {
@@ -753,7 +758,9 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "Role")){
 		// Insert an object of type Role
 		nobjects.add(
 			new AbstractAction("Insert Role") {
@@ -767,7 +774,9 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "Interaction")){
 		// Insert an object of type Interaction
 		nobjects.add(
 			new AbstractAction("Insert Interaction") {
@@ -781,7 +790,9 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "TextNote")){
 		// Insert an object of type TextNote
 		nobjects.add(
 			new AbstractAction("Insert TextNote") {
@@ -795,7 +806,9 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "UMLComment")){
 		// Insert an object of type UMLComment
 		nobjects.add(
 			new AbstractAction("Insert UMLComment") {
@@ -809,7 +822,9 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "Goal")){
 		// Insert an object of type Goal
 		nobjects.add(
 			new AbstractAction("Insert Goal") {
@@ -823,7 +838,9 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "Organization")){
 		// Insert an object of type Organization
 		nobjects.add(
 			new AbstractAction("Insert Organization") {
@@ -837,6 +854,7 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 					}
 				}
 			});
+		}
 
 			return nobjects;
 	}

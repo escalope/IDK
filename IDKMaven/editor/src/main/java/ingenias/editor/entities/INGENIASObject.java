@@ -28,11 +28,16 @@ public class INGENIASObject extends Entity {
 
   public java.lang.String Description;
 
+
+
+
+
   public INGENIASObject(String id) {
     super(id);
     this.setHelpDesc("Root concept for ingenias entities");
     this.setHelpRecom("");
   }
+
 
       public java.lang.String getDescription(){
         return Description;
@@ -41,6 +46,8 @@ public class INGENIASObject extends Entity {
 					Description){
         this.Description=Description;
       }
+
+
 
 
 
@@ -58,7 +65,6 @@ super.fromMap(ht);
 }
 public void toMap(Map ht){
 super.toMap(ht);
-
 
 //if (this.getDescription() instanceof String)
  if (this.getDescription()!=null)

@@ -2839,6 +2839,7 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 		 protected Vector<AbstractAction> createDiagramSpecificInsertActions(final Point pt, final ModelJGraph graph) {
 			 Vector<AbstractAction> nobjects=new Vector<AbstractAction>();
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Agent")){
 		// Insert an object of type Agent
 		nobjects.add(
 			new AbstractAction("Insert Agent") {
@@ -2852,7 +2853,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Organization")){
 		// Insert an object of type Organization
 		nobjects.add(
 			new AbstractAction("Insert Organization") {
@@ -2866,7 +2869,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "OrganizationGroup")){
 		// Insert an object of type OrganizationGroup
 		nobjects.add(
 			new AbstractAction("Insert OrganizationGroup") {
@@ -2880,7 +2885,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "OrganizationNetwork")){
 		// Insert an object of type OrganizationNetwork
 		nobjects.add(
 			new AbstractAction("Insert OrganizationNetwork") {
@@ -2894,7 +2901,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Role")){
 		// Insert an object of type Role
 		nobjects.add(
 			new AbstractAction("Insert Role") {
@@ -2908,7 +2917,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Resource")){
 		// Insert an object of type Resource
 		nobjects.add(
 			new AbstractAction("Insert Resource") {
@@ -2922,7 +2933,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Application")){
 		// Insert an object of type Application
 		nobjects.add(
 			new AbstractAction("Insert Application") {
@@ -2936,7 +2949,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "EnvironmentApplication")){
 		// Insert an object of type EnvironmentApplication
 		nobjects.add(
 			new AbstractAction("Insert EnvironmentApplication") {
@@ -2950,7 +2965,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "InternalApplication")){
 		// Insert an object of type InternalApplication
 		nobjects.add(
 			new AbstractAction("Insert InternalApplication") {
@@ -2964,7 +2981,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Task")){
 		// Insert an object of type Task
 		nobjects.add(
 			new AbstractAction("Insert Task") {
@@ -2978,7 +2997,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Plan")){
 		// Insert an object of type Plan
 		nobjects.add(
 			new AbstractAction("Insert Plan") {
@@ -2992,7 +3013,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Workflow")){
 		// Insert an object of type Workflow
 		nobjects.add(
 			new AbstractAction("Insert Workflow") {
@@ -3006,7 +3029,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Interaction")){
 		// Insert an object of type Interaction
 		nobjects.add(
 			new AbstractAction("Insert Interaction") {
@@ -3020,7 +3045,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Goal")){
 		// Insert an object of type Goal
 		nobjects.add(
 			new AbstractAction("Insert Goal") {
@@ -3034,7 +3061,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Fact")){
 		// Insert an object of type Fact
 		nobjects.add(
 			new AbstractAction("Insert Fact") {
@@ -3048,7 +3077,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "FrameFact")){
 		// Insert an object of type FrameFact
 		nobjects.add(
 			new AbstractAction("Insert FrameFact") {
@@ -3062,7 +3093,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "Believe")){
 		// Insert an object of type Believe
 		nobjects.add(
 			new AbstractAction("Insert Believe") {
@@ -3076,7 +3109,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "GeneralEvent")){
 		// Insert an object of type GeneralEvent
 		nobjects.add(
 			new AbstractAction("Insert GeneralEvent") {
@@ -3090,7 +3125,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "ApplicationEvent")){
 		// Insert an object of type ApplicationEvent
 		nobjects.add(
 			new AbstractAction("Insert ApplicationEvent") {
@@ -3104,7 +3141,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "ApplicationEventSlots")){
 		// Insert an object of type ApplicationEventSlots
 		nobjects.add(
 			new AbstractAction("Insert ApplicationEventSlots") {
@@ -3118,7 +3157,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "AutonomousEntityQuery")){
 		// Insert an object of type AutonomousEntityQuery
 		nobjects.add(
 			new AbstractAction("Insert AutonomousEntityQuery") {
@@ -3132,7 +3173,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "AgentRequirementsQuery")){
 		// Insert an object of type AgentRequirementsQuery
 		nobjects.add(
 			new AbstractAction("Insert AgentRequirementsQuery") {
@@ -3146,7 +3189,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "ConcreteAgent")){
 		// Insert an object of type ConcreteAgent
 		nobjects.add(
 			new AbstractAction("Insert ConcreteAgent") {
@@ -3160,7 +3205,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "TextNote")){
 		// Insert an object of type TextNote
 		nobjects.add(
 			new AbstractAction("Insert TextNote") {
@@ -3174,7 +3221,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "UMLComment")){
 		// Insert an object of type UMLComment
 		nobjects.add(
 			new AbstractAction("Insert UMLComment") {
@@ -3188,7 +3237,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "RoleWS")){
 		// Insert an object of type RoleWS
 		nobjects.add(
 			new AbstractAction("Insert RoleWS") {
@@ -3202,7 +3253,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "TaskWS")){
 		// Insert an object of type TaskWS
 		nobjects.add(
 			new AbstractAction("Insert TaskWS") {
@@ -3216,7 +3269,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "GoalStateWS")){
 		// Insert an object of type GoalStateWS
 		nobjects.add(
 			new AbstractAction("Insert GoalStateWS") {
@@ -3230,7 +3285,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "AgentWS")){
 		// Insert an object of type AgentWS
 		nobjects.add(
 			new AbstractAction("Insert AgentWS") {
@@ -3244,7 +3301,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "WorkflowBox")){
 		// Insert an object of type WorkflowBox
 		nobjects.add(
 			new AbstractAction("Insert WorkflowBox") {
@@ -3258,7 +3317,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "ApplicationWS")){
 		// Insert an object of type ApplicationWS
 		nobjects.add(
 			new AbstractAction("Insert ApplicationWS") {
@@ -3272,7 +3333,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "BoxedTask")){
 		// Insert an object of type BoxedTask
 		nobjects.add(
 			new AbstractAction("Insert BoxedTask") {
@@ -3286,7 +3349,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "ContextBindingTask")){
 		// Insert an object of type ContextBindingTask
 		nobjects.add(
 			new AbstractAction("Insert ContextBindingTask") {
@@ -3300,7 +3365,9 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("OrganizationModel", "ContextReleaseTask")){
 		// Insert an object of type ContextReleaseTask
 		nobjects.add(
 			new AbstractAction("Insert ContextReleaseTask") {
@@ -3314,6 +3381,7 @@ public class OrganizationModelActionsFactory extends DiagramMenuEntriesActionsFa
 					}
 				}
 			});
+		}
 
 			return nobjects;
 	}

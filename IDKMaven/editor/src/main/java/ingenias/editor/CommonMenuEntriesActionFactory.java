@@ -225,7 +225,10 @@ public class CommonMenuEntriesActionFactory {
 					public void actionPerformed(ActionEvent e) {
 						new Thread(){
 							public void run(){
-								RelationshipManager.connect(point, selected,graph);		
+								String className=graph.getClass().getName();
+								String diagramType=className.substring(className.lastIndexOf(".")+1, className.indexOf("ModelJGraph"));
+								
+								RelationshipManager.connect(point, selected,graph, state.getDiagramFilter().getCurrentAllowedRelationships().get(diagramType));		
 							}
 						}.start();
 					}

@@ -1747,6 +1747,7 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 		 protected Vector<AbstractAction> createDiagramSpecificInsertActions(final Point pt, final ModelJGraph graph) {
 			 Vector<AbstractAction> nobjects=new Vector<AbstractAction>();
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Agent")){
 		// Insert an object of type Agent
 		nobjects.add(
 			new AbstractAction("Insert Agent") {
@@ -1760,7 +1761,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "AgentWS")){
 		// Insert an object of type AgentWS
 		nobjects.add(
 			new AbstractAction("Insert AgentWS") {
@@ -1774,7 +1777,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Role")){
 		// Insert an object of type Role
 		nobjects.add(
 			new AbstractAction("Insert Role") {
@@ -1788,7 +1793,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "RoleWS")){
 		// Insert an object of type RoleWS
 		nobjects.add(
 			new AbstractAction("Insert RoleWS") {
@@ -1802,7 +1809,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Task")){
 		// Insert an object of type Task
 		nobjects.add(
 			new AbstractAction("Insert Task") {
@@ -1816,7 +1825,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "TaskWS")){
 		// Insert an object of type TaskWS
 		nobjects.add(
 			new AbstractAction("Insert TaskWS") {
@@ -1830,7 +1841,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Goal")){
 		// Insert an object of type Goal
 		nobjects.add(
 			new AbstractAction("Insert Goal") {
@@ -1844,7 +1857,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Interaction")){
 		// Insert an object of type Interaction
 		nobjects.add(
 			new AbstractAction("Insert Interaction") {
@@ -1858,7 +1873,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "IUIterate")){
 		// Insert an object of type IUIterate
 		nobjects.add(
 			new AbstractAction("Insert IUIterate") {
@@ -1872,7 +1889,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "IUConcurrence")){
 		// Insert an object of type IUConcurrence
 		nobjects.add(
 			new AbstractAction("Insert IUConcurrence") {
@@ -1886,7 +1905,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "InteractionUnit")){
 		// Insert an object of type InteractionUnit
 		nobjects.add(
 			new AbstractAction("Insert InteractionUnit") {
@@ -1900,7 +1921,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "UMLSpecification")){
 		// Insert an object of type UMLSpecification
 		nobjects.add(
 			new AbstractAction("Insert UMLSpecification") {
@@ -1914,7 +1937,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "GRASIASpecification")){
 		// Insert an object of type GRASIASpecification
 		nobjects.add(
 			new AbstractAction("Insert GRASIASpecification") {
@@ -1928,7 +1953,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "TextNote")){
 		// Insert an object of type TextNote
 		nobjects.add(
 			new AbstractAction("Insert TextNote") {
@@ -1942,7 +1969,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "UMLComment")){
 		// Insert an object of type UMLComment
 		nobjects.add(
 			new AbstractAction("Insert UMLComment") {
@@ -1956,7 +1985,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "RuntimeCommFailure")){
 		// Insert an object of type RuntimeCommFailure
 		nobjects.add(
 			new AbstractAction("Insert RuntimeCommFailure") {
@@ -1970,7 +2001,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Conversation")){
 		// Insert an object of type Conversation
 		nobjects.add(
 			new AbstractAction("Insert Conversation") {
@@ -1984,7 +2017,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Fact")){
 		// Insert an object of type Fact
 		nobjects.add(
 			new AbstractAction("Insert Fact") {
@@ -1998,7 +2033,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "RuntimeConversation")){
 		// Insert an object of type RuntimeConversation
 		nobjects.add(
 			new AbstractAction("Insert RuntimeConversation") {
@@ -2012,7 +2049,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "CommunicationEvent")){
 		// Insert an object of type CommunicationEvent
 		nobjects.add(
 			new AbstractAction("Insert CommunicationEvent") {
@@ -2026,7 +2065,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "ApplicationEvent")){
 		// Insert an object of type ApplicationEvent
 		nobjects.add(
 			new AbstractAction("Insert ApplicationEvent") {
@@ -2040,7 +2081,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "RemoteProcedureCall")){
 		// Insert an object of type RemoteProcedureCall
 		nobjects.add(
 			new AbstractAction("Insert RemoteProcedureCall") {
@@ -2054,7 +2097,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "GoalStateWS")){
 		// Insert an object of type GoalStateWS
 		nobjects.add(
 			new AbstractAction("Insert GoalStateWS") {
@@ -2068,7 +2113,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "GeneralEvent")){
 		// Insert an object of type GeneralEvent
 		nobjects.add(
 			new AbstractAction("Insert GeneralEvent") {
@@ -2082,7 +2129,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "FrameFact")){
 		// Insert an object of type FrameFact
 		nobjects.add(
 			new AbstractAction("Insert FrameFact") {
@@ -2096,7 +2145,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "RuntimeEvent")){
 		// Insert an object of type RuntimeEvent
 		nobjects.add(
 			new AbstractAction("Insert RuntimeEvent") {
@@ -2110,7 +2161,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "StateGoal")){
 		// Insert an object of type StateGoal
 		nobjects.add(
 			new AbstractAction("Insert StateGoal") {
@@ -2124,7 +2177,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "RuntimeFact")){
 		// Insert an object of type RuntimeFact
 		nobjects.add(
 			new AbstractAction("Insert RuntimeFact") {
@@ -2138,7 +2193,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "MessagePassing")){
 		// Insert an object of type MessagePassing
 		nobjects.add(
 			new AbstractAction("Insert MessagePassing") {
@@ -2152,7 +2209,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "ShareTouple")){
 		// Insert an object of type ShareTouple
 		nobjects.add(
 			new AbstractAction("Insert ShareTouple") {
@@ -2166,7 +2225,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Believe")){
 		// Insert an object of type Believe
 		nobjects.add(
 			new AbstractAction("Insert Believe") {
@@ -2180,7 +2241,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "AgentModelBelieve")){
 		// Insert an object of type AgentModelBelieve
 		nobjects.add(
 			new AbstractAction("Insert AgentModelBelieve") {
@@ -2194,7 +2257,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "ApplicationEventSlots")){
 		// Insert an object of type ApplicationEventSlots
 		nobjects.add(
 			new AbstractAction("Insert ApplicationEventSlots") {
@@ -2208,7 +2273,9 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Compromise")){
 		// Insert an object of type Compromise
 		nobjects.add(
 			new AbstractAction("Insert Compromise") {
@@ -2222,6 +2289,7 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
 			return nobjects;
 	}

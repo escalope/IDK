@@ -118,60 +118,64 @@ public abstract class ModelJGraph extends JGraph implements Cloneable{
 		// this.setTransferHandler(new RelationshipEntityTransferHandler());
 
 		lc=new ListenerContainer(m,this.getGraphLayoutCache(),this);
-
-		setGridSize(1.0);
-
 		naryEdgeLocation = new ChangeNARYEdgeLocation(this);
 		changeEntityLocation= new ChangeEntityLocation(this);
+		setGridSize(1.0);
+
+		
 
 		if (enabledAllListeners){
 
-			// add listeners in the inverse order. Event listeners are notified in reverse order 
-			addGraphSelectionListener(new GraphSelectionListener() {
-
-				@Override
-				public void valueChanged(GraphSelectionEvent arg0) {
-
-					invalidate();
-					repaint();
-					refresh();
-
-				}});
-			this.getModel().addGraphModelListener(naryEdgeLocation);
-			this.getModel().addGraphModelListener(changeEntityLocation);
-			this.getModel().addGraphModelListener(lc);
-			this.addKeyListener(new KeyListener() {
-				@Override
-				public void keyTyped(KeyEvent arg0) {
-					if (arg0.getKeyChar()=='H' ||arg0.getKeyChar()=='h'){
-						BasicGraphUI bui = ((BasicGraphUI)getUI());
-						for (Object selcell:getSelectionCells()){
-							if (selcell instanceof DefaultGraphCell)
-								if (bui.isHiglighted((DefaultGraphCell) selcell))
-									bui.unhiglight((DefaultGraphCell) selcell);
-								else
-									bui.higlight((DefaultGraphCell) selcell);	
-						}
-
-					}
-
-				}
-
-				@Override
-				public void keyReleased(KeyEvent arg0) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void keyPressed(KeyEvent arg0) {
-					// TODO Auto-generated method stub
-				}
-			});
+			createListeners();
 		}
 		final ModelJGraph self=this;
 
 
+	}
+
+	public void createListeners() {		
+		// add listeners in the inverse order. Event listeners are notified in reverse order 
+		addGraphSelectionListener(new GraphSelectionListener() {
+
+			@Override
+			public void valueChanged(GraphSelectionEvent arg0) {
+
+				invalidate();
+				repaint();
+				refresh();
+
+			}});
+		this.getModel().addGraphModelListener(naryEdgeLocation);
+		this.getModel().addGraphModelListener(changeEntityLocation);
+		this.getModel().addGraphModelListener(lc);
+		this.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				if (arg0.getKeyChar()=='H' ||arg0.getKeyChar()=='h'){
+					BasicGraphUI bui = ((BasicGraphUI)getUI());
+					for (Object selcell:getSelectionCells()){
+						if (selcell instanceof DefaultGraphCell)
+							if (bui.isHiglighted((DefaultGraphCell) selcell))
+								bui.unhiglight((DefaultGraphCell) selcell);
+							else
+								bui.higlight((DefaultGraphCell) selcell);	
+					}
+
+				}
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+		});
 	}
 
 	public void disableChangeEntityLocation(){

@@ -1732,6 +1732,7 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 		 protected Vector<AbstractAction> createDiagramSpecificInsertActions(final Point pt, final ModelJGraph graph) {
 			 Vector<AbstractAction> nobjects=new Vector<AbstractAction>();
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "TestingPackage")){
 		// Insert an object of type TestingPackage
 		nobjects.add(
 			new AbstractAction("Insert TestingPackage") {
@@ -1745,7 +1746,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "DeploymentPackage")){
 		// Insert an object of type DeploymentPackage
 		nobjects.add(
 			new AbstractAction("Insert DeploymentPackage") {
@@ -1759,7 +1762,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "DeploymentPackageWithContext")){
 		// Insert an object of type DeploymentPackageWithContext
 		nobjects.add(
 			new AbstractAction("Insert DeploymentPackageWithContext") {
@@ -1773,7 +1778,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "INGENIASComponent")){
 		// Insert an object of type INGENIASComponent
 		nobjects.add(
 			new AbstractAction("Insert INGENIASComponent") {
@@ -1787,7 +1794,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "Application")){
 		// Insert an object of type Application
 		nobjects.add(
 			new AbstractAction("Insert Application") {
@@ -1801,7 +1810,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "SimulationPackage")){
 		// Insert an object of type SimulationPackage
 		nobjects.add(
 			new AbstractAction("Insert SimulationPackage") {
@@ -1815,7 +1826,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "SimulationEvent")){
 		// Insert an object of type SimulationEvent
 		nobjects.add(
 			new AbstractAction("Insert SimulationEvent") {
@@ -1829,7 +1842,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "SimExtractedInformation")){
 		// Insert an object of type SimExtractedInformation
 		nobjects.add(
 			new AbstractAction("Insert SimExtractedInformation") {
@@ -1843,7 +1858,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "INGENIASCodeComponent")){
 		// Insert an object of type INGENIASCodeComponent
 		nobjects.add(
 			new AbstractAction("Insert INGENIASCodeComponent") {
@@ -1857,7 +1874,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "EnvironmentApplication")){
 		// Insert an object of type EnvironmentApplication
 		nobjects.add(
 			new AbstractAction("Insert EnvironmentApplication") {
@@ -1871,7 +1890,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "InternalApplication")){
 		// Insert an object of type InternalApplication
 		nobjects.add(
 			new AbstractAction("Insert InternalApplication") {
@@ -1885,7 +1906,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "UMLComment")){
 		// Insert an object of type UMLComment
 		nobjects.add(
 			new AbstractAction("Insert UMLComment") {
@@ -1899,7 +1922,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "Goal")){
 		// Insert an object of type Goal
 		nobjects.add(
 			new AbstractAction("Insert Goal") {
@@ -1913,7 +1938,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "DeploymentUnitByType")){
 		// Insert an object of type DeploymentUnitByType
 		nobjects.add(
 			new AbstractAction("Insert DeploymentUnitByType") {
@@ -1927,7 +1954,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "DeploymentUnitByTypeEnumInitMS")){
 		// Insert an object of type DeploymentUnitByTypeEnumInitMS
 		nobjects.add(
 			new AbstractAction("Insert DeploymentUnitByTypeEnumInitMS") {
@@ -1941,7 +1970,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "DeploymentUnitByTypeMSEntity")){
 		// Insert an object of type DeploymentUnitByTypeMSEntity
 		nobjects.add(
 			new AbstractAction("Insert DeploymentUnitByTypeMSEntity") {
@@ -1955,7 +1986,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "AMIContext")){
 		// Insert an object of type AMIContext
 		nobjects.add(
 			new AbstractAction("Insert AMIContext") {
@@ -1969,7 +2002,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "Fact")){
 		// Insert an object of type Fact
 		nobjects.add(
 			new AbstractAction("Insert Fact") {
@@ -1983,7 +2018,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "ApplicationWS")){
 		// Insert an object of type ApplicationWS
 		nobjects.add(
 			new AbstractAction("Insert ApplicationWS") {
@@ -1997,7 +2034,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "DeploymentUnitByTypeWithInitMS")){
 		// Insert an object of type DeploymentUnitByTypeWithInitMS
 		nobjects.add(
 			new AbstractAction("Insert DeploymentUnitByTypeWithInitMS") {
@@ -2011,7 +2050,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "RuntimeCommFailure")){
 		// Insert an object of type RuntimeCommFailure
 		nobjects.add(
 			new AbstractAction("Insert RuntimeCommFailure") {
@@ -2025,7 +2066,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "ApplicationEvent")){
 		// Insert an object of type ApplicationEvent
 		nobjects.add(
 			new AbstractAction("Insert ApplicationEvent") {
@@ -2039,7 +2082,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "MentalState")){
 		// Insert an object of type MentalState
 		nobjects.add(
 			new AbstractAction("Insert MentalState") {
@@ -2053,7 +2098,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "GoalStateWS")){
 		// Insert an object of type GoalStateWS
 		nobjects.add(
 			new AbstractAction("Insert GoalStateWS") {
@@ -2067,7 +2114,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "FrameFact")){
 		// Insert an object of type FrameFact
 		nobjects.add(
 			new AbstractAction("Insert FrameFact") {
@@ -2081,7 +2130,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "Test")){
 		// Insert an object of type Test
 		nobjects.add(
 			new AbstractAction("Insert Test") {
@@ -2095,7 +2146,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "RuntimeEvent")){
 		// Insert an object of type RuntimeEvent
 		nobjects.add(
 			new AbstractAction("Insert RuntimeEvent") {
@@ -2109,7 +2162,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "FAERIEContext")){
 		// Insert an object of type FAERIEContext
 		nobjects.add(
 			new AbstractAction("Insert FAERIEContext") {
@@ -2123,7 +2178,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "AgentWS")){
 		// Insert an object of type AgentWS
 		nobjects.add(
 			new AbstractAction("Insert AgentWS") {
@@ -2137,7 +2194,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "AgentModelBelieve")){
 		// Insert an object of type AgentModelBelieve
 		nobjects.add(
 			new AbstractAction("Insert AgentModelBelieve") {
@@ -2151,7 +2210,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "AMIContextBindingData")){
 		// Insert an object of type AMIContextBindingData
 		nobjects.add(
 			new AbstractAction("Insert AMIContextBindingData") {
@@ -2165,7 +2226,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "ApplicationEventSlots")){
 		// Insert an object of type ApplicationEventSlots
 		nobjects.add(
 			new AbstractAction("Insert ApplicationEventSlots") {
@@ -2179,7 +2242,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "Compromise")){
 		// Insert an object of type Compromise
 		nobjects.add(
 			new AbstractAction("Insert Compromise") {
@@ -2193,7 +2258,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "FileSpecPatternMapping")){
 		// Insert an object of type FileSpecPatternMapping
 		nobjects.add(
 			new AbstractAction("Insert FileSpecPatternMapping") {
@@ -2207,7 +2274,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "Conversation")){
 		// Insert an object of type Conversation
 		nobjects.add(
 			new AbstractAction("Insert Conversation") {
@@ -2221,7 +2290,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "FAERIECtxtModel")){
 		// Insert an object of type FAERIECtxtModel
 		nobjects.add(
 			new AbstractAction("Insert FAERIECtxtModel") {
@@ -2235,7 +2306,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "Agent")){
 		// Insert an object of type Agent
 		nobjects.add(
 			new AbstractAction("Insert Agent") {
@@ -2249,7 +2322,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "RuntimeConversation")){
 		// Insert an object of type RuntimeConversation
 		nobjects.add(
 			new AbstractAction("Insert RuntimeConversation") {
@@ -2263,7 +2338,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "CommunicationEvent")){
 		// Insert an object of type CommunicationEvent
 		nobjects.add(
 			new AbstractAction("Insert CommunicationEvent") {
@@ -2277,7 +2354,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "MentalInstanceSpecification")){
 		// Insert an object of type MentalInstanceSpecification
 		nobjects.add(
 			new AbstractAction("Insert MentalInstanceSpecification") {
@@ -2291,7 +2370,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "GeneralEvent")){
 		// Insert an object of type GeneralEvent
 		nobjects.add(
 			new AbstractAction("Insert GeneralEvent") {
@@ -2305,7 +2386,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "ConditionalMentalState")){
 		// Insert an object of type ConditionalMentalState
 		nobjects.add(
 			new AbstractAction("Insert ConditionalMentalState") {
@@ -2319,7 +2402,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "StateGoal")){
 		// Insert an object of type StateGoal
 		nobjects.add(
 			new AbstractAction("Insert StateGoal") {
@@ -2333,7 +2418,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "RuntimeFact")){
 		// Insert an object of type RuntimeFact
 		nobjects.add(
 			new AbstractAction("Insert RuntimeFact") {
@@ -2347,7 +2434,9 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("DeployDiagram", "Believe")){
 		// Insert an object of type Believe
 		nobjects.add(
 			new AbstractAction("Insert Believe") {
@@ -2361,6 +2450,7 @@ public class DeployDiagramActionsFactory extends DiagramMenuEntriesActionsFactor
 					}
 				}
 			});
+		}
 
 			return nobjects;
 	}

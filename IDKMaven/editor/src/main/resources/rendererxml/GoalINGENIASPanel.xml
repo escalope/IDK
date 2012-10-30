@@ -1,3 +1,5 @@
+
+
 ##panel layout="BorderLayout" Background="white"#
 ##myeditor  editable="false" LineWrap="true"  Background="white" id="Id" text="thisisaverylongtext" constraints="BorderLayout.NORTH" minimumsize="50,50"#
 ##/myeditor #

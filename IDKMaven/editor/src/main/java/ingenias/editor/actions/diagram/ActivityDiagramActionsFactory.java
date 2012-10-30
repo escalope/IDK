@@ -859,6 +859,7 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 		 protected Vector<AbstractAction> createDiagramSpecificInsertActions(final Point pt, final ModelJGraph graph) {
 			 Vector<AbstractAction> nobjects=new Vector<AbstractAction>();
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "InitialNode")){
 		// Insert an object of type InitialNode
 		nobjects.add(
 			new AbstractAction("Insert InitialNode") {
@@ -872,7 +873,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "DecisionNode")){
 		// Insert an object of type DecisionNode
 		nobjects.add(
 			new AbstractAction("Insert DecisionNode") {
@@ -886,7 +889,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "ForkNode")){
 		// Insert an object of type ForkNode
 		nobjects.add(
 			new AbstractAction("Insert ForkNode") {
@@ -900,7 +905,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "EndNode")){
 		// Insert an object of type EndNode
 		nobjects.add(
 			new AbstractAction("Insert EndNode") {
@@ -914,7 +921,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "Task")){
 		// Insert an object of type Task
 		nobjects.add(
 			new AbstractAction("Insert Task") {
@@ -928,7 +937,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "Role")){
 		// Insert an object of type Role
 		nobjects.add(
 			new AbstractAction("Insert Role") {
@@ -942,7 +953,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "WorkflowBox")){
 		// Insert an object of type WorkflowBox
 		nobjects.add(
 			new AbstractAction("Insert WorkflowBox") {
@@ -956,7 +969,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "UMLComment")){
 		// Insert an object of type UMLComment
 		nobjects.add(
 			new AbstractAction("Insert UMLComment") {
@@ -970,7 +985,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "TextNote")){
 		// Insert an object of type TextNote
 		nobjects.add(
 			new AbstractAction("Insert TextNote") {
@@ -984,7 +1001,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "TaskWS")){
 		// Insert an object of type TaskWS
 		nobjects.add(
 			new AbstractAction("Insert TaskWS") {
@@ -998,7 +1017,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "Workflow")){
 		// Insert an object of type Workflow
 		nobjects.add(
 			new AbstractAction("Insert Workflow") {
@@ -1012,7 +1033,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "BoxedTask")){
 		// Insert an object of type BoxedTask
 		nobjects.add(
 			new AbstractAction("Insert BoxedTask") {
@@ -1026,7 +1049,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "RoleWS")){
 		// Insert an object of type RoleWS
 		nobjects.add(
 			new AbstractAction("Insert RoleWS") {
@@ -1040,7 +1065,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "ContextBindingTask")){
 		// Insert an object of type ContextBindingTask
 		nobjects.add(
 			new AbstractAction("Insert ContextBindingTask") {
@@ -1054,7 +1081,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "ContextReleaseTask")){
 		// Insert an object of type ContextReleaseTask
 		nobjects.add(
 			new AbstractAction("Insert ContextReleaseTask") {
@@ -1068,7 +1097,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "Plan")){
 		// Insert an object of type Plan
 		nobjects.add(
 			new AbstractAction("Insert Plan") {
@@ -1082,6 +1113,7 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					}
 				}
 			});
+		}
 
 			return nobjects;
 	}

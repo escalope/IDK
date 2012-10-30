@@ -109,7 +109,7 @@ java.io.Serializable {
 	static {
 		try {
 			delImage = Toolkit.getDefaultToolkit().createImage(
-			"images/delete.gif");
+					"images/delete.gif");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -215,7 +215,7 @@ java.io.Serializable {
 						Border border1;
 						TitledBorder border;
 						border1 = BorderFactory
-						.createLineBorder(Color.black, 2);
+								.createLineBorder(Color.black, 2);
 						border = new TitledBorder(border1, cf.getName());
 						if (!this.isCollectionType(cf)) {
 							this.getValue(entity.getClass(), cf);
@@ -280,9 +280,9 @@ java.io.Serializable {
 			Object[] paracf = { "" + ingenias.editor.Editor.getNewId(om, gm) };
 
 			String methodName = "create" + type.substring(0, 1).toUpperCase()
-			+ type.substring(1, type.length());
+					+ type.substring(1, type.length());
 			java.lang.reflect.Method m = ingenias.editor.ObjectManager.class
-			.getMethod(methodName, conscf);
+					.getMethod(methodName, conscf);
 			final Entity result = (Entity) m.invoke(om, paracf);
 			this.undo.add(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -347,8 +347,8 @@ java.io.Serializable {
 	 *                Description of the Exception
 	 */
 	private JPanel createSimplePanel(Field cf1, Class entc)
-	throws NoSuchMethodException, ClassNotFoundException,
-	IllegalAccessException, InstantiationException {
+			throws NoSuchMethodException, ClassNotFoundException,
+			IllegalAccessException, InstantiationException {
 		final Field cf = cf1;
 		JPanel np = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
 
@@ -511,7 +511,7 @@ java.io.Serializable {
 			Class[] paramt = { String.class };
 			Object[] objects = { "" + ingenias.editor.Editor.getNewId(om, gm) };
 			cent1 = (ModelEntity) cf.getType().getConstructor(paramt)
-			.newInstance(objects);
+					.newInstance(objects);
 			this.setValue(cent1, cf);
 		}
 
@@ -606,10 +606,10 @@ java.io.Serializable {
 		delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int result = JOptionPane
-				.showConfirmDialog(parentFrame,
-						"Do you really want to Unlink?", "Unlink",
-						JOptionPane.YES_NO_OPTION,
-						JOptionPane.QUESTION_MESSAGE);
+						.showConfirmDialog(parentFrame,
+								"Do you really want to Unlink?", "Unlink",
+								JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
 				if (result == JOptionPane.OK_OPTION) {
 					setValue(null, field);
 					np.removeAll();
@@ -794,7 +794,7 @@ java.io.Serializable {
 								if (result == JOptionPane.OK_OPTION
 										&& options.getSelectedIndex() >= 0) {
 									Class sclass = (Class) instanceIndex
-									.get(options.getSelectedItem());
+											.get(options.getSelectedItem());
 									Entity ent = null;
 									if (ModelEntity.class
 											.isAssignableFrom(sclass)) {
@@ -834,8 +834,8 @@ java.io.Serializable {
 							} else {
 								JOptionPane.showMessageDialog(parentFrame,
 										"There are no valid classes assignable to "
-										+ type, "Warning",
-										JOptionPane.WARNING_MESSAGE);
+												+ type, "Warning",
+												JOptionPane.WARNING_MESSAGE);
 							}
 
 						} catch (Exception e1) {
@@ -881,7 +881,7 @@ java.io.Serializable {
 								if (result == JOptionPane.OK_OPTION
 										&& options.getSelectedIndex() >= 0) {
 									Entity ent = (Entity) instanceIndex
-									.get(options.getSelectedItem());
+											.get(options.getSelectedItem());
 									addValue(ent, cf);
 									final Entity ent1 = ent;
 									SwingUtilities.invokeLater(new Runnable() {
@@ -921,31 +921,49 @@ java.io.Serializable {
 
 							try {
 								Class type = getCollectionType(cf);
-								Enumeration enumeration = getCollection(cf);
+								/*Enumeration enumeration = getCollection(cf);
 								boolean found = false;
 								while (enumeration.hasMoreElements() && !found) {
 									final Object currentObject = enumeration
-									.nextElement();
-									if (currentObject.equals(objectToDelete)) {
-										SwingUtilities
-										.invokeLater(new Runnable() {
-											public void run() {
-												lm.removeElement(currentObject);
-											}
-										});
-										if (type.equals(java.lang.String.class)) {
-											removeValue(
-													currentObject.toString(),
-													cf);
-										} else {
-											ingenias.editor.entities.Entity en = (ingenias.editor.entities.Entity) currentObject;
-											removeValue(en.getId(), cf);
-											refreshList(jl);
-
-										}
+											.nextElement();*/
+								//if (objectToDelete.equals(objectToDelete)) {
+								final Object toDeleteFinal=objectToDelete;
+								SwingUtilities
+								.invokeLater(new Runnable() {
+									public void run() {
+										lm.removeElement(toDeleteFinal);
+										refreshList(jl);
 									}
+								});
+								if (type.equals(java.lang.String.class)) {
+									removeValue(
+											objectToDelete.toString(),
+											cf);
+									refreshList(jl);
+								} else {
+									ingenias.editor.entities.Entity en = (ingenias.editor.entities.Entity) objectToDelete;
+									removeValue(en.getId(), cf);
+									refreshList(jl);
 
 								}
+								//	}
+
+								//}
+								/*	if (!found) {
+									// it is an element not added yet to the attribute. It has to be removed from the list.
+									// though it has not been added yet, we assume that a  previous oiperation of aggregation will
+									// occur on confirming. Hence, a remove is necessary to keep the ballance.
+									lm.removeElement(objectToDelete);
+									refreshList(jl);
+									if (type.equals(java.lang.String.class)) {
+										removeValue(
+												objectToDelete.toString(),
+												cf);
+									} else {																			
+										ingenias.editor.entities.Entity en = (ingenias.editor.entities.Entity) objectToDelete;
+										removeValue(en.getId(), cf);
+									}
+								}*/
 
 							} catch (Exception e1) {
 								e1.printStackTrace();
@@ -1026,7 +1044,7 @@ java.io.Serializable {
 	 *                Description of the Exception
 	 */
 	private JPanel createCollectionPanel(final Field cf)
-	throws NoSuchMethodException {
+			throws NoSuchMethodException {
 		JPanel main = new JPanel(new GridLayout());
 		main.setAlignmentX(Component.LEFT_ALIGNMENT);
 		JScrollPane collection = new JScrollPane();
@@ -1144,7 +1162,7 @@ java.io.Serializable {
 	private Vector getSubclasses(Class c) {
 		Vector result = new Vector();
 		final Vector validClasses = ingenias.editor.ObjectManager
-		.getValidEntitiesClasses();
+				.getValidEntitiesClasses();
 		Enumeration enumeration = validClasses.elements();
 		while (enumeration.hasMoreElements()) {
 			Class current = (Class) enumeration.nextElement();
@@ -1189,7 +1207,7 @@ java.io.Serializable {
 			Class params[] = { cf.getType() };
 
 			String mname = "set" + cf.getName().substring(0, 1).toUpperCase()
-			+ cf.getName().substring(1, cf.getName().length());
+					+ cf.getName().substring(1, cf.getName().length());
 			java.lang.reflect.Method[] mms = entity.getClass().getMethods();
 			for (int k = 0; k < mms.length; k++) {
 				Class[] c = mms[k].getParameterTypes();
@@ -1207,8 +1225,8 @@ java.io.Serializable {
 								.getTypedContent().toString());
 						if ((cf.getName().equalsIgnoreCase("id") && (objectsWithSameID
 								.size() == 0 || (objectsWithSameID.size() == 1 && objectsWithSameID
-										.contains(entity))))
-										|| !cf.getName().equalsIgnoreCase("id")) {
+								.contains(entity))))
+								|| !cf.getName().equalsIgnoreCase("id")) {
 							m.invoke(entity,
 									new Object[] { jt.getTypedContent() });
 
@@ -1259,7 +1277,7 @@ java.io.Serializable {
 			Class params[] = { cf.getType() };
 			final Object paramVal[] = { value };
 			String mname = "set" + cf.getName().substring(0, 1).toUpperCase()
-			+ cf.getName().substring(1, cf.getName().length());
+					+ cf.getName().substring(1, cf.getName().length());
 			java.lang.reflect.Method[] mms = entity.getClass().getMethods();
 			for (int k = 0; k < mms.length; k++) {
 				Class[] c = mms[k].getParameterTypes();
@@ -1334,11 +1352,11 @@ java.io.Serializable {
 
 			final Object paramVal[] = { value };
 			String mname = "add" + cf.getName().substring(0, 1).toUpperCase()
-			+ cf.getName().substring(1, cf.getName().length());
+					+ cf.getName().substring(1, cf.getName().length());
 			String mnameremove = "remove"
-				+ cf.getName().substring(0, 1).toUpperCase()
-				+ cf.getName().substring(1, cf.getName().length())
-				+ "Element";
+					+ cf.getName().substring(0, 1).toUpperCase()
+					+ cf.getName().substring(1, cf.getName().length())
+					+ "Element";
 			/*
 			 * java.lang.reflect.Method[] mms = entity.getClass().getMethods();
 			 * for (int k = 0; k < mms.length; k++) { Class[] c =
@@ -1405,7 +1423,7 @@ java.io.Serializable {
 			iae.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Adds a feature to the Value attribute of the GeneralEditionPanel object
 	 * 
@@ -1490,9 +1508,9 @@ java.io.Serializable {
 			Class params[] = { "".getClass() };
 			final Object paramVal[] = { id };
 			String mname = "remove"
-				+ cf.getName().substring(0, 1).toUpperCase()
-				+ cf.getName().substring(1, cf.getName().length())
-				+ "Element";
+					+ cf.getName().substring(0, 1).toUpperCase()
+					+ cf.getName().substring(1, cf.getName().length())
+					+ "Element";
 
 			/*
 			 * java.lang.reflect.Method[] mms = entity.getClass().getMethods();
@@ -1500,7 +1518,7 @@ java.io.Serializable {
 			 * mms[k].getParameterTypes(); }
 			 */
 			final java.lang.reflect.Method m = this.entity.getClass()
-			.getMethod(mname, params);
+					.getMethod(mname, params);
 
 			this.confirm.add(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -1541,8 +1559,8 @@ java.io.Serializable {
 			Class params[] = {};
 			Object paramVal[] = {};
 			String mname = "get" + cf.getName().substring(0, 1).toUpperCase()
-			+ cf.getName().substring(1, cf.getName().length())
-			+ "Elements";
+					+ cf.getName().substring(1, cf.getName().length())
+					+ "Elements";
 			java.lang.reflect.Method[] mms = entity.getClass().getMethods();
 
 			java.lang.reflect.Method m = this.entity.getClass().getMethod(
@@ -1580,7 +1598,7 @@ java.io.Serializable {
 		Class params[] = {};
 		Object paramVal[] = {};
 		String mname = "get" + cf.getName().substring(0, 1).toUpperCase()
-		+ cf.getName().substring(1, cf.getName().length()) + "Type";
+				+ cf.getName().substring(1, cf.getName().length()) + "Type";
 		java.lang.reflect.Method[] mms = entity.getClass().getMethods();
 
 		java.lang.reflect.Method m = this.entity.getClass().getMethod(mname,
@@ -1675,11 +1693,11 @@ java.io.Serializable {
 	}
 
 	private Object obtainWidget(Class c, String field)
-	throws InstantiationException, IllegalAccessException,
-	ClassNotFoundException {
+			throws InstantiationException, IllegalAccessException,
+			ClassNotFoundException {
 		String className = "ingenias.editor.widget."
-			+ c.getName().substring(c.getName().lastIndexOf(".") + 1,
-					c.getName().length()) + "WidgetPreferences";
+				+ c.getName().substring(c.getName().lastIndexOf(".") + 1,
+						c.getName().length()) + "WidgetPreferences";
 		Class[] cparams = {};
 		Object[] cval = {};
 
@@ -1695,7 +1713,7 @@ java.io.Serializable {
 		for (int k = 0; k < comps.length && !ismodified; k++) {
 			if (comps[k] instanceof GeneralEditionPanel) {
 				ismodified = ismodified
-				|| ((GeneralEditionPanel) comps[k]).isModified();
+						|| ((GeneralEditionPanel) comps[k]).isModified();
 			}
 		}
 		return ismodified || undo.size() > 0;
@@ -1746,13 +1764,13 @@ java.io.Serializable {
 		try {
 			Class c = this.entity.getClass();
 			String className = "ingenias.editor.widget."
-				+ c.getName().substring(c.getName().lastIndexOf(".") + 1,
-						c.getName().length()) + "WidgetPreferences";
+					+ c.getName().substring(c.getName().lastIndexOf(".") + 1,
+							c.getName().length()) + "WidgetPreferences";
 			Class[] cparams = {};
 			Object[] cval = {};
 
 			EntityWidgetPreferences ep = (EntityWidgetPreferences) Class
-			.forName(className).newInstance();
+					.forName(className).newInstance();
 			return ep.getPreferredOrder();
 		} catch (ClassNotFoundException cnf) {
 			cnf.printStackTrace();

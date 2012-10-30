@@ -565,13 +565,14 @@ public class PersistenceManager {
 			throws ingenias.exception.UnknowFormat,
 			ingenias.exception.DamagedFormat, CannotLoad {
 
-
+		ModelJGraph.disableAllListeners();
 		loadWithoutListeners(input,resources,oldProperties,ids);
+		ModelJGraph.enableAllListeners();
 		for (ModelJGraph mjg:ids.gm.getUOModels()){
+			mjg.createListeners();
 			mjg.getListenerContainer().setEnabled(true);
 			mjg.getListenerContainer().setToFrontVisibleChildren();
-			mjg.getListenerContainer().graphChanged(null); // to refresh the container layout
-			mjg.enableAllListeners();
+			mjg.getListenerContainer().graphChanged(null); // to refresh the container layout			
 		}
 		ids.editor.setEnabled(true);
 

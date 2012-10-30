@@ -224,7 +224,8 @@ public class IDE extends ingenias.editor.IDEAbs {
 	public IDE() {
 		super();
 		try {
-			System.getProperties().load(getClass().getResourceAsStream("/editor.properties"));
+			if (getClass().getResourceAsStream("/editor.properties")!=null)
+				System.getProperties().load(getClass().getResourceAsStream("/editor.properties"));
 		} catch (IOException e) {			
 
 		}

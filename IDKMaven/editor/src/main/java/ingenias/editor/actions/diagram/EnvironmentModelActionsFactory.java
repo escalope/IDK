@@ -1345,6 +1345,7 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 		 protected Vector<AbstractAction> createDiagramSpecificInsertActions(final Point pt, final ModelJGraph graph) {
 			 Vector<AbstractAction> nobjects=new Vector<AbstractAction>();
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "Agent")){
 		// Insert an object of type Agent
 		nobjects.add(
 			new AbstractAction("Insert Agent") {
@@ -1358,7 +1359,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "OrganizationGroup")){
 		// Insert an object of type OrganizationGroup
 		nobjects.add(
 			new AbstractAction("Insert OrganizationGroup") {
@@ -1372,7 +1375,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "Resource")){
 		// Insert an object of type Resource
 		nobjects.add(
 			new AbstractAction("Insert Resource") {
@@ -1386,7 +1391,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "Application")){
 		// Insert an object of type Application
 		nobjects.add(
 			new AbstractAction("Insert Application") {
@@ -1400,7 +1407,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "InternalApplication")){
 		// Insert an object of type InternalApplication
 		nobjects.add(
 			new AbstractAction("Insert InternalApplication") {
@@ -1414,7 +1423,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "EnvironmentApplication")){
 		// Insert an object of type EnvironmentApplication
 		nobjects.add(
 			new AbstractAction("Insert EnvironmentApplication") {
@@ -1428,7 +1439,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "ApplicationWS")){
 		// Insert an object of type ApplicationWS
 		nobjects.add(
 			new AbstractAction("Insert ApplicationWS") {
@@ -1442,7 +1455,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "TextNote")){
 		// Insert an object of type TextNote
 		nobjects.add(
 			new AbstractAction("Insert TextNote") {
@@ -1456,7 +1471,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "UMLComment")){
 		// Insert an object of type UMLComment
 		nobjects.add(
 			new AbstractAction("Insert UMLComment") {
@@ -1470,7 +1487,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "Organization")){
 		// Insert an object of type Organization
 		nobjects.add(
 			new AbstractAction("Insert Organization") {
@@ -1484,7 +1503,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "AMIContext")){
 		// Insert an object of type AMIContext
 		nobjects.add(
 			new AbstractAction("Insert AMIContext") {
@@ -1498,7 +1519,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIEContext")){
 		// Insert an object of type FAERIEContext
 		nobjects.add(
 			new AbstractAction("Insert FAERIEContext") {
@@ -1512,7 +1535,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIECtxtModel")){
 		// Insert an object of type FAERIECtxtModel
 		nobjects.add(
 			new AbstractAction("Insert FAERIECtxtModel") {
@@ -1526,7 +1551,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIECtxtAttribute")){
 		// Insert an object of type FAERIECtxtAttribute
 		nobjects.add(
 			new AbstractAction("Insert FAERIECtxtAttribute") {
@@ -1540,7 +1567,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIECtxtEntity")){
 		// Insert an object of type FAERIECtxtEntity
 		nobjects.add(
 			new AbstractAction("Insert FAERIECtxtEntity") {
@@ -1554,7 +1583,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIECtxtRelationship")){
 		// Insert an object of type FAERIECtxtRelationship
 		nobjects.add(
 			new AbstractAction("Insert FAERIECtxtRelationship") {
@@ -1568,7 +1599,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIECtxtValue")){
 		// Insert an object of type FAERIECtxtValue
 		nobjects.add(
 			new AbstractAction("Insert FAERIECtxtValue") {
@@ -1582,7 +1615,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "RoleWS")){
 		// Insert an object of type RoleWS
 		nobjects.add(
 			new AbstractAction("Insert RoleWS") {
@@ -1596,6 +1631,7 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
 			return nobjects;
 	}

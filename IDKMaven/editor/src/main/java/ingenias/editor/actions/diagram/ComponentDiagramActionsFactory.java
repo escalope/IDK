@@ -502,6 +502,7 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 		 protected Vector<AbstractAction> createDiagramSpecificInsertActions(final Point pt, final ModelJGraph graph) {
 			 Vector<AbstractAction> nobjects=new Vector<AbstractAction>();
 
+		if (this.getState().getDiagramFilter().isValidEntity("ComponentDiagram", "INGENIASComponent")){
 		// Insert an object of type INGENIASComponent
 		nobjects.add(
 			new AbstractAction("Insert INGENIASComponent") {
@@ -515,7 +516,9 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ComponentDiagram", "INGENIASCodeComponent")){
 		// Insert an object of type INGENIASCodeComponent
 		nobjects.add(
 			new AbstractAction("Insert INGENIASCodeComponent") {
@@ -529,7 +532,9 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ComponentDiagram", "FileSpecPatternMapping")){
 		// Insert an object of type FileSpecPatternMapping
 		nobjects.add(
 			new AbstractAction("Insert FileSpecPatternMapping") {
@@ -543,7 +548,9 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ComponentDiagram", "Application")){
 		// Insert an object of type Application
 		nobjects.add(
 			new AbstractAction("Insert Application") {
@@ -557,7 +564,9 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ComponentDiagram", "EnvironmentApplication")){
 		// Insert an object of type EnvironmentApplication
 		nobjects.add(
 			new AbstractAction("Insert EnvironmentApplication") {
@@ -571,7 +580,9 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ComponentDiagram", "InternalApplication")){
 		// Insert an object of type InternalApplication
 		nobjects.add(
 			new AbstractAction("Insert InternalApplication") {
@@ -585,7 +596,9 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ComponentDiagram", "Task")){
 		// Insert an object of type Task
 		nobjects.add(
 			new AbstractAction("Insert Task") {
@@ -599,7 +612,9 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ComponentDiagram", "Test")){
 		// Insert an object of type Test
 		nobjects.add(
 			new AbstractAction("Insert Test") {
@@ -613,7 +628,9 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("ComponentDiagram", "UMLComment")){
 		// Insert an object of type UMLComment
 		nobjects.add(
 			new AbstractAction("Insert UMLComment") {
@@ -627,6 +644,7 @@ public class ComponentDiagramActionsFactory extends DiagramMenuEntriesActionsFac
 					}
 				}
 			});
+		}
 
 			return nobjects;
 	}

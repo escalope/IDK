@@ -151,7 +151,7 @@ public class ListenerContainer implements GraphModelListener {
 					}
 				applyChanges(map); // applies these translations				
 			}
-			if (ModelJGraph.getEnabledAllListeners())
+		//	if (ModelJGraph.getEnabledAllListeners())
 			refreshContainer();
 
 		}

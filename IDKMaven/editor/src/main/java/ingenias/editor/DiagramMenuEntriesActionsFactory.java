@@ -35,6 +35,10 @@ public abstract class DiagramMenuEntriesActionsFactory {
     	 this.resources=resources;
     	 this.state=state;
      }
+     
+     protected IDEState getState(){
+    	 return state;
+     }
           
 	abstract protected Vector<AbstractAction> createDiagramSpecificInsertActions(Point point, ModelJGraph graph) ;
 }

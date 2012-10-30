@@ -169,7 +169,7 @@ public class RelationshipManager implements java.io.Serializable {
   
 	// This method is called through the pop-up menu.
 	// The elements to connect have to be selected.
-	public static void connect(Point pt, ModelJGraph graph) {
+	/*public static void connect(Point pt, ModelJGraph graph) {
 		// The general connect method only admits a GraphCell[] parameter.
 		GraphCell[] selected = new GraphCell[graph.getSelectionCells().length];
 		int x = 0;
@@ -181,7 +181,7 @@ public class RelationshipManager implements java.io.Serializable {
 		// General connect method.
 		connect(pt, selected,graph);
 
-	}
+	}*/
 	
 
 	private static NAryEdge findRelationshipInArray(Object[] ops) {
@@ -339,9 +339,16 @@ public class RelationshipManager implements java.io.Serializable {
 	//      a new relationship.
 	// 1 and it is NAryEdge => Connect the remaining GraphCells with that NAryEdge.
 	// other cases => Error unable to connect.
-	public static NAryEdge connect(Point pt, GraphCell[] selected, ModelJGraph graph) {
+	public static NAryEdge connect(Point pt, GraphCell[] selected, ModelJGraph graph, Vector<String> allowedRelationships) {
 		// Possible edges.
-		Object[] ops = graph.getPossibleRelationships(selected);
+		Object[] nops = graph.getPossibleRelationships(selected);
+		Vector<Object> possibleRels=new Vector<Object>();
+		for (Object obj:nops){
+			if (allowedRelationships.contains(obj))
+				possibleRels.add(obj);
+		}
+		Object[] ops=possibleRels.toArray();
+		
 		NAryEdge nEdge = null;
 
 		if (ops.length > 0) {
@@ -550,7 +557,7 @@ public class RelationshipManager implements java.io.Serializable {
 	// This method is called to connect two ports directly, that is,
 	// not through the pop-up menu.
 	// Both source and target are not null.
-  public static NAryEdge connect(Port source, Port target, ModelJGraph graph) {
+  public static NAryEdge connect(Port source, Port target, ModelJGraph graph, Vector<String> allowedRelationships) {
 		;
 		// The general connect method only admits a GraphCell[] parameter.
 		GraphCell sourceGraphCell = (GraphCell)graph.getModel().getParent(
@@ -585,7 +592,7 @@ public class RelationshipManager implements java.io.Serializable {
 		 else {*/
 		return connect(new Point(x, y), new GraphCell[] {
 			sourceGraphCell, targetGraphCell
-		},graph);
+		},graph, allowedRelationships);
 //		}
 
 	}

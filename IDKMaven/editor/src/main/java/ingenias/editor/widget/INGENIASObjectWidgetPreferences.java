@@ -36,11 +36,6 @@ public class INGENIASObjectWidgetPreferences extends EntityWidgetPreferences {
   this.setPreferredOrder(preferredOrder);
    Vector result=null;
   
-   preferredWidget.put("Code",ingenias.editor.widget.ScrolledTArea.class);
-   result=new Vector();
-   
-   defaultValues.put("Code",result);
-  
    preferredWidget.put("Description",ingenias.editor.widget.ScrolledTArea.class);
    result=new Vector();
    

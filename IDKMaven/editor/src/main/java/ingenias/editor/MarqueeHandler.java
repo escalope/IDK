@@ -96,6 +96,8 @@ public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Seri
 
 	private GUIResources resources;
 
+	private IDEState ids;
+
 	public MarqueeHandler(ModelJGraph graph, 
 			GUIResources resources, 
 			IDEState ids, DiagramMenuEntriesActionsFactory daf){
@@ -103,6 +105,7 @@ public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Seri
 		this.af=new CommonMenuEntriesActionFactory(resources,ids);
 		this.daf=daf;
 		this.resources=resources;
+		this.ids=ids;
 	}
 	
 	public MarqueeHandler(ModelJGraph graph,			
@@ -110,6 +113,7 @@ public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Seri
 		this.graph=graph;	
 		this.daf=daf;
 		this.af=new CommonMenuEntriesActionFactory(null,ids);
+		this.ids=ids;
 		
 	}
 
@@ -493,8 +497,12 @@ public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Seri
 			final PortView portBackup=port;
 			Runnable connectThread=new Runnable(){
 				public void run(){
+					String className=graph.getClass().getName();
+					String diagramType=className.substring(className.lastIndexOf(".")+1, className.indexOf("ModelJGraph"));
 					// Then Establish Connection
-					RelationshipManager.connect((Port) firstPortBackup.getCell(), (Port) portBackup.getCell(),graph);					
+					RelationshipManager.connect((Port) firstPortBackup.getCell(), 
+							(Port) portBackup.getCell(),
+							graph, ids.getDiagramFilter().getCurrentAllowedRelationships().get(diagramType));					
 				}
 			};
 			SwingUtilities.invokeLater(connectThread);

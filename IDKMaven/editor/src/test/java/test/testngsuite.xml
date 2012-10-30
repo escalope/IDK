@@ -7,6 +7,8 @@
 			<class name="test.SpecificationFileModificationTest" />
 			<class name="test.SaveEnableTest" />
 			<class name="test.CompareSpecTest" />
+			<class name="test.CheckListOfEntitiesTest" />
+			<class name="test.ResizeEntitiesAndContainerTest" />			
 		</classes>
 	</test>
 </suite>

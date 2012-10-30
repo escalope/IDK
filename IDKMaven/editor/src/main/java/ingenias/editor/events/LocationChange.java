@@ -110,28 +110,37 @@ public class LocationChange {
 				} else {
 					x3=x0+point.getWidth();
 				}
+				if (Math.abs(x2-x1)<0.01){
+					y3=y2;
+				} else {
 					m=(y2-y1)/(x2-x1);
 					n=y2-((y2-y1)/(x2-x1))*x2;
 					y3=m*x3+n;
-				
+				}
+
+
 			} else {
 				if (Math.abs(y2-y0)<Math.abs(y2-y0-point.getHeight())){
 					y3=y0;
 				} else {
 					y3=y0+point.getHeight();
 				}
-				
+
 				if (Math.abs(x2-x1)<=2){
 					if (y2>y0){
 						y3=y0+point.getHeight();
 					} else {
 						y3=y0;
-					x3=x0+point.getWidth()/2;
+						x3=x0+point.getWidth()/2;
 					}
 				} else {
-					m=(y2-y1)/(x2-x1);
-					n=y2-((y2-y1)/(x2-x1))*x2;
-					x3=(y3-n)/m;
+					if (Math.abs(x2-x1)<0.01){
+						x3=x2;
+					} else {
+						m=(y2-y1)/(x2-x1);
+						n=y2-((y2-y1)/(x2-x1))*x2;
+						x3=(y3-n)/m;
+					}
 				}
 			}
 

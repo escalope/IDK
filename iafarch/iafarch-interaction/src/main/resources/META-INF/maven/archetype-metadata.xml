@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor
+	
+	name="iafarch"
+	>
+	<fileSets>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/main/java</directory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/main/spec</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/main/javapermsrc</directory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/main/javagensrc</directory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>src/main/resources</directory>
+			<includes>
+				<include>**/*.prop</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8" filtered="true">
+			<directory>src/izpack</directory>
+			<includes>
+				<include>Licence.txt</include>
+				<include>Readme.txt</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8" filtered="true">
+			<directory>src/izpack</directory>
+			<includes>
+				<include>install.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/test/javapermsrc</directory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/test/javapermsrc</directory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+<!--to prevent velocity from processing these files looking for replacements -->
+			<directory></directory>
+			<includes>
+				<include>maven-build.properties</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="false" encoding="UTF-8">
+<!--to prevent velocity from processing these files looking for replacements -->
+			<directory></directory>
+			<includes>
+				<include>build.xml</include>
+				<include>iaf-generated-build.xml</include>
+				<include>maven-build.xml</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</archetype-descriptor>

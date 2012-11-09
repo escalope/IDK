@@ -102,11 +102,11 @@ public class AMIContextRenderer extends CompositeRenderer implements CellViewRen
 		}
 
 	
-        if (currentMap.get("Applications")!=null && 
-            currentMap.get("Applications") instanceof ingenias.editor.rendererxml.CollectionPanel) {
+        if (currentMap.get("Models")!=null && 
+            currentMap.get("Models") instanceof ingenias.editor.rendererxml.CollectionPanel) {
           try {
             ( (ingenias.editor.rendererxml.CollectionPanel) currentMap.get(
-                "Applications")).setCollection("Applications",ent.Applications, ent.Applications.getType());
+                "Models")).setCollection("Models",ent.Models, ent.Models.getType());
           }
           catch (IllegalArgumentException ex) {
             ex.printStackTrace();
@@ -116,11 +116,11 @@ public class AMIContextRenderer extends CompositeRenderer implements CellViewRen
           }
         }
 	
-        if (currentMap.get("Applications")!=null && 
-            currentMap.get("Applications") instanceof ingenias.editor.rendererxml.CollectionPanel) {
+        if (currentMap.get("Models")!=null && 
+            currentMap.get("Models") instanceof ingenias.editor.rendererxml.CollectionPanel) {
           try {
             ( (ingenias.editor.rendererxml.CollectionPanel) currentMap.get(
-                "Applications")).setCollection("Applications",ent.Applications, ent.Applications.getType());
+                "Models")).setCollection("Models",ent.Models, ent.Models.getType());
           }
           catch (IllegalArgumentException ex) {
             ex.printStackTrace();
@@ -132,40 +132,21 @@ public class AMIContextRenderer extends CompositeRenderer implements CellViewRen
 	
 
       
-      if (currentMap.get("Applications")!=null){
-	   if (ent!=null && ent.getApplications()!=null){
-		if (currentMap.get("Applications") instanceof javax.swing.JLabel){
-		((javax.swing.JLabel)( currentMap).get("Applications")).setText(ent.getApplications().toString());
+      if (currentMap.get("Models")!=null){
+	   if (ent!=null && ent.getModels()!=null){
+		if (currentMap.get("Models") instanceof javax.swing.JLabel){
+		((javax.swing.JLabel)( currentMap).get("Models")).setText(ent.getModels().toString());
 		} else {
-		 if (currentMap.get("Applications") instanceof javax.swing.text.JTextComponent)
-		 ((javax.swing.text.JTextComponent)( currentMap).get("Applications")).setText(ent.getApplications().toString());
+		 if (currentMap.get("Models") instanceof javax.swing.text.JTextComponent)
+		 ((javax.swing.text.JTextComponent)( currentMap).get("Models")).setText(ent.getModels().toString());
 		
 	      } 
 	   } else  {
-	     if (currentMap.get("Applications") instanceof javax.swing.JLabel)
-	     ((javax.swing.JLabel)( currentMap).get("Applications")).setText("");
+	     if (currentMap.get("Models") instanceof javax.swing.JLabel)
+	     ((javax.swing.JLabel)( currentMap).get("Models")).setText("");
 	     else {
-		if (!(currentMap.get("Applications") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
-		((javax.swing.text.JTextComponent)( currentMap).get("Applications")).setText("");
-	     }
-         }
-	  }
-	   
-      if (currentMap.get("Model")!=null){
-	   if (ent!=null && ent.getModel()!=null){
-		if (currentMap.get("Model") instanceof javax.swing.JLabel){
-		((javax.swing.JLabel)( currentMap).get("Model")).setText(ent.getModel().toString());
-		} else {
-		 if (currentMap.get("Model") instanceof javax.swing.text.JTextComponent)
-		 ((javax.swing.text.JTextComponent)( currentMap).get("Model")).setText(ent.getModel().toString());
-		
-	      } 
-	   } else  {
-	     if (currentMap.get("Model") instanceof javax.swing.JLabel)
-	     ((javax.swing.JLabel)( currentMap).get("Model")).setText("");
-	     else {
-		if (!(currentMap.get("Model") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
-		((javax.swing.text.JTextComponent)( currentMap).get("Model")).setText("");
+		if (!(currentMap.get("Models") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
+		((javax.swing.text.JTextComponent)( currentMap).get("Models")).setText("");
 	     }
          }
 	  }

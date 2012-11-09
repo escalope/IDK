@@ -279,6 +279,29 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>buildnumber-maven-plugin</artifactId>
+      <version>1.1</version>
+      <executions>
+        <execution>
+          <phase>validate</phase>
+          <goals>
+            <goal>create</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+  
+      <doCheck>true</doCheck>
+          <doUpdate>false</doUpdate> 
+        <format>${version}.{0,number}</format>
+        <items>
+          <item>buildNumber0</item>
+        </items>
+      </configuration>
+
+    </plugin>
 			
 				<plugin><!-- shade plugin must go before izpack to be executed first -->
 				<groupId>org.apache.maven.plugins</groupId>
@@ -291,7 +314,7 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<finalName>${project.artifactId}-${project.version}-selfcontained</finalName>
+							<finalName>${project.artifactId}-selfcontained-${project.version}-${buildNumber}</finalName>
 							<filters>
 								<filter>
 									<artifact>*:*</artifact>
@@ -335,52 +358,8 @@
         </configuration>
       </plugin>
 		
-<plugin>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>buildnumber-maven-plugin</artifactId>
-      <version>1.1</version>
-      <executions>
-        <execution>
-          <phase>validate</phase>
-          <goals>
-            <goal>create</goal>
-          </goals>
-        </execution>
-      </executions>
-      <configuration>
-  
-      <doCheck>true</doCheck>
-          <doUpdate>false</doUpdate> 
-        <format>${version}.{0,number}</format>
-        <items>
-          <item>buildNumber0</item>
-        </items>
-      </configuration>
 
-    </plugin>
-<plugin>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>buildnumber-maven-plugin</artifactId>
-      <version>1.1</version>
-      <executions>
-        <execution>
-          <phase>validate</phase>
-          <goals>
-            <goal>create</goal>
-          </goals>
-        </execution>
-      </executions>
-      <configuration>
-  
-      <doCheck>true</doCheck>
-          <doUpdate>false</doUpdate> 
-        <format>${version}.{0,number}</format>
-        <items>
-          <item>buildNumber0</item>
-        </items>
-      </configuration>
 
-    </plugin>
 		</plugins>
 	</build>
 </project>

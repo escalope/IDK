@@ -4,12 +4,6 @@
 ##vbox Background="white" constraints="BorderLayout.CENTER"#
 ##label id="Label" /#
 ##stereotype text="CtxtNotifies" HorizontalAlignment="CENTER" /#
-##panel
-          layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
-##iconlabel icon="images/attribute.gif" /#
-##label text="event:"/#
-##label id="Event"/#
-##/panel#
 ##/vbox#
 ##/panel#
 		

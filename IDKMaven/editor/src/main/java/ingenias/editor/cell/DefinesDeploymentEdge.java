@@ -48,6 +48,8 @@ this.addClass("DefinesDeploymentsource","ingenias.editor.entities.DeploymentUnit
      
 this.addClass("DefinesDeploymentsource","ingenias.editor.entities.AMIContext");
      
+this.addClass("DefinesDeploymentsource","ingenias.editor.entities.AMIContextInstantiation");
+     
     
      this.addRole("DefinesDeploymenttarget");
      this.setArity("DefinesDeploymenttarget",true,1);

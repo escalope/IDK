@@ -489,7 +489,8 @@ public class ListenerContainer implements GraphModelListener {
 	private Vector<Object> getRoots(int k) {
 		// TODO Auto-generated method stub
 		Vector<Object> result = new Vector<Object>();
-		for (Object root : dgm.getRoots()) {
+		Object[] roots = dgm.getAll(dgm);
+		for (Object root :roots) {
 			if (getDepth(root) == k)
 				result.add(root);
 		}

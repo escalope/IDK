@@ -75,6 +75,10 @@ public OrganizationModelCellViewFactory() {}
    // Diagram Objects start here
 
 
+   if (userObject.getClass().equals(FAERIEContext.class)){
+           return new ingenias.editor.cell.FAERIEContextView(v);
+   }
+
    if (userObject.getClass().equals(Agent.class)){
            return new ingenias.editor.cell.AgentView(v);
    }
@@ -203,12 +207,20 @@ public OrganizationModelCellViewFactory() {}
            return new ingenias.editor.cell.BoxedTaskView(v);
    }
 
+   if (userObject.getClass().equals(AMIContext.class)){
+           return new ingenias.editor.cell.AMIContextView(v);
+   }
+
    if (userObject.getClass().equals(ContextBindingTask.class)){
            return new ingenias.editor.cell.ContextBindingTaskView(v);
    }
 
    if (userObject.getClass().equals(ContextReleaseTask.class)){
            return new ingenias.editor.cell.ContextReleaseTaskView(v);
+   }
+
+   if (userObject.getClass().equals(ContextUseTask.class)){
+           return new ingenias.editor.cell.ContextUseTaskView(v);
    }
 
 

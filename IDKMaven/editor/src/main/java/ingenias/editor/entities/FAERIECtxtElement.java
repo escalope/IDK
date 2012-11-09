@@ -23,7 +23,7 @@ package ingenias.editor.entities;
 import java.util.*;
 import ingenias.editor.TypedVector;
 
-public class FAERIECtxtElement extends INGENIASObject {
+public class FAERIECtxtElement extends FrameFact {
 
 
 

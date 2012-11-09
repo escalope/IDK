@@ -117,13 +117,9 @@ public class InteractionModelPanel extends JGraph {
 
  entities.add("RuntimeCommFailure");
 
- entities.add("Conversation");
-
  entities.add("Fact");
 
- entities.add("RuntimeConversation");
-
- entities.add("CommunicationEvent");
+ entities.add("FAERIECtxtRelationship");
 
  entities.add("ApplicationEvent");
 
@@ -131,27 +127,37 @@ public class InteractionModelPanel extends JGraph {
 
  entities.add("GoalStateWS");
 
- entities.add("GeneralEvent");
-
  entities.add("FrameFact");
 
  entities.add("RuntimeEvent");
 
- entities.add("StateGoal");
-
- entities.add("RuntimeFact");
+ entities.add("FAERIECtxtEntity");
 
  entities.add("MessagePassing");
 
  entities.add("ShareTouple");
-
- entities.add("Believe");
 
  entities.add("AgentModelBelieve");
 
  entities.add("ApplicationEventSlots");
 
  entities.add("Compromise");
+
+ entities.add("FAERIECtxtAttribute");
+
+ entities.add("Conversation");
+
+ entities.add("RuntimeConversation");
+
+ entities.add("CommunicationEvent");
+
+ entities.add("GeneralEvent");
+
+ entities.add("StateGoal");
+
+ entities.add("RuntimeFact");
+
+ entities.add("Believe");
 
    return entities;
   }
@@ -304,15 +310,6 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("Conversation")) {
-    Conversation nentity=new Conversation(((Model)getModel()).getNewId("Conversation"));
-      DefaultGraphCell vertex = new
-          ConversationCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("Fact")) {
     Fact nentity=new Fact(((Model)getModel()).getNewId("Fact"));
       DefaultGraphCell vertex = new
@@ -322,19 +319,10 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("RuntimeConversation")) {
-    RuntimeConversation nentity=new RuntimeConversation(((Model)getModel()).getNewId("RuntimeConversation"));
+    if (entity.equalsIgnoreCase("FAERIECtxtRelationship")) {
+    FAERIECtxtRelationship nentity=new FAERIECtxtRelationship(((Model)getModel()).getNewId("FAERIECtxtRelationship"));
       DefaultGraphCell vertex = new
-          RuntimeConversationCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("CommunicationEvent")) {
-    CommunicationEvent nentity=new CommunicationEvent(((Model)getModel()).getNewId("CommunicationEvent"));
-      DefaultGraphCell vertex = new
-          CommunicationEventCell(nentity);
+          FAERIECtxtRelationshipCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -367,15 +355,6 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("GeneralEvent")) {
-    GeneralEvent nentity=new GeneralEvent(((Model)getModel()).getNewId("GeneralEvent"));
-      DefaultGraphCell vertex = new
-          GeneralEventCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("FrameFact")) {
     FrameFact nentity=new FrameFact(((Model)getModel()).getNewId("FrameFact"));
       DefaultGraphCell vertex = new
@@ -394,19 +373,10 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("StateGoal")) {
-    StateGoal nentity=new StateGoal(((Model)getModel()).getNewId("StateGoal"));
+    if (entity.equalsIgnoreCase("FAERIECtxtEntity")) {
+    FAERIECtxtEntity nentity=new FAERIECtxtEntity(((Model)getModel()).getNewId("FAERIECtxtEntity"));
       DefaultGraphCell vertex = new
-          StateGoalCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("RuntimeFact")) {
-    RuntimeFact nentity=new RuntimeFact(((Model)getModel()).getNewId("RuntimeFact"));
-      DefaultGraphCell vertex = new
-          RuntimeFactCell(nentity);
+          FAERIECtxtEntityCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -425,15 +395,6 @@ public class InteractionModelPanel extends JGraph {
     ShareTouple nentity=new ShareTouple(((Model)getModel()).getNewId("ShareTouple"));
       DefaultGraphCell vertex = new
           ShareToupleCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("Believe")) {
-    Believe nentity=new Believe(((Model)getModel()).getNewId("Believe"));
-      DefaultGraphCell vertex = new
-          BelieveCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -461,6 +422,78 @@ public class InteractionModelPanel extends JGraph {
     Compromise nentity=new Compromise(((Model)getModel()).getNewId("Compromise"));
       DefaultGraphCell vertex = new
           CompromiseCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("FAERIECtxtAttribute")) {
+    FAERIECtxtAttribute nentity=new FAERIECtxtAttribute(((Model)getModel()).getNewId("FAERIECtxtAttribute"));
+      DefaultGraphCell vertex = new
+          FAERIECtxtAttributeCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Conversation")) {
+    Conversation nentity=new Conversation(((Model)getModel()).getNewId("Conversation"));
+      DefaultGraphCell vertex = new
+          ConversationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("RuntimeConversation")) {
+    RuntimeConversation nentity=new RuntimeConversation(((Model)getModel()).getNewId("RuntimeConversation"));
+      DefaultGraphCell vertex = new
+          RuntimeConversationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("CommunicationEvent")) {
+    CommunicationEvent nentity=new CommunicationEvent(((Model)getModel()).getNewId("CommunicationEvent"));
+      DefaultGraphCell vertex = new
+          CommunicationEventCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("GeneralEvent")) {
+    GeneralEvent nentity=new GeneralEvent(((Model)getModel()).getNewId("GeneralEvent"));
+      DefaultGraphCell vertex = new
+          GeneralEventCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("StateGoal")) {
+    StateGoal nentity=new StateGoal(((Model)getModel()).getNewId("StateGoal"));
+      DefaultGraphCell vertex = new
+          StateGoalCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("RuntimeFact")) {
+    RuntimeFact nentity=new RuntimeFact(((Model)getModel()).getNewId("RuntimeFact"));
+      DefaultGraphCell vertex = new
+          RuntimeFactCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Believe")) {
+    Believe nentity=new Believe(((Model)getModel()).getNewId("Believe"));
+      DefaultGraphCell vertex = new
+          BelieveCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -551,23 +584,13 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("Conversation")) {
-      return ConversationView.getSize((Conversation)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("Fact")) {
       return FactView.getSize((Fact)entity);      
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("RuntimeConversation")) {
-      return RuntimeConversationView.getSize((RuntimeConversation)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("CommunicationEvent")) {
-      return CommunicationEventView.getSize((CommunicationEvent)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtRelationship")) {
+      return FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship)entity);      
     }
     else
 
@@ -586,11 +609,6 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("GeneralEvent")) {
-      return GeneralEventView.getSize((GeneralEvent)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("FrameFact")) {
       return FrameFactView.getSize((FrameFact)entity);      
     }
@@ -601,13 +619,8 @@ public class InteractionModelPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("StateGoal")) {
-      return StateGoalView.getSize((StateGoal)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("RuntimeFact")) {
-      return RuntimeFactView.getSize((RuntimeFact)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtEntity")) {
+      return FAERIECtxtEntityView.getSize((FAERIECtxtEntity)entity);      
     }
     else
 
@@ -618,11 +631,6 @@ public class InteractionModelPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("ShareTouple")) {
       return ShareToupleView.getSize((ShareTouple)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("Believe")) {
-      return BelieveView.getSize((Believe)entity);      
     }
     else
 
@@ -638,6 +646,46 @@ public class InteractionModelPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("Compromise")) {
       return CompromiseView.getSize((Compromise)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtAttribute")) {
+      return FAERIECtxtAttributeView.getSize((FAERIECtxtAttribute)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Conversation")) {
+      return ConversationView.getSize((Conversation)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("RuntimeConversation")) {
+      return RuntimeConversationView.getSize((RuntimeConversation)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("CommunicationEvent")) {
+      return CommunicationEventView.getSize((CommunicationEvent)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("GeneralEvent")) {
+      return GeneralEventView.getSize((GeneralEvent)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("StateGoal")) {
+      return StateGoalView.getSize((StateGoal)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("RuntimeFact")) {
+      return RuntimeFactView.getSize((RuntimeFact)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Believe")) {
+      return BelieveView.getSize((Believe)entity);      
     }
     else
 
@@ -803,13 +851,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(Conversation.class)) {
-      vertex = new ConversationCell( (Conversation) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = ConversationView.getSize((Conversation) entity);
-    }
-    else
-
     if (entity.getClass().equals(Fact.class)) {
       vertex = new FactCell( (Fact) entity);
       // Default Size for the new Vertex with the new entity within
@@ -817,17 +858,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(RuntimeConversation.class)) {
-      vertex = new RuntimeConversationCell( (RuntimeConversation) entity);
+    if (entity.getClass().equals(FAERIECtxtRelationship.class)) {
+      vertex = new FAERIECtxtRelationshipCell( (FAERIECtxtRelationship) entity);
       // Default Size for the new Vertex with the new entity within
-      size = RuntimeConversationView.getSize((RuntimeConversation) entity);
-    }
-    else
-
-    if (entity.getClass().equals(CommunicationEvent.class)) {
-      vertex = new CommunicationEventCell( (CommunicationEvent) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = CommunicationEventView.getSize((CommunicationEvent) entity);
+      size = FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship) entity);
     }
     else
 
@@ -852,13 +886,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(GeneralEvent.class)) {
-      vertex = new GeneralEventCell( (GeneralEvent) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = GeneralEventView.getSize((GeneralEvent) entity);
-    }
-    else
-
     if (entity.getClass().equals(FrameFact.class)) {
       vertex = new FrameFactCell( (FrameFact) entity);
       // Default Size for the new Vertex with the new entity within
@@ -873,17 +900,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(StateGoal.class)) {
-      vertex = new StateGoalCell( (StateGoal) entity);
+    if (entity.getClass().equals(FAERIECtxtEntity.class)) {
+      vertex = new FAERIECtxtEntityCell( (FAERIECtxtEntity) entity);
       // Default Size for the new Vertex with the new entity within
-      size = StateGoalView.getSize((StateGoal) entity);
-    }
-    else
-
-    if (entity.getClass().equals(RuntimeFact.class)) {
-      vertex = new RuntimeFactCell( (RuntimeFact) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = RuntimeFactView.getSize((RuntimeFact) entity);
+      size = FAERIECtxtEntityView.getSize((FAERIECtxtEntity) entity);
     }
     else
 
@@ -898,13 +918,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new ShareToupleCell( (ShareTouple) entity);
       // Default Size for the new Vertex with the new entity within
       size = ShareToupleView.getSize((ShareTouple) entity);
-    }
-    else
-
-    if (entity.getClass().equals(Believe.class)) {
-      vertex = new BelieveCell( (Believe) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = BelieveView.getSize((Believe) entity);
     }
     else
 
@@ -926,6 +939,62 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new CompromiseCell( (Compromise) entity);
       // Default Size for the new Vertex with the new entity within
       size = CompromiseView.getSize((Compromise) entity);
+    }
+    else
+
+    if (entity.getClass().equals(FAERIECtxtAttribute.class)) {
+      vertex = new FAERIECtxtAttributeCell( (FAERIECtxtAttribute) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FAERIECtxtAttributeView.getSize((FAERIECtxtAttribute) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Conversation.class)) {
+      vertex = new ConversationCell( (Conversation) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ConversationView.getSize((Conversation) entity);
+    }
+    else
+
+    if (entity.getClass().equals(RuntimeConversation.class)) {
+      vertex = new RuntimeConversationCell( (RuntimeConversation) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeConversationView.getSize((RuntimeConversation) entity);
+    }
+    else
+
+    if (entity.getClass().equals(CommunicationEvent.class)) {
+      vertex = new CommunicationEventCell( (CommunicationEvent) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = CommunicationEventView.getSize((CommunicationEvent) entity);
+    }
+    else
+
+    if (entity.getClass().equals(GeneralEvent.class)) {
+      vertex = new GeneralEventCell( (GeneralEvent) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = GeneralEventView.getSize((GeneralEvent) entity);
+    }
+    else
+
+    if (entity.getClass().equals(StateGoal.class)) {
+      vertex = new StateGoalCell( (StateGoal) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = StateGoalView.getSize((StateGoal) entity);
+    }
+    else
+
+    if (entity.getClass().equals(RuntimeFact.class)) {
+      vertex = new RuntimeFactCell( (RuntimeFact) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeFactView.getSize((RuntimeFact) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Believe.class)) {
+      vertex = new BelieveCell( (Believe) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = BelieveView.getSize((Believe) entity);
     }
     else
 

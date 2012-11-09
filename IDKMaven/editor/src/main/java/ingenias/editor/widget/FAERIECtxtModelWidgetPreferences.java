@@ -32,7 +32,7 @@ public class FAERIECtxtModelWidgetPreferences extends AMICtxtModelWidgetPreferen
 
   public FAERIECtxtModelWidgetPreferences() {
   super();
-  String[] preferredOrder={"id","Description","CtxtElements","CtxtValues",""};
+  String[] preferredOrder={"id","Description","CtxtElements",""};
   this.setPreferredOrder(preferredOrder);
    Vector result=null;
   

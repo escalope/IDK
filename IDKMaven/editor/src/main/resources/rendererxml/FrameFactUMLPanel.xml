@@ -10,7 +10,8 @@
 ##label id="Id"/#
           ##/panel#
 ##linepanel Background="white"/#
-##collectionpanel Background="white" id="Slots" #Executing orders null ##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
+##collectionpanel Background="white" id="Slots" #
+##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
 ##iconlabel icon="images/attribute.gif" /#
 ##label
           name="Slots_Name"/#

@@ -10,6 +10,17 @@
 ##label id="Id"/#
           ##/panel#
 ##linepanel Background="white"/#
+##collectionpanel Background="white" id="Slots" #
+##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
+##iconlabel icon="images/attribute.gif" /#
+##label
+          name="Slots_Name"/#
+##label text=":"/#
+##label name="Slots_Type"/#
+##label text=":"/#
+##label name="Slots_Value"/#
+##/panel#
+##/collectionpanel#
 ##linepanel Background="white" /#
 ##/vbox#
 ##/panel#

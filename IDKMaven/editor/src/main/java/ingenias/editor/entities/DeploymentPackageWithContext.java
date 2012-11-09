@@ -26,11 +26,11 @@ import ingenias.editor.TypedVector;
 public class DeploymentPackageWithContext extends DeploymentPackage {
 
 
-  public ingenias.editor.entities.AMIContextBindingData ContextBindingData;
-
-  public ingenias.editor.entities.AMIContext Context;
 
 
+  public TypedVector Context=new TypedVector(ingenias.editor.entities.AMIContext.class);
+
+  public TypedVector ContextModelInstantiation=new TypedVector(ingenias.editor.entities.AMIContextInstantiation.class);
 
 
 
@@ -41,24 +41,88 @@ public class DeploymentPackageWithContext extends DeploymentPackage {
   }
 
 
-      public ingenias.editor.entities.AMIContextBindingData getContextBindingData(){
-        return ContextBindingData;
-      }
-       public void setContextBindingData(ingenias.editor.entities.AMIContextBindingData
-					ContextBindingData){
-        this.ContextBindingData=ContextBindingData;
-      }
 
 
-      public ingenias.editor.entities.AMIContext getContext(){
-        return Context;
-      }
-       public void setContext(ingenias.editor.entities.AMIContext
-					Context){
-        this.Context=Context;
-      }
+  public void setContext(TypedVector tv){
+    this.Context=tv;
+  }
+
+  public String getContext(){
+   return Context.toString();
+  }
+
+  public Class getContextType(){
+   return Context.getType();
+  }
+  public void addContext(ingenias.editor.entities.AMIContext element){
+   this.Context.add(element);
+  }
+
+  public void insertContextAt(int pos,ingenias.editor.entities.AMIContext element){
+   this.Context.insert(element,pos);
+  }
+
+  public int containsContext(ingenias.editor.entities.AMIContext element){
+   return this.Context.indexOf(element);
+  }
 
 
+  public Enumeration getContextElements(){
+   return this.Context.elements();
+  }
+
+  public void removeContextElement(String id){
+    Enumeration enumeration=this.getContextElements();
+    ingenias.editor.entities.Entity found=null;
+    while (enumeration.hasMoreElements() && found==null){
+     ingenias.editor.entities.Entity ent=(ingenias.editor.entities.Entity)enumeration.nextElement();
+     if (ent.getId().equalsIgnoreCase(id))
+      found=ent;
+    }
+    if (found!=null)
+     this.Context.remove(found);
+  }
+
+
+  public void setContextModelInstantiation(TypedVector tv){
+    this.ContextModelInstantiation=tv;
+  }
+
+  public String getContextModelInstantiation(){
+   return ContextModelInstantiation.toString();
+  }
+
+  public Class getContextModelInstantiationType(){
+   return ContextModelInstantiation.getType();
+  }
+  public void addContextModelInstantiation(ingenias.editor.entities.AMIContextInstantiation element){
+   this.ContextModelInstantiation.add(element);
+  }
+
+  public void insertContextModelInstantiationAt(int pos,ingenias.editor.entities.AMIContextInstantiation element){
+   this.ContextModelInstantiation.insert(element,pos);
+  }
+
+  public int containsContextModelInstantiation(ingenias.editor.entities.AMIContextInstantiation element){
+   return this.ContextModelInstantiation.indexOf(element);
+  }
+
+
+  public Enumeration getContextModelInstantiationElements(){
+   return this.ContextModelInstantiation.elements();
+  }
+
+  public void removeContextModelInstantiationElement(String id){
+    Enumeration enumeration=this.getContextModelInstantiationElements();
+    ingenias.editor.entities.Entity found=null;
+    while (enumeration.hasMoreElements() && found==null){
+     ingenias.editor.entities.Entity ent=(ingenias.editor.entities.Entity)enumeration.nextElement();
+     if (ent.getId().equalsIgnoreCase(id))
+      found=ent;
+    }
+    if (found!=null)
+     this.ContextModelInstantiation.remove(found);
+  }
 
 
 

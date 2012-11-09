@@ -108,6 +108,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
    	if (en.getClass().equals(ingenias.editor.entities.Fact.class))
 	  return  new ingenias.editor.cell.FactCell((ingenias.editor.entities.Fact)en);
 
+   	if (en.getClass().equals(ingenias.editor.entities.AMIContextInstantiation.class))
+	  return  new ingenias.editor.cell.AMIContextInstantiationCell((ingenias.editor.entities.AMIContextInstantiation)en);
+
    	if (en.getClass().equals(ingenias.editor.entities.ShareTouple.class))
 	  return  new ingenias.editor.cell.ShareToupleCell((ingenias.editor.entities.ShareTouple)en);
 
@@ -155,6 +158,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
 
    	if (en.getClass().equals(ingenias.editor.entities.OrganizationNetwork.class))
 	  return  new ingenias.editor.cell.OrganizationNetworkCell((ingenias.editor.entities.OrganizationNetwork)en);
+
+   	if (en.getClass().equals(ingenias.editor.entities.FAERIECtxtModelInst.class))
+	  return  new ingenias.editor.cell.FAERIECtxtModelInstCell((ingenias.editor.entities.FAERIECtxtModelInst)en);
 
    	if (en.getClass().equals(ingenias.editor.entities.FAERIECtxtModel.class))
 	  return  new ingenias.editor.cell.FAERIECtxtModelCell((ingenias.editor.entities.FAERIECtxtModel)en);
@@ -258,6 +264,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
    	if (en.getClass().equals(ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS.class))
 	  return  new ingenias.editor.cell.DeploymentUnitByTypeEnumInitMSCell((ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS)en);
 
+   	if (en.getClass().equals(ingenias.editor.entities.ContextUseTask.class))
+	  return  new ingenias.editor.cell.ContextUseTaskCell((ingenias.editor.entities.ContextUseTask)en);
+
    	if (en.getClass().equals(ingenias.editor.entities.GeneralEvent.class))
 	  return  new ingenias.editor.cell.GeneralEventCell((ingenias.editor.entities.GeneralEvent)en);
 
@@ -323,9 +332,6 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
 
    	if (en.getClass().equals(ingenias.editor.entities.SimulationPackage.class))
 	  return  new ingenias.editor.cell.SimulationPackageCell((ingenias.editor.entities.SimulationPackage)en);
-
-   	if (en.getClass().equals(ingenias.editor.entities.AMIContextBindingData.class))
-	  return  new ingenias.editor.cell.AMIContextBindingDataCell((ingenias.editor.entities.AMIContextBindingData)en);
 
    	if (en.getClass().equals(ingenias.editor.entities.CommunicationEvent.class))
 	  return  new ingenias.editor.cell.CommunicationEventCell((ingenias.editor.entities.CommunicationEvent)en);

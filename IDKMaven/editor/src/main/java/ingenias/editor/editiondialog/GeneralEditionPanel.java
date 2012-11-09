@@ -1488,7 +1488,8 @@ java.io.Serializable {
 		boolean found=false;
 		for (int k=0;k<graph.getModel().getRootCount() && !found;k++){
 			if (graph.getModel().getRootAt(k) instanceof DefaultGraphCell){
-				found= ((DefaultGraphCell)(graph.getModel().getRootAt(k))).getUserObject().equals(entity2);
+				if (((DefaultGraphCell)(graph.getModel().getRootAt(k))).getUserObject()!=null)
+					found= ((DefaultGraphCell)(graph.getModel().getRootAt(k))).getUserObject().equals(entity2);
 			}
 		}
 		return found;
@@ -1797,8 +1798,9 @@ java.io.Serializable {
 			if (contains(graph,entity)){
 
 				for (Object obj : graph.getRoots()) {
-					if (obj instanceof DefaultGraphCell
-							&& ((DefaultGraphCell) obj).getUserObject().equals(entity)) { // deleted
+					if (obj instanceof DefaultGraphCell &&
+							((DefaultGraphCell) obj).getUserObject()!=null && 							
+							((DefaultGraphCell) obj).getUserObject().equals(entity)) { // deleted
 						// element
 						// must
 						// be

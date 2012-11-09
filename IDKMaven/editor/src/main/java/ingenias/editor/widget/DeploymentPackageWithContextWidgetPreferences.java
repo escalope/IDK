@@ -32,7 +32,7 @@ public class DeploymentPackageWithContextWidgetPreferences extends DeploymentPac
 
   public DeploymentPackageWithContextWidgetPreferences() {
   super();
-  String[] preferredOrder={"id","Description","AgentsDeployed","Parameters","Context","ContextBindingData",""};
+  String[] preferredOrder={"id","Description","AgentsDeployed","Parameters","Context","ContextModelInstantiation",""};
   this.setPreferredOrder(preferredOrder);
    Vector result=null;
   

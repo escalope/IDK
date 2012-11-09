@@ -20,16 +20,20 @@
 ##label name="AgentsDeployed_NumberInstances"/#
 ##/panel#
 ##/collectionpanel#
+##collectionpanel Background="white" id="Context"#
 ##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
 ##iconlabel icon="images/attribute.gif" /#
 ##label text="context:"/#
-##label id="Context"/#
+##label name="Context_Id"/#
 ##/panel#
+##/collectionpanel#
+##collectionpanel Background="white" id="ContextModelInstantiation"#
 ##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
 ##iconlabel icon="images/attribute.gif" /#
-##label text="context binding data:"/#
-##label id="ContextBindingData"/#
+##label text="ContextModelInstantiation:"/#
+##label name="ContextModelInstantiation_Id"/#
 ##/panel#
+##/collectionpanel#
 ##collectionpanel Background="white" id="Parameters"#
 ##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
 ##iconlabel icon="images/attribute.gif" /#

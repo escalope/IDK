@@ -337,6 +337,28 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
     }
 
    if (false){
+    Image img_ContextUseTask =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_ContextUseTask);
+    Action ContextUseTask=
+        new AbstractAction("ContextUseTask", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "ContextUseTask");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    ContextUseTask.setEnabled(true);
+    jb = new JButton(ContextUseTask);
+    jb.setText("");
+    jb.setName("ContextUseTask");	
+    jb.setToolTipText("ContextUseTask");
+    toolbar.add(jb);
+    }
+
+   if (false){
     Image img_Workflow =
         ImageLoader.getImage("");
     undoIcon = new ImageIcon(img_Workflow);
@@ -514,6 +536,8 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
  entities.add("TextNote");
 
  entities.add("TaskWS");
+
+ entities.add("ContextUseTask");
 
  entities.add("Workflow");
 
@@ -815,6 +839,15 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("ContextUseTask")) {
+    ContextUseTask nentity=getOM().createContextUseTask(getMJGraph().getNewId("ContextUseTask"));
+      DefaultGraphCell vertex = new
+          ContextUseTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("Workflow")) {
     Workflow nentity=getOM().createWorkflow(getMJGraph().getNewId("Workflow"));
       DefaultGraphCell vertex = new
@@ -921,6 +954,11 @@ public class ActivityDiagramModelJGraph extends ModelJGraph {
 
     if (entity.getType().equalsIgnoreCase("TaskWS")) {
       return TaskWSView.getSize((ingenias.editor.entities.TaskWS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextUseTask")) {
+      return ContextUseTaskView.getSize((ingenias.editor.entities.ContextUseTask)entity);      
     }
     else
 
@@ -1117,6 +1155,14 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new TaskWSCell( (TaskWS) entity);
       // Default Size for the new Vertex with the new entity within
       size = TaskWSView.getSize((TaskWS) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(ContextUseTask.class)) {
+      vertex = new ContextUseTaskCell( (ContextUseTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextUseTaskView.getSize((ContextUseTask) entity);
       
     }
     else

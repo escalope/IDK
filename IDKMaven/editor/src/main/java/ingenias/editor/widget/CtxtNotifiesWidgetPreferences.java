@@ -31,7 +31,7 @@ public class CtxtNotifiesWidgetPreferences extends EntityWidgetPreferences {
 
   public CtxtNotifiesWidgetPreferences() {
   super();
-  String[] preferredOrder={"Label","Event",""};
+  String[] preferredOrder={"Label",""};
   this.setPreferredOrder(preferredOrder);
   Vector result=null;
   

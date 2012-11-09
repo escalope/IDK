@@ -130,20 +130,6 @@ public class FAERIECtxtModelRenderer extends CompositeRenderer implements CellVi
           }
         }
 	
-        if (currentMap.get("CtxtValues")!=null && 
-            currentMap.get("CtxtValues") instanceof ingenias.editor.rendererxml.CollectionPanel) {
-          try {
-            ( (ingenias.editor.rendererxml.CollectionPanel) currentMap.get(
-                "CtxtValues")).setCollection("CtxtValues",ent.CtxtValues, ent.CtxtValues.getType());
-          }
-          catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
-          }
-          catch (IllegalAccessException ex) {
-            ex.printStackTrace();
-          }
-        }
-	
         if (currentMap.get("CtxtElements")!=null && 
             currentMap.get("CtxtElements") instanceof ingenias.editor.rendererxml.CollectionPanel) {
           try {
@@ -160,25 +146,6 @@ public class FAERIECtxtModelRenderer extends CompositeRenderer implements CellVi
 	
 
       
-      if (currentMap.get("CtxtValues")!=null){
-	   if (ent!=null && ent.getCtxtValues()!=null){
-		if (currentMap.get("CtxtValues") instanceof javax.swing.JLabel){
-		((javax.swing.JLabel)( currentMap).get("CtxtValues")).setText(ent.getCtxtValues().toString());
-		} else {
-		 if (currentMap.get("CtxtValues") instanceof javax.swing.text.JTextComponent)
-		 ((javax.swing.text.JTextComponent)( currentMap).get("CtxtValues")).setText(ent.getCtxtValues().toString());
-		
-	      } 
-	   } else  {
-	     if (currentMap.get("CtxtValues") instanceof javax.swing.JLabel)
-	     ((javax.swing.JLabel)( currentMap).get("CtxtValues")).setText("");
-	     else {
-		if (!(currentMap.get("CtxtValues") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
-		((javax.swing.text.JTextComponent)( currentMap).get("CtxtValues")).setText("");
-	     }
-         }
-	  }
-	   
       if (currentMap.get("CtxtElements")!=null){
 	   if (ent!=null && ent.getCtxtElements()!=null){
 		if (currentMap.get("CtxtElements") instanceof javax.swing.JLabel){

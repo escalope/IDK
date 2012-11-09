@@ -10,11 +10,13 @@
 ##label id="Id"/#
           ##/panel#
 ##linepanel Background="white"/#
+##collectionpanel Background="white" id="Models"#
 ##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
 ##iconlabel icon="images/attribute.gif" /#
 ##label text="model:"/#
-##label id="Model"/#
+##label name="Models_Id"/#
 ##/panel#
+##/collectionpanel#
 ##linepanel Background="white" /#
 ##/vbox#
 ##/panel#

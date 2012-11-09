@@ -263,6 +263,9 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.Fact)
 	  return  new ingenias.editor.cell.FactCell((ingenias.editor.entities.Fact)en);
 
+   	if (en instanceof ingenias.editor.entities.AMIContextInstantiation)
+	  return  new ingenias.editor.cell.AMIContextInstantiationCell((ingenias.editor.entities.AMIContextInstantiation)en);
+
    	if (en instanceof ingenias.editor.entities.ShareTouple)
 	  return  new ingenias.editor.cell.ShareToupleCell((ingenias.editor.entities.ShareTouple)en);
 
@@ -310,6 +313,9 @@ public class GraphLoadImp1
 
    	if (en instanceof ingenias.editor.entities.OrganizationNetwork)
 	  return  new ingenias.editor.cell.OrganizationNetworkCell((ingenias.editor.entities.OrganizationNetwork)en);
+
+   	if (en instanceof ingenias.editor.entities.FAERIECtxtModelInst)
+	  return  new ingenias.editor.cell.FAERIECtxtModelInstCell((ingenias.editor.entities.FAERIECtxtModelInst)en);
 
    	if (en instanceof ingenias.editor.entities.FAERIECtxtModel)
 	  return  new ingenias.editor.cell.FAERIECtxtModelCell((ingenias.editor.entities.FAERIECtxtModel)en);
@@ -413,6 +419,9 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS)
 	  return  new ingenias.editor.cell.DeploymentUnitByTypeEnumInitMSCell((ingenias.editor.entities.DeploymentUnitByTypeEnumInitMS)en);
 
+   	if (en instanceof ingenias.editor.entities.ContextUseTask)
+	  return  new ingenias.editor.cell.ContextUseTaskCell((ingenias.editor.entities.ContextUseTask)en);
+
    	if (en instanceof ingenias.editor.entities.GeneralEvent)
 	  return  new ingenias.editor.cell.GeneralEventCell((ingenias.editor.entities.GeneralEvent)en);
 
@@ -478,9 +487,6 @@ public class GraphLoadImp1
 
    	if (en instanceof ingenias.editor.entities.SimulationPackage)
 	  return  new ingenias.editor.cell.SimulationPackageCell((ingenias.editor.entities.SimulationPackage)en);
-
-   	if (en instanceof ingenias.editor.entities.AMIContextBindingData)
-	  return  new ingenias.editor.cell.AMIContextBindingDataCell((ingenias.editor.entities.AMIContextBindingData)en);
 
    	if (en instanceof ingenias.editor.entities.CommunicationEvent)
 	  return  new ingenias.editor.cell.CommunicationEventCell((ingenias.editor.entities.CommunicationEvent)en);

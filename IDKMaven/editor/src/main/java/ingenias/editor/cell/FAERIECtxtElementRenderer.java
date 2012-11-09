@@ -104,6 +104,25 @@ public class FAERIECtxtElementRenderer extends CompositeRenderer implements Cell
 	
 
       
+      if (currentMap.get("Slots")!=null){
+	   if (ent!=null && ent.getSlots()!=null){
+		if (currentMap.get("Slots") instanceof javax.swing.JLabel){
+		((javax.swing.JLabel)( currentMap).get("Slots")).setText(ent.getSlots().toString());
+		} else {
+		 if (currentMap.get("Slots") instanceof javax.swing.text.JTextComponent)
+		 ((javax.swing.text.JTextComponent)( currentMap).get("Slots")).setText(ent.getSlots().toString());
+		
+	      } 
+	   } else  {
+	     if (currentMap.get("Slots") instanceof javax.swing.JLabel)
+	     ((javax.swing.JLabel)( currentMap).get("Slots")).setText("");
+	     else {
+		if (!(currentMap.get("Slots") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
+		((javax.swing.text.JTextComponent)( currentMap).get("Slots")).setText("");
+	     }
+         }
+	  }
+	   
       if (currentMap.get("Id")!=null){
 	   if (ent!=null && ent.getId()!=null){
 		if (currentMap.get("Id") instanceof javax.swing.JLabel){

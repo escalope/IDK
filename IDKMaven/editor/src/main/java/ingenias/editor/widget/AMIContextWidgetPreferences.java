@@ -24,7 +24,7 @@ package ingenias.editor.widget;
 import org.jgraph.graph.*;
 import java.util.*;
 
-public class AMIContextWidgetPreferences extends INGENIASObjectWidgetPreferences {
+public class AMIContextWidgetPreferences extends EnvironmentApplicationWidgetPreferences {
 
   Hashtable preferredWidget=new Hashtable();
   Hashtable defaultValues=new Hashtable();
@@ -32,7 +32,7 @@ public class AMIContextWidgetPreferences extends INGENIASObjectWidgetPreferences
 
   public AMIContextWidgetPreferences() {
   super();
-  String[] preferredOrder={"id","Description","Model","Applications",""};
+  String[] preferredOrder={"id","Description","Models",""};
   this.setPreferredOrder(preferredOrder);
    Vector result=null;
   

@@ -115,6 +115,10 @@ public ActivityDiagramCellViewFactory() {}
            return new ingenias.editor.cell.TaskWSView(v);
    }
 
+   if (userObject.getClass().equals(ContextUseTask.class)){
+           return new ingenias.editor.cell.ContextUseTaskView(v);
+   }
+
    if (userObject.getClass().equals(Workflow.class)){
            return new ingenias.editor.cell.WorkflowView(v);
    }

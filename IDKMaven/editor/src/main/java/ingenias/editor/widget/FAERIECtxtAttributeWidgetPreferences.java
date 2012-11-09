@@ -32,7 +32,7 @@ public class FAERIECtxtAttributeWidgetPreferences extends FAERIECtxtElementWidge
 
   public FAERIECtxtAttributeWidgetPreferences() {
   super();
-  String[] preferredOrder={"id","Description",""};
+  String[] preferredOrder={"id","Description","Slots",""};
   this.setPreferredOrder(preferredOrder);
    Vector result=null;
   

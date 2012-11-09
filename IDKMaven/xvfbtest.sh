@@ -4,7 +4,7 @@ env DISPLAY=:1 fluxbox &
 sleep 2
 env DISPLAY=:1 x11vnc -display :1 -bg -nopw -listen localhost -xkb&
 sleep 2
-vncviewer  -encodings 'copyrect tight zrle hextile' localhost:5900 &
+vncviewer  -viewonly -encodings 'copyrect tight zrle hextile' localhost:5900 &
 env DISPLAY=:1 mvn $1
 killall -9 vncviewer
 killall -9 Xvfb

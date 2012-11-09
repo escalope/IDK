@@ -10,16 +10,11 @@
 ##label id="Id"/#
           ##/panel#
 ##linepanel Background="white"/#
+##collectionpanel Background="white" id="Models"#
 ##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
 ##iconlabel icon="images/attribute.gif" /#
 ##label text="model:"/#
-##label id="Model"/#
-##/panel#
-##collectionpanel Background="white" id="Applications"#
-##panel layout="FlowLayout(FlowLayout.LEFT,5,0)" Background="white" #
-##iconlabel icon="images/attribute.gif" /#
-##label text="application:"/#
-##label name="Applications_Id"/#
+##label name="Models_Id"/#
 ##/panel#
 ##/collectionpanel#
 ##/vbox#

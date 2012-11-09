@@ -469,24 +469,46 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
 
    if (true){
-    Image img_AMIContext =
+    Image img_FAERIECtxtModelInst =
         ImageLoader.getImage("images/mdepl.gif");
-    undoIcon = new ImageIcon(img_AMIContext);
-    Action AMIContext=
-        new AbstractAction("AMIContext", undoIcon) {
+    undoIcon = new ImageIcon(img_FAERIECtxtModelInst);
+    Action FAERIECtxtModelInst=
+        new AbstractAction("FAERIECtxtModelInst", undoIcon) {
       public void actionPerformed(ActionEvent e) {
        try{
-        insert(new Point(0, 0), "AMIContext");
+        insert(new Point(0, 0), "FAERIECtxtModelInst");
 	} catch (InvalidEntity e1) {			
 		e1.printStackTrace();
 	}
       }
     };
-    AMIContext.setEnabled(true);
-    jb = new JButton(AMIContext);
+    FAERIECtxtModelInst.setEnabled(true);
+    jb = new JButton(FAERIECtxtModelInst);
     jb.setText("");
-    jb.setName("AMIContext");	
-    jb.setToolTipText("AMIContext");
+    jb.setName("FAERIECtxtModelInst");	
+    jb.setToolTipText("FAERIECtxtModelInst");
+    toolbar.add(jb);
+    }
+
+   if (true){
+    Image img_FAERIEContext =
+        ImageLoader.getImage("images/mdepl.gif");
+    undoIcon = new ImageIcon(img_FAERIEContext);
+    Action FAERIEContext=
+        new AbstractAction("FAERIEContext", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "FAERIEContext");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    FAERIEContext.setEnabled(true);
+    jb = new JButton(FAERIEContext);
+    jb.setText("");
+    jb.setName("FAERIEContext");	
+    jb.setToolTipText("FAERIEContext");
     toolbar.add(jb);
     }
 
@@ -513,24 +535,24 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
 
    if (false){
-    Image img_ApplicationWS =
+    Image img_RuntimeCommFailure =
         ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_ApplicationWS);
-    Action ApplicationWS=
-        new AbstractAction("ApplicationWS", undoIcon) {
+    undoIcon = new ImageIcon(img_RuntimeCommFailure);
+    Action RuntimeCommFailure=
+        new AbstractAction("RuntimeCommFailure", undoIcon) {
       public void actionPerformed(ActionEvent e) {
        try{
-        insert(new Point(0, 0), "ApplicationWS");
+        insert(new Point(0, 0), "RuntimeCommFailure");
 	} catch (InvalidEntity e1) {			
 		e1.printStackTrace();
 	}
       }
     };
-    ApplicationWS.setEnabled(true);
-    jb = new JButton(ApplicationWS);
+    RuntimeCommFailure.setEnabled(true);
+    jb = new JButton(RuntimeCommFailure);
     jb.setText("");
-    jb.setName("ApplicationWS");	
-    jb.setToolTipText("ApplicationWS");
+    jb.setName("RuntimeCommFailure");	
+    jb.setToolTipText("RuntimeCommFailure");
     toolbar.add(jb);
     }
 
@@ -557,24 +579,24 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
 
    if (false){
-    Image img_RuntimeCommFailure =
+    Image img_FAERIECtxtRelationship =
         ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_RuntimeCommFailure);
-    Action RuntimeCommFailure=
-        new AbstractAction("RuntimeCommFailure", undoIcon) {
+    undoIcon = new ImageIcon(img_FAERIECtxtRelationship);
+    Action FAERIECtxtRelationship=
+        new AbstractAction("FAERIECtxtRelationship", undoIcon) {
       public void actionPerformed(ActionEvent e) {
        try{
-        insert(new Point(0, 0), "RuntimeCommFailure");
+        insert(new Point(0, 0), "FAERIECtxtRelationship");
 	} catch (InvalidEntity e1) {			
 		e1.printStackTrace();
 	}
       }
     };
-    RuntimeCommFailure.setEnabled(true);
-    jb = new JButton(RuntimeCommFailure);
+    FAERIECtxtRelationship.setEnabled(true);
+    jb = new JButton(FAERIECtxtRelationship);
     jb.setText("");
-    jb.setName("RuntimeCommFailure");	
-    jb.setToolTipText("RuntimeCommFailure");
+    jb.setName("FAERIECtxtRelationship");	
+    jb.setToolTipText("FAERIECtxtRelationship");
     toolbar.add(jb);
     }
 
@@ -711,24 +733,24 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
 
    if (false){
-    Image img_FAERIEContext =
+    Image img_FAERIECtxtEntity =
         ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_FAERIEContext);
-    Action FAERIEContext=
-        new AbstractAction("FAERIEContext", undoIcon) {
+    undoIcon = new ImageIcon(img_FAERIECtxtEntity);
+    Action FAERIECtxtEntity=
+        new AbstractAction("FAERIECtxtEntity", undoIcon) {
       public void actionPerformed(ActionEvent e) {
        try{
-        insert(new Point(0, 0), "FAERIEContext");
+        insert(new Point(0, 0), "FAERIECtxtEntity");
 	} catch (InvalidEntity e1) {			
 		e1.printStackTrace();
 	}
       }
     };
-    FAERIEContext.setEnabled(true);
-    jb = new JButton(FAERIEContext);
+    FAERIECtxtEntity.setEnabled(true);
+    jb = new JButton(FAERIECtxtEntity);
     jb.setText("");
-    jb.setName("FAERIEContext");	
-    jb.setToolTipText("FAERIEContext");
+    jb.setName("FAERIECtxtEntity");	
+    jb.setToolTipText("FAERIECtxtEntity");
     toolbar.add(jb);
     }
 
@@ -777,28 +799,6 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
 
    if (false){
-    Image img_AMIContextBindingData =
-        ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_AMIContextBindingData);
-    Action AMIContextBindingData=
-        new AbstractAction("AMIContextBindingData", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "AMIContextBindingData");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    AMIContextBindingData.setEnabled(true);
-    jb = new JButton(AMIContextBindingData);
-    jb.setText("");
-    jb.setName("AMIContextBindingData");	
-    jb.setToolTipText("AMIContextBindingData");
-    toolbar.add(jb);
-    }
-
-   if (false){
     Image img_ApplicationEventSlots =
         ImageLoader.getImage("");
     undoIcon = new ImageIcon(img_ApplicationEventSlots);
@@ -843,6 +843,28 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
 
    if (false){
+    Image img_FAERIECtxtAttribute =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_FAERIECtxtAttribute);
+    Action FAERIECtxtAttribute=
+        new AbstractAction("FAERIECtxtAttribute", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "FAERIECtxtAttribute");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    FAERIECtxtAttribute.setEnabled(true);
+    jb = new JButton(FAERIECtxtAttribute);
+    jb.setText("");
+    jb.setName("FAERIECtxtAttribute");	
+    jb.setToolTipText("FAERIECtxtAttribute");
+    toolbar.add(jb);
+    }
+
+   if (false){
     Image img_FileSpecPatternMapping =
         ImageLoader.getImage("");
     undoIcon = new ImageIcon(img_FileSpecPatternMapping);
@@ -883,28 +905,6 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     jb.setText("");
     jb.setName("Conversation");	
     jb.setToolTipText("Conversation");
-    toolbar.add(jb);
-    }
-
-   if (false){
-    Image img_FAERIECtxtModel =
-        ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_FAERIECtxtModel);
-    Action FAERIECtxtModel=
-        new AbstractAction("FAERIECtxtModel", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "FAERIECtxtModel");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    FAERIECtxtModel.setEnabled(true);
-    jb = new JButton(FAERIECtxtModel);
-    jb.setText("");
-    jb.setName("FAERIECtxtModel");	
-    jb.setToolTipText("FAERIECtxtModel");
     toolbar.add(jb);
     }
 
@@ -975,6 +975,28 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
 
    if (false){
+    Image img_AMIContext =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_AMIContext);
+    Action AMIContext=
+        new AbstractAction("AMIContext", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "AMIContext");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    AMIContext.setEnabled(true);
+    jb = new JButton(AMIContext);
+    jb.setText("");
+    jb.setName("AMIContext");	
+    jb.setToolTipText("AMIContext");
+    toolbar.add(jb);
+    }
+
+   if (false){
     Image img_MentalInstanceSpecification =
         ImageLoader.getImage("");
     undoIcon = new ImageIcon(img_MentalInstanceSpecification);
@@ -993,6 +1015,28 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     jb.setText("");
     jb.setName("MentalInstanceSpecification");	
     jb.setToolTipText("MentalInstanceSpecification");
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_AMIContextInstantiation =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_AMIContextInstantiation);
+    Action AMIContextInstantiation=
+        new AbstractAction("AMIContextInstantiation", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "AMIContextInstantiation");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    AMIContextInstantiation.setEnabled(true);
+    jb = new JButton(AMIContextInstantiation);
+    jb.setText("");
+    jb.setName("AMIContextInstantiation");	
+    jb.setToolTipText("AMIContextInstantiation");
     toolbar.add(jb);
     }
 
@@ -1161,15 +1205,17 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
 
  entities.add("DeploymentUnitByTypeMSEntity");
 
- entities.add("AMIContext");
+ entities.add("FAERIECtxtModelInst");
+
+ entities.add("FAERIEContext");
 
  entities.add("Fact");
 
- entities.add("ApplicationWS");
+ entities.add("RuntimeCommFailure");
 
  entities.add("DeploymentUnitByTypeWithInitMS");
 
- entities.add("RuntimeCommFailure");
+ entities.add("FAERIECtxtRelationship");
 
  entities.add("ApplicationEvent");
 
@@ -1183,23 +1229,21 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
 
  entities.add("RuntimeEvent");
 
- entities.add("FAERIEContext");
+ entities.add("FAERIECtxtEntity");
 
  entities.add("AgentWS");
 
  entities.add("AgentModelBelieve");
 
- entities.add("AMIContextBindingData");
-
  entities.add("ApplicationEventSlots");
 
  entities.add("Compromise");
 
+ entities.add("FAERIECtxtAttribute");
+
  entities.add("FileSpecPatternMapping");
 
  entities.add("Conversation");
-
- entities.add("FAERIECtxtModel");
 
  entities.add("Agent");
 
@@ -1207,7 +1251,11 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
 
  entities.add("CommunicationEvent");
 
+ entities.add("AMIContext");
+
  entities.add("MentalInstanceSpecification");
+
+ entities.add("AMIContextInstantiation");
 
  entities.add("GeneralEvent");
 
@@ -1519,10 +1567,19 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("AMIContext")) {
-    AMIContext nentity=getOM().createAMIContext(getMJGraph().getNewId("AMIContext"));
+    if (entity.equalsIgnoreCase("FAERIECtxtModelInst")) {
+    FAERIECtxtModelInst nentity=getOM().createFAERIECtxtModelInst(getMJGraph().getNewId("FAERIECtxtModelInst"));
       DefaultGraphCell vertex = new
-          AMIContextCell(nentity);
+          FAERIECtxtModelInstCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("FAERIEContext")) {
+    FAERIEContext nentity=getOM().createFAERIEContext(getMJGraph().getNewId("FAERIEContext"));
+      DefaultGraphCell vertex = new
+          FAERIEContextCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1537,10 +1594,10 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("ApplicationWS")) {
-    ApplicationWS nentity=getOM().createApplicationWS(getMJGraph().getNewId("ApplicationWS"));
+    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
+    RuntimeCommFailure nentity=getOM().createRuntimeCommFailure(getMJGraph().getNewId("RuntimeCommFailure"));
       DefaultGraphCell vertex = new
-          ApplicationWSCell(nentity);
+          RuntimeCommFailureCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1555,10 +1612,10 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
-    RuntimeCommFailure nentity=getOM().createRuntimeCommFailure(getMJGraph().getNewId("RuntimeCommFailure"));
+    if (entity.equalsIgnoreCase("FAERIECtxtRelationship")) {
+    FAERIECtxtRelationship nentity=getOM().createFAERIECtxtRelationship(getMJGraph().getNewId("FAERIECtxtRelationship"));
       DefaultGraphCell vertex = new
-          RuntimeCommFailureCell(nentity);
+          FAERIECtxtRelationshipCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1618,10 +1675,10 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("FAERIEContext")) {
-    FAERIEContext nentity=getOM().createFAERIEContext(getMJGraph().getNewId("FAERIEContext"));
+    if (entity.equalsIgnoreCase("FAERIECtxtEntity")) {
+    FAERIECtxtEntity nentity=getOM().createFAERIECtxtEntity(getMJGraph().getNewId("FAERIECtxtEntity"));
       DefaultGraphCell vertex = new
-          FAERIEContextCell(nentity);
+          FAERIECtxtEntityCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1645,15 +1702,6 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("AMIContextBindingData")) {
-    AMIContextBindingData nentity=getOM().createAMIContextBindingData(getMJGraph().getNewId("AMIContextBindingData"));
-      DefaultGraphCell vertex = new
-          AMIContextBindingDataCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("ApplicationEventSlots")) {
     ApplicationEventSlots nentity=getOM().createApplicationEventSlots(getMJGraph().getNewId("ApplicationEventSlots"));
       DefaultGraphCell vertex = new
@@ -1672,6 +1720,15 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("FAERIECtxtAttribute")) {
+    FAERIECtxtAttribute nentity=getOM().createFAERIECtxtAttribute(getMJGraph().getNewId("FAERIECtxtAttribute"));
+      DefaultGraphCell vertex = new
+          FAERIECtxtAttributeCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("FileSpecPatternMapping")) {
     FileSpecPatternMapping nentity=getOM().createFileSpecPatternMapping(getMJGraph().getNewId("FileSpecPatternMapping"));
       DefaultGraphCell vertex = new
@@ -1685,15 +1742,6 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     Conversation nentity=getOM().createConversation(getMJGraph().getNewId("Conversation"));
       DefaultGraphCell vertex = new
           ConversationCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("FAERIECtxtModel")) {
-    FAERIECtxtModel nentity=getOM().createFAERIECtxtModel(getMJGraph().getNewId("FAERIECtxtModel"));
-      DefaultGraphCell vertex = new
-          FAERIECtxtModelCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1726,10 +1774,28 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("AMIContext")) {
+    AMIContext nentity=getOM().createAMIContext(getMJGraph().getNewId("AMIContext"));
+      DefaultGraphCell vertex = new
+          AMIContextCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("MentalInstanceSpecification")) {
     MentalInstanceSpecification nentity=getOM().createMentalInstanceSpecification(getMJGraph().getNewId("MentalInstanceSpecification"));
       DefaultGraphCell vertex = new
           MentalInstanceSpecificationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("AMIContextInstantiation")) {
+    AMIContextInstantiation nentity=getOM().createAMIContextInstantiation(getMJGraph().getNewId("AMIContextInstantiation"));
+      DefaultGraphCell vertex = new
+          AMIContextInstantiationCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1865,8 +1931,13 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("AMIContext")) {
-      return AMIContextView.getSize((ingenias.editor.entities.AMIContext)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtModelInst")) {
+      return FAERIECtxtModelInstView.getSize((ingenias.editor.entities.FAERIECtxtModelInst)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("FAERIEContext")) {
+      return FAERIEContextView.getSize((ingenias.editor.entities.FAERIEContext)entity);      
     }
     else
 
@@ -1875,8 +1946,8 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("ApplicationWS")) {
-      return ApplicationWSView.getSize((ingenias.editor.entities.ApplicationWS)entity);      
+    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
+      return RuntimeCommFailureView.getSize((ingenias.editor.entities.RuntimeCommFailure)entity);      
     }
     else
 
@@ -1885,8 +1956,8 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
-      return RuntimeCommFailureView.getSize((ingenias.editor.entities.RuntimeCommFailure)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtRelationship")) {
+      return FAERIECtxtRelationshipView.getSize((ingenias.editor.entities.FAERIECtxtRelationship)entity);      
     }
     else
 
@@ -1920,8 +1991,8 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("FAERIEContext")) {
-      return FAERIEContextView.getSize((ingenias.editor.entities.FAERIEContext)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtEntity")) {
+      return FAERIECtxtEntityView.getSize((ingenias.editor.entities.FAERIECtxtEntity)entity);      
     }
     else
 
@@ -1935,11 +2006,6 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("AMIContextBindingData")) {
-      return AMIContextBindingDataView.getSize((ingenias.editor.entities.AMIContextBindingData)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("ApplicationEventSlots")) {
       return ApplicationEventSlotsView.getSize((ingenias.editor.entities.ApplicationEventSlots)entity);      
     }
@@ -1950,6 +2016,11 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtAttribute")) {
+      return FAERIECtxtAttributeView.getSize((ingenias.editor.entities.FAERIECtxtAttribute)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("FileSpecPatternMapping")) {
       return FileSpecPatternMappingView.getSize((ingenias.editor.entities.FileSpecPatternMapping)entity);      
     }
@@ -1957,11 +2028,6 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
 
     if (entity.getType().equalsIgnoreCase("Conversation")) {
       return ConversationView.getSize((ingenias.editor.entities.Conversation)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("FAERIECtxtModel")) {
-      return FAERIECtxtModelView.getSize((ingenias.editor.entities.FAERIECtxtModel)entity);      
     }
     else
 
@@ -1980,8 +2046,18 @@ public class DeployDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("AMIContext")) {
+      return AMIContextView.getSize((ingenias.editor.entities.AMIContext)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("MentalInstanceSpecification")) {
       return MentalInstanceSpecificationView.getSize((ingenias.editor.entities.MentalInstanceSpecification)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("AMIContextInstantiation")) {
+      return AMIContextInstantiationView.getSize((ingenias.editor.entities.AMIContextInstantiation)entity);      
     }
     else
 
@@ -2217,10 +2293,18 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(AMIContext.class)) {
-      vertex = new AMIContextCell( (AMIContext) entity);
+    if (entity.getClass().equals(FAERIECtxtModelInst.class)) {
+      vertex = new FAERIECtxtModelInstCell( (FAERIECtxtModelInst) entity);
       // Default Size for the new Vertex with the new entity within
-      size = AMIContextView.getSize((AMIContext) entity);
+      size = FAERIECtxtModelInstView.getSize((FAERIECtxtModelInst) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(FAERIEContext.class)) {
+      vertex = new FAERIEContextCell( (FAERIEContext) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FAERIEContextView.getSize((FAERIEContext) entity);
       
     }
     else
@@ -2233,10 +2317,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(ApplicationWS.class)) {
-      vertex = new ApplicationWSCell( (ApplicationWS) entity);
+    if (entity.getClass().equals(RuntimeCommFailure.class)) {
+      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
       // Default Size for the new Vertex with the new entity within
-      size = ApplicationWSView.getSize((ApplicationWS) entity);
+      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
       
     }
     else
@@ -2249,10 +2333,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(RuntimeCommFailure.class)) {
-      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
+    if (entity.getClass().equals(FAERIECtxtRelationship.class)) {
+      vertex = new FAERIECtxtRelationshipCell( (FAERIECtxtRelationship) entity);
       // Default Size for the new Vertex with the new entity within
-      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
+      size = FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship) entity);
       
     }
     else
@@ -2305,10 +2389,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(FAERIEContext.class)) {
-      vertex = new FAERIEContextCell( (FAERIEContext) entity);
+    if (entity.getClass().equals(FAERIECtxtEntity.class)) {
+      vertex = new FAERIECtxtEntityCell( (FAERIECtxtEntity) entity);
       // Default Size for the new Vertex with the new entity within
-      size = FAERIEContextView.getSize((FAERIEContext) entity);
+      size = FAERIECtxtEntityView.getSize((FAERIECtxtEntity) entity);
       
     }
     else
@@ -2329,14 +2413,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(AMIContextBindingData.class)) {
-      vertex = new AMIContextBindingDataCell( (AMIContextBindingData) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = AMIContextBindingDataView.getSize((AMIContextBindingData) entity);
-      
-    }
-    else
-
     if (entity.getClass().equals(ApplicationEventSlots.class)) {
       vertex = new ApplicationEventSlotsCell( (ApplicationEventSlots) entity);
       // Default Size for the new Vertex with the new entity within
@@ -2353,6 +2429,14 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(FAERIECtxtAttribute.class)) {
+      vertex = new FAERIECtxtAttributeCell( (FAERIECtxtAttribute) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FAERIECtxtAttributeView.getSize((FAERIECtxtAttribute) entity);
+      
+    }
+    else
+
     if (entity.getClass().equals(FileSpecPatternMapping.class)) {
       vertex = new FileSpecPatternMappingCell( (FileSpecPatternMapping) entity);
       // Default Size for the new Vertex with the new entity within
@@ -2365,14 +2449,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new ConversationCell( (Conversation) entity);
       // Default Size for the new Vertex with the new entity within
       size = ConversationView.getSize((Conversation) entity);
-      
-    }
-    else
-
-    if (entity.getClass().equals(FAERIECtxtModel.class)) {
-      vertex = new FAERIECtxtModelCell( (FAERIECtxtModel) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = FAERIECtxtModelView.getSize((FAERIECtxtModel) entity);
       
     }
     else
@@ -2401,10 +2477,26 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(AMIContext.class)) {
+      vertex = new AMIContextCell( (AMIContext) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AMIContextView.getSize((AMIContext) entity);
+      
+    }
+    else
+
     if (entity.getClass().equals(MentalInstanceSpecification.class)) {
       vertex = new MentalInstanceSpecificationCell( (MentalInstanceSpecification) entity);
       // Default Size for the new Vertex with the new entity within
       size = MentalInstanceSpecificationView.getSize((MentalInstanceSpecification) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(AMIContextInstantiation.class)) {
+      vertex = new AMIContextInstantiationCell( (AMIContextInstantiation) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AMIContextInstantiationView.getSize((AMIContextInstantiation) entity);
       
     }
     else

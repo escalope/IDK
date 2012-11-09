@@ -27,8 +27,6 @@ import ingenias.editor.TypedVector;
 public class CtxtUpdates extends NAryEdgeEntity {
 
 
-  public ingenias.editor.entities.MentalEntity UpdateWith;
-
 
 
 
@@ -43,14 +41,6 @@ public class CtxtUpdates extends NAryEdgeEntity {
 
 
   
-      public ingenias.editor.entities.MentalEntity getUpdateWith(){
-        return UpdateWith;
-      }
-   public void setUpdateWith(ingenias.editor.entities.MentalEntity
-					UpdateWith){
-        this.UpdateWith=UpdateWith;
-      }
-
 
 
 public void fromMap(Map ht){

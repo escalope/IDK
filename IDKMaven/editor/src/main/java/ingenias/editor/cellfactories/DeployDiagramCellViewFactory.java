@@ -139,24 +139,28 @@ public DeployDiagramCellViewFactory() {}
            return new ingenias.editor.cell.DeploymentUnitByTypeMSEntityView(v);
    }
 
-   if (userObject.getClass().equals(AMIContext.class)){
-           return new ingenias.editor.cell.AMIContextView(v);
+   if (userObject.getClass().equals(FAERIECtxtModelInst.class)){
+           return new ingenias.editor.cell.FAERIECtxtModelInstView(v);
+   }
+
+   if (userObject.getClass().equals(FAERIEContext.class)){
+           return new ingenias.editor.cell.FAERIEContextView(v);
    }
 
    if (userObject.getClass().equals(Fact.class)){
            return new ingenias.editor.cell.FactView(v);
    }
 
-   if (userObject.getClass().equals(ApplicationWS.class)){
-           return new ingenias.editor.cell.ApplicationWSView(v);
+   if (userObject.getClass().equals(RuntimeCommFailure.class)){
+           return new ingenias.editor.cell.RuntimeCommFailureView(v);
    }
 
    if (userObject.getClass().equals(DeploymentUnitByTypeWithInitMS.class)){
            return new ingenias.editor.cell.DeploymentUnitByTypeWithInitMSView(v);
    }
 
-   if (userObject.getClass().equals(RuntimeCommFailure.class)){
-           return new ingenias.editor.cell.RuntimeCommFailureView(v);
+   if (userObject.getClass().equals(FAERIECtxtRelationship.class)){
+           return new ingenias.editor.cell.FAERIECtxtRelationshipView(v);
    }
 
    if (userObject.getClass().equals(ApplicationEvent.class)){
@@ -183,8 +187,8 @@ public DeployDiagramCellViewFactory() {}
            return new ingenias.editor.cell.RuntimeEventView(v);
    }
 
-   if (userObject.getClass().equals(FAERIEContext.class)){
-           return new ingenias.editor.cell.FAERIEContextView(v);
+   if (userObject.getClass().equals(FAERIECtxtEntity.class)){
+           return new ingenias.editor.cell.FAERIECtxtEntityView(v);
    }
 
    if (userObject.getClass().equals(AgentWS.class)){
@@ -195,10 +199,6 @@ public DeployDiagramCellViewFactory() {}
            return new ingenias.editor.cell.AgentModelBelieveView(v);
    }
 
-   if (userObject.getClass().equals(AMIContextBindingData.class)){
-           return new ingenias.editor.cell.AMIContextBindingDataView(v);
-   }
-
    if (userObject.getClass().equals(ApplicationEventSlots.class)){
            return new ingenias.editor.cell.ApplicationEventSlotsView(v);
    }
@@ -207,16 +207,16 @@ public DeployDiagramCellViewFactory() {}
            return new ingenias.editor.cell.CompromiseView(v);
    }
 
+   if (userObject.getClass().equals(FAERIECtxtAttribute.class)){
+           return new ingenias.editor.cell.FAERIECtxtAttributeView(v);
+   }
+
    if (userObject.getClass().equals(FileSpecPatternMapping.class)){
            return new ingenias.editor.cell.FileSpecPatternMappingView(v);
    }
 
    if (userObject.getClass().equals(Conversation.class)){
            return new ingenias.editor.cell.ConversationView(v);
-   }
-
-   if (userObject.getClass().equals(FAERIECtxtModel.class)){
-           return new ingenias.editor.cell.FAERIECtxtModelView(v);
    }
 
    if (userObject.getClass().equals(Agent.class)){
@@ -231,8 +231,16 @@ public DeployDiagramCellViewFactory() {}
            return new ingenias.editor.cell.CommunicationEventView(v);
    }
 
+   if (userObject.getClass().equals(AMIContext.class)){
+           return new ingenias.editor.cell.AMIContextView(v);
+   }
+
    if (userObject.getClass().equals(MentalInstanceSpecification.class)){
            return new ingenias.editor.cell.MentalInstanceSpecificationView(v);
+   }
+
+   if (userObject.getClass().equals(AMIContextInstantiation.class)){
+           return new ingenias.editor.cell.AMIContextInstantiationView(v);
    }
 
    if (userObject.getClass().equals(GeneralEvent.class)){

@@ -598,39 +598,6 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			
 			
 			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.Conversation")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {
-                      graph.getListenerContainer().storeContraints(cell);         
-		      graph.getModel().getAttributes(cell).put("view", "UML");     				
-		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
-				 graph.getListenerContainer().restoreContraints(cell);
-				graph.invalidate();
-				graph.refresh();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.Conversation")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {
-                      graph.getListenerContainer().storeContraints(cell);         
-		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
-		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
-				 graph.getListenerContainer().restoreContraints(cell);
-				graph.invalidate();
-				graph.refresh();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.Fact")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -664,7 +631,7 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			
 			
 			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.RuntimeConversation")){
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtRelationship")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
@@ -679,40 +646,7 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			 }
 			
                   
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.RuntimeConversation")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {
-                      graph.getListenerContainer().storeContraints(cell);         
-		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
-		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
-				 graph.getListenerContainer().restoreContraints(cell);
-				graph.invalidate();
-				graph.refresh();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.CommunicationEvent")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {
-                      graph.getListenerContainer().storeContraints(cell);         
-		      graph.getModel().getAttributes(cell).put("view", "UML");     				
-		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
-				 graph.getListenerContainer().restoreContraints(cell);
-				graph.invalidate();
-				graph.refresh();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.CommunicationEvent")){
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtRelationship")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
@@ -829,39 +763,6 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			
 			
 			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.GeneralEvent")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {
-                      graph.getListenerContainer().storeContraints(cell);         
-		      graph.getModel().getAttributes(cell).put("view", "UML");     				
-		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
-				 graph.getListenerContainer().restoreContraints(cell);
-				graph.invalidate();
-				graph.refresh();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.GeneralEvent")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {
-                      graph.getListenerContainer().storeContraints(cell);         
-		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
-		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
-				 graph.getListenerContainer().restoreContraints(cell);
-				graph.invalidate();
-				graph.refresh();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.FrameFact")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -928,7 +829,7 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			
 			
 			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.StateGoal")){
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtEntity")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
                      public void actionPerformed(ActionEvent e) {
@@ -943,40 +844,7 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			 }
 			
                   
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.StateGoal")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {
-                      graph.getListenerContainer().storeContraints(cell);         
-		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
-		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
-				 graph.getListenerContainer().restoreContraints(cell);
-				graph.invalidate();
-				graph.refresh();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.RuntimeFact")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {
-                      graph.getListenerContainer().storeContraints(cell);         
-		      graph.getModel().getAttributes(cell).put("view", "UML");     				
-		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
-				 graph.getListenerContainer().restoreContraints(cell);
-				graph.invalidate();
-				graph.refresh();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.RuntimeFact")){
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtEntity")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
@@ -1043,39 +911,6 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			
                   
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.ShareTouple")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
-                   possibleViews.add(new AbstractAction("INGENIAS") {
-                     public void actionPerformed(ActionEvent e) {
-                      graph.getListenerContainer().storeContraints(cell);         
-		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
-		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
-				 graph.getListenerContainer().restoreContraints(cell);
-				graph.invalidate();
-				graph.refresh();
-                     }
-                   });
-			 }
-			
-                  
-			
-			
-			
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.Believe")){
-			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
-                   possibleViews.add(new AbstractAction("UML") {
-                     public void actionPerformed(ActionEvent e) {
-                      graph.getListenerContainer().storeContraints(cell);         
-		      graph.getModel().getAttributes(cell).put("view", "UML");     				
-		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
-				 graph.getListenerContainer().restoreContraints(cell);
-				graph.invalidate();
-				graph.refresh();
-                     }
-                   });
-			 }
-			
-                  
-			 if (ent.getClass().getName().equals("ingenias.editor.entities.Believe")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
@@ -1175,6 +1010,270 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			
                   
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.Compromise")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtAttribute")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtAttribute")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Conversation")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Conversation")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.RuntimeConversation")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.RuntimeConversation")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.CommunicationEvent")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.CommunicationEvent")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.GeneralEvent")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.GeneralEvent")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.StateGoal")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.StateGoal")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.RuntimeFact")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.RuntimeFact")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Believe")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.Believe")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
@@ -2003,22 +2102,6 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			});
 		}
 
-		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Conversation")){
-		// Insert an object of type Conversation
-		nobjects.add(
-			new AbstractAction("Insert Conversation") {
-				public void actionPerformed(ActionEvent ev) {
-					try {
-						graph.insert(pt, "Conversation");
-					} catch (InvalidEntity e) {						
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(graph, "Object type Conversation is not allowed in this diagram",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-			});
-		}
-
 		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Fact")){
 		// Insert an object of type Fact
 		nobjects.add(
@@ -2035,32 +2118,16 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			});
 		}
 
-		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "RuntimeConversation")){
-		// Insert an object of type RuntimeConversation
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "FAERIECtxtRelationship")){
+		// Insert an object of type FAERIECtxtRelationship
 		nobjects.add(
-			new AbstractAction("Insert RuntimeConversation") {
+			new AbstractAction("Insert FAERIECtxtRelationship") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
-						graph.insert(pt, "RuntimeConversation");
+						graph.insert(pt, "FAERIECtxtRelationship");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(graph, "Object type RuntimeConversation is not allowed in this diagram",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-			});
-		}
-
-		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "CommunicationEvent")){
-		// Insert an object of type CommunicationEvent
-		nobjects.add(
-			new AbstractAction("Insert CommunicationEvent") {
-				public void actionPerformed(ActionEvent ev) {
-					try {
-						graph.insert(pt, "CommunicationEvent");
-					} catch (InvalidEntity e) {						
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(graph, "Object type CommunicationEvent is not allowed in this diagram",
+						JOptionPane.showMessageDialog(graph, "Object type FAERIECtxtRelationship is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2115,22 +2182,6 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			});
 		}
 
-		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "GeneralEvent")){
-		// Insert an object of type GeneralEvent
-		nobjects.add(
-			new AbstractAction("Insert GeneralEvent") {
-				public void actionPerformed(ActionEvent ev) {
-					try {
-						graph.insert(pt, "GeneralEvent");
-					} catch (InvalidEntity e) {						
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(graph, "Object type GeneralEvent is not allowed in this diagram",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-			});
-		}
-
 		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "FrameFact")){
 		// Insert an object of type FrameFact
 		nobjects.add(
@@ -2163,32 +2214,16 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 			});
 		}
 
-		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "StateGoal")){
-		// Insert an object of type StateGoal
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "FAERIECtxtEntity")){
+		// Insert an object of type FAERIECtxtEntity
 		nobjects.add(
-			new AbstractAction("Insert StateGoal") {
+			new AbstractAction("Insert FAERIECtxtEntity") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
-						graph.insert(pt, "StateGoal");
+						graph.insert(pt, "FAERIECtxtEntity");
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(graph, "Object type StateGoal is not allowed in this diagram",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-			});
-		}
-
-		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "RuntimeFact")){
-		// Insert an object of type RuntimeFact
-		nobjects.add(
-			new AbstractAction("Insert RuntimeFact") {
-				public void actionPerformed(ActionEvent ev) {
-					try {
-						graph.insert(pt, "RuntimeFact");
-					} catch (InvalidEntity e) {						
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(graph, "Object type RuntimeFact is not allowed in this diagram",
+						JOptionPane.showMessageDialog(graph, "Object type FAERIECtxtEntity is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2221,22 +2256,6 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(graph, "Object type ShareTouple is not allowed in this diagram",
-                                "Warning", JOptionPane.WARNING_MESSAGE);
-					}
-				}
-			});
-		}
-
-		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Believe")){
-		// Insert an object of type Believe
-		nobjects.add(
-			new AbstractAction("Insert Believe") {
-				public void actionPerformed(ActionEvent ev) {
-					try {
-						graph.insert(pt, "Believe");
-					} catch (InvalidEntity e) {						
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(graph, "Object type Believe is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -2285,6 +2304,134 @@ public class InteractionModelActionsFactory extends DiagramMenuEntriesActionsFac
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(graph, "Object type Compromise is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "FAERIECtxtAttribute")){
+		// Insert an object of type FAERIECtxtAttribute
+		nobjects.add(
+			new AbstractAction("Insert FAERIECtxtAttribute") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "FAERIECtxtAttribute");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type FAERIECtxtAttribute is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Conversation")){
+		// Insert an object of type Conversation
+		nobjects.add(
+			new AbstractAction("Insert Conversation") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "Conversation");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type Conversation is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "RuntimeConversation")){
+		// Insert an object of type RuntimeConversation
+		nobjects.add(
+			new AbstractAction("Insert RuntimeConversation") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "RuntimeConversation");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type RuntimeConversation is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "CommunicationEvent")){
+		// Insert an object of type CommunicationEvent
+		nobjects.add(
+			new AbstractAction("Insert CommunicationEvent") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "CommunicationEvent");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type CommunicationEvent is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "GeneralEvent")){
+		// Insert an object of type GeneralEvent
+		nobjects.add(
+			new AbstractAction("Insert GeneralEvent") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "GeneralEvent");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type GeneralEvent is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "StateGoal")){
+		// Insert an object of type StateGoal
+		nobjects.add(
+			new AbstractAction("Insert StateGoal") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "StateGoal");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type StateGoal is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "RuntimeFact")){
+		// Insert an object of type RuntimeFact
+		nobjects.add(
+			new AbstractAction("Insert RuntimeFact") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "RuntimeFact");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type RuntimeFact is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("InteractionModel", "Believe")){
+		// Insert an object of type Believe
+		nobjects.add(
+			new AbstractAction("Insert Believe") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "Believe");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type Believe is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

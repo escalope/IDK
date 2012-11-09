@@ -469,28 +469,6 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
 
    if (false){
-    Image img_Conversation =
-        ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_Conversation);
-    Action Conversation=
-        new AbstractAction("Conversation", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "Conversation");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    Conversation.setEnabled(true);
-    jb = new JButton(Conversation);
-    jb.setText("");
-    jb.setName("Conversation");	
-    jb.setToolTipText("Conversation");
-    toolbar.add(jb);
-    }
-
-   if (false){
     Image img_Fact =
         ImageLoader.getImage("");
     undoIcon = new ImageIcon(img_Fact);
@@ -513,46 +491,24 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
 
    if (false){
-    Image img_RuntimeConversation =
+    Image img_FAERIECtxtRelationship =
         ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_RuntimeConversation);
-    Action RuntimeConversation=
-        new AbstractAction("RuntimeConversation", undoIcon) {
+    undoIcon = new ImageIcon(img_FAERIECtxtRelationship);
+    Action FAERIECtxtRelationship=
+        new AbstractAction("FAERIECtxtRelationship", undoIcon) {
       public void actionPerformed(ActionEvent e) {
        try{
-        insert(new Point(0, 0), "RuntimeConversation");
+        insert(new Point(0, 0), "FAERIECtxtRelationship");
 	} catch (InvalidEntity e1) {			
 		e1.printStackTrace();
 	}
       }
     };
-    RuntimeConversation.setEnabled(true);
-    jb = new JButton(RuntimeConversation);
+    FAERIECtxtRelationship.setEnabled(true);
+    jb = new JButton(FAERIECtxtRelationship);
     jb.setText("");
-    jb.setName("RuntimeConversation");	
-    jb.setToolTipText("RuntimeConversation");
-    toolbar.add(jb);
-    }
-
-   if (false){
-    Image img_CommunicationEvent =
-        ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_CommunicationEvent);
-    Action CommunicationEvent=
-        new AbstractAction("CommunicationEvent", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "CommunicationEvent");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    CommunicationEvent.setEnabled(true);
-    jb = new JButton(CommunicationEvent);
-    jb.setText("");
-    jb.setName("CommunicationEvent");	
-    jb.setToolTipText("CommunicationEvent");
+    jb.setName("FAERIECtxtRelationship");	
+    jb.setToolTipText("FAERIECtxtRelationship");
     toolbar.add(jb);
     }
 
@@ -623,28 +579,6 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
 
    if (false){
-    Image img_GeneralEvent =
-        ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_GeneralEvent);
-    Action GeneralEvent=
-        new AbstractAction("GeneralEvent", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "GeneralEvent");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    GeneralEvent.setEnabled(true);
-    jb = new JButton(GeneralEvent);
-    jb.setText("");
-    jb.setName("GeneralEvent");	
-    jb.setToolTipText("GeneralEvent");
-    toolbar.add(jb);
-    }
-
-   if (false){
     Image img_FrameFact =
         ImageLoader.getImage("");
     undoIcon = new ImageIcon(img_FrameFact);
@@ -689,46 +623,24 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
 
    if (false){
-    Image img_StateGoal =
+    Image img_FAERIECtxtEntity =
         ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_StateGoal);
-    Action StateGoal=
-        new AbstractAction("StateGoal", undoIcon) {
+    undoIcon = new ImageIcon(img_FAERIECtxtEntity);
+    Action FAERIECtxtEntity=
+        new AbstractAction("FAERIECtxtEntity", undoIcon) {
       public void actionPerformed(ActionEvent e) {
        try{
-        insert(new Point(0, 0), "StateGoal");
+        insert(new Point(0, 0), "FAERIECtxtEntity");
 	} catch (InvalidEntity e1) {			
 		e1.printStackTrace();
 	}
       }
     };
-    StateGoal.setEnabled(true);
-    jb = new JButton(StateGoal);
+    FAERIECtxtEntity.setEnabled(true);
+    jb = new JButton(FAERIECtxtEntity);
     jb.setText("");
-    jb.setName("StateGoal");	
-    jb.setToolTipText("StateGoal");
-    toolbar.add(jb);
-    }
-
-   if (false){
-    Image img_RuntimeFact =
-        ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_RuntimeFact);
-    Action RuntimeFact=
-        new AbstractAction("RuntimeFact", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "RuntimeFact");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    RuntimeFact.setEnabled(true);
-    jb = new JButton(RuntimeFact);
-    jb.setText("");
-    jb.setName("RuntimeFact");	
-    jb.setToolTipText("RuntimeFact");
+    jb.setName("FAERIECtxtEntity");	
+    jb.setToolTipText("FAERIECtxtEntity");
     toolbar.add(jb);
     }
 
@@ -773,28 +685,6 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     jb.setText("");
     jb.setName("ShareTouple");	
     jb.setToolTipText("ShareTouple");
-    toolbar.add(jb);
-    }
-
-   if (false){
-    Image img_Believe =
-        ImageLoader.getImage("");
-    undoIcon = new ImageIcon(img_Believe);
-    Action Believe=
-        new AbstractAction("Believe", undoIcon) {
-      public void actionPerformed(ActionEvent e) {
-       try{
-        insert(new Point(0, 0), "Believe");
-	} catch (InvalidEntity e1) {			
-		e1.printStackTrace();
-	}
-      }
-    };
-    Believe.setEnabled(true);
-    jb = new JButton(Believe);
-    jb.setText("");
-    jb.setName("Believe");	
-    jb.setToolTipText("Believe");
     toolbar.add(jb);
     }
 
@@ -861,6 +751,182 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     jb.setText("");
     jb.setName("Compromise");	
     jb.setToolTipText("Compromise");
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_FAERIECtxtAttribute =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_FAERIECtxtAttribute);
+    Action FAERIECtxtAttribute=
+        new AbstractAction("FAERIECtxtAttribute", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "FAERIECtxtAttribute");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    FAERIECtxtAttribute.setEnabled(true);
+    jb = new JButton(FAERIECtxtAttribute);
+    jb.setText("");
+    jb.setName("FAERIECtxtAttribute");	
+    jb.setToolTipText("FAERIECtxtAttribute");
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_Conversation =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_Conversation);
+    Action Conversation=
+        new AbstractAction("Conversation", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "Conversation");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    Conversation.setEnabled(true);
+    jb = new JButton(Conversation);
+    jb.setText("");
+    jb.setName("Conversation");	
+    jb.setToolTipText("Conversation");
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_RuntimeConversation =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_RuntimeConversation);
+    Action RuntimeConversation=
+        new AbstractAction("RuntimeConversation", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "RuntimeConversation");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    RuntimeConversation.setEnabled(true);
+    jb = new JButton(RuntimeConversation);
+    jb.setText("");
+    jb.setName("RuntimeConversation");	
+    jb.setToolTipText("RuntimeConversation");
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_CommunicationEvent =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_CommunicationEvent);
+    Action CommunicationEvent=
+        new AbstractAction("CommunicationEvent", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "CommunicationEvent");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    CommunicationEvent.setEnabled(true);
+    jb = new JButton(CommunicationEvent);
+    jb.setText("");
+    jb.setName("CommunicationEvent");	
+    jb.setToolTipText("CommunicationEvent");
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_GeneralEvent =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_GeneralEvent);
+    Action GeneralEvent=
+        new AbstractAction("GeneralEvent", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "GeneralEvent");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    GeneralEvent.setEnabled(true);
+    jb = new JButton(GeneralEvent);
+    jb.setText("");
+    jb.setName("GeneralEvent");	
+    jb.setToolTipText("GeneralEvent");
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_StateGoal =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_StateGoal);
+    Action StateGoal=
+        new AbstractAction("StateGoal", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "StateGoal");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    StateGoal.setEnabled(true);
+    jb = new JButton(StateGoal);
+    jb.setText("");
+    jb.setName("StateGoal");	
+    jb.setToolTipText("StateGoal");
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_RuntimeFact =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_RuntimeFact);
+    Action RuntimeFact=
+        new AbstractAction("RuntimeFact", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "RuntimeFact");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    RuntimeFact.setEnabled(true);
+    jb = new JButton(RuntimeFact);
+    jb.setText("");
+    jb.setName("RuntimeFact");	
+    jb.setToolTipText("RuntimeFact");
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_Believe =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_Believe);
+    Action Believe=
+        new AbstractAction("Believe", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "Believe");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    Believe.setEnabled(true);
+    jb = new JButton(Believe);
+    jb.setText("");
+    jb.setName("Believe");	
+    jb.setToolTipText("Believe");
     toolbar.add(jb);
     }
 
@@ -937,13 +1003,9 @@ public class InteractionModelModelJGraph extends ModelJGraph {
 
  entities.add("RuntimeCommFailure");
 
- entities.add("Conversation");
-
  entities.add("Fact");
 
- entities.add("RuntimeConversation");
-
- entities.add("CommunicationEvent");
+ entities.add("FAERIECtxtRelationship");
 
  entities.add("ApplicationEvent");
 
@@ -951,27 +1013,37 @@ public class InteractionModelModelJGraph extends ModelJGraph {
 
  entities.add("GoalStateWS");
 
- entities.add("GeneralEvent");
-
  entities.add("FrameFact");
 
  entities.add("RuntimeEvent");
 
- entities.add("StateGoal");
-
- entities.add("RuntimeFact");
+ entities.add("FAERIECtxtEntity");
 
  entities.add("MessagePassing");
 
  entities.add("ShareTouple");
-
- entities.add("Believe");
 
  entities.add("AgentModelBelieve");
 
  entities.add("ApplicationEventSlots");
 
  entities.add("Compromise");
+
+ entities.add("FAERIECtxtAttribute");
+
+ entities.add("Conversation");
+
+ entities.add("RuntimeConversation");
+
+ entities.add("CommunicationEvent");
+
+ entities.add("GeneralEvent");
+
+ entities.add("StateGoal");
+
+ entities.add("RuntimeFact");
+
+ entities.add("Believe");
 
    return entities;
   }
@@ -1462,15 +1534,6 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("Conversation")) {
-    Conversation nentity=getOM().createConversation(getMJGraph().getNewId("Conversation"));
-      DefaultGraphCell vertex = new
-          ConversationCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("Fact")) {
     Fact nentity=getOM().createFact(getMJGraph().getNewId("Fact"));
       DefaultGraphCell vertex = new
@@ -1480,19 +1543,10 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("RuntimeConversation")) {
-    RuntimeConversation nentity=getOM().createRuntimeConversation(getMJGraph().getNewId("RuntimeConversation"));
+    if (entity.equalsIgnoreCase("FAERIECtxtRelationship")) {
+    FAERIECtxtRelationship nentity=getOM().createFAERIECtxtRelationship(getMJGraph().getNewId("FAERIECtxtRelationship"));
       DefaultGraphCell vertex = new
-          RuntimeConversationCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("CommunicationEvent")) {
-    CommunicationEvent nentity=getOM().createCommunicationEvent(getMJGraph().getNewId("CommunicationEvent"));
-      DefaultGraphCell vertex = new
-          CommunicationEventCell(nentity);
+          FAERIECtxtRelationshipCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1525,15 +1579,6 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("GeneralEvent")) {
-    GeneralEvent nentity=getOM().createGeneralEvent(getMJGraph().getNewId("GeneralEvent"));
-      DefaultGraphCell vertex = new
-          GeneralEventCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("FrameFact")) {
     FrameFact nentity=getOM().createFrameFact(getMJGraph().getNewId("FrameFact"));
       DefaultGraphCell vertex = new
@@ -1552,19 +1597,10 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("StateGoal")) {
-    StateGoal nentity=getOM().createStateGoal(getMJGraph().getNewId("StateGoal"));
+    if (entity.equalsIgnoreCase("FAERIECtxtEntity")) {
+    FAERIECtxtEntity nentity=getOM().createFAERIECtxtEntity(getMJGraph().getNewId("FAERIECtxtEntity"));
       DefaultGraphCell vertex = new
-          StateGoalCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("RuntimeFact")) {
-    RuntimeFact nentity=getOM().createRuntimeFact(getMJGraph().getNewId("RuntimeFact"));
-      DefaultGraphCell vertex = new
-          RuntimeFactCell(nentity);
+          FAERIECtxtEntityCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1583,15 +1619,6 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     ShareTouple nentity=getOM().createShareTouple(getMJGraph().getNewId("ShareTouple"));
       DefaultGraphCell vertex = new
           ShareToupleCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("Believe")) {
-    Believe nentity=getOM().createBelieve(getMJGraph().getNewId("Believe"));
-      DefaultGraphCell vertex = new
-          BelieveCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1619,6 +1646,78 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     Compromise nentity=getOM().createCompromise(getMJGraph().getNewId("Compromise"));
       DefaultGraphCell vertex = new
           CompromiseCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("FAERIECtxtAttribute")) {
+    FAERIECtxtAttribute nentity=getOM().createFAERIECtxtAttribute(getMJGraph().getNewId("FAERIECtxtAttribute"));
+      DefaultGraphCell vertex = new
+          FAERIECtxtAttributeCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Conversation")) {
+    Conversation nentity=getOM().createConversation(getMJGraph().getNewId("Conversation"));
+      DefaultGraphCell vertex = new
+          ConversationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("RuntimeConversation")) {
+    RuntimeConversation nentity=getOM().createRuntimeConversation(getMJGraph().getNewId("RuntimeConversation"));
+      DefaultGraphCell vertex = new
+          RuntimeConversationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("CommunicationEvent")) {
+    CommunicationEvent nentity=getOM().createCommunicationEvent(getMJGraph().getNewId("CommunicationEvent"));
+      DefaultGraphCell vertex = new
+          CommunicationEventCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("GeneralEvent")) {
+    GeneralEvent nentity=getOM().createGeneralEvent(getMJGraph().getNewId("GeneralEvent"));
+      DefaultGraphCell vertex = new
+          GeneralEventCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("StateGoal")) {
+    StateGoal nentity=getOM().createStateGoal(getMJGraph().getNewId("StateGoal"));
+      DefaultGraphCell vertex = new
+          StateGoalCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("RuntimeFact")) {
+    RuntimeFact nentity=getOM().createRuntimeFact(getMJGraph().getNewId("RuntimeFact"));
+      DefaultGraphCell vertex = new
+          RuntimeFactCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Believe")) {
+    Believe nentity=getOM().createBelieve(getMJGraph().getNewId("Believe"));
+      DefaultGraphCell vertex = new
+          BelieveCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -1709,23 +1808,13 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("Conversation")) {
-      return ConversationView.getSize((ingenias.editor.entities.Conversation)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("Fact")) {
       return FactView.getSize((ingenias.editor.entities.Fact)entity);      
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("RuntimeConversation")) {
-      return RuntimeConversationView.getSize((ingenias.editor.entities.RuntimeConversation)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("CommunicationEvent")) {
-      return CommunicationEventView.getSize((ingenias.editor.entities.CommunicationEvent)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtRelationship")) {
+      return FAERIECtxtRelationshipView.getSize((ingenias.editor.entities.FAERIECtxtRelationship)entity);      
     }
     else
 
@@ -1744,11 +1833,6 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("GeneralEvent")) {
-      return GeneralEventView.getSize((ingenias.editor.entities.GeneralEvent)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("FrameFact")) {
       return FrameFactView.getSize((ingenias.editor.entities.FrameFact)entity);      
     }
@@ -1759,13 +1843,8 @@ public class InteractionModelModelJGraph extends ModelJGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("StateGoal")) {
-      return StateGoalView.getSize((ingenias.editor.entities.StateGoal)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("RuntimeFact")) {
-      return RuntimeFactView.getSize((ingenias.editor.entities.RuntimeFact)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtEntity")) {
+      return FAERIECtxtEntityView.getSize((ingenias.editor.entities.FAERIECtxtEntity)entity);      
     }
     else
 
@@ -1776,11 +1855,6 @@ public class InteractionModelModelJGraph extends ModelJGraph {
 
     if (entity.getType().equalsIgnoreCase("ShareTouple")) {
       return ShareToupleView.getSize((ingenias.editor.entities.ShareTouple)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("Believe")) {
-      return BelieveView.getSize((ingenias.editor.entities.Believe)entity);      
     }
     else
 
@@ -1796,6 +1870,46 @@ public class InteractionModelModelJGraph extends ModelJGraph {
 
     if (entity.getType().equalsIgnoreCase("Compromise")) {
       return CompromiseView.getSize((ingenias.editor.entities.Compromise)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtAttribute")) {
+      return FAERIECtxtAttributeView.getSize((ingenias.editor.entities.FAERIECtxtAttribute)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Conversation")) {
+      return ConversationView.getSize((ingenias.editor.entities.Conversation)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("RuntimeConversation")) {
+      return RuntimeConversationView.getSize((ingenias.editor.entities.RuntimeConversation)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("CommunicationEvent")) {
+      return CommunicationEventView.getSize((ingenias.editor.entities.CommunicationEvent)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("GeneralEvent")) {
+      return GeneralEventView.getSize((ingenias.editor.entities.GeneralEvent)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("StateGoal")) {
+      return StateGoalView.getSize((ingenias.editor.entities.StateGoal)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("RuntimeFact")) {
+      return RuntimeFactView.getSize((ingenias.editor.entities.RuntimeFact)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Believe")) {
+      return BelieveView.getSize((ingenias.editor.entities.Believe)entity);      
     }
     else
 
@@ -2042,14 +2156,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(Conversation.class)) {
-      vertex = new ConversationCell( (Conversation) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = ConversationView.getSize((Conversation) entity);
-      
-    }
-    else
-
     if (entity.getClass().equals(Fact.class)) {
       vertex = new FactCell( (Fact) entity);
       // Default Size for the new Vertex with the new entity within
@@ -2058,18 +2164,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(RuntimeConversation.class)) {
-      vertex = new RuntimeConversationCell( (RuntimeConversation) entity);
+    if (entity.getClass().equals(FAERIECtxtRelationship.class)) {
+      vertex = new FAERIECtxtRelationshipCell( (FAERIECtxtRelationship) entity);
       // Default Size for the new Vertex with the new entity within
-      size = RuntimeConversationView.getSize((RuntimeConversation) entity);
-      
-    }
-    else
-
-    if (entity.getClass().equals(CommunicationEvent.class)) {
-      vertex = new CommunicationEventCell( (CommunicationEvent) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = CommunicationEventView.getSize((CommunicationEvent) entity);
+      size = FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship) entity);
       
     }
     else
@@ -2098,14 +2196,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(GeneralEvent.class)) {
-      vertex = new GeneralEventCell( (GeneralEvent) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = GeneralEventView.getSize((GeneralEvent) entity);
-      
-    }
-    else
-
     if (entity.getClass().equals(FrameFact.class)) {
       vertex = new FrameFactCell( (FrameFact) entity);
       // Default Size for the new Vertex with the new entity within
@@ -2122,18 +2212,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(StateGoal.class)) {
-      vertex = new StateGoalCell( (StateGoal) entity);
+    if (entity.getClass().equals(FAERIECtxtEntity.class)) {
+      vertex = new FAERIECtxtEntityCell( (FAERIECtxtEntity) entity);
       // Default Size for the new Vertex with the new entity within
-      size = StateGoalView.getSize((StateGoal) entity);
-      
-    }
-    else
-
-    if (entity.getClass().equals(RuntimeFact.class)) {
-      vertex = new RuntimeFactCell( (RuntimeFact) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = RuntimeFactView.getSize((RuntimeFact) entity);
+      size = FAERIECtxtEntityView.getSize((FAERIECtxtEntity) entity);
       
     }
     else
@@ -2150,14 +2232,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new ShareToupleCell( (ShareTouple) entity);
       // Default Size for the new Vertex with the new entity within
       size = ShareToupleView.getSize((ShareTouple) entity);
-      
-    }
-    else
-
-    if (entity.getClass().equals(Believe.class)) {
-      vertex = new BelieveCell( (Believe) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = BelieveView.getSize((Believe) entity);
       
     }
     else
@@ -2182,6 +2256,70 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new CompromiseCell( (Compromise) entity);
       // Default Size for the new Vertex with the new entity within
       size = CompromiseView.getSize((Compromise) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(FAERIECtxtAttribute.class)) {
+      vertex = new FAERIECtxtAttributeCell( (FAERIECtxtAttribute) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FAERIECtxtAttributeView.getSize((FAERIECtxtAttribute) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(Conversation.class)) {
+      vertex = new ConversationCell( (Conversation) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ConversationView.getSize((Conversation) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(RuntimeConversation.class)) {
+      vertex = new RuntimeConversationCell( (RuntimeConversation) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeConversationView.getSize((RuntimeConversation) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(CommunicationEvent.class)) {
+      vertex = new CommunicationEventCell( (CommunicationEvent) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = CommunicationEventView.getSize((CommunicationEvent) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(GeneralEvent.class)) {
+      vertex = new GeneralEventCell( (GeneralEvent) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = GeneralEventView.getSize((GeneralEvent) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(StateGoal.class)) {
+      vertex = new StateGoalCell( (StateGoal) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = StateGoalView.getSize((StateGoal) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(RuntimeFact.class)) {
+      vertex = new RuntimeFactCell( (RuntimeFact) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeFactView.getSize((RuntimeFact) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(Believe.class)) {
+      vertex = new BelieveCell( (Believe) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = BelieveView.getSize((Believe) entity);
       
     }
     else

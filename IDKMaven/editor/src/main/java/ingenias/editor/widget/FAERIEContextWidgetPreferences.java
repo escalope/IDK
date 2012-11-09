@@ -32,7 +32,7 @@ public class FAERIEContextWidgetPreferences extends AMIContextWidgetPreferences 
 
   public FAERIEContextWidgetPreferences() {
   super();
-  String[] preferredOrder={"id","Description","Model","Applications",""};
+  String[] preferredOrder={"id","Description","Models",""};
   this.setPreferredOrder(preferredOrder);
    Vector result=null;
   

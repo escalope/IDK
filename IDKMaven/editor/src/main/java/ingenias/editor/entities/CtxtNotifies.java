@@ -27,8 +27,6 @@ import ingenias.editor.TypedVector;
 public class CtxtNotifies extends NAryEdgeEntity {
 
 
-  public ingenias.editor.entities.GeneralEvent Event;
-
 
 
 
@@ -43,14 +41,6 @@ public class CtxtNotifies extends NAryEdgeEntity {
 
 
   
-      public ingenias.editor.entities.GeneralEvent getEvent(){
-        return Event;
-      }
-   public void setEvent(ingenias.editor.entities.GeneralEvent
-					Event){
-        this.Event=Event;
-      }
-
 
 
 public void fromMap(Map ht){

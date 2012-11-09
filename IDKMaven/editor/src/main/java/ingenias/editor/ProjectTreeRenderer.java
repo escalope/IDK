@@ -95,6 +95,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
  static ImageIcon FactIcon=new ImageIcon(ImageLoader.getImage("images/mfact.gif"));
 	
+ static ImageIcon AMIContextInstantiationIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
+	
  static ImageIcon ShareToupleIcon=new ImageIcon(ImageLoader.getImage("images/miu.gif"));
 	
  static ImageIcon DeploymentUnitByTypeWithInitMSIcon=new ImageIcon(ImageLoader.getImage("images/mimtypedepl.gif"));
@@ -126,6 +128,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
  static ImageIcon ForkNodeIcon=new ImageIcon(ImageLoader.getImage("images/mforknode.gif"));
 	
  static ImageIcon OrganizationNetworkIcon=new ImageIcon(ImageLoader.getImage("images/mnetwork.gif"));
+	
+ static ImageIcon FAERIECtxtModelInstIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
 	
  static ImageIcon FAERIECtxtModelIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
 	
@@ -195,6 +199,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
  static ImageIcon DeploymentUnitByTypeEnumInitMSIcon=new ImageIcon(ImageLoader.getImage("images/mimtypedepl.gif"));
 	
+ static ImageIcon ContextUseTaskIcon=new ImageIcon(ImageLoader.getImage("images/mtask.gif"));
+	
  static ImageIcon GeneralEventIcon=new ImageIcon(ImageLoader.getImage("images/mevent.gif"));
 	
  static ImageIcon CompromiseIcon=new ImageIcon(ImageLoader.getImage("images/mcomp.gif"));
@@ -238,8 +244,6 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
  static ImageIcon INGENIASCodeComponentIcon=new ImageIcon(ImageLoader.getImage("images/miccomponent.gif"));
 	
  static ImageIcon SimulationPackageIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
-	
- static ImageIcon AMIContextBindingDataIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
 	
  static ImageIcon CommunicationEventIcon=new ImageIcon(ImageLoader.getImage("images/meventa.gif"));
 	
@@ -360,6 +364,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(Fact.class))
           return "images/mfact.gif";
 	
+        if (userObject.getClass().equals(AMIContextInstantiation.class))
+          return "images/mdepl.gif";
+	
         if (userObject.getClass().equals(ShareTouple.class))
           return "images/miu.gif";
 	
@@ -407,6 +414,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
         if (userObject.getClass().equals(OrganizationNetwork.class))
           return "images/mnetwork.gif";
+	
+        if (userObject.getClass().equals(FAERIECtxtModelInst.class))
+          return "images/mdepl.gif";
 	
         if (userObject.getClass().equals(FAERIECtxtModel.class))
           return "images/mdepl.gif";
@@ -510,6 +520,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(DeploymentUnitByTypeEnumInitMS.class))
           return "images/mimtypedepl.gif";
 	
+        if (userObject.getClass().equals(ContextUseTask.class))
+          return "images/mtask.gif";
+	
         if (userObject.getClass().equals(GeneralEvent.class))
           return "images/mevent.gif";
 	
@@ -574,9 +587,6 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
           return "images/miccomponent.gif";
 	
         if (userObject.getClass().equals(SimulationPackage.class))
-          return "images/mdepl.gif";
-	
-        if (userObject.getClass().equals(AMIContextBindingData.class))
           return "images/mdepl.gif";
 	
         if (userObject.getClass().equals(CommunicationEvent.class))
@@ -702,6 +712,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(Fact.class))
           return FactIcon;
 	
+        if (userObject.getClass().equals(AMIContextInstantiation.class))
+          return AMIContextInstantiationIcon;
+	
         if (userObject.getClass().equals(ShareTouple.class))
           return ShareToupleIcon;
 	
@@ -749,6 +762,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
         if (userObject.getClass().equals(OrganizationNetwork.class))
           return OrganizationNetworkIcon;
+	
+        if (userObject.getClass().equals(FAERIECtxtModelInst.class))
+          return FAERIECtxtModelInstIcon;
 	
         if (userObject.getClass().equals(FAERIECtxtModel.class))
           return FAERIECtxtModelIcon;
@@ -852,6 +868,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(DeploymentUnitByTypeEnumInitMS.class))
           return DeploymentUnitByTypeEnumInitMSIcon;
 	
+        if (userObject.getClass().equals(ContextUseTask.class))
+          return ContextUseTaskIcon;
+	
         if (userObject.getClass().equals(GeneralEvent.class))
           return GeneralEventIcon;
 	
@@ -917,9 +936,6 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
         if (userObject.getClass().equals(SimulationPackage.class))
           return SimulationPackageIcon;
-	
-        if (userObject.getClass().equals(AMIContextBindingData.class))
-          return AMIContextBindingDataIcon;
 	
         if (userObject.getClass().equals(CommunicationEvent.class))
           return CommunicationEventIcon;

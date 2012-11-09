@@ -85,6 +85,8 @@ public class AgentModelPanel extends JGraph {
    Vector<String> entities=new   Vector<String>();
 
 
+ entities.add("FAERIEContext");
+
  entities.add("Agent");
 
  entities.add("Role");
@@ -153,7 +155,13 @@ public class AgentModelPanel extends JGraph {
 
  entities.add("RuntimeCommFailure");
 
+ entities.add("FAERIECtxtRelationship");
+
  entities.add("RuntimeEvent");
+
+ entities.add("FAERIECtxtEntity");
+
+ entities.add("FAERIECtxtAttribute");
 
  entities.add("Interaction");
 
@@ -163,9 +171,13 @@ public class AgentModelPanel extends JGraph {
 
  entities.add("CommunicationEvent");
 
+ entities.add("AMIContext");
+
  entities.add("ContextBindingTask");
 
  entities.add("ContextReleaseTask");
+
+ entities.add("ContextUseTask");
 
  entities.add("RuntimeFact");
 
@@ -176,6 +188,15 @@ public class AgentModelPanel extends JGraph {
    
   public DefaultGraphCell createCell(String entity) throws InvalidEntity{
   
+    if (entity.equalsIgnoreCase("FAERIEContext")) {
+    FAERIEContext nentity=new FAERIEContext(((Model)getModel()).getNewId("FAERIEContext"));
+      DefaultGraphCell vertex = new
+          FAERIEContextCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("Agent")) {
     Agent nentity=new Agent(((Model)getModel()).getNewId("Agent"));
       DefaultGraphCell vertex = new
@@ -482,10 +503,37 @@ public class AgentModelPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("FAERIECtxtRelationship")) {
+    FAERIECtxtRelationship nentity=new FAERIECtxtRelationship(((Model)getModel()).getNewId("FAERIECtxtRelationship"));
+      DefaultGraphCell vertex = new
+          FAERIECtxtRelationshipCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("RuntimeEvent")) {
     RuntimeEvent nentity=new RuntimeEvent(((Model)getModel()).getNewId("RuntimeEvent"));
       DefaultGraphCell vertex = new
           RuntimeEventCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("FAERIECtxtEntity")) {
+    FAERIECtxtEntity nentity=new FAERIECtxtEntity(((Model)getModel()).getNewId("FAERIECtxtEntity"));
+      DefaultGraphCell vertex = new
+          FAERIECtxtEntityCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("FAERIECtxtAttribute")) {
+    FAERIECtxtAttribute nentity=new FAERIECtxtAttribute(((Model)getModel()).getNewId("FAERIECtxtAttribute"));
+      DefaultGraphCell vertex = new
+          FAERIECtxtAttributeCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -527,6 +575,15 @@ public class AgentModelPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("AMIContext")) {
+    AMIContext nentity=new AMIContext(((Model)getModel()).getNewId("AMIContext"));
+      DefaultGraphCell vertex = new
+          AMIContextCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("ContextBindingTask")) {
     ContextBindingTask nentity=new ContextBindingTask(((Model)getModel()).getNewId("ContextBindingTask"));
       DefaultGraphCell vertex = new
@@ -540,6 +597,15 @@ public class AgentModelPanel extends JGraph {
     ContextReleaseTask nentity=new ContextReleaseTask(((Model)getModel()).getNewId("ContextReleaseTask"));
       DefaultGraphCell vertex = new
           ContextReleaseTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ContextUseTask")) {
+    ContextUseTask nentity=new ContextUseTask(((Model)getModel()).getNewId("ContextUseTask"));
+      DefaultGraphCell vertex = new
+          ContextUseTaskCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -559,6 +625,11 @@ public class AgentModelPanel extends JGraph {
   
   public Dimension getDefaultSize(Entity entity) throws InvalidEntity{
     
+    if (entity.getType().equalsIgnoreCase("FAERIEContext")) {
+      return FAERIEContextView.getSize((FAERIEContext)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("Agent")) {
       return AgentView.getSize((Agent)entity);      
     }
@@ -729,8 +800,23 @@ public class AgentModelPanel extends JGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtRelationship")) {
+      return FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("RuntimeEvent")) {
       return RuntimeEventView.getSize((RuntimeEvent)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtEntity")) {
+      return FAERIECtxtEntityView.getSize((FAERIECtxtEntity)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtAttribute")) {
+      return FAERIECtxtAttributeView.getSize((FAERIECtxtAttribute)entity);      
     }
     else
 
@@ -754,6 +840,11 @@ public class AgentModelPanel extends JGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("AMIContext")) {
+      return AMIContextView.getSize((AMIContext)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("ContextBindingTask")) {
       return ContextBindingTaskView.getSize((ContextBindingTask)entity);      
     }
@@ -761,6 +852,11 @@ public class AgentModelPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("ContextReleaseTask")) {
       return ContextReleaseTaskView.getSize((ContextReleaseTask)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextUseTask")) {
+      return ContextUseTaskView.getSize((ContextUseTask)entity);      
     }
     else
 
@@ -818,6 +914,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     DefaultGraphCell vertex = null;
     Dimension size = null;
 
+
+    if (entity.getClass().equals(FAERIEContext.class)) {
+      vertex = new FAERIEContextCell( (FAERIEContext) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FAERIEContextView.getSize((FAERIEContext) entity);
+    }
+    else
 
     if (entity.getClass().equals(Agent.class)) {
       vertex = new AgentCell( (Agent) entity);
@@ -1057,10 +1160,31 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(FAERIECtxtRelationship.class)) {
+      vertex = new FAERIECtxtRelationshipCell( (FAERIECtxtRelationship) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship) entity);
+    }
+    else
+
     if (entity.getClass().equals(RuntimeEvent.class)) {
       vertex = new RuntimeEventCell( (RuntimeEvent) entity);
       // Default Size for the new Vertex with the new entity within
       size = RuntimeEventView.getSize((RuntimeEvent) entity);
+    }
+    else
+
+    if (entity.getClass().equals(FAERIECtxtEntity.class)) {
+      vertex = new FAERIECtxtEntityCell( (FAERIECtxtEntity) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FAERIECtxtEntityView.getSize((FAERIECtxtEntity) entity);
+    }
+    else
+
+    if (entity.getClass().equals(FAERIECtxtAttribute.class)) {
+      vertex = new FAERIECtxtAttributeCell( (FAERIECtxtAttribute) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FAERIECtxtAttributeView.getSize((FAERIECtxtAttribute) entity);
     }
     else
 
@@ -1092,6 +1216,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(AMIContext.class)) {
+      vertex = new AMIContextCell( (AMIContext) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AMIContextView.getSize((AMIContext) entity);
+    }
+    else
+
     if (entity.getClass().equals(ContextBindingTask.class)) {
       vertex = new ContextBindingTaskCell( (ContextBindingTask) entity);
       // Default Size for the new Vertex with the new entity within
@@ -1103,6 +1234,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new ContextReleaseTaskCell( (ContextReleaseTask) entity);
       // Default Size for the new Vertex with the new entity within
       size = ContextReleaseTaskView.getSize((ContextReleaseTask) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ContextUseTask.class)) {
+      vertex = new ContextUseTaskCell( (ContextUseTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextUseTaskView.getSize((ContextUseTask) entity);
     }
     else
 

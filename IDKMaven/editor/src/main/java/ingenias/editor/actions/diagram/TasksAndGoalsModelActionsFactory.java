@@ -70,6 +70,39 @@ public class TasksAndGoalsModelActionsFactory extends DiagramMenuEntriesActionsF
 		
 			
 			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIEContext")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIEContext")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.Agent")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -1159,6 +1192,105 @@ public class TasksAndGoalsModelActionsFactory extends DiagramMenuEntriesActionsF
 			
 			
 			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtAttribute")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtAttribute")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtEntity")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtEntity")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtRelationship")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.FAERIECtxtRelationship")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.RemoteProcedureCall")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -1357,6 +1489,39 @@ public class TasksAndGoalsModelActionsFactory extends DiagramMenuEntriesActionsF
 			
 			
 			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.AMIContext")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.AMIContext")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.ContextBindingTask")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -1406,6 +1571,39 @@ public class TasksAndGoalsModelActionsFactory extends DiagramMenuEntriesActionsF
 			
                   
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.ContextReleaseTask")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ContextUseTask")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ContextUseTask")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
                    possibleViews.add(new AbstractAction("INGENIAS") {
                      public void actionPerformed(ActionEvent e) {
@@ -2791,6 +2989,22 @@ public class TasksAndGoalsModelActionsFactory extends DiagramMenuEntriesActionsF
 		 protected Vector<AbstractAction> createDiagramSpecificInsertActions(final Point pt, final ModelJGraph graph) {
 			 Vector<AbstractAction> nobjects=new Vector<AbstractAction>();
 
+		if (this.getState().getDiagramFilter().isValidEntity("TasksAndGoalsModel", "FAERIEContext")){
+		// Insert an object of type FAERIEContext
+		nobjects.add(
+			new AbstractAction("Insert FAERIEContext") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "FAERIEContext");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type FAERIEContext is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
 		if (this.getState().getDiagramFilter().isValidEntity("TasksAndGoalsModel", "Agent")){
 		// Insert an object of type Agent
 		nobjects.add(
@@ -3319,6 +3533,54 @@ public class TasksAndGoalsModelActionsFactory extends DiagramMenuEntriesActionsF
 			});
 		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("TasksAndGoalsModel", "FAERIECtxtAttribute")){
+		// Insert an object of type FAERIECtxtAttribute
+		nobjects.add(
+			new AbstractAction("Insert FAERIECtxtAttribute") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "FAERIECtxtAttribute");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type FAERIECtxtAttribute is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("TasksAndGoalsModel", "FAERIECtxtEntity")){
+		// Insert an object of type FAERIECtxtEntity
+		nobjects.add(
+			new AbstractAction("Insert FAERIECtxtEntity") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "FAERIECtxtEntity");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type FAERIECtxtEntity is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("TasksAndGoalsModel", "FAERIECtxtRelationship")){
+		// Insert an object of type FAERIECtxtRelationship
+		nobjects.add(
+			new AbstractAction("Insert FAERIECtxtRelationship") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "FAERIECtxtRelationship");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type FAERIECtxtRelationship is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
 		if (this.getState().getDiagramFilter().isValidEntity("TasksAndGoalsModel", "RemoteProcedureCall")){
 		// Insert an object of type RemoteProcedureCall
 		nobjects.add(
@@ -3415,6 +3677,22 @@ public class TasksAndGoalsModelActionsFactory extends DiagramMenuEntriesActionsF
 			});
 		}
 
+		if (this.getState().getDiagramFilter().isValidEntity("TasksAndGoalsModel", "AMIContext")){
+		// Insert an object of type AMIContext
+		nobjects.add(
+			new AbstractAction("Insert AMIContext") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "AMIContext");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type AMIContext is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
 		if (this.getState().getDiagramFilter().isValidEntity("TasksAndGoalsModel", "ContextBindingTask")){
 		// Insert an object of type ContextBindingTask
 		nobjects.add(
@@ -3441,6 +3719,22 @@ public class TasksAndGoalsModelActionsFactory extends DiagramMenuEntriesActionsF
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(graph, "Object type ContextReleaseTask is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("TasksAndGoalsModel", "ContextUseTask")){
+		// Insert an object of type ContextUseTask
+		nobjects.add(
+			new AbstractAction("Insert ContextUseTask") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "ContextUseTask");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type ContextUseTask is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

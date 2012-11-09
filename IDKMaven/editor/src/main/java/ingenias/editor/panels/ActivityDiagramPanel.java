@@ -105,6 +105,8 @@ public class ActivityDiagramPanel extends JGraph {
 
  entities.add("TaskWS");
 
+ entities.add("ContextUseTask");
+
  entities.add("Workflow");
 
  entities.add("BoxedTask");
@@ -209,6 +211,15 @@ public class ActivityDiagramPanel extends JGraph {
     TaskWS nentity=new TaskWS(((Model)getModel()).getNewId("TaskWS"));
       DefaultGraphCell vertex = new
           TaskWSCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ContextUseTask")) {
+    ContextUseTask nentity=new ContextUseTask(((Model)getModel()).getNewId("ContextUseTask"));
+      DefaultGraphCell vertex = new
+          ContextUseTaskCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -320,6 +331,11 @@ public class ActivityDiagramPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("TaskWS")) {
       return TaskWSView.getSize((TaskWS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextUseTask")) {
+      return ContextUseTaskView.getSize((ContextUseTask)entity);      
     }
     else
 
@@ -470,6 +486,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new TaskWSCell( (TaskWS) entity);
       // Default Size for the new Vertex with the new entity within
       size = TaskWSView.getSize((TaskWS) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ContextUseTask.class)) {
+      vertex = new ContextUseTaskCell( (ContextUseTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextUseTaskView.getSize((ContextUseTask) entity);
     }
     else
 

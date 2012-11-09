@@ -101,25 +101,6 @@ current=ent.getPrefs(attributes).getView();
 	
 
       
-      if (currentMap.get("UpdateWith")!=null){
-	   if (ent!=null && ent.getUpdateWith()!=null){
-		if (currentMap.get("UpdateWith") instanceof javax.swing.JLabel){
-		((javax.swing.JLabel)( currentMap).get("UpdateWith")).setText(ent.getUpdateWith().toString());
-		} else {
-		 if (currentMap.get("UpdateWith") instanceof javax.swing.text.JTextComponent)
-		 ((javax.swing.text.JTextComponent)( currentMap).get("UpdateWith")).setText(ent.getUpdateWith().toString());
-		
-	      } 
-	   } else  {
-	     if (currentMap.get("UpdateWith") instanceof javax.swing.JLabel)
-	     ((javax.swing.JLabel)( currentMap).get("UpdateWith")).setText("");
-	     else {
-		if (!(currentMap.get("UpdateWith") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
-		((javax.swing.text.JTextComponent)( currentMap).get("UpdateWith")).setText("");
-	     }
-         }
-	  }
-	   
       if (currentMap.get("Label")!=null){
 	   if (ent!=null && ent.getLabel()!=null){
 		if (currentMap.get("Label") instanceof javax.swing.JLabel){

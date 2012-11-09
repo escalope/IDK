@@ -117,15 +117,17 @@ public class DeployDiagramPanel extends JGraph {
 
  entities.add("DeploymentUnitByTypeMSEntity");
 
- entities.add("AMIContext");
+ entities.add("FAERIECtxtModelInst");
+
+ entities.add("FAERIEContext");
 
  entities.add("Fact");
 
- entities.add("ApplicationWS");
+ entities.add("RuntimeCommFailure");
 
  entities.add("DeploymentUnitByTypeWithInitMS");
 
- entities.add("RuntimeCommFailure");
+ entities.add("FAERIECtxtRelationship");
 
  entities.add("ApplicationEvent");
 
@@ -139,23 +141,21 @@ public class DeployDiagramPanel extends JGraph {
 
  entities.add("RuntimeEvent");
 
- entities.add("FAERIEContext");
+ entities.add("FAERIECtxtEntity");
 
  entities.add("AgentWS");
 
  entities.add("AgentModelBelieve");
 
- entities.add("AMIContextBindingData");
-
  entities.add("ApplicationEventSlots");
 
  entities.add("Compromise");
 
+ entities.add("FAERIECtxtAttribute");
+
  entities.add("FileSpecPatternMapping");
 
  entities.add("Conversation");
-
- entities.add("FAERIECtxtModel");
 
  entities.add("Agent");
 
@@ -163,7 +163,11 @@ public class DeployDiagramPanel extends JGraph {
 
  entities.add("CommunicationEvent");
 
+ entities.add("AMIContext");
+
  entities.add("MentalInstanceSpecification");
+
+ entities.add("AMIContextInstantiation");
 
  entities.add("GeneralEvent");
 
@@ -326,10 +330,19 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("AMIContext")) {
-    AMIContext nentity=new AMIContext(((Model)getModel()).getNewId("AMIContext"));
+    if (entity.equalsIgnoreCase("FAERIECtxtModelInst")) {
+    FAERIECtxtModelInst nentity=new FAERIECtxtModelInst(((Model)getModel()).getNewId("FAERIECtxtModelInst"));
       DefaultGraphCell vertex = new
-          AMIContextCell(nentity);
+          FAERIECtxtModelInstCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("FAERIEContext")) {
+    FAERIEContext nentity=new FAERIEContext(((Model)getModel()).getNewId("FAERIEContext"));
+      DefaultGraphCell vertex = new
+          FAERIEContextCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -344,10 +357,10 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("ApplicationWS")) {
-    ApplicationWS nentity=new ApplicationWS(((Model)getModel()).getNewId("ApplicationWS"));
+    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
+    RuntimeCommFailure nentity=new RuntimeCommFailure(((Model)getModel()).getNewId("RuntimeCommFailure"));
       DefaultGraphCell vertex = new
-          ApplicationWSCell(nentity);
+          RuntimeCommFailureCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -362,10 +375,10 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("RuntimeCommFailure")) {
-    RuntimeCommFailure nentity=new RuntimeCommFailure(((Model)getModel()).getNewId("RuntimeCommFailure"));
+    if (entity.equalsIgnoreCase("FAERIECtxtRelationship")) {
+    FAERIECtxtRelationship nentity=new FAERIECtxtRelationship(((Model)getModel()).getNewId("FAERIECtxtRelationship"));
       DefaultGraphCell vertex = new
-          RuntimeCommFailureCell(nentity);
+          FAERIECtxtRelationshipCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -425,10 +438,10 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("FAERIEContext")) {
-    FAERIEContext nentity=new FAERIEContext(((Model)getModel()).getNewId("FAERIEContext"));
+    if (entity.equalsIgnoreCase("FAERIECtxtEntity")) {
+    FAERIECtxtEntity nentity=new FAERIECtxtEntity(((Model)getModel()).getNewId("FAERIECtxtEntity"));
       DefaultGraphCell vertex = new
-          FAERIEContextCell(nentity);
+          FAERIECtxtEntityCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -452,15 +465,6 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("AMIContextBindingData")) {
-    AMIContextBindingData nentity=new AMIContextBindingData(((Model)getModel()).getNewId("AMIContextBindingData"));
-      DefaultGraphCell vertex = new
-          AMIContextBindingDataCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("ApplicationEventSlots")) {
     ApplicationEventSlots nentity=new ApplicationEventSlots(((Model)getModel()).getNewId("ApplicationEventSlots"));
       DefaultGraphCell vertex = new
@@ -479,6 +483,15 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("FAERIECtxtAttribute")) {
+    FAERIECtxtAttribute nentity=new FAERIECtxtAttribute(((Model)getModel()).getNewId("FAERIECtxtAttribute"));
+      DefaultGraphCell vertex = new
+          FAERIECtxtAttributeCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("FileSpecPatternMapping")) {
     FileSpecPatternMapping nentity=new FileSpecPatternMapping(((Model)getModel()).getNewId("FileSpecPatternMapping"));
       DefaultGraphCell vertex = new
@@ -492,15 +505,6 @@ public class DeployDiagramPanel extends JGraph {
     Conversation nentity=new Conversation(((Model)getModel()).getNewId("Conversation"));
       DefaultGraphCell vertex = new
           ConversationCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("FAERIECtxtModel")) {
-    FAERIECtxtModel nentity=new FAERIECtxtModel(((Model)getModel()).getNewId("FAERIECtxtModel"));
-      DefaultGraphCell vertex = new
-          FAERIECtxtModelCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -533,10 +537,28 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("AMIContext")) {
+    AMIContext nentity=new AMIContext(((Model)getModel()).getNewId("AMIContext"));
+      DefaultGraphCell vertex = new
+          AMIContextCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("MentalInstanceSpecification")) {
     MentalInstanceSpecification nentity=new MentalInstanceSpecification(((Model)getModel()).getNewId("MentalInstanceSpecification"));
       DefaultGraphCell vertex = new
           MentalInstanceSpecificationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("AMIContextInstantiation")) {
+    AMIContextInstantiation nentity=new AMIContextInstantiation(((Model)getModel()).getNewId("AMIContextInstantiation"));
+      DefaultGraphCell vertex = new
+          AMIContextInstantiationCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -672,8 +694,13 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("AMIContext")) {
-      return AMIContextView.getSize((AMIContext)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtModelInst")) {
+      return FAERIECtxtModelInstView.getSize((FAERIECtxtModelInst)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("FAERIEContext")) {
+      return FAERIEContextView.getSize((FAERIEContext)entity);      
     }
     else
 
@@ -682,8 +709,8 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("ApplicationWS")) {
-      return ApplicationWSView.getSize((ApplicationWS)entity);      
+    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
+      return RuntimeCommFailureView.getSize((RuntimeCommFailure)entity);      
     }
     else
 
@@ -692,8 +719,8 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("RuntimeCommFailure")) {
-      return RuntimeCommFailureView.getSize((RuntimeCommFailure)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtRelationship")) {
+      return FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship)entity);      
     }
     else
 
@@ -727,8 +754,8 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("FAERIEContext")) {
-      return FAERIEContextView.getSize((FAERIEContext)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtEntity")) {
+      return FAERIECtxtEntityView.getSize((FAERIECtxtEntity)entity);      
     }
     else
 
@@ -742,11 +769,6 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("AMIContextBindingData")) {
-      return AMIContextBindingDataView.getSize((AMIContextBindingData)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("ApplicationEventSlots")) {
       return ApplicationEventSlotsView.getSize((ApplicationEventSlots)entity);      
     }
@@ -757,6 +779,11 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtAttribute")) {
+      return FAERIECtxtAttributeView.getSize((FAERIECtxtAttribute)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("FileSpecPatternMapping")) {
       return FileSpecPatternMappingView.getSize((FileSpecPatternMapping)entity);      
     }
@@ -764,11 +791,6 @@ public class DeployDiagramPanel extends JGraph {
 
     if (entity.getType().equalsIgnoreCase("Conversation")) {
       return ConversationView.getSize((Conversation)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("FAERIECtxtModel")) {
-      return FAERIECtxtModelView.getSize((FAERIECtxtModel)entity);      
     }
     else
 
@@ -787,8 +809,18 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("AMIContext")) {
+      return AMIContextView.getSize((AMIContext)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("MentalInstanceSpecification")) {
       return MentalInstanceSpecificationView.getSize((MentalInstanceSpecification)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("AMIContextInstantiation")) {
+      return AMIContextInstantiationView.getSize((AMIContextInstantiation)entity);      
     }
     else
 
@@ -979,10 +1011,17 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(AMIContext.class)) {
-      vertex = new AMIContextCell( (AMIContext) entity);
+    if (entity.getClass().equals(FAERIECtxtModelInst.class)) {
+      vertex = new FAERIECtxtModelInstCell( (FAERIECtxtModelInst) entity);
       // Default Size for the new Vertex with the new entity within
-      size = AMIContextView.getSize((AMIContext) entity);
+      size = FAERIECtxtModelInstView.getSize((FAERIECtxtModelInst) entity);
+    }
+    else
+
+    if (entity.getClass().equals(FAERIEContext.class)) {
+      vertex = new FAERIEContextCell( (FAERIEContext) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FAERIEContextView.getSize((FAERIEContext) entity);
     }
     else
 
@@ -993,10 +1032,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(ApplicationWS.class)) {
-      vertex = new ApplicationWSCell( (ApplicationWS) entity);
+    if (entity.getClass().equals(RuntimeCommFailure.class)) {
+      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
       // Default Size for the new Vertex with the new entity within
-      size = ApplicationWSView.getSize((ApplicationWS) entity);
+      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
     }
     else
 
@@ -1007,10 +1046,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(RuntimeCommFailure.class)) {
-      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
+    if (entity.getClass().equals(FAERIECtxtRelationship.class)) {
+      vertex = new FAERIECtxtRelationshipCell( (FAERIECtxtRelationship) entity);
       // Default Size for the new Vertex with the new entity within
-      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
+      size = FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship) entity);
     }
     else
 
@@ -1056,10 +1095,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(FAERIEContext.class)) {
-      vertex = new FAERIEContextCell( (FAERIEContext) entity);
+    if (entity.getClass().equals(FAERIECtxtEntity.class)) {
+      vertex = new FAERIECtxtEntityCell( (FAERIECtxtEntity) entity);
       // Default Size for the new Vertex with the new entity within
-      size = FAERIEContextView.getSize((FAERIEContext) entity);
+      size = FAERIECtxtEntityView.getSize((FAERIECtxtEntity) entity);
     }
     else
 
@@ -1077,13 +1116,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(AMIContextBindingData.class)) {
-      vertex = new AMIContextBindingDataCell( (AMIContextBindingData) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = AMIContextBindingDataView.getSize((AMIContextBindingData) entity);
-    }
-    else
-
     if (entity.getClass().equals(ApplicationEventSlots.class)) {
       vertex = new ApplicationEventSlotsCell( (ApplicationEventSlots) entity);
       // Default Size for the new Vertex with the new entity within
@@ -1098,6 +1130,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(FAERIECtxtAttribute.class)) {
+      vertex = new FAERIECtxtAttributeCell( (FAERIECtxtAttribute) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FAERIECtxtAttributeView.getSize((FAERIECtxtAttribute) entity);
+    }
+    else
+
     if (entity.getClass().equals(FileSpecPatternMapping.class)) {
       vertex = new FileSpecPatternMappingCell( (FileSpecPatternMapping) entity);
       // Default Size for the new Vertex with the new entity within
@@ -1109,13 +1148,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new ConversationCell( (Conversation) entity);
       // Default Size for the new Vertex with the new entity within
       size = ConversationView.getSize((Conversation) entity);
-    }
-    else
-
-    if (entity.getClass().equals(FAERIECtxtModel.class)) {
-      vertex = new FAERIECtxtModelCell( (FAERIECtxtModel) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = FAERIECtxtModelView.getSize((FAERIECtxtModel) entity);
     }
     else
 
@@ -1140,10 +1172,24 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(AMIContext.class)) {
+      vertex = new AMIContextCell( (AMIContext) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AMIContextView.getSize((AMIContext) entity);
+    }
+    else
+
     if (entity.getClass().equals(MentalInstanceSpecification.class)) {
       vertex = new MentalInstanceSpecificationCell( (MentalInstanceSpecification) entity);
       // Default Size for the new Vertex with the new entity within
       size = MentalInstanceSpecificationView.getSize((MentalInstanceSpecification) entity);
+    }
+    else
+
+    if (entity.getClass().equals(AMIContextInstantiation.class)) {
+      vertex = new AMIContextInstantiationCell( (AMIContextInstantiation) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AMIContextInstantiationView.getSize((AMIContextInstantiation) entity);
     }
     else
 

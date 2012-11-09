@@ -180,18 +180,22 @@ public class ObjectSave extends ObjectSaveAbs{
           ingenias.editor.entities.DeploymentPackageWithContext nen=(ingenias.editor.entities.DeploymentPackageWithContext)en;
 	  String _name;
           
-          _name=ingenias.editor.entities.Entity.encodeutf8Text("ContextBindingData");
-          os.write("<objectproperty id=\""+_name+"\">\n");
-          if (nen.getContextBindingData()!=null)
-           saveObject(nen.getContextBindingData(),os);
+          
+          os.write("<objectproperty id=\"Context\" collection=\"true\">\n");
+             enumeration=nen.getContextElements();
+          while (enumeration.hasMoreElements()){
+            ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+           saveObject(next,os);
+          }
           os.write("</objectproperty>\n");
           
-          _name=ingenias.editor.entities.Entity.encodeutf8Text("Context");
-          os.write("<objectproperty id=\""+_name+"\">\n");
-          if (nen.getContext()!=null)
-           saveObject(nen.getContext(),os);
+          os.write("<objectproperty id=\"ContextModelInstantiation\" collection=\"true\">\n");
+             enumeration=nen.getContextModelInstantiationElements();
+          while (enumeration.hasMoreElements()){
+            ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+           saveObject(next,os);
+          }
           os.write("</objectproperty>\n");
-          
           
         }
         
@@ -206,6 +210,21 @@ public class ObjectSave extends ObjectSaveAbs{
           ingenias.editor.entities.AOPMentalStatePattern nen=(ingenias.editor.entities.AOPMentalStatePattern)en;
 	  String _name;
           
+          
+        }
+        
+        if (en instanceof ingenias.editor.entities.AMIContextInstantiation){
+          ingenias.editor.entities.AMIContextInstantiation nen=(ingenias.editor.entities.AMIContextInstantiation)en;
+	  String _name;
+          
+          
+          os.write("<objectproperty id=\"Model\" collection=\"true\">\n");
+             enumeration=nen.getModelElements();
+          while (enumeration.hasMoreElements()){
+            ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+           saveObject(next,os);
+          }
+          os.write("</objectproperty>\n");
           
         }
         
@@ -430,6 +449,21 @@ public class ObjectSave extends ObjectSaveAbs{
           ingenias.editor.entities.OrganizationNetwork nen=(ingenias.editor.entities.OrganizationNetwork)en;
 	  String _name;
           
+          
+        }
+        
+        if (en instanceof ingenias.editor.entities.FAERIECtxtModelInst){
+          ingenias.editor.entities.FAERIECtxtModelInst nen=(ingenias.editor.entities.FAERIECtxtModelInst)en;
+	  String _name;
+          
+          
+          os.write("<objectproperty id=\"EntityInstances\" collection=\"true\">\n");
+             enumeration=nen.getEntityInstancesElements();
+          while (enumeration.hasMoreElements()){
+            ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+           saveObject(next,os);
+          }
+          os.write("</objectproperty>\n");
           
         }
         
@@ -917,6 +951,13 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+        if (en instanceof ingenias.editor.entities.ContextUseTask){
+          ingenias.editor.entities.ContextUseTask nen=(ingenias.editor.entities.ContextUseTask)en;
+	  String _name;
+          
+          
+        }
+        
         if (en instanceof ingenias.editor.entities.Autonomous_entity){
           ingenias.editor.entities.Autonomous_entity nen=(ingenias.editor.entities.Autonomous_entity)en;
 	  String _name;
@@ -1258,13 +1299,6 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
-        if (en instanceof ingenias.editor.entities.AMIContextBindingData){
-          ingenias.editor.entities.AMIContextBindingData nen=(ingenias.editor.entities.AMIContextBindingData)en;
-	  String _name;
-          
-          
-        }
-        
         if (en instanceof ingenias.editor.entities.UMLClassifier){
           ingenias.editor.entities.UMLClassifier nen=(ingenias.editor.entities.UMLClassifier)en;
 	  String _name;
@@ -1424,15 +1458,9 @@ public class ObjectSave extends ObjectSaveAbs{
           ingenias.editor.entities.AMIContext nen=(ingenias.editor.entities.AMIContext)en;
 	  String _name;
           
-          _name=ingenias.editor.entities.Entity.encodeutf8Text("Model");
-          os.write("<objectproperty id=\""+_name+"\">\n");
-          if (nen.getModel()!=null)
-           saveObject(nen.getModel(),os);
-          os.write("</objectproperty>\n");
           
-          
-          os.write("<objectproperty id=\"Applications\" collection=\"true\">\n");
-             enumeration=nen.getApplicationsElements();
+          os.write("<objectproperty id=\"Models\" collection=\"true\">\n");
+             enumeration=nen.getModelsElements();
           while (enumeration.hasMoreElements()){
             ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
            saveObject(next,os);
@@ -1969,11 +1997,6 @@ public class ObjectSave extends ObjectSaveAbs{
          if (en.getClass().equals(ingenias.editor.entities.CtxtUpdates.class)){
           ingenias.editor.entities.CtxtUpdates nen=(ingenias.editor.entities.CtxtUpdates)en;
           
-          os.write("<objectproperty id=\"UpdateWith\">\n");
-          if (nen.getUpdateWith()!=null)
-           saveObject(nen.getUpdateWith(),os);
-          os.write("</objectproperty>\n");
-          
           
         }
         
@@ -2199,11 +2222,6 @@ public class ObjectSave extends ObjectSaveAbs{
         
          if (en.getClass().equals(ingenias.editor.entities.CtxtNotifies.class)){
           ingenias.editor.entities.CtxtNotifies nen=(ingenias.editor.entities.CtxtNotifies)en;
-          
-          os.write("<objectproperty id=\"Event\">\n");
-          if (nen.getEvent()!=null)
-           saveObject(nen.getEvent(),os);
-          os.write("</objectproperty>\n");
           
           
         }

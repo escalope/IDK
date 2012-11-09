@@ -75,6 +75,10 @@ public AgentModelCellViewFactory() {}
    // Diagram Objects start here
 
 
+   if (userObject.getClass().equals(FAERIEContext.class)){
+           return new ingenias.editor.cell.FAERIEContextView(v);
+   }
+
    if (userObject.getClass().equals(Agent.class)){
            return new ingenias.editor.cell.AgentView(v);
    }
@@ -211,8 +215,20 @@ public AgentModelCellViewFactory() {}
            return new ingenias.editor.cell.RuntimeCommFailureView(v);
    }
 
+   if (userObject.getClass().equals(FAERIECtxtRelationship.class)){
+           return new ingenias.editor.cell.FAERIECtxtRelationshipView(v);
+   }
+
    if (userObject.getClass().equals(RuntimeEvent.class)){
            return new ingenias.editor.cell.RuntimeEventView(v);
+   }
+
+   if (userObject.getClass().equals(FAERIECtxtEntity.class)){
+           return new ingenias.editor.cell.FAERIECtxtEntityView(v);
+   }
+
+   if (userObject.getClass().equals(FAERIECtxtAttribute.class)){
+           return new ingenias.editor.cell.FAERIECtxtAttributeView(v);
    }
 
    if (userObject.getClass().equals(Interaction.class)){
@@ -231,12 +247,20 @@ public AgentModelCellViewFactory() {}
            return new ingenias.editor.cell.CommunicationEventView(v);
    }
 
+   if (userObject.getClass().equals(AMIContext.class)){
+           return new ingenias.editor.cell.AMIContextView(v);
+   }
+
    if (userObject.getClass().equals(ContextBindingTask.class)){
            return new ingenias.editor.cell.ContextBindingTaskView(v);
    }
 
    if (userObject.getClass().equals(ContextReleaseTask.class)){
            return new ingenias.editor.cell.ContextReleaseTaskView(v);
+   }
+
+   if (userObject.getClass().equals(ContextUseTask.class)){
+           return new ingenias.editor.cell.ContextUseTaskView(v);
    }
 
    if (userObject.getClass().equals(RuntimeFact.class)){

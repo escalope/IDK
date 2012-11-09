@@ -31,7 +31,7 @@ public class CtxtUpdatesWidgetPreferences extends EntityWidgetPreferences {
 
   public CtxtUpdatesWidgetPreferences() {
   super();
-  String[] preferredOrder={"Label","UpdateWith",""};
+  String[] preferredOrder={"Label",""};
   this.setPreferredOrder(preferredOrder);
   Vector result=null;
   

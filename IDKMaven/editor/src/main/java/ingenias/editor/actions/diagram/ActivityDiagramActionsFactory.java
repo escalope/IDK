@@ -400,6 +400,39 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 			
 			
 			
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ContextUseTask")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
+                   possibleViews.add(new AbstractAction("UML") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "UML");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.UML);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			 if (ent.getClass().getName().equals("ingenias.editor.entities.ContextUseTask")){
+			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.INGENIAS;
+                   possibleViews.add(new AbstractAction("INGENIAS") {
+                     public void actionPerformed(ActionEvent e) {
+                      graph.getListenerContainer().storeContraints(cell);         
+		      graph.getModel().getAttributes(cell).put("view", "INGENIAS");     				
+		     ent.getPrefs(graph.getModel().getAttributes(cell)).setView(ViewPreferences.ViewType.INGENIAS);
+				 graph.getListenerContainer().restoreContraints(cell);
+				graph.invalidate();
+				graph.refresh();
+                     }
+                   });
+			 }
+			
+                  
+			
+			
+			
 			 if (ent.getClass().getName().equals("ingenias.editor.entities.Workflow")){
 			 final ViewPreferences.ViewType current1=ViewPreferences.ViewType.UML;
                    possibleViews.add(new AbstractAction("UML") {
@@ -1013,6 +1046,22 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 					} catch (InvalidEntity e) {						
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(graph, "Object type TaskWS is not allowed in this diagram",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			});
+		}
+
+		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "ContextUseTask")){
+		// Insert an object of type ContextUseTask
+		nobjects.add(
+			new AbstractAction("Insert ContextUseTask") {
+				public void actionPerformed(ActionEvent ev) {
+					try {
+						graph.insert(pt, "ContextUseTask");
+					} catch (InvalidEntity e) {						
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(graph, "Object type ContextUseTask is not allowed in this diagram",
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}

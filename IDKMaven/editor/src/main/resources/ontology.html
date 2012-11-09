@@ -43,6 +43,8 @@
 
 <A HREF="#AOPMentalStatePattern">AOPMentalStatePattern</A> <BR>
 
+<A HREF="#AMIContextInstantiation">AMIContextInstantiation</A> <BR>
+
 <A HREF="#ShareTouple">ShareTouple</A> <BR>
 
 <A HREF="#DeploymentUnitByTypeWithInitMS">DeploymentUnitByTypeWithInitMS</A> <BR>
@@ -82,6 +84,8 @@
 <A HREF="#ForkNode">ForkNode</A> <BR>
 
 <A HREF="#OrganizationNetwork">OrganizationNetwork</A> <BR>
+
+<A HREF="#FAERIECtxtModelInst">FAERIECtxtModelInst</A> <BR>
 
 <A HREF="#FAERIECtxtModel">FAERIECtxtModel</A> <BR>
 
@@ -167,6 +171,8 @@
 
 <A HREF="#DeploymentUnitByTypeEnumInitMS">DeploymentUnitByTypeEnumInitMS</A> <BR>
 
+<A HREF="#ContextUseTask">ContextUseTask</A> <BR>
+
 <A HREF="#Autonomous_entity">Autonomous_entity</A> <BR>
 
 <A HREF="#GeneralEvent">GeneralEvent</A> <BR>
@@ -228,8 +234,6 @@
 <A HREF="#INGENIASCodeComponent">INGENIASCodeComponent</A> <BR>
 
 <A HREF="#SimulationPackage">SimulationPackage</A> <BR>
-
-<A HREF="#AMIContextBindingData">AMIContextBindingData</A> <BR>
 
 <A HREF="#UMLClassifier">UMLClassifier</A> <BR>
 
@@ -606,6 +610,8 @@ Relationships:
 Entities:
 <ul>
 
+<li><A HREF="#FAERIEContext">FAERIEContext</A></li>
+
 <li><A HREF="#Agent">Agent</A></li>
 
 <li><A HREF="#Organization">Organization</A></li>
@@ -670,9 +676,13 @@ Entities:
 
 <li><A HREF="#BoxedTask">BoxedTask</A></li>
 
+<li><A HREF="#AMIContext">AMIContext</A></li>
+
 <li><A HREF="#ContextBindingTask">ContextBindingTask</A></li>
 
 <li><A HREF="#ContextReleaseTask">ContextReleaseTask</A></li>
+
+<li><A HREF="#ContextUseTask">ContextUseTask</A></li>
 
 </ul>
 </TD>
@@ -812,6 +822,8 @@ Relationships:
 Entities:
 <ul>
 
+<li><A HREF="#FAERIEContext">FAERIEContext</A></li>
+
 <li><A HREF="#Agent">Agent</A></li>
 
 <li><A HREF="#AgentModelBelieve">AgentModelBelieve</A></li>
@@ -878,6 +890,12 @@ Entities:
 
 <li><A HREF="#Interaction">Interaction</A></li>
 
+<li><A HREF="#FAERIECtxtAttribute">FAERIECtxtAttribute</A></li>
+
+<li><A HREF="#FAERIECtxtEntity">FAERIECtxtEntity</A></li>
+
+<li><A HREF="#FAERIECtxtRelationship">FAERIECtxtRelationship</A></li>
+
 <li><A HREF="#RemoteProcedureCall">RemoteProcedureCall</A></li>
 
 <li><A HREF="#RuntimeEvent">RuntimeEvent</A></li>
@@ -890,9 +908,13 @@ Entities:
 
 <li><A HREF="#RuntimeConversation">RuntimeConversation</A></li>
 
+<li><A HREF="#AMIContext">AMIContext</A></li>
+
 <li><A HREF="#ContextBindingTask">ContextBindingTask</A></li>
 
 <li><A HREF="#ContextReleaseTask">ContextReleaseTask</A></li>
+
+<li><A HREF="#ContextUseTask">ContextUseTask</A></li>
 
 <li><A HREF="#RuntimeFact">RuntimeFact</A></li>
 
@@ -1010,13 +1032,9 @@ Entities:
 
 <li><A HREF="#RuntimeCommFailure">RuntimeCommFailure</A></li>
 
-<li><A HREF="#Conversation">Conversation</A></li>
-
 <li><A HREF="#Fact">Fact</A></li>
 
-<li><A HREF="#RuntimeConversation">RuntimeConversation</A></li>
-
-<li><A HREF="#CommunicationEvent">CommunicationEvent</A></li>
+<li><A HREF="#FAERIECtxtRelationship">FAERIECtxtRelationship</A></li>
 
 <li><A HREF="#ApplicationEvent">ApplicationEvent</A></li>
 
@@ -1024,27 +1042,37 @@ Entities:
 
 <li><A HREF="#GoalStateWS">GoalStateWS</A></li>
 
-<li><A HREF="#GeneralEvent">GeneralEvent</A></li>
-
 <li><A HREF="#FrameFact">FrameFact</A></li>
 
 <li><A HREF="#RuntimeEvent">RuntimeEvent</A></li>
 
-<li><A HREF="#StateGoal">StateGoal</A></li>
-
-<li><A HREF="#RuntimeFact">RuntimeFact</A></li>
+<li><A HREF="#FAERIECtxtEntity">FAERIECtxtEntity</A></li>
 
 <li><A HREF="#MessagePassing">MessagePassing</A></li>
 
 <li><A HREF="#ShareTouple">ShareTouple</A></li>
-
-<li><A HREF="#Believe">Believe</A></li>
 
 <li><A HREF="#AgentModelBelieve">AgentModelBelieve</A></li>
 
 <li><A HREF="#ApplicationEventSlots">ApplicationEventSlots</A></li>
 
 <li><A HREF="#Compromise">Compromise</A></li>
+
+<li><A HREF="#FAERIECtxtAttribute">FAERIECtxtAttribute</A></li>
+
+<li><A HREF="#Conversation">Conversation</A></li>
+
+<li><A HREF="#RuntimeConversation">RuntimeConversation</A></li>
+
+<li><A HREF="#CommunicationEvent">CommunicationEvent</A></li>
+
+<li><A HREF="#GeneralEvent">GeneralEvent</A></li>
+
+<li><A HREF="#StateGoal">StateGoal</A></li>
+
+<li><A HREF="#RuntimeFact">RuntimeFact</A></li>
+
+<li><A HREF="#Believe">Believe</A></li>
 
 </ul>
 </TD>
@@ -1110,6 +1138,8 @@ Entities:
 
 <li><A HREF="#TaskWS">TaskWS</A></li>
 
+<li><A HREF="#ContextUseTask">ContextUseTask</A></li>
+
 <li><A HREF="#Workflow">Workflow</A></li>
 
 <li><A HREF="#BoxedTask">BoxedTask</A></li>
@@ -1151,6 +1181,8 @@ Relationships:
 <TD valign="top"/>
 Entities:
 <ul>
+
+<li><A HREF="#FAERIEContext">FAERIEContext</A></li>
 
 <li><A HREF="#Agent">Agent</A></li>
 
@@ -1220,7 +1252,13 @@ Entities:
 
 <li><A HREF="#RuntimeCommFailure">RuntimeCommFailure</A></li>
 
+<li><A HREF="#FAERIECtxtRelationship">FAERIECtxtRelationship</A></li>
+
 <li><A HREF="#RuntimeEvent">RuntimeEvent</A></li>
+
+<li><A HREF="#FAERIECtxtEntity">FAERIECtxtEntity</A></li>
+
+<li><A HREF="#FAERIECtxtAttribute">FAERIECtxtAttribute</A></li>
 
 <li><A HREF="#Interaction">Interaction</A></li>
 
@@ -1230,9 +1268,13 @@ Entities:
 
 <li><A HREF="#CommunicationEvent">CommunicationEvent</A></li>
 
+<li><A HREF="#AMIContext">AMIContext</A></li>
+
 <li><A HREF="#ContextBindingTask">ContextBindingTask</A></li>
 
 <li><A HREF="#ContextReleaseTask">ContextReleaseTask</A></li>
+
+<li><A HREF="#ContextUseTask">ContextUseTask</A></li>
 
 <li><A HREF="#RuntimeFact">RuntimeFact</A></li>
 
@@ -1366,15 +1408,17 @@ Entities:
 
 <li><A HREF="#DeploymentUnitByTypeMSEntity">DeploymentUnitByTypeMSEntity</A></li>
 
-<li><A HREF="#AMIContext">AMIContext</A></li>
+<li><A HREF="#FAERIECtxtModelInst">FAERIECtxtModelInst</A></li>
+
+<li><A HREF="#FAERIEContext">FAERIEContext</A></li>
 
 <li><A HREF="#Fact">Fact</A></li>
 
-<li><A HREF="#ApplicationWS">ApplicationWS</A></li>
+<li><A HREF="#RuntimeCommFailure">RuntimeCommFailure</A></li>
 
 <li><A HREF="#DeploymentUnitByTypeWithInitMS">DeploymentUnitByTypeWithInitMS</A></li>
 
-<li><A HREF="#RuntimeCommFailure">RuntimeCommFailure</A></li>
+<li><A HREF="#FAERIECtxtRelationship">FAERIECtxtRelationship</A></li>
 
 <li><A HREF="#ApplicationEvent">ApplicationEvent</A></li>
 
@@ -1388,23 +1432,21 @@ Entities:
 
 <li><A HREF="#RuntimeEvent">RuntimeEvent</A></li>
 
-<li><A HREF="#FAERIEContext">FAERIEContext</A></li>
+<li><A HREF="#FAERIECtxtEntity">FAERIECtxtEntity</A></li>
 
 <li><A HREF="#AgentWS">AgentWS</A></li>
 
 <li><A HREF="#AgentModelBelieve">AgentModelBelieve</A></li>
 
-<li><A HREF="#AMIContextBindingData">AMIContextBindingData</A></li>
-
 <li><A HREF="#ApplicationEventSlots">ApplicationEventSlots</A></li>
 
 <li><A HREF="#Compromise">Compromise</A></li>
 
+<li><A HREF="#FAERIECtxtAttribute">FAERIECtxtAttribute</A></li>
+
 <li><A HREF="#FileSpecPatternMapping">FileSpecPatternMapping</A></li>
 
 <li><A HREF="#Conversation">Conversation</A></li>
-
-<li><A HREF="#FAERIECtxtModel">FAERIECtxtModel</A></li>
 
 <li><A HREF="#Agent">Agent</A></li>
 
@@ -1412,7 +1454,11 @@ Entities:
 
 <li><A HREF="#CommunicationEvent">CommunicationEvent</A></li>
 
+<li><A HREF="#AMIContext">AMIContext</A></li>
+
 <li><A HREF="#MentalInstanceSpecification">MentalInstanceSpecification</A></li>
+
+<li><A HREF="#AMIContextInstantiation">AMIContextInstantiation</A></li>
 
 <li><A HREF="#GeneralEvent">GeneralEvent</A></li>
 
@@ -1618,10 +1664,10 @@ A deploy unit is an entity that defines how many instances of agents will exist 
 Attributes:<BR>
 <ul>
 
- <li> ContextBindingData which contains ingenias.editor.entities.AMIContextBindingData  </li>
 
- <li> Context which contains ingenias.editor.entities.AMIContext  </li>
+ <li><B>Context</B> which is a collection of <B>ingenias.editor.entities.AMIContext</B> elements</li>
 
+ <li><B>ContextModelInstantiation</B> which is a collection of <B>ingenias.editor.entities.AMIContextInstantiation</B> elements</li>
 
 </ul>
 
@@ -1646,6 +1692,19 @@ Attributes:<BR>
 
  <li> AOPExpression which contains java.lang.String  </li>
 
+
+</ul>
+
+
+   <H2><A NAME="AMIContextInstantiation"></A>AMIContextInstantiation specializes <A HREF="#INGENIASObject">INGENIASObject</A> </H2>
+A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
+
+ <li><B>Model</B> which is a collection of <B>ingenias.editor.entities.AMICtxtModel</B> elements</li>
 
 </ul>
 
@@ -1912,6 +1971,19 @@ A network of roles played by some agents. A network is characterized<P>
 Attributes:<BR>
 <ul>
 
+
+</ul>
+
+
+   <H2><A NAME="FAERIECtxtModelInst"></A>FAERIECtxtModelInst specializes <A HREF="#AMIContextInstantiation">AMIContextInstantiation</A> </H2>
+A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
+
+ <li><B>EntityInstances</B> which is a collection of <B>ingenias.editor.entities.MentalInstanceSpecification</B> elements</li>
 
 </ul>
 
@@ -2414,7 +2486,7 @@ Attributes:<BR>
 </ul>
 
 
-   <H2><A NAME="FAERIECtxtElement"></A>FAERIECtxtElement specializes <A HREF="#INGENIASObject">INGENIASObject</A> </H2>
+   <H2><A NAME="FAERIECtxtElement"></A>FAERIECtxtElement specializes <A HREF="#FrameFact">FrameFact</A> </H2>
 A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
 <B>Use it when ....</B><BR>
 <P>
@@ -2458,6 +2530,17 @@ Attributes:<BR>
 
 
  <li><B>InitialState</B> which is a collection of <B>ingenias.editor.entities.MentalInstanceSpecification</B> elements</li>
+
+</ul>
+
+
+   <H2><A NAME="ContextUseTask"></A>ContextUseTask specializes <A HREF="#Task">Task</A> </H2>
+Tasks is the encapsulation of actions or non-distributable algorithms. Tasks can use Applications and resources. Tasks generate changes in the mental state of the agent that executes them. Changes consist of: (a) modifying, creating or<br>    destroying mental entities; or (b) changes in the perception of the world by acting over applications (applications act over the world producing events, that are perceived by the agent). Though tasks can be also assigned to roles, at the end, it will<br>    belong to an agent.<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
 
 </ul>
 
@@ -2867,17 +2950,6 @@ Attributes:<BR>
 </ul>
 
 
-   <H2><A NAME="AMIContextBindingData"></A>AMIContextBindingData specializes <A HREF="#INGENIASObject">INGENIASObject</A> </H2>
-A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
-<B>Use it when ....</B><BR>
-<P>
-Attributes:<BR>
-<ul>
-
-
-</ul>
-
-
    <H2><A NAME="UMLClassifier"></A>UMLClassifier specializes <A HREF="#Entity">Entity</A> </H2>
 Root concept to abstract UML entities<P>
 <B>Use it when ....</B><BR>
@@ -3071,17 +3143,15 @@ Attributes:<BR>
 </ul>
 
 
-   <H2><A NAME="AMIContext"></A>AMIContext specializes <A HREF="#INGENIASObject">INGENIASObject</A> </H2>
+   <H2><A NAME="AMIContext"></A>AMIContext specializes <A HREF="#EnvironmentApplication">EnvironmentApplication</A> </H2>
 A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
 <B>Use it when ....</B><BR>
 <P>
 Attributes:<BR>
 <ul>
 
- <li> Model which contains ingenias.editor.entities.AMICtxtModel  </li>
 
-
- <li><B>Applications</B> which is a collection of <B>ingenias.editor.entities.Application</B> elements</li>
+ <li><B>Models</B> which is a collection of <B>ingenias.editor.entities.AMICtxtModel</B> elements</li>
 
 </ul>
 
@@ -3522,6 +3592,8 @@ Connected elements:<BR>
       <li><B><A HREF="#DeploymentUnitByType">DeploymentUnitByType</A></B></li>
      
       <li><B><A HREF="#AMIContext">AMIContext</A></B></li>
+     
+      <li><B><A HREF="#AMIContextInstantiation">AMIContextInstantiation</A></B></li>
      
    </ul>
     
@@ -4651,8 +4723,6 @@ Connected elements:<BR>
 Attributes:<BR>
 <ul>
 
- <li> UpdateWith which contains ingenias.editor.entities.MentalEntity  </li>
-
 
 </ul>
 <P>
@@ -5674,8 +5744,6 @@ Connected elements:<BR>
  <H2><A NAME="CtxtNotifies"></A>CtxtNotifies</H2>
 Attributes:<BR>
 <ul>
-
- <li> Event which contains ingenias.editor.entities.GeneralEvent  </li>
 
 
 </ul>

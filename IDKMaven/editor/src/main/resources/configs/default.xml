@@ -1,29 +1,237 @@
+
 <filter>
-	<name>IAF</name>
+	<name>Full INGENIAS</name>
 	<author>Jorge Gomez Sanz</author>
 	<date>20/04/2009</date>
-	<diagrams>
 	<diagrams>
 
 		<diagram name="EnvironmentModel">
 
 			<entity>Agent</entity>
 
+			<entity>OrganizationGroup</entity>
+
+			<entity>Resource</entity>
+
+			<entity>Application</entity>
+
 			<entity>InternalApplication</entity>
 
 			<entity>EnvironmentApplication</entity>
+
+			<entity>ApplicationWS</entity>
 
 			<entity>TextNote</entity>
 
 			<entity>UMLComment</entity>
 
+			<entity>Organization</entity>
+
+			<entity>AMIContext</entity>
+
+			<entity>FAERIEContext</entity>
+
+			<entity>FAERIECtxtModel</entity>
+
+			<entity>FAERIECtxtAttribute</entity>
+
+			<entity>FAERIECtxtEntity</entity>
+
+			<entity>FAERIECtxtRelationship</entity>
+
+			<entity>FAERIECtxtValue</entity>
+
+			<entity>RoleWS</entity>
+
+
+          		<relationship>EPerceives</relationship>
+
           		<relationship>EPerceivesNotification</relationship>
+
+          		<relationship>EPerceivesPolling</relationship>
 
           		<relationship>EResourceBelongsTo</relationship>
 
           		<relationship>ApplicationBelongsTo</relationship>
 
           		<relationship>UMLAnnotatedElement</relationship>
+
+          		<relationship>OHasGroup</relationship>
+
+          		<relationship>ODecomposesGroup</relationship>
+
+          		<relationship>CtxtNotifies</relationship>
+
+          		<relationship>CtxtUpdates</relationship>
+
+          		<relationship>FAERIEAppliedTo</relationship>
+
+          		<relationship>FAERIEHasValue</relationship>
+
+          		<relationship>FAERIEGeneratedBy</relationship>
+
+          		<relationship>FAERIESrcEntity</relationship>
+
+          		<relationship>FAERIETrgtEntity</relationship>
+
+          		<relationship>HasCtxModel</relationship>
+
+		</diagram>
+
+		<diagram name="OrganizationModel">
+
+			<entity>FAERIEContext</entity>
+
+			<entity>Agent</entity>
+
+			<entity>Organization</entity>
+
+			<entity>OrganizationGroup</entity>
+
+			<entity>OrganizationNetwork</entity>
+
+			<entity>Role</entity>
+
+			<entity>Resource</entity>
+
+			<entity>Application</entity>
+
+			<entity>EnvironmentApplication</entity>
+
+			<entity>InternalApplication</entity>
+
+			<entity>Task</entity>
+
+			<entity>Plan</entity>
+
+			<entity>Workflow</entity>
+
+			<entity>Interaction</entity>
+
+			<entity>Goal</entity>
+
+			<entity>Fact</entity>
+
+			<entity>FrameFact</entity>
+
+			<entity>Believe</entity>
+
+			<entity>GeneralEvent</entity>
+
+			<entity>ApplicationEvent</entity>
+
+			<entity>ApplicationEventSlots</entity>
+
+			<entity>AutonomousEntityQuery</entity>
+
+			<entity>AgentRequirementsQuery</entity>
+
+			<entity>ConcreteAgent</entity>
+
+			<entity>TextNote</entity>
+
+			<entity>UMLComment</entity>
+
+			<entity>RoleWS</entity>
+
+			<entity>TaskWS</entity>
+
+			<entity>GoalStateWS</entity>
+
+			<entity>AgentWS</entity>
+
+			<entity>WorkflowBox</entity>
+
+			<entity>ApplicationWS</entity>
+
+			<entity>BoxedTask</entity>
+
+			<entity>AMIContext</entity>
+
+			<entity>ContextBindingTask</entity>
+
+			<entity>ContextReleaseTask</entity>
+
+			<entity>ContextUseTask</entity>
+
+
+          		<relationship>UMLAnnotatedElement</relationship>
+
+          		<relationship>EResourceBelongsTo</relationship>
+
+          		<relationship>OHasGroup</relationship>
+
+          		<relationship>OHasMember</relationship>
+
+          		<relationship>OHasWF</relationship>
+
+          		<relationship>ODecomposesGroup</relationship>
+
+          		<relationship>ODecomposesWF</relationship>
+
+          		<relationship>GTPursues</relationship>
+
+          		<relationship>WFConnects</relationship>
+
+          		<relationship>WFUses</relationship>
+
+          		<relationship>WFContainsTask</relationship>
+
+          		<relationship>WFConsumes</relationship>
+
+          		<relationship>Consumes</relationship>
+
+          		<relationship>WFDecomposes</relationship>
+
+          		<relationship>WFProduces</relationship>
+
+          		<relationship>AGORelationshipGroup</relationship>
+
+          		<relationship>AGORelationshipMember</relationship>
+
+          		<relationship>AGORelationshipOrg</relationship>
+
+          		<relationship>AGOSubordinationRelationshipGroup</relationship>
+
+          		<relationship>AGOSubordinationRelationshipMember</relationship>
+
+          		<relationship>AGOSubordinationRelationshipOrg</relationship>
+
+          		<relationship>AGOCondSubordinationRelationshipGroup</relationship>
+
+          		<relationship>AGOCondSubordinationRelationshipMember</relationship>
+
+          		<relationship>AGOCondSubordinationRelationshipOrg</relationship>
+
+          		<relationship>AGOInconditionalSubordinationRelationshipGroup</relationship>
+
+          		<relationship>AGOInconditionalSubordinationRelationshipMember</relationship>
+
+          		<relationship>AGOInconditionalSubordinationRelationshipOrg</relationship>
+
+          		<relationship>AGOClientServerRelationshipGroup</relationship>
+
+          		<relationship>AGOClientServerRelationshipMember</relationship>
+
+          		<relationship>AGOClientServerRelationshipOrg</relationship>
+
+          		<relationship>WFSpecifiesExecution</relationship>
+
+          		<relationship>WFResponsable</relationship>
+
+          		<relationship>IInitiates</relationship>
+
+          		<relationship>IColaborates</relationship>
+
+          		<relationship>WFParticipates</relationship>
+
+          		<relationship>WFPlays</relationship>
+
+          		<relationship>WFDecomposesWF</relationship>
+
+          		<relationship>UMLAnnotatedElement</relationship>
+
+          		<relationship>WSConnects</relationship>
 
 		</diagram>
 
@@ -32,6 +240,10 @@
 			<entity>INGENIASComponent</entity>
 
 			<entity>INGENIASCodeComponent</entity>
+
+			<entity>FileSpecPatternMapping</entity>
+
+			<entity>Application</entity>
 
 			<entity>EnvironmentApplication</entity>
 
@@ -43,6 +255,7 @@
 
 			<entity>UMLComment</entity>
 
+
           		<relationship>CDUsesCode</relationship>
 
           		<relationship>UMLRealizes</relationship>
@@ -51,85 +264,114 @@
 
 		</diagram>
 
-		<diagram name="OrganizationModel">
+		<diagram name="TasksAndGoalsModel">
+
+			<entity>FAERIEContext</entity>
 
 			<entity>Agent</entity>
 
+			<entity>AgentModelBelieve</entity>
+
+			<entity>ApplicationEvent</entity>
+
+			<entity>ApplicationEventSlots</entity>
+
+			<entity>Application</entity>
+
+			<entity>AgentWS</entity>
+
 			<entity>Role</entity>
+
+			<entity>Goal</entity>
+
+			<entity>StateGoal</entity>
+
+			<entity>Task</entity>
 
 			<entity>Resource</entity>
 
-			<entity>EnvironmentApplication</entity>
-
-			<entity>InternalApplication</entity>
-
-			<entity>Task</entity>
-
-			<entity>Interaction</entity>
-
-			<entity>Goal</entity>
+			<entity>Fact</entity>
 
 			<entity>FrameFact</entity>
 
-			<entity>ApplicationEventSlots</entity>
+			<entity>RuntimeCommFailure</entity>
 
-			<entity>TextNote</entity>
+			<entity>Believe</entity>
 
-			<entity>UMLComment</entity>
+			<entity>Compromise</entity>
 
-          		<relationship>UMLAnnotatedElement</relationship>
+			<entity>GeneralEvent</entity>
 
-          		<relationship>EResourceBelongsTo</relationship>
-
-          		<relationship>GTPursues</relationship>
-
-          		<relationship>WFUses</relationship>
-
-          		<relationship>WFContainsTask</relationship>
-
-          		<relationship>WFConsumes</relationship>
-
-          		<relationship>Consumes</relationship>
-
-          		<relationship>WFProduces</relationship>
-
-          		<relationship>WFResponsable</relationship>
-
-          		<relationship>WFPlays</relationship>
-
-          		<relationship>UMLAnnotatedElement</relationship>
-
-		</diagram>
-
-		<diagram name="TasksAndGoalsModel">
-
-			<entity>Agent</entity>
-
-			<entity>ApplicationEventSlots</entity>
-
-			<entity>Role</entity>
-
-			<entity>Goal</entity>
-
-			<entity>Task</entity>
-
-			<entity>FrameFact</entity>
+			<entity>CommunicationEvent</entity>
 
 			<entity>EnvironmentApplication</entity>
 
 			<entity>InternalApplication</entity>
 
 			<entity>TextNote</entity>
+
+			<entity>Plan</entity>
+
+			<entity>BoxedTask</entity>
+
+			<entity>MentalEntityInstanceCreation</entity>
+
+			<entity>MentalEntityInstanceAccess</entity>
 
 			<entity>Conversation</entity>
 
 			<entity>UMLComment</entity>
 
+			<entity>Workflow</entity>
+
+			<entity>RoleWS</entity>
+
+			<entity>TaskWS</entity>
+
+			<entity>GoalStateWS</entity>
+
+			<entity>ApplicationWS</entity>
+
 			<entity>Interaction</entity>
+
+			<entity>FAERIECtxtAttribute</entity>
+
+			<entity>FAERIECtxtEntity</entity>
+
+			<entity>FAERIECtxtRelationship</entity>
+
+			<entity>RemoteProcedureCall</entity>
+
+			<entity>RuntimeEvent</entity>
+
+			<entity>IUIterate</entity>
+
+			<entity>MessagePassing</entity>
+
+			<entity>ShareTouple</entity>
+
+			<entity>RuntimeConversation</entity>
+
+			<entity>AMIContext</entity>
+
+			<entity>ContextBindingTask</entity>
+
+			<entity>ContextReleaseTask</entity>
+
+			<entity>ContextUseTask</entity>
+
+			<entity>RuntimeFact</entity>
+
+			<entity>IUConcurrence</entity>
+
+			<entity>InteractionUnit</entity>
+
 
           		<relationship>GTPursues</relationship>
 
-          		<relationship>GTCreates</relationship>          		
+          		<relationship>GTCreates</relationship>
+
+          		<relationship>GTAffects</relationship>
 
           		<relationship>GTDestroys</relationship>
 
@@ -143,13 +385,47 @@
 
           		<relationship>WFConsumes</relationship>
 
+          		<relationship>Consumes</relationship>
+
           		<relationship>WFUses</relationship>
+
+          		<relationship>WFUsesMethod</relationship>
+
+          		<relationship>PConnects</relationship>
 
           		<relationship>WFProduces</relationship>
 
+          		<relationship>GTDecomposes</relationship>
+
+          		<relationship>GTDecomposesAND</relationship>
+
+          		<relationship>GTDecomposesOR</relationship>
+
+          		<relationship>GTDepends</relationship>
+
+          		<relationship>GTInherits</relationship>
+
+          		<relationship>GTAndDepends</relationship>
+
+          		<relationship>GTOrDepends</relationship>
+
+          		<relationship>WFDecomposes</relationship>
+
+          		<relationship>Contribute</relationship>
+
+          		<relationship>ContributePositively</relationship>
+
+          		<relationship>ContributeNegatively</relationship>
+
           		<relationship>UMLAnnotatedElement</relationship>
 
+          		<relationship>WFParticipates</relationship>
+
+          		<relationship>WFCancels</relationship>
+
           		<relationship>IAccesses</relationship>
+
+          		<relationship>TriggersFailure</relationship>
 
 		</diagram>
 
@@ -157,21 +433,78 @@
 
 			<entity>Agent</entity>
 
+			<entity>AgentWS</entity>
+
 			<entity>Role</entity>
 
+			<entity>RoleWS</entity>
+
 			<entity>Task</entity>
+
+			<entity>TaskWS</entity>
 
 			<entity>Goal</entity>
 
 			<entity>Interaction</entity>
 
+			<entity>IUIterate</entity>
+
+			<entity>IUConcurrence</entity>
+
 			<entity>InteractionUnit</entity>
+
+			<entity>UMLSpecification</entity>
 
 			<entity>GRASIASpecification</entity>
 
 			<entity>TextNote</entity>
 
 			<entity>UMLComment</entity>
+
+			<entity>RuntimeCommFailure</entity>
+
+			<entity>Fact</entity>
+
+			<entity>FAERIECtxtRelationship</entity>
+
+			<entity>ApplicationEvent</entity>
+
+			<entity>RemoteProcedureCall</entity>
+
+			<entity>GoalStateWS</entity>
+
+			<entity>FrameFact</entity>
+
+			<entity>RuntimeEvent</entity>
+
+			<entity>FAERIECtxtEntity</entity>
+
+			<entity>MessagePassing</entity>
+
+			<entity>ShareTouple</entity>
+
+			<entity>AgentModelBelieve</entity>
+
+			<entity>ApplicationEventSlots</entity>
+
+			<entity>Compromise</entity>
+
+			<entity>FAERIECtxtAttribute</entity>
+
+			<entity>Conversation</entity>
+
+			<entity>RuntimeConversation</entity>
+
+			<entity>CommunicationEvent</entity>
+
+			<entity>GeneralEvent</entity>
+
+			<entity>StateGoal</entity>
+
+			<entity>RuntimeFact</entity>
+
+			<entity>Believe</entity>
+
 
           		<relationship>IInitiates</relationship>
 
@@ -183,19 +516,78 @@
 
           		<relationship>UISelection</relationship>
 
+          		<relationship>IPursues</relationship>
+
           		<relationship>GTPursues</relationship>
 
           		<relationship>IHasSpec</relationship>
 
           		<relationship>UIPrecedes</relationship>
 
+          		<relationship>UMLSendsMessage</relationship>
+
           		<relationship>UMLAnnotatedElement</relationship>
 
           		<relationship>IAccesses</relationship>
 
+          		<relationship>TriggersFailure</relationship>
+
+		</diagram>
+
+		<diagram name="ActivityDiagram">
+
+			<entity>InitialNode</entity>
+
+			<entity>DecisionNode</entity>
+
+			<entity>ForkNode</entity>
+
+			<entity>EndNode</entity>
+
+			<entity>Task</entity>
+
+			<entity>Role</entity>
+
+			<entity>WorkflowBox</entity>
+
+			<entity>UMLComment</entity>
+
+			<entity>TextNote</entity>
+
+			<entity>TaskWS</entity>
+
+			<entity>ContextUseTask</entity>
+
+			<entity>Workflow</entity>
+
+			<entity>BoxedTask</entity>
+
+			<entity>RoleWS</entity>
+
+			<entity>ContextBindingTask</entity>
+
+			<entity>ContextReleaseTask</entity>
+
+			<entity>Plan</entity>
+
+
+          		<relationship>UMLAnnotatedElement</relationship>
+
+          		<relationship>WFStarts</relationship>
+
+          		<relationship>WFEnds</relationship>
+
+          		<relationship>WFDecides</relationship>
+
+          		<relationship>WFFollows</relationship>
+
+          		<relationship>WFFollowsGuarded</relationship>
+
 		</diagram>
 
 		<diagram name="AgentModel">
+
+			<entity>FAERIEContext</entity>
 
 			<entity>Agent</entity>
 
@@ -203,17 +595,41 @@
 
 			<entity>Goal</entity>
 
+			<entity>Plan</entity>
+
+			<entity>StateGoal</entity>
+
 			<entity>Fact</entity>
 
 			<entity>Task</entity>
 
 			<entity>FrameFact</entity>
 
+			<entity>Believe</entity>
+
+			<entity>Compromise</entity>
+
+			<entity>GeneralEvent</entity>
+
+			<entity>ApplicationEvent</entity>
+
 			<entity>ApplicationEventSlots</entity>
+
+			<entity>MentalStateProcessor</entity>
+
+			<entity>MentalStateManager</entity>
 
 			<entity>MentalState</entity>
 
 			<entity>ConditionalMentalState</entity>
+
+			<entity>AutonomousEntityQuery</entity>
+
+			<entity>AgentRequirementsQuery</entity>
+
+			<entity>ConcreteAgent</entity>
+
+			<entity>AgentModelBelieve</entity>
 
 			<entity>Conversation</entity>
 
@@ -221,11 +637,51 @@
 
 			<entity>TextNote</entity>
 
+			<entity>Application</entity>
+
 			<entity>EnvironmentApplication</entity>
 
 			<entity>InternalApplication</entity>
 
+			<entity>RoleWS</entity>
+
+			<entity>TaskWS</entity>
+
+			<entity>GoalStateWS</entity>
+
+			<entity>AgentWS</entity>
+
 			<entity>MentalInstanceSpecification</entity>
+
+			<entity>ApplicationWS</entity>
+
+			<entity>RuntimeCommFailure</entity>
+
+			<entity>FAERIECtxtRelationship</entity>
+
+			<entity>RuntimeEvent</entity>
+
+			<entity>FAERIECtxtEntity</entity>
+
+			<entity>FAERIECtxtAttribute</entity>
+
+			<entity>Interaction</entity>
+
+			<entity>BoxedTask</entity>
+
+			<entity>RuntimeConversation</entity>
+
+			<entity>CommunicationEvent</entity>
+
+			<entity>AMIContext</entity>
+
+			<entity>ContextBindingTask</entity>
+
+			<entity>ContextReleaseTask</entity>
+
+			<entity>ContextUseTask</entity>
+
+			<entity>RuntimeFact</entity>
 
 
           		<relationship>GTPursues</relationship>
@@ -233,6 +689,10 @@
           		<relationship>AInherits</relationship>
 
           		<relationship>AHasMS</relationship>
+
+          		<relationship>AHasMSManager</relationship>
+
+          		<relationship>AHasMSProcessor</relationship>
 
           		<relationship>WFResponsable</relationship>
 
@@ -254,13 +714,64 @@
 
 		</diagram>
 
+		<diagram name="UseCaseDiagram">
+
+			<entity>TextUseCase</entity>
+
+			<entity>INGENIASUseCase</entity>
+
+			<entity>Agent</entity>
+
+			<entity>Role</entity>
+
+			<entity>Interaction</entity>
+
+			<entity>TextNote</entity>
+
+			<entity>UMLComment</entity>
+
+			<entity>Goal</entity>
+
+			<entity>Organization</entity>
+
+
+          		<relationship>Extends</relationship>
+
+          		<relationship>Includes</relationship>
+
+          		<relationship>Generalizes</relationship>
+
+          		<relationship>ParticipatesInUseCase</relationship>
+
+          		<relationship>UMLDescribesUseCase</relationship>
+
+          		<relationship>UMLAssociation</relationship>
+
+          		<relationship>UMLAnnotatedElement</relationship>
+
+          		<relationship>UseCasePursues</relationship>
+
+		</diagram>
+
 		<diagram name="DeployDiagram">
 
 			<entity>TestingPackage</entity>
 
 			<entity>DeploymentPackage</entity>
 
+			<entity>DeploymentPackageWithContext</entity>
+
 			<entity>INGENIASComponent</entity>
+
+			<entity>Application</entity>
+
+			<entity>SimulationPackage</entity>
+
+			<entity>SimulationEvent</entity>
+
+			<entity>SimExtractedInformation</entity>
+
+			<entity>INGENIASCodeComponent</entity>
 
 			<entity>EnvironmentApplication</entity>
 
@@ -268,18 +779,87 @@
 
 			<entity>UMLComment</entity>
 
+			<entity>Goal</entity>
+
 			<entity>DeploymentUnitByType</entity>
 
 			<entity>DeploymentUnitByTypeEnumInitMS</entity>
 
 			<entity>DeploymentUnitByTypeMSEntity</entity>
 
+			<entity>FAERIECtxtModelInst</entity>
+
+			<entity>FAERIEContext</entity>
+
+			<entity>Fact</entity>
+
+			<entity>RuntimeCommFailure</entity>
+
+			<entity>DeploymentUnitByTypeWithInitMS</entity>
+
+			<entity>FAERIECtxtRelationship</entity>
+
+			<entity>ApplicationEvent</entity>
+
+			<entity>MentalState</entity>
+
+			<entity>GoalStateWS</entity>
+
+			<entity>FrameFact</entity>
+
+			<entity>Test</entity>
+
+			<entity>RuntimeEvent</entity>
+
+			<entity>FAERIECtxtEntity</entity>
+
+			<entity>AgentWS</entity>
+
+			<entity>AgentModelBelieve</entity>
+
+			<entity>ApplicationEventSlots</entity>
+
+			<entity>Compromise</entity>
+
+			<entity>FAERIECtxtAttribute</entity>
+
+			<entity>FileSpecPatternMapping</entity>
+
+			<entity>Conversation</entity>
+
+			<entity>Agent</entity>
+
+			<entity>RuntimeConversation</entity>
+
+			<entity>CommunicationEvent</entity>
+
+			<entity>AMIContext</entity>
+
+			<entity>MentalInstanceSpecification</entity>
+
+			<entity>AMIContextInstantiation</entity>
+
+			<entity>GeneralEvent</entity>
+
+			<entity>ConditionalMentalState</entity>
+
+			<entity>StateGoal</entity>
+
+			<entity>RuntimeFact</entity>
+
+			<entity>Believe</entity>
+
+
           		<relationship>UMLAnnotatedElement</relationship>
 
           		<relationship>DefinesDeployment</relationship>
 
+          		<relationship>CDUsesCode</relationship>
+
+          		<relationship>SimulationPursues</relationship>
+
 		</diagram>
 
 	</diagrams>
-	</diagrams>
 </filter>
+

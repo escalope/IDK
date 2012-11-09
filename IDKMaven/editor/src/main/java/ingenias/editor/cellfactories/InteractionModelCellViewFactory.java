@@ -139,20 +139,12 @@ public InteractionModelCellViewFactory() {}
            return new ingenias.editor.cell.RuntimeCommFailureView(v);
    }
 
-   if (userObject.getClass().equals(Conversation.class)){
-           return new ingenias.editor.cell.ConversationView(v);
-   }
-
    if (userObject.getClass().equals(Fact.class)){
            return new ingenias.editor.cell.FactView(v);
    }
 
-   if (userObject.getClass().equals(RuntimeConversation.class)){
-           return new ingenias.editor.cell.RuntimeConversationView(v);
-   }
-
-   if (userObject.getClass().equals(CommunicationEvent.class)){
-           return new ingenias.editor.cell.CommunicationEventView(v);
+   if (userObject.getClass().equals(FAERIECtxtRelationship.class)){
+           return new ingenias.editor.cell.FAERIECtxtRelationshipView(v);
    }
 
    if (userObject.getClass().equals(ApplicationEvent.class)){
@@ -167,10 +159,6 @@ public InteractionModelCellViewFactory() {}
            return new ingenias.editor.cell.GoalStateWSView(v);
    }
 
-   if (userObject.getClass().equals(GeneralEvent.class)){
-           return new ingenias.editor.cell.GeneralEventView(v);
-   }
-
    if (userObject.getClass().equals(FrameFact.class)){
            return new ingenias.editor.cell.FrameFactView(v);
    }
@@ -179,12 +167,8 @@ public InteractionModelCellViewFactory() {}
            return new ingenias.editor.cell.RuntimeEventView(v);
    }
 
-   if (userObject.getClass().equals(StateGoal.class)){
-           return new ingenias.editor.cell.StateGoalView(v);
-   }
-
-   if (userObject.getClass().equals(RuntimeFact.class)){
-           return new ingenias.editor.cell.RuntimeFactView(v);
+   if (userObject.getClass().equals(FAERIECtxtEntity.class)){
+           return new ingenias.editor.cell.FAERIECtxtEntityView(v);
    }
 
    if (userObject.getClass().equals(MessagePassing.class)){
@@ -193,10 +177,6 @@ public InteractionModelCellViewFactory() {}
 
    if (userObject.getClass().equals(ShareTouple.class)){
            return new ingenias.editor.cell.ShareToupleView(v);
-   }
-
-   if (userObject.getClass().equals(Believe.class)){
-           return new ingenias.editor.cell.BelieveView(v);
    }
 
    if (userObject.getClass().equals(AgentModelBelieve.class)){
@@ -209,6 +189,38 @@ public InteractionModelCellViewFactory() {}
 
    if (userObject.getClass().equals(Compromise.class)){
            return new ingenias.editor.cell.CompromiseView(v);
+   }
+
+   if (userObject.getClass().equals(FAERIECtxtAttribute.class)){
+           return new ingenias.editor.cell.FAERIECtxtAttributeView(v);
+   }
+
+   if (userObject.getClass().equals(Conversation.class)){
+           return new ingenias.editor.cell.ConversationView(v);
+   }
+
+   if (userObject.getClass().equals(RuntimeConversation.class)){
+           return new ingenias.editor.cell.RuntimeConversationView(v);
+   }
+
+   if (userObject.getClass().equals(CommunicationEvent.class)){
+           return new ingenias.editor.cell.CommunicationEventView(v);
+   }
+
+   if (userObject.getClass().equals(GeneralEvent.class)){
+           return new ingenias.editor.cell.GeneralEventView(v);
+   }
+
+   if (userObject.getClass().equals(StateGoal.class)){
+           return new ingenias.editor.cell.StateGoalView(v);
+   }
+
+   if (userObject.getClass().equals(RuntimeFact.class)){
+           return new ingenias.editor.cell.RuntimeFactView(v);
+   }
+
+   if (userObject.getClass().equals(Believe.class)){
+           return new ingenias.editor.cell.BelieveView(v);
    }
 
 

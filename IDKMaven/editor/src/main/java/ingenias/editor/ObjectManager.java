@@ -73,6 +73,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode AOPMentalStatePatternNode=null;
 
+  public javax.swing.tree.DefaultMutableTreeNode AMIContextInstantiationNode=null;
+
   public javax.swing.tree.DefaultMutableTreeNode ShareToupleNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeWithInitMSNode=null;
@@ -112,6 +114,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
   public javax.swing.tree.DefaultMutableTreeNode ForkNodeNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode OrganizationNetworkNode=null;
+
+  public javax.swing.tree.DefaultMutableTreeNode FAERIECtxtModelInstNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode FAERIECtxtModelNode=null;
 
@@ -197,6 +201,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeEnumInitMSNode=null;
 
+  public javax.swing.tree.DefaultMutableTreeNode ContextUseTaskNode=null;
+
   public javax.swing.tree.DefaultMutableTreeNode Autonomous_entityNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode GeneralEventNode=null;
@@ -258,8 +264,6 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
   public javax.swing.tree.DefaultMutableTreeNode INGENIASCodeComponentNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode SimulationPackageNode=null;
-
-  public javax.swing.tree.DefaultMutableTreeNode AMIContextBindingDataNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode UMLClassifierNode=null;
 
@@ -343,6 +347,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   AOPMentalStatePatternNode=new javax.swing.tree.DefaultMutableTreeNode("AOPMentalStatePattern");
 
+  AMIContextInstantiationNode=new javax.swing.tree.DefaultMutableTreeNode("AMIContextInstantiation");
+
   ShareToupleNode=new javax.swing.tree.DefaultMutableTreeNode("ShareTouple");
 
   DeploymentUnitByTypeWithInitMSNode=new javax.swing.tree.DefaultMutableTreeNode("DeploymentUnitByTypeWithInitMS");
@@ -382,6 +388,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
   ForkNodeNode=new javax.swing.tree.DefaultMutableTreeNode("ForkNode");
 
   OrganizationNetworkNode=new javax.swing.tree.DefaultMutableTreeNode("OrganizationNetwork");
+
+  FAERIECtxtModelInstNode=new javax.swing.tree.DefaultMutableTreeNode("FAERIECtxtModelInst");
 
   FAERIECtxtModelNode=new javax.swing.tree.DefaultMutableTreeNode("FAERIECtxtModel");
 
@@ -467,6 +475,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   DeploymentUnitByTypeEnumInitMSNode=new javax.swing.tree.DefaultMutableTreeNode("DeploymentUnitByTypeEnumInitMS");
 
+  ContextUseTaskNode=new javax.swing.tree.DefaultMutableTreeNode("ContextUseTask");
+
   Autonomous_entityNode=new javax.swing.tree.DefaultMutableTreeNode("Autonomous_entity");
 
   GeneralEventNode=new javax.swing.tree.DefaultMutableTreeNode("GeneralEvent");
@@ -528,8 +538,6 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
   INGENIASCodeComponentNode=new javax.swing.tree.DefaultMutableTreeNode("INGENIASCodeComponent");
 
   SimulationPackageNode=new javax.swing.tree.DefaultMutableTreeNode("SimulationPackage");
-
-  AMIContextBindingDataNode=new javax.swing.tree.DefaultMutableTreeNode("AMIContextBindingData");
 
   UMLClassifierNode=new javax.swing.tree.DefaultMutableTreeNode("UMLClassifier");
 
@@ -617,6 +625,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     addNodeInSortedOrder( SymbolicMentalStatePatternNode,AOPMentalStatePatternNode);
 
+    addNodeInSortedOrder( INGENIASObjectNode,AMIContextInstantiationNode);
+
     addNodeInSortedOrder( InteractionUnitNode,ShareToupleNode);
 
     addNodeInSortedOrder( DeploymentUnitByTypeNode,DeploymentUnitByTypeWithInitMSNode);
@@ -656,6 +666,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     addNodeInSortedOrder( UMLObjectNode,ForkNodeNode);
 
     addNodeInSortedOrder( OrganizationGroupNode,OrganizationNetworkNode);
+
+    addNodeInSortedOrder( AMIContextInstantiationNode,FAERIECtxtModelInstNode);
 
     addNodeInSortedOrder( AMICtxtModelNode,FAERIECtxtModelNode);
 
@@ -731,13 +743,15 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     addNodeInSortedOrder( INGENIASObjectNode,WorkflowBoxNode);
 
-    addNodeInSortedOrder( INGENIASObjectNode,FAERIECtxtElementNode);
+    addNodeInSortedOrder( FrameFactNode,FAERIECtxtElementNode);
 
     addNodeInSortedOrder( INGENIASObjectNode,AgentComponentNode);
 
     addNodeInSortedOrder( SymbolicMentalStatePatternNode,GRASIAMentalStatePatternNode);
 
     addNodeInSortedOrder( DeploymentUnitByTypeNode,DeploymentUnitByTypeEnumInitMSNode);
+
+    addNodeInSortedOrder( TaskNode,ContextUseTaskNode);
 
     addNodeInSortedOrder( INGENIASObjectNode,Autonomous_entityNode);
 
@@ -801,8 +815,6 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     addNodeInSortedOrder( INGENIASObjectNode,SimulationPackageNode);
 
-    addNodeInSortedOrder( INGENIASObjectNode,AMIContextBindingDataNode);
-
     addNodeInSortedOrder( GeneralEventNode,CommunicationEventNode);
 
     addNodeInSortedOrder( TaskNode,TaskWSNode);
@@ -827,7 +839,7 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     addNodeInSortedOrder( RoleNode,RoleWSNode);
 
-    addNodeInSortedOrder( INGENIASObjectNode,AMIContextNode);
+    addNodeInSortedOrder( EnvironmentApplicationNode,AMIContextNode);
 
     addNodeInSortedOrder( INGENIASObjectNode,SimulationEventNode);
 
@@ -1083,6 +1095,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public Object getAOPMentalStatePattern(String object){
     Object o=findUserObject(AOPMentalStatePatternNode,object);
+    return o;
+  }
+  
+  public AMIContextInstantiation createAMIContextInstantiation(String id){
+    AMIContextInstantiation object=new     AMIContextInstantiation(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    AMIContextInstantiationNode.insert(nn, AMIContextInstantiationNode.getChildCount());
+    nn.setParent(AMIContextInstantiationNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getAMIContextInstantiation(String object){
+    Object o=findUserObject(AMIContextInstantiationNode,object);
     return o;
   }
   
@@ -1368,6 +1395,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public Object getOrganizationNetwork(String object){
     Object o=findUserObject(OrganizationNetworkNode,object);
+    return o;
+  }
+  
+  public FAERIECtxtModelInst createFAERIECtxtModelInst(String id){
+    FAERIECtxtModelInst object=new     FAERIECtxtModelInst(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    FAERIECtxtModelInstNode.insert(nn, FAERIECtxtModelInstNode.getChildCount());
+    nn.setParent(FAERIECtxtModelInstNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getFAERIECtxtModelInst(String object){
+    Object o=findUserObject(FAERIECtxtModelInstNode,object);
     return o;
   }
   
@@ -1911,6 +1953,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return o;
   }
   
+  public ContextUseTask createContextUseTask(String id){
+    ContextUseTask object=new     ContextUseTask(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    ContextUseTaskNode.insert(nn, ContextUseTaskNode.getChildCount());
+    nn.setParent(ContextUseTaskNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getContextUseTask(String object){
+    Object o=findUserObject(ContextUseTaskNode,object);
+    return o;
+  }
+  
   public GeneralEvent createGeneralEvent(String id){
     GeneralEvent object=new     GeneralEvent(id);
     DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
@@ -2316,21 +2373,6 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return o;
   }
   
-  public AMIContextBindingData createAMIContextBindingData(String id){
-    AMIContextBindingData object=new     AMIContextBindingData(id);
-    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
-    AMIContextBindingDataNode.insert(nn, AMIContextBindingDataNode.getChildCount());
-    nn.setParent(AMIContextBindingDataNode);
-    this.reload();
-    arbolObjetos.repaint();
-    return object;
-  }
-
-  public Object getAMIContextBindingData(String object){
-    Object o=findUserObject(AMIContextBindingDataNode,object);
-    return o;
-  }
-  
   public CommunicationEvent createCommunicationEvent(String id){
     CommunicationEvent object=new     CommunicationEvent(id);
     DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
@@ -2622,6 +2664,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     result.add(AOPMentalStatePattern.class);
 
+    result.add(AMIContextInstantiation.class);
+
     result.add(ShareTouple.class);
 
     result.add(DeploymentUnitByTypeWithInitMS.class);
@@ -2661,6 +2705,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     result.add(ForkNode.class);
 
     result.add(OrganizationNetwork.class);
+
+    result.add(FAERIECtxtModelInst.class);
 
     result.add(FAERIECtxtModel.class);
 
@@ -2746,6 +2792,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     result.add(DeploymentUnitByTypeEnumInitMS.class);
 
+    result.add(ContextUseTask.class);
+
     result.add(Autonomous_entity.class);
 
     result.add(GeneralEvent.class);
@@ -2807,8 +2855,6 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     result.add(INGENIASCodeComponent.class);
 
     result.add(SimulationPackage.class);
-
-    result.add(AMIContextBindingData.class);
 
     result.add(UMLClassifier.class);
 

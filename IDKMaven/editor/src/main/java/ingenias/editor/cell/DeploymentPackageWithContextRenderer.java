@@ -102,6 +102,34 @@ public class DeploymentPackageWithContextRenderer extends CompositeRenderer impl
 		}
 
 	
+        if (currentMap.get("Context")!=null && 
+            currentMap.get("Context") instanceof ingenias.editor.rendererxml.CollectionPanel) {
+          try {
+            ( (ingenias.editor.rendererxml.CollectionPanel) currentMap.get(
+                "Context")).setCollection("Context",ent.Context, ent.Context.getType());
+          }
+          catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+          }
+          catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+          }
+        }
+	
+        if (currentMap.get("ContextModelInstantiation")!=null && 
+            currentMap.get("ContextModelInstantiation") instanceof ingenias.editor.rendererxml.CollectionPanel) {
+          try {
+            ( (ingenias.editor.rendererxml.CollectionPanel) currentMap.get(
+                "ContextModelInstantiation")).setCollection("ContextModelInstantiation",ent.ContextModelInstantiation, ent.ContextModelInstantiation.getType());
+          }
+          catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+          }
+          catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+          }
+        }
+	
         if (currentMap.get("Parameters")!=null && 
             currentMap.get("Parameters") instanceof ingenias.editor.rendererxml.CollectionPanel) {
           try {
@@ -116,27 +144,36 @@ public class DeploymentPackageWithContextRenderer extends CompositeRenderer impl
           }
         }
 	
+        if (currentMap.get("Context")!=null && 
+            currentMap.get("Context") instanceof ingenias.editor.rendererxml.CollectionPanel) {
+          try {
+            ( (ingenias.editor.rendererxml.CollectionPanel) currentMap.get(
+                "Context")).setCollection("Context",ent.Context, ent.Context.getType());
+          }
+          catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+          }
+          catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+          }
+        }
+	
+        if (currentMap.get("ContextModelInstantiation")!=null && 
+            currentMap.get("ContextModelInstantiation") instanceof ingenias.editor.rendererxml.CollectionPanel) {
+          try {
+            ( (ingenias.editor.rendererxml.CollectionPanel) currentMap.get(
+                "ContextModelInstantiation")).setCollection("ContextModelInstantiation",ent.ContextModelInstantiation, ent.ContextModelInstantiation.getType());
+          }
+          catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+          }
+          catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+          }
+        }
+	
 
       
-      if (currentMap.get("ContextBindingData")!=null){
-	   if (ent!=null && ent.getContextBindingData()!=null){
-		if (currentMap.get("ContextBindingData") instanceof javax.swing.JLabel){
-		((javax.swing.JLabel)( currentMap).get("ContextBindingData")).setText(ent.getContextBindingData().toString());
-		} else {
-		 if (currentMap.get("ContextBindingData") instanceof javax.swing.text.JTextComponent)
-		 ((javax.swing.text.JTextComponent)( currentMap).get("ContextBindingData")).setText(ent.getContextBindingData().toString());
-		
-	      } 
-	   } else  {
-	     if (currentMap.get("ContextBindingData") instanceof javax.swing.JLabel)
-	     ((javax.swing.JLabel)( currentMap).get("ContextBindingData")).setText("");
-	     else {
-		if (!(currentMap.get("ContextBindingData") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
-		((javax.swing.text.JTextComponent)( currentMap).get("ContextBindingData")).setText("");
-	     }
-         }
-	  }
-	   
       if (currentMap.get("Parameters")!=null){
 	   if (ent!=null && ent.getParameters()!=null){
 		if (currentMap.get("Parameters") instanceof javax.swing.JLabel){
@@ -190,6 +227,25 @@ public class DeploymentPackageWithContextRenderer extends CompositeRenderer impl
 	     else {
 		if (!(currentMap.get("Context") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
 		((javax.swing.text.JTextComponent)( currentMap).get("Context")).setText("");
+	     }
+         }
+	  }
+	   
+      if (currentMap.get("ContextModelInstantiation")!=null){
+	   if (ent!=null && ent.getContextModelInstantiation()!=null){
+		if (currentMap.get("ContextModelInstantiation") instanceof javax.swing.JLabel){
+		((javax.swing.JLabel)( currentMap).get("ContextModelInstantiation")).setText(ent.getContextModelInstantiation().toString());
+		} else {
+		 if (currentMap.get("ContextModelInstantiation") instanceof javax.swing.text.JTextComponent)
+		 ((javax.swing.text.JTextComponent)( currentMap).get("ContextModelInstantiation")).setText(ent.getContextModelInstantiation().toString());
+		
+	      } 
+	   } else  {
+	     if (currentMap.get("ContextModelInstantiation") instanceof javax.swing.JLabel)
+	     ((javax.swing.JLabel)( currentMap).get("ContextModelInstantiation")).setText("");
+	     else {
+		if (!(currentMap.get("ContextModelInstantiation") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
+		((javax.swing.text.JTextComponent)( currentMap).get("ContextModelInstantiation")).setText("");
 	     }
          }
 	  }

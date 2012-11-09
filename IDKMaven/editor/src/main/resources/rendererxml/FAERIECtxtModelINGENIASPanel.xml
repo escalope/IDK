@@ -8,9 +8,6 @@
 ##/vbox#
 ##container id="CtxtElements" border="MatteBorder(2,2,2,2,black)" constraints="BorderLayout.CENTER" background="white" foreground="white" preferredsize="80,80"#
 ##/container#
-##hcontainer id="CtxtValues"
-          border="MatteBorder(2,2,2,2,black)" constraints="BorderLayout.SOUTH" background="white" foreground="white" preferredsize="80,80"#
-##/hcontainer#
 ##/withoutportspanel#
 
 		

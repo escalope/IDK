@@ -101,25 +101,6 @@ current=ent.getPrefs(attributes).getView();
 	
 
       
-      if (currentMap.get("Event")!=null){
-	   if (ent!=null && ent.getEvent()!=null){
-		if (currentMap.get("Event") instanceof javax.swing.JLabel){
-		((javax.swing.JLabel)( currentMap).get("Event")).setText(ent.getEvent().toString());
-		} else {
-		 if (currentMap.get("Event") instanceof javax.swing.text.JTextComponent)
-		 ((javax.swing.text.JTextComponent)( currentMap).get("Event")).setText(ent.getEvent().toString());
-		
-	      } 
-	   } else  {
-	     if (currentMap.get("Event") instanceof javax.swing.JLabel)
-	     ((javax.swing.JLabel)( currentMap).get("Event")).setText("");
-	     else {
-		if (!(currentMap.get("Event") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
-		((javax.swing.text.JTextComponent)( currentMap).get("Event")).setText("");
-	     }
-         }
-	  }
-	   
       if (currentMap.get("Label")!=null){
 	   if (ent!=null && ent.getLabel()!=null){
 		if (currentMap.get("Label") instanceof javax.swing.JLabel){

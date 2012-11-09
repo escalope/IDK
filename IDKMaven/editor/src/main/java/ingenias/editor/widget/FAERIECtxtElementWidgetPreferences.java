@@ -24,7 +24,7 @@ package ingenias.editor.widget;
 import org.jgraph.graph.*;
 import java.util.*;
 
-public class FAERIECtxtElementWidgetPreferences extends INGENIASObjectWidgetPreferences {
+public class FAERIECtxtElementWidgetPreferences extends FrameFactWidgetPreferences {
 
   Hashtable preferredWidget=new Hashtable();
   Hashtable defaultValues=new Hashtable();
@@ -32,7 +32,7 @@ public class FAERIECtxtElementWidgetPreferences extends INGENIASObjectWidgetPref
 
   public FAERIECtxtElementWidgetPreferences() {
   super();
-  String[] preferredOrder={"id","Description",""};
+  String[] preferredOrder={"id","Description","Slots",""};
   this.setPreferredOrder(preferredOrder);
    Vector result=null;
   

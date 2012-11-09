@@ -9,7 +9,7 @@
     <groupId>net.sf.ingenias</groupId>
     <artifactId>iafarch</artifactId>
     <packaging>pom</packaging>
-    <version>1.3</version>
+    <version>1.4-SNAPSHOT</version>
     <name>iafarch</name>
     <description>The INGENIAS Development Kit</description>
     <url>http://ingenias.sf.net</url>

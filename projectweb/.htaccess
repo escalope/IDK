@@ -1,0 +1,7 @@
+---
+layout: none
+permalink: .htaccess
+---
+AddType video/mp4 mp4
+AddType video/webm webm
+AddType video/ogg ogv

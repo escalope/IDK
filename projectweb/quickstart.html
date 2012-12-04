@@ -37,9 +37,9 @@ registered your project in sonatype</a>.&nbsp;
 There are several development scenarios considered in this
 tutorial
  
-- Starting a project from one template</li>
+- Starting a project from one template
 - Running a project
-- Modifying a project</li>
+- Modifying a project
 
 
 The scenarios consider a GUI Agent. This GUI agent shows one window
@@ -53,6 +53,19 @@ consists in printing a message in the console.
 * Will be replaced with the ToC, excluding the "Contents" header
 {:toc}
 
+#If you are already familiar with Maven, read this
+
+INGENIAS elements can be found under the groupid **net.sf.ingenias** in <a href="http://search.maven.org/#search%7cga%7c1%7cg%3A%22net.sf.ingenias%22" target="_blank">Maven Central</a>.  The main developer is **escalope** and the packages ought to be signed. If you know about Maven, you can already use the compoments there. There are archetypes for building INGENIAS projects. The relevant archetypes are:
+
+- *iafarch-empty*: it creates an empty project
+- *iafarch-gui*: it creates a project showing how an agent can interface with a GUI
+- *iafarch-helloworld*: a basic example of an agent printing hello world
+- *iafarch-interaction*: a more complex example involving interaction among agents as well as inheritance properties
+
+Sources can be found in sourceforge in <a href="http://ingenias.svn.sourceforge.net/viewvc/ingenias/" target="_blank">http://ingenias.svn.sourceforge.net/viewvc/ingenias</a>. The trunk/IDKMaven folder contains the development branch of INGENIAS Development Kit. Tagged versions can be found in the tags branch. 
+
+If you don't know much about Maven, you should keep reading. 
+
 # Required software
 
 The INGENIAS requires three pieces of software which, if you are used
@@ -65,19 +78,11 @@ href="http://ant.apache.org">ant</a>.
 ## Installing Java SDK
 
 First, The Java SDK has to be installed. It needs to be the sun
-version, not the openjdk.
-<b>Linux</b>: just type in a console 
-<code>sudo apt-get install sun-java6-jdk</code> 
+version, not the openjdk. INGENIAS is compiled with JDK 64 bits 1.7.0_07, so you should have this version at least.  
 
-and to be sure this is the version being executed, run
 
-<code>sudo update-alternatives --config java</code> 
 
-And 
-
-<code>sudo update-alternatives --config javac</code>
-
-In both cases, check that the java-sun-6 version is selected.
+**Linux**: JDK is no more distributed in some linux flavors, so you should consult your distribution support site. Anyway, the community is working on this. <a href="http://www.wikihow.com/Upgrade-Oracle-Java-on-Ubuntu-Linux">You can find four ways to install JDK</a>
 
 <b>Windows and others:</b><a target="_blank" title="Ant download and install
 instructions"
@@ -92,7 +97,8 @@ href="http://www.oracle.com/technetwork/java/javase/index-137561.html">.
 ## Installing Ant
 
 Ant software has to be installed as well. To do so:
-<b>Linux:</b> just type in a console 
+
+<b>Linux:</b>  type in a console 
 
 <code>sudo apt-get install ant</code> 
 
@@ -114,11 +120,10 @@ href="http://ant.apache.org/manual/install.html">. </a>
 
 ## Installing Maven
 
-<b>Linux</b>: just type in a console 
+<b>Linux</b>:  type in a console 
 
 <code>sudo apt-get install maven3</code>
-<b>
-</b>
+
 <b>Windows and others:</b> <a title="Maven download and install instructions"
 href="http://maven.apache.org/download.html">Check the maven
 download and installation guide</a>.&nbsp;
@@ -146,9 +151,7 @@ are some guidelines that may help to decide which names to assign to
 each one</a>. For the sake of a small development, just write the
 same value in both. The version number can be left as it is. It makes
 sense in long term developments, though.&nbsp;
-<video controls="controls" type="video/webm" preload="auto"
-poster="/assets/videos/posterdemorapida0.png"
-src="/assets/videos/demorapida0.webm"></video>
+<video controls="controls" type="video/webm" preload="auto" poster="/assets/videos/posterdemorapida0.png" src="/assets/videos/demorapida0.webm"/>
 
 # Running the project
 
@@ -175,19 +178,18 @@ automatically.</li>
 embedded JADE instance". It will fail if there is no opened JADE
 instance . </li>
 </ul>
+
 The XXXX stands for the name of the deployment. In INGENIAS, you can
 specify how many agents you want to run, of what type, and what kind of
 initial state you want to assume from them. Each deployment has a
 specific name which you assign in the specification. This name replaces
-the XXXX in the example.&nbsp; When there is no XXXX, it is assumed one
+the XXXX in the example. When there is no XXXX, it is assumed one
 instance of each defined agent is launched assuming a default initial
-state.
-
-<video controls="controls" type="video/webm" preload="none"
-poster="/assets/videos/posterdemorapida1.png"
-src="/assets/videos/demorapida1.webm"></video>
+state
+<video controls="controls" type="video/webm" preload="auto" poster="/assets/videos/posterdemorapida1.png" src="/assets/videos/demorapida1.webm"/>
 
 # Modifying the specification
+
 A development is usually requiring creating or modifying a
 specification. The video shows how to access the specification, how a
 new deployment is defined, and how to run this new deployment.
@@ -197,16 +199,11 @@ launched with:
 After modifying the specification, it needs to be saved to be
 considered in the execution. Then, type your preferred launch command,
 like:
-
+ 
 <code>ant run</code> 
 When the specification is modified, the next time ant is invoked, it
 will take longer to execute. The reason is the need to regenerate the
 code for several Java classes to take into account the changes made.
 
-<video controls="controls" type="video/webm" preload="none"
-poster="/assets/videos/posterdemorapida2.png"
-src="/assets/videos/demorapida2.webm"></video>
-
-
-
+<video controls="controls" type="video/webm" preload="auto" poster="/assets/videos/posterdemorapida2.png" src="/assets/videos/demorapida2.webm"></video>
 

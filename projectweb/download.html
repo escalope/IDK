@@ -1,0 +1,34 @@
+---
+layout: pagewithoutposts
+title: Download
+---
+
+All the artifacts being part of the INGENIAS support tools are
+already uploaded to the <a target="_blank" title="Maven Central Repository"
+href="http://search.maven.org/">Maven central repository</a>. Also,
+since INGENIAS projects are Maven projects, it is possible to include
+any software available in this repository. 
+
+Since Maven adoption, the download has been left aside partially, since it is Maven the one responsible of downloading anything. Nevertheless, if you require binaries, we will try to provide some in sourceforge. Currently, only the editor is available. The editor is the component responsible of modeling in INGENIAS:
+
+-  [The editor will be available from sourceforge as a file](http://sourceforge.net/projects/ingenias/files/INGENIASEditor). 
+
+As more elements are available, this page will be updated.
+
+In the meantime, please, check the [Tutorial](/tutorial.html) and learn how to use the IDK using Maven. If you find troubles learning Maven, you still can  use [eclipse IDE](http://www.eclipse.org). You should get one version that has the Maven plugin already installed since not all of them have it. I have checked the following do have this plugin in versions Juno and above:
+
+- **Eclipse IDE for Java and DSL Developers**
+- **Eclipse for RCP and RAP Developers**
+
+To use INGENIAS from eclipse, you need to follow these steps:
+
+- Go to the menu option **file**, then **New**, then **Project**
+- Choose **Maven Project**, and then press **Next**
+- Click **Next** in the following dialogue
+- In the archetype selection dialog, write **iaf** in the filter, select the latest non SNAPSHOT version. You can choose an empty project or a project with some content already inside. Click on **Next**
+- Write your project data, and press **Finish**
+
+Since INGENIAS has been ported to Maven and eclipse has Maven plugin built-in, you should be able to compile the system and generate the code as if you were in command line. You can use the Eclipse's external tools option to launch the ant targets as you would from command line.
+
+
+

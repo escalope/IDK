@@ -1,0 +1,33 @@
+﻿1
+00:00:05,300 --> 00:00:13,800
+Se lanza la ejecución de los tests con "mvn test"
+
+2
+00:00:11,250 --> 00:00:21,650
+La visualización de resultados se hace en una sesión de xvfb que emula un servidor X
+
+3
+00:00:13,900 --> 00:00:21,600
+El servidor se lanza en background y se captura su salida mediante vnc
+
+4
+00:00:21,750 --> 00:00:32,250
+El gui bajo prueba se lanza desde un terminal indicando que el display está asociado a este servidor X.
+Esto se consigue con el comando "env DISPLAY=:1 whatevercommand"
+
+5
+00:00:25,500 --> 00:00:31,200
+Se usa FEST para reproducir acciones de un usuario
+
+6
+00:00:29,450 --> 00:00:36,450
+FEST inyecta eventos en el GUI tales como movimientos de un ratón o pulsaciones de teclado
+
+7
+00:00:33,700 --> 00:00:43,100
+Los eventos no son lanzados sobre X directamente, sino que se ajustan a componentes concretos de la GUI, lo que permite una mayor legibilidad de las pruebas
+
+8
+00:00:38,350 --> 00:00:48,650
+Los tests incluyen la creación de algunas entidades, introducción de datos en campos de texto, chequeo del estado del GUI, y comprobación de que se crean entidades del nombre esperado en los diagramas
+

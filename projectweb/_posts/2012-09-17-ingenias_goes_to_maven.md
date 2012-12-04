@@ -2,6 +2,8 @@
 layout: post 
 title: INGENIAS goes to MAVEN 
 comments: true
+tags:
+- news
 --- 
 
 INGENIAS has two versions at this moment. The [old

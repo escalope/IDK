@@ -1,0 +1,36 @@
+﻿1
+00:00:05,300 --> 00:00:13,800
+Tests are started from console with "mvn test"
+
+2
+00:00:11,250 --> 00:00:21,650
+Tests are launched within a  xvfb session, which is a software that emulates a hardware-less X server
+
+3
+00:00:13,900 --> 00:00:21,600
+The Xfvb is in the background and it is headless by default.
+Nevertheless, its output can be captured and made visible through VNC
+
+4
+00:00:21,750 --> 00:00:32,250
+The GUI under testing is launched from a terminal by indicating that the DISPLAY is the new one run by Xfvb.
+This is easy from linux with the commands "env DISPLAY=:1 whatevercommand"
+
+5
+00:00:25,500 --> 00:00:31,200
+FEST framework is used to simulate user actions
+
+6
+00:00:29,450 --> 00:00:36,450
+FEST injects events into the GUI such as mouse movements or key press/release actions
+
+7
+00:00:33,700 --> 00:00:43,100
+Events are not launched over X associated to some raw X,Y position.
+Instead, they are focused into concrete GUI components, so the testing code is quite more readable.
+
+8
+00:00:38,350 --> 00:00:48,650
+Tests include creation of entities, checking there are elements in the diagrams matching the expected names of created elements,
+text input, GUI state (e.g. enable/disabled), and others
+

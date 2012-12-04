@@ -1,10 +1,17 @@
+
 permalink: :title.html
 destination: ../web/
 markdown:    kramdown
 kramdown:
   use_coderay: true
 auto: true
+permalink: /blog/:year/:month/:day/:title
+include:
+  - .htaccess
 exclude:
   - Rakefile
   - Gemfile
   - .gitignore
+
+tag_page_layout: tag_page
+tag_page_dir: tag

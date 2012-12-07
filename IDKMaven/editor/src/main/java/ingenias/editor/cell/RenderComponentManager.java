@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.AbstractMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
@@ -45,6 +46,7 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
+import javax.swing.SwingUtilities;
 
 import org.jgraph.JGraph;
 import org.jgraph.graph.AttributeMap;
@@ -58,12 +60,22 @@ import org.swixml.SwingEngine;
  */
 
 
+
+
 public class RenderComponentManager {
 
 
 
 	private static Hashtable<RenderIndex,JPanel> renderer = new Hashtable<RenderIndex,JPanel>();
 	private static Hashtable<RenderIndex,Hashtable> components = new Hashtable<RenderIndex,Hashtable>();
+	
+	private static Hashtable<Entity,String> hashcodeEntities=new Hashtable();
+	private static Hashtable<AbstractMap.SimpleEntry<String,String>,Dimension> initialDimension=
+			new Hashtable<AbstractMap.SimpleEntry<String,String>,Dimension>();
+	private static Hashtable<AbstractMap.SimpleEntry<Entity,String>,Dimension> registeredDimension=
+			new Hashtable<AbstractMap.SimpleEntry<Entity,String>,Dimension>();
+	
+	
 	private static JWindow helperFrame=new JWindow();
 	static {
 		helperFrame.setVisible(false);
@@ -74,7 +86,6 @@ public class RenderComponentManager {
 		synchronized (renderer){
 			//System.err.println("REgistered ("+classname+","+kind+")"+ ids);
 			renderer.put(new RenderIndex(classname,kind),component);
-
 			components.put(new RenderIndex(classname,kind),ids);
 		}
 	}
@@ -163,6 +174,8 @@ public class RenderComponentManager {
 			throw new ingenias.exception.ParseException("Review XML compliance in file "+file+" with content "+result);
 		}
 	}
+	
+	
 
 	public static Dimension getSize(Entity entity,
 			String classname, ingenias.editor.entities.ViewPreferences.ViewType kind){
@@ -170,6 +183,9 @@ public class RenderComponentManager {
 		/*if (retrievePanel(classname,kind)==null){
 			System.err.println(renderer);
 		}*/
+		if (!SwingUtilities.isEventDispatchThread()){
+			throw new RuntimeException("Method getSize was called from outside the event dispatch thread");
+		}
 		synchronized (renderer){
 			try {
 				helperFrame.getContentPane().removeAll();

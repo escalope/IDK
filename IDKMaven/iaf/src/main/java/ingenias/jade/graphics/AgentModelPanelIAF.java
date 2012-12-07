@@ -49,6 +49,8 @@ import java.awt.geom.Rectangle2D;
 import java.util.Hashtable;
 import java.util.Map;
 
+import javax.swing.SwingUtilities;
+
 import org.jgraph.event.GraphModelEvent;
 import org.jgraph.event.GraphModelListener;
 import org.jgraph.graph.BasicMarqueeHandler;
@@ -69,7 +71,7 @@ public class AgentModelPanelIAF extends ingenias.editor.panels.AgentModelPanel {
 	private boolean modifying=false;
 
 	public void resizeEntities(){
-		new Thread(){
+		Runnable runFromEDT=new Runnable(){
 			public void run(){
 				if (!modifying){
 					modifying=true;
@@ -105,8 +107,12 @@ public class AgentModelPanelIAF extends ingenias.editor.panels.AgentModelPanel {
 					modifying=false;
 				}
 			}
-		}.start();
-	}
+		};
+
+	//	SwingUtilities.invokeLater(runFromEDT);
+	};
+
+
 
 	@Override
 	public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.Entity

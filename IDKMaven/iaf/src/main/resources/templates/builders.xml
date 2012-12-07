@@ -41,6 +41,7 @@
            property="maven.classpath.present"/>
    <antcall target="generateclasspathfrommaven"/>  
    <loadfile srcFile="target/classpath.txt" property="mavenclasspath" />  
+   <loadfile srcFile="target/classpathingenias.txt" property="ingeniasmavenclasspath" />  
   </target>
   
 <!--
@@ -86,6 +87,7 @@ This is the macro definition for maven Ant task
     classname="ingenias.simulation.@@@v@@@simulationconfig@@@/v@@@">
 		<classpath>			  
 			<pathelement path="${maven.build.outputDir}" />
+			<pathelement path="${ingeniasmavenclasspath}" />
 			<pathelement path="${mavenclasspath}" />            
 		</classpath>
     </java>
@@ -97,7 +99,8 @@ This is the macro definition for maven Ant task
     <java fork="true" failonerror="true" maxmemory="@@@v@@@memory@@@/v@@@"
     classname="ingenias.simulation.@@@v@@@simulationconfig@@@/v@@@">
 		<classpath>	
-			<pathelement path="${maven.build.outputDir}" />   		  
+			<pathelement path="${maven.build.outputDir}" />   	
+			<pathelement path="${ingeniasmavenclasspath}" />	  
 			<pathelement path="${mavenclasspath}" />          			  
 		</classpath>
     </java>
@@ -118,7 +121,8 @@ This is the macro definition for maven Ant task
     classname="ingenias.jade.Main@@@v@@@node@@@/v@@@ProdStandAlone">
     <arg line="@@@v@@@port@@@/v@@@"/>
 		<classpath>		
-			<pathelement path="${maven.build.outputDir}" />     	  
+			<pathelement path="${maven.build.outputDir}" />     
+			<pathelement path="${ingeniasmavenclasspath}" />	  
 			<pathelement path="${mavenclasspath}" />     
 		</classpath>
     </java>
@@ -129,7 +133,8 @@ This is the macro definition for maven Ant task
     classname="ingenias.jade.Main@@@v@@@node@@@/v@@@">
     <arg line="@@@v@@@port@@@/v@@@"/> 
     	<classpath>			  
-			<pathelement path="${maven.build.outputDir}" />     
+			<pathelement path="${maven.build.outputDir}" />    
+			<pathelement path="${ingeniasmavenclasspath}" /> 
 			<pathelement path="${mavenclasspath}" />          
 		</classpath>
     </java>
@@ -141,6 +146,7 @@ This is the macro definition for maven Ant task
     <arg line="@@@v@@@port@@@/v@@@ pause"/> 
     	<classpath>			  
 			<pathelement path="${maven.build.outputDir}" />     
+			<pathelement path="${ingeniasmavenclasspath}" />
 			<pathelement path="${mavenclasspath}" />          
 		</classpath>
     </java>
@@ -151,8 +157,9 @@ This is the macro definition for maven Ant task
     <java fork="true" failonerror="true" maxmemory="128m"
     classname="jade.Boot">
 	<arg line="-gui -port @@@v@@@port@@@/v@@@ -mtp 'jade.mtp.http.MessageTransportProtocol(http://127.0.0.1:@@@v@@@fedport@@@/v@@@/acc)' -file-dir target/jade/"/>
-      	<classpath>			  
+      	<classpath>					
 			<pathelement path="${maven.build.outputDir}" />   
+			<pathelement path="${ingeniasmavenclasspath}" />
 			<pathelement path="${mavenclasspath}" />        
 		</classpath>
     </java>
@@ -163,8 +170,9 @@ This is the macro definition for maven Ant task
     <java fork="true" failonerror="true" maxmemory="128m"
     classname="jade.Boot">
     <arg line="-gui -port @@@v@@@port@@@/v@@@ -mtp 'jade.mtp.http.MessageTransportProtocol(http://127.0.0.1:@@@v@@@fedport@@@/v@@@/acc)' -file-dir target/jade subDF:jade.domain.df federator:jade.misc.DFFederatorAgent(resources/DFFederatorAgent.properties)"/>	
-		<classpath>			  
+		<classpath>		  
 			<pathelement path="${maven.build.outputDir}" />    
+			<pathelement path="${ingeniasmavenclasspath}" />	
 			<pathelement path="${mavenclasspath}" />    
 		</classpath>
     </java>
@@ -176,8 +184,9 @@ This is the macro definition for maven Ant task
 		classname="ingenias.jade.Main@@@v@@@node@@@/v@@@">
 		  <jvmarg line="-Xdebug -Xrunjdwp:transport=dt_socket,address=60005,server=y,suspend=n"/>
 		 <arg line="@@@v@@@port@@@/v@@@"/>
-		<classpath>			  
+		<classpath>		  
 			<pathelement path="${maven.build.outputDir}" />     
+			<pathelement path="${ingeniasmavenclasspath}" />
 			<pathelement path="${mavenclasspath}" />        
 		</classpath>
 	  </java>

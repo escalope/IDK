@@ -144,7 +144,7 @@ public class MentalStateProcessor implements LocksListener {
 						&& !sb.getFinished()){
 	
 					try {
-						Thread.currentThread().sleep((long)(200*Math.random()));
+						Thread.currentThread().sleep((long)(100*Math.random()));
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -163,7 +163,7 @@ public class MentalStateProcessor implements LocksListener {
 					getExecutionState().equals(
 							ja.getMainBehavior().STATE_BLOCKED)){
 				try {
-					Thread.currentThread().sleep((long)(1000*Math.random()));
+					Thread.currentThread().sleep((long)(100*Math.random()));
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 				//	e.printStackTrace();

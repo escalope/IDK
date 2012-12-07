@@ -45,6 +45,7 @@ import jade.core.behaviours.CyclicBehaviour;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -58,10 +59,13 @@ import java.util.Vector;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeListener;
 
 import org.jgraph.event.GraphModelEvent;
 import org.jgraph.event.GraphModelListener;
+import org.jgraph.graph.AttributeMap;
 import org.jgraph.graph.CellView;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphConstants;
@@ -531,13 +535,31 @@ MentalStateUpdater {
 	private void insertIntoDiagram(final Entity ent) {
 		if (amm!=null){
 			Runnable insert=new Runnable(){
-				public void run(){
-					String superclass=ent.getClass().getSuperclass().getName().substring(ent.getClass().getSuperclass().getName().lastIndexOf(".")+1);
-					Dimension dim=RenderComponentManager.getSize(ent,superclass,ent.getPrefs(null).getView());
-					java.awt.Point j = ModelJGraph.findEmptyPlacePoint(dim,amm);
+				public void run(){					
 					ent.getPrefs(null).setView(ViewType.UML);
-					DefaultGraphCell dgc = amm.insertDuplicated(j, ent);
+					final DefaultGraphCell dgc = amm.insertDuplicated(new Point(0,0), ent);
 					resizeAllMentalEntities();
+					Runnable findInsertionPlace=new Runnable(){
+						public void run(){ // this will be run after all entities are resized
+							AttributeMap attributes = amm.getModel().getAttributes(dgc);
+							Rectangle2D cloc = GraphConstants.getBounds(attributes);													
+							Dimension dim1 = new Dimension(
+							(int)cloc.getWidth(), 
+							(int)cloc.getHeight());
+							java.awt.Point j = ModelJGraph.findEmptyPlacePoint(
+									dim1,
+									amm);
+							Rectangle2D loc=GraphConstants.getBounds(attributes);			  
+							loc.setRect(loc.getX(),loc.getY(),(int) Math.min(400, dim1
+									.getWidth()), (int) Math.min(300, dim1.getHeight()));		
+							GraphConstants.setBounds(attributes,loc);	
+							Map nmap=new Hashtable();
+							nmap.put(dgc,attributes);
+							amm.getModel().edit(nmap,null,null,null);
+						}
+					};
+					SwingUtilities.invokeLater(findInsertionPlace);					
+					
 				}
 			};
 			javax.swing.SwingUtilities.invokeLater(insert);
@@ -548,7 +570,7 @@ MentalStateUpdater {
 		}
 	}
 
-	public void resizeAllMentalEntities() {			
+	public synchronized void resizeAllMentalEntities() {			
 		if (amm!=null){
 			Runnable resize=new Runnable(){
 				public void run(){
@@ -587,7 +609,7 @@ MentalStateUpdater {
 					}		
 				}
 			};
-			javax.swing.SwingUtilities.invokeLater(resize);
+			javax.swing.SwingUtilities.invokeLater(resize);			
 
 
 		}

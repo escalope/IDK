@@ -228,7 +228,7 @@ public class EventManager implements AgentEventListener{
 
 	@Override
 	public void startingTaskExecution(String agentid, String agentType, Task task){
-		for (AgentEventListener listener:listeners){
+		for (AgentEventListener listener:listeners){			
 			listener.startingTaskExecution(agentid, agentType, task);
 		}
 

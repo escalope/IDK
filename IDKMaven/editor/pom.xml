@@ -382,10 +382,13 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/java/test/testngsuite.xml</suiteXmlFile>
 					</suiteXmlFiles>
+					<properties>
 					<property>
 						<name>listener</name>
-						<value>org.fest.swing.testng.ScreenshotOnFailureListener</value>
+						<value>org.fest.swing.testng.listener.ScreenshotOnFailureListener</value>						
 					</property>
+					</properties>
+				
 				</configuration>
 			</plugin>
 

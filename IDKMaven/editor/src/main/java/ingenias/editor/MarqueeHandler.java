@@ -21,6 +21,7 @@
 package ingenias.editor;
 import ingenias.editor.CommonMenuEntriesActionFactory;
 import ingenias.editor.cell.NAryEdge;
+import ingenias.editor.editiondialog.MyJLabel;
 import ingenias.editor.entities.Entity;
 import ingenias.editor.entities.RoleEntity;
 import ingenias.editor.widget.GraphicsUtils;
@@ -35,6 +36,7 @@ import ingenias.generator.browser.GraphRelationshipImp;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.event.*;
 import java.awt.event.*;
 import java.util.Map;
@@ -46,6 +48,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -60,6 +64,8 @@ import org.jgraph.JGraph;
 import org.jgraph.graph.*;
 import org.jgraph.event.*;
 import java.util.Vector;
+import java.util.concurrent.TimeUnit;
+
 import org.jgraph.JGraph;
 import org.jgraph.graph.*;
 import org.jgraph.event.*;
@@ -127,6 +133,23 @@ public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Seri
 		return p;
 	}
 
+
+	public static DefaultGraphCell getOtherExtremeFromAryEdge(GraphModel m,DefaultEdge de){
+		DefaultPort sourcePort = (DefaultPort) ( (Edge) de).getSource();
+		Object source = m.getParent(sourcePort);
+		Port targetPort = (Port) ( (Edge) de).getTarget();
+		Object target = m.getParent(targetPort);
+
+		if (!(source instanceof NAryEdge)) {
+			return (DefaultGraphCell) source;
+		}
+		if (!(target instanceof NAryEdge)) {
+			return (DefaultGraphCell) target;
+		}
+		return null;
+
+	}
+	
 	public static ingenias.editor.cell.NAryEdge getNAryEdge(GraphModel m,DefaultEdge de){
 		DefaultPort sourcePort = (DefaultPort) ( (Edge) de).getSource();
 		Object source = m.getParent(sourcePort);
@@ -274,7 +297,9 @@ public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Seri
 			// Find Cell in Model Coordinates
 			Object cell = getGraph().getFirstCellForLocation(loc.x, loc.y);
 
-			JPopupMenu menu=new JPopupMenu();
+			JPopupMenu menu=new JPopupMenu();	
+			
+			menu.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 
 			if (cell instanceof DefaultEdge){
 				menu.add("Relationship");
@@ -313,11 +338,23 @@ public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Seri
 						}
 						addActionsToPopupMenu(menu,af.createDiagramOperations(getGraph()));
 						menu.addSeparator();
-						addActionsToPopupMenu(menu,daf.createDiagramSpecificInsertActions(e.getPoint(),graph));	
+						Vector<AbstractAction> insertActions = daf.createDiagramSpecificInsertActions(e.getPoint(),graph);
+						Collections.sort(insertActions, new Comparator<AbstractAction>(){
+
+							@Override
+							public int compare(AbstractAction o1,
+									AbstractAction o2) {
+								return o1.getValue(AbstractAction.NAME).toString().compareTo(o2.getValue(AbstractAction.NAME).toString());
+							}
+							
+						});
+						
+						addActionsToPopupMenuInsideComponent(menu,insertActions);	
 					}
 				}
 
 
+			
 			// Display PopupMenu
 			menu.show(getGraph(), e.getX(), e.getY());
 
@@ -411,14 +448,21 @@ public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Seri
 			DefaultEdge[] edgesPerRole=nary.getRoleEdges(roles.elementAt(k));					
 			if (edgesPerRole.length>1){
 				for (int j=0;j<edgesPerRole.length;j++){
+					final RoleEntity re=(RoleEntity)(edgesPerRole[j].getUserObject());
 					Vector<AbstractAction> edgeMenuActions = af.createEdgeActions(
-							nary.getRoleEdges(roles.elementAt(k))[j], getGraph());
-					menu.add(createMenu("role:"+roles.elementAt(k),edgeMenuActions));
+							nary.getRoleEdges(roles.elementAt(k))[j], getGraph());		
+					DefaultGraphCell dgc=getOtherExtremeFromAryEdge(graph.getModel(), edgesPerRole[j]);
+					
+					menu.add(createMenu("role:"+roles.elementAt(k)+":"+
+							((Entity)dgc.getUserObject()).getId(),edgeMenuActions));
 				}
 			} else {
 				if (edgesPerRole.length==1){
+					DefaultGraphCell dgc=getOtherExtremeFromAryEdge(graph.getModel(), nary.getRoleEdges(roles.elementAt(k))[0]);
+					
 					Vector<AbstractAction> edgeMenuActions = af.createEdgeActions(nary.getRoleEdges(roles.elementAt(k))[0], getGraph());
-					menu.add(createMenu("role:"+roles.elementAt(k),edgeMenuActions));
+					menu.add(createMenu("role:"+roles.elementAt(k)+":"+
+							((Entity)dgc.getUserObject()).getId(),edgeMenuActions));
 				} 
 			}
 
@@ -436,12 +480,96 @@ public class MarqueeHandler extends BasicMarqueeHandler  implements java.io.Seri
 		// TODO Auto-generated method stub
 		return menu;
 	}
+	
+	private void addActionsToPopupMenuInsideComponent(final JPopupMenu menu, 
+			Vector<AbstractAction> actions) {
+
+		int columns=4;
+		int rows=(actions.size()/columns)+1;;
+		
+		if (actions.size() % columns ==0)
+			rows=actions.size()/columns;
+		
+		
+		JPanel jp=new JPanel(new GridLayout(rows, columns,5,5));
+			
+		
+		jp.setBackground(menu.getBackground());
+		JScrollPane jsp=new JScrollPane(jp);
+		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		Iterator<AbstractAction> it=actions.iterator();
+		while (it.hasNext()){
+			final AbstractAction aa=it.next();
+			final JLabel jl=new MyJLabel(aa.getValue(AbstractAction.NAME).toString());
+			jl.setName(aa.getValue(AbstractAction.NAME).toString());
+			if (aa.getValue("tooltip")!=null && 
+					!aa.getValue("tooltip").equals("")){
+				String text=aa.getValue("tooltip").toString();
+				/*if (text.length()>80){
+					String ntext="";
+					for (int k=0;k<=text.length()/80;k++){
+						ntext=ntext+text.substring(k*80,
+								Math.min(text.length(), (k+1)*80))+"\n";
+					}
+					text=ntext;
+				}
+				text="<html>"+text
+						.replaceAll("\n",
+								"<br/>")+
+								"</html>";*/
+				jl.setToolTipText(text);
+				// trick from http://tech.chitgoks.com/2010/05/31/disable-tooltip-delay-in-java-swing/
+				jl.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+			}
+			jl.addMouseListener(new MouseAdapter() {
+				Color lastColor=null;
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					jl.setOpaque(true);
+					lastColor=jl.getBackground();
+					jl.setBackground(Color.lightGray);
+				}
+				
+				public void mouseClicked(MouseEvent e) {
+					aa.actionPerformed(new ActionEvent(e.getSource(),
+							ActionEvent.ACTION_PERFORMED,""));
+					menu.setVisible(false);
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					jl.setOpaque(false);
+					jl.setBackground(lastColor);
+					jl.invalidate();
+					jl.repaint();
+				}
+			});
+			jp.add(jl);
+		}
+		menu.add(jsp);
+	}
 
 
 	private void addActionsToPopupMenu(JPopupMenu menu, Vector<AbstractAction> actions) {
-		Iterator<AbstractAction> it=actions.iterator();
+
+		Iterator<AbstractAction> it=actions.iterator();		
+		
 		while (it.hasNext()){
-			menu.add(it.next());
+			AbstractAction aa=it.next();
+			
+			menu.add(aa);
 		}
 	}
 

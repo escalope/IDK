@@ -278,6 +278,22 @@ public class RelationshipSave extends RelationshipSaveAbs{
 
     }
     
+     if (en.getClass().equals(ingenias.editor.entities.MemberDplmntsourceRole.class)){
+      ingenias.editor.entities.MemberDplmntsourceRole nen=(ingenias.editor.entities.MemberDplmntsourceRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.MemberDplmnttargetRole.class)){
+      ingenias.editor.entities.MemberDplmnttargetRole nen=(ingenias.editor.entities.MemberDplmnttargetRole)en;
+      
+      
+
+
+    }
+    
      if (en.getClass().equals(ingenias.editor.entities.DefinesDeploymentsourceRole.class)){
       ingenias.editor.entities.DefinesDeploymentsourceRole nen=(ingenias.editor.entities.DefinesDeploymentsourceRole)en;
       
@@ -416,6 +432,22 @@ public class RelationshipSave extends RelationshipSaveAbs{
     
      if (en.getClass().equals(ingenias.editor.entities.WFCancelstargetRole.class)){
       ingenias.editor.entities.WFCancelstargetRole nen=(ingenias.editor.entities.WFCancelstargetRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.WFTestAftersourceRole.class)){
+      ingenias.editor.entities.WFTestAftersourceRole nen=(ingenias.editor.entities.WFTestAftersourceRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.WFTestAftertargetRole.class)){
+      ingenias.editor.entities.WFTestAftertargetRole nen=(ingenias.editor.entities.WFTestAftertargetRole)en;
       
       
 
@@ -608,6 +640,22 @@ public class RelationshipSave extends RelationshipSaveAbs{
     
      if (en.getClass().equals(ingenias.editor.entities.WFSpecifiesExecutiontargetRole.class)){
       ingenias.editor.entities.WFSpecifiesExecutiontargetRole nen=(ingenias.editor.entities.WFSpecifiesExecutiontargetRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.OrgDplmntsourceRole.class)){
+      ingenias.editor.entities.OrgDplmntsourceRole nen=(ingenias.editor.entities.OrgDplmntsourceRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.OrgDplmnttargetRole.class)){
+      ingenias.editor.entities.OrgDplmnttargetRole nen=(ingenias.editor.entities.OrgDplmnttargetRole)en;
       
       
 
@@ -878,9 +926,33 @@ public class RelationshipSave extends RelationshipSaveAbs{
 
     }
     
+     if (en.getClass().equals(ingenias.editor.entities.GroupDplmntsourceRole.class)){
+      ingenias.editor.entities.GroupDplmntsourceRole nen=(ingenias.editor.entities.GroupDplmntsourceRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.GroupDplmnttargetRole.class)){
+      ingenias.editor.entities.GroupDplmnttargetRole nen=(ingenias.editor.entities.GroupDplmnttargetRole)en;
+      
+      
+
+
+    }
+    
      if (en.getClass().equals(ingenias.editor.entities.PConnectssourceRole.class)){
       ingenias.editor.entities.PConnectssourceRole nen=(ingenias.editor.entities.PConnectssourceRole)en;
       
+      
+	os.write("<objectproperty id=\"TaskOutput\" collection=\"true\">\n");
+         enumeration=nen.getTaskOutputElements();
+      while (enumeration.hasMoreElements()){
+        ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+       new ObjectSave().saveObject(next,os);
+      }
+	os.write("</objectproperty>\n");
       
 
 
@@ -889,6 +961,14 @@ public class RelationshipSave extends RelationshipSaveAbs{
      if (en.getClass().equals(ingenias.editor.entities.PConnectstargetRole.class)){
       ingenias.editor.entities.PConnectstargetRole nen=(ingenias.editor.entities.PConnectstargetRole)en;
       
+      
+	os.write("<objectproperty id=\"TaskInput\" collection=\"true\">\n");
+         enumeration=nen.getTaskInputElements();
+      while (enumeration.hasMoreElements()){
+        ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+       new ObjectSave().saveObject(next,os);
+      }
+	os.write("</objectproperty>\n");
       
 
 
@@ -1096,6 +1176,22 @@ public class RelationshipSave extends RelationshipSaveAbs{
     
      if (en.getClass().equals(ingenias.editor.entities.WFConsumestargetRole.class)){
       ingenias.editor.entities.WFConsumestargetRole nen=(ingenias.editor.entities.WFConsumestargetRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.TestEventInjectionsourceRole.class)){
+      ingenias.editor.entities.TestEventInjectionsourceRole nen=(ingenias.editor.entities.TestEventInjectionsourceRole)en;
+      
+      
+
+
+    }
+    
+     if (en.getClass().equals(ingenias.editor.entities.TestEventInjectiontargetRole.class)){
+      ingenias.editor.entities.TestEventInjectiontargetRole nen=(ingenias.editor.entities.TestEventInjectiontargetRole)en;
       
       
 

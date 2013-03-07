@@ -179,10 +179,10 @@ public class RenderComponentManager {
 
 	public static Dimension getSize(Entity entity,
 			String classname, ingenias.editor.entities.ViewPreferences.ViewType kind){
-		//System.err.println("Obtaning size for "+classname);
-		/*if (retrievePanel(classname,kind)==null){
-			System.err.println(renderer);
-		}*/
+
+		if (!SwingUtilities.isEventDispatchThread()){
+			throw new RuntimeException("Method getSize was called from outside the event dispatch thread");
+		}
 		if (!SwingUtilities.isEventDispatchThread()){
 			throw new RuntimeException("Method getSize was called from outside the event dispatch thread");
 		}
@@ -232,10 +232,6 @@ public class RenderComponentManager {
 	}
 
 	public static Dimension getSize(String classname, ingenias.editor.entities.ViewPreferences.ViewType kind){
-		//System.err.println("Obtaning size for "+classname);
-		/*if (retrievePanel(classname,kind)==null){
-			System.err.println(renderer);
-		}*/
 		synchronized (renderer) {
 			helperFrame.getContentPane().removeAll();
 			if (retrievePanel(classname,kind)==null){

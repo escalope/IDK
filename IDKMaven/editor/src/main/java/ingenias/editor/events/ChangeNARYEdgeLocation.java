@@ -217,8 +217,6 @@ implements org.jgraph.event.GraphModelListener {
 					rect2=GraphConstants.getBounds(next);
 					intersectsline=intersectsline|| evaluateCurrentNAryEdge(rect1, graph, intersectsline, current);			
 				}				
-				/*System.err.println("evaluating "+rect1);
-			System.err.println("evaluating "+rect2+" intersects "+rect1.intersects(rect2));*/
 			} while (it.hasNext() && (rect2==null || !rect1.intersects(rect2)) && !intersectsline);
 		}
 		// this slows down things a lot

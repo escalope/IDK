@@ -46,6 +46,8 @@ public class DefinesDeploymentEdge extends NAryEdge {
      
 this.addClass("DefinesDeploymentsource","ingenias.editor.entities.DeploymentUnitByType");
      
+this.addClass("DefinesDeploymentsource","ingenias.editor.entities.OrgDeploymentUnit");
+     
 this.addClass("DefinesDeploymentsource","ingenias.editor.entities.AMIContext");
      
 this.addClass("DefinesDeploymentsource","ingenias.editor.entities.AMIContextInstantiation");

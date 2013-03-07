@@ -1,5 +1,6 @@
 package test;
 
+import org.fest.swing.annotation.GUITest;
 import org.testng.annotations.Test;
 
 import ingenias.editor.IDEState;
@@ -39,6 +40,7 @@ public class TestDiagramCreation  {
 	private BrowserImp browser;
 
 	@Test
+	@GUITest
 	public void diagramCreationTest() {
 		try {
 			 browser=new BrowserImp(IDEState.emptyIDEState());
@@ -159,7 +161,6 @@ public class TestDiagramCreation  {
 		GraphCollection gc=gaf.createCollection(nv,g);
 		GraphAttribute methods=gaf.createAttribute("Methods",gc,g);	
 		ge.setAttribute(methods);
-		System.err.println("Printed "+methods);
 	}
 
 	/**
@@ -190,6 +191,7 @@ public class TestDiagramCreation  {
 	}
 	
 	@Test
+
 	public void saveSpecTest() throws IOException{
 		ingenias.editor.Log.initInstance(new PrintWriter(System.out));
 		diagramCreationTest();		

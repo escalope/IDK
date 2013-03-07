@@ -28,6 +28,7 @@ import ingenias.editor.TypedVector;
 import ingenias.editor.cell.NAryEdge;
 import ingenias.editor.cell.RenderComponentManager;
 import ingenias.editor.entities.Entity;
+import ingenias.editor.entities.ModelEntity;
 import ingenias.editor.entities.NAryEdgeEntity;
 import ingenias.editor.entities.RoleEntity;
 import ingenias.exception.InvalidAttribute;
@@ -153,6 +154,32 @@ public class GraphEntityFactory {
 			throw new InvalidEntity();
 		}
 	}
+	
+	public  GraphEntity createEntity(String entType, Graph diagram) throws InvalidEntity{ 
+		Model mjg = (Model) diagram.getGraph().getModel();
+	    return createEntity(entType, mjg.getNewId(entType), diagram);
+	}
+	
+	public GraphEntity createModelEntity(String diagramType, String id,Graph diagram) throws InvalidEntity{
+		
+		ModelEntity modelEntity;
+		try {
+			modelEntity = (ModelEntity) Class.forName("ingenias.editor.entities."+diagramType+"ModelEntity").getConstructor(new Class[]{String.class}).newInstance(id);
+			GraphEntityImp gei=new GraphEntityImp(modelEntity,null,diagram.getGraph(),ids);
+			return gei;
+		} catch (InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException
+				| ClassNotFoundException e) {
+			throw new InvalidEntity(e);
+			// TODO Auto-generated catch block			
+		} catch (NullEntity e) {
+		throw new InvalidEntity(e);
+		}
+		
+		
+		
+	}
 
 	public  GraphEntity createEntity(String entType, String id,Graph diagram) throws InvalidEntity{
 		try {
@@ -218,12 +245,13 @@ public class GraphEntityFactory {
 		}
 	}
 
-	public Entity createEntityWithoutDiagram(String entType, String id) {
+	public GraphEntity createEntityWithoutDiagram(String entType, String id) {
 		Method m;
 		try {
 			m = ids.om.getClass().getMethod("create"+entType,new Class[]{String.class});
 			Entity result=(Entity)(m.invoke(ids.om,new Object[]{id}));
-			return result;
+			GraphEntityImp gei=new GraphEntityImp(result,null,ids);
+			return gei;
 		} catch (SecurityException e) {
 			
 			e.printStackTrace();
@@ -238,6 +266,9 @@ public class GraphEntityFactory {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
 			
+			e.printStackTrace();
+		} catch (NullEntity e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

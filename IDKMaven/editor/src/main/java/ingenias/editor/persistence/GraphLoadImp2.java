@@ -105,6 +105,12 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
    	if (en.getClass().equals(ingenias.editor.entities.DeploymentPackageWithContext.class))
 	  return  new ingenias.editor.cell.DeploymentPackageWithContextCell((ingenias.editor.entities.DeploymentPackageWithContext)en);
 
+   	if (en.getClass().equals(ingenias.editor.entities.OrgDeploymentUnit.class))
+	  return  new ingenias.editor.cell.OrgDeploymentUnitCell((ingenias.editor.entities.OrgDeploymentUnit)en);
+
+   	if (en.getClass().equals(ingenias.editor.entities.WFTest.class))
+	  return  new ingenias.editor.cell.WFTestCell((ingenias.editor.entities.WFTest)en);
+
    	if (en.getClass().equals(ingenias.editor.entities.Fact.class))
 	  return  new ingenias.editor.cell.FactCell((ingenias.editor.entities.Fact)en);
 
@@ -168,6 +174,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
    	if (en.getClass().equals(ingenias.editor.entities.MessagePassing.class))
 	  return  new ingenias.editor.cell.MessagePassingCell((ingenias.editor.entities.MessagePassing)en);
 
+   	if (en.getClass().equals(ingenias.editor.entities.GroupDeploymentUnit.class))
+	  return  new ingenias.editor.cell.GroupDeploymentUnitCell((ingenias.editor.entities.GroupDeploymentUnit)en);
+
    	if (en.getClass().equals(ingenias.editor.entities.SubProtocol.class))
 	  return  new ingenias.editor.cell.SubProtocolCell((ingenias.editor.entities.SubProtocol)en);
 
@@ -203,6 +212,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
 
    	if (en.getClass().equals(ingenias.editor.entities.FAERIECtxtValue.class))
 	  return  new ingenias.editor.cell.FAERIECtxtValueCell((ingenias.editor.entities.FAERIECtxtValue)en);
+
+   	if (en.getClass().equals(ingenias.editor.entities.WFTestState.class))
+	  return  new ingenias.editor.cell.WFTestStateCell((ingenias.editor.entities.WFTestState)en);
 
    	if (en.getClass().equals(ingenias.editor.entities.FAERIECtxtEntity.class))
 	  return  new ingenias.editor.cell.FAERIECtxtEntityCell((ingenias.editor.entities.FAERIECtxtEntity)en);
@@ -279,6 +291,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
    	if (en.getClass().equals(ingenias.editor.entities.EnvironmentApplication.class))
 	  return  new ingenias.editor.cell.EnvironmentApplicationCell((ingenias.editor.entities.EnvironmentApplication)en);
 
+   	if (en.getClass().equals(ingenias.editor.entities.WFTestFinalState.class))
+	  return  new ingenias.editor.cell.WFTestFinalStateCell((ingenias.editor.entities.WFTestFinalState)en);
+
    	if (en.getClass().equals(ingenias.editor.entities.ApplicationEventSlots.class))
 	  return  new ingenias.editor.cell.ApplicationEventSlotsCell((ingenias.editor.entities.ApplicationEventSlots)en);
 
@@ -324,6 +339,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
    	if (en.getClass().equals(ingenias.editor.entities.Agent.class))
 	  return  new ingenias.editor.cell.AgentCell((ingenias.editor.entities.Agent)en);
 
+   	if (en.getClass().equals(ingenias.editor.entities.TaskOutputDefinition.class))
+	  return  new ingenias.editor.cell.TaskOutputDefinitionCell((ingenias.editor.entities.TaskOutputDefinition)en);
+
    	if (en.getClass().equals(ingenias.editor.entities.MentalStateManager.class))
 	  return  new ingenias.editor.cell.MentalStateManagerCell((ingenias.editor.entities.MentalStateManager)en);
 
@@ -354,6 +372,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
    	if (en.getClass().equals(ingenias.editor.entities.ApplicationEvent.class))
 	  return  new ingenias.editor.cell.ApplicationEventCell((ingenias.editor.entities.ApplicationEvent)en);
 
+   	if (en.getClass().equals(ingenias.editor.entities.WFTestInitialState.class))
+	  return  new ingenias.editor.cell.WFTestInitialStateCell((ingenias.editor.entities.WFTestInitialState)en);
+
    	if (en.getClass().equals(ingenias.editor.entities.Task.class))
 	  return  new ingenias.editor.cell.TaskCell((ingenias.editor.entities.Task)en);
 
@@ -365,6 +386,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
 
    	if (en.getClass().equals(ingenias.editor.entities.RoleWS.class))
 	  return  new ingenias.editor.cell.RoleWSCell((ingenias.editor.entities.RoleWS)en);
+
+   	if (en.getClass().equals(ingenias.editor.entities.TaskInputDefinition.class))
+	  return  new ingenias.editor.cell.TaskInputDefinitionCell((ingenias.editor.entities.TaskInputDefinition)en);
 
    	if (en.getClass().equals(ingenias.editor.entities.AMIContext.class))
 	  return  new ingenias.editor.cell.AMIContextCell((ingenias.editor.entities.AMIContext)en);
@@ -422,6 +446,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
     if (en instanceof ingenias.editor.entities.ContributeNegatively)
      return  new ingenias.editor.cell.ContributeNegativelyEdge((ingenias.editor.entities.ContributeNegatively)en);
 
+    if (en instanceof ingenias.editor.entities.MemberDplmnt)
+     return  new ingenias.editor.cell.MemberDplmntEdge((ingenias.editor.entities.MemberDplmnt)en);
+
     if (en instanceof ingenias.editor.entities.DefinesDeployment)
      return  new ingenias.editor.cell.DefinesDeploymentEdge((ingenias.editor.entities.DefinesDeployment)en);
 
@@ -448,6 +475,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
 
     if (en instanceof ingenias.editor.entities.WFCancels)
      return  new ingenias.editor.cell.WFCancelsEdge((ingenias.editor.entities.WFCancels)en);
+
+    if (en instanceof ingenias.editor.entities.WFTestAfter)
+     return  new ingenias.editor.cell.WFTestAfterEdge((ingenias.editor.entities.WFTestAfter)en);
 
     if (en instanceof ingenias.editor.entities.AGOInconditionalSubordinationRelationshipGroup)
      return  new ingenias.editor.cell.AGOInconditionalSubordinationRelationshipGroupEdge((ingenias.editor.entities.AGOInconditionalSubordinationRelationshipGroup)en);
@@ -484,6 +514,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
 
     if (en instanceof ingenias.editor.entities.WFSpecifiesExecution)
      return  new ingenias.editor.cell.WFSpecifiesExecutionEdge((ingenias.editor.entities.WFSpecifiesExecution)en);
+
+    if (en instanceof ingenias.editor.entities.OrgDplmnt)
+     return  new ingenias.editor.cell.OrgDplmntEdge((ingenias.editor.entities.OrgDplmnt)en);
 
     if (en instanceof ingenias.editor.entities.AInstanceOf)
      return  new ingenias.editor.cell.AInstanceOfEdge((ingenias.editor.entities.AInstanceOf)en);
@@ -533,6 +566,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
     if (en instanceof ingenias.editor.entities.FAERIESrcEntity)
      return  new ingenias.editor.cell.FAERIESrcEntityEdge((ingenias.editor.entities.FAERIESrcEntity)en);
 
+    if (en instanceof ingenias.editor.entities.GroupDplmnt)
+     return  new ingenias.editor.cell.GroupDplmntEdge((ingenias.editor.entities.GroupDplmnt)en);
+
     if (en instanceof ingenias.editor.entities.PConnects)
      return  new ingenias.editor.cell.PConnectsEdge((ingenias.editor.entities.PConnects)en);
 
@@ -574,6 +610,9 @@ public class GraphLoadImp2 extends GraphLoadImp2Abs
 
     if (en instanceof ingenias.editor.entities.Consumes)
      return  new ingenias.editor.cell.ConsumesEdge((ingenias.editor.entities.Consumes)en);
+
+    if (en instanceof ingenias.editor.entities.TestEventInjection)
+     return  new ingenias.editor.cell.TestEventInjectionEdge((ingenias.editor.entities.TestEventInjection)en);
 
     if (en instanceof ingenias.editor.entities.AHasMS)
      return  new ingenias.editor.cell.AHasMSEdge((ingenias.editor.entities.AHasMS)en);

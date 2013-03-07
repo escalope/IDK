@@ -17,6 +17,7 @@
  **/
 
 package ingenias.generator.browser;
+import ingenias.exception.InvalidEntity;
 import ingenias.exception.NotFound;
 
 import java.util.Iterator;
@@ -32,5 +33,7 @@ public interface AttributedElement {
 
  // Obtains an attribute just by its name
  public GraphAttribute getAttributeByName(String name) throws NotFound;
+ 
+ public void setAttributeValue(String name,Object value) throws NotFound, InvalidEntity;
 
 }

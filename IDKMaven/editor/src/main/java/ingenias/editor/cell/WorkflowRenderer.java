@@ -102,8 +102,55 @@ public class WorkflowRenderer extends CompositeRenderer implements CellViewRende
 		}
 
 	
+        if (currentMap.get("Tasks")!=null && 
+            currentMap.get("Tasks") instanceof ingenias.editor.rendererxml.CollectionPanel) {
+          try {
+            ( (ingenias.editor.rendererxml.CollectionPanel) currentMap.get(
+                "Tasks")).setCollection("Tasks",ent.Tasks, ent.Tasks.getType());
+          }
+          catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+          }
+          catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+          }
+        }
+	
+        if (currentMap.get("Tasks")!=null && 
+            currentMap.get("Tasks") instanceof ingenias.editor.rendererxml.CollectionPanel) {
+          try {
+            ( (ingenias.editor.rendererxml.CollectionPanel) currentMap.get(
+                "Tasks")).setCollection("Tasks",ent.Tasks, ent.Tasks.getType());
+          }
+          catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+          }
+          catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+          }
+        }
+	
 
       
+      if (currentMap.get("Tasks")!=null){
+	   if (ent!=null && ent.getTasks()!=null){
+		if (currentMap.get("Tasks") instanceof javax.swing.JLabel){
+		((javax.swing.JLabel)( currentMap).get("Tasks")).setText(ent.getTasks().toString());
+		} else {
+		 if (currentMap.get("Tasks") instanceof javax.swing.text.JTextComponent)
+		 ((javax.swing.text.JTextComponent)( currentMap).get("Tasks")).setText(ent.getTasks().toString());
+		
+	      } 
+	   } else  {
+	     if (currentMap.get("Tasks") instanceof javax.swing.JLabel)
+	     ((javax.swing.JLabel)( currentMap).get("Tasks")).setText("");
+	     else {
+		if (!(currentMap.get("Tasks") instanceof ingenias.editor.rendererxml.CollectionPanel)) 
+		((javax.swing.text.JTextComponent)( currentMap).get("Tasks")).setText("");
+	     }
+         }
+	  }
+	   
       if (currentMap.get("Id")!=null){
 	   if (ent!=null && ent.getId()!=null){
 		if (currentMap.get("Id") instanceof javax.swing.JLabel){

@@ -1,5 +1,6 @@
 package test;
 
+import static ingenias.testing.fest.JGraphFixtureExtension.jgraphWithName;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.awt.Frame;
@@ -53,7 +54,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static test.JGraphFixtureExtension.jgraphWithName;
 
 public class CheckListOfEntitiesTest {
 
@@ -71,7 +71,7 @@ public class CheckListOfEntitiesTest {
 
 	public static final String firstDiagram="environment definition";
 
-	@BeforeMethod 
+	@BeforeMethod (alwaysRun=true)
 	public void setUpOnce() {
 		listener = EmergencyAbortListener.registerInToolkit();
 		//FailOnThreadViolationRepaintManager.install();
@@ -94,7 +94,7 @@ public class CheckListOfEntitiesTest {
 	}
 
 
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void tearDown() {
 		listener.unregister(); 
 		window.close();

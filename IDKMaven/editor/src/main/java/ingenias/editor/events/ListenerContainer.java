@@ -1244,9 +1244,9 @@ public class ListenerContainer implements GraphModelListener {
 		coordChildren = new Rectangle((int) xchild, (int) ychild,
 				(int) widthchild, (int) heightchild);
 
-		if (isNotExternal(coordChildren, coordParent))
-			System.err.println("External layout failed");
-		else {
+		if (isNotExternal(coordChildren, coordParent)){
+			new Exception("External layout failed").printStackTrace();
+		}else {
 
 			Hashtable mapnest1 = new Hashtable();
 			map.put(changed, mapnest1);
@@ -1286,7 +1286,7 @@ public class ListenerContainer implements GraphModelListener {
 		Rectangle newBound = new Rectangle((int) xchild, (int) ychild,
 				(int) widthchild, (int) heightchild);
 		if (!isHorizontal(newBound, coordParent))
-			System.err.println("Horizontal layout failed");
+			new Exception("Horizontal layout failed").printStackTrace();
 		else {
 
 			Hashtable mapnest1 = new Hashtable();
@@ -1327,7 +1327,7 @@ public class ListenerContainer implements GraphModelListener {
 		Rectangle newBound = new Rectangle((int) xchild, (int) ychild,
 				(int) widthchild, (int) heightchild);
 		if (!isVertical(newBound, coordParent))
-			System.err.println("Vertical layout failed");
+			new Exception("Vertical layout failed").printStackTrace();
 		else {
 			Hashtable mapnest1 = new Hashtable();
 			map.put(changed, mapnest1);
@@ -1495,7 +1495,7 @@ public class ListenerContainer implements GraphModelListener {
 				}
 			}
 
-			jg.getGraphLayoutCache().edit(changes, null, null, null);
+			jg.getModel().edit(changes, null, null, null);
 			jg.invalidate();
 			jg.repaint();
 		}

@@ -20,6 +20,9 @@ package ingenias.generator.browser;
 
 import ingenias.editor.GUIResources;
 import ingenias.editor.IDEState;
+import ingenias.editor.ModelJGraph;
+import ingenias.editor.entities.Entity;
+
 import java.util.*;
 import java.io.*;
 import ingenias.exception.*;
@@ -103,8 +106,9 @@ public class BrowserImp implements Browser {
 	 *@return    The allEntities value
 	 */
 	public GraphEntity[] getAllEntities() {
+		
 		Graph[] gs = this.getGraphs();
-		HashSet entities = new HashSet();
+		HashSet<GraphEntity> entities = new HashSet<GraphEntity>();
 		for (int k = 0; k < gs.length; k++) {
 			Graph current = gs[k];
 			GraphEntity[] ges=null;
@@ -118,10 +122,23 @@ public class BrowserImp implements Browser {
 				entities.add(ges[i]);
 			}
 		}
-		Object[] temp = entities.toArray();
-		GraphEntity[] result = new GraphEntity[temp.length];
-		System.arraycopy(temp, 0, result, 0, temp.length);
-		return result;
+		
+		GraphEntity[] temp = entities.toArray(new GraphEntity[entities.size()]);
+		/*Object[] temp = ids.om.getAllObjects().toArray();
+		Graph[] gs=this.getGraphs();
+		Vector<GraphEntity> entities=new Vector<GraphEntity>(); 		
+		for (Object ent:temp){
+			if ( Entity.class.isAssignableFrom(ent.getClass()))
+				try {
+					entities.add(new GraphEntityImp((Entity)ent,null,(ModelJGraph) gs[0].getGraph(), getState()));
+				} catch (NullEntity e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		GraphEntity[] result = new GraphEntity[entities.size()];*/
+		//System.arraycopy(entities.toArray(), 0, temp, 0, temp.length);
+		return temp;
 	}
 
 

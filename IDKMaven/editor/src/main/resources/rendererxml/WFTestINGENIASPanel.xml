@@ -1,0 +1,20 @@
+
+
+##panel layout="BorderLayout" Background="white" border="LineBorder(Color.black,1)"#
+##panel Background="white" HorizontalAlignment="CENTER"  constraints="BorderLayout.NORTH" layout="FlowLayout(FlowLayout.CENTER,0,0)" #
+##label text="Id:" /#
+##label id="Id"/#
+##label text="Test duration:" /#
+##label id="TestDuration"/#
+##label text="Max time per cycle:" /#
+##label id="MaxTimePerCycle"/#
+##label text="Repetition:"  /#
+##label id="Repetition"/#
+##label text="NeverClaim:"/#
+##label id="NeverClaim"/#
+##iconlabel icon="images/mdepl.gif" HorizontalAlignment="EAST" /#
+##/panel#
+##container id="TestStates" border="MatteBorder(1,1,1,1,black)" constraints="BorderLayout.CENTER" background="white" foreground="white" preferredsize="80,80"#
+##/container#
+##/panel#
+		

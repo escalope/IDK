@@ -139,11 +139,12 @@ super.toMap(ht);
 }
 
 public String toString(){
-if (this.getId()==null ||
+/*if (this.getId()==null ||
     this.getId().toString().equals(""))
  return "Please, define the value of field Id";
 else
- return this.getId().toString();
+ return this.getId().toString();*/
+return ""+getId();
 }
 
 }

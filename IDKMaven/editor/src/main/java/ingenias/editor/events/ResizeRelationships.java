@@ -87,7 +87,6 @@ public class ResizeRelationships
         c,
         new Object[] {
         ne.getUserObject()});
-    	System.err.println(c.getName());
     result = (Dimension) c.getMethod("getSize",
                                      new Class[] {}).invoke(c,
         new Object[] {});

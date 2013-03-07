@@ -43,6 +43,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import javax.swing.event.CellEditorListener;
 
 import org.jgraph.graph.CellView;
@@ -53,18 +54,18 @@ import org.jgraph.plaf.basic.BasicGraphUI;
 
 public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io.Serializable {
 
-	
+
 
 	protected JDialog editDialog = null;
 	private IDEState ids;
 	private GUIResources resources;
-	
+
 
 	public EmbeddedAndPopupCellEditor(IDEState ids,GUIResources resources){
 		this.resources=resources;
 		this.ids=ids;
 	}
-	
+
 	protected void completeEditing(boolean messageStop,
 			boolean messageCancel,
 			boolean messageGraph) {
@@ -72,15 +73,16 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 			completeEditingEmbed(messageStop,messageCancel,messageGraph);
 		} else
 			completeEditingPopup(messageStop,messageCancel,messageGraph);
-		
+
 	}
-	
+
 	protected boolean startEditing(final Object cell, MouseEvent event) {
 		if (ids.prefs.getEditPropertiesMode().equals(Preferences.EditPropertiesMode.PANEL)){
 			return startEditingEmbed(cell, event);
 		} else
 			return startEditingPopup(cell, event);
 		
+
 	}
 
 	protected void completeEditingEmbed(boolean messageStop,
@@ -123,7 +125,7 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 	}
 	protected boolean startEditingEmbed(final Object cell, MouseEvent event) {
 
-		completeEditing();
+		//completeEditing();
 		/*if (cell instanceof DefaultEdge){
 			cell=MarqueeHandler.getNAryEdge(ed.getGraph().getModel(),(DefaultEdge)cell);
 		}*/
@@ -237,22 +239,34 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 				} else {								
 					editDialog.setVisible(false);
 				}
-				ids.om.reload();	
-				graph.repaint();
-				resources.getMainFrame().invalidate();
-				resources.getMainFrame().repaint();
-				
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						ids.om.reload();	
+
+						resources.getMainFrame().invalidate();
+						resources.getMainFrame().repaint();
+						graph.invalidate();
+						graph.repaint();
+					}});
+
 			};
 		});
 		accept.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				editDialog.setVisible(false);
 				gep.confirmActions();
-				graph.repaint();
-				resources.getMainFrame().invalidate();
-				resources.getMainFrame().repaint();
-				ids.setChanged(true);
-				resources.setChanged();
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+
+						resources.getMainFrame().invalidate();
+						resources.getMainFrame().repaint();
+						ids.setChanged(true);
+						resources.setChanged();		
+						graph.invalidate();
+						graph.repaint();
+					}
+				});
+
 			};
 		});
 
@@ -266,13 +280,13 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 			JOptionPane.showMessageDialog(null,"There is already another entity with name "+ent.getId()+". I will restore old id","ERROR",JOptionPane.ERROR_MESSAGE);
 			ent.setId(oldid);
 		}*/
-		
+
 		ids.om.reload();
 		resources.getMainFrame().invalidate();
 		resources.getMainFrame().repaint();
 	}
-	
-	
+
+
 	protected void completeEditingPopup(boolean messageStop,
 			boolean messageCancel,
 			boolean messageGraph) {
@@ -314,10 +328,12 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 		}
 	}
 	protected boolean startEditingPopup(final Object cell, MouseEvent event) {
+		
+		
+		
 
-		completeEditing();
-	
 		if (graph.isCellEditable(cell) && editDialog == null) {      	
+		//	editingCell = cell;
 			CellView tmp = graphLayoutCache.getMapping(cell, false);
 			cellEditor = tmp.getEditor();
 			editingComponent = cellEditor.getGraphCellEditorComponent(graph, cell,
@@ -337,6 +353,7 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 						JPanel main=new JPanel();
 						main.setLayout(new BorderLayout());
 						main.add(south, BorderLayout.SOUTH);
+						
 						final Entity ent=(Entity) ((DefaultGraphCell)cell).getUserObject();
 						final GeneralEditionPanel gep=new GeneralEditionPanel(
 								ids.editor, 
@@ -345,7 +362,7 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 						main.add(jsp, BorderLayout.CENTER);
 						createIndependentEditDialogPopup(cell, accept, cancel, main,
 								ent, gep);
-			
+						//completeEditing();
 					}
 				}.start();
 
@@ -356,13 +373,15 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 				editingComponent = null;
 			}
 		}
-		return false;
+		
+		
+		return true;
 	}
 
 	private void createIndependentEditDialogPopup(Object cell, JButton accept,
 			JButton cancel, JPanel main, final Entity ent,
 			final GeneralEditionPanel gep) {
-		editingCell = cell;
+		
 		Dimension editorSize = editingComponent.getPreferredSize();
 		final JDialog editDialog=new JDialog(resources.getMainFrame(),true);
 		editDialog.getContentPane().setLayout(new BorderLayout());
@@ -384,6 +403,8 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 				} else {								
 					editDialog.setVisible(false);
 				}
+				resources.getMainFrame().invalidate();
+				resources.getMainFrame().repaint();
 				graph.repaint();
 			};
 		});
@@ -391,10 +412,16 @@ public class EmbeddedAndPopupCellEditor  extends BasicGraphUI implements java.io
 			public void actionPerformed(ActionEvent e) {
 				editDialog.setVisible(false);
 				gep.confirmActions();
-				graph.repaint();
-				graph.firePropertyChange(org.jgraph.JGraph.GRAPH_MODEL_PROPERTY,0,0);
-				ids.setChanged(true);
-				resources.setChanged();
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){				
+						graph.firePropertyChange(org.jgraph.JGraph.GRAPH_MODEL_PROPERTY,0,0);
+						ids.setChanged(true);
+						resources.setChanged();
+						resources.getMainFrame().invalidate();
+						resources.getMainFrame().repaint();
+						graph.invalidate();
+						graph.repaint();
+					}});
 			};
 		});
 

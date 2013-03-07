@@ -28,6 +28,10 @@ public class RuntimeConversation extends Conversation {
 
   public java.lang.String State;
 
+  public ingenias.editor.entities.OrgDeploymentUnit Organization;
+
+  public ingenias.editor.entities.GroupDeploymentUnit Group;
+
   public ingenias.editor.entities.Interaction Interaction;
 
   public java.lang.Integer AbortCode;
@@ -55,6 +59,24 @@ public class RuntimeConversation extends Conversation {
        public void setState(java.lang.String
 					State){
         this.State=State;
+      }
+
+
+      public ingenias.editor.entities.OrgDeploymentUnit getOrganization(){
+        return Organization;
+      }
+       public void setOrganization(ingenias.editor.entities.OrgDeploymentUnit
+					Organization){
+        this.Organization=Organization;
+      }
+
+
+      public ingenias.editor.entities.GroupDeploymentUnit getGroup(){
+        return Group;
+      }
+       public void setGroup(ingenias.editor.entities.GroupDeploymentUnit
+					Group){
+        this.Group=Group;
       }
 
 
@@ -207,11 +229,12 @@ super.toMap(ht);
 }
 
 public String toString(){
-if (this.getId()==null ||
+/*if (this.getId()==null ||
     this.getId().toString().equals(""))
  return "Please, define the value of field Id";
 else
- return this.getId().toString();
+ return this.getId().toString();*/
+return ""+getId();
 }
 
 }

@@ -69,6 +69,10 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode DeploymentPackageWithContextNode=null;
 
+  public javax.swing.tree.DefaultMutableTreeNode OrgDeploymentUnitNode=null;
+
+  public javax.swing.tree.DefaultMutableTreeNode WFTestNode=null;
+
   public javax.swing.tree.DefaultMutableTreeNode FactNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode AOPMentalStatePatternNode=null;
@@ -123,6 +127,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode MessagePassingNode=null;
 
+  public javax.swing.tree.DefaultMutableTreeNode GroupDeploymentUnitNode=null;
+
   public javax.swing.tree.DefaultMutableTreeNode SubProtocolNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode RuntimeConversationNode=null;
@@ -152,6 +158,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
   public javax.swing.tree.DefaultMutableTreeNode PlanNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode FAERIECtxtValueNode=null;
+
+  public javax.swing.tree.DefaultMutableTreeNode WFTestStateNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode UMLComponentNode=null;
 
@@ -215,6 +223,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode EnvironmentApplicationNode=null;
 
+  public javax.swing.tree.DefaultMutableTreeNode WFTestFinalStateNode=null;
+
   public javax.swing.tree.DefaultMutableTreeNode ApplicationEventSlotsNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode AgentDescriptionNode=null;
@@ -259,6 +269,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode AgentNode=null;
 
+  public javax.swing.tree.DefaultMutableTreeNode TaskOutputDefinitionNode=null;
+
   public javax.swing.tree.DefaultMutableTreeNode MentalStateManagerNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode INGENIASCodeComponentNode=null;
@@ -283,6 +295,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public javax.swing.tree.DefaultMutableTreeNode ApplicationEventNode=null;
 
+  public javax.swing.tree.DefaultMutableTreeNode WFTestInitialStateNode=null;
+
   public javax.swing.tree.DefaultMutableTreeNode TaskNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode DeploymentUnitByTypeMSEntityNode=null;
@@ -290,6 +304,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
   public javax.swing.tree.DefaultMutableTreeNode MentalEntityInstanceAccessNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode RoleWSNode=null;
+
+  public javax.swing.tree.DefaultMutableTreeNode TaskInputDefinitionNode=null;
 
   public javax.swing.tree.DefaultMutableTreeNode AMIContextNode=null;
 
@@ -342,6 +358,10 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
   ContextBindingTaskNode=new javax.swing.tree.DefaultMutableTreeNode("ContextBindingTask");
 
   DeploymentPackageWithContextNode=new javax.swing.tree.DefaultMutableTreeNode("DeploymentPackageWithContext");
+
+  OrgDeploymentUnitNode=new javax.swing.tree.DefaultMutableTreeNode("OrgDeploymentUnit");
+
+  WFTestNode=new javax.swing.tree.DefaultMutableTreeNode("WFTest");
 
   FactNode=new javax.swing.tree.DefaultMutableTreeNode("Fact");
 
@@ -397,6 +417,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   MessagePassingNode=new javax.swing.tree.DefaultMutableTreeNode("MessagePassing");
 
+  GroupDeploymentUnitNode=new javax.swing.tree.DefaultMutableTreeNode("GroupDeploymentUnit");
+
   SubProtocolNode=new javax.swing.tree.DefaultMutableTreeNode("SubProtocol");
 
   RuntimeConversationNode=new javax.swing.tree.DefaultMutableTreeNode("RuntimeConversation");
@@ -426,6 +448,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
   PlanNode=new javax.swing.tree.DefaultMutableTreeNode("Plan");
 
   FAERIECtxtValueNode=new javax.swing.tree.DefaultMutableTreeNode("FAERIECtxtValue");
+
+  WFTestStateNode=new javax.swing.tree.DefaultMutableTreeNode("WFTestState");
 
   UMLComponentNode=new javax.swing.tree.DefaultMutableTreeNode("UMLComponent");
 
@@ -489,6 +513,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   EnvironmentApplicationNode=new javax.swing.tree.DefaultMutableTreeNode("EnvironmentApplication");
 
+  WFTestFinalStateNode=new javax.swing.tree.DefaultMutableTreeNode("WFTestFinalState");
+
   ApplicationEventSlotsNode=new javax.swing.tree.DefaultMutableTreeNode("ApplicationEventSlots");
 
   AgentDescriptionNode=new javax.swing.tree.DefaultMutableTreeNode("AgentDescription");
@@ -533,6 +559,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   AgentNode=new javax.swing.tree.DefaultMutableTreeNode("Agent");
 
+  TaskOutputDefinitionNode=new javax.swing.tree.DefaultMutableTreeNode("TaskOutputDefinition");
+
   MentalStateManagerNode=new javax.swing.tree.DefaultMutableTreeNode("MentalStateManager");
 
   INGENIASCodeComponentNode=new javax.swing.tree.DefaultMutableTreeNode("INGENIASCodeComponent");
@@ -557,6 +585,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   ApplicationEventNode=new javax.swing.tree.DefaultMutableTreeNode("ApplicationEvent");
 
+  WFTestInitialStateNode=new javax.swing.tree.DefaultMutableTreeNode("WFTestInitialState");
+
   TaskNode=new javax.swing.tree.DefaultMutableTreeNode("Task");
 
   DeploymentUnitByTypeMSEntityNode=new javax.swing.tree.DefaultMutableTreeNode("DeploymentUnitByTypeMSEntity");
@@ -564,6 +594,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
   MentalEntityInstanceAccessNode=new javax.swing.tree.DefaultMutableTreeNode("MentalEntityInstanceAccess");
 
   RoleWSNode=new javax.swing.tree.DefaultMutableTreeNode("RoleWS");
+
+  TaskInputDefinitionNode=new javax.swing.tree.DefaultMutableTreeNode("TaskInputDefinition");
 
   AMIContextNode=new javax.swing.tree.DefaultMutableTreeNode("AMIContext");
 
@@ -621,6 +653,10 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     addNodeInSortedOrder( DeploymentPackageNode,DeploymentPackageWithContextNode);
 
+    addNodeInSortedOrder( INGENIASObjectNode,OrgDeploymentUnitNode);
+
+    addNodeInSortedOrder( TestNode,WFTestNode);
+
     addNodeInSortedOrder( InformationMentalEntityNode,FactNode);
 
     addNodeInSortedOrder( SymbolicMentalStatePatternNode,AOPMentalStatePatternNode);
@@ -675,6 +711,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     addNodeInSortedOrder( InteractionUnitNode,MessagePassingNode);
 
+    addNodeInSortedOrder( INGENIASObjectNode,GroupDeploymentUnitNode);
+
     addNodeInSortedOrder( AUMLContainerNode,SubProtocolNode);
 
     addNodeInSortedOrder( ConversationNode,RuntimeConversationNode);
@@ -702,6 +740,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     addNodeInSortedOrder( TaskNode,PlanNode);
 
     addNodeInSortedOrder( INGENIASObjectNode,FAERIECtxtValueNode);
+
+    addNodeInSortedOrder( INGENIASObjectNode,WFTestStateNode);
 
     addNodeInSortedOrder( UMLClassifierNode,UMLComponentNode);
 
@@ -765,6 +805,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     addNodeInSortedOrder( ApplicationNode,EnvironmentApplicationNode);
 
+    addNodeInSortedOrder( WFTestStateNode,WFTestFinalStateNode);
+
     addNodeInSortedOrder( ApplicationEventNode,ApplicationEventSlotsNode);
 
     addNodeInSortedOrder( INGENIASObjectNode,AgentDescriptionNode);
@@ -809,6 +851,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     addNodeInSortedOrder( Autonomous_entityNode,AgentNode);
 
+    addNodeInSortedOrder( INGENIASObjectNode,TaskOutputDefinitionNode);
+
     addNodeInSortedOrder( AgentComponentNode,MentalStateManagerNode);
 
     addNodeInSortedOrder( INGENIASObjectNode,INGENIASCodeComponentNode);
@@ -831,6 +875,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     addNodeInSortedOrder( GeneralEventNode,ApplicationEventNode);
 
+    addNodeInSortedOrder( WFTestStateNode,WFTestInitialStateNode);
+
     addNodeInSortedOrder( AgentComponentNode,TaskNode);
 
     addNodeInSortedOrder( DeploymentUnitByTypeNode,DeploymentUnitByTypeMSEntityNode);
@@ -838,6 +884,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     addNodeInSortedOrder( INGENIASObjectNode,MentalEntityInstanceAccessNode);
 
     addNodeInSortedOrder( RoleNode,RoleWSNode);
+
+    addNodeInSortedOrder( INGENIASObjectNode,TaskInputDefinitionNode);
 
     addNodeInSortedOrder( EnvironmentApplicationNode,AMIContextNode);
 
@@ -1065,6 +1113,36 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public Object getDeploymentPackageWithContext(String object){
     Object o=findUserObject(DeploymentPackageWithContextNode,object);
+    return o;
+  }
+  
+  public OrgDeploymentUnit createOrgDeploymentUnit(String id){
+    OrgDeploymentUnit object=new     OrgDeploymentUnit(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    OrgDeploymentUnitNode.insert(nn, OrgDeploymentUnitNode.getChildCount());
+    nn.setParent(OrgDeploymentUnitNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getOrgDeploymentUnit(String object){
+    Object o=findUserObject(OrgDeploymentUnitNode,object);
+    return o;
+  }
+  
+  public WFTest createWFTest(String id){
+    WFTest object=new     WFTest(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    WFTestNode.insert(nn, WFTestNode.getChildCount());
+    nn.setParent(WFTestNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getWFTest(String object){
+    Object o=findUserObject(WFTestNode,object);
     return o;
   }
   
@@ -1443,6 +1521,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return o;
   }
   
+  public GroupDeploymentUnit createGroupDeploymentUnit(String id){
+    GroupDeploymentUnit object=new     GroupDeploymentUnit(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    GroupDeploymentUnitNode.insert(nn, GroupDeploymentUnitNode.getChildCount());
+    nn.setParent(GroupDeploymentUnitNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getGroupDeploymentUnit(String object){
+    Object o=findUserObject(GroupDeploymentUnitNode,object);
+    return o;
+  }
+  
   public SubProtocol createSubProtocol(String id){
     SubProtocol object=new     SubProtocol(id);
     DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
@@ -1635,6 +1728,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public Object getFAERIECtxtValue(String object){
     Object o=findUserObject(FAERIECtxtValueNode,object);
+    return o;
+  }
+  
+  public WFTestState createWFTestState(String id){
+    WFTestState object=new     WFTestState(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    WFTestStateNode.insert(nn, WFTestStateNode.getChildCount());
+    nn.setParent(WFTestStateNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getWFTestState(String object){
+    Object o=findUserObject(WFTestStateNode,object);
     return o;
   }
   
@@ -2028,6 +2136,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return o;
   }
   
+  public WFTestFinalState createWFTestFinalState(String id){
+    WFTestFinalState object=new     WFTestFinalState(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    WFTestFinalStateNode.insert(nn, WFTestFinalStateNode.getChildCount());
+    nn.setParent(WFTestFinalStateNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getWFTestFinalState(String object){
+    Object o=findUserObject(WFTestFinalStateNode,object);
+    return o;
+  }
+  
   public ApplicationEventSlots createApplicationEventSlots(String id){
     ApplicationEventSlots object=new     ApplicationEventSlots(id);
     DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
@@ -2328,6 +2451,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return o;
   }
   
+  public TaskOutputDefinition createTaskOutputDefinition(String id){
+    TaskOutputDefinition object=new     TaskOutputDefinition(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    TaskOutputDefinitionNode.insert(nn, TaskOutputDefinitionNode.getChildCount());
+    nn.setParent(TaskOutputDefinitionNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getTaskOutputDefinition(String object){
+    Object o=findUserObject(TaskOutputDefinitionNode,object);
+    return o;
+  }
+  
   public MentalStateManager createMentalStateManager(String id){
     MentalStateManager object=new     MentalStateManager(id);
     DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
@@ -2493,6 +2631,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     return o;
   }
   
+  public WFTestInitialState createWFTestInitialState(String id){
+    WFTestInitialState object=new     WFTestInitialState(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    WFTestInitialStateNode.insert(nn, WFTestInitialStateNode.getChildCount());
+    nn.setParent(WFTestInitialStateNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getWFTestInitialState(String object){
+    Object o=findUserObject(WFTestInitialStateNode,object);
+    return o;
+  }
+  
   public Task createTask(String id){
     Task object=new     Task(id);
     DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
@@ -2550,6 +2703,21 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
   public Object getRoleWS(String object){
     Object o=findUserObject(RoleWSNode,object);
+    return o;
+  }
+  
+  public TaskInputDefinition createTaskInputDefinition(String id){
+    TaskInputDefinition object=new     TaskInputDefinition(id);
+    DefaultMutableTreeNode nn=new DefaultMutableTreeNode(object);
+    TaskInputDefinitionNode.insert(nn, TaskInputDefinitionNode.getChildCount());
+    nn.setParent(TaskInputDefinitionNode);
+    this.reload();
+    arbolObjetos.repaint();
+    return object;
+  }
+
+  public Object getTaskInputDefinition(String object){
+    Object o=findUserObject(TaskInputDefinitionNode,object);
     return o;
   }
   
@@ -2660,6 +2828,10 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     result.add(DeploymentPackageWithContext.class);
 
+    result.add(OrgDeploymentUnit.class);
+
+    result.add(WFTest.class);
+
     result.add(Fact.class);
 
     result.add(AOPMentalStatePattern.class);
@@ -2714,6 +2886,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     result.add(MessagePassing.class);
 
+    result.add(GroupDeploymentUnit.class);
+
     result.add(SubProtocol.class);
 
     result.add(RuntimeConversation.class);
@@ -2743,6 +2917,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     result.add(Plan.class);
 
     result.add(FAERIECtxtValue.class);
+
+    result.add(WFTestState.class);
 
     result.add(UMLComponent.class);
 
@@ -2806,6 +2982,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     result.add(EnvironmentApplication.class);
 
+    result.add(WFTestFinalState.class);
+
     result.add(ApplicationEventSlots.class);
 
     result.add(AgentDescription.class);
@@ -2850,6 +3028,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     result.add(Agent.class);
 
+    result.add(TaskOutputDefinition.class);
+
     result.add(MentalStateManager.class);
 
     result.add(INGENIASCodeComponent.class);
@@ -2874,6 +3054,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
 
     result.add(ApplicationEvent.class);
 
+    result.add(WFTestInitialState.class);
+
     result.add(Task.class);
 
     result.add(DeploymentUnitByTypeMSEntity.class);
@@ -2881,6 +3063,8 @@ public class ObjectManager extends javax.swing.tree.DefaultMutableTreeNode imple
     result.add(MentalEntityInstanceAccess.class);
 
     result.add(RoleWS.class);
+
+    result.add(TaskInputDefinition.class);
 
     result.add(AMIContext.class);
 

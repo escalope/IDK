@@ -38,7 +38,6 @@ public class IDEChangesHandler implements DiagramChangeHandler{
 	public void addNewDiagram(ModelJGraph mjg) {
 		ids.setChanged(true);
 		resources.setChanged();
-		System.err.println("Reloading everything");
 		ids.gm.reload();		
 		ids.editor.reloadDiagrams();
 		resources.getArbolProyectos().repaint();		
@@ -47,7 +46,6 @@ public class IDEChangesHandler implements DiagramChangeHandler{
 	public void addNewPackage(Object[] path, String nombre) {
 		ids.setChanged(true);
 		resources.setChanged();
-		System.err.println("Reloading everything");
 		ids.gm.reload();		
 		ids.editor.reloadDiagrams();
 		resources.getArbolProyectos().repaint();		
@@ -57,7 +55,6 @@ public class IDEChangesHandler implements DiagramChangeHandler{
 	public void diagramDeleted(ModelJGraph mj) {
 		ids.setChanged(true);
 		resources.setChanged();
-		System.err.println("Reloading everything");
 		ids.gm.reload();		
 		ids.editor.reloadDiagrams();
 		resources.getArbolProyectos().repaint();				
@@ -66,7 +63,6 @@ public class IDEChangesHandler implements DiagramChangeHandler{
 	public void diagramPropertiesChanged(ModelJGraph mjg) {
 		ids.setChanged(true);
 		resources.setChanged();
-		System.err.println("Reloading everything");
 		ids.gm.reload();		
 		ids.editor.reloadDiagrams();
 		resources.getArbolProyectos().repaint();		
@@ -75,7 +71,6 @@ public class IDEChangesHandler implements DiagramChangeHandler{
 	public void diagramRenamed(ModelJGraph mjg) {
 		ids.setChanged(true);
 		resources.setChanged();
-		System.err.println("Reloading everything");
 		ids.gm.reload();		
 		ids.editor.reloadDiagrams();
 		resources.getArbolProyectos().repaint();		

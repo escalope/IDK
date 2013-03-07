@@ -107,8 +107,48 @@ public ComponentDiagramCellViewFactory() {}
            return new ingenias.editor.cell.TestView(v);
    }
 
+   if (userObject.getClass().equals(WFTest.class)){
+           return new ingenias.editor.cell.WFTestView(v);
+   }
+
+   if (userObject.getClass().equals(WFTestState.class)){
+           return new ingenias.editor.cell.WFTestStateView(v);
+   }
+
+   if (userObject.getClass().equals(WFTestFinalState.class)){
+           return new ingenias.editor.cell.WFTestFinalStateView(v);
+   }
+
+   if (userObject.getClass().equals(WFTestInitialState.class)){
+           return new ingenias.editor.cell.WFTestInitialStateView(v);
+   }
+
    if (userObject.getClass().equals(UMLComment.class)){
            return new ingenias.editor.cell.UMLCommentView(v);
+   }
+
+   if (userObject.getClass().equals(TaskWS.class)){
+           return new ingenias.editor.cell.TaskWSView(v);
+   }
+
+   if (userObject.getClass().equals(ContextUseTask.class)){
+           return new ingenias.editor.cell.ContextUseTaskView(v);
+   }
+
+   if (userObject.getClass().equals(BoxedTask.class)){
+           return new ingenias.editor.cell.BoxedTaskView(v);
+   }
+
+   if (userObject.getClass().equals(ContextBindingTask.class)){
+           return new ingenias.editor.cell.ContextBindingTaskView(v);
+   }
+
+   if (userObject.getClass().equals(ContextReleaseTask.class)){
+           return new ingenias.editor.cell.ContextReleaseTaskView(v);
+   }
+
+   if (userObject.getClass().equals(Plan.class)){
+           return new ingenias.editor.cell.PlanView(v);
    }
 
 
@@ -124,6 +164,10 @@ public ComponentDiagramCellViewFactory() {}
 
    if (v.getClass().equals(UMLAnnotatedElementEdge.class)){
            return new ingenias.editor.cell.UMLAnnotatedElementView(v);
+   }
+
+   if (v.getClass().equals(WFTestAfterEdge.class)){
+           return new ingenias.editor.cell.WFTestAfterView(v);
    }
 
 

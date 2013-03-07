@@ -59,6 +59,7 @@ import ingenias.editor.rendererxml.*;
 import ingenias.editor.events.*;
 import ingenias.exception.InvalidEntity;
 import ingenias.editor.*;
+import java.util.concurrent.TimeUnit;
 
 public class EnvironmentModelModelJGraph extends ModelJGraph {
 
@@ -131,10 +132,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     Agent.setEnabled(true);
-    jb = new JButton(Agent);
+    jb = new JButton(Agent){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("Agent");	
-    jb.setToolTipText("Agent");
+    jb.setToolTipText("Agent:"+new Agent("").getHelpDesc()+"\n\n"+new Agent("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -153,10 +172,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     OrganizationGroup.setEnabled(true);
-    jb = new JButton(OrganizationGroup);
+    jb = new JButton(OrganizationGroup){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("OrganizationGroup");	
-    jb.setToolTipText("OrganizationGroup");
+    jb.setToolTipText("OrganizationGroup:"+new OrganizationGroup("").getHelpDesc()+"\n\n"+new OrganizationGroup("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -175,10 +212,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     Resource.setEnabled(true);
-    jb = new JButton(Resource);
+    jb = new JButton(Resource){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("Resource");	
-    jb.setToolTipText("Resource");
+    jb.setToolTipText("Resource:"+new Resource("").getHelpDesc()+"\n\n"+new Resource("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -197,10 +252,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     Application.setEnabled(true);
-    jb = new JButton(Application);
+    jb = new JButton(Application){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("Application");	
-    jb.setToolTipText("Application");
+    jb.setToolTipText("Application:"+new Application("").getHelpDesc()+"\n\n"+new Application("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -219,10 +292,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     InternalApplication.setEnabled(true);
-    jb = new JButton(InternalApplication);
+    jb = new JButton(InternalApplication){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("InternalApplication");	
-    jb.setToolTipText("InternalApplication");
+    jb.setToolTipText("InternalApplication:"+new InternalApplication("").getHelpDesc()+"\n\n"+new InternalApplication("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -241,10 +332,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     EnvironmentApplication.setEnabled(true);
-    jb = new JButton(EnvironmentApplication);
+    jb = new JButton(EnvironmentApplication){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("EnvironmentApplication");	
-    jb.setToolTipText("EnvironmentApplication");
+    jb.setToolTipText("EnvironmentApplication:"+new EnvironmentApplication("").getHelpDesc()+"\n\n"+new EnvironmentApplication("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -263,10 +372,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     ApplicationWS.setEnabled(true);
-    jb = new JButton(ApplicationWS);
+    jb = new JButton(ApplicationWS){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("ApplicationWS");	
-    jb.setToolTipText("ApplicationWS");
+    jb.setToolTipText("ApplicationWS:"+new ApplicationWS("").getHelpDesc()+"\n\n"+new ApplicationWS("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -285,10 +412,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     TextNote.setEnabled(true);
-    jb = new JButton(TextNote);
+    jb = new JButton(TextNote){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("TextNote");	
-    jb.setToolTipText("TextNote");
+    jb.setToolTipText("TextNote:"+new TextNote("").getHelpDesc()+"\n\n"+new TextNote("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -307,10 +452,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     UMLComment.setEnabled(true);
-    jb = new JButton(UMLComment);
+    jb = new JButton(UMLComment){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("UMLComment");	
-    jb.setToolTipText("UMLComment");
+    jb.setToolTipText("UMLComment:"+new UMLComment("").getHelpDesc()+"\n\n"+new UMLComment("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -329,10 +492,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     Organization.setEnabled(true);
-    jb = new JButton(Organization);
+    jb = new JButton(Organization){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("Organization");	
-    jb.setToolTipText("Organization");
+    jb.setToolTipText("Organization:"+new Organization("").getHelpDesc()+"\n\n"+new Organization("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -351,10 +532,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     AMIContext.setEnabled(true);
-    jb = new JButton(AMIContext);
+    jb = new JButton(AMIContext){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("AMIContext");	
-    jb.setToolTipText("AMIContext");
+    jb.setToolTipText("AMIContext:"+new AMIContext("").getHelpDesc()+"\n\n"+new AMIContext("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -373,10 +572,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     FAERIEContext.setEnabled(true);
-    jb = new JButton(FAERIEContext);
+    jb = new JButton(FAERIEContext){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("FAERIEContext");	
-    jb.setToolTipText("FAERIEContext");
+    jb.setToolTipText("FAERIEContext:"+new FAERIEContext("").getHelpDesc()+"\n\n"+new FAERIEContext("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -395,10 +612,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     FAERIECtxtModel.setEnabled(true);
-    jb = new JButton(FAERIECtxtModel);
+    jb = new JButton(FAERIECtxtModel){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("FAERIECtxtModel");	
-    jb.setToolTipText("FAERIECtxtModel");
+    jb.setToolTipText("FAERIECtxtModel:"+new FAERIECtxtModel("").getHelpDesc()+"\n\n"+new FAERIECtxtModel("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -417,10 +652,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     FAERIECtxtAttribute.setEnabled(true);
-    jb = new JButton(FAERIECtxtAttribute);
+    jb = new JButton(FAERIECtxtAttribute){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("FAERIECtxtAttribute");	
-    jb.setToolTipText("FAERIECtxtAttribute");
+    jb.setToolTipText("FAERIECtxtAttribute:"+new FAERIECtxtAttribute("").getHelpDesc()+"\n\n"+new FAERIECtxtAttribute("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -439,10 +692,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     FAERIECtxtEntity.setEnabled(true);
-    jb = new JButton(FAERIECtxtEntity);
+    jb = new JButton(FAERIECtxtEntity){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("FAERIECtxtEntity");	
-    jb.setToolTipText("FAERIECtxtEntity");
+    jb.setToolTipText("FAERIECtxtEntity:"+new FAERIECtxtEntity("").getHelpDesc()+"\n\n"+new FAERIECtxtEntity("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -461,10 +732,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     FAERIECtxtRelationship.setEnabled(true);
-    jb = new JButton(FAERIECtxtRelationship);
+    jb = new JButton(FAERIECtxtRelationship){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("FAERIECtxtRelationship");	
-    jb.setToolTipText("FAERIECtxtRelationship");
+    jb.setToolTipText("FAERIECtxtRelationship:"+new FAERIECtxtRelationship("").getHelpDesc()+"\n\n"+new FAERIECtxtRelationship("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -483,10 +772,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     FAERIECtxtValue.setEnabled(true);
-    jb = new JButton(FAERIECtxtValue);
+    jb = new JButton(FAERIECtxtValue){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("FAERIECtxtValue");	
-    jb.setToolTipText("FAERIECtxtValue");
+    jb.setToolTipText("FAERIECtxtValue:"+new FAERIECtxtValue("").getHelpDesc()+"\n\n"+new FAERIECtxtValue("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -505,10 +812,28 @@ public class EnvironmentModelModelJGraph extends ModelJGraph {
       }
     };
     RoleWS.setEnabled(true);
-    jb = new JButton(RoleWS);
+    jb = new JButton(RoleWS){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("RoleWS");	
-    jb.setToolTipText("RoleWS");
+    jb.setToolTipText("RoleWS:"+new RoleWS("").getHelpDesc()+"\n\n"+new RoleWS("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -1564,7 +1889,6 @@ JOptionPane.showMessageDialog(this,
 					vv=(VertexView)cv;
 				}
 			}
-			System.err.println("waiting");
 			try {
 				Thread.currentThread().sleep(10);
 			} catch (InterruptedException e) {

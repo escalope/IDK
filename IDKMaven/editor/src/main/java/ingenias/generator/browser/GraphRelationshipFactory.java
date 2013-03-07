@@ -128,7 +128,7 @@ public class GraphRelationshipFactory {
 		for (int k=0;k<graph.getGraph().getModel().getRootCount() && result==null;k++){
 			if (graph.getGraph().getModel().getRootAt(k) instanceof DefaultGraphCell){
 				DefaultGraphCell root=(DefaultGraphCell)graph.getGraph().getModel().getRootAt(k);
-				if (((Entity)root.getUserObject()).getId().equals(id)){
+				if (root.getUserObject()!=null && ((Entity)root.getUserObject()).getId().equals(id)){
 					result=root;
 				}
 			}

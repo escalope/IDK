@@ -46,12 +46,16 @@ public class OHasWFEdge extends NAryEdge {
      
 this.addClass("OHasWFsource","ingenias.editor.entities.Organization");
      
+this.addClass("OHasWFsource","ingenias.editor.entities.OrganizationGroup");
+     
     
      this.addRole("OHasWFtarget");
      this.setArity("OHasWFtarget",true,1);
      this.setArity("OHasWFtarget",false,2147483647);
      
 this.addClass("OHasWFtarget","ingenias.editor.entities.Workflow");
+     
+this.addClass("OHasWFtarget","ingenias.editor.entities.Interaction");
      
     
     // Add ports for every role.

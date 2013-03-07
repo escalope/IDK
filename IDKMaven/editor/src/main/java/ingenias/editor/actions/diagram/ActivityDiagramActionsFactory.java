@@ -894,8 +894,7 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "InitialNode")){
 		// Insert an object of type InitialNode
-		nobjects.add(
-			new AbstractAction("Insert InitialNode") {
+		AbstractAction aa=new AbstractAction("Insert InitialNode") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "InitialNode");
@@ -905,13 +904,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new InitialNode("").getHelpDesc()+"\n\n"+new InitialNode("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "DecisionNode")){
 		// Insert an object of type DecisionNode
-		nobjects.add(
-			new AbstractAction("Insert DecisionNode") {
+		AbstractAction aa=new AbstractAction("Insert DecisionNode") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "DecisionNode");
@@ -921,13 +921,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new DecisionNode("").getHelpDesc()+"\n\n"+new DecisionNode("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "ForkNode")){
 		// Insert an object of type ForkNode
-		nobjects.add(
-			new AbstractAction("Insert ForkNode") {
+		AbstractAction aa=new AbstractAction("Insert ForkNode") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ForkNode");
@@ -937,13 +938,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ForkNode("").getHelpDesc()+"\n\n"+new ForkNode("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "EndNode")){
 		// Insert an object of type EndNode
-		nobjects.add(
-			new AbstractAction("Insert EndNode") {
+		AbstractAction aa=new AbstractAction("Insert EndNode") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "EndNode");
@@ -953,13 +955,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new EndNode("").getHelpDesc()+"\n\n"+new EndNode("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "Task")){
 		// Insert an object of type Task
-		nobjects.add(
-			new AbstractAction("Insert Task") {
+		AbstractAction aa=new AbstractAction("Insert Task") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Task");
@@ -969,13 +972,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Task("").getHelpDesc()+"\n\n"+new Task("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "Role")){
 		// Insert an object of type Role
-		nobjects.add(
-			new AbstractAction("Insert Role") {
+		AbstractAction aa=new AbstractAction("Insert Role") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Role");
@@ -985,13 +989,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Role("").getHelpDesc()+"\n\n"+new Role("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "WorkflowBox")){
 		// Insert an object of type WorkflowBox
-		nobjects.add(
-			new AbstractAction("Insert WorkflowBox") {
+		AbstractAction aa=new AbstractAction("Insert WorkflowBox") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "WorkflowBox");
@@ -1001,13 +1006,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new WorkflowBox("").getHelpDesc()+"\n\n"+new WorkflowBox("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "UMLComment")){
 		// Insert an object of type UMLComment
-		nobjects.add(
-			new AbstractAction("Insert UMLComment") {
+		AbstractAction aa=new AbstractAction("Insert UMLComment") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "UMLComment");
@@ -1017,13 +1023,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new UMLComment("").getHelpDesc()+"\n\n"+new UMLComment("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "TextNote")){
 		// Insert an object of type TextNote
-		nobjects.add(
-			new AbstractAction("Insert TextNote") {
+		AbstractAction aa=new AbstractAction("Insert TextNote") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "TextNote");
@@ -1033,13 +1040,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new TextNote("").getHelpDesc()+"\n\n"+new TextNote("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "TaskWS")){
 		// Insert an object of type TaskWS
-		nobjects.add(
-			new AbstractAction("Insert TaskWS") {
+		AbstractAction aa=new AbstractAction("Insert TaskWS") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "TaskWS");
@@ -1049,13 +1057,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new TaskWS("").getHelpDesc()+"\n\n"+new TaskWS("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "ContextUseTask")){
 		// Insert an object of type ContextUseTask
-		nobjects.add(
-			new AbstractAction("Insert ContextUseTask") {
+		AbstractAction aa=new AbstractAction("Insert ContextUseTask") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ContextUseTask");
@@ -1065,13 +1074,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ContextUseTask("").getHelpDesc()+"\n\n"+new ContextUseTask("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "Workflow")){
 		// Insert an object of type Workflow
-		nobjects.add(
-			new AbstractAction("Insert Workflow") {
+		AbstractAction aa=new AbstractAction("Insert Workflow") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Workflow");
@@ -1081,13 +1091,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Workflow("").getHelpDesc()+"\n\n"+new Workflow("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "BoxedTask")){
 		// Insert an object of type BoxedTask
-		nobjects.add(
-			new AbstractAction("Insert BoxedTask") {
+		AbstractAction aa=new AbstractAction("Insert BoxedTask") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "BoxedTask");
@@ -1097,13 +1108,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new BoxedTask("").getHelpDesc()+"\n\n"+new BoxedTask("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "RoleWS")){
 		// Insert an object of type RoleWS
-		nobjects.add(
-			new AbstractAction("Insert RoleWS") {
+		AbstractAction aa=new AbstractAction("Insert RoleWS") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "RoleWS");
@@ -1113,13 +1125,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new RoleWS("").getHelpDesc()+"\n\n"+new RoleWS("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "ContextBindingTask")){
 		// Insert an object of type ContextBindingTask
-		nobjects.add(
-			new AbstractAction("Insert ContextBindingTask") {
+		AbstractAction aa=new AbstractAction("Insert ContextBindingTask") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ContextBindingTask");
@@ -1129,13 +1142,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ContextBindingTask("").getHelpDesc()+"\n\n"+new ContextBindingTask("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "ContextReleaseTask")){
 		// Insert an object of type ContextReleaseTask
-		nobjects.add(
-			new AbstractAction("Insert ContextReleaseTask") {
+		AbstractAction aa=new AbstractAction("Insert ContextReleaseTask") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ContextReleaseTask");
@@ -1145,13 +1159,14 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ContextReleaseTask("").getHelpDesc()+"\n\n"+new ContextReleaseTask("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("ActivityDiagram", "Plan")){
 		// Insert an object of type Plan
-		nobjects.add(
-			new AbstractAction("Insert Plan") {
+		AbstractAction aa=new AbstractAction("Insert Plan") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Plan");
@@ -1161,7 +1176,9 @@ public class ActivityDiagramActionsFactory extends DiagramMenuEntriesActionsFact
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Plan("").getHelpDesc()+"\n\n"+new Plan("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 			return nobjects;

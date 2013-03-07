@@ -59,6 +59,7 @@ import ingenias.editor.rendererxml.*;
 import ingenias.editor.events.*;
 import ingenias.exception.InvalidEntity;
 import ingenias.editor.*;
+import java.util.concurrent.TimeUnit;
 
 public class ComponentDiagramModelJGraph extends ModelJGraph {
 
@@ -131,10 +132,28 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
       }
     };
     INGENIASComponent.setEnabled(true);
-    jb = new JButton(INGENIASComponent);
+    jb = new JButton(INGENIASComponent){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("INGENIASComponent");	
-    jb.setToolTipText("INGENIASComponent");
+    jb.setToolTipText("INGENIASComponent:"+new INGENIASComponent("").getHelpDesc()+"\n\n"+new INGENIASComponent("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -153,10 +172,28 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
       }
     };
     INGENIASCodeComponent.setEnabled(true);
-    jb = new JButton(INGENIASCodeComponent);
+    jb = new JButton(INGENIASCodeComponent){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("INGENIASCodeComponent");	
-    jb.setToolTipText("INGENIASCodeComponent");
+    jb.setToolTipText("INGENIASCodeComponent:"+new INGENIASCodeComponent("").getHelpDesc()+"\n\n"+new INGENIASCodeComponent("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -175,10 +212,28 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
       }
     };
     FileSpecPatternMapping.setEnabled(true);
-    jb = new JButton(FileSpecPatternMapping);
+    jb = new JButton(FileSpecPatternMapping){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("FileSpecPatternMapping");	
-    jb.setToolTipText("FileSpecPatternMapping");
+    jb.setToolTipText("FileSpecPatternMapping:"+new FileSpecPatternMapping("").getHelpDesc()+"\n\n"+new FileSpecPatternMapping("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -197,10 +252,28 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
       }
     };
     Application.setEnabled(true);
-    jb = new JButton(Application);
+    jb = new JButton(Application){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("Application");	
-    jb.setToolTipText("Application");
+    jb.setToolTipText("Application:"+new Application("").getHelpDesc()+"\n\n"+new Application("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -219,10 +292,28 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
       }
     };
     EnvironmentApplication.setEnabled(true);
-    jb = new JButton(EnvironmentApplication);
+    jb = new JButton(EnvironmentApplication){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("EnvironmentApplication");	
-    jb.setToolTipText("EnvironmentApplication");
+    jb.setToolTipText("EnvironmentApplication:"+new EnvironmentApplication("").getHelpDesc()+"\n\n"+new EnvironmentApplication("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -241,10 +332,28 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
       }
     };
     InternalApplication.setEnabled(true);
-    jb = new JButton(InternalApplication);
+    jb = new JButton(InternalApplication){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("InternalApplication");	
-    jb.setToolTipText("InternalApplication");
+    jb.setToolTipText("InternalApplication:"+new InternalApplication("").getHelpDesc()+"\n\n"+new InternalApplication("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -263,10 +372,28 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
       }
     };
     Task.setEnabled(true);
-    jb = new JButton(Task);
+    jb = new JButton(Task){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("Task");	
-    jb.setToolTipText("Task");
+    jb.setToolTipText("Task:"+new Task("").getHelpDesc()+"\n\n"+new Task("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -285,10 +412,188 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
       }
     };
     Test.setEnabled(true);
-    jb = new JButton(Test);
+    jb = new JButton(Test){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("Test");	
-    jb.setToolTipText("Test");
+    jb.setToolTipText("Test:"+new Test("").getHelpDesc()+"\n\n"+new Test("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+    toolbar.add(jb);
+    }
+
+   if (true){
+    Image img_WFTest =
+        ImageLoader.getImage("images/mdepl.gif");
+    undoIcon = new ImageIcon(img_WFTest);
+    Action WFTest=
+        new AbstractAction("WFTest", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "WFTest");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    WFTest.setEnabled(true);
+    jb = new JButton(WFTest){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
+    jb.setText("");
+    jb.setName("WFTest");	
+    jb.setToolTipText("WFTest:"+new WFTest("").getHelpDesc()+"\n\n"+new WFTest("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+    toolbar.add(jb);
+    }
+
+   if (true){
+    Image img_WFTestState =
+        ImageLoader.getImage("images/mdepl.gif");
+    undoIcon = new ImageIcon(img_WFTestState);
+    Action WFTestState=
+        new AbstractAction("WFTestState", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "WFTestState");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    WFTestState.setEnabled(true);
+    jb = new JButton(WFTestState){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
+    jb.setText("");
+    jb.setName("WFTestState");	
+    jb.setToolTipText("WFTestState:"+new WFTestState("").getHelpDesc()+"\n\n"+new WFTestState("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+    toolbar.add(jb);
+    }
+
+   if (true){
+    Image img_WFTestFinalState =
+        ImageLoader.getImage("images/mdepl.gif");
+    undoIcon = new ImageIcon(img_WFTestFinalState);
+    Action WFTestFinalState=
+        new AbstractAction("WFTestFinalState", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "WFTestFinalState");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    WFTestFinalState.setEnabled(true);
+    jb = new JButton(WFTestFinalState){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
+    jb.setText("");
+    jb.setName("WFTestFinalState");	
+    jb.setToolTipText("WFTestFinalState:"+new WFTestFinalState("").getHelpDesc()+"\n\n"+new WFTestFinalState("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+    toolbar.add(jb);
+    }
+
+   if (true){
+    Image img_WFTestInitialState =
+        ImageLoader.getImage("images/mdepl.gif");
+    undoIcon = new ImageIcon(img_WFTestInitialState);
+    Action WFTestInitialState=
+        new AbstractAction("WFTestInitialState", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "WFTestInitialState");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    WFTestInitialState.setEnabled(true);
+    jb = new JButton(WFTestInitialState){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
+    jb.setText("");
+    jb.setName("WFTestInitialState");	
+    jb.setToolTipText("WFTestInitialState:"+new WFTestInitialState("").getHelpDesc()+"\n\n"+new WFTestInitialState("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -307,10 +612,268 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
       }
     };
     UMLComment.setEnabled(true);
-    jb = new JButton(UMLComment);
+    jb = new JButton(UMLComment){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
     jb.setText("");
     jb.setName("UMLComment");	
-    jb.setToolTipText("UMLComment");
+    jb.setToolTipText("UMLComment:"+new UMLComment("").getHelpDesc()+"\n\n"+new UMLComment("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_TaskWS =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_TaskWS);
+    Action TaskWS=
+        new AbstractAction("TaskWS", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "TaskWS");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    TaskWS.setEnabled(true);
+    jb = new JButton(TaskWS){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
+    jb.setText("");
+    jb.setName("TaskWS");	
+    jb.setToolTipText("TaskWS:"+new TaskWS("").getHelpDesc()+"\n\n"+new TaskWS("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_ContextUseTask =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_ContextUseTask);
+    Action ContextUseTask=
+        new AbstractAction("ContextUseTask", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "ContextUseTask");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    ContextUseTask.setEnabled(true);
+    jb = new JButton(ContextUseTask){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
+    jb.setText("");
+    jb.setName("ContextUseTask");	
+    jb.setToolTipText("ContextUseTask:"+new ContextUseTask("").getHelpDesc()+"\n\n"+new ContextUseTask("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_BoxedTask =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_BoxedTask);
+    Action BoxedTask=
+        new AbstractAction("BoxedTask", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "BoxedTask");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    BoxedTask.setEnabled(true);
+    jb = new JButton(BoxedTask){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
+    jb.setText("");
+    jb.setName("BoxedTask");	
+    jb.setToolTipText("BoxedTask:"+new BoxedTask("").getHelpDesc()+"\n\n"+new BoxedTask("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_ContextBindingTask =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_ContextBindingTask);
+    Action ContextBindingTask=
+        new AbstractAction("ContextBindingTask", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "ContextBindingTask");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    ContextBindingTask.setEnabled(true);
+    jb = new JButton(ContextBindingTask){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
+    jb.setText("");
+    jb.setName("ContextBindingTask");	
+    jb.setToolTipText("ContextBindingTask:"+new ContextBindingTask("").getHelpDesc()+"\n\n"+new ContextBindingTask("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_ContextReleaseTask =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_ContextReleaseTask);
+    Action ContextReleaseTask=
+        new AbstractAction("ContextReleaseTask", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "ContextReleaseTask");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    ContextReleaseTask.setEnabled(true);
+    jb = new JButton(ContextReleaseTask){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
+    jb.setText("");
+    jb.setName("ContextReleaseTask");	
+    jb.setToolTipText("ContextReleaseTask:"+new ContextReleaseTask("").getHelpDesc()+"\n\n"+new ContextReleaseTask("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
+    toolbar.add(jb);
+    }
+
+   if (false){
+    Image img_Plan =
+        ImageLoader.getImage("");
+    undoIcon = new ImageIcon(img_Plan);
+    Action Plan=
+        new AbstractAction("Plan", undoIcon) {
+      public void actionPerformed(ActionEvent e) {
+       try{
+        insert(new Point(0, 0), "Plan");
+	} catch (InvalidEntity e1) {			
+		e1.printStackTrace();
+	}
+      }
+    };
+    Plan.setEnabled(true);
+    jb = new JButton(Plan){
+					@Override
+					public JToolTip createToolTip() {
+						return new ingenias.editor.editiondialog.JMultiLineToolTip();
+					}
+				};
+    jb.setText("");
+    jb.setName("Plan");	
+    jb.setToolTipText("Plan:"+new Plan("").getHelpDesc()+"\n\n"+new Plan("").getHelpRecom());
+    jb.addMouseListener(new MouseAdapter() {
+				    final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+				    final int dismissDelayMinutes = (int) TimeUnit.MINUTES.toMillis(10); // 10 minutes
+				    @Override
+				    public void mouseEntered(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(dismissDelayMinutes);
+				    }
+				 
+				    @Override
+				    public void mouseExited(MouseEvent me) {
+				        ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+				    }
+				});
     toolbar.add(jb);
     }
 
@@ -327,6 +890,8 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
           relationships.add("UMLRealizes");
 
           relationships.add("UMLAnnotatedElement");
+
+          relationships.add("WFTestAfter");
 
    return relationships;
   }
@@ -351,7 +916,27 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
 
  entities.add("Test");
 
+ entities.add("WFTest");
+
+ entities.add("WFTestState");
+
+ entities.add("WFTestFinalState");
+
+ entities.add("WFTestInitialState");
+
  entities.add("UMLComment");
+
+ entities.add("TaskWS");
+
+ entities.add("ContextUseTask");
+
+ entities.add("BoxedTask");
+
+ entities.add("ContextBindingTask");
+
+ entities.add("ContextReleaseTask");
+
+ entities.add("Plan");
 
    return entities;
   }
@@ -405,6 +990,11 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
           v.add("UMLAnnotatedElement");
 	  }
 
+        // N-ary relationships. Sometimes they can be also binary.
+        if (WFTestAfterEdge.acceptConnection(this.getModel(), selected)) {
+          v.add("WFTestAfter");
+	  }
+
       }
       else if (nAryEdgesNum == 1) {
 
@@ -421,6 +1011,11 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
         if (selectedEdge instanceof UMLAnnotatedElementEdge &&
         (UMLAnnotatedElementEdge.acceptConnection(this.getModel(), selected))) {
           v.add("UMLAnnotatedElement");
+        }
+
+        if (selectedEdge instanceof WFTestAfterEdge &&
+        (WFTestAfterEdge.acceptConnection(this.getModel(), selected))) {
+          v.add("WFTestAfter");
         }
 
       }
@@ -478,6 +1073,17 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
         // There is no NAryEdges in selected.
         else if (nAryEdgesNum == 0) {
           return new UMLAnnotatedElementEdge(new ingenias.editor.entities.UMLAnnotatedElement(getMJGraph().getNewId()));
+        }
+      }
+
+      if (relacion.equalsIgnoreCase("WFTestAfter")) {
+        // ResponsibleNEdge already exists.
+        if (nAryEdgesNum == 1 && selectedEdge instanceof WFTestAfterEdge) {
+          return selectedEdge;
+        }
+        // There is no NAryEdges in selected.
+        else if (nAryEdgesNum == 0) {
+          return new WFTestAfterEdge(new ingenias.editor.entities.WFTestAfter(getMJGraph().getNewId()));
         }
       }
 
@@ -560,10 +1166,100 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("WFTest")) {
+    WFTest nentity=getOM().createWFTest(getMJGraph().getNewId("WFTest"));
+      DefaultGraphCell vertex = new
+          WFTestCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("WFTestState")) {
+    WFTestState nentity=getOM().createWFTestState(getMJGraph().getNewId("WFTestState"));
+      DefaultGraphCell vertex = new
+          WFTestStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("WFTestFinalState")) {
+    WFTestFinalState nentity=getOM().createWFTestFinalState(getMJGraph().getNewId("WFTestFinalState"));
+      DefaultGraphCell vertex = new
+          WFTestFinalStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("WFTestInitialState")) {
+    WFTestInitialState nentity=getOM().createWFTestInitialState(getMJGraph().getNewId("WFTestInitialState"));
+      DefaultGraphCell vertex = new
+          WFTestInitialStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("UMLComment")) {
     UMLComment nentity=getOM().createUMLComment(getMJGraph().getNewId("UMLComment"));
       DefaultGraphCell vertex = new
           UMLCommentCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("TaskWS")) {
+    TaskWS nentity=getOM().createTaskWS(getMJGraph().getNewId("TaskWS"));
+      DefaultGraphCell vertex = new
+          TaskWSCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ContextUseTask")) {
+    ContextUseTask nentity=getOM().createContextUseTask(getMJGraph().getNewId("ContextUseTask"));
+      DefaultGraphCell vertex = new
+          ContextUseTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("BoxedTask")) {
+    BoxedTask nentity=getOM().createBoxedTask(getMJGraph().getNewId("BoxedTask"));
+      DefaultGraphCell vertex = new
+          BoxedTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ContextBindingTask")) {
+    ContextBindingTask nentity=getOM().createContextBindingTask(getMJGraph().getNewId("ContextBindingTask"));
+      DefaultGraphCell vertex = new
+          ContextBindingTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ContextReleaseTask")) {
+    ContextReleaseTask nentity=getOM().createContextReleaseTask(getMJGraph().getNewId("ContextReleaseTask"));
+      DefaultGraphCell vertex = new
+          ContextReleaseTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Plan")) {
+    Plan nentity=getOM().createPlan(getMJGraph().getNewId("Plan"));
+      DefaultGraphCell vertex = new
+          PlanCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -614,8 +1310,58 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("WFTest")) {
+      return WFTestView.getSize((ingenias.editor.entities.WFTest)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("WFTestState")) {
+      return WFTestStateView.getSize((ingenias.editor.entities.WFTestState)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("WFTestFinalState")) {
+      return WFTestFinalStateView.getSize((ingenias.editor.entities.WFTestFinalState)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("WFTestInitialState")) {
+      return WFTestInitialStateView.getSize((ingenias.editor.entities.WFTestInitialState)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("UMLComment")) {
       return UMLCommentView.getSize((ingenias.editor.entities.UMLComment)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("TaskWS")) {
+      return TaskWSView.getSize((ingenias.editor.entities.TaskWS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextUseTask")) {
+      return ContextUseTaskView.getSize((ingenias.editor.entities.ContextUseTask)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("BoxedTask")) {
+      return BoxedTaskView.getSize((ingenias.editor.entities.BoxedTask)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextBindingTask")) {
+      return ContextBindingTaskView.getSize((ingenias.editor.entities.ContextBindingTask)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextReleaseTask")) {
+      return ContextReleaseTaskView.getSize((ingenias.editor.entities.ContextReleaseTask)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Plan")) {
+      return PlanView.getSize((ingenias.editor.entities.Plan)entity);      
     }
     else
 
@@ -630,6 +1376,10 @@ public class ComponentDiagramModelJGraph extends ModelJGraph {
 
       if (entity.getType().equalsIgnoreCase("UMLAnnotatedElement")) {
       	return UMLAnnotatedElementView.getSize((ingenias.editor.entities.UMLAnnotatedElement)entity);
+      }
+
+      if (entity.getType().equalsIgnoreCase("WFTestAfter")) {
+      	return WFTestAfterView.getSize((ingenias.editor.entities.WFTestAfter)entity);
       }
 
     throw new ingenias.exception.InvalidEntity("Entity type "+entity+" is not allowed in this diagram"); 
@@ -758,10 +1508,90 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(WFTest.class)) {
+      vertex = new WFTestCell( (WFTest) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestView.getSize((WFTest) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(WFTestState.class)) {
+      vertex = new WFTestStateCell( (WFTestState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestStateView.getSize((WFTestState) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(WFTestFinalState.class)) {
+      vertex = new WFTestFinalStateCell( (WFTestFinalState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestFinalStateView.getSize((WFTestFinalState) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(WFTestInitialState.class)) {
+      vertex = new WFTestInitialStateCell( (WFTestInitialState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestInitialStateView.getSize((WFTestInitialState) entity);
+      
+    }
+    else
+
     if (entity.getClass().equals(UMLComment.class)) {
       vertex = new UMLCommentCell( (UMLComment) entity);
       // Default Size for the new Vertex with the new entity within
       size = UMLCommentView.getSize((UMLComment) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(TaskWS.class)) {
+      vertex = new TaskWSCell( (TaskWS) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = TaskWSView.getSize((TaskWS) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(ContextUseTask.class)) {
+      vertex = new ContextUseTaskCell( (ContextUseTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextUseTaskView.getSize((ContextUseTask) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(BoxedTask.class)) {
+      vertex = new BoxedTaskCell( (BoxedTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = BoxedTaskView.getSize((BoxedTask) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(ContextBindingTask.class)) {
+      vertex = new ContextBindingTaskCell( (ContextBindingTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextBindingTaskView.getSize((ContextBindingTask) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(ContextReleaseTask.class)) {
+      vertex = new ContextReleaseTaskCell( (ContextReleaseTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextReleaseTaskView.getSize((ContextReleaseTask) entity);
+      
+    }
+    else
+
+    if (entity.getClass().equals(Plan.class)) {
+      vertex = new PlanCell( (Plan) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = PlanView.getSize((Plan) entity);
       
     }
     else
@@ -799,7 +1629,6 @@ JOptionPane.showMessageDialog(this,
 					vv=(VertexView)cv;
 				}
 			}
-			System.err.println("waiting");
 			try {
 				Thread.currentThread().sleep(10);
 			} catch (InterruptedException e) {

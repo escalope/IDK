@@ -1,12 +1,12 @@
 
 
 ##panel layout="BorderLayout" Background="white"#
-##panel constraints="BorderLayout.NORTH" Background="white" layout="GridBagLayout"#
-##htmllabel id="Id"#
-##gridbagconstraints id="gbc_1" insets="0,0,0,0" gridx="0"
-          gridy="0" fill="GridBagLayout.BOTH" anchor="GridBagLayout.CENTER"/#
-##/htmllabel #
+##panel Background="white" HorizontalAlignment="CENTER"  constraints="BorderLayout.NORTH" layout="FlowLayout(FlowLayout.CENTER,0,0)" #
+##label id="Id"/#
+##iconlabel icon="images/mworkflow.gif" HorizontalAlignment="EAST" /#
 ##/panel#
-##label Foreground="blue" icon="images/workflow.gif" constraints="BorderLayout.CENTER" HorizontalAlignment="CENTER" /#
+##container id="Tasks" border="MatteBorder(1,1,1,1,black)" constraints="BorderLayout.CENTER" background="white" foreground="white" preferredsize="80,80"#
+##/container#
 ##/panel#
+
 		

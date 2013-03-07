@@ -72,9 +72,7 @@ public class HistoryManager {
 
 
 	public static void updateHistory(File newFile, final GUIResources resources, final IDEState ids, final IDEUpdater updater){
-		//	new Exception("update history").printStackTrace();
-		/*System.err.println("antes:"+newFile);	
-		System.err.println("antes:"+ids.getLastFiles());*/
+	
 		if (!ids.getLastFiles().contains(newFile)) {
 			if (ids.getLastFiles().size() > 5) {
 				ids.getLastFiles().remove(0);

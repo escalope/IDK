@@ -76,11 +76,12 @@ super.toMap(ht);
 }
 
 public String toString(){
-if (this.getText()==null ||
+/*if (this.getText()==null ||
     this.getText().toString().equals(""))
  return "Please, define the value of field Text";
 else
- return this.getText().toString();
+ return this.getText().toString();*/
+return ""+getText();
 }
 
 }

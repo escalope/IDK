@@ -260,6 +260,12 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.DeploymentPackageWithContext)
 	  return  new ingenias.editor.cell.DeploymentPackageWithContextCell((ingenias.editor.entities.DeploymentPackageWithContext)en);
 
+   	if (en instanceof ingenias.editor.entities.OrgDeploymentUnit)
+	  return  new ingenias.editor.cell.OrgDeploymentUnitCell((ingenias.editor.entities.OrgDeploymentUnit)en);
+
+   	if (en instanceof ingenias.editor.entities.WFTest)
+	  return  new ingenias.editor.cell.WFTestCell((ingenias.editor.entities.WFTest)en);
+
    	if (en instanceof ingenias.editor.entities.Fact)
 	  return  new ingenias.editor.cell.FactCell((ingenias.editor.entities.Fact)en);
 
@@ -323,6 +329,9 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.MessagePassing)
 	  return  new ingenias.editor.cell.MessagePassingCell((ingenias.editor.entities.MessagePassing)en);
 
+   	if (en instanceof ingenias.editor.entities.GroupDeploymentUnit)
+	  return  new ingenias.editor.cell.GroupDeploymentUnitCell((ingenias.editor.entities.GroupDeploymentUnit)en);
+
    	if (en instanceof ingenias.editor.entities.SubProtocol)
 	  return  new ingenias.editor.cell.SubProtocolCell((ingenias.editor.entities.SubProtocol)en);
 
@@ -358,6 +367,9 @@ public class GraphLoadImp1
 
    	if (en instanceof ingenias.editor.entities.FAERIECtxtValue)
 	  return  new ingenias.editor.cell.FAERIECtxtValueCell((ingenias.editor.entities.FAERIECtxtValue)en);
+
+   	if (en instanceof ingenias.editor.entities.WFTestState)
+	  return  new ingenias.editor.cell.WFTestStateCell((ingenias.editor.entities.WFTestState)en);
 
    	if (en instanceof ingenias.editor.entities.FAERIECtxtEntity)
 	  return  new ingenias.editor.cell.FAERIECtxtEntityCell((ingenias.editor.entities.FAERIECtxtEntity)en);
@@ -434,6 +446,9 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.EnvironmentApplication)
 	  return  new ingenias.editor.cell.EnvironmentApplicationCell((ingenias.editor.entities.EnvironmentApplication)en);
 
+   	if (en instanceof ingenias.editor.entities.WFTestFinalState)
+	  return  new ingenias.editor.cell.WFTestFinalStateCell((ingenias.editor.entities.WFTestFinalState)en);
+
    	if (en instanceof ingenias.editor.entities.ApplicationEventSlots)
 	  return  new ingenias.editor.cell.ApplicationEventSlotsCell((ingenias.editor.entities.ApplicationEventSlots)en);
 
@@ -479,6 +494,9 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.Agent)
 	  return  new ingenias.editor.cell.AgentCell((ingenias.editor.entities.Agent)en);
 
+   	if (en instanceof ingenias.editor.entities.TaskOutputDefinition)
+	  return  new ingenias.editor.cell.TaskOutputDefinitionCell((ingenias.editor.entities.TaskOutputDefinition)en);
+
    	if (en instanceof ingenias.editor.entities.MentalStateManager)
 	  return  new ingenias.editor.cell.MentalStateManagerCell((ingenias.editor.entities.MentalStateManager)en);
 
@@ -509,6 +527,9 @@ public class GraphLoadImp1
    	if (en instanceof ingenias.editor.entities.ApplicationEvent)
 	  return  new ingenias.editor.cell.ApplicationEventCell((ingenias.editor.entities.ApplicationEvent)en);
 
+   	if (en instanceof ingenias.editor.entities.WFTestInitialState)
+	  return  new ingenias.editor.cell.WFTestInitialStateCell((ingenias.editor.entities.WFTestInitialState)en);
+
    	if (en instanceof ingenias.editor.entities.Task)
 	  return  new ingenias.editor.cell.TaskCell((ingenias.editor.entities.Task)en);
 
@@ -520,6 +541,9 @@ public class GraphLoadImp1
 
    	if (en instanceof ingenias.editor.entities.RoleWS)
 	  return  new ingenias.editor.cell.RoleWSCell((ingenias.editor.entities.RoleWS)en);
+
+   	if (en instanceof ingenias.editor.entities.TaskInputDefinition)
+	  return  new ingenias.editor.cell.TaskInputDefinitionCell((ingenias.editor.entities.TaskInputDefinition)en);
 
    	if (en instanceof ingenias.editor.entities.AMIContext)
 	  return  new ingenias.editor.cell.AMIContextCell((ingenias.editor.entities.AMIContext)en);
@@ -577,6 +601,9 @@ public class GraphLoadImp1
     if (en instanceof ingenias.editor.entities.ContributeNegatively)
      return  new ContributeNegativelyEdge((ingenias.editor.entities.ContributeNegatively)en);
 
+    if (en instanceof ingenias.editor.entities.MemberDplmnt)
+     return  new MemberDplmntEdge((ingenias.editor.entities.MemberDplmnt)en);
+
     if (en instanceof ingenias.editor.entities.DefinesDeployment)
      return  new DefinesDeploymentEdge((ingenias.editor.entities.DefinesDeployment)en);
 
@@ -603,6 +630,9 @@ public class GraphLoadImp1
 
     if (en instanceof ingenias.editor.entities.WFCancels)
      return  new WFCancelsEdge((ingenias.editor.entities.WFCancels)en);
+
+    if (en instanceof ingenias.editor.entities.WFTestAfter)
+     return  new WFTestAfterEdge((ingenias.editor.entities.WFTestAfter)en);
 
     if (en instanceof ingenias.editor.entities.AGOInconditionalSubordinationRelationshipGroup)
      return  new AGOInconditionalSubordinationRelationshipGroupEdge((ingenias.editor.entities.AGOInconditionalSubordinationRelationshipGroup)en);
@@ -639,6 +669,9 @@ public class GraphLoadImp1
 
     if (en instanceof ingenias.editor.entities.WFSpecifiesExecution)
      return  new WFSpecifiesExecutionEdge((ingenias.editor.entities.WFSpecifiesExecution)en);
+
+    if (en instanceof ingenias.editor.entities.OrgDplmnt)
+     return  new OrgDplmntEdge((ingenias.editor.entities.OrgDplmnt)en);
 
     if (en instanceof ingenias.editor.entities.AInstanceOf)
      return  new AInstanceOfEdge((ingenias.editor.entities.AInstanceOf)en);
@@ -688,6 +721,9 @@ public class GraphLoadImp1
     if (en instanceof ingenias.editor.entities.FAERIESrcEntity)
      return  new FAERIESrcEntityEdge((ingenias.editor.entities.FAERIESrcEntity)en);
 
+    if (en instanceof ingenias.editor.entities.GroupDplmnt)
+     return  new GroupDplmntEdge((ingenias.editor.entities.GroupDplmnt)en);
+
     if (en instanceof ingenias.editor.entities.PConnects)
      return  new PConnectsEdge((ingenias.editor.entities.PConnects)en);
 
@@ -729,6 +765,9 @@ public class GraphLoadImp1
 
     if (en instanceof ingenias.editor.entities.Consumes)
      return  new ConsumesEdge((ingenias.editor.entities.Consumes)en);
+
+    if (en instanceof ingenias.editor.entities.TestEventInjection)
+     return  new TestEventInjectionEdge((ingenias.editor.entities.TestEventInjection)en);
 
     if (en instanceof ingenias.editor.entities.AHasMS)
      return  new AHasMSEdge((ingenias.editor.entities.AHasMS)en);

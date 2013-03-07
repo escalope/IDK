@@ -127,12 +127,11 @@ implements BasicCodeGenerator {
 	 *@exception  java.io.FileNotFoundException The template was not found
 	 */
 	public void addTemplate(String filePath, ClassLoader cl) throws java.io.FileNotFoundException {
-		if (cl instanceof java.net.URLClassLoader) {
-			System.err.println("Loding "+filePath);
+		if (cl instanceof java.net.URLClassLoader) {			
 			java.net.URL baseURL = ((java.net.URLClassLoader)cl).getResource(filePath);
 			if (baseURL == null) {
 				try {
-					System.err.println("Loading.....");
+					//System.err.println("Loading.....");
 					new URL(filePath).openStream().close();
 					this.templates.add(new URL(filePath));
 				} catch (MalformedURLException e) {
@@ -156,7 +155,7 @@ implements BasicCodeGenerator {
 		else {
 			ClassLoader loader = cl;
 			try {
-				System.err.println("Loading..... from "+this.getClass().getClassLoader().getClass().getName());
+				//System.err.println("Loading..... from "+this.getClass().getClassLoader().getClass().getName());
 				//new URL(filePath).openStream().close();
 				if (loader.getResource(filePath)==null)
 					throw new IOException ();
@@ -190,7 +189,7 @@ implements BasicCodeGenerator {
 					getClassLoader()).findResource(filePath);
 			if (baseURL == null) {
 				try {
-					System.err.println("Loading.....");
+				//	System.err.println("Loading.....");
 					new URL(filePath).openStream().close();
 					this.templates.add(new URL(filePath));
 				} catch (MalformedURLException e) {
@@ -214,7 +213,7 @@ implements BasicCodeGenerator {
 		else {
 			ClassLoader loader = this.getClass().getClassLoader();
 			try {
-				System.err.println("Loading..... from "+this.getClass().getClassLoader().getClass().getName());
+			//	System.err.println("Loading..... from "+this.getClass().getClassLoader().getClass().getName());
 				//new URL(filePath).openStream().close();
 				if (loader.getResource(filePath)==null)
 					throw new IOException ();
@@ -257,11 +256,11 @@ implements BasicCodeGenerator {
 
 
 		setProperties(nprops);
-		for (Object key: nprops.keySet()){
+		/*for (Object key: nprops.keySet()){
 
 			System.err.println(((ProjectProperty)nprops.get(key.toString())).key+":"+
 					((ProjectProperty)nprops.get(key.toString())).value);
-		};
+		};*/
 
 		Sequences seq = this.generate();
 		if (templates.size() == 0) {
@@ -315,11 +314,11 @@ implements BasicCodeGenerator {
 
 
 		setProperties(nprops);
-		for (Object key: nprops.keySet()){
+	/*	for (Object key: nprops.keySet()){
 
 			System.err.println(((ProjectProperty)nprops.get(key.toString())).key+":"+
 					((ProjectProperty)nprops.get(key.toString())).value);
-		};
+		};*/
 
 		Sequences seq = this.generate();
 		if (templates.size() == 0) {

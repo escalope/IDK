@@ -30,22 +30,29 @@ import ingenias.exception.NullEntity;
 import ingenias.generator.browser.BrowserImp;
 import ingenias.generator.browser.Graph;
 import ingenias.generator.browser.GraphEntity;
+import ingenias.generator.browser.GraphRelationship;
 import ingenias.generator.browser.GraphRelationshipImp;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.geom.Point2D;
 import java.lang.reflect.Field;
+import java.util.Hashtable;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import org.jgraph.graph.AttributeMap;
 import org.jgraph.graph.DefaultEdge;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphCell;
+import org.jgraph.graph.GraphConstants;
 import org.jgraph.graph.GraphModel;
 
 public class CommonMenuEntriesActionFactory {
@@ -68,8 +75,7 @@ public class CommonMenuEntriesActionFactory {
 		if (fs.length>1)
 			actions.add(
 					new AbstractAction("Edit") {
-						public void actionPerformed(ActionEvent e) {
-							System.err.println("clase cell"+defaultEdge.getClass()+" "+defaultEdge.getUserObject());
+						public void actionPerformed(ActionEvent e) {							
 							graph.startEditingAtCell(defaultEdge);
 
 						}
@@ -80,17 +86,71 @@ public class CommonMenuEntriesActionFactory {
 
 						public void actionPerformed(ActionEvent e) {
 							re.hide();
+													
+							AttributeMap am = graph.getModel().getAttributes(defaultEdge);
+							
+							GraphConstants.setLabelEnabled(am,false);		
+							GraphConstants.setLabelPosition(am,
+									new Point2D.Double(GraphConstants.PERMILLE/2, -20));	
+							Hashtable attributes=new Hashtable();
+							attributes.put(defaultEdge,am);
+							graph.getModel().edit(attributes,null,null,null); // hack to prevent duplicating attributes
+							/*attributes=new Hashtable();
+							attributes.put(defaultEdge,am);							
+							graph.getModel().edit(attributes,null,null,null);*/
+							SwingUtilities.invokeLater(new Runnable(){
+								public void run(){
+									graph.invalidate();
+									graph.repaint();		
+									resources.getMainFrame().invalidate();
+									resources.getMainFrame().repaint();
+								}
+							});
+							
 						}
 					});
 		for (int k=0;k<fs.length;k++){
-			if (!fs[k].getName().equalsIgnoreCase("id")){
+			if (!fs[k].getDeclaringClass().equals(Entity.class)){
 				final int j=k;
 				// Edit
 				actions.add(
 						new AbstractAction("Show field "+fs[k].getName()) {
 
-							public void actionPerformed(ActionEvent e) {
+							public void actionPerformed(ActionEvent e) {			
+								try{
 								re.show(j);
+								AttributeMap am = graph.getModel().getAttributes(defaultEdge);//graph.getGraphLayoutCache().getMapping(defaultEdge,false).getAllAttributes();										
+								GraphConstants.setLabelEnabled(am,true);							 						
+								GraphConstants.setLabelPosition(am,
+										new Point2D.Double(GraphConstants.PERMILLE/2, -20));
+					        	
+					        	//GraphConstants.setBackground(am,new Color(212,219,206));
+								
+								
+								/*attributes.put(graph.getGraphLayoutCache().getMapping(defaultEdge,false),am);
+								graph.getGraphLayoutCache().edit(attributes); // hack to prevent duplicating attributes
+								attributes=new Hashtable();								
+								am=new AttributeMap();*/
+							
+								GraphConstants.setOpaque(am, true);		
+								GraphConstants.setBackground(am,new Color(212,219,206));
+					        	GraphConstants.setBorderColor(am, Color.GRAY);
+					        	GraphConstants.setLabelAlongEdge(am,true);
+					        	
+					        	final Hashtable attributes=new Hashtable();
+					        	attributes.put(defaultEdge,am);
+					        	graph.getModel().edit(attributes,null,null,null);
+								SwingUtilities.invokeLater(new Runnable(){
+									public void run(){
+										graph.refresh();
+										graph.invalidate();
+										graph.repaint();		
+										resources.getMainFrame().invalidate();
+										resources.getMainFrame().repaint();
+										
+									}
+								});
+								}catch (Throwable t){t.printStackTrace();};
 							}
 						});
 
@@ -181,12 +241,12 @@ public class CommonMenuEntriesActionFactory {
 					public void actionPerformed(ActionEvent e) {
 						Log.getInstance().logERROR("Replacing");
 						try {
-							Vector<GraphRelationshipImp> rels = 
+							Vector<GraphRelationship> rels = 
 									browser.findEntity(ent.getId()).getAllRelationships();
 							Entity newent = ConvertUtils.convert(state,ent.getId(), ent.getType(),
 									current);
 							for (int j=0;j<rels.size();j++){
-								rels.elementAt(j).getNAryEdge().replace(ent.getId(),newent);
+								((GraphRelationshipImp)rels.elementAt(j)).getNAryEdge().replace(ent.getId(),newent);
 							}
 							Vector<ModelJGraph> models = state.gm.getUOModels();
 							for (int j=0;j<models.size();j++){

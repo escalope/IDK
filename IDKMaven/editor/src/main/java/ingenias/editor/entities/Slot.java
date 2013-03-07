@@ -122,11 +122,12 @@ super.toMap(ht);
 }
 
 public String toString(){
-if (this.getName()==null ||
+/*if (this.getName()==null ||
     this.getName().toString().equals(""))
  return "Please, define the value of field Name";
 else
- return this.getName().toString();
+ return this.getName().toString();*/
+return ""+getName();
 }
 
 }

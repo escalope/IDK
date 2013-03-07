@@ -20,6 +20,7 @@ package ingenias.generator.browser;
 
 import ingenias.editor.IDEState;
 import ingenias.editor.ModelJGraph;
+import ingenias.exception.InvalidEntity;
 import ingenias.exception.NotFound;
 
 import java.lang.reflect.*;
@@ -58,6 +59,41 @@ abstract class AttributedElementImp implements AttributedElement {
 	}
 
 
+	 
+	 public void setAttributeValue(String name,Object value) throws NotFound, InvalidEntity{
+
+			Field[] fields=element.getClass().getFields();
+			GraphAttribute result=null;
+			int k=0;
+			boolean found=false;
+			String availableFields="";
+			while (k<fields.length && !found){
+				try {
+					availableFields=availableFields+fields[k].getName()+"="+fields[k].get(element)+",";
+				} catch (IllegalArgumentException e) {
+
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+
+					e.printStackTrace();
+				}
+				found=fields[k].getName().equalsIgnoreCase(name);
+				if (!found) k++;
+			}
+
+			if (!found)
+				throw new NotFound("Field "+name+" not found in entity "+ element+":"+element.getClass().getName()+".Available fields in "+element.getClass()+" are "+availableFields);
+			if (fields[k].getType().isAssignableFrom(value.getClass())){
+				try {
+					fields[k].set(element, value);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					throw new InvalidEntity("Could not assign value to field "+name,e);
+				}
+			} else 
+				throw new InvalidEntity("Supplied value is not compatible with field "+name);
+	 }
 
 	public GraphAttribute getAttributeByName(String name) throws NotFound{
 

@@ -101,7 +101,27 @@ public class ComponentDiagramPanel extends JGraph {
 
  entities.add("Test");
 
+ entities.add("WFTest");
+
+ entities.add("WFTestState");
+
+ entities.add("WFTestFinalState");
+
+ entities.add("WFTestInitialState");
+
  entities.add("UMLComment");
+
+ entities.add("TaskWS");
+
+ entities.add("ContextUseTask");
+
+ entities.add("BoxedTask");
+
+ entities.add("ContextBindingTask");
+
+ entities.add("ContextReleaseTask");
+
+ entities.add("Plan");
 
    return entities;
   }
@@ -182,10 +202,100 @@ public class ComponentDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("WFTest")) {
+    WFTest nentity=new WFTest(((Model)getModel()).getNewId("WFTest"));
+      DefaultGraphCell vertex = new
+          WFTestCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("WFTestState")) {
+    WFTestState nentity=new WFTestState(((Model)getModel()).getNewId("WFTestState"));
+      DefaultGraphCell vertex = new
+          WFTestStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("WFTestFinalState")) {
+    WFTestFinalState nentity=new WFTestFinalState(((Model)getModel()).getNewId("WFTestFinalState"));
+      DefaultGraphCell vertex = new
+          WFTestFinalStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("WFTestInitialState")) {
+    WFTestInitialState nentity=new WFTestInitialState(((Model)getModel()).getNewId("WFTestInitialState"));
+      DefaultGraphCell vertex = new
+          WFTestInitialStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("UMLComment")) {
     UMLComment nentity=new UMLComment(((Model)getModel()).getNewId("UMLComment"));
       DefaultGraphCell vertex = new
           UMLCommentCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("TaskWS")) {
+    TaskWS nentity=new TaskWS(((Model)getModel()).getNewId("TaskWS"));
+      DefaultGraphCell vertex = new
+          TaskWSCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ContextUseTask")) {
+    ContextUseTask nentity=new ContextUseTask(((Model)getModel()).getNewId("ContextUseTask"));
+      DefaultGraphCell vertex = new
+          ContextUseTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("BoxedTask")) {
+    BoxedTask nentity=new BoxedTask(((Model)getModel()).getNewId("BoxedTask"));
+      DefaultGraphCell vertex = new
+          BoxedTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ContextBindingTask")) {
+    ContextBindingTask nentity=new ContextBindingTask(((Model)getModel()).getNewId("ContextBindingTask"));
+      DefaultGraphCell vertex = new
+          ContextBindingTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ContextReleaseTask")) {
+    ContextReleaseTask nentity=new ContextReleaseTask(((Model)getModel()).getNewId("ContextReleaseTask"));
+      DefaultGraphCell vertex = new
+          ContextReleaseTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Plan")) {
+    Plan nentity=new Plan(((Model)getModel()).getNewId("Plan"));
+      DefaultGraphCell vertex = new
+          PlanCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -236,8 +346,58 @@ public class ComponentDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("WFTest")) {
+      return WFTestView.getSize((WFTest)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("WFTestState")) {
+      return WFTestStateView.getSize((WFTestState)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("WFTestFinalState")) {
+      return WFTestFinalStateView.getSize((WFTestFinalState)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("WFTestInitialState")) {
+      return WFTestInitialStateView.getSize((WFTestInitialState)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("UMLComment")) {
       return UMLCommentView.getSize((UMLComment)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("TaskWS")) {
+      return TaskWSView.getSize((TaskWS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextUseTask")) {
+      return ContextUseTaskView.getSize((ContextUseTask)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("BoxedTask")) {
+      return BoxedTaskView.getSize((BoxedTask)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextBindingTask")) {
+      return ContextBindingTaskView.getSize((ContextBindingTask)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextReleaseTask")) {
+      return ContextReleaseTaskView.getSize((ContextReleaseTask)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Plan")) {
+      return PlanView.getSize((Plan)entity);      
     }
     else
 
@@ -347,10 +507,80 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(WFTest.class)) {
+      vertex = new WFTestCell( (WFTest) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestView.getSize((WFTest) entity);
+    }
+    else
+
+    if (entity.getClass().equals(WFTestState.class)) {
+      vertex = new WFTestStateCell( (WFTestState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestStateView.getSize((WFTestState) entity);
+    }
+    else
+
+    if (entity.getClass().equals(WFTestFinalState.class)) {
+      vertex = new WFTestFinalStateCell( (WFTestFinalState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestFinalStateView.getSize((WFTestFinalState) entity);
+    }
+    else
+
+    if (entity.getClass().equals(WFTestInitialState.class)) {
+      vertex = new WFTestInitialStateCell( (WFTestInitialState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestInitialStateView.getSize((WFTestInitialState) entity);
+    }
+    else
+
     if (entity.getClass().equals(UMLComment.class)) {
       vertex = new UMLCommentCell( (UMLComment) entity);
       // Default Size for the new Vertex with the new entity within
       size = UMLCommentView.getSize((UMLComment) entity);
+    }
+    else
+
+    if (entity.getClass().equals(TaskWS.class)) {
+      vertex = new TaskWSCell( (TaskWS) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = TaskWSView.getSize((TaskWS) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ContextUseTask.class)) {
+      vertex = new ContextUseTaskCell( (ContextUseTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextUseTaskView.getSize((ContextUseTask) entity);
+    }
+    else
+
+    if (entity.getClass().equals(BoxedTask.class)) {
+      vertex = new BoxedTaskCell( (BoxedTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = BoxedTaskView.getSize((BoxedTask) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ContextBindingTask.class)) {
+      vertex = new ContextBindingTaskCell( (ContextBindingTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextBindingTaskView.getSize((ContextBindingTask) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ContextReleaseTask.class)) {
+      vertex = new ContextReleaseTaskCell( (ContextReleaseTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextReleaseTaskView.getSize((ContextReleaseTask) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Plan.class)) {
+      vertex = new PlanCell( (Plan) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = PlanView.getSize((Plan) entity);
     }
     else
 

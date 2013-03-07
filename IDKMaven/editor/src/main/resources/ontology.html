@@ -39,6 +39,10 @@
 
 <A HREF="#DeploymentPackageWithContext">DeploymentPackageWithContext</A> <BR>
 
+<A HREF="#OrgDeploymentUnit">OrgDeploymentUnit</A> <BR>
+
+<A HREF="#WFTest">WFTest</A> <BR>
+
 <A HREF="#Fact">Fact</A> <BR>
 
 <A HREF="#AOPMentalStatePattern">AOPMentalStatePattern</A> <BR>
@@ -93,6 +97,8 @@
 
 <A HREF="#MessagePassing">MessagePassing</A> <BR>
 
+<A HREF="#GroupDeploymentUnit">GroupDeploymentUnit</A> <BR>
+
 <A HREF="#SubProtocol">SubProtocol</A> <BR>
 
 <A HREF="#RuntimeConversation">RuntimeConversation</A> <BR>
@@ -122,6 +128,8 @@
 <A HREF="#Plan">Plan</A> <BR>
 
 <A HREF="#FAERIECtxtValue">FAERIECtxtValue</A> <BR>
+
+<A HREF="#WFTestState">WFTestState</A> <BR>
 
 <A HREF="#UMLComponent">UMLComponent</A> <BR>
 
@@ -185,6 +193,8 @@
 
 <A HREF="#EnvironmentApplication">EnvironmentApplication</A> <BR>
 
+<A HREF="#WFTestFinalState">WFTestFinalState</A> <BR>
+
 <A HREF="#ApplicationEventSlots">ApplicationEventSlots</A> <BR>
 
 <A HREF="#AgentDescription">AgentDescription</A> <BR>
@@ -229,6 +239,8 @@
 
 <A HREF="#Agent">Agent</A> <BR>
 
+<A HREF="#TaskOutputDefinition">TaskOutputDefinition</A> <BR>
+
 <A HREF="#MentalStateManager">MentalStateManager</A> <BR>
 
 <A HREF="#INGENIASCodeComponent">INGENIASCodeComponent</A> <BR>
@@ -253,6 +265,8 @@
 
 <A HREF="#ApplicationEvent">ApplicationEvent</A> <BR>
 
+<A HREF="#WFTestInitialState">WFTestInitialState</A> <BR>
+
 <A HREF="#Task">Task</A> <BR>
 
 <A HREF="#DeploymentUnitByTypeMSEntity">DeploymentUnitByTypeMSEntity</A> <BR>
@@ -260,6 +274,8 @@
 <A HREF="#MentalEntityInstanceAccess">MentalEntityInstanceAccess</A> <BR>
 
 <A HREF="#RoleWS">RoleWS</A> <BR>
+
+<A HREF="#TaskInputDefinition">TaskInputDefinition</A> <BR>
 
 <A HREF="#AMIContext">AMIContext</A> <BR>
 
@@ -300,6 +316,8 @@
 
 <A HREF="#ContributeNegatively">ContributeNegatively</A><BR>
 
+<A HREF="#MemberDplmnt">MemberDplmnt</A><BR>
+
 <A HREF="#DefinesDeployment">DefinesDeployment</A><BR>
 
 <A HREF="#HasCtxModel">HasCtxModel</A><BR>
@@ -317,6 +335,8 @@
 <A HREF="#GTCreates">GTCreates</A><BR>
 
 <A HREF="#WFCancels">WFCancels</A><BR>
+
+<A HREF="#WFTestAfter">WFTestAfter</A><BR>
 
 <A HREF="#AGOInconditionalSubordinationRelationshipGroup">AGOInconditionalSubordinationRelationshipGroup</A><BR>
 
@@ -341,6 +361,8 @@
 <A HREF="#AGOClientServerRelationshipMember">AGOClientServerRelationshipMember</A><BR>
 
 <A HREF="#WFSpecifiesExecution">WFSpecifiesExecution</A><BR>
+
+<A HREF="#OrgDplmnt">OrgDplmnt</A><BR>
 
 <A HREF="#AInstanceOf">AInstanceOf</A><BR>
 
@@ -374,6 +396,8 @@
 
 <A HREF="#FAERIESrcEntity">FAERIESrcEntity</A><BR>
 
+<A HREF="#GroupDplmnt">GroupDplmnt</A><BR>
+
 <A HREF="#PConnects">PConnects</A><BR>
 
 <A HREF="#AHasMSProcessor">AHasMSProcessor</A><BR>
@@ -401,6 +425,8 @@
 <A HREF="#AGORelationshipOrg">AGORelationshipOrg</A><BR>
 
 <A HREF="#Consumes">Consumes</A><BR>
+
+<A HREF="#TestEventInjection">TestEventInjection</A><BR>
 
 <A HREF="#AHasMS">AHasMS</A><BR>
 
@@ -796,7 +822,27 @@ Entities:
 
 <li><A HREF="#Test">Test</A></li>
 
+<li><A HREF="#WFTest">WFTest</A></li>
+
+<li><A HREF="#WFTestState">WFTestState</A></li>
+
+<li><A HREF="#WFTestFinalState">WFTestFinalState</A></li>
+
+<li><A HREF="#WFTestInitialState">WFTestInitialState</A></li>
+
 <li><A HREF="#UMLComment">UMLComment</A></li>
+
+<li><A HREF="#TaskWS">TaskWS</A></li>
+
+<li><A HREF="#ContextUseTask">ContextUseTask</A></li>
+
+<li><A HREF="#BoxedTask">BoxedTask</A></li>
+
+<li><A HREF="#ContextBindingTask">ContextBindingTask</A></li>
+
+<li><A HREF="#ContextReleaseTask">ContextReleaseTask</A></li>
+
+<li><A HREF="#Plan">Plan</A></li>
 
 </ul>
 </TD>
@@ -809,6 +855,8 @@ Relationships:
 <li><A HREF="#UMLRealizes">UMLRealizes</A></li>
 
 <li><A HREF="#UMLAnnotatedElement">UMLAnnotatedElement</A></li>
+
+<li><A HREF="#WFTestAfter">WFTestAfter</A></li>
 
 </ul>
 </TD>
@@ -945,6 +993,8 @@ Relationships:
 <li><A HREF="#WFResponsable">WFResponsable</A></li>
 
 <li><A HREF="#WFConsumes">WFConsumes</A></li>
+
+<li><A HREF="#WFPlays">WFPlays</A></li>
 
 <li><A HREF="#Consumes">Consumes</A></li>
 
@@ -1412,13 +1462,27 @@ Entities:
 
 <li><A HREF="#FAERIEContext">FAERIEContext</A></li>
 
+<li><A HREF="#WFTestInitialState">WFTestInitialState</A></li>
+
+<li><A HREF="#WFTestFinalState">WFTestFinalState</A></li>
+
+<li><A HREF="#WFTestState">WFTestState</A></li>
+
+<li><A HREF="#OrgDeploymentUnit">OrgDeploymentUnit</A></li>
+
+<li><A HREF="#GroupDeploymentUnit">GroupDeploymentUnit</A></li>
+
+<li><A HREF="#TaskWS">TaskWS</A></li>
+
 <li><A HREF="#Fact">Fact</A></li>
+
+<li><A HREF="#OrganizationGroup">OrganizationGroup</A></li>
 
 <li><A HREF="#RuntimeCommFailure">RuntimeCommFailure</A></li>
 
-<li><A HREF="#DeploymentUnitByTypeWithInitMS">DeploymentUnitByTypeWithInitMS</A></li>
-
 <li><A HREF="#FAERIECtxtRelationship">FAERIECtxtRelationship</A></li>
+
+<li><A HREF="#Organization">Organization</A></li>
 
 <li><A HREF="#ApplicationEvent">ApplicationEvent</A></li>
 
@@ -1426,49 +1490,67 @@ Entities:
 
 <li><A HREF="#GoalStateWS">GoalStateWS</A></li>
 
-<li><A HREF="#FrameFact">FrameFact</A></li>
-
 <li><A HREF="#Test">Test</A></li>
 
 <li><A HREF="#RuntimeEvent">RuntimeEvent</A></li>
 
 <li><A HREF="#FAERIECtxtEntity">FAERIECtxtEntity</A></li>
 
-<li><A HREF="#AgentWS">AgentWS</A></li>
-
-<li><A HREF="#AgentModelBelieve">AgentModelBelieve</A></li>
-
 <li><A HREF="#ApplicationEventSlots">ApplicationEventSlots</A></li>
-
-<li><A HREF="#Compromise">Compromise</A></li>
 
 <li><A HREF="#FAERIECtxtAttribute">FAERIECtxtAttribute</A></li>
 
 <li><A HREF="#FileSpecPatternMapping">FileSpecPatternMapping</A></li>
 
-<li><A HREF="#Conversation">Conversation</A></li>
-
-<li><A HREF="#Agent">Agent</A></li>
+<li><A HREF="#BoxedTask">BoxedTask</A></li>
 
 <li><A HREF="#RuntimeConversation">RuntimeConversation</A></li>
+
+<li><A HREF="#Agent">Agent</A></li>
 
 <li><A HREF="#CommunicationEvent">CommunicationEvent</A></li>
 
 <li><A HREF="#AMIContext">AMIContext</A></li>
 
-<li><A HREF="#MentalInstanceSpecification">MentalInstanceSpecification</A></li>
-
 <li><A HREF="#AMIContextInstantiation">AMIContextInstantiation</A></li>
 
+<li><A HREF="#ContextReleaseTask">ContextReleaseTask</A></li>
+
 <li><A HREF="#GeneralEvent">GeneralEvent</A></li>
+
+<li><A HREF="#ContextUseTask">ContextUseTask</A></li>
 
 <li><A HREF="#ConditionalMentalState">ConditionalMentalState</A></li>
 
 <li><A HREF="#StateGoal">StateGoal</A></li>
 
-<li><A HREF="#RuntimeFact">RuntimeFact</A></li>
-
 <li><A HREF="#Believe">Believe</A></li>
+
+<li><A HREF="#Task">Task</A></li>
+
+<li><A HREF="#Plan">Plan</A></li>
+
+<li><A HREF="#WFTest">WFTest</A></li>
+
+<li><A HREF="#DeploymentUnitByTypeWithInitMS">DeploymentUnitByTypeWithInitMS</A></li>
+
+<li><A HREF="#OrganizationNetwork">OrganizationNetwork</A></li>
+
+<li><A HREF="#FrameFact">FrameFact</A></li>
+
+<li><A HREF="#AgentWS">AgentWS</A></li>
+
+<li><A HREF="#AgentModelBelieve">AgentModelBelieve</A></li>
+
+<li><A HREF="#Compromise">Compromise</A></li>
+
+<li><A HREF="#Conversation">Conversation</A></li>
+
+<li><A HREF="#MentalInstanceSpecification">MentalInstanceSpecification</A></li>
+
+<li><A HREF="#ContextBindingTask">ContextBindingTask</A></li>
+
+<li><A HREF="#RuntimeFact">RuntimeFact</A></li>
 
 </ul>
 </TD>
@@ -1483,6 +1565,14 @@ Relationships:
 <li><A HREF="#CDUsesCode">CDUsesCode</A></li>
 
 <li><A HREF="#SimulationPursues">SimulationPursues</A></li>
+
+<li><A HREF="#TestEventInjection">TestEventInjection</A></li>
+
+<li><A HREF="#OrgDplmnt">OrgDplmnt</A></li>
+
+<li><A HREF="#GroupDplmnt">GroupDplmnt</A></li>
+
+<li><A HREF="#MemberDplmnt">MemberDplmnt</A></li>
 
 </ul>
 </TD>
@@ -1668,6 +1758,42 @@ Attributes:<BR>
  <li><B>Context</B> which is a collection of <B>ingenias.editor.entities.AMIContext</B> elements</li>
 
  <li><B>ContextModelInstantiation</B> which is a collection of <B>ingenias.editor.entities.AMIContextInstantiation</B> elements</li>
+
+</ul>
+
+
+   <H2><A NAME="OrgDeploymentUnit"></A>OrgDeploymentUnit specializes <A HREF="#INGENIASObject">INGENIASObject</A> </H2>
+A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
+ <li> InstanceName which contains java.lang.String  </li>
+
+ <li> InstOrganization which contains ingenias.editor.entities.Organization  </li>
+
+
+</ul>
+
+
+   <H2><A NAME="WFTest"></A>WFTest specializes <A HREF="#Test">Test</A> </H2>
+A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
+ <li> NeverClaim which contains java.lang.String  </li>
+
+ <li> Repetition which contains java.lang.String  </li>
+
+ <li> MaxTimePerCycle which contains java.lang.String  </li>
+
+ <li> TestDuration which contains java.lang.String  </li>
+
+
+ <li><B>TestStates</B> which is a collection of <B>ingenias.editor.entities.WFTestState</B> elements</li>
 
 </ul>
 
@@ -2027,6 +2153,21 @@ Attributes:<BR>
 </ul>
 
 
+   <H2><A NAME="GroupDeploymentUnit"></A>GroupDeploymentUnit specializes <A HREF="#INGENIASObject">INGENIASObject</A> </H2>
+A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
+ <li> InstanceName which contains java.lang.String  </li>
+
+ <li> InstGroup which contains ingenias.editor.entities.OrganizationGroup  </li>
+
+
+</ul>
+
+
    <H2><A NAME="SubProtocol"></A>SubProtocol specializes <A HREF="#AUMLContainer">AUMLContainer</A> </H2>
 It represents an AUML protocol<P>
 <B>Use it when ....</B><BR>
@@ -2229,6 +2370,21 @@ A deploy unit is an entity that defines how many instances of agents will exist 
 <P>
 Attributes:<BR>
 <ul>
+
+
+</ul>
+
+
+   <H2><A NAME="WFTestState"></A>WFTestState specializes <A HREF="#INGENIASObject">INGENIASObject</A> </H2>
+A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
+ <li> PartID which contains java.lang.String  </li>
+
+ <li> Task which contains ingenias.editor.entities.Task  </li>
 
 
 </ul>
@@ -2611,6 +2767,17 @@ Attributes:<BR>
 </ul>
 
 
+   <H2><A NAME="WFTestFinalState"></A>WFTestFinalState specializes <A HREF="#WFTestState">WFTestState</A> </H2>
+A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
+
+</ul>
+
+
    <H2><A NAME="ApplicationEventSlots"></A>ApplicationEventSlots specializes <A HREF="#ApplicationEvent">ApplicationEvent</A> </H2>
 An application event that determines the information that transmits as slots<P>
 <B>Use it when ....</B><BR>
@@ -2899,6 +3066,21 @@ Attributes:<BR>
 </ul>
 
 
+   <H2><A NAME="TaskOutputDefinition"></A>TaskOutputDefinition specializes <A HREF="#INGENIASObject">INGENIASObject</A> </H2>
+Describes an action in an activity diagram<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
+ <li> Operation which contains java.lang.String  </li>
+
+ <li> AffectedElement which contains ingenias.editor.entities.MentalEntity  </li>
+
+
+</ul>
+
+
    <H2><A NAME="MentalStateManager"></A>MentalStateManager specializes <A HREF="#AgentComponent">AgentComponent</A> </H2>
 An agent has a mental state upon which the agent takes decisions. This mental state is an aggregate of mental entities (believes, facts, events, etc.). As an aggregate, the mental state must be managed. Say that management of mental<br>    state consists of determining how new mental entities are added, how to maintain consistency, and how to remove entities. To specify these elements you can use description field of the entity or also task and goal models. If you use task and goals<br>    models, you can detail which management tasks exist and how they act. In these diagrams, tasks can be associated to mental entities by other relationships different from consumes or produces. For instance, you can say that a task create mental<br>    entities or removes mental entities depending on certain conditions. To express these conditions, we use MentalStatePatterns.<P>
 <B>Use it when ....</B><BR>
@@ -3089,6 +3271,17 @@ Attributes:<BR>
 </ul>
 
 
+   <H2><A NAME="WFTestInitialState"></A>WFTestInitialState specializes <A HREF="#WFTestState">WFTestState</A> </H2>
+A deploy unit is an entity that defines how many instances of agents will exist in the final system<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
+
+</ul>
+
+
    <H2><A NAME="Task"></A>Task specializes <A HREF="#AgentComponent">AgentComponent</A> </H2>
 Tasks is the encapsulation of actions or non-distributable algorithms. Tasks can use Applications and resources. Tasks generate changes in the mental state of the agent that executes them. Changes consist of: (a) modifying, creating or<br>    destroying mental entities; or (b) changes in the perception of the world by acting over applications (applications act over the world producing events, that are perceived by the agent). Though tasks can be also assigned to roles, at the end, it will<br>    belong to an agent.<P>
 <B>Use it when ....</B><BR>
@@ -3138,6 +3331,21 @@ A role is a self-contained grouping of functionalities. When an agent plays a ro
 <P>
 Attributes:<BR>
 <ul>
+
+
+</ul>
+
+
+   <H2><A NAME="TaskInputDefinition"></A>TaskInputDefinition specializes <A HREF="#INGENIASObject">INGENIASObject</A> </H2>
+Describes an action in an activity diagram<P>
+<B>Use it when ....</B><BR>
+<P>
+Attributes:<BR>
+<ul>
+
+ <li> Operation which contains java.lang.String  </li>
+
+ <li> AffectedElement which contains ingenias.editor.entities.MentalEntity  </li>
 
 
 </ul>
@@ -3208,6 +3416,8 @@ A workflow is an abstraction to a process that has been automatised using activi
 Attributes:<BR>
 <ul>
 
+
+ <li><B>Tasks</B> which is a collection of <B>ingenias.editor.entities.Task</B> elements</li>
 
 </ul>
 
@@ -3576,6 +3786,32 @@ Connected elements:<BR>
     
  </ul>
 
+ <H2><A NAME="MemberDplmnt"></A>MemberDplmnt</H2>
+Attributes:<BR>
+<ul>
+
+
+</ul>
+<P>
+Connected elements:<BR>
+<ul>
+    
+  <li> Extreme: <B>MemberDplmntsource</B> (min arity:1, max arity:1). It can contains entities of the following types:
+   <ul>
+     
+      <li><B><A HREF="#GroupDeploymentUnit">GroupDeploymentUnit</A></B></li>
+     
+   </ul>
+    
+  <li> Extreme: <B>MemberDplmnttarget</B> (min arity:1, max arity:2147483647). It can contains entities of the following types:
+   <ul>
+     
+      <li><B><A HREF="#DeploymentUnitByType">DeploymentUnitByType</A></B></li>
+     
+   </ul>
+    
+ </ul>
+
  <H2><A NAME="DefinesDeployment"></A>DefinesDeployment</H2>
 Attributes:<BR>
 <ul>
@@ -3590,6 +3826,8 @@ Connected elements:<BR>
    <ul>
      
       <li><B><A HREF="#DeploymentUnitByType">DeploymentUnitByType</A></B></li>
+     
+      <li><B><A HREF="#OrgDeploymentUnit">OrgDeploymentUnit</A></B></li>
      
       <li><B><A HREF="#AMIContext">AMIContext</A></B></li>
      
@@ -3837,6 +4075,32 @@ Connected elements:<BR>
    <ul>
      
       <li><B><A HREF="#Conversation">Conversation</A></B></li>
+     
+   </ul>
+    
+ </ul>
+
+ <H2><A NAME="WFTestAfter"></A>WFTestAfter</H2>
+Attributes:<BR>
+<ul>
+
+
+</ul>
+<P>
+Connected elements:<BR>
+<ul>
+    
+  <li> Extreme: <B>WFTestAftersource</B> (min arity:1, max arity:2147483647). It can contains entities of the following types:
+   <ul>
+     
+      <li><B><A HREF="#WFTestState">WFTestState</A></B></li>
+     
+   </ul>
+    
+  <li> Extreme: <B>WFTestAftertarget</B> (min arity:1, max arity:2147483647). It can contains entities of the following types:
+   <ul>
+     
+      <li><B><A HREF="#WFTestState">WFTestState</A></B></li>
      
    </ul>
     
@@ -4177,6 +4441,32 @@ Connected elements:<BR>
    <ul>
      
       <li><B><A HREF="#Interaction">Interaction</A></B></li>
+     
+   </ul>
+    
+ </ul>
+
+ <H2><A NAME="OrgDplmnt"></A>OrgDplmnt</H2>
+Attributes:<BR>
+<ul>
+
+
+</ul>
+<P>
+Connected elements:<BR>
+<ul>
+    
+  <li> Extreme: <B>OrgDplmntsource</B> (min arity:1, max arity:1). It can contains entities of the following types:
+   <ul>
+     
+      <li><B><A HREF="#OrgDeploymentUnit">OrgDeploymentUnit</A></B></li>
+     
+   </ul>
+    
+  <li> Extreme: <B>OrgDplmnttarget</B> (min arity:1, max arity:2147483647). It can contains entities of the following types:
+   <ul>
+     
+      <li><B><A HREF="#GroupDeploymentUnit">GroupDeploymentUnit</A></B></li>
      
    </ul>
     
@@ -4639,12 +4929,38 @@ Connected elements:<BR>
     
  </ul>
 
+ <H2><A NAME="GroupDplmnt"></A>GroupDplmnt</H2>
+Attributes:<BR>
+<ul>
+
+
+</ul>
+<P>
+Connected elements:<BR>
+<ul>
+    
+  <li> Extreme: <B>GroupDplmntsource</B> (min arity:1, max arity:1). It can contains entities of the following types:
+   <ul>
+     
+      <li><B><A HREF="#OrgDplmnt">OrgDplmnt</A></B></li>
+     
+   </ul>
+    
+  <li> Extreme: <B>GroupDplmnttarget</B> (min arity:1, max arity:2147483647). It can contains entities of the following types:
+   <ul>
+     
+      <li><B><A HREF="#GroupDeploymentUnit">GroupDeploymentUnit</A></B></li>
+     
+   </ul>
+    
+ </ul>
+
  <H2><A NAME="PConnects"></A>PConnects</H2>
 Attributes:<BR>
 <ul>
 
 
- <li><B>Inputs</B> which is a collection of <B>ingenias.editor.entities.MentalEntityInstanceAccess</B> elements</li>
+ <li><B>Inputs</B> which is a collection of <B>ingenias.editor.entities.MentalEntity</B> elements</li>
 
 </ul>
 <P>
@@ -5016,6 +5332,32 @@ Connected elements:<BR>
    <ul>
      
       <li><B><A HREF="#MentalEntity">MentalEntity</A></B></li>
+     
+   </ul>
+    
+ </ul>
+
+ <H2><A NAME="TestEventInjection"></A>TestEventInjection</H2>
+Attributes:<BR>
+<ul>
+
+
+</ul>
+<P>
+Connected elements:<BR>
+<ul>
+    
+  <li> Extreme: <B>TestEventInjectionsource</B> (min arity:1, max arity:2147483647). It can contains entities of the following types:
+   <ul>
+     
+      <li><B><A HREF="#SimulationEvent">SimulationEvent</A></B></li>
+     
+   </ul>
+    
+  <li> Extreme: <B>TestEventInjectiontarget</B> (min arity:1, max arity:1). It can contains entities of the following types:
+   <ul>
+     
+      <li><B><A HREF="#TestingPackage">TestingPackage</A></B></li>
      
    </ul>
     

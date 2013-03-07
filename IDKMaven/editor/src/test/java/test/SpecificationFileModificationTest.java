@@ -1,5 +1,6 @@
 package test;
 
+import static ingenias.testing.fest.JGraphFixtureExtension.jgraphWithName;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.awt.Frame;
@@ -64,7 +65,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static test.JGraphFixtureExtension.jgraphWithName;
 
 public class SpecificationFileModificationTest {
 
@@ -90,7 +90,6 @@ public class SpecificationFileModificationTest {
 				ide.launchIDE(new String[]{});		
 				ide.removeExitAction();
 				ide.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);	
-				System.err.println("Creada nueva ventana");
 				return ide; 
 			}
 		});		
@@ -105,12 +104,14 @@ public class SpecificationFileModificationTest {
 	@AfterMethod(alwaysRun=true)
 	public void tearDown() {
 		window.close();
+		Pause.pause(1000);
+		window.requireNotVisible();
 		window.cleanUp();
 
 	}
 
 
-	@Test(dependsOnGroups= {"diagramcreation"})
+	@Test //(dependsOnGroups= {"diagramcreation"})
 	@GUITest
 	public void testIndenpendencyOfIDEAndBrowser() throws UnknowFormat, DamagedFormat, CannotLoad{
 		Browser originalSpec=BrowserImp.initialise(fileSpec); // loads the original spec
@@ -129,6 +130,7 @@ public class SpecificationFileModificationTest {
 		Browser browser = new BrowserImp(frame.getIds());
 		GraphEntity ent = browser.findEntity("INGENIASCodeComponent0");
 		try {
+			assertTrue("The entity INGENIASCodeComponent0 should exist and it does not", ent!=null);
 			assertTrue("The entity INGENIASCodeComponent0 should contain the text "+randomtext,
 					randomtext.equals(ent.getAttributeByName("Code").getSimpleValue()));
 		} catch (NotFound e1) {
@@ -171,7 +173,7 @@ public class SpecificationFileModificationTest {
 			
 		}
 		
-		
+	
 	}
 
 

@@ -79,6 +79,10 @@ public class GraphAttributeFactory {
 	}
 	
 
+	public  GraphAttribute createAttribute(String name, GraphCollection value, Graph graph ){
+		GraphAttribute ga=new GraphAttributeImp(name,((GraphCollectionImp)value).getValue(),((GraphImp)graph).getGraph(),ids);
+		return ga;  
+	}
 	
 	public  GraphAttribute createAttribute(String name, Object value, Graph graph ){
 		GraphAttribute ga=new GraphAttributeImp(name,value,((GraphImp)graph).getGraph(),ids);

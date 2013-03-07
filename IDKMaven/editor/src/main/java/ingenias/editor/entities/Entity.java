@@ -31,7 +31,7 @@ public class Entity  implements java.io.Serializable, Comparable {
 
   public String id;
   public String type;
-  public String helprec="";
+  public static String helprec="";
   public String helpdesc="";
   public ViewPreferences prefs=new ViewPreferences();
  

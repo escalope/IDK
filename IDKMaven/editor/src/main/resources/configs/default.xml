@@ -253,7 +253,27 @@
 
 			<entity>Test</entity>
 
+			<entity>WFTest</entity>
+
+			<entity>WFTestState</entity>
+
+			<entity>WFTestFinalState</entity>
+
+			<entity>WFTestInitialState</entity>
+
 			<entity>UMLComment</entity>
+
+			<entity>TaskWS</entity>
+
+			<entity>ContextUseTask</entity>
+
+			<entity>BoxedTask</entity>
+
+			<entity>ContextBindingTask</entity>
+
+			<entity>ContextReleaseTask</entity>
+
+			<entity>Plan</entity>
 
 
           		<relationship>CDUsesCode</relationship>
@@ -261,6 +281,8 @@
           		<relationship>UMLRealizes</relationship>
 
           		<relationship>UMLAnnotatedElement</relationship>
+
+          		<relationship>WFTestAfter</relationship>
 
 		</diagram>
 
@@ -384,6 +406,8 @@
           		<relationship>WFResponsable</relationship>
 
           		<relationship>WFConsumes</relationship>
+
+          		<relationship>WFPlays</relationship>
 
           		<relationship>Consumes</relationship>
 
@@ -791,13 +815,27 @@
 
 			<entity>FAERIEContext</entity>
 
+			<entity>WFTestInitialState</entity>
+
+			<entity>WFTestFinalState</entity>
+
+			<entity>WFTestState</entity>
+
+			<entity>OrgDeploymentUnit</entity>
+
+			<entity>GroupDeploymentUnit</entity>
+
+			<entity>TaskWS</entity>
+
 			<entity>Fact</entity>
+
+			<entity>OrganizationGroup</entity>
 
 			<entity>RuntimeCommFailure</entity>
 
-			<entity>DeploymentUnitByTypeWithInitMS</entity>
-
 			<entity>FAERIECtxtRelationship</entity>
+
+			<entity>Organization</entity>
 
 			<entity>ApplicationEvent</entity>
 
@@ -805,49 +843,67 @@
 
 			<entity>GoalStateWS</entity>
 
-			<entity>FrameFact</entity>
-
 			<entity>Test</entity>
 
 			<entity>RuntimeEvent</entity>
 
 			<entity>FAERIECtxtEntity</entity>
 
-			<entity>AgentWS</entity>
-
-			<entity>AgentModelBelieve</entity>
-
 			<entity>ApplicationEventSlots</entity>
-
-			<entity>Compromise</entity>
 
 			<entity>FAERIECtxtAttribute</entity>
 
 			<entity>FileSpecPatternMapping</entity>
 
-			<entity>Conversation</entity>
-
-			<entity>Agent</entity>
+			<entity>BoxedTask</entity>
 
 			<entity>RuntimeConversation</entity>
+
+			<entity>Agent</entity>
 
 			<entity>CommunicationEvent</entity>
 
 			<entity>AMIContext</entity>
 
-			<entity>MentalInstanceSpecification</entity>
-
 			<entity>AMIContextInstantiation</entity>
 
+			<entity>ContextReleaseTask</entity>
+
 			<entity>GeneralEvent</entity>
+
+			<entity>ContextUseTask</entity>
 
 			<entity>ConditionalMentalState</entity>
 
 			<entity>StateGoal</entity>
 
-			<entity>RuntimeFact</entity>
-
 			<entity>Believe</entity>
+
+			<entity>Task</entity>
+
+			<entity>Plan</entity>
+
+			<entity>WFTest</entity>
+
+			<entity>DeploymentUnitByTypeWithInitMS</entity>
+
+			<entity>OrganizationNetwork</entity>
+
+			<entity>FrameFact</entity>
+
+			<entity>AgentWS</entity>
+
+			<entity>AgentModelBelieve</entity>
+
+			<entity>Compromise</entity>
+
+			<entity>Conversation</entity>
+
+			<entity>MentalInstanceSpecification</entity>
+
+			<entity>ContextBindingTask</entity>
+
+			<entity>RuntimeFact</entity>
 
 
           		<relationship>UMLAnnotatedElement</relationship>
@@ -857,6 +913,14 @@
           		<relationship>CDUsesCode</relationship>
 
           		<relationship>SimulationPursues</relationship>
+
+          		<relationship>TestEventInjection</relationship>
+
+          		<relationship>OrgDplmnt</relationship>
+
+          		<relationship>GroupDplmnt</relationship>
+
+          		<relationship>MemberDplmnt</relationship>
 
 		</diagram>
 

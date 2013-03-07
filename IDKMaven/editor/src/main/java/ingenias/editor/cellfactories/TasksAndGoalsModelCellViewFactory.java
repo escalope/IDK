@@ -314,6 +314,10 @@ public TasksAndGoalsModelCellViewFactory() {}
            return new ingenias.editor.cell.WFConsumesView(v);
    }
 
+   if (v.getClass().equals(WFPlaysEdge.class)){
+           return new ingenias.editor.cell.WFPlaysView(v);
+   }
+
    if (v.getClass().equals(ConsumesEdge.class)){
            return new ingenias.editor.cell.ConsumesView(v);
    }

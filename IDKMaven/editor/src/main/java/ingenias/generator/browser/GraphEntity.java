@@ -18,6 +18,7 @@
 
 package ingenias.generator.browser;
 
+import ingenias.editor.entities.Entity;
 import ingenias.exception.InvalidAttribute;
 
 import java.util.*;
@@ -28,16 +29,20 @@ public interface GraphEntity  extends AttributedElement{
 	// Obtains all relationships of an entity in the diagram from which
 	// this entity was extracted
 	public GraphRelationship[] getRelationships();
+	public GraphRelationship[] getRelationships(String type);
 	
 	// Obtains all relationships in which this entity participates
 	// no matter what is the diagram
-	public Vector getAllRelationships();
+	public Vector<GraphRelationship> getAllRelationships();
+	public Vector<GraphRelationship> getAllRelationships(String relType);
 	
 	// Obtains the id of the entity
 	public String getID();
 	
 	// Obtains the type of the entity
 	public String getType();
+	
+	public Entity getEntity();
 	
 	
 	/**

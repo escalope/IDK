@@ -43,7 +43,6 @@ public class Splash extends javax.swing.JWindow  implements java.io.Serializable
   public void show(){
     Dimension d=Toolkit.getDefaultToolkit().getScreenSize();
     this.pack();
-    System.err.println(d);
     this.setLocation(ingenias.editor.widget.GraphicsUtils.getCenter(this.getSize()));
     super.show();
   

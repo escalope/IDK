@@ -236,10 +236,8 @@ implements  java.io.Serializable {
 				k++;
 			}
 		}
-		System.err.println("trying to remove "+k+" "+graphPanel.getTabCount());
 		if (k < size) {
-			graphPanel.removeTabAt(k);
-			System.err.println("Removed "+k+" "+graphPanel.getTabCount());
+			graphPanel.removeTabAt(k);		
 		}
 	}
 
@@ -338,13 +336,10 @@ implements  java.io.Serializable {
 								DefaultGraphCell newEntityInContainer = (DefaultGraphCell) selectedCell;
 								Vector<Field> candidateField=new Vector<Field>();
 
-								System.err.println("container:"+container.getClass().getName()+" new:"+newEntityInContainer.getClass().getName());
-
 								for (String fieldName:fields.keySet()){
 									try {
 										String mname = "add" + fieldName.substring(0, 1).toUpperCase()
 												+ fieldName.substring(1, fieldName.length());
-										System.err.println(mname);
 										Class vclass = newEntityInContainer.getUserObject().getClass();
 										Class params[] = new Class[]{newEntityInContainer.getUserObject().getClass()};
 										Method fieldMethod = null;//
@@ -378,8 +373,7 @@ implements  java.io.Serializable {
 									for (DefaultGraphCell dgc:toRemove){
 										graph.getListenerContainer().removeCellFromParentShip(dgc);
 									}
-								} else
-									System.err.println("Candidatos "+candidateField);
+								} 
 
 							}
 
@@ -488,14 +482,12 @@ implements  java.io.Serializable {
 		/*if (getGraph() instanceof AUMLInteractionDiagramModelJGraph){
 			this.auml.insert(point, entity, (ModelJGraph)getGraph(),ids);
 		} else {*/
-		System.err.println("----------------intentando insertando ----------------");
 		newCell=getGraph().insert(point, entity);
 		Entity newEntity=(Entity) newCell.getUserObject();
 		if (prefs.getModelingLanguage()==Preferences.ModelingLanguage.UML)
 			newEntity.getPrefs(null).setView(ViewPreferences.ViewType.UML);
 		if (prefs.getModelingLanguage()==Preferences.ModelingLanguage.INGENIAS)
 			newEntity.getPrefs(null).setView(ViewPreferences.ViewType.INGENIAS);
-		System.err.println("----------------insertando ----------------");
 		//}		
 
 	}
@@ -924,7 +916,6 @@ implements  java.io.Serializable {
 				//System.err.println(comp.getViewport().getView().getClass().getName());
 				ModelJGraph mjg=(ModelJGraph)(comp.getViewport().getView());
 				graphPanel.setTitleAt(k, mjg.getName())	;
-				System.err.println("cambiando titulo a "+mjg.getName());
 			} 
 		}
 		graphPanel.invalidate();

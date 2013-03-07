@@ -121,13 +121,27 @@ public class DeployDiagramPanel extends JGraph {
 
  entities.add("FAERIEContext");
 
+ entities.add("WFTestInitialState");
+
+ entities.add("WFTestFinalState");
+
+ entities.add("WFTestState");
+
+ entities.add("OrgDeploymentUnit");
+
+ entities.add("GroupDeploymentUnit");
+
+ entities.add("TaskWS");
+
  entities.add("Fact");
 
- entities.add("RuntimeCommFailure");
-
- entities.add("DeploymentUnitByTypeWithInitMS");
+ entities.add("OrganizationGroup");
 
  entities.add("FAERIECtxtRelationship");
+
+ entities.add("FAERIECtxtRelationship");
+
+ entities.add("Organization");
 
  entities.add("ApplicationEvent");
 
@@ -135,49 +149,69 @@ public class DeployDiagramPanel extends JGraph {
 
  entities.add("GoalStateWS");
 
- entities.add("FrameFact");
-
  entities.add("Test");
 
  entities.add("RuntimeEvent");
 
  entities.add("FAERIECtxtEntity");
 
- entities.add("AgentWS");
-
- entities.add("AgentModelBelieve");
-
  entities.add("ApplicationEventSlots");
 
- entities.add("Compromise");
+ entities.add("FAERIECtxtAttribute");
 
  entities.add("FAERIECtxtAttribute");
 
  entities.add("FileSpecPatternMapping");
 
- entities.add("Conversation");
-
- entities.add("Agent");
+ entities.add("BoxedTask");
 
  entities.add("RuntimeConversation");
+
+ entities.add("Agent");
 
  entities.add("CommunicationEvent");
 
  entities.add("AMIContext");
 
- entities.add("MentalInstanceSpecification");
-
  entities.add("AMIContextInstantiation");
 
+ entities.add("ContextReleaseTask");
+
  entities.add("GeneralEvent");
+
+ entities.add("ContextUseTask");
 
  entities.add("ConditionalMentalState");
 
  entities.add("StateGoal");
 
- entities.add("RuntimeFact");
-
  entities.add("Believe");
+
+ entities.add("Task");
+
+ entities.add("Plan");
+
+ entities.add("WFTest");
+
+ entities.add("DeploymentUnitByTypeWithInitMS");
+
+ entities.add("OrganizationNetwork");
+
+ entities.add("FrameFact");
+
+ entities.add("AgentWS");
+
+ entities.add("AgentModelBelieve");
+
+ entities.add("Compromise");
+
+ entities.add("Conversation");
+
+ entities.add("MentalInstanceSpecification");
+
+ entities.add("ContextBindingTask");
+
+ entities.add("RuntimeFact");
 
    return entities;
   }
@@ -348,10 +382,73 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("WFTestInitialState")) {
+    WFTestInitialState nentity=new WFTestInitialState(((Model)getModel()).getNewId("WFTestInitialState"));
+      DefaultGraphCell vertex = new
+          WFTestInitialStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("WFTestFinalState")) {
+    WFTestFinalState nentity=new WFTestFinalState(((Model)getModel()).getNewId("WFTestFinalState"));
+      DefaultGraphCell vertex = new
+          WFTestFinalStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("WFTestState")) {
+    WFTestState nentity=new WFTestState(((Model)getModel()).getNewId("WFTestState"));
+      DefaultGraphCell vertex = new
+          WFTestStateCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("OrgDeploymentUnit")) {
+    OrgDeploymentUnit nentity=new OrgDeploymentUnit(((Model)getModel()).getNewId("OrgDeploymentUnit"));
+      DefaultGraphCell vertex = new
+          OrgDeploymentUnitCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("GroupDeploymentUnit")) {
+    GroupDeploymentUnit nentity=new GroupDeploymentUnit(((Model)getModel()).getNewId("GroupDeploymentUnit"));
+      DefaultGraphCell vertex = new
+          GroupDeploymentUnitCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("TaskWS")) {
+    TaskWS nentity=new TaskWS(((Model)getModel()).getNewId("TaskWS"));
+      DefaultGraphCell vertex = new
+          TaskWSCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("Fact")) {
     Fact nentity=new Fact(((Model)getModel()).getNewId("Fact"));
       DefaultGraphCell vertex = new
           FactCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("OrganizationGroup")) {
+    OrganizationGroup nentity=new OrganizationGroup(((Model)getModel()).getNewId("OrganizationGroup"));
+      DefaultGraphCell vertex = new
+          OrganizationGroupCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -366,19 +463,19 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("DeploymentUnitByTypeWithInitMS")) {
-    DeploymentUnitByTypeWithInitMS nentity=new DeploymentUnitByTypeWithInitMS(((Model)getModel()).getNewId("DeploymentUnitByTypeWithInitMS"));
+    if (entity.equalsIgnoreCase("FAERIECtxtRelationship")) {
+    FAERIECtxtRelationship nentity=new FAERIECtxtRelationship(((Model)getModel()).getNewId("FAERIECtxtRelationship"));
       DefaultGraphCell vertex = new
-          DeploymentUnitByTypeWithInitMSCell(nentity);
+          FAERIECtxtRelationshipCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
     else
 
-    if (entity.equalsIgnoreCase("FAERIECtxtRelationship")) {
-    FAERIECtxtRelationship nentity=new FAERIECtxtRelationship(((Model)getModel()).getNewId("FAERIECtxtRelationship"));
+    if (entity.equalsIgnoreCase("Organization")) {
+    Organization nentity=new Organization(((Model)getModel()).getNewId("Organization"));
       DefaultGraphCell vertex = new
-          FAERIECtxtRelationshipCell(nentity);
+          OrganizationCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -411,15 +508,6 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("FrameFact")) {
-    FrameFact nentity=new FrameFact(((Model)getModel()).getNewId("FrameFact"));
-      DefaultGraphCell vertex = new
-          FrameFactCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("Test")) {
     Test nentity=new Test(((Model)getModel()).getNewId("Test"));
       DefaultGraphCell vertex = new
@@ -447,24 +535,6 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("AgentWS")) {
-    AgentWS nentity=new AgentWS(((Model)getModel()).getNewId("AgentWS"));
-      DefaultGraphCell vertex = new
-          AgentWSCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("AgentModelBelieve")) {
-    AgentModelBelieve nentity=new AgentModelBelieve(((Model)getModel()).getNewId("AgentModelBelieve"));
-      DefaultGraphCell vertex = new
-          AgentModelBelieveCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("ApplicationEventSlots")) {
     ApplicationEventSlots nentity=new ApplicationEventSlots(((Model)getModel()).getNewId("ApplicationEventSlots"));
       DefaultGraphCell vertex = new
@@ -474,10 +544,10 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("Compromise")) {
-    Compromise nentity=new Compromise(((Model)getModel()).getNewId("Compromise"));
+    if (entity.equalsIgnoreCase("FAERIECtxtAttribute")) {
+    FAERIECtxtAttribute nentity=new FAERIECtxtAttribute(((Model)getModel()).getNewId("FAERIECtxtAttribute"));
       DefaultGraphCell vertex = new
-          CompromiseCell(nentity);
+          FAERIECtxtAttributeCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -501,19 +571,10 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("Conversation")) {
-    Conversation nentity=new Conversation(((Model)getModel()).getNewId("Conversation"));
+    if (entity.equalsIgnoreCase("BoxedTask")) {
+    BoxedTask nentity=new BoxedTask(((Model)getModel()).getNewId("BoxedTask"));
       DefaultGraphCell vertex = new
-          ConversationCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
-    if (entity.equalsIgnoreCase("Agent")) {
-    Agent nentity=new Agent(((Model)getModel()).getNewId("Agent"));
-      DefaultGraphCell vertex = new
-          AgentCell(nentity);
+          BoxedTaskCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -523,6 +584,15 @@ public class DeployDiagramPanel extends JGraph {
     RuntimeConversation nentity=new RuntimeConversation(((Model)getModel()).getNewId("RuntimeConversation"));
       DefaultGraphCell vertex = new
           RuntimeConversationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Agent")) {
+    Agent nentity=new Agent(((Model)getModel()).getNewId("Agent"));
+      DefaultGraphCell vertex = new
+          AgentCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -546,15 +616,6 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("MentalInstanceSpecification")) {
-    MentalInstanceSpecification nentity=new MentalInstanceSpecification(((Model)getModel()).getNewId("MentalInstanceSpecification"));
-      DefaultGraphCell vertex = new
-          MentalInstanceSpecificationCell(nentity);
-      // Default Size for the cell with the new entity
-     return vertex;
-    }
-    else
-
     if (entity.equalsIgnoreCase("AMIContextInstantiation")) {
     AMIContextInstantiation nentity=new AMIContextInstantiation(((Model)getModel()).getNewId("AMIContextInstantiation"));
       DefaultGraphCell vertex = new
@@ -564,10 +625,28 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.equalsIgnoreCase("ContextReleaseTask")) {
+    ContextReleaseTask nentity=new ContextReleaseTask(((Model)getModel()).getNewId("ContextReleaseTask"));
+      DefaultGraphCell vertex = new
+          ContextReleaseTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
     if (entity.equalsIgnoreCase("GeneralEvent")) {
     GeneralEvent nentity=new GeneralEvent(((Model)getModel()).getNewId("GeneralEvent"));
       DefaultGraphCell vertex = new
           GeneralEventCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ContextUseTask")) {
+    ContextUseTask nentity=new ContextUseTask(((Model)getModel()).getNewId("ContextUseTask"));
+      DefaultGraphCell vertex = new
+          ContextUseTaskCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -591,19 +670,127 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.equalsIgnoreCase("RuntimeFact")) {
-    RuntimeFact nentity=new RuntimeFact(((Model)getModel()).getNewId("RuntimeFact"));
+    if (entity.equalsIgnoreCase("Believe")) {
+    Believe nentity=new Believe(((Model)getModel()).getNewId("Believe"));
       DefaultGraphCell vertex = new
-          RuntimeFactCell(nentity);
+          BelieveCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
     else
 
-    if (entity.equalsIgnoreCase("Believe")) {
-    Believe nentity=new Believe(((Model)getModel()).getNewId("Believe"));
+    if (entity.equalsIgnoreCase("Task")) {
+    Task nentity=new Task(((Model)getModel()).getNewId("Task"));
       DefaultGraphCell vertex = new
-          BelieveCell(nentity);
+          TaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Plan")) {
+    Plan nentity=new Plan(((Model)getModel()).getNewId("Plan"));
+      DefaultGraphCell vertex = new
+          PlanCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("WFTest")) {
+    WFTest nentity=new WFTest(((Model)getModel()).getNewId("WFTest"));
+      DefaultGraphCell vertex = new
+          WFTestCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("DeploymentUnitByTypeWithInitMS")) {
+    DeploymentUnitByTypeWithInitMS nentity=new DeploymentUnitByTypeWithInitMS(((Model)getModel()).getNewId("DeploymentUnitByTypeWithInitMS"));
+      DefaultGraphCell vertex = new
+          DeploymentUnitByTypeWithInitMSCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("OrganizationNetwork")) {
+    OrganizationNetwork nentity=new OrganizationNetwork(((Model)getModel()).getNewId("OrganizationNetwork"));
+      DefaultGraphCell vertex = new
+          OrganizationNetworkCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("FrameFact")) {
+    FrameFact nentity=new FrameFact(((Model)getModel()).getNewId("FrameFact"));
+      DefaultGraphCell vertex = new
+          FrameFactCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("AgentWS")) {
+    AgentWS nentity=new AgentWS(((Model)getModel()).getNewId("AgentWS"));
+      DefaultGraphCell vertex = new
+          AgentWSCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("AgentModelBelieve")) {
+    AgentModelBelieve nentity=new AgentModelBelieve(((Model)getModel()).getNewId("AgentModelBelieve"));
+      DefaultGraphCell vertex = new
+          AgentModelBelieveCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Compromise")) {
+    Compromise nentity=new Compromise(((Model)getModel()).getNewId("Compromise"));
+      DefaultGraphCell vertex = new
+          CompromiseCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("Conversation")) {
+    Conversation nentity=new Conversation(((Model)getModel()).getNewId("Conversation"));
+      DefaultGraphCell vertex = new
+          ConversationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("MentalInstanceSpecification")) {
+    MentalInstanceSpecification nentity=new MentalInstanceSpecification(((Model)getModel()).getNewId("MentalInstanceSpecification"));
+      DefaultGraphCell vertex = new
+          MentalInstanceSpecificationCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("ContextBindingTask")) {
+    ContextBindingTask nentity=new ContextBindingTask(((Model)getModel()).getNewId("ContextBindingTask"));
+      DefaultGraphCell vertex = new
+          ContextBindingTaskCell(nentity);
+      // Default Size for the cell with the new entity
+     return vertex;
+    }
+    else
+
+    if (entity.equalsIgnoreCase("RuntimeFact")) {
+    RuntimeFact nentity=new RuntimeFact(((Model)getModel()).getNewId("RuntimeFact"));
+      DefaultGraphCell vertex = new
+          RuntimeFactCell(nentity);
       // Default Size for the cell with the new entity
      return vertex;
     }
@@ -704,8 +891,43 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("WFTestInitialState")) {
+      return WFTestInitialStateView.getSize((WFTestInitialState)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("WFTestFinalState")) {
+      return WFTestFinalStateView.getSize((WFTestFinalState)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("WFTestState")) {
+      return WFTestStateView.getSize((WFTestState)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("OrgDeploymentUnit")) {
+      return OrgDeploymentUnitView.getSize((OrgDeploymentUnit)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("GroupDeploymentUnit")) {
+      return GroupDeploymentUnitView.getSize((GroupDeploymentUnit)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("TaskWS")) {
+      return TaskWSView.getSize((TaskWS)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("Fact")) {
       return FactView.getSize((Fact)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("OrganizationGroup")) {
+      return OrganizationGroupView.getSize((OrganizationGroup)entity);      
     }
     else
 
@@ -714,13 +936,13 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("DeploymentUnitByTypeWithInitMS")) {
-      return DeploymentUnitByTypeWithInitMSView.getSize((DeploymentUnitByTypeWithInitMS)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtRelationship")) {
+      return FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship)entity);      
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("FAERIECtxtRelationship")) {
-      return FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship)entity);      
+    if (entity.getType().equalsIgnoreCase("Organization")) {
+      return OrganizationView.getSize((Organization)entity);      
     }
     else
 
@@ -739,11 +961,6 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("FrameFact")) {
-      return FrameFactView.getSize((FrameFact)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("Test")) {
       return TestView.getSize((Test)entity);      
     }
@@ -759,23 +976,13 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("AgentWS")) {
-      return AgentWSView.getSize((AgentWS)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("AgentModelBelieve")) {
-      return AgentModelBelieveView.getSize((AgentModelBelieve)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("ApplicationEventSlots")) {
       return ApplicationEventSlotsView.getSize((ApplicationEventSlots)entity);      
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("Compromise")) {
-      return CompromiseView.getSize((Compromise)entity);      
+    if (entity.getType().equalsIgnoreCase("FAERIECtxtAttribute")) {
+      return FAERIECtxtAttributeView.getSize((FAERIECtxtAttribute)entity);      
     }
     else
 
@@ -789,18 +996,18 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("Conversation")) {
-      return ConversationView.getSize((Conversation)entity);      
-    }
-    else
-
-    if (entity.getType().equalsIgnoreCase("Agent")) {
-      return AgentView.getSize((Agent)entity);      
+    if (entity.getType().equalsIgnoreCase("BoxedTask")) {
+      return BoxedTaskView.getSize((BoxedTask)entity);      
     }
     else
 
     if (entity.getType().equalsIgnoreCase("RuntimeConversation")) {
       return RuntimeConversationView.getSize((RuntimeConversation)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Agent")) {
+      return AgentView.getSize((Agent)entity);      
     }
     else
 
@@ -814,18 +1021,23 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("MentalInstanceSpecification")) {
-      return MentalInstanceSpecificationView.getSize((MentalInstanceSpecification)entity);      
-    }
-    else
-
     if (entity.getType().equalsIgnoreCase("AMIContextInstantiation")) {
       return AMIContextInstantiationView.getSize((AMIContextInstantiation)entity);      
     }
     else
 
+    if (entity.getType().equalsIgnoreCase("ContextReleaseTask")) {
+      return ContextReleaseTaskView.getSize((ContextReleaseTask)entity);      
+    }
+    else
+
     if (entity.getType().equalsIgnoreCase("GeneralEvent")) {
       return GeneralEventView.getSize((GeneralEvent)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextUseTask")) {
+      return ContextUseTaskView.getSize((ContextUseTask)entity);      
     }
     else
 
@@ -839,13 +1051,73 @@ public class DeployDiagramPanel extends JGraph {
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("RuntimeFact")) {
-      return RuntimeFactView.getSize((RuntimeFact)entity);      
+    if (entity.getType().equalsIgnoreCase("Believe")) {
+      return BelieveView.getSize((Believe)entity);      
     }
     else
 
-    if (entity.getType().equalsIgnoreCase("Believe")) {
-      return BelieveView.getSize((Believe)entity);      
+    if (entity.getType().equalsIgnoreCase("Task")) {
+      return TaskView.getSize((Task)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Plan")) {
+      return PlanView.getSize((Plan)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("WFTest")) {
+      return WFTestView.getSize((WFTest)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("DeploymentUnitByTypeWithInitMS")) {
+      return DeploymentUnitByTypeWithInitMSView.getSize((DeploymentUnitByTypeWithInitMS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("OrganizationNetwork")) {
+      return OrganizationNetworkView.getSize((OrganizationNetwork)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("FrameFact")) {
+      return FrameFactView.getSize((FrameFact)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("AgentWS")) {
+      return AgentWSView.getSize((AgentWS)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("AgentModelBelieve")) {
+      return AgentModelBelieveView.getSize((AgentModelBelieve)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Compromise")) {
+      return CompromiseView.getSize((Compromise)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("Conversation")) {
+      return ConversationView.getSize((Conversation)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("MentalInstanceSpecification")) {
+      return MentalInstanceSpecificationView.getSize((MentalInstanceSpecification)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("ContextBindingTask")) {
+      return ContextBindingTaskView.getSize((ContextBindingTask)entity);      
+    }
+    else
+
+    if (entity.getType().equalsIgnoreCase("RuntimeFact")) {
+      return RuntimeFactView.getSize((RuntimeFact)entity);      
     }
     else
 
@@ -1025,6 +1297,48 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(WFTestInitialState.class)) {
+      vertex = new WFTestInitialStateCell( (WFTestInitialState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestInitialStateView.getSize((WFTestInitialState) entity);
+    }
+    else
+
+    if (entity.getClass().equals(WFTestFinalState.class)) {
+      vertex = new WFTestFinalStateCell( (WFTestFinalState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestFinalStateView.getSize((WFTestFinalState) entity);
+    }
+    else
+
+    if (entity.getClass().equals(WFTestState.class)) {
+      vertex = new WFTestStateCell( (WFTestState) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestStateView.getSize((WFTestState) entity);
+    }
+    else
+
+    if (entity.getClass().equals(OrgDeploymentUnit.class)) {
+      vertex = new OrgDeploymentUnitCell( (OrgDeploymentUnit) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = OrgDeploymentUnitView.getSize((OrgDeploymentUnit) entity);
+    }
+    else
+
+    if (entity.getClass().equals(GroupDeploymentUnit.class)) {
+      vertex = new GroupDeploymentUnitCell( (GroupDeploymentUnit) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = GroupDeploymentUnitView.getSize((GroupDeploymentUnit) entity);
+    }
+    else
+
+    if (entity.getClass().equals(TaskWS.class)) {
+      vertex = new TaskWSCell( (TaskWS) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = TaskWSView.getSize((TaskWS) entity);
+    }
+    else
+
     if (entity.getClass().equals(Fact.class)) {
       vertex = new FactCell( (Fact) entity);
       // Default Size for the new Vertex with the new entity within
@@ -1032,17 +1346,17 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(RuntimeCommFailure.class)) {
-      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
+    if (entity.getClass().equals(OrganizationGroup.class)) {
+      vertex = new OrganizationGroupCell( (OrganizationGroup) entity);
       // Default Size for the new Vertex with the new entity within
-      size = RuntimeCommFailureView.getSize((RuntimeCommFailure) entity);
+      size = OrganizationGroupView.getSize((OrganizationGroup) entity);
     }
     else
 
-    if (entity.getClass().equals(DeploymentUnitByTypeWithInitMS.class)) {
-      vertex = new DeploymentUnitByTypeWithInitMSCell( (DeploymentUnitByTypeWithInitMS) entity);
+    if (entity.getClass().equals(RuntimeCommFailure.class)) {
+      vertex = new RuntimeCommFailureCell( (RuntimeCommFailure) entity);
       // Default Size for the new Vertex with the new entity within
-      size = DeploymentUnitByTypeWithInitMSView.getSize((DeploymentUnitByTypeWithInitMS) entity);
+      size = FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship) entity);
     }
     else
 
@@ -1050,6 +1364,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new FAERIECtxtRelationshipCell( (FAERIECtxtRelationship) entity);
       // Default Size for the new Vertex with the new entity within
       size = FAERIECtxtRelationshipView.getSize((FAERIECtxtRelationship) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Organization.class)) {
+      vertex = new OrganizationCell( (Organization) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = OrganizationView.getSize((Organization) entity);
     }
     else
 
@@ -1074,13 +1395,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(FrameFact.class)) {
-      vertex = new FrameFactCell( (FrameFact) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = FrameFactView.getSize((FrameFact) entity);
-    }
-    else
-
     if (entity.getClass().equals(Test.class)) {
       vertex = new TestCell( (Test) entity);
       // Default Size for the new Vertex with the new entity within
@@ -1102,20 +1416,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(AgentWS.class)) {
-      vertex = new AgentWSCell( (AgentWS) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = AgentWSView.getSize((AgentWS) entity);
-    }
-    else
-
-    if (entity.getClass().equals(AgentModelBelieve.class)) {
-      vertex = new AgentModelBelieveCell( (AgentModelBelieve) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = AgentModelBelieveView.getSize((AgentModelBelieve) entity);
-    }
-    else
-
     if (entity.getClass().equals(ApplicationEventSlots.class)) {
       vertex = new ApplicationEventSlotsCell( (ApplicationEventSlots) entity);
       // Default Size for the new Vertex with the new entity within
@@ -1123,10 +1423,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(Compromise.class)) {
-      vertex = new CompromiseCell( (Compromise) entity);
+    if (entity.getClass().equals(FAERIECtxtAttribute.class)) {
+      vertex = new FAERIECtxtAttributeCell( (FAERIECtxtAttribute) entity);
       // Default Size for the new Vertex with the new entity within
-      size = CompromiseView.getSize((Compromise) entity);
+      size = FAERIECtxtAttributeView.getSize((FAERIECtxtAttribute) entity);
     }
     else
 
@@ -1144,17 +1444,10 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(Conversation.class)) {
-      vertex = new ConversationCell( (Conversation) entity);
+    if (entity.getClass().equals(BoxedTask.class)) {
+      vertex = new BoxedTaskCell( (BoxedTask) entity);
       // Default Size for the new Vertex with the new entity within
-      size = ConversationView.getSize((Conversation) entity);
-    }
-    else
-
-    if (entity.getClass().equals(Agent.class)) {
-      vertex = new AgentCell( (Agent) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = AgentView.getSize((Agent) entity);
+      size = BoxedTaskView.getSize((BoxedTask) entity);
     }
     else
 
@@ -1162,6 +1455,13 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
       vertex = new RuntimeConversationCell( (RuntimeConversation) entity);
       // Default Size for the new Vertex with the new entity within
       size = RuntimeConversationView.getSize((RuntimeConversation) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Agent.class)) {
+      vertex = new AgentCell( (Agent) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AgentView.getSize((Agent) entity);
     }
     else
 
@@ -1179,13 +1479,6 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(MentalInstanceSpecification.class)) {
-      vertex = new MentalInstanceSpecificationCell( (MentalInstanceSpecification) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = MentalInstanceSpecificationView.getSize((MentalInstanceSpecification) entity);
-    }
-    else
-
     if (entity.getClass().equals(AMIContextInstantiation.class)) {
       vertex = new AMIContextInstantiationCell( (AMIContextInstantiation) entity);
       // Default Size for the new Vertex with the new entity within
@@ -1193,10 +1486,24 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
+    if (entity.getClass().equals(ContextReleaseTask.class)) {
+      vertex = new ContextReleaseTaskCell( (ContextReleaseTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextReleaseTaskView.getSize((ContextReleaseTask) entity);
+    }
+    else
+
     if (entity.getClass().equals(GeneralEvent.class)) {
       vertex = new GeneralEventCell( (GeneralEvent) entity);
       // Default Size for the new Vertex with the new entity within
       size = GeneralEventView.getSize((GeneralEvent) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ContextUseTask.class)) {
+      vertex = new ContextUseTaskCell( (ContextUseTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextUseTaskView.getSize((ContextUseTask) entity);
     }
     else
 
@@ -1214,17 +1521,101 @@ public DefaultGraphCell insertDuplicated(Point point, ingenias.editor.entities.E
     }
     else
 
-    if (entity.getClass().equals(RuntimeFact.class)) {
-      vertex = new RuntimeFactCell( (RuntimeFact) entity);
-      // Default Size for the new Vertex with the new entity within
-      size = RuntimeFactView.getSize((RuntimeFact) entity);
-    }
-    else
-
     if (entity.getClass().equals(Believe.class)) {
       vertex = new BelieveCell( (Believe) entity);
       // Default Size for the new Vertex with the new entity within
       size = BelieveView.getSize((Believe) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Task.class)) {
+      vertex = new TaskCell( (Task) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = TaskView.getSize((Task) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Plan.class)) {
+      vertex = new PlanCell( (Plan) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = PlanView.getSize((Plan) entity);
+    }
+    else
+
+    if (entity.getClass().equals(WFTest.class)) {
+      vertex = new WFTestCell( (WFTest) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = WFTestView.getSize((WFTest) entity);
+    }
+    else
+
+    if (entity.getClass().equals(DeploymentUnitByTypeWithInitMS.class)) {
+      vertex = new DeploymentUnitByTypeWithInitMSCell( (DeploymentUnitByTypeWithInitMS) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = DeploymentUnitByTypeWithInitMSView.getSize((DeploymentUnitByTypeWithInitMS) entity);
+    }
+    else
+
+    if (entity.getClass().equals(OrganizationNetwork.class)) {
+      vertex = new OrganizationNetworkCell( (OrganizationNetwork) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = OrganizationNetworkView.getSize((OrganizationNetwork) entity);
+    }
+    else
+
+    if (entity.getClass().equals(FrameFact.class)) {
+      vertex = new FrameFactCell( (FrameFact) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = FrameFactView.getSize((FrameFact) entity);
+    }
+    else
+
+    if (entity.getClass().equals(AgentWS.class)) {
+      vertex = new AgentWSCell( (AgentWS) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AgentWSView.getSize((AgentWS) entity);
+    }
+    else
+
+    if (entity.getClass().equals(AgentModelBelieve.class)) {
+      vertex = new AgentModelBelieveCell( (AgentModelBelieve) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = AgentModelBelieveView.getSize((AgentModelBelieve) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Compromise.class)) {
+      vertex = new CompromiseCell( (Compromise) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = CompromiseView.getSize((Compromise) entity);
+    }
+    else
+
+    if (entity.getClass().equals(Conversation.class)) {
+      vertex = new ConversationCell( (Conversation) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ConversationView.getSize((Conversation) entity);
+    }
+    else
+
+    if (entity.getClass().equals(MentalInstanceSpecification.class)) {
+      vertex = new MentalInstanceSpecificationCell( (MentalInstanceSpecification) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = MentalInstanceSpecificationView.getSize((MentalInstanceSpecification) entity);
+    }
+    else
+
+    if (entity.getClass().equals(ContextBindingTask.class)) {
+      vertex = new ContextBindingTaskCell( (ContextBindingTask) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = ContextBindingTaskView.getSize((ContextBindingTask) entity);
+    }
+    else
+
+    if (entity.getClass().equals(RuntimeFact.class)) {
+      vertex = new RuntimeFactCell( (RuntimeFact) entity);
+      // Default Size for the new Vertex with the new entity within
+      size = RuntimeFactView.getSize((RuntimeFact) entity);
     }
     else
 

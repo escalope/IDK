@@ -76,7 +76,6 @@ public class GeneralEditionFrame extends javax.swing.JDialog implements java.io.
 		accept.addActionListener(new java.awt.event.ActionListener(){
 			public void actionPerformed(java.awt.event.ActionEvent ae) {				
 				gep.confirmActions();
-				System.out.println("Changes applied "+ent);
 				self.setVisible(false);
 				status=ACCEPTED;
 				

@@ -24,6 +24,7 @@ package ingenias.editor.entities;
 
 
 import java.util.*;
+import ingenias.editor.TypedVector;
 
 public class AGORelationship1targetRole extends RoleEntity {
 

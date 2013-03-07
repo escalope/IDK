@@ -77,7 +77,7 @@ class CheckChangesInFile extends Thread implements  WindowListener {
 						&& ide.getIds().getCurrentFile().getCanonicalPath().equals(watchedFile.getCanonicalPath())){
 					long currentFileLastModified = new File(watchedFile.getCanonicalPath()).lastModified();
 					if (currentFileLastModified>watchedFileLastModified){
-						isCurrentFileContentDifferentFromIDEContent=differentContent();
+						isCurrentFileContentDifferentFromIDEContent=!getDifferences().isEmpty();
 						watchedFileLastModified=currentFileLastModified;												
 						if (isCurrentFileContentDifferentFromIDEContent && !closing){
 							if (!ide.getIds().isChanged()){										
@@ -135,6 +135,39 @@ class CheckChangesInFile extends Thread implements  WindowListener {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private Vector<String> getDifferences() {		
+		try {
+			Browser bimp=BrowserImp.initialise(watchedFile.getCanonicalPath());
+			ModelJGraph.enableAllListeners(); // a browser initialised through the initialise method is assumed to be
+			//linked to no gui. Therefore, the persistence does load the spec without any listeners
+			// and this prevents some runtime exception due to the event managers acting over elements in the specification
+			// which were not layered out. This causes the listeners to be disabled by default, which is handled by
+			// a static var. So, loading a new spec in headless mode causes a gui to ignore events.
+			//return !BrowserImp.compare(bimp, new BrowserImp(ide.getIds()));
+			Vector<String> diffs2 = BrowserImp.findAllDifferences(bimp, new BrowserImp(ide.getIds()));
+			Vector<String> diffs1=BrowserImp.findAllDifferences(new BrowserImp(ide.getIds()),bimp);
+			diffs1.addAll(diffs2);
+			if (diffs1.size()>0)
+				System.out.println("aqui");
+			return diffs1;
+		} catch (UnknowFormat e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DamagedFormat e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CannotLoad e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Vector<String>();
+
+
 	}
 
 	private boolean differentContent() {		

@@ -93,6 +93,10 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
  static ImageIcon DeploymentPackageWithContextIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
 	
+ static ImageIcon OrgDeploymentUnitIcon=new ImageIcon(ImageLoader.getImage("images/mtypedepl.gif"));
+	
+ static ImageIcon WFTestIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
+	
  static ImageIcon FactIcon=new ImageIcon(ImageLoader.getImage("images/mfact.gif"));
 	
  static ImageIcon AMIContextInstantiationIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
@@ -135,6 +139,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
  static ImageIcon MessagePassingIcon=new ImageIcon(ImageLoader.getImage("images/miu.gif"));
 	
+ static ImageIcon GroupDeploymentUnitIcon=new ImageIcon(ImageLoader.getImage("images/mtypedepl.gif"));
+	
  static ImageIcon SubProtocolIcon=new ImageIcon(ImageLoader.getImage("images/prot.png"));
 	
  static ImageIcon RuntimeConversationIcon=new ImageIcon(ImageLoader.getImage("images/mconv.png"));
@@ -158,6 +164,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
  static ImageIcon PlanIcon=new ImageIcon(ImageLoader.getImage("images/mplan.gif"));
 	
  static ImageIcon FAERIECtxtValueIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
+	
+ static ImageIcon WFTestStateIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
 	
  static ImageIcon FAERIECtxtEntityIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
 	
@@ -209,6 +217,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
  static ImageIcon EnvironmentApplicationIcon=new ImageIcon(ImageLoader.getImage("images/mappe.gif"));
 	
+ static ImageIcon WFTestFinalStateIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
+	
  static ImageIcon ApplicationEventSlotsIcon=new ImageIcon(ImageLoader.getImage("images/meventas.gif"));
 	
  static ImageIcon ProtocolIcon=new ImageIcon(ImageLoader.getImage("images/prot.png"));
@@ -239,6 +249,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
  static ImageIcon AgentIcon=new ImageIcon(ImageLoader.getImage("images/magent.gif"));
 	
+ static ImageIcon TaskOutputDefinitionIcon=new ImageIcon(ImageLoader.getImage("images/miusecase.gif"));
+	
  static ImageIcon MentalStateManagerIcon=new ImageIcon(ImageLoader.getImage("images/mman.gif"));
 	
  static ImageIcon INGENIASCodeComponentIcon=new ImageIcon(ImageLoader.getImage("images/miccomponent.gif"));
@@ -259,6 +271,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
  static ImageIcon ApplicationEventIcon=new ImageIcon(ImageLoader.getImage("images/meventa.gif"));
 	
+ static ImageIcon WFTestInitialStateIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
+	
  static ImageIcon TaskIcon=new ImageIcon(ImageLoader.getImage("images/mtask.gif"));
 	
  static ImageIcon DeploymentUnitByTypeMSEntityIcon=new ImageIcon(ImageLoader.getImage("images/mimtypedepl.gif"));
@@ -266,6 +280,8 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
  static ImageIcon MentalEntityInstanceAccessIcon=new ImageIcon(ImageLoader.getImage("images/mtask.gif"));
 	
  static ImageIcon RoleWSIcon=new ImageIcon(ImageLoader.getImage("images/mrolews.gif"));
+	
+ static ImageIcon TaskInputDefinitionIcon=new ImageIcon(ImageLoader.getImage("images/miusecase.gif"));
 	
  static ImageIcon AMIContextIcon=new ImageIcon(ImageLoader.getImage("images/mdepl.gif"));
 	
@@ -361,6 +377,12 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(DeploymentPackageWithContext.class))
           return "images/mdepl.gif";
 	
+        if (userObject.getClass().equals(OrgDeploymentUnit.class))
+          return "images/mtypedepl.gif";
+	
+        if (userObject.getClass().equals(WFTest.class))
+          return "images/mdepl.gif";
+	
         if (userObject.getClass().equals(Fact.class))
           return "images/mfact.gif";
 	
@@ -424,6 +446,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(MessagePassing.class))
           return "images/miu.gif";
 	
+        if (userObject.getClass().equals(GroupDeploymentUnit.class))
+          return "images/mtypedepl.gif";
+	
         if (userObject.getClass().equals(SubProtocol.class))
           return "images/prot.png";
 	
@@ -458,6 +483,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
           return "images/mplan.gif";
 	
         if (userObject.getClass().equals(FAERIECtxtValue.class))
+          return "images/mdepl.gif";
+	
+        if (userObject.getClass().equals(WFTestState.class))
           return "images/mdepl.gif";
 	
         if (userObject.getClass().equals(FAERIECtxtEntity.class))
@@ -535,6 +563,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(EnvironmentApplication.class))
           return "images/mappe.gif";
 	
+        if (userObject.getClass().equals(WFTestFinalState.class))
+          return "images/mdepl.gif";
+	
         if (userObject.getClass().equals(ApplicationEventSlots.class))
           return "images/meventas.gif";
 	
@@ -580,6 +611,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(Agent.class))
           return "images/magent.gif";
 	
+        if (userObject.getClass().equals(TaskOutputDefinition.class))
+          return "images/miusecase.gif";
+	
         if (userObject.getClass().equals(MentalStateManager.class))
           return "images/mman.gif";
 	
@@ -610,6 +644,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(ApplicationEvent.class))
           return "images/meventa.gif";
 	
+        if (userObject.getClass().equals(WFTestInitialState.class))
+          return "images/mdepl.gif";
+	
         if (userObject.getClass().equals(Task.class))
           return "images/mtask.gif";
 	
@@ -621,6 +658,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
         if (userObject.getClass().equals(RoleWS.class))
           return "images/mrolews.gif";
+	
+        if (userObject.getClass().equals(TaskInputDefinition.class))
+          return "images/miusecase.gif";
 	
         if (userObject.getClass().equals(AMIContext.class))
           return "images/mdepl.gif";
@@ -709,6 +749,12 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(DeploymentPackageWithContext.class))
           return DeploymentPackageWithContextIcon;
 	
+        if (userObject.getClass().equals(OrgDeploymentUnit.class))
+          return OrgDeploymentUnitIcon;
+	
+        if (userObject.getClass().equals(WFTest.class))
+          return WFTestIcon;
+	
         if (userObject.getClass().equals(Fact.class))
           return FactIcon;
 	
@@ -772,6 +818,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(MessagePassing.class))
           return MessagePassingIcon;
 	
+        if (userObject.getClass().equals(GroupDeploymentUnit.class))
+          return GroupDeploymentUnitIcon;
+	
         if (userObject.getClass().equals(SubProtocol.class))
           return SubProtocolIcon;
 	
@@ -807,6 +856,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
         if (userObject.getClass().equals(FAERIECtxtValue.class))
           return FAERIECtxtValueIcon;
+	
+        if (userObject.getClass().equals(WFTestState.class))
+          return WFTestStateIcon;
 	
         if (userObject.getClass().equals(FAERIECtxtEntity.class))
           return FAERIECtxtEntityIcon;
@@ -883,6 +935,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(EnvironmentApplication.class))
           return EnvironmentApplicationIcon;
 	
+        if (userObject.getClass().equals(WFTestFinalState.class))
+          return WFTestFinalStateIcon;
+	
         if (userObject.getClass().equals(ApplicationEventSlots.class))
           return ApplicationEventSlotsIcon;
 	
@@ -928,6 +983,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(Agent.class))
           return AgentIcon;
 	
+        if (userObject.getClass().equals(TaskOutputDefinition.class))
+          return TaskOutputDefinitionIcon;
+	
         if (userObject.getClass().equals(MentalStateManager.class))
           return MentalStateManagerIcon;
 	
@@ -958,6 +1016,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
         if (userObject.getClass().equals(ApplicationEvent.class))
           return ApplicationEventIcon;
 	
+        if (userObject.getClass().equals(WFTestInitialState.class))
+          return WFTestInitialStateIcon;
+	
         if (userObject.getClass().equals(Task.class))
           return TaskIcon;
 	
@@ -969,6 +1030,9 @@ static ImageIcon modeloDeployDiagram=new ImageIcon(ImageLoader.getImage("images/
 	
         if (userObject.getClass().equals(RoleWS.class))
           return RoleWSIcon;
+	
+        if (userObject.getClass().equals(TaskInputDefinition.class))
+          return TaskInputDefinitionIcon;
 	
         if (userObject.getClass().equals(AMIContext.class))
           return AMIContextIcon;

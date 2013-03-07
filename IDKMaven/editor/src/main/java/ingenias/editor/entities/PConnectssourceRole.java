@@ -24,6 +24,7 @@ package ingenias.editor.entities;
 
 
 import java.util.*;
+import ingenias.editor.TypedVector;
 
 public class PConnectssourceRole extends RoleEntity {
 
@@ -38,6 +39,8 @@ public class PConnectssourceRole extends RoleEntity {
 	  }
 
 
+  public TypedVector TaskOutput=new TypedVector(ingenias.editor.entities.TaskOutputDefinition.class);
+
 
   public PConnectssourceRole(String id) {
     super(id);
@@ -46,6 +49,30 @@ public class PConnectssourceRole extends RoleEntity {
 
 
 
+
+
+  public Class getTaskOutputType(){
+   return TaskOutput.getType();
+  }
+  public void addTaskOutput(ingenias.editor.entities.TaskOutputDefinition element){
+   this.TaskOutput.add(element);
+  }
+
+  public Enumeration getTaskOutputElements(){
+   return this.TaskOutput.elements();
+  }
+
+  public void removeTaskOutputElement(String id){
+    Enumeration enumeration=this.getTaskOutputElements();
+    ingenias.editor.entities.Entity found=null;
+    while (enumeration.hasMoreElements() && found==null){
+     ingenias.editor.entities.Entity ent=(ingenias.editor.entities.Entity)enumeration.nextElement();
+     if (ent.getId().equalsIgnoreCase(id))
+      found=ent;
+    }
+    if (found!=null)
+     this.TaskOutput.remove(found);
+  }
 
 
 

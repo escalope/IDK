@@ -87,11 +87,12 @@ super.toMap(ht);
 }
 
 public String toString(){
-if (this.getSlot()==null ||
+/*if (this.getSlot()==null ||
     this.getSlot().toString().equals(""))
  return "Please, define the value of field Slot";
 else
- return this.getSlot().toString();
+ return this.getSlot().toString();*/
+return ""+getSlot();
 }
 
 }

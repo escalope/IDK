@@ -76,11 +76,12 @@ super.toMap(ht);
 }
 
 public String toString(){
-if (this.getEntity()==null ||
+/*if (this.getEntity()==null ||
     this.getEntity().toString().equals(""))
  return "Please, define the value of field Entity";
 else
- return this.getEntity().toString();
+ return this.getEntity().toString();*/
+return ""+getEntity();
 }
 
 }

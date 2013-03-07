@@ -117,7 +117,6 @@ public class LocationChange {
 				double y3max=m*point.getMaxX()+n;
 				double distancey3min=distance(x1,y1,point.getMinX(),y3min);
 				double distancey3max=distance(x1,y1,point.getMaxX(),y3max);
-				System.err.println(distancey3min-distancey3max);
 				if (Math.min(distancey3min,distancey3max )<maxdistance){
 					if (distancey3min<maxdistance && distancey3max<maxdistance){
 						// two sides of the rectangle are intersected. The closer to x2 is chosen

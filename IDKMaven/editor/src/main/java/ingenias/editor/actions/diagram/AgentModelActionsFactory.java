@@ -2253,8 +2253,7 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "FAERIEContext")){
 		// Insert an object of type FAERIEContext
-		nobjects.add(
-			new AbstractAction("Insert FAERIEContext") {
+		AbstractAction aa=new AbstractAction("Insert FAERIEContext") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FAERIEContext");
@@ -2264,13 +2263,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FAERIEContext("").getHelpDesc()+"\n\n"+new FAERIEContext("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Agent")){
 		// Insert an object of type Agent
-		nobjects.add(
-			new AbstractAction("Insert Agent") {
+		AbstractAction aa=new AbstractAction("Insert Agent") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Agent");
@@ -2280,13 +2280,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Agent("").getHelpDesc()+"\n\n"+new Agent("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Role")){
 		// Insert an object of type Role
-		nobjects.add(
-			new AbstractAction("Insert Role") {
+		AbstractAction aa=new AbstractAction("Insert Role") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Role");
@@ -2296,13 +2297,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Role("").getHelpDesc()+"\n\n"+new Role("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Goal")){
 		// Insert an object of type Goal
-		nobjects.add(
-			new AbstractAction("Insert Goal") {
+		AbstractAction aa=new AbstractAction("Insert Goal") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Goal");
@@ -2312,13 +2314,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Goal("").getHelpDesc()+"\n\n"+new Goal("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Plan")){
 		// Insert an object of type Plan
-		nobjects.add(
-			new AbstractAction("Insert Plan") {
+		AbstractAction aa=new AbstractAction("Insert Plan") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Plan");
@@ -2328,13 +2331,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Plan("").getHelpDesc()+"\n\n"+new Plan("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "StateGoal")){
 		// Insert an object of type StateGoal
-		nobjects.add(
-			new AbstractAction("Insert StateGoal") {
+		AbstractAction aa=new AbstractAction("Insert StateGoal") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "StateGoal");
@@ -2344,13 +2348,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new StateGoal("").getHelpDesc()+"\n\n"+new StateGoal("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Fact")){
 		// Insert an object of type Fact
-		nobjects.add(
-			new AbstractAction("Insert Fact") {
+		AbstractAction aa=new AbstractAction("Insert Fact") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Fact");
@@ -2360,13 +2365,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Fact("").getHelpDesc()+"\n\n"+new Fact("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Task")){
 		// Insert an object of type Task
-		nobjects.add(
-			new AbstractAction("Insert Task") {
+		AbstractAction aa=new AbstractAction("Insert Task") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Task");
@@ -2376,13 +2382,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Task("").getHelpDesc()+"\n\n"+new Task("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "FrameFact")){
 		// Insert an object of type FrameFact
-		nobjects.add(
-			new AbstractAction("Insert FrameFact") {
+		AbstractAction aa=new AbstractAction("Insert FrameFact") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FrameFact");
@@ -2392,13 +2399,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FrameFact("").getHelpDesc()+"\n\n"+new FrameFact("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Believe")){
 		// Insert an object of type Believe
-		nobjects.add(
-			new AbstractAction("Insert Believe") {
+		AbstractAction aa=new AbstractAction("Insert Believe") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Believe");
@@ -2408,13 +2416,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Believe("").getHelpDesc()+"\n\n"+new Believe("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Compromise")){
 		// Insert an object of type Compromise
-		nobjects.add(
-			new AbstractAction("Insert Compromise") {
+		AbstractAction aa=new AbstractAction("Insert Compromise") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Compromise");
@@ -2424,13 +2433,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Compromise("").getHelpDesc()+"\n\n"+new Compromise("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "GeneralEvent")){
 		// Insert an object of type GeneralEvent
-		nobjects.add(
-			new AbstractAction("Insert GeneralEvent") {
+		AbstractAction aa=new AbstractAction("Insert GeneralEvent") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "GeneralEvent");
@@ -2440,13 +2450,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new GeneralEvent("").getHelpDesc()+"\n\n"+new GeneralEvent("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "ApplicationEvent")){
 		// Insert an object of type ApplicationEvent
-		nobjects.add(
-			new AbstractAction("Insert ApplicationEvent") {
+		AbstractAction aa=new AbstractAction("Insert ApplicationEvent") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ApplicationEvent");
@@ -2456,13 +2467,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ApplicationEvent("").getHelpDesc()+"\n\n"+new ApplicationEvent("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "ApplicationEventSlots")){
 		// Insert an object of type ApplicationEventSlots
-		nobjects.add(
-			new AbstractAction("Insert ApplicationEventSlots") {
+		AbstractAction aa=new AbstractAction("Insert ApplicationEventSlots") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ApplicationEventSlots");
@@ -2472,13 +2484,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ApplicationEventSlots("").getHelpDesc()+"\n\n"+new ApplicationEventSlots("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "MentalStateProcessor")){
 		// Insert an object of type MentalStateProcessor
-		nobjects.add(
-			new AbstractAction("Insert MentalStateProcessor") {
+		AbstractAction aa=new AbstractAction("Insert MentalStateProcessor") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "MentalStateProcessor");
@@ -2488,13 +2501,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new MentalStateProcessor("").getHelpDesc()+"\n\n"+new MentalStateProcessor("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "MentalStateManager")){
 		// Insert an object of type MentalStateManager
-		nobjects.add(
-			new AbstractAction("Insert MentalStateManager") {
+		AbstractAction aa=new AbstractAction("Insert MentalStateManager") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "MentalStateManager");
@@ -2504,13 +2518,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new MentalStateManager("").getHelpDesc()+"\n\n"+new MentalStateManager("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "MentalState")){
 		// Insert an object of type MentalState
-		nobjects.add(
-			new AbstractAction("Insert MentalState") {
+		AbstractAction aa=new AbstractAction("Insert MentalState") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "MentalState");
@@ -2520,13 +2535,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new MentalState("").getHelpDesc()+"\n\n"+new MentalState("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "ConditionalMentalState")){
 		// Insert an object of type ConditionalMentalState
-		nobjects.add(
-			new AbstractAction("Insert ConditionalMentalState") {
+		AbstractAction aa=new AbstractAction("Insert ConditionalMentalState") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ConditionalMentalState");
@@ -2536,13 +2552,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ConditionalMentalState("").getHelpDesc()+"\n\n"+new ConditionalMentalState("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "AutonomousEntityQuery")){
 		// Insert an object of type AutonomousEntityQuery
-		nobjects.add(
-			new AbstractAction("Insert AutonomousEntityQuery") {
+		AbstractAction aa=new AbstractAction("Insert AutonomousEntityQuery") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "AutonomousEntityQuery");
@@ -2552,13 +2569,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new AutonomousEntityQuery("").getHelpDesc()+"\n\n"+new AutonomousEntityQuery("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "AgentRequirementsQuery")){
 		// Insert an object of type AgentRequirementsQuery
-		nobjects.add(
-			new AbstractAction("Insert AgentRequirementsQuery") {
+		AbstractAction aa=new AbstractAction("Insert AgentRequirementsQuery") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "AgentRequirementsQuery");
@@ -2568,13 +2586,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new AgentRequirementsQuery("").getHelpDesc()+"\n\n"+new AgentRequirementsQuery("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "ConcreteAgent")){
 		// Insert an object of type ConcreteAgent
-		nobjects.add(
-			new AbstractAction("Insert ConcreteAgent") {
+		AbstractAction aa=new AbstractAction("Insert ConcreteAgent") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ConcreteAgent");
@@ -2584,13 +2603,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ConcreteAgent("").getHelpDesc()+"\n\n"+new ConcreteAgent("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "AgentModelBelieve")){
 		// Insert an object of type AgentModelBelieve
-		nobjects.add(
-			new AbstractAction("Insert AgentModelBelieve") {
+		AbstractAction aa=new AbstractAction("Insert AgentModelBelieve") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "AgentModelBelieve");
@@ -2600,13 +2620,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new AgentModelBelieve("").getHelpDesc()+"\n\n"+new AgentModelBelieve("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Conversation")){
 		// Insert an object of type Conversation
-		nobjects.add(
-			new AbstractAction("Insert Conversation") {
+		AbstractAction aa=new AbstractAction("Insert Conversation") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Conversation");
@@ -2616,13 +2637,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Conversation("").getHelpDesc()+"\n\n"+new Conversation("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "UMLComment")){
 		// Insert an object of type UMLComment
-		nobjects.add(
-			new AbstractAction("Insert UMLComment") {
+		AbstractAction aa=new AbstractAction("Insert UMLComment") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "UMLComment");
@@ -2632,13 +2654,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new UMLComment("").getHelpDesc()+"\n\n"+new UMLComment("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "TextNote")){
 		// Insert an object of type TextNote
-		nobjects.add(
-			new AbstractAction("Insert TextNote") {
+		AbstractAction aa=new AbstractAction("Insert TextNote") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "TextNote");
@@ -2648,13 +2671,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new TextNote("").getHelpDesc()+"\n\n"+new TextNote("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Application")){
 		// Insert an object of type Application
-		nobjects.add(
-			new AbstractAction("Insert Application") {
+		AbstractAction aa=new AbstractAction("Insert Application") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Application");
@@ -2664,13 +2688,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Application("").getHelpDesc()+"\n\n"+new Application("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "EnvironmentApplication")){
 		// Insert an object of type EnvironmentApplication
-		nobjects.add(
-			new AbstractAction("Insert EnvironmentApplication") {
+		AbstractAction aa=new AbstractAction("Insert EnvironmentApplication") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "EnvironmentApplication");
@@ -2680,13 +2705,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new EnvironmentApplication("").getHelpDesc()+"\n\n"+new EnvironmentApplication("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "InternalApplication")){
 		// Insert an object of type InternalApplication
-		nobjects.add(
-			new AbstractAction("Insert InternalApplication") {
+		AbstractAction aa=new AbstractAction("Insert InternalApplication") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "InternalApplication");
@@ -2696,13 +2722,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new InternalApplication("").getHelpDesc()+"\n\n"+new InternalApplication("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "RoleWS")){
 		// Insert an object of type RoleWS
-		nobjects.add(
-			new AbstractAction("Insert RoleWS") {
+		AbstractAction aa=new AbstractAction("Insert RoleWS") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "RoleWS");
@@ -2712,13 +2739,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new RoleWS("").getHelpDesc()+"\n\n"+new RoleWS("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "TaskWS")){
 		// Insert an object of type TaskWS
-		nobjects.add(
-			new AbstractAction("Insert TaskWS") {
+		AbstractAction aa=new AbstractAction("Insert TaskWS") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "TaskWS");
@@ -2728,13 +2756,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new TaskWS("").getHelpDesc()+"\n\n"+new TaskWS("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "GoalStateWS")){
 		// Insert an object of type GoalStateWS
-		nobjects.add(
-			new AbstractAction("Insert GoalStateWS") {
+		AbstractAction aa=new AbstractAction("Insert GoalStateWS") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "GoalStateWS");
@@ -2744,13 +2773,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new GoalStateWS("").getHelpDesc()+"\n\n"+new GoalStateWS("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "AgentWS")){
 		// Insert an object of type AgentWS
-		nobjects.add(
-			new AbstractAction("Insert AgentWS") {
+		AbstractAction aa=new AbstractAction("Insert AgentWS") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "AgentWS");
@@ -2760,13 +2790,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new AgentWS("").getHelpDesc()+"\n\n"+new AgentWS("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "MentalInstanceSpecification")){
 		// Insert an object of type MentalInstanceSpecification
-		nobjects.add(
-			new AbstractAction("Insert MentalInstanceSpecification") {
+		AbstractAction aa=new AbstractAction("Insert MentalInstanceSpecification") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "MentalInstanceSpecification");
@@ -2776,13 +2807,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new MentalInstanceSpecification("").getHelpDesc()+"\n\n"+new MentalInstanceSpecification("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "ApplicationWS")){
 		// Insert an object of type ApplicationWS
-		nobjects.add(
-			new AbstractAction("Insert ApplicationWS") {
+		AbstractAction aa=new AbstractAction("Insert ApplicationWS") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ApplicationWS");
@@ -2792,13 +2824,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ApplicationWS("").getHelpDesc()+"\n\n"+new ApplicationWS("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "RuntimeCommFailure")){
 		// Insert an object of type RuntimeCommFailure
-		nobjects.add(
-			new AbstractAction("Insert RuntimeCommFailure") {
+		AbstractAction aa=new AbstractAction("Insert RuntimeCommFailure") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "RuntimeCommFailure");
@@ -2808,13 +2841,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new RuntimeCommFailure("").getHelpDesc()+"\n\n"+new RuntimeCommFailure("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "FAERIECtxtRelationship")){
 		// Insert an object of type FAERIECtxtRelationship
-		nobjects.add(
-			new AbstractAction("Insert FAERIECtxtRelationship") {
+		AbstractAction aa=new AbstractAction("Insert FAERIECtxtRelationship") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FAERIECtxtRelationship");
@@ -2824,13 +2858,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FAERIECtxtRelationship("").getHelpDesc()+"\n\n"+new FAERIECtxtRelationship("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "RuntimeEvent")){
 		// Insert an object of type RuntimeEvent
-		nobjects.add(
-			new AbstractAction("Insert RuntimeEvent") {
+		AbstractAction aa=new AbstractAction("Insert RuntimeEvent") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "RuntimeEvent");
@@ -2840,13 +2875,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new RuntimeEvent("").getHelpDesc()+"\n\n"+new RuntimeEvent("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "FAERIECtxtEntity")){
 		// Insert an object of type FAERIECtxtEntity
-		nobjects.add(
-			new AbstractAction("Insert FAERIECtxtEntity") {
+		AbstractAction aa=new AbstractAction("Insert FAERIECtxtEntity") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FAERIECtxtEntity");
@@ -2856,13 +2892,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FAERIECtxtEntity("").getHelpDesc()+"\n\n"+new FAERIECtxtEntity("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "FAERIECtxtAttribute")){
 		// Insert an object of type FAERIECtxtAttribute
-		nobjects.add(
-			new AbstractAction("Insert FAERIECtxtAttribute") {
+		AbstractAction aa=new AbstractAction("Insert FAERIECtxtAttribute") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FAERIECtxtAttribute");
@@ -2872,13 +2909,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FAERIECtxtAttribute("").getHelpDesc()+"\n\n"+new FAERIECtxtAttribute("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "Interaction")){
 		// Insert an object of type Interaction
-		nobjects.add(
-			new AbstractAction("Insert Interaction") {
+		AbstractAction aa=new AbstractAction("Insert Interaction") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Interaction");
@@ -2888,13 +2926,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Interaction("").getHelpDesc()+"\n\n"+new Interaction("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "BoxedTask")){
 		// Insert an object of type BoxedTask
-		nobjects.add(
-			new AbstractAction("Insert BoxedTask") {
+		AbstractAction aa=new AbstractAction("Insert BoxedTask") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "BoxedTask");
@@ -2904,13 +2943,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new BoxedTask("").getHelpDesc()+"\n\n"+new BoxedTask("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "RuntimeConversation")){
 		// Insert an object of type RuntimeConversation
-		nobjects.add(
-			new AbstractAction("Insert RuntimeConversation") {
+		AbstractAction aa=new AbstractAction("Insert RuntimeConversation") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "RuntimeConversation");
@@ -2920,13 +2960,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new RuntimeConversation("").getHelpDesc()+"\n\n"+new RuntimeConversation("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "CommunicationEvent")){
 		// Insert an object of type CommunicationEvent
-		nobjects.add(
-			new AbstractAction("Insert CommunicationEvent") {
+		AbstractAction aa=new AbstractAction("Insert CommunicationEvent") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "CommunicationEvent");
@@ -2936,13 +2977,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new CommunicationEvent("").getHelpDesc()+"\n\n"+new CommunicationEvent("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "AMIContext")){
 		// Insert an object of type AMIContext
-		nobjects.add(
-			new AbstractAction("Insert AMIContext") {
+		AbstractAction aa=new AbstractAction("Insert AMIContext") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "AMIContext");
@@ -2952,13 +2994,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new AMIContext("").getHelpDesc()+"\n\n"+new AMIContext("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "ContextBindingTask")){
 		// Insert an object of type ContextBindingTask
-		nobjects.add(
-			new AbstractAction("Insert ContextBindingTask") {
+		AbstractAction aa=new AbstractAction("Insert ContextBindingTask") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ContextBindingTask");
@@ -2968,13 +3011,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ContextBindingTask("").getHelpDesc()+"\n\n"+new ContextBindingTask("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "ContextReleaseTask")){
 		// Insert an object of type ContextReleaseTask
-		nobjects.add(
-			new AbstractAction("Insert ContextReleaseTask") {
+		AbstractAction aa=new AbstractAction("Insert ContextReleaseTask") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ContextReleaseTask");
@@ -2984,13 +3028,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ContextReleaseTask("").getHelpDesc()+"\n\n"+new ContextReleaseTask("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "ContextUseTask")){
 		// Insert an object of type ContextUseTask
-		nobjects.add(
-			new AbstractAction("Insert ContextUseTask") {
+		AbstractAction aa=new AbstractAction("Insert ContextUseTask") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ContextUseTask");
@@ -3000,13 +3045,14 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ContextUseTask("").getHelpDesc()+"\n\n"+new ContextUseTask("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("AgentModel", "RuntimeFact")){
 		// Insert an object of type RuntimeFact
-		nobjects.add(
-			new AbstractAction("Insert RuntimeFact") {
+		AbstractAction aa=new AbstractAction("Insert RuntimeFact") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "RuntimeFact");
@@ -3016,7 +3062,9 @@ public class AgentModelActionsFactory extends DiagramMenuEntriesActionsFactory  
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new RuntimeFact("").getHelpDesc()+"\n\n"+new RuntimeFact("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 			return nobjects;

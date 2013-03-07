@@ -1,5 +1,6 @@
 package test;
 
+import static ingenias.testing.fest.JGraphFixtureExtension.jgraphWithName;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.awt.Frame;
@@ -50,7 +51,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static test.JGraphFixtureExtension.jgraphWithName;
 
 public class SaveEnableTest {
 
@@ -67,7 +67,7 @@ public class SaveEnableTest {
 	public static final String secondDiagram="Task description";
 	public static final String thirdDiagram="Task Code";
 
-	@BeforeMethod 
+	@BeforeMethod (alwaysRun=true)
 	public void setUpOnce() {
 		//FailOnThreadViolationRepaintManager.install();
 
@@ -89,7 +89,7 @@ public class SaveEnableTest {
 	}
 
 
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void tearDown() {
 		window.close();
 		window.cleanUp();

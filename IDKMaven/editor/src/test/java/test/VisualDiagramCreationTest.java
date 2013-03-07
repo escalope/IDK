@@ -1,5 +1,6 @@
 package test;
 
+import static ingenias.testing.fest.JGraphFixtureExtension.jgraphWithName;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.awt.Frame;
@@ -48,12 +49,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static test.JGraphFixtureExtension.jgraphWithName;
 
 public class VisualDiagramCreationTest {
 
 
-	private Robot robot;
 	private FrameFixture window;
 
 	private IDE frame;
@@ -82,7 +81,6 @@ public class VisualDiagramCreationTest {
 		window.show(); // it shows the frame to test
 		window.resizeWidthTo(1000);
 		window.resizeHeightTo(700);
-
 		
 	}
 
@@ -90,8 +88,9 @@ public class VisualDiagramCreationTest {
 	@AfterMethod (alwaysRun=true)
 	public void tearDown() {
 		window.close();
+		Pause.pause(1000);
+		window.requireNotVisible();
 		window.cleanUp();
-
 	}
 	
 	@Test(groups={"diagramcreation"})
@@ -167,6 +166,7 @@ public class VisualDiagramCreationTest {
 		window.optionPane(Timeout.timeout(3000)).yesButton().click();
 	
 		window.menuItemWithPath("File", "Save").requireDisabled();
+
 	}
 
 

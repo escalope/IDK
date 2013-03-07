@@ -114,7 +114,6 @@ public class GraphManager implements java.io.Serializable {
 		for (int k=0;k<path.length;k++){
 			System.err.print(path[k].toString()+",");
 		}
-		System.err.println();
 		if (dmn.getParent()!=null){
 			dmn.removeFromParent();
 			this.reload();

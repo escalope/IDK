@@ -29,7 +29,7 @@ public class PConnects extends NAryEdgeEntity {
 
 
 
-  public TypedVector Inputs=new TypedVector(ingenias.editor.entities.MentalEntityInstanceAccess.class);
+  public TypedVector Inputs=new TypedVector(ingenias.editor.entities.MentalEntity.class);
 
 
   public PConnects(String id) {
@@ -52,15 +52,15 @@ public class PConnects extends NAryEdgeEntity {
   public Class getInputsType(){
    return Inputs.getType();
   }
-  public void addInputs(ingenias.editor.entities.MentalEntityInstanceAccess element){
+  public void addInputs(ingenias.editor.entities.MentalEntity element){
    this.Inputs.add(element);
   }
 
-  public void insertInputsAt(int pos,ingenias.editor.entities.MentalEntityInstanceAccess element){
+  public void insertInputsAt(int pos,ingenias.editor.entities.MentalEntity element){
    this.Inputs.insert(element,pos);
   }
 
-  public int containsInputs(ingenias.editor.entities.MentalEntityInstanceAccess element){
+  public int containsInputs(ingenias.editor.entities.MentalEntity element){
    return this.Inputs.indexOf(element);
   }
 

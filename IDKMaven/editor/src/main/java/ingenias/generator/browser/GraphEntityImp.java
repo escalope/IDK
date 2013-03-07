@@ -21,6 +21,7 @@ package ingenias.generator.browser;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+
 import org.jgraph.graph.*;
 
 import ingenias.editor.IDEState;
@@ -79,6 +80,7 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 		this.browser=new BrowserImp(ids);
 	}
 
+
 	private Vector getCells(org.jgraph.JGraph graph){		
 		List roots=new Vector(((DefaultGraphModel)graph.getModel()).getRoots());
 		Vector v=new Vector();
@@ -92,7 +94,8 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 			Object o=roots.get(k);
 			if (o instanceof org.jgraph.graph.DefaultGraphCell){
 				dgc=(org.jgraph.graph.DefaultGraphCell)o;
-				found=((ingenias.editor.entities.Entity)dgc.getUserObject()).getId().equals(ent.getId());
+				if (dgc.getUserObject()!=null)
+					found=((ingenias.editor.entities.Entity)dgc.getUserObject()).getId().equals(ent.getId());
 				if (found)
 					dgcs.add(dgc);
 			}
@@ -115,6 +118,7 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 			Object o=roots.get(k);
 			if (o instanceof org.jgraph.graph.DefaultGraphCell){
 				dgc=(org.jgraph.graph.DefaultGraphCell)o;
+				if (dgc.getUserObject()!=null)
 				found=((ingenias.editor.entities.Entity)dgc.getUserObject()).getId().equals(ent.getId());
 			}
 			k++;
@@ -135,8 +139,8 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 
 
 
-	private HashSet<GraphRelationshipImp> getRelationshipsFromAGraph(ingenias.editor.ModelJGraph graph){
-		HashSet<GraphRelationshipImp> v=new HashSet<GraphRelationshipImp>();
+	private HashSet<GraphRelationship> getRelationshipsFromAGraph(ingenias.editor.ModelJGraph graph){
+		HashSet<GraphRelationship> v=new HashSet<GraphRelationship>();
 		Enumeration dgcs=this.getCells(graph).elements();
 		while (dgcs.hasMoreElements()){
 
@@ -166,8 +170,8 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 
 	}
 
-	public Vector<GraphRelationshipImp> getAllRelationships(){
-		HashSet<GraphRelationshipImp> result=new HashSet<GraphRelationshipImp>();
+	public Vector<GraphRelationship> getAllRelationships(){
+		HashSet<GraphRelationship> result=new HashSet<GraphRelationship>();
 		Graph[] g=null;
 
 		g = browser.getGraphs();
@@ -176,9 +180,24 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 			HashSet rel=this.getRelationshipsFromAGraph(((GraphImp)g[k]).getGraph());
 			result.addAll(rel);
 		}
-		return new Vector<GraphRelationshipImp>(result);
+		return new Vector<GraphRelationship>(result);
 	}
 
+	public Vector getAllRelationships(String relType){
+		HashSet<GraphRelationship> result=new HashSet<GraphRelationship>();
+		Graph[] g=null;
+
+		g = browser.getGraphs();
+
+		for (int k=0;k<g.length;k++){
+			HashSet<GraphRelationship> rel=this.getRelationshipsFromAGraph(((GraphImp)g[k]).getGraph());
+			for (GraphRelationship gr:rel){
+				if (gr.getType().equalsIgnoreCase(relType))
+					result.add(gr);
+			}
+		}
+		return new Vector<GraphRelationship>(result);
+	}
 
 
 
@@ -287,7 +306,7 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 		}	
 	}
 
-	protected Entity getEntity(){
+	public Entity getEntity(){
 		return this.ent;
 	}
 
@@ -295,6 +314,37 @@ public class GraphEntityImp extends AttributedElementImp implements GraphEntity{
 	public String getID() {
 		
 		return ent.getId();
+	}
+
+	@Override
+	public GraphRelationship[] getRelationships(String type) {
+		Vector v=new Vector();
+
+		Iterator ports=dgc.getChildren().iterator();
+		while (ports.hasNext()){
+			Object port=ports.next();
+			Iterator it=graph.getModel().edges(port);
+
+			while (it.hasNext()){
+
+				org.jgraph.graph.Edge current=
+					(org.jgraph.graph.Edge)it.next();
+				DefaultGraphCell extr=this.getExtreme(current);
+
+				ingenias.editor.entities.NAryEdgeEntity nary=
+					(ingenias.editor.entities.NAryEdgeEntity)extr.getUserObject();
+				if (nary.getType().equalsIgnoreCase(type))
+				 v.add(nary);
+			}
+
+		}
+
+		GraphRelationship[] result=new GraphRelationship[v.size()];
+		for (int k=0;k<result.length;k++){
+			result[k]=new GraphRelationshipImp((NAryEdgeEntity)v.elementAt(k),graph,ids);
+		}
+
+		return result;
 	}
 
 

@@ -180,12 +180,6 @@ java.io.Serializable {
 		this.setAlignmentX(Component.LEFT_ALIGNMENT);
 		this.add(main);
 
-		/*
-		 * BoxLayout bl=new BoxLayout(this,BoxLayout.Y_AXIS);
-		 * this.setLayout(bl);
-		 */
-		// this.add(Box.createRigidArea(new Dimension(0,20)));
-
 		if (ModelEntity.class.isAssignableFrom(ent.getClass())) {
 			JPanel subpanel = null;
 			subpanel = this.createModelPanel((ModelEntity) ent);
@@ -204,14 +198,7 @@ java.io.Serializable {
 
 					final Field cf = entc.getField(preferredOrder[k]);
 					try {
-						JPanel subpanel = null;
-						// if (! RoleEntity.class.isAssignableFrom(entc) ) {
-						Object widget = obtainWidget(ent.getClass(),
-								cf.getName());
-						/*
-						 * if (widget==null && !isCollectionType(cf)) { subpanel
-						 * = this.createSimplePanel(cf, entc); } else {
-						 */
+						JPanel subpanel = null;						
 						Border border1;
 						TitledBorder border;
 						border1 = BorderFactory
@@ -226,12 +213,12 @@ java.io.Serializable {
 						if (subpanel != null) {
 							subpanel.setBorder(border);
 						}
-						// }
+				
 						if (subpanel != null) {
 							subpanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 							main.add(subpanel);
 						}
-						// }
+					
 					} catch (NoSuchMethodException nsm) {
 						nsm.printStackTrace();
 					} catch (Exception nsme) {
@@ -818,8 +805,6 @@ java.io.Serializable {
 											public void run() {
 												lm.addElement(ent1);
 												refreshList(jl);
-												System.out.println("Refreshed with "
-														+ ent1.toString());
 
 											}
 										});
@@ -887,9 +872,6 @@ java.io.Serializable {
 									SwingUtilities.invokeLater(new Runnable() {
 										public void run() {
 											lm.addElement(ent1);
-											System.out
-											.println("Refreshed with "
-													+ ent1.toString());
 										}
 									});
 									refreshList(jl);
@@ -1004,8 +986,6 @@ java.io.Serializable {
 	private void refreshList(final JList jl) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				for (int k = 0; k < jl.getModel().getSize(); k++)
-					System.err.println(k + ":" + jl.getModel().getElementAt(k));
 				jl.invalidate();
 				jl.repaint();
 				parentFrame.repaint();
@@ -1230,10 +1210,6 @@ java.io.Serializable {
 							m.invoke(entity,
 									new Object[] { jt.getTypedContent() });
 
-							System.out.println("setting value "
-									+ jt.getTypedContent() + " to field "
-									+ cf.getName()
-									+ " from setValueFromTextField");
 						} else {
 							JOptionPane
 							.showMessageDialog(
@@ -1297,9 +1273,6 @@ java.io.Serializable {
 						public void actionPerformed(ActionEvent e) {
 							try {
 								m.invoke(entity, paramVal);
-								System.out.println("setting value " + value
-										+ " to field " + cf.getName()
-										+ " from setValue");
 
 								insertAdditionalCellsForSpecialLayout(value, entity, editor.getGraph(), gm);
 
@@ -1437,12 +1410,6 @@ java.io.Serializable {
 	}
 
 	private static void insertAdditionalCellsForSpecialLayout(final Object value, Entity entity, ModelJGraph edgraph, GraphManager gm) {
-		System.err.println("Inserting new cells for " + value);
-		System.err.println("Inserting new cells for "
-				+ (value instanceof ingenias.editor.entities.Entity));
-		System.err.println("Inserting new cells for "
-				+ (edgraph.getAllowedEntities().contains(entity
-						.getClass().getSimpleName())));
 		for (ModelJGraph graph:gm.getUOModels()){
 
 			if (contains(graph,entity)){
@@ -1464,16 +1431,13 @@ java.io.Serializable {
 							// to
 							// all
 							// cells containing entity
-							System.err.println("entity "+entity.getId()+":"+entity.getType());
 							DefaultGraphCell cell = graph.insertDuplicated(new Point(1,
 									1), (Entity) value);
 							graph.getListenerContainer().setParent(cell,
 									(DefaultGraphCell) obj); // inserted cell
-							System.err.println("inserted " + value);
 							if (graph.getListenerContainer()
 									.parentHasVisibleContainers((DefaultGraphCell) obj)
 									.isEmpty()) {
-								System.err.println("setting to invisible for " + value);
 								// no visible elements
 								graph.getGraphLayoutCache().setVisible(cell, false);
 							}

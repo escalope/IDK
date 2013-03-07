@@ -111,7 +111,6 @@ public class CustomTransferHandler extends GraphTransferHandler{
 	 * 	  
 	 */
 	public boolean importData(JComponent comp, Transferable t) {
-		System.err.println("editando...");
 		try {
 			Hashtable<DefaultGraphCell,DefaultGraphCell> transferredparentship=null;
 			Hashtable<String, Hashtable<DefaultGraphCell, Dimension>> entityConstraints=null;
@@ -150,14 +149,9 @@ public class CustomTransferHandler extends GraphTransferHandler{
 								!(cells[i] instanceof NAryEdge) && 
 								!(cells[i] instanceof DefaultPort) &&
 								!(cells[i] instanceof DefaultEdge)){
-							if (!(((DefaultGraphCell)cells[i]).getUserObject() instanceof Entity)){
-								System.err.println(((DefaultGraphCell)cells[i]).getUserObject().getClass().getName());
-								System.err.println(((DefaultGraphCell)cells[i]).getClass().getName());
-
-							}
+							
 							ingenias.editor.entities.Entity ent=
 									(Entity) ((DefaultGraphCell)cells[i]).getUserObject();
-							System.err.println("Validating "+diagramType+" "+ent.getType()+" "+defaultFilter.isValidEntity(diagramType, ent.getType()));
 							allInModel=allInModel && 
 									defaultFilter.isValidEntity(diagramType, ent.getType());
 						} else 
@@ -268,7 +262,6 @@ public class CustomTransferHandler extends GraphTransferHandler{
 	@Override
 	protected void handleExternalDrop(JGraph graph, Object[] cells, Map nested,
 			ConnectionSet cs, ParentMap pm, double dx, double dy) {
-		System.err.println("Ejecutando override");
 		// Removes all connections for which the port is neither
 		// passed in the parent map nor already in the model.
 		Iterator it = cs.connections();

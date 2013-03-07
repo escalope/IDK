@@ -28,6 +28,8 @@ public class Workflow extends INGENIASObject {
 
 
 
+  public TypedVector Tasks=new TypedVector(ingenias.editor.entities.Task.class);
+
 
 
   public Workflow(String id) {
@@ -37,6 +39,47 @@ public class Workflow extends INGENIASObject {
   }
 
 
+
+
+  public void setTasks(TypedVector tv){
+    this.Tasks=tv;
+  }
+
+  public String getTasks(){
+   return Tasks.toString();
+  }
+
+  public Class getTasksType(){
+   return Tasks.getType();
+  }
+  public void addTasks(ingenias.editor.entities.Task element){
+   this.Tasks.add(element);
+  }
+
+  public void insertTasksAt(int pos,ingenias.editor.entities.Task element){
+   this.Tasks.insert(element,pos);
+  }
+
+  public int containsTasks(ingenias.editor.entities.Task element){
+   return this.Tasks.indexOf(element);
+  }
+
+
+  public Enumeration getTasksElements(){
+   return this.Tasks.elements();
+  }
+
+  public void removeTasksElement(String id){
+    Enumeration enumeration=this.getTasksElements();
+    ingenias.editor.entities.Entity found=null;
+    while (enumeration.hasMoreElements() && found==null){
+     ingenias.editor.entities.Entity ent=(ingenias.editor.entities.Entity)enumeration.nextElement();
+     if (ent.getId().equalsIgnoreCase(id))
+      found=ent;
+    }
+    if (found!=null)
+     this.Tasks.remove(found);
+  }
 
 
 
@@ -53,11 +96,12 @@ super.toMap(ht);
 }
 
 public String toString(){
-if (this.getId()==null ||
+/*if (this.getId()==null ||
     this.getId().toString().equals(""))
  return "Please, define the value of field Id";
 else
- return this.getId().toString();
+ return this.getId().toString();*/
+return ""+getId();
 }
 
 }

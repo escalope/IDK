@@ -688,7 +688,6 @@ public abstract class IDEGUI extends javax.swing.JFrame  {
 				Search.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						SearchActionPerformed(evt);
-						System.err.println("invocando");
 					}
 				});
 			}
@@ -847,7 +846,7 @@ public abstract class IDEGUI extends javax.swing.JFrame  {
 
 	public void switchINGENIASView_actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.err.println("ejec1");
+
 		
 	}
 

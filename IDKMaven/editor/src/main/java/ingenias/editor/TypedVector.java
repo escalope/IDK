@@ -132,8 +132,21 @@ public class TypedVector extends Vector  implements java.io.Serializable {
    if (!found)
     super.add(object);
   }
-
+  
   public String toString(){
+	    StringBuffer sb=new StringBuffer();	    
+	     for (int k=0;k<this.size();k++){
+	       sb.append(this.elementAt(k).toString()+"\n");
+	     }	     
+	 /*   sb.append("<ul>");
+	    for (int k=0;k<this.size();k++){
+	      sb.append("<li>"+this.elementAt(k).toString()+"</li>");
+	    }
+	    sb.append("</ul>");*/
+	    return sb.toString();
+	  }
+
+  public String toHTMLString(){
     StringBuffer sb=new StringBuffer();
     sb.append("<ul>");
      for (int k=0;k<this.size();k++){

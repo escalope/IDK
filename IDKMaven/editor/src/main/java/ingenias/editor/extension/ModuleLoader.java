@@ -132,8 +132,7 @@ extends URLClassLoader {
 						modificationTime.put(fs[k].getName(),fs[k].lastModified()); // registers modification time
 
 						ModuleLoader ml = new ModuleLoader(new URL("file:" +  nname.getAbsolutePath()));
-						ml.getToolsAndCG(currenttools, currentcg);
-						System.err.println("module loader creado en "+nname);          
+						ml.getToolsAndCG(currenttools, currentcg);					
 					}
 				}
 			}
@@ -209,18 +208,7 @@ extends URLClassLoader {
 	 *@exception  Exception  Description of Exception
 	 */
 	public static void main(String args[]) throws Exception {
-		/*  Set tools = new HashSet();
-    Set cg = new HashSet();
-    cleanExtensionFolder();
-    ModuleLoader.updateStatus("ext",tools, cg);
-    ModuleLoader.updateStatus("ext",tools, cg);
-    ModuleLoader.updateStatus("ext",tools, cg);
-    Iterator it = tools.iterator();
-    while (it.hasNext()) {
-      System.err.println(it.next());
-    }*/
 
-		//    ut.invokeClass("ingenias.codeproc.ExampleReportGenerator");
 	}
 
 }

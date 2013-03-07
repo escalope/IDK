@@ -714,8 +714,7 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
 
 		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "TextUseCase")){
 		// Insert an object of type TextUseCase
-		nobjects.add(
-			new AbstractAction("Insert TextUseCase") {
+		AbstractAction aa=new AbstractAction("Insert TextUseCase") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "TextUseCase");
@@ -725,13 +724,14 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new TextUseCase("").getHelpDesc()+"\n\n"+new TextUseCase("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "INGENIASUseCase")){
 		// Insert an object of type INGENIASUseCase
-		nobjects.add(
-			new AbstractAction("Insert INGENIASUseCase") {
+		AbstractAction aa=new AbstractAction("Insert INGENIASUseCase") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "INGENIASUseCase");
@@ -741,13 +741,14 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new INGENIASUseCase("").getHelpDesc()+"\n\n"+new INGENIASUseCase("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "Agent")){
 		// Insert an object of type Agent
-		nobjects.add(
-			new AbstractAction("Insert Agent") {
+		AbstractAction aa=new AbstractAction("Insert Agent") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Agent");
@@ -757,13 +758,14 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Agent("").getHelpDesc()+"\n\n"+new Agent("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "Role")){
 		// Insert an object of type Role
-		nobjects.add(
-			new AbstractAction("Insert Role") {
+		AbstractAction aa=new AbstractAction("Insert Role") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Role");
@@ -773,13 +775,14 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Role("").getHelpDesc()+"\n\n"+new Role("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "Interaction")){
 		// Insert an object of type Interaction
-		nobjects.add(
-			new AbstractAction("Insert Interaction") {
+		AbstractAction aa=new AbstractAction("Insert Interaction") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Interaction");
@@ -789,13 +792,14 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Interaction("").getHelpDesc()+"\n\n"+new Interaction("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "TextNote")){
 		// Insert an object of type TextNote
-		nobjects.add(
-			new AbstractAction("Insert TextNote") {
+		AbstractAction aa=new AbstractAction("Insert TextNote") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "TextNote");
@@ -805,13 +809,14 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new TextNote("").getHelpDesc()+"\n\n"+new TextNote("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "UMLComment")){
 		// Insert an object of type UMLComment
-		nobjects.add(
-			new AbstractAction("Insert UMLComment") {
+		AbstractAction aa=new AbstractAction("Insert UMLComment") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "UMLComment");
@@ -821,13 +826,14 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new UMLComment("").getHelpDesc()+"\n\n"+new UMLComment("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "Goal")){
 		// Insert an object of type Goal
-		nobjects.add(
-			new AbstractAction("Insert Goal") {
+		AbstractAction aa=new AbstractAction("Insert Goal") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Goal");
@@ -837,13 +843,14 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Goal("").getHelpDesc()+"\n\n"+new Goal("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("UseCaseDiagram", "Organization")){
 		// Insert an object of type Organization
-		nobjects.add(
-			new AbstractAction("Insert Organization") {
+		AbstractAction aa=new AbstractAction("Insert Organization") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Organization");
@@ -853,7 +860,9 @@ public class UseCaseDiagramActionsFactory extends DiagramMenuEntriesActionsFacto
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Organization("").getHelpDesc()+"\n\n"+new Organization("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 			return nobjects;

@@ -32,7 +32,7 @@ public class PConnectssourceRoleWidgetPreferences extends EntityWidgetPreference
 
   public PConnectssourceRoleWidgetPreferences() {
   super();
-  String[] preferredOrder={""};
+  String[] preferredOrder={"TaskOutput",""};
   this.setPreferredOrder(preferredOrder);
   Vector result=null;
   

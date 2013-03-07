@@ -36,7 +36,6 @@ public class CustomJLabel extends JLabel {
   private Entity ent;
   public CustomJLabel(Entity ent) {
     super("");
-    //System.err.println("1"+ent);
     this.ent=ent;
     this.setText(ent.getId());
   }
@@ -44,7 +43,6 @@ public class CustomJLabel extends JLabel {
 
   public String getText(){
     if (ent!=null){
-      System.err.println("2" + ent);
       return ent.toString();
     } else
       return "";

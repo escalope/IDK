@@ -262,7 +262,6 @@ public class IDEState  implements java.io.Serializable, DiagramChangeHandler {
 
 
 	public void diagramRenamed(ModelJGraph mjg) {
-		System.err.println("renombrando :"+stateChangeListeners);
 		for (DiagramChangeHandler listener:this.stateChangeListeners)
 			listener.diagramRenamed(mjg);				
 	}

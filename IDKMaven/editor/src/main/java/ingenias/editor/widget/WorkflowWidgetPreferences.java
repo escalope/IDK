@@ -32,7 +32,7 @@ public class WorkflowWidgetPreferences extends INGENIASObjectWidgetPreferences {
 
   public WorkflowWidgetPreferences() {
   super();
-  String[] preferredOrder={"id","Description",""};
+  String[] preferredOrder={"id","Description","Tasks",""};
   this.setPreferredOrder(preferredOrder);
    Vector result=null;
   

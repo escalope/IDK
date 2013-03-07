@@ -199,6 +199,33 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+        if (en instanceof ingenias.editor.entities.OrgDeploymentUnit){
+          ingenias.editor.entities.OrgDeploymentUnit nen=(ingenias.editor.entities.OrgDeploymentUnit)en;
+	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("InstOrganization");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getInstOrganization()!=null)
+           saveObject(nen.getInstOrganization(),os);
+          os.write("</objectproperty>\n");
+          
+        }
+        
+        if (en instanceof ingenias.editor.entities.WFTest){
+          ingenias.editor.entities.WFTest nen=(ingenias.editor.entities.WFTest)en;
+	  String _name;
+          
+          
+          os.write("<objectproperty id=\"TestStates\" collection=\"true\">\n");
+             enumeration=nen.getTestStatesElements();
+          while (enumeration.hasMoreElements()){
+            ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+           saveObject(next,os);
+          }
+          os.write("</objectproperty>\n");
+          
+        }
+        
         if (en instanceof ingenias.editor.entities.Fact){
           ingenias.editor.entities.Fact nen=(ingenias.editor.entities.Fact)en;
 	  String _name;
@@ -504,6 +531,19 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+        if (en instanceof ingenias.editor.entities.GroupDeploymentUnit){
+          ingenias.editor.entities.GroupDeploymentUnit nen=(ingenias.editor.entities.GroupDeploymentUnit)en;
+	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("InstGroup");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getInstGroup()!=null)
+           saveObject(nen.getInstGroup(),os);
+          os.write("</objectproperty>\n");
+          
+          
+        }
+        
         if (en instanceof ingenias.editor.entities.SubProtocol){
           ingenias.editor.entities.SubProtocol nen=(ingenias.editor.entities.SubProtocol)en;
 	  String _name;
@@ -520,6 +560,18 @@ public class ObjectSave extends ObjectSaveAbs{
         if (en instanceof ingenias.editor.entities.RuntimeConversation){
           ingenias.editor.entities.RuntimeConversation nen=(ingenias.editor.entities.RuntimeConversation)en;
 	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("Organization");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getOrganization()!=null)
+           saveObject(nen.getOrganization(),os);
+          os.write("</objectproperty>\n");
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("Group");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getGroup()!=null)
+           saveObject(nen.getGroup(),os);
+          os.write("</objectproperty>\n");
           
           _name=ingenias.editor.entities.Entity.encodeutf8Text("Interaction");
           os.write("<objectproperty id=\""+_name+"\">\n");
@@ -695,6 +747,19 @@ public class ObjectSave extends ObjectSaveAbs{
         if (en instanceof ingenias.editor.entities.FAERIECtxtValue){
           ingenias.editor.entities.FAERIECtxtValue nen=(ingenias.editor.entities.FAERIECtxtValue)en;
 	  String _name;
+          
+          
+        }
+        
+        if (en instanceof ingenias.editor.entities.WFTestState){
+          ingenias.editor.entities.WFTestState nen=(ingenias.editor.entities.WFTestState)en;
+	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("Task");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getTask()!=null)
+           saveObject(nen.getTask(),os);
+          os.write("</objectproperty>\n");
           
           
         }
@@ -1000,6 +1065,13 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+        if (en instanceof ingenias.editor.entities.WFTestFinalState){
+          ingenias.editor.entities.WFTestFinalState nen=(ingenias.editor.entities.WFTestFinalState)en;
+	  String _name;
+          
+          
+        }
+        
         if (en instanceof ingenias.editor.entities.ApplicationEventSlots){
           ingenias.editor.entities.ApplicationEventSlots nen=(ingenias.editor.entities.ApplicationEventSlots)en;
 	  String _name;
@@ -1240,6 +1312,19 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+        if (en instanceof ingenias.editor.entities.TaskOutputDefinition){
+          ingenias.editor.entities.TaskOutputDefinition nen=(ingenias.editor.entities.TaskOutputDefinition)en;
+	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("AffectedElement");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getAffectedElement()!=null)
+           saveObject(nen.getAffectedElement(),os);
+          os.write("</objectproperty>\n");
+          
+          
+        }
+        
         if (en instanceof ingenias.editor.entities.MentalStateManager){
           ingenias.editor.entities.MentalStateManager nen=(ingenias.editor.entities.MentalStateManager)en;
 	  String _name;
@@ -1414,6 +1499,13 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+        if (en instanceof ingenias.editor.entities.WFTestInitialState){
+          ingenias.editor.entities.WFTestInitialState nen=(ingenias.editor.entities.WFTestInitialState)en;
+	  String _name;
+          
+          
+        }
+        
         if (en instanceof ingenias.editor.entities.Task){
           ingenias.editor.entities.Task nen=(ingenias.editor.entities.Task)en;
 	  String _name;
@@ -1450,6 +1542,19 @@ public class ObjectSave extends ObjectSaveAbs{
         if (en instanceof ingenias.editor.entities.RoleWS){
           ingenias.editor.entities.RoleWS nen=(ingenias.editor.entities.RoleWS)en;
 	  String _name;
+          
+          
+        }
+        
+        if (en instanceof ingenias.editor.entities.TaskInputDefinition){
+          ingenias.editor.entities.TaskInputDefinition nen=(ingenias.editor.entities.TaskInputDefinition)en;
+	  String _name;
+          
+          _name=ingenias.editor.entities.Entity.encodeutf8Text("AffectedElement");
+          os.write("<objectproperty id=\""+_name+"\">\n");
+          if (nen.getAffectedElement()!=null)
+           saveObject(nen.getAffectedElement(),os);
+          os.write("</objectproperty>\n");
           
           
         }
@@ -1506,6 +1611,14 @@ public class ObjectSave extends ObjectSaveAbs{
           ingenias.editor.entities.Workflow nen=(ingenias.editor.entities.Workflow)en;
 	  String _name;
           
+          
+          os.write("<objectproperty id=\"Tasks\" collection=\"true\">\n");
+             enumeration=nen.getTasksElements();
+          while (enumeration.hasMoreElements()){
+            ingenias.editor.entities.Entity next=(ingenias.editor.entities.Entity)enumeration.nextElement();
+           saveObject(next,os);
+          }
+          os.write("</objectproperty>\n");
           
         }
         
@@ -1681,6 +1794,12 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+         if (en.getClass().equals(ingenias.editor.entities.MemberDplmnt.class)){
+          ingenias.editor.entities.MemberDplmnt nen=(ingenias.editor.entities.MemberDplmnt)en;
+          
+          
+        }
+        
          if (en.getClass().equals(ingenias.editor.entities.DefinesDeployment.class)){
           ingenias.editor.entities.DefinesDeployment nen=(ingenias.editor.entities.DefinesDeployment)en;
           
@@ -1761,6 +1880,12 @@ public class ObjectSave extends ObjectSaveAbs{
           if (nen.getCondition()!=null)
            saveObject(nen.getCondition(),os);
           os.write("</objectproperty>\n");
+          
+          
+        }
+        
+         if (en.getClass().equals(ingenias.editor.entities.WFTestAfter.class)){
+          ingenias.editor.entities.WFTestAfter nen=(ingenias.editor.entities.WFTestAfter)en;
           
           
         }
@@ -1853,6 +1978,12 @@ public class ObjectSave extends ObjectSaveAbs{
         
          if (en.getClass().equals(ingenias.editor.entities.WFSpecifiesExecution.class)){
           ingenias.editor.entities.WFSpecifiesExecution nen=(ingenias.editor.entities.WFSpecifiesExecution)en;
+          
+          
+        }
+        
+         if (en.getClass().equals(ingenias.editor.entities.OrgDplmnt.class)){
+          ingenias.editor.entities.OrgDplmnt nen=(ingenias.editor.entities.OrgDplmnt)en;
           
           
         }
@@ -1968,6 +2099,12 @@ public class ObjectSave extends ObjectSaveAbs{
           
         }
         
+         if (en.getClass().equals(ingenias.editor.entities.GroupDplmnt.class)){
+          ingenias.editor.entities.GroupDplmnt nen=(ingenias.editor.entities.GroupDplmnt)en;
+          
+          
+        }
+        
          if (en.getClass().equals(ingenias.editor.entities.PConnects.class)){
           ingenias.editor.entities.PConnects nen=(ingenias.editor.entities.PConnects)en;
           
@@ -2066,6 +2203,12 @@ public class ObjectSave extends ObjectSaveAbs{
           if (nen.getCondition()!=null)
            saveObject(nen.getCondition(),os);
           os.write("</objectproperty>\n");
+          
+          
+        }
+        
+         if (en.getClass().equals(ingenias.editor.entities.TestEventInjection.class)){
+          ingenias.editor.entities.TestEventInjection nen=(ingenias.editor.entities.TestEventInjection)en;
           
           
         }

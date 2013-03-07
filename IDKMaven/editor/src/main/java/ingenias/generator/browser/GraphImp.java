@@ -59,7 +59,7 @@ implements Graph {
 		return mjg.getID();
 	}
 
-	
+
 	public String getName() {
 		return mjg.getID();
 	}
@@ -85,20 +85,21 @@ implements Graph {
 	}
 
 	public GraphRelationship[] getRelationships() {
-		int max = mjg.getModel().getRootCount();
-		Vector v = new Vector();
+		Object[] roots= mjg.getRoots();
+		java.util.Vector v = new java.util.Vector();
 
 		boolean found = false;
 		int k = 0;
 		org.jgraph.graph.DefaultGraphCell dgc = null;
-		while (k < max) {
-			Object o = mjg.getModel().getRootAt(k);
+		while (k <  roots.length) {
+			Object o = roots[k];
+
 			if (org.jgraph.graph.DefaultGraphCell.class.isAssignableFrom(o.getClass())) {
 				dgc = (org.jgraph.graph.DefaultGraphCell) o;
 				if (ingenias.editor.entities.NAryEdgeEntity.class.isAssignableFrom(dgc.
 						getUserObject().getClass())) {
 					ingenias.editor.entities.NAryEdgeEntity ne =
-						(ingenias.editor.entities.NAryEdgeEntity) dgc.getUserObject();
+							(ingenias.editor.entities.NAryEdgeEntity) dgc.getUserObject();
 
 					v.add(new GraphRelationshipImp(ne, mjg,ids));
 				}
@@ -117,15 +118,15 @@ implements Graph {
 	}
 
 
-	public GraphEntity[] getEntitiesWithDuplicates()  throws NullEntity{ 
-		int max = mjg.getModel().getRootCount();
+	public GraphEntity[] getEntitiesWithDuplicates()  throws NullEntity{
+		Object[] roots= mjg.getRoots();
 		java.util.Vector v = new java.util.Vector();
 
 		boolean found = false;
 		int k = 0;
 		org.jgraph.graph.DefaultGraphCell dgc = null;
-		while (k < max) {
-			Object o = mjg.getModel().getRootAt(k);
+		while (k <  roots.length) {
+			Object o = roots[k];
 			if (o instanceof org.jgraph.graph.DefaultGraphCell) {
 				dgc = (org.jgraph.graph.DefaultGraphCell) o;
 				if (! (dgc.getUserObject()instanceof ingenias.editor.entities.
@@ -133,7 +134,7 @@ implements Graph {
 						! (dgc.getUserObject()instanceof ingenias.editor.entities.
 								RoleEntity)) {
 					ingenias.editor.entities.Entity ne =
-						(ingenias.editor.entities.Entity) dgc.getUserObject();
+							(ingenias.editor.entities.Entity) dgc.getUserObject();
 					GraphEntity ge=null;
 
 					ge = new GraphEntityImp(ne, dgc,mjg,ids);
@@ -160,22 +161,23 @@ implements Graph {
 
 
 	public GraphEntity[] getEntities() throws NullEntity {
-		int max = mjg.getModel().getRootCount();
+		Object[] roots= mjg.getRoots();
 		java.util.Vector v = new java.util.Vector();
 
 		boolean found = false;
 		int k = 0;
 		org.jgraph.graph.DefaultGraphCell dgc = null;
-		while (k <  mjg.getModel().getRootCount()) {
-			Object o = mjg.getModel().getRootAt(k);
+		while (k <  roots.length) {
+			Object o = roots[k];
 			if (o instanceof org.jgraph.graph.DefaultGraphCell) {
 				dgc = (org.jgraph.graph.DefaultGraphCell) o;
-				if (! (dgc.getUserObject()instanceof ingenias.editor.entities.
-						NAryEdgeEntity) &&
-						! (dgc.getUserObject()instanceof ingenias.editor.entities.
-								RoleEntity)) {
+				if (dgc.getUserObject() !=null &&
+						! (dgc.getUserObject() instanceof ingenias.editor.entities.
+								NAryEdgeEntity) &&
+								! (dgc.getUserObject()instanceof ingenias.editor.entities.
+										RoleEntity)) {
 					ingenias.editor.entities.Entity ne =
-						(ingenias.editor.entities.Entity) dgc.getUserObject();
+							(ingenias.editor.entities.Entity) dgc.getUserObject();
 					GraphEntity ge=null;
 
 					ge = new GraphEntityImp(ne, mjg,ids);
@@ -223,7 +225,7 @@ implements Graph {
 		temp.add(njg,BorderLayout.CENTER);
 		njg.setSelectionCells(new Object[0]);
 		ingenias.editor.export.Diagram2SVG.diagram2SVG(temp, target,"png");
-		
+
 
 	}
 

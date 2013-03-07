@@ -88,16 +88,16 @@ public class ConvertUtils {
          }*/
        }
      } else {
-       System.err.println(mjg.getModel().getRootAt(k).getClass());
+      // System.err.println(mjg.getModel().getRootAt(k).getClass());
      }
 
    }
    mjg.repaint();
    mjg.revalidate();
 
-   for (int k=0;k<mjg.getGraphLayoutCache().getRoots().length;k++){
+  /* for (int k=0;k<mjg.getGraphLayoutCache().getRoots().length;k++){
      System.err.println(mjg.getGraphLayoutCache().getRoots()[k].getClass());
-   }
+   }*/
 
   }
  }

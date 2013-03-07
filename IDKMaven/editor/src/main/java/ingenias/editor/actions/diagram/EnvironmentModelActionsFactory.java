@@ -1347,8 +1347,7 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "Agent")){
 		// Insert an object of type Agent
-		nobjects.add(
-			new AbstractAction("Insert Agent") {
+		AbstractAction aa=new AbstractAction("Insert Agent") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Agent");
@@ -1358,13 +1357,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Agent("").getHelpDesc()+"\n\n"+new Agent("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "OrganizationGroup")){
 		// Insert an object of type OrganizationGroup
-		nobjects.add(
-			new AbstractAction("Insert OrganizationGroup") {
+		AbstractAction aa=new AbstractAction("Insert OrganizationGroup") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "OrganizationGroup");
@@ -1374,13 +1374,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new OrganizationGroup("").getHelpDesc()+"\n\n"+new OrganizationGroup("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "Resource")){
 		// Insert an object of type Resource
-		nobjects.add(
-			new AbstractAction("Insert Resource") {
+		AbstractAction aa=new AbstractAction("Insert Resource") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Resource");
@@ -1390,13 +1391,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Resource("").getHelpDesc()+"\n\n"+new Resource("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "Application")){
 		// Insert an object of type Application
-		nobjects.add(
-			new AbstractAction("Insert Application") {
+		AbstractAction aa=new AbstractAction("Insert Application") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Application");
@@ -1406,13 +1408,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Application("").getHelpDesc()+"\n\n"+new Application("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "InternalApplication")){
 		// Insert an object of type InternalApplication
-		nobjects.add(
-			new AbstractAction("Insert InternalApplication") {
+		AbstractAction aa=new AbstractAction("Insert InternalApplication") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "InternalApplication");
@@ -1422,13 +1425,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new InternalApplication("").getHelpDesc()+"\n\n"+new InternalApplication("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "EnvironmentApplication")){
 		// Insert an object of type EnvironmentApplication
-		nobjects.add(
-			new AbstractAction("Insert EnvironmentApplication") {
+		AbstractAction aa=new AbstractAction("Insert EnvironmentApplication") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "EnvironmentApplication");
@@ -1438,13 +1442,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new EnvironmentApplication("").getHelpDesc()+"\n\n"+new EnvironmentApplication("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "ApplicationWS")){
 		// Insert an object of type ApplicationWS
-		nobjects.add(
-			new AbstractAction("Insert ApplicationWS") {
+		AbstractAction aa=new AbstractAction("Insert ApplicationWS") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "ApplicationWS");
@@ -1454,13 +1459,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new ApplicationWS("").getHelpDesc()+"\n\n"+new ApplicationWS("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "TextNote")){
 		// Insert an object of type TextNote
-		nobjects.add(
-			new AbstractAction("Insert TextNote") {
+		AbstractAction aa=new AbstractAction("Insert TextNote") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "TextNote");
@@ -1470,13 +1476,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new TextNote("").getHelpDesc()+"\n\n"+new TextNote("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "UMLComment")){
 		// Insert an object of type UMLComment
-		nobjects.add(
-			new AbstractAction("Insert UMLComment") {
+		AbstractAction aa=new AbstractAction("Insert UMLComment") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "UMLComment");
@@ -1486,13 +1493,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new UMLComment("").getHelpDesc()+"\n\n"+new UMLComment("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "Organization")){
 		// Insert an object of type Organization
-		nobjects.add(
-			new AbstractAction("Insert Organization") {
+		AbstractAction aa=new AbstractAction("Insert Organization") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "Organization");
@@ -1502,13 +1510,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new Organization("").getHelpDesc()+"\n\n"+new Organization("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "AMIContext")){
 		// Insert an object of type AMIContext
-		nobjects.add(
-			new AbstractAction("Insert AMIContext") {
+		AbstractAction aa=new AbstractAction("Insert AMIContext") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "AMIContext");
@@ -1518,13 +1527,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new AMIContext("").getHelpDesc()+"\n\n"+new AMIContext("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIEContext")){
 		// Insert an object of type FAERIEContext
-		nobjects.add(
-			new AbstractAction("Insert FAERIEContext") {
+		AbstractAction aa=new AbstractAction("Insert FAERIEContext") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FAERIEContext");
@@ -1534,13 +1544,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FAERIEContext("").getHelpDesc()+"\n\n"+new FAERIEContext("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIECtxtModel")){
 		// Insert an object of type FAERIECtxtModel
-		nobjects.add(
-			new AbstractAction("Insert FAERIECtxtModel") {
+		AbstractAction aa=new AbstractAction("Insert FAERIECtxtModel") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FAERIECtxtModel");
@@ -1550,13 +1561,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FAERIECtxtModel("").getHelpDesc()+"\n\n"+new FAERIECtxtModel("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIECtxtAttribute")){
 		// Insert an object of type FAERIECtxtAttribute
-		nobjects.add(
-			new AbstractAction("Insert FAERIECtxtAttribute") {
+		AbstractAction aa=new AbstractAction("Insert FAERIECtxtAttribute") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FAERIECtxtAttribute");
@@ -1566,13 +1578,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FAERIECtxtAttribute("").getHelpDesc()+"\n\n"+new FAERIECtxtAttribute("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIECtxtEntity")){
 		// Insert an object of type FAERIECtxtEntity
-		nobjects.add(
-			new AbstractAction("Insert FAERIECtxtEntity") {
+		AbstractAction aa=new AbstractAction("Insert FAERIECtxtEntity") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FAERIECtxtEntity");
@@ -1582,13 +1595,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FAERIECtxtEntity("").getHelpDesc()+"\n\n"+new FAERIECtxtEntity("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIECtxtRelationship")){
 		// Insert an object of type FAERIECtxtRelationship
-		nobjects.add(
-			new AbstractAction("Insert FAERIECtxtRelationship") {
+		AbstractAction aa=new AbstractAction("Insert FAERIECtxtRelationship") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FAERIECtxtRelationship");
@@ -1598,13 +1612,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FAERIECtxtRelationship("").getHelpDesc()+"\n\n"+new FAERIECtxtRelationship("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "FAERIECtxtValue")){
 		// Insert an object of type FAERIECtxtValue
-		nobjects.add(
-			new AbstractAction("Insert FAERIECtxtValue") {
+		AbstractAction aa=new AbstractAction("Insert FAERIECtxtValue") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "FAERIECtxtValue");
@@ -1614,13 +1629,14 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new FAERIECtxtValue("").getHelpDesc()+"\n\n"+new FAERIECtxtValue("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 		if (this.getState().getDiagramFilter().isValidEntity("EnvironmentModel", "RoleWS")){
 		// Insert an object of type RoleWS
-		nobjects.add(
-			new AbstractAction("Insert RoleWS") {
+		AbstractAction aa=new AbstractAction("Insert RoleWS") {
 				public void actionPerformed(ActionEvent ev) {
 					try {
 						graph.insert(pt, "RoleWS");
@@ -1630,7 +1646,9 @@ public class EnvironmentModelActionsFactory extends DiagramMenuEntriesActionsFac
                                 "Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-			});
+			};
+		aa.putValue("tooltip", new RoleWS("").getHelpDesc()+"\n\n"+new RoleWS("").getHelpRecom());
+		nobjects.add(aa);
 		}
 
 			return nobjects;

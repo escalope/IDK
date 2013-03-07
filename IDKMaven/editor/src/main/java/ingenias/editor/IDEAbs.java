@@ -319,14 +319,12 @@ implements java.io.Serializable,IDEUpdater
 	public void stop(){
 		if (update!=null)
 			update.stopUpdate();
-		System.err.println("finalizado");
 	}
 
 
 	protected void finalize() throws Throwable{
 		if (update!=null)
 			update.stopUpdate();
-		System.err.println("finalizado");
 		super.finalize();
 
 	}

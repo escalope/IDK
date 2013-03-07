@@ -139,7 +139,7 @@ public class HyperlinkAction implements HyperlinkListener{
 
 			}	
 		
-		System.err.println("UPDATED.....................");
+		
 	}
 	
 	private void locateAndScrollToObject(String id) {

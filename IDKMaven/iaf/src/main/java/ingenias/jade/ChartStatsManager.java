@@ -1,3 +1,24 @@
+/*
+Copyright (C) 2012 Jorge Gomez Sanz
+
+This file is part of INGENIAS Agent Framework, an agent infrastructure linked
+to the INGENIAS Development Kit, and availabe at http://ingenias.sourceforge.net. 
+
+INGENIAS Agent Framework is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+INGENIAS Agent Framework is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with INGENIAS Agent Framework; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+ */
 package ingenias.jade;
 
 import ingenias.editor.entities.MentalEntity;
@@ -36,6 +57,7 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.FixedMillisecond;
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.Month;
+import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
@@ -156,14 +178,14 @@ public class ChartStatsManager extends ApplicationFrame {
 
 
 	public synchronized void addEvent(final String evid, final long timestamp, final Integer nvalue){
-		Runnable run=new Runnable(){
+		/*Runnable run=new Runnable(){
 			public void run(){
 				Integer value=nvalue;
 				TimeSeries current=null;
 				if (series.containsKey(evid)){
 					current=series.get(evid);
 				} else {
-					current =new TimeSeries(evid,Millisecond.class);
+					current =new TimeSeries(evid,Second.class);
 					series.put(evid,current);
                                         boolean inserted=false;
                                         int k=0;
@@ -186,12 +208,12 @@ public class ChartStatsManager extends ApplicationFrame {
 				if (current.getItemCount()>0){
 					value=value+current.getValue(current.getItemCount()-1).intValue();
 					}
-				
-				current.addOrUpdate(new Millisecond(new Date()),value);
+				// TODO this creates an excessive delay in the platform
+//				 current.addOrUpdate(new Second(new Date(timestamp)),value);
 				//current.add(new TimeSeriesDataItem())
 			}
 		};
-		SwingUtilities.invokeLater(run);
+		SwingUtilities.invokeLater(run);*/
 		
 	}
 

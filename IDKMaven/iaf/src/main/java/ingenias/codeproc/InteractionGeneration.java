@@ -560,7 +560,7 @@ public class InteractionGeneration {
                             mygen.fatalError();
                         }
                     } else {
-                        System.err.println("Error indetectado en "+interaction);
+                       // System.err.println("Error indetectado en "+interaction);
                     }
                 }
                 
@@ -1060,7 +1060,7 @@ public class InteractionGeneration {
                 }
             } else {
                 
-                System.err.println("Error detectado con "+spec);
+             //   System.err.println("Error detectado con "+spec);
             }
         } catch (NotFound e) {
             e.printStackTrace();

@@ -78,17 +78,34 @@ public class @@@v@@@tname@@@/v@@@Task extends Task{
   		@@@repeat altname="0" id="expectedOutputMS"@@@
 		@@@v@@@outputtype@@@/v@@@ outputs@@@v@@@alternativeid@@@/v@@@@@@v@@@outputid@@@/v@@@=
 			(@@@v@@@outputtype@@@/v@@@)
-				outputs@@@v@@@alternativeid@@@/v@@@.getEntityByType("@@@v@@@outputid@@@/v@@@");
+				outputs@@@v@@@alternativeid@@@/v@@@.getEntityByType("@@@v@@@outputid@@@/v@@@");				
+		@@@repeat altname="0" id="setorganizationalconstraints"@@@
+		OrgDeploymentUnit odu=new OrgDeploymentUnit("");
+		String orgInstanceName="@@@v@@@orginstancename@@@/v@@@";  //if you know it, write here the id of the organization
+		odu.setInstanceName(orgInstanceName);
+		odu.setInstOrganization(new Organization("@@@v@@@orgtype@@@/v@@@"));
+		outputs@@@v@@@alternativeid@@@/v@@@@@@v@@@outputid@@@/v@@@.setOrganization(odu);
 		@@@/repeat@@@
+		@@@repeat altname="0" id="setgroupconstraints"@@@
+		GroupDeploymentUnit gdu=new GroupDeploymentUnit("");	
+		String groupInstanceName="@@@v@@@groupinstancename@@@/v@@@";  //if you know it, write here the id of the group
+		gdu.setInstanceName(groupInstanceName);
+		gdu.setInstGroup(new OrganizationGroup("@@@v@@@grouptype@@@/v@@@"));
+		outputs@@@v@@@alternativeid@@@/v@@@@@@v@@@outputid@@@/v@@@.setGroup(gdu);
+		@@@/repeat@@@	
+		@@@/repeat@@@
+		
 		@@@repeat altname="0" id="expectedOutputWF"@@@
 		@@@v@@@outputtype@@@/v@@@ outputs@@@v@@@alternativeid@@@/v@@@@@@v@@@outputid@@@/v@@@=
 			(@@@v@@@outputtype@@@/v@@@)
-				outputs@@@v@@@alternativeid@@@/v@@@.getEntityByType("@@@v@@@outputid@@@/v@@@");
+				outputs@@@v@@@alternativeid@@@/v@@@.getEntityByType("@@@v@@@outputid@@@/v@@@");								
 		@@@/repeat@@@
 		@@@/repeat@@@
 		
         YellowPages yp=null; // only available for initiators of interactions
-@@@repeat altname="0" id="interactions"@@@
+	@@@repeat altname="0" id="interactions"@@@
+        
+	
 		// This task can produce an interaction of type @@@v@@@interid@@@/v@@@ by working with its conversation object
         
         // To define manually who are the collaborator involved. Your selection will be verified

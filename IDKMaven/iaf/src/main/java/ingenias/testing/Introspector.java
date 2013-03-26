@@ -1,5 +1,8 @@
 /**
- * 
+ * This class reuses the introspection agent code to provide a synchronous interface with the
+ * introspection services each JADE agent provides.  
+ * @author Jorge J. Gomez-Sanz
+ *
  */
 package ingenias.testing;
 

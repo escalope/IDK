@@ -124,19 +124,24 @@ extends javax.swing.JFrame {
 
 	static {
 		if (IAFProperties.getGraphicsOn()) {
-			mim.pack();
-			Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-
-			/*mim.setLocation(
-					d.width / 2 - mim.getSize().width / 2,
-					d.height / 2 - 100);
-*/
-			mim.setLocationByPlatform(true);
-			mim.setVisible(true);
-		
-			mim.setMainTask(new JPanel());
+			createDebuggingWindow();
 			//mim.setMainMS(new JScrollPane());
 		}
+	}
+
+	public static MainInteractionManager createDebuggingWindow() {
+		mim.pack();
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+
+		/*mim.setLocation(
+				d.width / 2 - mim.getSize().width / 2,
+				d.height / 2 - 100);
+*/
+		mim.setLocationByPlatform(true);
+		mim.setVisible(true);
+
+		mim.setMainTask(new JPanel());
+		return mim;
 	}
 
 	public static MainInteractionManager getInstance() {
@@ -491,6 +496,7 @@ extends javax.swing.JFrame {
 
 			//mainPanel.setOrientation(JSplitPane.VERTICAL_SPLIT);
 			mainPanel.add(jtp, BorderLayout.CENTER);
+			
 
 			//mainPanel.add(this.logsScrollPane,JSplitPane.BOTTOM);
 			//mainPanel.setDividerLocation(200);
@@ -527,6 +533,7 @@ extends javax.swing.JFrame {
 			runWithoutInterruption.setEnabled(false);
 			jPanel1.add(runWithoutInterruption);
 			runWithoutInterruption.setText("go");
+			runWithoutInterruption.setName("automaticgo");
 			runWithoutInterruption.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent evt) {
@@ -539,6 +546,7 @@ extends javax.swing.JFrame {
 
 			jPanel1.add(runStep);
 			runStep.setText("Manual run");
+			runStep.setName("manualgo");
 			runStep.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent evt) {
@@ -548,7 +556,7 @@ extends javax.swing.JFrame {
 				}
 			});
 
-
+			jtp.setName("debuggingtabs");
 			jtp.add("tasks", mainTasks);
 			jtp.addTab("interactions", null, interactionsScrollPane, null);
 

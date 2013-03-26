@@ -28,7 +28,9 @@ public class AgentStates {
 	public static final int DECISION_FINISHED = 1;
 	public static final int EXECUTION_FINISHED = 2;
 	public static final int PLANNING_STARTING = 3;
-	public static final int STARTING_AGENT = 3;
+	public static final int STARTING_AGENT = 4;
+	public static final int WAIT_FOR_CHANGE_IN_MENTAL_STATE = 5;
+	public static final int STARTING_DECISION = 0;
 	
 
 }

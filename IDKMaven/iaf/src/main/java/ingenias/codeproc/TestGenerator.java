@@ -35,6 +35,8 @@ import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.GraphAttribute;
 import ingenias.generator.browser.GraphCollection;
 import ingenias.generator.browser.GraphEntity;
+import ingenias.generator.browser.GraphRelationship;
+import ingenias.generator.browser.GraphRole;
 import ingenias.generator.datatemplate.Repeat;
 import ingenias.generator.datatemplate.Sequences;
 import ingenias.generator.datatemplate.Var;
@@ -50,20 +52,18 @@ public class TestGenerator {
 	public void generateTests(Sequences p, BasicCodeGenerator generator){
 		try {
 			GraphEntity[] testEntities = Utils
-			.generateEntitiesOfType("Test",browser);
-
+					.generateEntitiesOfType("Test",browser);
 			for (GraphEntity test:testEntities){
 				Repeat testingDepl = new Repeat("testdefinition");
 				p.addRepeat(testingDepl);
 				testingDepl.add(new Var("test", Utils.replaceBadChars(test.getID())));
 				addAgentIdsToBeLaunchedAtTest(testingDepl, test,generator,browser);
-
-
 			}
-
 		} catch (NotInitialised e) {			
 			e.printStackTrace();
 		}
+
+
 
 	}
 
@@ -71,13 +71,13 @@ public class TestGenerator {
 	private void addAgentIdsToBeLaunchedAtTest(Repeat testingDepl,
 			GraphEntity test,BasicCodeGenerator bcg,Browser browser) throws NotInitialised {
 		GraphEntity[] deployPacks = Utils
-		.generateEntitiesOfType("TestingPackage",browser);
+				.generateEntitiesOfType("TestingPackage",browser);
 		if (deployPacks.length > 0) {
 			for (int k = 0; k < deployPacks.length; k++) {
 				try {
 
 					GraphAttribute deplPackageAttr = deployPacks[k]
-					                                             .getAttributeByName("TestingDeployment");
+							.getAttributeByName("TestingDeployment");
 					GraphAttribute testAttr = deployPacks[k].getAttributeByName("Tests");
 
 
@@ -135,9 +135,9 @@ public class TestGenerator {
 	 * @throws NotInitialised
 	 */
 	public  void generateTestingDeployment(Sequences p, BasicCodeGenerator bcg,Browser browser)
-	throws NotInitialised {
+			throws NotInitialised {
 		GraphEntity[] deployPacks = Utils
-		.generateEntitiesOfType("TestingPackage",browser);
+				.generateEntitiesOfType("TestingPackage",browser);
 		String port = "60000";
 		if (deployPacks.length > 0) {
 			for (int k = 0; k < deployPacks.length; k++) {
@@ -148,7 +148,7 @@ public class TestGenerator {
 					testingDepl.add(new Var("testingconfig",Utils.replaceBadChars(deployPacks[k].getID())));
 
 					GraphAttribute deplPackageAttr = deployPacks[k]
-					                                             .getAttributeByName("TestingDeployment");
+							.getAttributeByName("TestingDeployment");
 					GraphAttribute testAttr = deployPacks[k].getAttributeByName("Tests");
 
 
@@ -167,9 +167,47 @@ public class TestGenerator {
 									testingDepl.add(testRepeat);
 									depl = new Repeat("deploynode");
 									testRepeat.add(depl);
+
+									Repeat regular=new Repeat("regulartest");
+									Repeat wftest=new Repeat("wftest");
+									GraphEntity test=tests.getElementAt(j);									
+
+									if (test.getType().equalsIgnoreCase("Test")){
+										depl.add(regular);										
+										DeploymentGenerator.generateDeploymentPack(deplPackage, regular,bcg); // for JUnit class initialization per test
+										addEventInjection(regular,deployPacks[k]);
+									} else {
+										depl.add(wftest);		
+										addEventInjection(wftest,deployPacks[k]);
+										String testduration = test.getAttributeByName("TestDuration").getSimpleValue();
+										if (testduration.equalsIgnoreCase("")){
+											Log.getInstance().logERROR(
+													"The test must have a duration","", test.getID());
+										}										
+										wftest.add(new Var("testduration",testduration));
+
+										String maxtimepercycle = test.getAttributeByName("MaxTimePerCycle").getSimpleValue();										
+										if (maxtimepercycle.equalsIgnoreCase("")){
+											Log.getInstance().logWARNING(
+													"The test does not have a max time per cycle value. By default, test duration will be used","", test.getID());
+											maxtimepercycle=testduration;
+										}
+										wftest.add(new Var("maxtimepercycle",maxtimepercycle));
+
+										String testrepetition = test.getAttributeByName("Repetition").getSimpleValue();
+										if (testrepetition.equalsIgnoreCase("")){
+											Log.getInstance().logWARNING(
+													"The test does not have a repetition value assigned. The default repetition is 1","", test.getID());
+											testrepetition="1";
+										}
+										wftest.add(new Var("testrepetition",testrepetition));
+
+										generateAutomataForWF(wftest,test,deplPackage);
+										DeploymentGenerator.generateDeploymentPack(deplPackage, wftest,bcg); // for JUnit class initialization per test
+
+									}
 									Hashtable<String,String> agentIds=DeploymentGenerator.generateDeploymentPack(deplPackage, depl,bcg); // for JUnit class initialization per test
 
-									GraphEntity test=tests.getElementAt(j);																											
 									testRepeat.add(new Var("test", Utils.replaceBadChars(test.getID())));
 									GraphEntity[] relatedComponents = Utils.getRelatedElements(test, "UMLRealizes", "UMLRealizestarget");
 									if (relatedComponents!=null && 
@@ -226,6 +264,218 @@ public class TestGenerator {
 	}
 
 
+	private void addEventInjection(Repeat regular, GraphEntity test) throws NotFound, NullEntity {
+		Vector<GraphEntity> injectionelements = Utils.getRelatedElementsVector(test, "TestEventInjection", "TestEventInjectionsource");
+		
+
+		for (GraphEntity injection:injectionelements){
+			String initperiod=injection.getAttributeByName("ProducedAtSimTime").getSimpleValue();
+			String finishingperiod=injection.getAttributeByName("FinishedAtSimTime").getSimpleValue();
+			String freq=injection.getAttributeByName("InsertionFrequency").getSimpleValue();
+			GraphEntity receiver = injection.getAttributeByName("ReceivedByAgentsInDeployment").getEntityValue();
+			GraphEntity newInfo = injection.getAttributeByName("NewInformation").getEntityValue();						
+			Vector<String> agentids=new Vector<String>();
+			agentids=getAgentIDS(receiver);
+			for (String aid:agentids){
+				Repeat eventInjection=new Repeat("eventinjection");
+				regular.add(eventInjection);
+				eventInjection.add(new Var("eventfreq",freq));
+				eventInjection.add(new Var("eventfinishingperiod",finishingperiod));
+				eventInjection.add(new Var("eventinitperiod",initperiod));
+				eventInjection.add(new Var("injectedagentid",aid));
+				eventInjection.add(new Var("injectedentity",newInfo.getID()));
+			}
+
+		}
+	}
+
+	public static Vector<String> getAgentIDS(GraphEntity depunit) throws NullEntity, NotFound {
+		Vector<String> aids=new Vector<String>();
+		int ninstances = Integer.parseInt(depunit
+				.getAttributeByName("NumberInstances")
+				.getSimpleValue());
+		GraphEntity atype = depunit.getAttributeByName(
+				"AgentTypeDeployed").getEntityValue();
+		for (int l = 0; l < ninstances; l++) {			
+
+			aids.add(Utils
+					.replaceBadChars(atype.getID())
+					+ "_" + l+Utils
+					.replaceBadChars(depunit.getID()));
+		}
+		return aids;
+	}
+
+	private void generateAutomataForWF(Repeat wftest, GraphEntity test, GraphEntity deplPackage) {
+		GraphCollection states;
+		try {
+			states = test.getAttributeByName("TestStates").getCollectionValue();
+			for (int k=0; k<states.size();k++){
+
+				GraphEntity currentState = states.getElementAt(k);
+				if (currentState.getType().equalsIgnoreCase("WFTestInitialState")){
+					Repeat initstateR=new Repeat("wfinitialstates");					
+					wftest.add(initstateR);
+					initstateR.add(new Var("initstatename","default_"+currentState.getID()));
+					generateInitialTransitionsForWFTest(wftest,currentState,deplPackage);
+				}
+				if (currentState.getType().equalsIgnoreCase("WFTestFinalState")){
+					Repeat initstateR=new Repeat("wffinalstates");
+					wftest.add(initstateR);
+					initstateR.add(new Var("finalstatename",currentState.getID()));	
+					//generateFinalTransitionsForWFTest(wftest,currentState,deplPackage);
+				}
+
+
+				generateTransitionsForWFTest(wftest, currentState,deplPackage);
+
+
+			}
+
+
+		} catch (NullEntity | NotFound e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private void generateFinalTransitionsForWFTest(Repeat wftest,
+			GraphEntity finalState, GraphEntity deplPackage) throws NullEntity, NotFound{
+		String currentStateID = finalState.getID();
+
+		String nextStateId = "default_"+finalState.getID();
+
+		if (lookForDU(finalState.getAttributeByName("PartID").getSimpleValue(),deplPackage)==null){
+			Log.getInstance()
+			.logERROR("wrong partID "+finalState.getAttributeByName("PartID").getSimpleValue()+" in state "+finalState.getID()+". Please, define a deployment " +
+					"package where one of the deployment units is linked to the deployment package with" +
+					" a definesdeployment relationships whose label matches this PartID.");
+		} else {
+			Vector<String> agentids=getAgentIdsForDeploymentPackage(
+					lookForDU(finalState.getAttributeByName("PartID").getSimpleValue(),deplPackage));
+			GraphEntity task=finalState.getAttributeByName("Task").getEntityValue();
+			for (String aid:agentids){
+				Repeat initstateR=new Repeat("wftransition");
+				wftest.add(initstateR);						
+				initstateR.add(new Var("firststate",currentStateID));						
+				initstateR.add(new Var("secondstate",nextStateId));
+				initstateR.add(new Var("transcondition",aid+"-"+task.getID()));
+				initstateR.add(new Var("wfagentid",aid));
+				initstateR.add(new Var("wftaskid",task.getID()));
+			}
+		}
+
+	}
+
+	private void generateTransitionsForWFTest(Repeat wftest,
+			GraphEntity currentState, GraphEntity deplPackage) throws NullEntity, NotFound {
+		String currentStateID = currentState.getID();
+		Vector<GraphRole> nextStates = Utils.getRelatedElementsRolesVector(currentState, "WFTestAfter", "WFTestAftertarget");		
+		for (GraphRole gr:nextStates){					
+			String nextStateId = gr.getPlayer().getID();
+			if (!nextStateId.equals(currentStateID)){
+				if (lookForDU(gr.getPlayer().getAttributeByName("PartID").getSimpleValue(),deplPackage)==null){
+					Log.getInstance()
+					.logERROR("wrong partID "+gr.getPlayer().getAttributeByName("PartID").getSimpleValue()+" in state "+nextStateId+". Please, define a deployment " +
+							"package where one of the deployment units is linked to the deployment package with" +
+							" a definesdeployment relationships whose label matches this PartID.");
+				} else {
+					Vector<String> agentids=getAgentIdsForDeploymentPackage(
+							lookForDU(gr.getPlayer().getAttributeByName("PartID").getSimpleValue(),deplPackage));
+					GraphEntity task=gr.getPlayer().getAttributeByName("Task").getEntityValue();
+					for (String aid:agentids){
+						Repeat initstateR=new Repeat("wftransition");
+						wftest.add(initstateR);						
+						initstateR.add(new Var("firststate",currentStateID));						
+						initstateR.add(new Var("secondstate",nextStateId));
+						initstateR.add(new Var("transcondition",aid+"-"+task.getID()));						
+						initstateR.add(new Var("wfagentid",aid));
+						initstateR.add(new Var("wftaskid",task.getID()));
+					}
+				}
+			}
+		}
+	}
+
+	private void generateInitialTransitionsForWFTest(Repeat wftest,
+			GraphEntity initialState, GraphEntity deplPackage) throws NullEntity, NotFound {
+		String currentStateID = "default_"+initialState.getID();
+
+		String nextStateId = initialState.getID();
+
+		if (lookForDU(initialState.getAttributeByName("PartID").getSimpleValue(),deplPackage)==null){
+			Log.getInstance()
+			.logERROR("wrong partID "+initialState.getAttributeByName("PartID").getSimpleValue()+" in state "+initialState.getID()+". Please, define a deployment " +
+					"package where one of the deployment units is linked to the deployment package with" +
+					" a definesdeployment relationships whose label matches this PartID.");
+		} else {
+			Vector<String> agentids=getAgentIdsForDeploymentPackage(
+					lookForDU(initialState.getAttributeByName("PartID").getSimpleValue(),deplPackage));
+			GraphEntity task=initialState.getAttributeByName("Task").getEntityValue();
+			for (String aid:agentids){
+				Repeat initstateR=new Repeat("wftransition");
+				wftest.add(initstateR);						
+				initstateR.add(new Var("firststate",currentStateID));						
+				initstateR.add(new Var("secondstate",nextStateId));
+				initstateR.add(new Var("transcondition",aid+"-"+task.getID()));
+				initstateR.add(new Var("wfagentid",aid));
+				initstateR.add(new Var("wftaskid",task.getID()));
+			}
+		}
+
+
+	}
+
+	private GraphEntity lookForDU(String simpleValue, GraphEntity deplPackage) {
+		GraphRelationship[] rels = Utils.getRelatedElementsRels(deplPackage, "DefinesDeployment", "DefinesDeploymentsource");
+		GraphEntity du=null;
+
+		for (GraphRelationship gr:rels){
+			try {
+				if (gr.getAttributeByName("Label")!=null 
+						&&gr.getAttributeByName("Label").getSimpleValue().equals(simpleValue)){				
+					du=gr.getRoles("DefinesDeploymentsource")[0].getPlayer();				
+				}
+			} catch (NullEntity e) {				
+			} catch (NotFound e) {				
+			}
+
+		}
+
+		return du;
+
+	}
+
+	private Vector<String> getAgentIdsForDeploymentPackage(
+			GraphEntity deploymentunit) {
+		Vector<String> agentids=new Vector<String>();
+		int ninstances;
+		try {
+			ninstances = Integer.parseInt(deploymentunit
+					.getAttributeByName("NumberInstances")
+					.getSimpleValue());
+			GraphEntity atype = deploymentunit.getAttributeByName(
+					"AgentTypeDeployed").getEntityValue();
+			for (int k=0;k<ninstances;k++){
+				String aid= Utils
+						.replaceBadChars(atype.getID())
+						+ "_" + k+Utils
+						.replaceBadChars(deploymentunit.getID());
+				agentids.add(aid);
+			}
+		} catch (NumberFormatException | NotFound e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullEntity e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return agentids;
+
+	}
+
 	/**
 	 * 
 	 * 
@@ -233,9 +483,9 @@ public class TestGenerator {
 	 * @throws NotInitialised
 	 */
 	public  void generateSimulationDeployment(Sequences p, BasicCodeGenerator bcg,Browser browser)
-	throws NotInitialised {
+			throws NotInitialised {
 		GraphEntity[] deployPacks = Utils
-		.generateEntitiesOfType("SimulationPackage",browser);
+				.generateEntitiesOfType("SimulationPackage",browser);
 		String port = "60000";
 		if (deployPacks.length > 0) {
 			for (int k = 0; k < deployPacks.length; k++) {
@@ -246,7 +496,7 @@ public class TestGenerator {
 					testingDepl.add(new Var("simulationconfig",Utils.replaceBadChars(deployPacks[k].getID())));
 
 					GraphAttribute deplPackageAttr = deployPacks[k]
-					                                             .getAttributeByName("SimulationDeployment");
+							.getAttributeByName("SimulationDeployment");
 
 
 					if (deplPackageAttr != null && deplPackageAttr.getEntityValue()!=null) {
@@ -272,8 +522,8 @@ public class TestGenerator {
 								Log.getInstance()
 								.logERROR(
 										"The simulation package has not defined a valid sim length. Its value is "+simLengthAttr.getSimpleValue()+" and it should be a " +
-										"positive integer. Please fill in the SimLength field of entity "+deployPacks[k].getID(),
-										"", deployPacks[k].getID());
+												"positive integer. Please fill in the SimLength field of entity "+deployPacks[k].getID(),
+												"", deployPacks[k].getID());
 							}
 
 						} else {
@@ -281,8 +531,8 @@ public class TestGenerator {
 							Log.getInstance()
 							.logERROR(
 									"The simulation package has not defined a valid sim length and should be a " +
-									"positive integer. Please fill in the SimLength field of entity "+deployPacks[k].getID(),
-									"", deployPacks[k].getID());
+											"positive integer. Please fill in the SimLength field of entity "+deployPacks[k].getID(),
+											"", deployPacks[k].getID());
 						}
 
 						// retrieve events to be inserted
@@ -319,7 +569,7 @@ public class TestGenerator {
 	private void defineObservedInformations(BasicCodeGenerator bcg,
 			GraphEntity[] deployPacks, int k, Repeat testingDepl,
 			Hashtable<String, String> agentIds, GraphAttribute extractedInfoAttr)
-	throws NullEntity, NotFound {
+					throws NullEntity, NotFound {
 		if (extractedInfoAttr!=null && extractedInfoAttr.getCollectionValue()!=null &&
 				extractedInfoAttr.getCollectionValue().size()>0){
 			for (int j=0;j<extractedInfoAttr.getCollectionValue().size();j++){

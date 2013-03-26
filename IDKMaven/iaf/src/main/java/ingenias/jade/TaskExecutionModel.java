@@ -168,6 +168,12 @@ public class TaskExecutionModel {
             ja.getMSM().remove(t.getConversationContext().getId());
             }
             }*/
+            EventManager.getInstance().taskExecutionFinished(ja.getLocalName(),
+                    ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),
+                    t); // before the change propagates to another agents, it is processed. If it was done afterwards, then there would be race conditions
+            // due to the fact that the other agent is running into another thread. Hence, the other agent tasks, may be executed before this event was processed,
+            // giving fake faults because the task sequence was correct
+            
             waitForCommsInitialization(ja,newInteractions); // Comms will be initialized when 
             // a state behavior is created for handling the comms. This happens in two steps.
             // First, the state machine is created and added to the comms manager queue.
@@ -178,9 +184,7 @@ public class TaskExecutionModel {
             msm = cmsm;
             markMentalStateAsChanged();
             
-            EventManager.getInstance().taskExecutionFinished(ja.getLocalName(),
-                    ja.getClass().getName().substring(0, ja.getClass().getName().indexOf("JADE")),
-                    t);
+          
         } else {
               msm.unlockChanges();
         }    
@@ -320,6 +324,24 @@ private ActiveConversation createNewInteractionWithCollaboratorsAutomaticallySet
         final JADEAgent ja, final Task t,
         final RuntimeConversation current) throws NoAgentsFound, WrongInteraction {
     ActiveConversation actconv;
+    
+    if (current.getOrganization()!=null && current.getGroup()!=null){
+    	String orgtype=current.getOrganization().getInstOrganization().getId();
+    	String grouptype=current.getGroup().getInstGroup().getId();
+    	String orgID=ja.getAM().getYellowPages().getRegisteredOrganizationsWithType(orgtype).firstElement();
+    	String groupid=ja.getAM().getYellowPages().getRegisteredGroupWithType(grouptype).firstElement();
+    	actconv = ja.getCM().launchProtocolAsInitiatorWithinOrganizationGroup(current.getInteraction().getId(),    
+    			orgID,groupid,
+                ja.getAM().getYellowPages());
+    } else
+    
+    if (current.getOrganization()!=null ){
+    	String orgtype=current.getOrganization().getInstOrganization().getId();
+    	String orgID=ja.getAM().getYellowPages().getRegisteredOrganizationsWithType(orgtype).firstElement();
+    	actconv = ja.getCM().launchProtocolAsInitiatorWithinOrganization(current.getInteraction().getId(),    
+    			orgID,
+                ja.getAM().getYellowPages());
+    } else
     // automatic selection of participants
     actconv = ja.getCM().launchProtocolAsInitiator(current.getInteraction().getId(),
             ja.getAM().getYellowPages());

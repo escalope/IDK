@@ -3,7 +3,273 @@
  @@@repeat id="testingnode"@@@
 
  @@@repeat id="testunit"@@@
-   @@@repeat id="deploynode"@@@
+ @@@repeat id="deploynode"@@@
+ 
+ 
+  @@@repeat id="regulartest"@@@
+   @@@saveto@@@
+  @@@file overwrite="no"@@@@@@v@@@jadeproject@@@/v@@@/src/test/javapermsrc/ingenias/testing/@@@v@@@test@@@/v@@@Test.java@@@/file@@@
+  @@@text@@@
+
+/*
+    Copyright (C) 2005 Jorge Gomez Sanz
+
+    This file is part of INGENIAS Agent Framework, an agent infrastructure linked
+    to the INGENIAS Development Kit, and availabe at http://grasia.fdi.ucm.es/ingenias or
+    http://ingenias.sourceforge.net. 
+
+    INGENIAS Agent Framework is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    INGENIAS Agent Framework is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with INGENIAS Agent Framework; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*/
+
+
+package ingenias.testing;
+
+import java.util.Vector;
+import static org.testng.AssertJUnit.assertTrue;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+
+import jade.core.*;
+import jade.wrapper.StaleProxyException;
+import ingenias.editor.entities.MentalEntity;
+import ingenias.jade.MentalStateManager;
+import ingenias.jade.graphics.MainInteractionManager;
+import ingenias.jade.mental.*;
+import ingenias.testing.MSMRepository;
+import ingenias.testing.TestUtils;
+import ingenias.testing.*;
+import ingenias.jade.IAFProperties;
+import ingenias.testing.BasicMASTest;
+import ingenias.exception.TimeOut;
+
+public class @@@v@@@test@@@/v@@@Test extends @@@v@@@testingconfig@@@/v@@@For@@@v@@@test@@@/v@@@ {
+
+
+	@BeforeMethod
+	@Override
+	public void agentSetup() throws StaleProxyException{
+		IAFProperties.setGraphicsOn(false); // disable graphics
+		super.agentSetup();
+		// customize MAS Setup method here
+	}
+
+
+	@AfterMethod
+	@Override
+	public void endTest() throws StaleProxyException{
+		super.endTest();
+		// customize MAS shutdown here. The default behavior is a kill signal sent to the main container
+	};
+
+  
+  
+  @Test
+  public void testDemo() throws TimeOut{			
+  			// Involved agent local ids for this test are:
+  			@@@repeat id="agents"@@@  			
+        	// -@@@v@@@agentid@@@/v@@@        	
+        	@@@/repeat@@@
+  			// write here the agent id whose 
+  			// mental state manager you want to get access to
+			// MentalStateManager msm = MSMRepository.getInstance().get("MY_AGENT_ID"); // provides access to the
+			// For current agents, these are the variables containing their mental states
+			
+			@@@repeat id="agents"@@@  			
+        	// -@@@v@@@agentid@@@/v@@@
+        	MentalStateManager msm@@@v@@@agentid@@@/v@@@=MSMRepository.getInstance().waitFor("@@@v@@@agentid@@@/v@@@");
+        	@@@/repeat@@@
+        	
+			// mental state of the agent
+			@@@repeat id="agents"@@@  			
+        	// -@@@v@@@agentid@@@/v@@@
+			Vector<MentalEntity> frameFactEntitiesBefore@@@v@@@agentid@@@/v@@@ = msm@@@v@@@agentid@@@/v@@@
+					.getMentalEntityByType("MY_TYPE"); // Obtains entities of a given type
+									
+			assertTrue("There should be two MY_TYPE entities",
+			   	frameFactEntitiesBefore@@@v@@@agentid@@@/v@@@.size()==2);
+			@@@/repeat@@@
+						
+			MainInteractionManager.goAutomatic(); // tells the agents to start working
+			TestUtils.doNothing(1000); // waits for 1 second
+			@@@repeat id="agents"@@@  	
+			Vector<MentalEntity> frameFactEntitiesAfter@@@v@@@agentid@@@/v@@@ = msm@@@v@@@agentid@@@/v@@@
+					.getMentalEntityByType("MY_TYPE");
+					
+			assertTrue("There should be no any MY_TYPE entities",
+			  frameFactEntitiesAfter@@@v@@@agentid@@@/v@@@.size() == 0); // checks that all entities of type MY_TYPE
+			  // do not exist 	
+			@@@/repeat@@@		
+  }
+}
+
+
+ @@@/text@@@
+ @@@/saveto@@@
+ @@@/repeat@@@	
+ 
+ 
+  @@@repeat id="wftest"@@@
+   @@@saveto@@@
+  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/src/test/javagensrc/ingenias/testing/@@@v@@@test@@@/v@@@TestIn@@@v@@@testingconfig@@@/v@@@.java@@@/file@@@
+  @@@text@@@
+
+/*
+    Copyright (C) 2005 Jorge Gomez Sanz
+
+    This file is part of INGENIAS Agent Framework, an agent infrastructure linked
+    to the INGENIAS Development Kit, and availabe at http://grasia.fdi.ucm.es/ingenias or
+    http://ingenias.sourceforge.net. 
+
+    INGENIAS Agent Framework is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    INGENIAS Agent Framework is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with INGENIAS Agent Framework; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*/
+
+
+package ingenias.testing;
+
+
+import static org.testng.AssertJUnit.assertTrue;
+import ingenias.exception.InvalidEntity;
+import ingenias.exception.TimeOut;
+import ingenias.jade.EventManager;
+import ingenias.jade.IAFProperties;
+import ingenias.jade.MentalStateManager;
+import ingenias.jade.graphics.MainInteractionManager;
+import ingenias.testing.traces.RetrieveExecutionData;
+import ingenias.testing.traces.TaskExecutionValidation;
+import jade.wrapper.StaleProxyException;
+import ingenias.jade.mental.*;
+
+import java.util.Vector;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class @@@v@@@test@@@/v@@@TestIn@@@v@@@testingconfig@@@/v@@@ extends @@@v@@@testingconfig@@@/v@@@For@@@v@@@test@@@/v@@@ {
+
+	@BeforeMethod
+	@Override
+	public void agentSetup() throws StaleProxyException{
+		IAFProperties.setGraphicsOn(false); // disable graphics
+		super.agentSetup();
+		// customize MAS Setup method here
+	}
+
+
+	@AfterMethod
+	@Override
+	public void endTest() throws StaleProxyException{
+		super.endTest();
+		// customize MAS shutdown here. The default behavior is a kill signal sent to the main container
+	};
+
+  
+  
+  @Test(invocationCount=@@@v@@@testrepetition@@@/v@@@,skipFailedInvocations=false)
+  public void testDemo() throws TimeOut{		
+  			@@@repeat id="agents"@@@  			
+        	// wait for @@@v@@@agentid@@@/v@@@ to initialise
+        	MentalStateManager msm@@@v@@@agentid@@@/v@@@=MSMRepository.getInstance().waitFor("@@@v@@@agentid@@@/v@@@");
+        	@@@/repeat@@@
+        	
+        	GenericAutomata ga=null;
+        	ga=new GenericAutomata();
+			@@@repeat id="wfinitialstates"@@@
+			ga.addInitialState("@@@v@@@initstatename@@@/v@@@");		
+			@@@/repeat@@@
+			
+			@@@repeat id="wffinalstates"@@@
+			ga.addFinalState("@@@v@@@finalstatename@@@/v@@@");		
+			@@@/repeat@@@
+			
+			@@@repeat id="wftransition"@@@
+			ga.addStateTransition("@@@v@@@firststate@@@/v@@@","@@@v@@@transcondition@@@/v@@@","@@@v@@@secondstate@@@/v@@@");
+			@@@/repeat@@@	
+			
+			TaskExecutionValidation tev=new TaskExecutionValidation(ga);
+        	@@@repeat id="wftransition"@@@
+        	tev.registerTask("@@@v@@@wfagentid@@@/v@@@","@@@v@@@wftaskid@@@/v@@@");
+        	@@@/repeat@@@	
+        		
+        	RetrieveExecutionData cwfe=new 	RetrieveExecutionData();
+        	EventManager.getInstance().register(cwfe);
+		long step=100;
+		long currentTime=0;
+		long finishedTime=0;
+		long duration=@@@v@@@testduration@@@/v@@@;
+		long maxtimepercycle=@@@v@@@maxtimepercycle@@@/v@@@;
+		@@@repeat id="eventinjection"@@@
+		finishedTime=Math.max(finishedTime,@@@v@@@eventfinishingperiod@@@/v@@@);
+		@@@/repeat@@@ 
+		MainInteractionManager.goAutomatic(); // tells the agents to start working			
+		while (currentTime<finishedTime){
+				try {
+					Thread.currentThread().sleep(step);
+					
+				} catch (InterruptedException e) {					
+					e.printStackTrace();
+				}
+				@@@repeat id="eventinjection"@@@
+				if (currentTime%@@@v@@@eventfreq@@@/v@@@ ==0 && currentTime<@@@v@@@eventfinishingperiod@@@/v@@@)
+					try{
+					 msm@@@v@@@injectedagentid@@@/v@@@.addMentalEntity(new @@@v@@@injectedentity@@@/v@@@(MentalStateManager.generateMentalEntityID()));
+					}  catch (InvalidEntity e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					}
+				@@@/repeat@@@
+				currentTime=currentTime+step;
+			}
+			
+			if (currentTime<duration){
+				TestUtils.doNothing(duration-currentTime); // waits for tasks to execute	
+			}
+					
+			
+			MainInteractionManager.goManual(); // now it commands to not execute more tasks		
+			EventManager.getInstance().unregister(cwfe);
+			
+		    Vector<String> counterExamples=tev.validatePartialTermination(cwfe,ga,maxtimepercycle);
+		    assertTrue("The execution does not match the expected sequences. I found the following counter examples "+counterExamples,counterExamples.isEmpty());		
+							
+  }
+}
+
+
+ @@@/text@@@
+ @@@/saveto@@@
+ @@@/repeat@@@	
+ 
  @@@saveto@@@
   @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/src/test/javagensrc/ingenias/testing/@@@v@@@testingconfig@@@/v@@@For@@@v@@@test@@@/v@@@.java@@@/file@@@
   @@@text@@@
@@ -37,14 +303,17 @@ package ingenias.testing;
 
 import java.util.Vector;
 
-import org.junit.Before;
-import org.junit.After;
-import org.junit.Test;
+import java.util.Vector;
+import static org.testng.AssertJUnit.assertTrue;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import jade.core.*;
 import jade.wrapper.StaleProxyException;
 import jade.wrapper.State;
-import ingenias.exception.TimeOut;
 import ingenias.jade.mental.*;
 import ingenias.jade.IAFProperties;
 import ingenias.jade.graphics.MainInteractionManager;
@@ -55,20 +324,22 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import ingenias.testing.BasicMASTest;
 
 
 
-
-public class @@@v@@@testingconfig@@@/v@@@For@@@v@@@test@@@/v@@@ extends @@@v@@@test@@@/v@@@Test{
+public class @@@v@@@testingconfig@@@/v@@@For@@@v@@@test@@@/v@@@ extends BasicMASTest{
 jade.wrapper.AgentContainer ac=null;
  
-  @Before
-  public void agentSetup() throws StaleProxyException, TimeOut{
+ 
+  public void agentSetup() throws StaleProxyException{
   
   
-        IAFProperties.setGraphicsOn(false); // disable graphics
+ //      IAFProperties.setGraphicsOn(false); // disable graphics
          MainInteractionManager.goManual(); // Stop task execution
          
+ 		 new File("target/jade").mkdirs();
+ 		
          new Thread(){
 			public void run(){
 				String[] args1=new String[4];
@@ -80,6 +351,7 @@ jade.wrapper.AgentContainer ac=null;
 			}
 		}.start();
 
+ 		
         // Get a hold on JADE runtime
         jade.core.Runtime rt = jade.core.Runtime.instance();
 
@@ -90,7 +362,7 @@ jade.wrapper.AgentContainer ac=null;
         Profile p = new ProfileImpl();
         p.setParameter("preload","a*");
         p.setParameter(Profile.MAIN_PORT, "@@@v@@@port@@@/v@@@");
-        p.setParameter(Profile.FILE_DIR, "jade/");
+        p.setParameter(Profile.FILE_DIR, "target/jade/");
         
         
         // Waits for JADE to start
@@ -140,8 +412,27 @@ jade.wrapper.AgentContainer ac=null;
 	   @@@/repeat@@@	   
 	   agc@@@v@@@agentid@@@/v@@@.putO2AObject(ment, false);
 	}
+
 	@@@/repeat@@@
-	
+		@@@repeat id="orgdescription"@@@	
+	{ 	   
+	   OrganizationDescription orgdesc=null;
+	   orgdesc=new OrganizationDescription();
+	   orgdesc.setOrgName("@@@v@@@orgname@@@/v@@@","@@@v@@@orgtype@@@/v@@@");
+	   Vector<String> groups=new Vector<String>(); 
+	   @@@repeat id="rootgroups"@@@
+	    orgdesc.addGroup("@@@v@@@groupname@@@/v@@@","@@@v@@@grouptype@@@/v@@@");	     
+	   @@@/repeat@@@	   	 
+	   @@@repeat id="subgroups"@@@
+	    orgdesc.addSubGroup("@@@v@@@rootgroup@@@/v@@@","@@@v@@@subgroup@@@/v@@@","@@@v@@@subgrouptype@@@/v@@@"); 
+	   @@@/repeat@@@	   	 
+	   @@@repeat id="groupmembership"@@@
+	    orgdesc.addMember("@@@v@@@rootgroup@@@/v@@@","@@@v@@@memberid@@@/v@@@"); 
+	   @@@/repeat@@@	 
+	   agc@@@v@@@agentid@@@/v@@@.putO2AObject(orgdesc, false);  	 
+	}	
+	@@@/repeat@@@
+		
         new Thread(){
           public void run(){
             try {
@@ -165,9 +456,9 @@ jade.wrapper.AgentContainer ac=null;
      }
      
      
-     @After
+   
 	public void endTest() throws StaleProxyException{
-	 ac.kill();	
+	  ac.kill();	// a kill action does make the test to look like failed in any case
 	};
 	
 
@@ -179,54 +470,5 @@ jade.wrapper.AgentContainer ac=null;
       @@@/repeat@@@    
     @@@/repeat@@@
     
-     @@@repeat id="testingnode"@@@
- 
-  @@@saveto@@@
-  @@@file overwrite="yes"@@@@@@v@@@jadeproject@@@/v@@@/src/test/javagensrc/ingenias/testing/@@@v@@@testingconfig@@@/v@@@Launcher.java@@@/file@@@
-  @@@text@@@
 
-/*
-    Copyright (C) 2005 Jorge Gomez Sanz
-
-    This file is part of INGENIAS Agent Framework, an agent infrastructure linked
-    to the INGENIAS Development Kit, and availabe at http://grasia.fdi.ucm.es/ingenias or
-    http://ingenias.sourceforge.net. 
-
-    INGENIAS Agent Framework is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    INGENIAS Agent Framework is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with INGENIAS Agent Framework; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
-
-package ingenias.testing;
-
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import ingenias.testing.*;
-
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
- @@@repeat id="testunit"@@@
- @@@repeat id="deploynode"@@@
-       @@@v@@@testingconfig@@@/v@@@For@@@v@@@test@@@/v@@@.class,
-@@@/repeat@@@
-@@@/repeat@@@                
-        EmptyTest.class
-        })
-public class @@@v@@@testingconfig@@@/v@@@Launcher {
-}
-
- @@@/text@@@
- @@@/saveto@@@
-  @@@/repeat@@@
 @@@/program@@@

@@ -186,7 +186,7 @@ MentalStateUpdater {
 		}
 
 		if (amm!=null){
-			amm.validate();
+			amm.invalidate();
 			amm.repaint();
 		}
 
@@ -263,12 +263,13 @@ MentalStateUpdater {
 		amm.getModel().addGraphModelListener(new GraphModelListener() {
 			public void graphChanged(GraphModelEvent arg0) {
 				modified = true;
+				MentalStateManager.this.amm.invalidate();
+				MentalStateManager.this.amm.repaint();
 				// System.err.println("Graph modified .....");
 			}
 		});
 		((Model) amm.getModel()).setAskMessages(false);
 		ids.gm.addModel(new Object[] {}, "mentalstate", amm);
-		MSMRepository.getInstance().register(agentName, this);
 		graphModificationThread.setName("Graph modification "+this.agentName);
 		graphModificationThread.start();
 	}
@@ -338,10 +339,10 @@ MentalStateUpdater {
 			((Model) amm.getModel()).setAskMessages(false);*/
 		//ids.gm.addModel(new Object[] {}, "mentalstate", amm);
 
-		if (agentName.indexOf("@")>=0)
+		/*if (agentName.indexOf("@")>=0)
 			MSMRepository.getInstance().register(agentName.substring(0,agentName.indexOf('@')), this);
 		else
-			MSMRepository.getInstance().register(agentName, this);
+			MSMRepository.getInstance().register(agentName, this);*/
 		graphModificationThread.setName("Graph modification "+this.agentName);
 		graphModificationThread.start();
 	}
@@ -665,10 +666,12 @@ MentalStateUpdater {
 	}
 
 	public synchronized void processNewEntitiesInConversations(){
+		Vector<Runnable> executedActions=new Vector<Runnable> ();
 		for (Runnable action:executeLaterActions){
 			action.run();
+			executedActions.add(action);
 		}
-		executeLaterActions.clear();
+		executeLaterActions.removeAll(executedActions);
 	}
 
 	public synchronized void addMentalEntityToConversation(final RuntimeConversation conv,final Vector<MentalEntity> mes)
@@ -677,24 +680,25 @@ MentalStateUpdater {
 		Runnable action=new Runnable(){
 			public void run(){
 			//	System.err.println(" inicio.................. "+agentName);
+				Vector<MentalEntity> localmes = (Vector<MentalEntity>) mes.clone();
 				checkLockChanges();
 			//	System.err.println(" .................. "+agentName);
-				Vector<MentalEntity> localmes = (Vector<MentalEntity>) mes.clone();
-				for (MentalEntity me:mes){				
+				
+				for (MentalEntity me:mes){									
 					conv.addCurrentContent(me);
 					//		DebugUtils.logEvent("MEAddedToConversation", new String[]{agentName,me.getType(),me.getId(),conv.getInteraction().getId(),conv.getConversationID()});
 					
 				}
 
 				resizeAllMentalEntities();
-				setModified();
+				setModified();// force a replan so that the MSP does execute these updates
 				graphModificationQueue.add(true);// This instruction forces to replan, since
 				// the MSP is listening to changes in the MSM
 
 			}
 		};
 		addActionsToProcessNewEntitiesInConversations(action);
-		setModified(); // force a replan so that the MSP does execute these updates
+	//	setModified(); 
 
 	}
 
@@ -1001,7 +1005,7 @@ MentalStateUpdater {
 					new RuntimeException("Object wait in a JADE behavior!!!");
 				}
 			} catch (ClassNotFoundException ex) {
-				Logger.getLogger(MentalStateManager.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(MentalStateManager.class.getName()).log(Level.SEVERE, "Could not find class "+trace.getClassName(), ex);
 			}
 		}
 		while (!changesAllowed && !Thread.currentThread().equals(ownerThread))

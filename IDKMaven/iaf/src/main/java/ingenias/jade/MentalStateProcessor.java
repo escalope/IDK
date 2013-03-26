@@ -42,6 +42,9 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Vector;
 
+import org.jgraph.event.GraphModelEvent;
+import org.jgraph.event.GraphModelListener;
+
 /**
  * This class implements the decision procedure associated to the agent. Basically, it decides which
  * tasks have to be added to the task queue of the agent. The decision algorithm is as follows:
@@ -92,22 +95,24 @@ public class MentalStateProcessor implements LocksListener {
 				
 				boolean repeat = true;
 
-				while (repeat) {
+				MSPState = AgentStates.WAIT_FOR_CHANGE_IN_MENTAL_STATE;
+				while (repeat) { 
+					
 					msm.processNewEntitiesInConversations();
-					repeat = isReplanRequestQueueEmpty();
+					repeat = isReplanRequestQueueEmpty(); // a plan request is triggered automatically when modifying the MS
 					try {
 						Thread.currentThread().sleep((long)(200*Math.random()));
 					} catch (InterruptedException e) {
 					}
 				}
+				MSPState = AgentStates.STARTING_DECISION;
+				doReplan.remove(0);
 
-
-				letAllJadeBehaviorsReevaluate();
-
-
-				if (ja.getMSM().modifiedSinceLastLecture())
+				//if (ja.getMSM().modifiedSinceLastLecture())
 				 replan();
-				
+				 
+				 letAllJadeBehaviorsReevaluate();// WARNING:you cannot do this inside the previous loop
+				 
 				// When simulation mode is on, the next task execution has to
 				// wait for the next cycle.
 				// isSimulationModelEnabled is invoked beforehand so as not
@@ -119,7 +124,8 @@ public class MentalStateProcessor implements LocksListener {
 				MSPState = AgentStates.DECISION_FINISHED;
 
 
-				processQueues();
+				processQueues(); // queue processing implies the execution of the first task. This execution triggers a replan, what enables the execution of
+				// the next task. 
 				
 			//	msm.checkNullFieldsInMentalEntities();
 
@@ -199,6 +205,15 @@ public class MentalStateProcessor implements LocksListener {
 		MSPRepository.getInstance().register(ja.getName().substring(0, ja.getName().indexOf('@')), this);
 		replanThread.setName("Replanning " + ja.getAID().getLocalName());
 		replanThread.start();
+		msm.registerChangeListener(new GraphModelListener() {
+			
+			@Override
+			public void graphChanged(GraphModelEvent e) {
+				lifeCycle();
+				
+			}
+		});
+				
 	}
 
 	public MentalStateProcessor(MentalStateManager msm, JADEAgent ja) {
@@ -212,6 +227,14 @@ public class MentalStateProcessor implements LocksListener {
 		MSPRepository.getInstance().register(ja.getName().substring(0, ja.getName().indexOf('@')), this);
 		replanThread.setName("Replanning " + ja.getAID().getLocalName());
 		replanThread.start();
+		msm.registerChangeListener(new GraphModelListener() {
+			
+			@Override
+			public void graphChanged(GraphModelEvent e) {
+				lifeCycle();
+				
+			}
+		});
 	}
 
 	public void lifeCycle() {
@@ -455,7 +478,7 @@ public class MentalStateProcessor implements LocksListener {
 		}
 	}
 
-	public synchronized void doReplan() {
+	public  void doReplan() {
 		doReplan.add(true);
 
 	}

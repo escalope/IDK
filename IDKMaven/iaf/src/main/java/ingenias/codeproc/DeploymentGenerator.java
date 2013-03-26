@@ -35,6 +35,9 @@ import ingenias.generator.datatemplate.Repeat;
 import ingenias.generator.datatemplate.Sequences;
 import ingenias.generator.datatemplate.Var;
 
+import jade.tools.logging.ontology.GetAllLoggers;
+
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -54,7 +57,7 @@ public class DeploymentGenerator {
 	public static void generateDeployment(Sequences p, BasicCodeGenerator bcg, Browser browser) throws NotInitialised {
 
 		GraphEntity[] deployPacks = Utils
-		.generateEntitiesOfType("DeploymentPackage",browser);
+				.generateEntitiesOfType("DeploymentPackage",browser);
 
 		if (deployPacks.length > 0) {
 			for (int k = 0; k < deployPacks.length; k++) {
@@ -79,9 +82,9 @@ public class DeploymentGenerator {
 			Repeat agentsR = new Repeat("agents");
 			depl.add(agentsR);
 			agentsR.add(new Var("agentid", Utils.replaceBadChars(agents[k]
-			                                                            .getID())));
+					.getID())));
 			agentsR.add(new Var("agenttype", Utils.replaceBadChars(agents[k]
-			                                                              .getID())));
+					.getID())));
 
 		}
 
@@ -94,23 +97,23 @@ public class DeploymentGenerator {
 		Hashtable<String,String> agentIds=new Hashtable<String,String>();
 		try {
 			GraphCollection params = deploymentPack.getAttributeByName(
-			"Parameters").getCollectionValue();
+					"Parameters").getCollectionValue();
 			for (int j = 0; j < params.size(); j++) {
 				GraphEntity elem = params.getElementAt(j);
 				try {
 					if (elem.getAttributeByName("Name") != null
 							&& elem.getAttributeByName("Name")
 							.getSimpleValue().equalsIgnoreCase(
-							"port")) {
+									"port")) {
 						port = elem.getAttributeByName("Value")
-						.getSimpleValue();
+								.getSimpleValue();
 					}
 					if (elem.getAttributeByName("Name") != null
 							&& elem.getAttributeByName("Name")
 							.getSimpleValue().equalsIgnoreCase(
-							"memory")) {
+									"memory")) {
 						memory = elem.getAttributeByName("Value")
-						.getSimpleValue();
+								.getSimpleValue();
 					}
 
 				} catch (NotFound e) {
@@ -140,7 +143,9 @@ public class DeploymentGenerator {
 			HashSet<GraphEntity> depunits = new HashSet<GraphEntity> (Utils
 					.getRelatedElementsVector(deploymentPack,
 							"DefinesDeployment",
-					"DefinesDeploymentsource"));
+							"DefinesDeploymentsource"));
+
+			depunits.addAll(getAssociatedDeploymentUnitsThroughOrganizations(deploymentPack));
 			GraphCollection dplPackCol = deploymentPack.getAttributeByName("AgentsDeployed").getCollectionValue();
 			for (int k=0;k<dplPackCol.size();k++){
 				depunits.add(dplPackCol.getElementAt(k));
@@ -148,9 +153,11 @@ public class DeploymentGenerator {
 			//System.err.println("Deployment units "+depunits);
 
 			for (GraphEntity depunit : depunits) {
-				if (depunit.getType().equals("DeploymentUnitByType")) {
+				if (depunit.getType().equals("DeploymentUnitByType") ||
+						depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeMSEntity") ||
+						depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeEnumInitMS")){			
 					GraphEntity atype = depunit.getAttributeByName(
-					"AgentTypeDeployed").getEntityValue();
+							"AgentTypeDeployed").getEntityValue();
 					if (depunit
 							.getAttributeByName("NumberInstances")==null ){
 						bcg.fatalError();
@@ -181,7 +188,14 @@ public class DeploymentGenerator {
 									rolesR.add(new Var("roleid", Utils
 											.replaceBadChars(role.getID())));
 								}
-								
+								if (depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeMSEntity")) {
+									processDeploymentUnitByTypeMSEntity(agentsR, depunit);
+								}
+								if (depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeEnumInitMS")) {
+									processDeploymentUnitBypeEnumInitMS(agentsR, depunit);
+								}
+								produceInitialOrganizationStructure(agentsR,depunit);
+
 							}
 						} catch (NumberFormatException nfe){
 							bcg.fatalError();
@@ -190,13 +204,8 @@ public class DeploymentGenerator {
 						}
 					}
 				}
-				if (depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeMSEntity")) {
-					processDeploymentUnitByTypeMSEntity(depl, depunit,agentIds);
-				}
-				if (depunit.getType().equalsIgnoreCase("DeploymentUnitByTypeEnumInitMS")) {
-					processDeploymentUnitBypeEnumInitMS(depl, depunit,agentIds);
-				}
-				
+
+
 			}
 
 		} catch (NullEntity e) {
@@ -209,75 +218,149 @@ public class DeploymentGenerator {
 		return agentIds;
 	}
 
-	private static void processDeploymentUnitBypeEnumInitMS(Repeat depl,
-			GraphEntity depunit, Hashtable<String, String> agentIds) throws NullEntity, NotFound {
-		//System.err.println("by enum");
-		GraphEntity atype = depunit.getAttributeByName(
-		"AgentTypeDeployed").getEntityValue();
-		int ninstances = Integer.parseInt(depunit
-				.getAttributeByName("NumberInstances")
-				.getSimpleValue());
-		for (int l = 0; l < ninstances; l++) {
-			Repeat agentsR = new Repeat("agents");
-			depl.add(agentsR);
-			agentsR.add(new Var("agentid", Utils
-					.replaceBadChars(atype.getID())
-					+ "_" + l+Utils
-					.replaceBadChars(depunit.getID())));
-			agentIds.put( Utils
-					.replaceBadChars(atype.getID())
-					+ "_" + l+Utils
-					.replaceBadChars(depunit.getID()),depunit.getID());
-			agentsR.add(new Var("agenttype", Utils
-					.replaceBadChars(atype.getID())));
 
-			GraphCollection mentalSpecCollection = depunit
-			.getAttributeByName("InitialState")
-			.getCollectionValue();
-			for (int m = 0; m < mentalSpecCollection.size(); m++) {
-				GraphEntity mInstance = mentalSpecCollection
-				.getElementAt(m);
-				processMentalInstance(agentsR, mInstance);
 
+	private static HashSet<GraphEntity> getAssociatedDeploymentUnitsThroughOrganizations(
+			GraphEntity deploymentPack) throws NullEntity {
+		HashSet<GraphEntity> deploymentUnits=new HashSet<GraphEntity>();
+		Vector<GraphEntity> connectedElementsToDeploymentPack = Utils.getRelatedElementsVector(deploymentPack, "DefinesDeployment", "DefinesDeploymentsource");
+		for (GraphEntity connected:connectedElementsToDeploymentPack){
+			if (connected.getType().equalsIgnoreCase("OrgDeploymentUnit")){
+				deploymentUnits.addAll(findAssociatedDeplUnitsToOrgs(connected));
+			}
+		}
+		return deploymentUnits;
+	}
+
+	private static Collection<? extends GraphEntity> findAssociatedDeplUnitsToOrgs(
+			GraphEntity org) throws NullEntity {
+		if (org.getType().equalsIgnoreCase("OrgDeploymentUnit")){
+			Vector<GraphEntity> belongingGroups = Utils.getRelatedElementsVector(org, "OrgDplmnt", "OrgDplmnttarget");			
+			HashSet<GraphEntity> associatedDplUnit=new HashSet<GraphEntity>();
+			for (GraphEntity group: belongingGroups){
+				associatedDplUnit.addAll(findAssociatedDeplUnitsToOrgs(group));
+			}
+			return associatedDplUnit;
+		}
+		if (org.getType().equalsIgnoreCase("GroupDeploymentUnit")){
+			Vector<GraphEntity> belongingToGroups = Utils.getRelatedElementsVector(org, "GroupDplmnt", "GroupDplmnttarget");
+			belongingToGroups.remove(org);
+			Vector<GraphEntity> groupMembership = Utils.getRelatedElementsVector(org, "MemberDplmnt", "MemberDplmnttarget");
+			HashSet<GraphEntity> associatedDplUnit=new HashSet<GraphEntity>();
+			associatedDplUnit.addAll(groupMembership);
+			for (GraphEntity group:belongingToGroups){
+				associatedDplUnit.addAll(findAssociatedDeplUnitsToOrgs(group));
+			}
+			return associatedDplUnit;
+		}
+		return new HashSet<GraphEntity>();
+	}
+
+	public static void produceInitialOrganizationStructure(Repeat agentsR,
+			GraphEntity depunit) throws NullEntity {
+		Vector<GraphEntity> belongingToGroups = Utils.getRelatedElementsVector(depunit, "MemberDplmnt", "MemberDplmntsource");
+		for (GraphEntity group:belongingToGroups){
+			HashSet<GraphEntity> orgs= findOrganization(group, new HashSet<GraphEntity>());
+			for (GraphEntity org:orgs){
+				produceOrganizationDefinition(agentsR,org);
+			}
+		}		
+	}
+
+	private static void produceOrganizationDefinition(Repeat agentsR,
+			GraphEntity org) throws NullEntity {
+		Repeat orgR=new Repeat("orgdescription");
+		agentsR.add(orgR);
+		try {
+			orgR.add(new Var("orgname",org.getAttributeByName("InstanceName").getSimpleValue()));
+			orgR.add(new Var("orgtype",org.getAttributeByName("InstOrganization").getEntityValue().getID()));
+			Vector<GraphEntity> belongingGroups = Utils.getRelatedElementsVector(org, "OrgDplmnt", "OrgDplmnttarget");			
+			HashSet<GraphEntity> flattenedGroups=new HashSet<GraphEntity>();
+			for (GraphEntity parentGroup:belongingGroups){
+				Repeat rootGroupsR=new Repeat("rootgroups");
+				orgR.add(rootGroupsR);
+				rootGroupsR.add(new Var("groupname",parentGroup.getAttributeByName("InstanceName").getSimpleValue()));
+				rootGroupsR.add(new Var("grouptype",parentGroup.getAttributeByName("InstGroup").getEntityValue().getID()));				
+				produceGroupStructure(orgR,parentGroup,flattenedGroups);				
+			}		
+		} catch (NotFound e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private static void produceGroupStructure(Repeat orgR,
+			GraphEntity parentGroup,HashSet<GraphEntity> result) throws NullEntity, NotFound {
+		Vector<GraphEntity> belongingToGroups = Utils.getRelatedElementsVector(parentGroup, "GroupDplmnt", "GroupDplmnttarget");
+		Vector<GraphEntity> groupMembership = Utils.getRelatedElementsVector(parentGroup, "MemberDplmnt", "MemberDplmnttarget");
+		for (GraphEntity dplUnit:groupMembership){
+			Repeat groupmembership=new Repeat("groupmembership");
+			orgR.add(groupmembership);
+			Vector<String> ids = TestGenerator.getAgentIDS(dplUnit);
+			for (String id:ids){
+				groupmembership.add(new Var("memberid",id));
+				groupmembership.add(new Var("rootgroup",parentGroup.getAttributeByName("InstanceName").getSimpleValue()));
+				groupmembership.add(new Var("rootgrouptype",parentGroup.getAttributeByName("InstGroup").getEntityValue().getID()));
+			}
+		}
+		for (GraphEntity group:belongingToGroups){
+			if (!result.contains(group)){
+				Repeat subGroupsR=new Repeat("subgroups");
+				orgR.add(subGroupsR);
+				subGroupsR.add(new Var("rootgroup",parentGroup.getAttributeByName("InstanceName").getSimpleValue()));
+				subGroupsR.add(new Var("subgroup",group.getAttributeByName("InstanceName").getSimpleValue()));
+				subGroupsR.add(new Var("subgrouptype",group.getAttributeByName("InstGroup").getEntityValue().getID()));
+				result.add(group);
+				produceGroupStructure(orgR,group,result);
 			}
 		}
 	}
 
-	private static void processDeploymentUnitByTypeMSEntity(Repeat depl,
-			GraphEntity depunit, Hashtable<String, String> agentIds) throws NullEntity, NotFound {
-		//System.err.println("by ms entity");
-		GraphEntity atype = depunit.getAttributeByName(
-		"AgentTypeDeployed").getEntityValue();
-		int ninstances = Integer.parseInt(depunit
-				.getAttributeByName("NumberInstances")
-				.getSimpleValue());
-		for (int l = 0; l < ninstances; l++) {
-			Repeat agentsR = new Repeat("agents");
-			depl.add(agentsR);
-			agentsR.add(new Var("agentid", Utils
-					.replaceBadChars(atype.getID())
-					+ "_" + l+Utils
-					.replaceBadChars(depunit.getID())));
-			agentIds.put( Utils
-					.replaceBadChars(atype.getID())
-					+ "_" + l+Utils
-					.replaceBadChars(depunit.getID()),depunit.getID());
-			agentsR.add(new Var("agenttype", Utils
-					.replaceBadChars(atype.getID())));
 
-			GraphEntity mentalEntity = depunit
-			.getAttributeByName("InitialState")
-			.getEntityValue();
-			Vector<GraphEntity> containedElements = Utils.getRelatedElementsVector(mentalEntity,"acontainsme","acontainsmetarget");
-			for (GraphEntity ge:containedElements){
-				if (ge.getType().equalsIgnoreCase("MentalInstanceSpecification")){									 								
-					GraphEntity mInstance = ge;
-					processMentalInstance(agentsR,
-							mInstance);
-				}
+	private static HashSet<GraphEntity> findOrganization(GraphEntity group, HashSet<GraphEntity> visited) throws NullEntity {
+		Vector<GraphEntity> belongingToGroups = Utils.getRelatedElementsVector(group, "GroupDplmnt", "GroupDplmntsource");
+		Vector<GraphEntity> belongingToOrgs = Utils.getRelatedElementsVector(group, "OrgDplmnt", "OrgDplmntsource");
+		belongingToGroups.remove(group);
+		belongingToGroups.removeAll(visited);
+		HashSet<GraphEntity> organizations=new HashSet<GraphEntity>(belongingToOrgs);		
+		if (belongingToGroups.size()>0) {			
+			visited.addAll(belongingToGroups);
+			for (GraphEntity parentGroup:belongingToGroups){
+				organizations.addAll(findOrganization(parentGroup, visited));
 			}
+		}		
+		return organizations;		
+	}
 
-		}
+	private static void processDeploymentUnitBypeEnumInitMS(Repeat agentsR,
+			GraphEntity depunit) throws NullEntity, NotFound {
+		//System.err.println("by enum");
+		GraphCollection mentalSpecCollection = depunit
+				.getAttributeByName("InitialState")
+				.getCollectionValue();
+		for (int m = 0; m < mentalSpecCollection.size(); m++) {
+			GraphEntity mInstance = mentalSpecCollection
+					.getElementAt(m);
+			processMentalInstance(agentsR, mInstance);
+
+		}		
+	}
+
+	private static void processDeploymentUnitByTypeMSEntity(Repeat agentsR,
+			GraphEntity depunit) throws NullEntity, NotFound {
+		//System.err.println("by ms entity");
+		GraphEntity mentalEntity = depunit
+				.getAttributeByName("InitialState")
+				.getEntityValue();
+		Vector<GraphEntity> containedElements = Utils.getRelatedElementsVector(mentalEntity,"acontainsme","acontainsmetarget");
+		for (GraphEntity ge:containedElements){
+			if (ge.getType().equalsIgnoreCase("MentalInstanceSpecification")){									 								
+				GraphEntity mInstance = ge;
+				processMentalInstance(agentsR,
+						mInstance);
+			}
+		}		
 	}
 
 
@@ -285,13 +368,13 @@ public class DeploymentGenerator {
 	private static void processMentalInstance(Repeat agentsR,
 			GraphEntity mInstance) throws NullEntity, NotFound {
 		GraphEntity mInstanceType = mInstance
-		.getAttributeByName("InstanceType")
-		.getEntityValue();
+				.getAttributeByName("InstanceType")
+				.getEntityValue();
 		GraphCollection slotValues = mInstance
-		.getAttributeByName("SlotsValues")
-		.getCollectionValue();
+				.getAttributeByName("SlotsValues")
+				.getCollectionValue();
 		Repeat mentalentitiesR = new Repeat(
-		"initialentities");
+				"initialentities");
 		agentsR.add(mentalentitiesR);
 		mentalentitiesR.add(new Var(
 				"mentalentityname",
@@ -309,23 +392,23 @@ public class DeploymentGenerator {
 			Repeat mentalentitiesR) throws NullEntity, NotFound {
 		for (int n = 0; n < slotValues.size(); n++) {
 			Repeat slotvaluesR = new Repeat(
-			"slotvalue");
+					"slotvalue");
 			mentalentitiesR.add(slotvaluesR);
 
 			GraphEntity slotValueSpec = slotValues
-			.getElementAt(n);
+					.getElementAt(n);
 			GraphEntity slot = slotValueSpec
-			.getAttributeByName("Slot")
-			.getEntityValue();
+					.getAttributeByName("Slot")
+					.getEntityValue();
 			String value = slotValueSpec
-			.getAttributeByName(
-			"Value")
-			.getSimpleValue();
+					.getAttributeByName(
+							"Value")
+							.getSimpleValue();
 			slotvaluesR.add(new Var("slotname",
 					Utils.replaceBadChars(slot
 							.getAttributeByName(
-							"Name")
-							.getSimpleValue())));
+									"Name")
+									.getSimpleValue())));
 			slotvaluesR.add(new Var("slotvalue",
 					value));
 

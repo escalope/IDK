@@ -36,6 +36,7 @@ import ingenias.jade.comm.CustomLocks;
 import ingenias.jade.comm.LocksManager;
 import ingenias.jade.comm.StateBehavior;
 import ingenias.jade.comm.StateBehaviorChangesListener;
+import ingenias.jade.components.Application;
 import ingenias.jade.components.ApplicationManager;
 import ingenias.jade.components.OutputEntity;
 import ingenias.jade.components.Task;
@@ -48,6 +49,7 @@ import ingenias.jade.graphics.AgentModelMarqueeHandlerIAF;
 import ingenias.jade.graphics.AgentModelPanelIAF;
 import ingenias.jade.graphics.MainInteractionManager;
 import ingenias.jade.mental.Agent_data;
+import ingenias.jade.mental.OrganizationDescription;
 import ingenias.testing.DebugUtils;
 import ingenias.testing.MSMRepository;
 import ingenias.testing.MSPRepository;
@@ -287,6 +289,7 @@ abstract public class JADEAgent extends Agent{
 		} catch (InvalidEntity e) {			
 			e.printStackTrace();
 		}
+		MSMRepository.getInstance().register(this.getLocalName(), getMSM());
 		DebugUtils.logEvent("AgentInitialised", new String[]{getLocalName()});
 	}
 
@@ -479,8 +482,14 @@ abstract public class JADEAgent extends Agent{
 			do {
 				queue=(MentalEntity)this.getO2AObject();
 				if (queue!=null){
-					try {
+					try {						
 						this.msm.addMentalEntity(queue);
+						if (queue instanceof OrganizationDescription){
+							OrganizationDescription orgdesc=(OrganizationDescription)queue;
+							YellowPages yp = (YellowPages) getAM().getApplication("YellowPages");
+							yp.processOrganization(orgdesc);
+							
+						}
 					} catch (InvalidEntity e) {
 
 						e.printStackTrace();

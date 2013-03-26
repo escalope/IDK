@@ -37,6 +37,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.*;
 import java.net.UnknownHostException;
 
 import jade.core.*;
@@ -135,6 +136,24 @@ public class Main@@@v@@@node@@@/v@@@ProdStandAlone {
 	   @@@/repeat@@@	   
 	   agc@@@v@@@agentid@@@/v@@@.putO2AObject(ment, false);
 	}
+	@@@/repeat@@@
+@@@repeat id="orgdescription"@@@	
+	{ 	   
+	   OrganizationDescription orgdesc=null;
+	   orgdesc=new OrganizationDescription();
+	   orgdesc.setOrgName("@@@v@@@orgname@@@/v@@@","@@@v@@@orgtype@@@/v@@@");
+	   Vector<String> groups=new Vector<String>(); 
+	   @@@repeat id="rootgroups"@@@
+	    orgdesc.addGroup("@@@v@@@groupname@@@/v@@@","@@@v@@@grouptype@@@/v@@@");	     
+	   @@@/repeat@@@	   	 
+	   @@@repeat id="subgroups"@@@
+	    orgdesc.addSubGroup("@@@v@@@rootgroup@@@/v@@@","@@@v@@@subgroup@@@/v@@@","@@@v@@@subgrouptype@@@/v@@@"); 
+	   @@@/repeat@@@	   	 
+	   @@@repeat id="groupmembership"@@@
+	    orgdesc.addMember("@@@v@@@rootgroup@@@/v@@@","@@@v@@@memberid@@@/v@@@"); 
+	   @@@/repeat@@@	 
+	   agc@@@v@@@agentid@@@/v@@@.putO2AObject(orgdesc, false);  	 
+	}	
 	@@@/repeat@@@
 	
         new Thread(){

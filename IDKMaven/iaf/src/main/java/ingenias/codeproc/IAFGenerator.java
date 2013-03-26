@@ -23,19 +23,32 @@
 package ingenias.codeproc;
 
 import ingenias.codeproc.InteractionGeneration;
+import ingenias.codeproc.macros.MacroTaskPConnects;
+import ingenias.codeproc.macros.MacroWorkflowsToInteractions;
 import ingenias.editor.Log;
 import ingenias.editor.ModelJGraph;
 import ingenias.editor.ProjectProperty;
+import ingenias.editor.persistence.PersistenceManager;
+import ingenias.exception.InvalidAttribute;
+import ingenias.exception.InvalidColection;
+import ingenias.exception.InvalidEntity;
+import ingenias.exception.InvalidGraph;
 import ingenias.exception.NotFound;
 import ingenias.exception.NotInitialised;
 import ingenias.exception.NullEntity;
+import ingenias.exception.TransformationException;
 import ingenias.generator.browser.Browser;
 import ingenias.generator.browser.Graph;
 import ingenias.generator.browser.GraphAttribute;
+import ingenias.generator.browser.GraphAttributeFactory;
 import ingenias.generator.browser.GraphCollection;
 import ingenias.generator.browser.GraphEntity;
+import ingenias.generator.browser.GraphEntityFactory;
+import ingenias.generator.browser.GraphFactory;
 import ingenias.generator.browser.GraphRelationship;
+import ingenias.generator.browser.GraphRelationshipFactory;
 import ingenias.generator.browser.GraphRole;
+import ingenias.generator.browser.RelationshipFactory;
 import ingenias.generator.datatemplate.Repeat;
 import ingenias.generator.datatemplate.Sequences;
 import ingenias.generator.datatemplate.Var;
@@ -64,6 +77,7 @@ import java.util.Vector;
 
 import javax.swing.SwingUtilities;
 
+import org.apache.tools.ant.taskdefs.Taskdef;
 import org.bouncycastle.jce.provider.JDKMessageDigest.MD5;
 import org.fest.swing.awt.AWT;
 
@@ -175,13 +189,13 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 		pp.add(new ingenias.editor.ProjectProperty(this.getName(), "jadeout", "JADE generated output folder",
 				"gensrc",
-		"The folder that will hold generated JADE agents"));
+				"The folder that will hold generated JADE agents"));
 		pp.add(new ingenias.editor.ProjectProperty(this.getName(), "jadeperm", "JADE generate only once folder",
 				"permsrc",
-		"The folder that will hold generated elements that should not be regenerated"));
+				"The folder that will hold generated elements that should not be regenerated"));
 		pp.add(new ingenias.editor.ProjectProperty(this.getName(), "proysrc", "Main source folder for the project",
 				"src",
-		"The folder containing the sources of the project"));
+				"The folder containing the sources of the project"));
 
 		/*pp.add(new ingenias.editor.ProjectProperty(this.getName(), "producecode", "Triggers the use of code components",
 				"yes",
@@ -295,27 +309,40 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	public Sequences generate() {
 		this.error = false;
 		Sequences p = new Sequences();
+
+		p.addVar(new Var("jadeout",
+				this.getProperty("jadeout").value));
+		p.addVar(new Var("jadeperm",
+				this.getProperty("jadeperm").value));
+		p.addVar(new Var("proysrc",
+				this.getProperty("proysrc").value));
+		p.addVar(new Var("jadeproject",
+				this.getProperty("jadeproject").value));
+
+		processMacros();	
+
+		Hashtable components;
 		try {
-			p.addVar(new Var("jadeout",
-					this.getProperty("jadeout").value));
-			p.addVar(new Var("jadeperm",
-					this.getProperty("jadeperm").value));
-			p.addVar(new Var("proysrc",
-					this.getProperty("proysrc").value));
-			p.addVar(new Var("jadeproject",
-					this.getProperty("jadeproject").value));
-			Hashtable components = this.getComponents();
+			components = this.getComponents();
+
 			Hashtable filesapp = this.getFileAppAssociation();
+
 			this.generateAgentXML(p, filesapp, components);
+
 			this.generateTaskXML(p);
+
 			this.generateFactXML(p);
+
 			this.generateEventXML(p);
+
 			this.generateAppsXML(p);
+
 			TestGenerator tg=new TestGenerator(getBrowser()); 
 			DeploymentGenerator.generateDeployment(p,this,getBrowser());
 			tg.generateTestingDeployment(p,this,getBrowser());
 			tg.generateSimulationDeployment(p,this,getBrowser());
 			tg.generateTests(p,this);
+
 			if (!getError()) {
 				this.ig.generateActorActions(p);
 			}
@@ -324,12 +351,35 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			fos.write(p.toString().getBytes());
 			fos.close();
 
-		} catch (Exception exp) {
-			exp.printStackTrace();
+			File processedMacrosFile = File.createTempFile("ing", "_processedmacros.xml");
+			PersistenceManager pers=new PersistenceManager();
+			pers.save(processedMacrosFile, this.getBrowser().getState());
+		} catch (NotFound | NullEntity | NotInitialised e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
 		return p;
 	}
+
+
+
+	private void processMacros(){
+
+		try {
+			new MacroWorkflowsToInteractions(browser).apply();
+			new MacroTaskPConnects(browser).apply();
+		} catch (TransformationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+
+
 
 	/**
 	 * It obtains information about the association between the entities and actual files. It is prepared to
@@ -551,7 +601,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			//generateFactSlots(r, ffacts[k]);
 			p.addRepeat(r);
 		}
-		
+
 		ffacts = Utils.generateEntitiesOfType("ApplicationEvent",getBrowser());
 		for (int k = 0; k < ffacts.length; k++) {
 			Repeat r = new Repeat("events");
@@ -748,10 +798,10 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	private Vector getAgentGoals(GraphEntity agent) throws NullEntity {
 		Vector directGoals = Utils.getRelatedElementsVector(agent,
 				"GTPursues",
-		"GTPursuestarget");		
+				"GTPursuestarget");		
 		Vector<GraphEntity> rolesPlayed = Utils.getRelatedElementsVector(agent,
 				"WFPlays",
-		"WFPlaystarget");
+				"WFPlaystarget");
 		Vector<GraphEntity> additionalRoles=new Vector<GraphEntity>();
 		for (GraphEntity ge:rolesPlayed){
 			additionalRoles.addAll(Utils.getAscendantsOfRole(ge));
@@ -762,7 +812,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			GraphEntity role = (GraphEntity) enumeration.nextElement();
 			Vector goalsPursuedByRoles = Utils.getRelatedElementsVector(role,
 					"GTPursues",
-			"GTPursuestarget");
+					"GTPursuestarget");
 			directGoals.addAll(goalsPursuedByRoles);
 		}
 
@@ -787,7 +837,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 		Vector satisfyingTasks = Utils.getRelatedElementsVector(goal,
 				"GTSatisfies",
-		"GTSatisfiessource");
+				"GTSatisfiessource");
 
 		Vector solvingTasks = new Vector();
 		enumeration = satisfyingTasks.elements();
@@ -981,7 +1031,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				Set<GraphRole> inputs = new HashSet(this.getNonConsumableInput(task)); // To remove repeated items
 				Vector<GraphEntity> cancelledConversations = Utils.getRelatedElementsVector(task,
 						"WFCancels",
-				"WFCancelstarget");
+						"WFCancelstarget");
 				Vector<GraphRole> consumedInput = this.getInputsToRemoveAfterRead(task);
 				for (GraphEntity conv : cancelledConversations) {
 					Repeat cancelledConv = new Repeat("cancelconversation");
@@ -1172,6 +1222,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 							Var conversation = new Var("interid", Utils.replaceBadChars(intcontext.getID()));
 							interactioncontext.add(conversation);
 							taskRepeat.add(interactioncontext);
+
+
 						}
 					}
 				}
@@ -1198,6 +1250,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 						Repeat expectedOutput = new Repeat("expectedOutputWF");
 						expectedOutput.add(new Var("outputtype", Utils.replaceBadChars(fact.getID())));
 						expectedOutput.add(new Var("outputid", Utils.replaceBadChars(fact.getID())));
+						
+
 						expectedoutputalternatives.add(expectedOutput);
 					} else {
 						Log.getInstance().logERROR("Task "+task.getID()+" cannot wfproduce anything different from a framefact, generalevent or applicationeventslots", "", task.getID());
@@ -1212,6 +1266,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 					GraphEntity fact = (GraphEntity) iterator.next();
 					if (fact.getType().equalsIgnoreCase("Conversation")) {
 						Repeat interactions = new Repeat("interactions");
+						taskRepeat.add(interactions);
 						Repeat expectedOutput = new Repeat("expectedOutputMS");
 						try {
 							expectedOutput.add(new Var("outputtype", "RuntimeConversation"));
@@ -1222,6 +1277,36 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 							interactions.add(conversation);
 							expectedOutput.add(conversation);
 							generateColaborators(interaction, interactions);
+						
+								Vector<GraphEntity> orgconstraints = Utils.getRelatedElementsVector(interaction, "OHasWF", "OHasWFsource");
+								if (orgconstraints.size()>1){
+									Log.getInstance().logERROR("Interaction "+interaction.getID()+" is associated to more than one organizatoin or group"+
+											"Registered associations are "+orgconstraints
+											+". Please, do associate with only one group or organization","",interaction.getID());
+									this.fatalError();
+								} else {
+									if (!orgconstraints.isEmpty()){
+										GraphEntity orgentity=orgconstraints.firstElement();
+										if (orgentity.getType().equalsIgnoreCase("Organization")){
+											// organization constraint
+											Repeat organizationalconstraints = new Repeat("setorganizationalconstraints");
+											expectedOutput.add(organizationalconstraints);
+											organizationalconstraints.add(new Var("orginstancename",""));
+											organizationalconstraints.add(new Var("orgtype",orgentity.getID()));
+										} else
+											if (orgentity.getType().equalsIgnoreCase("OrganizationGroup")){
+												//group constraint
+												Repeat groupconstraints = new Repeat("setgroupconstraints");
+												groupconstraints.add(new Var("groupinstancename",""));
+												groupconstraints.add(new Var("grouptype",orgentity.getID()));
+												expectedOutput.add(groupconstraints);
+											}
+
+									}
+								}
+							
+
+
 						} catch (NullEntity ne) {
 							Log.getInstance().logERROR("Conversation entity has not defined the \"Interaction\" attribute. Please, edit the conversation and choose an interaction", "", fact.getID());
 							this.fatalError();
@@ -1573,7 +1658,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	private Vector getExpectedApps(GraphEntity task) throws NullEntity {
 		Vector inputs = Utils.getRelatedElementsVector(task,
 				"WFUses",
-		"WFUsestarget");
+				"WFUsestarget");
 		Enumeration enumeration = inputs.elements();
 		Vector apps = new Vector();
 		boolean validType = true;
@@ -1606,7 +1691,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		Vector tasks = this.getAgentTasks(agent);
 		if (tasks.size() == 0) {
 			Log.getInstance().logWARNING("Agent " + agent.getID() +
-			" has no any associated task");
+					" has no any associated task");
 		} else {
 			Enumeration enumeration = tasks.elements();
 			HashSet<GraphEntity> produced = new HashSet<GraphEntity>();
@@ -1629,7 +1714,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			produced.removeAll(removeConversations);
 			if (produced.size() != 0) {
 				Log.getInstance().logWARNING("Agent " + agent.getID() + " does not use as input of any task the following entities :" + produced +
-				". This may end in a generation of garbage. To prevent this, a default task for the deletion of these entities has been produced.");
+						". This may end in a generation of garbage. To prevent this, a default task for the deletion of these entities has been produced.");
 				for (GraphEntity conv : produced) {
 					Repeat defaultDeleteTask = new Repeat("deleteentity");
 					defaultDeleteTask.add(new Var("entityidtodelete", Utils.replaceBadChars(conv.getID())));
@@ -1659,7 +1744,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	Vector getExpectedOutput(GraphEntity task) throws NullEntity {
 		Hashtable inputs = Utils.getRelatedElementsHashtable(task,
 				"WFProduces",
-		"WFProducestarget");
+				"WFProducestarget");
 
 		Enumeration enumeration = inputs.keys();
 		boolean allfacts = true;
@@ -1684,7 +1769,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	Vector getExpectedOutputCreated(GraphEntity task) throws NullEntity {
 		Hashtable inputs = Utils.getRelatedElementsHashtable(task,
 				"GTCreates",
-		"GTCreatestarget");
+				"GTCreatestarget");
 
 		Enumeration enumeration = inputs.keys();
 		boolean allfacts = true;
@@ -1717,7 +1802,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	Vector getConsumedInputsInWorkflow(GraphEntity task) throws NullEntity {
 		Vector inputs = Utils.getRelatedElementsVector(task,
 				"WFConsumes",
-		"WFConsumestarget");
+				"WFConsumestarget");
 		Enumeration enumeration = inputs.elements();
 		boolean allfacts = true;
 		/*while (enumeration.hasMoreElements() && allfacts) {
@@ -1738,13 +1823,15 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	Vector<GraphRole> getInputsToRemoveAfterRead(GraphEntity task) throws NullEntity {
 		Vector<GraphRole> inputs = Utils.getRelatedElementsRolesVector(task,
 				"WFConsumes",
-		"WFConsumestarget");
+				"WFConsumestarget");
 		Vector<GraphRole> inputs1 = Utils.getRelatedElementsRolesVector(task,
 				"Consumes",
-		"WFConsumestarget");
+				"WFConsumestarget");
+
 
 		HashSet<GraphRole> result = new HashSet<GraphRole>(inputs);
 		result.addAll(inputs1);
+
 
 		/*while (enumeration.hasMoreElements() && allfacts) {
                  GraphEntity gr = (GraphEntity) enumeration.nextElement();
@@ -1764,10 +1851,10 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	Vector<GraphEntity> getConsumedInputs(GraphEntity task) throws NullEntity {
 		Vector<GraphEntity> inputs = Utils.getRelatedElementsVector(task,
 				"WFConsumes",
-		"WFConsumestarget");
+				"WFConsumestarget");
 		Vector<GraphEntity> inputs1 = Utils.getRelatedElementsVector(task,
 				"Consumes",
-		"WFConsumestarget");
+				"WFConsumestarget");
 
 		HashSet<GraphEntity> result = new HashSet<GraphEntity>(inputs);
 		result.addAll(inputs1);
@@ -1797,15 +1884,15 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	private Vector<GraphEntity> getCompleteExpectedInput(GraphEntity task) throws NullEntity {
 		Vector<GraphEntity> inputs = Utils.getRelatedElementsVector(task,
 				"WFConsumes",
-		"WFConsumestarget");
+				"WFConsumestarget");
 
 		Vector<GraphEntity> inputs2 = Utils.getRelatedElementsVector(task,
 				"GTModifies",
-		"WFConsumestarget");
+				"WFConsumestarget");
 
 		Vector<GraphEntity> inputs3 = Utils.getRelatedElementsVector(task,
 				"Consumes",
-		"WFConsumestarget");
+				"WFConsumestarget");
 
 		inputs.addAll(inputs2);
 		inputs.addAll(inputs3);
@@ -1816,7 +1903,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 		Vector<GraphRole> inputs2 = Utils.getRelatedElementsRolesVector(task,
 				"GTModifies",
-		"WFConsumestarget");
+				"WFConsumestarget");
 
 
 		return inputs2;
@@ -1834,7 +1921,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 		Vector tasks = Utils.getRelatedElementsVector(role,
 				"WFResponsable",
-		"WFResponsabletarget");
+				"WFResponsabletarget");
 
 		return tasks;
 	}
@@ -1851,10 +1938,10 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	private Vector getAgentTasks(GraphEntity agent) throws NullEntity {
 		Vector directTasks = Utils.getRelatedElementsVector(agent,
 				"WFResponsable",
-		"WFResponsabletarget");
+				"WFResponsabletarget");
 		Vector<GraphEntity> rolesPlayed = Utils.getRelatedElementsVector(agent,
 				"WFPlays",
-		"WFPlaystarget");
+				"WFPlaystarget");
 		HashSet tasks = new HashSet(directTasks);
 		Vector<GraphEntity> generalizedRoles=new Vector<GraphEntity>();
 		for (GraphEntity role:rolesPlayed){
@@ -1873,7 +1960,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	private Vector getAgentDirectTasks(GraphEntity agent) throws NullEntity {
 		Vector directTasks = Utils.getRelatedElementsVector(agent,
 				"WFResponsable",
-		"WFResponsabletarget");
+				"WFResponsabletarget");
 
 		HashSet tasks = new HashSet(directTasks);
 
@@ -1884,7 +1971,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		Hashtable<GraphEntity, Vector<GraphEntity>>  taskPerRole=new Hashtable<GraphEntity, Vector<GraphEntity>>(); 
 		Vector<GraphEntity> rolesPlayed = Utils.getRelatedElementsVector(agent,
 				"WFPlays",
-		"WFPlaystarget");
+				"WFPlaystarget");
 		HashSet<GraphEntity> expandedHierarchy=new HashSet<GraphEntity>();
 		for (GraphEntity ge:rolesPlayed){
 			expandedHierarchy.addAll(Utils.getAscendantsOfRole(ge));	
@@ -1912,7 +1999,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		try {
 			Vector<GraphEntity> descendants = Utils.getRelatedElementsVector(ge,
 					"ARoleInheritance",
-			"ARoleInheritancesource");
+					"ARoleInheritancesource");
 			while (!descendants.isEmpty()){
 				allDescendants.addAll(descendants);
 				descendants.clear();
@@ -1920,7 +2007,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 
 					descendants.addAll(Utils.getRelatedElementsVector(descendant,
 							"ARoleInheritance",
-					"ARoleInheritancesource"));
+							"ARoleInheritancesource"));
 
 				}
 				descendants.removeAll(allDescendants);
@@ -1966,7 +2053,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			if (playedRoles.size() == 0) {
 				Log.getInstance().logWARNING("Agent " + agents[k].getID() +
 						" does not play" +
-				" any role. This agent will not participate in any interaction");
+						" any role. This agent will not participate in any interaction");
 				//					this.fatalError();
 			} else {
 				for (GraphEntity prole:playedRoles){
@@ -1985,14 +2072,14 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 						// The role does not start any interaction. This means it
 						//  can be a collaborator
 						interactions = getRoleInheritedRels(prole, "IColaborates",
-						"IColaboratessource");
+								"IColaboratessource");
 						/*this.getRelatedElements(playedRoles[j],
                                                  "IColaborates", "IColaboratessource");*/
 						if (interactions.length == 0) {
 							// A role must participate at least in one interaction
 							Log.getInstance().logWARNING("Role  " + prole.getID() +
 									" does not participate in any interaction. No interaction code will be generated for this role." +
-							"Please, associate this role with an interaction as colaborator or as initiator");
+									"Please, associate this role with an interaction as colaborator or as initiator");
 
 						} else {
 							for (int i = 0; i < interactions.length; i++) {
@@ -2192,7 +2279,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				ge = gc.getElementAt(k);
 				if (ge.getType().equals("FileSpecPatternMapping")) {
 					itis = ge.getAttributeByName("Pattern").getSimpleValue().equals("Singleton") &&
-					ge.getAttributeByName("Entity").getEntityValue().equals(appr);
+							ge.getAttributeByName("Entity").getEntityValue().equals(appr);
 
 				}
 				k++;
@@ -2252,15 +2339,17 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	 *@exception  Exception  Description of Exception
 	 */
 	public static void main(String args[]) throws Exception {	
- System.out.println("INGENIAS Agent Framework generator  (C) 2012 Jorge Gomez");
-                System.out.println("This program comes with ABSOLUTELY NO WARRANTY; for details check www.gnu.org/copyleft/gpl.html.");
-                System.out.println("This is free software, and you are welcome to redistribute it under certain conditions;; for details check www.gnu.org/copyleft/gpl.html.");
+		System.out.println("INGENIAS Agent Framework generator  (C) 2012 Jorge Gomez");
+		System.out.println("This program comes with ABSOLUTELY NO WARRANTY; for details check www.gnu.org/copyleft/gpl.html.");
+		System.out.println("This is free software, and you are welcome to redistribute it under certain conditions;; for details check www.gnu.org/copyleft/gpl.html.");
 
 		if (args.length==0){
 			System.err.println("The first argument (mandatory) has to be the specification file and the second (optional) " +
-			"the project folder");
+					"the project folder");
 		} else {
 			boolean therearenoSources=new File("src/main/javagensrc/ingenias/jade/Main.java").exists();
+			if (!new File(args[0]).exists())
+				throw new FileNotFoundException("File not found "+new File(args[0]).getAbsolutePath());
 			StringBuffer sb =  FileUtils.readFile(args[0]);			
 			byte[] checksum =getCheckSum(sb.toString());		
 			if (args.length>=4  &&
@@ -2285,22 +2374,30 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				if (args.length>=3){
 					jadegen.setProperty("jadeout", args[2]);  
 				} 
-				
+
 				if (args.length>=4){
 					jadegen.setProperty("jadeperm", args[3]);  
 				}
-	
 
-				for (Object key: props.keySet()){
+
+			/*	for (Object key: props.keySet()){
 					System.err.println(((ProjectProperty)props.get(key.toString())).key+":"+
 							((ProjectProperty)props.get(key.toString())).value);
-				};
+				};*/
 
 				jadegen.run();
 				
+				if (jadegen.isError() || Log.getInstance().areThereErrors()){
+					for (Frame f:Frame.getFrames()){
+						f.dispose();
+
+					}
+					throw new RuntimeException("There are the following code generation errors: "+Log.getInstance().getErrors());		
+				}
+
 			} else {
 				System.err.println("The first argument (mandatory) has to be the specification file and the second (optional) " +
-				"the project folder");
+						"the project folder");
 			}
 
 			for (Frame f:Frame.getFrames()){

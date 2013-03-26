@@ -23,6 +23,7 @@
 
 package ingenias.jade.components;
 
+import ingenias.jade.mental.OrganizationDescription;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.domain.DFService;
@@ -38,7 +39,10 @@ import jade.proto.AchieveREInitiator;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -53,11 +57,91 @@ public class YellowPages extends Application {
 	Agent ja;
 	private DFAgentDescription[]  searchResult;
 	private boolean searchFinished;
+	private Hashtable<String, OrganizationDescription> agentOrganizations=new Hashtable<String, OrganizationDescription>();
 
+	/**
+	 * It tells which organizations this agent is registered to
+	 * @return
+	 */
+	public Set<String> getAgentOrganizations(){
+		return agentOrganizations.keySet();
+	}
 
+	/**
+	 * It returns the groups within the organization to which this agent belongs
+	 * @param orgid
+	 * @return
+	 */
+	public Vector<String> getAgentGroups(String orgid){
+		Vector<String> groups=new Vector<String>();
+		OrganizationDescription orgd=agentOrganizations.get(orgid);
+		if (orgd.getOrgID().equalsIgnoreCase(orgid)){
+			for ( String cgroups:orgd.getGroups()){
+				for ( String member:orgd.getMembers(cgroups)){
+					if (member.equalsIgnoreCase(ja.getLocalName()))
+						groups.add(cgroups);
+				}			
+			}
+		}
+		return groups;
+	}
+
+	public Vector<String> getAgentIDsInOrganization(String o){
+		Vector<String> aids=new Vector<String>();
+		for (OrganizationDescription orgd:agentOrganizations.values())			
+			for (String group:orgd.getGroups()){
+				aids.addAll(orgd.getMembers(group));						
+			}
+		return aids;
+	}
+
+	public Vector<String> getAgentIDsInGroup(String groupid){
+		Vector<String> aids=new Vector<String>();
+		for (OrganizationDescription orgd:agentOrganizations.values())			
+			for (String group:orgd.getGroups()){
+				if (orgd.getMembers(group).contains(ja.getLocalName())){
+					aids.addAll(orgd.getMembers(group));				
+					HashSet<String> subgroups=orgd.getSubgroups(group);
+					for (String subgroup:subgroups){
+						aids.addAll(orgd.getMembers(subgroup));		
+					}
+				}
+			}
+
+		return aids;
+	}
 
 	public YellowPages(Agent ja){
 		this.ja=ja;
+	}
+
+	public synchronized DFAgentDescription[] getAgents(String orgid, String rolename) throws FIPAException {
+		DFAgentDescription[] agentsfound = getAgents(rolename); 
+		Vector<DFAgentDescription> filteredAgents = new Vector<DFAgentDescription>();
+		Vector<String> agentids=new Vector<String>();
+		agentids.addAll(getAgentIDsInOrganization(orgid));
+		
+		for (DFAgentDescription agent:agentsfound){
+			if (agentids.contains(agent.getName().getLocalName()))
+				filteredAgents.add(agent);
+		}
+		return filteredAgents.toArray(new DFAgentDescription[filteredAgents.size()]);
+	}
+
+	public synchronized DFAgentDescription[] getAgents(String orgid, String groupid, String rolename) throws FIPAException {
+		DFAgentDescription[] agentsfound = getAgents(rolename); 
+		Vector<DFAgentDescription> filteredAgents = new Vector<DFAgentDescription>();
+		Vector<String> groups = getAgentGroups(orgid);
+		Vector<String> agentids=new Vector<String>();
+		for (String gid:groups){
+			if (gid.equalsIgnoreCase(groupid))
+				agentids.addAll(getAgentIDsInGroup(gid));
+		}
+		for (DFAgentDescription agent:agentsfound){
+			if (agentids.contains(agent.getName().getLocalName()))
+				filteredAgents.add(agent);
+		}
+		return filteredAgents.toArray(new DFAgentDescription[filteredAgents.size()]);
 	}
 
 	/**
@@ -121,7 +205,7 @@ public class YellowPages extends Application {
 		List<DFAgentDescription> list = Arrays.asList(searchResult);
 		Collections.shuffle(list);
 		return list.toArray(new DFAgentDescription[list.size()]);
-	
+
 
 		/*int k=0;
 		while (result==null && k<10){
@@ -214,6 +298,33 @@ public class YellowPages extends Application {
 		dfd = new DFAgentDescription();
 		dfd.setName(new AID(localid,false));
 		return dfd;
+
+	}
+
+	public Vector<String> getRegisteredOrganizationsWithType(String orgtype) {
+		Vector<String> orgs=new Vector<String> ();
+		for (OrganizationDescription orgdescs:agentOrganizations.values()){
+			if (orgdescs.getOrgType().equalsIgnoreCase(orgtype))
+				orgs.add(orgdescs.getOrgID());
+		}
+		return orgs;
+	}
+
+	public Vector<String>  getRegisteredGroupWithType(String grouptype) {
+		Vector<String> groups=new Vector<String> ();		
+		for (OrganizationDescription orgdescs:agentOrganizations.values()){
+			for (String groupid:orgdescs.getGroups()){
+				if (orgdescs.getGroupType(groupid).equalsIgnoreCase(grouptype))
+					groups.add(groupid);	
+			}
+
+		}
+		return groups;
+	}
+
+	public void processOrganization(OrganizationDescription orgdesc) {
+		agentOrganizations.put(orgdesc.getOrgID(),orgdesc);
+
 
 	}
 

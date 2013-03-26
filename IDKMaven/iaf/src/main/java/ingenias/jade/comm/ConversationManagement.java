@@ -166,6 +166,9 @@ public class ConversationManagement {
 	 * @return The conversation id.
 	 * @throws NoAgentsFound
 	 */
+	
+	
+	
 	public ActiveConversation launchProtocolAsInitiator(String protocol,
 			YellowPages yp) throws NoAgentsFound, WrongInteraction {
 		String role = this.initiatorRoles.get(protocol);
@@ -183,6 +186,43 @@ public class ConversationManagement {
 
 		return actconv;
 
+	}
+	
+	public ActiveConversation launchProtocolAsInitiatorWithinOrganization(String protocol, String orgid,
+			YellowPages yp) throws NoAgentsFound, WrongInteraction {
+		String role = this.initiatorRoles.get(protocol);
+		// System.err.println(initiatorRoles);
+		ActiveConversation actconv = this.launchProtocolAsInitiator(protocol,orgid,
+				role, yp);
+		//System.err.println("actconv " + actconv + " " + this.agent.getMSM());
+		try {
+			this.agent.getMSM().addMentalEntity(actconv.getConv());
+		} catch (InvalidEntity e) {
+
+			e.printStackTrace();
+		}
+		this.add(actconv.getSb());
+
+		return actconv;
+
+	}
+	
+	public ActiveConversation launchProtocolAsInitiatorWithinOrganizationGroup(String protocol,String orgid,String groupid,
+			YellowPages yp) throws NoAgentsFound, WrongInteraction {
+		String role = this.initiatorRoles.get(protocol);
+		// System.err.println(initiatorRoles);
+		ActiveConversation actconv = this.launchProtocolAsInitiator(protocol,orgid,groupid,
+				role, yp);
+		//System.err.println("actconv " + actconv + " " + this.agent.getMSM());
+		try {
+			this.agent.getMSM().addMentalEntity(actconv.getConv());
+		} catch (InvalidEntity e) {
+
+			e.printStackTrace();
+		}
+		this.add(actconv.getSb());
+
+		return actconv;
 	}
 
 	/**
@@ -620,6 +660,22 @@ public class ConversationManagement {
 	 * @return The conversation id.
 	 * @throws NoAgentsFound
 	 */
+	protected ActiveConversation launchProtocolAsInitiator(String protocol,
+			String orgid, String role, YellowPages yp)  throws NoAgentsFound, WrongInteraction{
+		AgentExternalDescription[] actors = this.ap.getInteractionActors(protocol, orgid, yp);
+		if (actors==null) throw new RuntimeException("There are null actors. Cannot initialise the protocol");
+		return this.launchProtocolAsInitiator(protocol, role, actors,
+				this.agent.getMSM(), this.agent.getMSM());
+	}
+	
+	protected ActiveConversation launchProtocolAsInitiator(String protocol,
+			String orgid, String groupid, String role, YellowPages yp)  throws NoAgentsFound, WrongInteraction{
+		AgentExternalDescription[] actors = this.ap.getInteractionActors(protocol,orgid,groupid, yp);
+		if (actors==null) throw new RuntimeException("There are null actors. Cannot initialise the protocol");
+		return this.launchProtocolAsInitiator(protocol, role, actors,
+				this.agent.getMSM(), this.agent.getMSM());
+	}
+	
 	protected ActiveConversation launchProtocolAsInitiator(String protocol,
 			String role, YellowPages yp) throws NoAgentsFound, WrongInteraction {
 		AgentExternalDescription[] actors = this.ap.getInteractionActors(protocol, yp);

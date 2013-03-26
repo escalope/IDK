@@ -404,9 +404,9 @@ abstract public class StateBehavior
             //	ingenias.jade.graphics.MainInteractionManager.logInteraction("Current interaction content "+content,agentName,conversationID);
 
             try {
-               if (this.protocol.equalsIgnoreCase("ConsultaReputacion") && this.playedRole.equals("SupervisorInterestedInReputationRole")){
-                   System.out.println("Hola");
-               }
+               
+            	
+            	
                 securityCopy.getMSM().addMentalEntityToConversation(conv, tv);// myAgent attribute may have been
                 // set to null;
              

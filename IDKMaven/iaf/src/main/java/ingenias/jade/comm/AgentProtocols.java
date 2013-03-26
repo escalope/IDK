@@ -46,6 +46,13 @@ public interface AgentProtocols {
 	 throws ingenias.jade.exception.NoAgentsFound;
 	
 	
+	public AgentExternalDescription[] getInteractionActors(final String interaction, final String orgid,final YellowPages yp) 
+			 throws ingenias.jade.exception.NoAgentsFound;
+	
+	public AgentExternalDescription[] getInteractionActors(final String interaction, final String orgid, final String groupid, final YellowPages yp)
+			throws ingenias.jade.exception.NoAgentsFound;
+	
+	
 	/**
 	 * It certifies that agents involved in a protocol provide the requested service. Each agent
 	 * participates within interactions with, maybe, several agents. These agents are supposed

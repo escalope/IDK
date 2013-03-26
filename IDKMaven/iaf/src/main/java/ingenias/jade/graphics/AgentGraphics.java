@@ -290,6 +290,7 @@ public class AgentGraphics {
 		ammpanel.getViewport().add(amm, null);
 		final JPanel mspanel = new JPanel();
 		JButton jb = new JButton("Show mental state");
+		jb.setName(agentName+"-showmentalstate");
 		jb.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainInteractionManager.setMainMS(agentName,ammpanel);
@@ -350,7 +351,9 @@ public class AgentGraphics {
 			epb=Box.createVerticalBox();
 			epblabelanddiag.add(epb);
 			// Events perceived per application
-			JButton generateEvent=new JButton("Generate");
+			JButton generateEvent=new JButton("Generate");			
+			generateEvent.setName(idapp+"-generate-"+event.getType());			
+			
 			generateEvent.addActionListener(al);
 			generateEventPanel=new JPanel(new FlowLayout(FlowLayout.CENTER));
 			generateEventPanel.add(generateEvent);  

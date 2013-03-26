@@ -89,6 +89,12 @@ import ingenias.jade.comm.LocksWriter;
 
 public class @@@v@@@agentid@@@/v@@@Protocol implements AgentProtocols{
 
+interface AdapterYP {
+
+   public DFAgentDescription[] getAgents(String role)  throws FIPAException;
+
+}
+
 public @@@v@@@agentid@@@/v@@@Protocol(){};		
 			
 	public ActiveConversation initialiseProtocols(String agentName,RuntimeConversation conv, 
@@ -136,17 +142,38 @@ public @@@v@@@agentid@@@/v@@@Protocol(){};
         
         }
 
+  public AgentExternalDescription[] getInteractionActors(final String interaction, final String orgid, final YellowPages yp) throws ingenias.jade.exception.NoAgentsFound{
+    	return getInteractionActorsWithAdapter(interaction, new AdapterYP(){
+  	public DFAgentDescription[] getAgents(String role)  throws FIPAException {return yp.getAgents(orgid, role); };  	
+  	});
+  }
+  
+  public AgentExternalDescription[] getInteractionActors(final String interaction, final String orgid, final String groupid, final YellowPages yp) throws ingenias.jade.exception.NoAgentsFound{
+    	return getInteractionActorsWithAdapter(interaction, new AdapterYP(){
+  	public DFAgentDescription[] getAgents(String role)  throws FIPAException {return yp.getAgents(orgid, groupid, role); };  	
+  	});
+  }
+  
+  public AgentExternalDescription[] getInteractionActors(String interaction, final YellowPages yp) throws ingenias.jade.exception.NoAgentsFound{  
+  	return getInteractionActorsWithAdapter(interaction, new AdapterYP(){
+  	public DFAgentDescription[] getAgents(String role)  throws FIPAException {return yp.getAgents(role); };  	
+  	});
+  }
+ 
  
 	
-	        public AgentExternalDescription[] getInteractionActors(String interaction, YellowPages yp) throws ingenias.jade.exception.NoAgentsFound{
+	        private AgentExternalDescription[] getInteractionActorsWithAdapter(String interaction, AdapterYP yp) throws ingenias.jade.exception.NoAgentsFound{
               AgentExternalDescription[] result=null;
              @@@repeat id="interactions"@@@
                if (interaction.equals("@@@v@@@interactionid@@@/v@@@")){
+           
                 Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
                  @@@repeat id="interactionroles"@@@
                  try {
                  String cardinality="@@@v@@@irolenamecardinality@@@/v@@@";
-		 DFAgentDescription[] agents=yp.getAgents("@@@v@@@irolename@@@/v@@@");
+                 
+					DFAgentDescription[] agents=null;		 			
+		 			agents=yp.getAgents("@@@v@@@irolename@@@/v@@@");
                    if (agents==null || agents.length<=0)
                       throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role @@@v@@@irolename@@@/v@@@");
                    if (cardinality.equals("1") || cardinality.equals(""))

@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>net.sf.ingenias</groupId>
+		<artifactId>ingenias</artifactId>
+		<version>1.5-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.sf.ingenias</groupId>
+	<artifactId>ingeniasjgraphmod</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>A modified version of some JGraph files</name>
+	<description>A modified version of some JGraph files</description>
+	<url>http://ingenias.sf.net</url>
+	<licenses>
+		<license>
+			<name>The GPL V3</name>
+			<url>http://www.gnu.org/copyleft/gpl.html</url>
+			<distribution />
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iaf</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iaf</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iaf</url>		
+	</scm>
+	<developers>
+		<developer>
+			<id>escalope</id>
+			<name>Jorge Gomez-Sanz</name>
+			<email>jjgomez@fdi.ucm.es</email>
+		</developer>
+	</developers>
+	<dependencies>
+		<dependency>
+			<groupId>ant-contrib</groupId>
+			<artifactId>ant-contrib</artifactId>
+			<version>1.0b3</version>
+		</dependency>		
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.0.1</version>
+				<executions>
+					<execution>
+						<id>enforce-maven-3</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>3.0.3</version>
+								</requireMavenVersion>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				        <showDeprecation>true</showDeprecation>
+        				<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12</version>
+				<configuration>
+					<includes>
+						<include>**/*Test*.java</include>
+					</includes>
+				</configuration>
+				<dependencies>
+
+				</dependencies>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

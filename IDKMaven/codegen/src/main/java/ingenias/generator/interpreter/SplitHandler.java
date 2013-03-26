@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -35,6 +36,7 @@ import org.apache.xerces.parsers.DOMParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import ingenias.exception.*;
@@ -48,15 +50,18 @@ import ingenias.generator.util.FileUtils;
 public class SplitHandler {
 
 	Hashtable<File,String> filesTobeWritten=new Hashtable<File,String>();
+
+
 	/**
 	 *  Constructor for the TemplateHandler object
 	 *
 	 *@param  xmlFile        Description of Parameter
 	 *@exception  Exception  Description of Exception
 	 */
-	public SplitHandler(String xmlFile) throws FileTagEmpty,TextTagEmpty,java.io.IOException,SAXException{
+	public SplitHandler(String xmlFile) throws FileTagEmpty,TextTagEmpty,java.io.IOException,SAXException{		
 		//  Create a Xerces DOM Parser
 		DOMParser parser = new DOMParser();
+		
 
 		//  Parse the Document
 		//  and traverse the DOM
@@ -88,6 +93,41 @@ public class SplitHandler {
 			throw e;
 		}
 	}
+	
+	public SplitHandler(InputStream xmlFileContent) throws FileTagEmpty,TextTagEmpty,java.io.IOException,SAXException{		
+		//  Create a Xerces DOM Parser
+		DOMParser parser = new DOMParser();
+		
+
+		//  Parse the Document
+		//  and traverse the DOM
+		try {
+			//			parser.setIncludeIgnorableWhitespace(true);
+			parser.parse(new InputSource(xmlFileContent));
+			Document document = parser.getDocument();
+			NodeList children=document.getChildNodes();
+			for (int k=0;k<children.getLength();k++){
+				traverse(children.item(k));
+			}
+			//                        System.err.println("split made");
+		}
+		catch (SAXException e) {
+			//			e.printStackTrace();
+			throw e;
+			//        System.exit(-1);
+		}
+
+		catch (java.io.UTFDataFormatException formatEx){
+			ingenias.editor.Log.getInstance().logERROR("Error interpreting a INGENIAS file");
+			ingenias.editor.Log.getInstance().logERROR("The text contained in inputstream contains non UTF-8 characters");			
+			throw formatEx;
+		}
+
+		catch (IOException e) {
+
+			throw e;
+		}
+	}
 
 	public Vector<File> filesToBeWritten(){
 		return new Vector<File>(filesTobeWritten.keySet());
@@ -109,6 +149,16 @@ public class SplitHandler {
 				e.printStackTrace();
 			}			
 		}
+	}
+	
+	public String toString(){
+		StringBuffer representation=new StringBuffer();		
+		for (File fid:filesTobeWritten.keySet()){
+			representation.append("file:"+fid.getName()+"\n");
+			representation.append(filesTobeWritten.get(fid)+"\n");
+			representation.append("\n");
+		}
+		return representation.toString();
 	}
 
 

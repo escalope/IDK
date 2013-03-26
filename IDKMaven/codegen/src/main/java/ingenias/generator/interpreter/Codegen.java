@@ -23,6 +23,7 @@ import ingenias.exception.TextTagEmpty;
 import ingenias.generator.datatemplate.Repeat;
 import ingenias.generator.datatemplate.Sequences;
 import ingenias.generator.datatemplate.Var;
+import ingenias.generator.util.FileUtils;
 
 
 import java.io.File;
@@ -37,6 +38,10 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
 import java.util.Vector;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.xerces.parsers.DOMParser;
 import org.w3c.dom.Document;
@@ -92,6 +97,7 @@ public class Codegen {
 		TemplateTree tags = new TemplateTree(new Tag("root",0,0));
 
 		readFile = ingenias.generator.util.Conversor.convertArrobaFormat(readFile);
+		
 		//    System.err.println(readFile);
 		File output = File.createTempFile("ingenias", "_tmp");
 		FileOutputStream fos = new FileOutputStream(output);
@@ -104,7 +110,7 @@ public class Codegen {
 			TemplateHandler.process(output.getAbsolutePath(),
 					templateData, pw, tags);
 		}
-		catch (org.xml.sax.SAXParseException spe) {
+		catch (SAXParseException spe) {
 			ingenias.editor.Log.getInstance().logERROR("Parser error at " +
 					( (SAXParseException) spe).
 					getLineNumber() + ":" +
@@ -113,25 +119,39 @@ public class Codegen {
 					spe.getMessage());
 			throw new ingenias.exception.NotWellFormed();
 		}
+		catch (SAXException spe) {
+			ingenias.editor.Log.getInstance().logERROR("Parser error: " 
+					+
+					spe.getMessage());
+			throw new ingenias.exception.NotWellFormed();
+		};
+		
 		pw.close();
-		ingenias.editor.Log.getInstance().logSYS("Processing " + template);
+	//	ingenias.editor.Log.getInstance().logSYS("Processing " + template);
+		
 		Codegen.decompose(tempFile.getPath());
 		fos.close();
 		tempFile.delete();
+		output.delete();
 		//DebugXMLTrees.debugXmlTreeView("holaaaa",tags);
 		return tags;
 	}
-
-	public static SplitHandler applyArrobaWithoutWriting(String sequences, InputStream template) throws
+	
+	public static File processTemplateWithSequences(String sequences, InputStream template) throws
 	ingenias.exception.NotWellFormed, Exception {
+		
+		
+		
 		String readFile = readFile(template);
 		TemplateTree tags = new TemplateTree(new Tag("root",0,0));
-
-		readFile = ingenias.generator.util.Conversor.convertArrobaFormat(readFile);
+		readFile = ingenias.generator.util.Conversor.convertArrobaFormat(readFile);		
 		//System.err.println(readFile);
 		File output = File.createTempFile("ingenias", "_tmp");
 		FileOutputStream fos = new FileOutputStream(output);
 		fos.write(readFile.getBytes());
+		
+		checkWellFormedNess(output);
+	    
 		//System.err.println(sequences.toString());
 		Vector templateData = obtainTemplateData(sequences);
 		File tempFile=File.createTempFile("idk", "cgen");
@@ -152,12 +172,29 @@ public class Codegen {
 		pw.close();
 		ingenias.editor.Log.getInstance().logSYS("Processing " + template);	
 		fos.close();
-		tempFile.delete();
-		//DebugXMLTrees.debugXmlTreeView("holaaaa",tags);
-		return new SplitHandler(tempFile.getPath());
+		return tempFile;
 	}
 
-	public static void apply(String sequences, String template) throws Exception {
+	private static void checkWellFormedNess(File output)
+			throws ParserConfigurationException, SAXException, IOException {
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	    dbf.setValidating(false);
+	    DocumentBuilder db = dbf.newDocumentBuilder();
+	    Document doc = db.parse(output);
+	}
+
+	public static SplitHandler applyArrobaWithoutWriting(String sequences, InputStream template) throws
+	ingenias.exception.NotWellFormed, Exception {
+		
+		
+		File tempFile=processTemplateWithSequences(sequences,template);
+		//DebugXMLTrees.debugXmlTreeView("holaaaa",tags);
+		SplitHandler result = new SplitHandler(tempFile.getPath());
+		tempFile.delete();
+		return result;
+	}
+
+	/*public static void apply(String sequences, String template) throws Exception {
 		Vector templateData = obtainTemplateData(sequences);
 		//                                System.out.println(templateData.size());
 		File tempFile=File.createTempFile("idk", "cgen");
@@ -167,7 +204,7 @@ public class Codegen {
 		//                                System.err.println("inspeccionando "+template);
 		Codegen.decompose(tempFile.getPath());
 		tempFile.delete();
-	}
+	}*/
 
 	public static void decompose(String target) throws FileTagEmpty, TextTagEmpty,
 	java.io.IOException, SAXException {

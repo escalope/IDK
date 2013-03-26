@@ -91,4 +91,8 @@ public class TemplateDataRepeat {
           } else
              return (TemplateDataVar)(body.elementAt(body.indexOf(new TemplateDataVar(id,""))));
         }
+        
+        public String toString(){
+        	return "repeat("+id+","+body+")";
+        }
 }

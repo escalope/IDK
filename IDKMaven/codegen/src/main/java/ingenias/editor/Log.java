@@ -10,6 +10,8 @@ public class Log {
   private static PrintWriter out = null;
   private static PrintWriter error = null;
   private static StringBuffer altbuffer = new StringBuffer();
+
+private boolean thereAreErrors;
   
 
   private Log(PrintWriter all) {
@@ -26,9 +28,14 @@ public class Log {
     this.out.println(message);
     this.out.flush();
   }
+  
+  public boolean areThereErrors(){
+	  return thereAreErrors;
+  }
 
   public void clearError() {
     altbuffer = new StringBuffer();
+    thereAreErrors=false;
   }
 
   public void logERROR(Throwable e) {
@@ -123,7 +130,7 @@ public class Log {
 
     }
     altbuffer.append("[" + sb + "] ERROR:" + message);
-
+    this.thereAreErrors=true;
     this.flushErrors();
   }
 

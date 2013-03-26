@@ -39,6 +39,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import dom.DOMAddLines;
 
@@ -48,7 +49,10 @@ public class TemplateHandler {
 	
 	public static void process(String template, Vector templateData,
 			PrintWriter pw, TemplateTree tags) throws
-			IOException,SAXException,GenerationException {
+			IOException,
+			SAXException,
+			SAXParseException,
+			GenerationException {
 		//  Create a Xerces DOM Parser
 		TemplateHandler.pw = pw;
 		DOMAddLines parser = new DOMAddLines(template);
@@ -83,8 +87,11 @@ public class TemplateHandler {
 			});
 			
 			Document document = parser.getDocument();
-			traverse(document.getElementsByTagName("program").item(0), templateData, null,
-					tags,new Vector(), p, 0);
+			NodeList programnode = document.getElementsByTagName("program");
+			if (programnode==null || programnode.getLength()==0 || programnode.getLength()==2)
+				throw new SAXException("There is no root node labeled program");
+			traverse(programnode.item(0), templateData, null,
+					tags,new Vector(), p);
 		}
 		catch (GenerationException gen){
 			gen.printStackTrace();			
@@ -123,7 +130,7 @@ public class TemplateHandler {
 			Vector templateData,
 			TemplateDataRepeat tdr,
 			TemplateTree tags,Vector alreadyVisited,
-			java.awt.Point pos, int times) throws
+			java.awt.Point pos) throws
 			GenerationException {
 		
 		int type = node.getNodeType();
@@ -131,15 +138,15 @@ public class TemplateHandler {
 			if (node.getNodeName().equalsIgnoreCase("repeat")) {
 				String id = node.getAttributes().getNamedItem("id").getNodeValue();
 				Vector filtered = filterRepeat(templateData, id);
-				times=count(alreadyVisited,"repeat id=\"" + id + "\"");
+				int times=count(alreadyVisited,"repeat id=\"" + id + "\"");
 				String tname="repeat id=\"" + id + "_"+times+"\"";
 				alreadyVisited.add("repeat id=\"" + id + "\"");
 				if (filtered.size() > 0) {
 					Enumeration enumeration = filtered.elements();
 					while (enumeration.hasMoreElements()) {
 						TemplateDataRepeat current = (TemplateDataRepeat) enumeration.nextElement();
-						Vector ntd = current.body;
-						ntd.add(current);
+						Vector ntd = new Vector(current.body);
+						//ntd.add(current);
 						ntd.addAll(filterVarTemplates(templateData));
 						NodeList children = node.getChildNodes();
 						if (children != null) {
@@ -147,12 +154,11 @@ public class TemplateHandler {
 									pos.x,0);
 							TemplateTree repeattree=new TemplateTree(t);
 							tags.addChildren(repeattree);              
-							alreadyVisited=new Vector();
+							//alreadyVisited=new Vector();
 							for (int i = 0; i < children.getLength(); i++) {
-								traverse(children.item(i), ntd, current, repeattree, alreadyVisited, pos,times);
+								traverse(children.item(i), ntd, current, repeattree, new Vector(), pos);
 							}
 							t.end = pos.x;
-						
 						}
 					}
 				} else {
@@ -221,12 +227,12 @@ public class TemplateHandler {
 								NodeList filechildren=children.item(i).getChildNodes();
 								for (int j=0;j<filechildren.getLength();j++){
 									traverse(filechildren.item(j), templateData, tdr, new TemplateTree(new Tag("",0,0)),
-											new Vector(),new java.awt.Point(),0);
+											new Vector(),new java.awt.Point());
 								}
 								filename=sw.toString();
 								pw=pwold;
 								traverse(children.item(i), templateData, tdr, new TemplateTree(new Tag("",0,0)),
-										new Vector(),new java.awt.Point(),0);
+										new Vector(),new java.awt.Point());
 							}
 							else {
 								if (children.item(i).getNodeName().toLowerCase().equals("text")) {
@@ -241,13 +247,13 @@ public class TemplateHandler {
 									tags.addChildren(instance);
 									
 									traverse(children.item(i), templateData, tdr, fakerepeat,
-											alreadyVisited,pos,0);
+											alreadyVisited,pos);
 									t.end = pos.x-1;
 									//instance.add(new Tag("/repeat",-1,-1));
 									//tags.add(instance);
 								}
 								else {
-									traverse(children.item(i), templateData, tdr, tags, alreadyVisited,pos,0);
+									traverse(children.item(i), templateData, tdr, tags, alreadyVisited,pos);
 								}
 							}
 							
@@ -256,7 +262,7 @@ public class TemplateHandler {
 					pw.print("</" + node.getNodeName() + ">");
 				}
 			
-		}
+		} else
 		if (type == Node.TEXT_NODE) {
 			String value = node.getNodeValue();
 			pos.x = pos.x + value.length(); // pos has to be incremented right before the conversion

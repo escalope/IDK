@@ -71,8 +71,7 @@ public class Conversor {
 						System.err.println(containment.substring(pos, containment.length()));
 						throw new  ingenias.exception.NotWellFormed();
 					}
-					if (pos<0)
-						System.err.println("otra cosa");
+					
 					
 					result.append("<"+restoreInvalidChar(containment.substring(pos+1, endTag).trim()) + ">");
 					lastPos = endTag + SUBTAGCHAR.length();					

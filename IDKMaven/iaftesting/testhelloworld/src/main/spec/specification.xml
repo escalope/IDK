@@ -1,0 +1,1211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project cid="215" version="1.2">
+<projectproperties>
+<projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="ext"  tooltip="Folder where the IDE will find its new modules" />
+ <openeddiagram>hello world agent description</openeddiagram></projectproperties>
+<leafpackages>
+   <path>
+    <package id="Project"/>
+    <package id="hello world agent description"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="greetings task description"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Greetings task code"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="test"/>
+    <package id="test declaration"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="test"/>
+    <package id="test deployment"/>
+   </path>
+</leafpackages>
+<objects>
+<object id="GreetingsTask" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="HelloWorldAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="BasicDeployment" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="HelloWorldAgentCreation" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="HelloWorldAgent" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="Greetings task code" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Language">Java</key>
+<key id="Code">System.out.println(&quot;Hello World&quot;);</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="BePolite" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="ExecutionContext"></key>
+</mapproperties>
+</object>
+<object id="DontForgetToGreet" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="ExecutionContext"></key>
+</mapproperties>
+</object>
+<object id="Initial mental state" type="ingenias.editor.entities.MentalState">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="HelloWorldTest" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="DebugGUI" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="BasicTestingDeployment" type="ingenias.editor.entities.TestingPackage">
+<objectproperty id="TestingDeployment">
+<object id="BasicDeployment" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Tests" collection="true">
+<object id="HelloWorldTest" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="DebugGUITestingDeployment" type="ingenias.editor.entities.TestingPackage">
+<objectproperty id="TestingDeployment">
+<object id="BasicDeployment" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Tests" collection="true">
+<object id="DebugGUI" type="ingenias.editor.entities.Test">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="HelloWorldTestComponent" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Language">Java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="DebugGUIComponent" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Language">Java</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objects>
+<relationships>
+<relationship id="1" type="ingenias.editor.entities.AHasMS">
+<object id="1" type="ingenias.editor.entities.AHasMS">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="HelloWorldAgent" class="ingenias.editor.entities.Agent" roleName="AHasMSsource" type="ingenias.editor.entities.AHasMSsourceRole" dgcid="119011804">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Initial mental state" class="ingenias.editor.entities.MentalState" roleName="AHasMStarget" type="ingenias.editor.entities.AHasMStargetRole" dgcid="2002726752">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="3" type="ingenias.editor.entities.AContainsME">
+<object id="3" type="ingenias.editor.entities.AContainsME">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+<key id="Label"></key>
+</mapproperties>
+</object>
+<role idEntity="DontForgetToGreet" class="ingenias.editor.entities.FrameFact" roleName="AContainsMEtarget" type="ingenias.editor.entities.AContainsMEtargetRole" dgcid="1967704905">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+<key id="Label"></key>
+</mapproperties>
+</role><role idEntity="Initial mental state" class="ingenias.editor.entities.MentalState" roleName="AContainsMEsource" type="ingenias.editor.entities.AContainsMEsourceRole" dgcid="2002726752">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="0" type="ingenias.editor.entities.GTPursues">
+<object id="0" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="HelloWorldAgent" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="119011804">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BePolite" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="1529344008">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="2" type="ingenias.editor.entities.WFResponsable">
+<object id="2" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GreetingsTask" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1383352368">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="HelloWorldAgent" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="119011804">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="5" type="ingenias.editor.entities.GTSatisfies">
+<object id="5" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="BePolite" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1282022091">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GreetingsTask" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1093579103">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="4" type="ingenias.editor.entities.WFConsumes">
+<object id="4" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DontForgetToGreet" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1047335311">
+<mapproperties>
+<key id="Cardinality"></key>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GreetingsTask" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1093579103">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="6" type="ingenias.editor.entities.CDUsesCode">
+<object id="6" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GreetingsTask" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="1560252447">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Greetings task code" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="240063212">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="9" type="ingenias.editor.entities.UMLRealizes">
+<object id="9" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DebugGUIComponent" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="1451176721">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DebugGUI" class="ingenias.editor.entities.Test" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="955370868">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="7" type="ingenias.editor.entities.UMLRealizes">
+<object id="7" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="HelloWorldTest" class="ingenias.editor.entities.Test" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="1383022966">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="HelloWorldTestComponent" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="1217253549">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="8" type="ingenias.editor.entities.DefinesDeployment">
+<object id="8" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="HelloWorldAgentCreation" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="1085516134">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="BasicDeployment" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="1154832236">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+</relationships>
+<models> 
+ <model id="hello world agent description" type="ingenias.editor.models.AgentModelModelJGraph">
+<object id="hello world agent description" type="ingenias.editor.entities.AgentModelDataEntity">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="BePolite" nid="node8" type="Goal">
+		<attr name="bounds">
+			<rectangle x="53" y="112" width="59" height="58"></rectangle>		</attr>
+
+
+	</node>
+			
+	<node id="3" nid="node1" type="AContainsME">
+		<attr name="bounds">
+			<rectangle x="359" y="163" width="104" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+
+	<connected id="node6">
+
+
+
+
+
+	</connected>
+	<connected id="node7">
+
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="2" nid="node3" type="WFResponsable">
+		<attr name="bounds">
+			<rectangle x="281" y="31" width="118" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+
+	<connected id="node5">
+
+
+
+
+
+	</connected>
+	<connected id="node4">
+
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="HelloWorldAgent" nid="node5" type="Agent">
+		<attr name="bounds">
+			<rectangle x="206" y="13" width="45" height="57"></rectangle>		</attr>
+
+
+	</node>
+			
+	<node id="DontForgetToGreet" nid="node7" type="FrameFact">
+		<attr name="bounds">
+			<rectangle x="473" y="109" width="123" height="42"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+
+	</node>
+			
+	<node id="Initial mental state" nid="node6" type="MentalState">
+		<attr name="bounds">
+			<rectangle x="218" y="194" width="132" height="42"></rectangle>		</attr>
+
+
+	</node>
+			
+	<node id="GreetingsTask" nid="node4" type="Task">
+		<attr name="bounds">
+			<rectangle x="430" y="16" width="90" height="43"></rectangle>		</attr>
+
+
+	</node>
+			
+	<node id="0" nid="node2" type="GTPursues">
+		<attr name="bounds">
+			<rectangle x="117" y="80" width="85" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+
+	<connected id="node5">
+
+
+
+
+
+	</connected>
+	<connected id="node8">
+
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="1" nid="node0" type="AHasMS">
+		<attr name="bounds">
+			<rectangle x="229" y="144" width="70" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+
+	<connected id="node5">
+
+
+
+
+
+	</connected>
+	<connected id="node6">
+
+
+
+
+
+
+	</connected>
+	</node><parentship>
+</parentship>
+<entityconstraints>
+<cellconstraint id="node7:INGENIAS">
+<currentcell id="node7" height="46" width="121"/>
+</cellconstraint>
+</entityconstraints>
+
+
+	</graph>
+
+
+	<layout>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="53" y="112" width="59" height="58"></rectangle>		</attr>
+
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="359" y="163" width="104" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="281" y="31" width="118" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="206" y="13" width="45" height="57"></rectangle>		</attr>
+
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="473" y="109" width="123" height="42"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="218" y="194" width="132" height="42"></rectangle>		</attr>
+
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="430" y="16" width="90" height="43"></rectangle>		</attr>
+
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="117" y="80" width="85" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="229" y="144" width="70" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="greetings task description" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
+<object id="greetings task description" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="4" nid="node4" type="WFConsumes">
+		<attr name="bounds">
+			<rectangle x="411" y="62" width="106" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	<connected id="node1">
+
+
+
+
+	</connected>
+	<connected id="node0">
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="BePolite" nid="node2" type="Goal">
+		<attr name="bounds">
+			<rectangle x="57" y="39" width="59" height="58"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="5" nid="node3" type="GTSatisfies">
+		<attr name="bounds">
+			<rectangle x="188" y="48" width="91" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	<connected id="node1">
+
+
+
+
+	</connected>
+	<connected id="node2">
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GreetingsTask" nid="node1" type="Task">
+		<attr name="bounds">
+			<rectangle x="351" y="22" width="90" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="DontForgetToGreet" nid="node0" type="FrameFact">
+		<attr name="bounds">
+			<rectangle x="488" y="82" width="123" height="42"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node><parentship>
+</parentship>
+<entityconstraints>
+<cellconstraint id="node0:INGENIAS">
+<currentcell id="node0" height="46" width="121"/>
+</cellconstraint>
+</entityconstraints>
+
+
+	</graph>
+
+
+	<layout>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="411" y="62" width="106" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="57" y="39" width="59" height="58"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="188" y="48" width="91" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="351" y="22" width="90" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="488" y="82" width="123" height="42"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Greetings task code" type="ingenias.editor.models.ComponentDiagramModelJGraph">
+<object id="Greetings task code" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="6" nid="node2" type="CDUsesCode">
+		<attr name="bounds">
+			<rectangle x="240" y="80" width="94" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	<connected id="node0">
+
+
+
+
+	</connected>
+	<connected id="node1">
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GreetingsTask" nid="node0" type="Task">
+		<attr name="bounds">
+			<rectangle x="109" y="68" width="90" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="Greetings task code" nid="node1" type="INGENIASCodeComponent">
+		<attr name="bounds">
+			<rectangle x="376" y="58" width="204" height="57"></rectangle>		</attr>
+
+	</node><parentship>
+</parentship>
+<entityconstraints>
+</entityconstraints>
+
+
+	</graph>
+
+
+	<layout>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="240" y="80" width="94" height="17"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="109" y="68" width="90" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="376" y="58" width="204" height="57"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="test declaration" type="ingenias.editor.models.ComponentDiagramModelJGraph">
+<object id="test declaration" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="test"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="9" nid="node4" type="UMLRealizes">
+		<attr name="bounds">
+			<rectangle x="363" y="188" width="64" height="15"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	<connected id="node2">
+
+
+
+
+	</connected>
+	<connected id="node1">
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="HelloWorldTest" nid="node3" type="Test">
+		<attr name="bounds">
+			<rectangle x="142" y="77" width="95" height="40"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="HelloWorldTestComponent" nid="node0" type="INGENIASComponent">
+		<attr name="bounds">
+			<rectangle x="486" y="69" width="200" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="DebugGUIComponent" nid="node1" type="INGENIASComponent">
+		<attr name="bounds">
+			<rectangle x="553" y="167" width="172" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="7" nid="node5" type="UMLRealizes">
+		<attr name="bounds">
+			<rectangle x="328" y="91" width="64" height="15"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	<connected id="node3">
+
+
+
+
+	</connected>
+	<connected id="node0">
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="DebugGUI" nid="node2" type="Test">
+		<attr name="bounds">
+			<rectangle x="148" y="173" width="89" height="46"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node><parentship>
+</parentship>
+<entityconstraints>
+<cellconstraint id="node3:INGENIAS">
+<currentcell id="node3" height="46" width="93"/>
+</cellconstraint>
+<cellconstraint id="node2:INGENIAS">
+<currentcell id="node2" height="46" width="89"/>
+</cellconstraint>
+</entityconstraints>
+
+
+	</graph>
+
+
+	<layout>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="363" y="188" width="64" height="15"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="142" y="77" width="95" height="40"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="486" y="69" width="200" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="553" y="167" width="172" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="328" y="91" width="64" height="15"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="148" y="173" width="89" height="46"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="test deployment" type="ingenias.editor.models.DeployDiagramModelJGraph">
+<object id="test deployment" type="ingenias.editor.entities.DeployDiagramDataEntity">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="test"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="DebugGUI" nid="node4" type="Test">
+		<attr name="bounds">
+			<rectangle x="-169" y="-53" width="62" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="HelloWorldAgent" nid="node7" type="Agent">
+		<attr name="bounds">
+			<rectangle x="138" y="-23" width="103" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="8" nid="node9" type="DefinesDeployment">
+		<attr name="bounds">
+			<rectangle x="252" y="68" width="135" height="15"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	<connected id="node2">
+
+
+
+
+	</connected>
+	<connected id="node6">
+
+
+
+
+
+	</connected>
+	</node>
+			
+	<node id="BasicDeployment" nid="node5" type="DeploymentPackage">
+		<attr name="bounds">
+			<rectangle x="-112" y="-54" width="107" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="HelloWorldAgentCreation" nid="node2" type="DeploymentUnitByType">
+		<attr name="bounds">
+			<rectangle x="407" y="43" width="166" height="70"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="BasicTestingDeployment" nid="node0" type="TestingPackage">
+		<attr name="bounds">
+			<rectangle x="74" y="127" width="216" height="70"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="BasicDeployment" nid="node8" type="DeploymentPackage">
+		<attr name="bounds">
+			<rectangle x="-169" y="-53" width="107" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="DebugGUITestingDeployment" nid="node1" type="TestingPackage">
+		<attr name="bounds">
+			<rectangle x="303" y="127" width="216" height="70"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="BasicDeployment" nid="node6" type="DeploymentPackage">
+		<attr name="bounds">
+			<rectangle x="88" y="53" width="144" height="40"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="HelloWorldTest" nid="node3" type="Test">
+		<attr name="bounds">
+			<rectangle x="-112" y="-54" width="93" height="46"></rectangle>		</attr>
+
+	</node><parentship>
+<child id="node4" parent="node1"/>
+<child id="node5" parent="node0"/>
+<child id="node7" parent="node2"/>
+<child id="node8" parent="node1"/>
+<child id="node3" parent="node0"/>
+</parentship>
+<entityconstraints>
+<cellconstraint id="node2:INGENIAS">
+<currentcell id="node2" height="46" width="156"/>
+</cellconstraint>
+<cellconstraint id="node0:INGENIAS">
+<currentcell id="node0" height="46" width="153"/>
+</cellconstraint>
+<cellconstraint id="node1:INGENIAS">
+<currentcell id="node1" height="46" width="108"/>
+</cellconstraint>
+<cellconstraint id="node6:INGENIAS">
+<currentcell id="node6" height="46" width="107"/>
+</cellconstraint>
+</entityconstraints>
+
+
+	</graph>
+
+
+	<layout>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="-169" y="-53" width="62" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="138" y="-23" width="103" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="252" y="68" width="135" height="15"></rectangle>		</attr>
+		<attr name="view">
+			<string>ingenias</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="-112" y="-54" width="107" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="407" y="43" width="166" height="70"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="74" y="127" width="216" height="70"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="-169" y="-53" width="107" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="303" y="127" width="216" height="70"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="88" y="53" width="144" height="40"></rectangle>		</attr>
+		<attr name="view">
+			<string>UML</string>
+		</attr>
+
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="-112" y="-54" width="93" height="46"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+</models>
+</project>

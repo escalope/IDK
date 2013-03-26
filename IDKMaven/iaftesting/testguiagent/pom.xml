@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<parent>
+		<groupId>net.sf.ingenias</groupId>
+		<artifactId>iaftesting</artifactId>
+		<version>1.5-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.sf.ingenias</groupId>
+	<artifactId>testguiagent</artifactId>
+	<version>1.5-SNAPSHOT</version>
+	<name>An agent that processes events from a GUI. The GUI is simulated by the platform through an interface that produces the events</name>
+	<url>http://maven.apache.org</url>
+	<packaging>jar</packaging>
+	
+	<build>
+		<defaultGoal>package</defaultGoal>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+		      <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-dependency-plugin</artifactId>
+			<version>2.5.1</version>
+			<executions>
+			  <execution>
+			    <id>build-classpath</id>
+			    <phase>validate</phase>
+			    <goals>
+			      <goal>build-classpath</goal>
+			    </goals>
+			    <configuration>
+				<outputFile>target/classpath.txt</outputFile>
+			      <!-- configure the plugin here -->
+			    </configuration>
+			  </execution>
+			  <execution>
+			    <id>build-classpath-editor</id>
+			    <phase>validate</phase>
+			    <goals>
+			      <goal>build-classpath</goal>
+			    </goals>
+			    <configuration>
+    				<includeGroupIds>net.sf.ingenias</includeGroupIds>
+				<outputFile>target/classpathingenias.txt</outputFile>
+			      <!-- configure the plugin here -->
+			    </configuration>
+			  </execution>
+			</executions>
+		      </plugin>
+			
+			<!-- begin: izpack configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution><!-- by default associated with generate-sources phase -->
+						<id>generate sources for IAF</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+
+					<keepAlive>false</keepAlive>
+					<mainClass>ingenias.codeproc.IAFGenerator</mainClass>
+					<arguments>
+						<argument>${project.basedir}/src/main/spec/specification.xml</argument>
+						<argument>${project.basedir}</argument>
+						<argument>src/main/javagensrc</argument>
+						<argument>src/main/javapermsrc</argument>
+						<argument>true</argument> <!-- to force code generation and test this way the IAF -->
+					</arguments>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>add-main-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/javagensrc</source>
+								<source>src/main/javapermsrc</source>
+							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-test-source</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/test/java</source>
+								<source>src/test/javapermsrc</source>
+								<source>src/test/javagensrc</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.14</version>
+				<configuration>
+					<includes>
+						<include>**/*Test*.java</include>
+					</includes>
+					<properties>
+					<property>
+						<name>listener</name>
+						<value>org.fest.swing.testng.listener.ScreenshotOnFailureListener</value>						
+					</property>
+					</properties>
+				</configuration>
+			</plugin>
+
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<!-- copy-dependency plugin -->
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+											<goal>build-classpath</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore /><!--  to avoid errors in the eclipse m2e plugin -->
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>exec-maven-plugin</artifactId>
+										<versionRange>[1.0,)</versionRange>
+										<goals>
+											<goal>java</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+	<properties>
+		<!-- begin: izpack configuration -->
+		<staging.dir>${project.build.directory}/staging</staging.dir>
+		<izpack-standalone.version>4.3.5</izpack-standalone.version>
+		<!-- end: izpack configuration -->
+	</properties>
+</project>

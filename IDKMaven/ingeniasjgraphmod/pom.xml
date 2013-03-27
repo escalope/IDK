@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>ingenias</artifactId>
-		<version>1.5</version>
+		<version>1.6-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>ingeniasjgraphmod</artifactId>
-	<version>1.5</version>
+	<version>1.6-SNAPSHOT</version>
 	<name>A modified version of some JGraph files</name>
 	<description>A modified version of some JGraph files</description>
 	<url>http://ingenias.sf.net</url>
@@ -22,9 +22,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.5/iaf</connection>
-		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.5/iaf</developerConnection>
-		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.5/iaf</url>		
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iaf</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iaf</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/iaf</url>		
 	</scm>
 	<developers>
 		<developer>

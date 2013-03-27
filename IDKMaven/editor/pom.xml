@@ -1,15 +1,14 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>ingenias</artifactId>
-		<version>1.5-SNAPSHOT</version>
+		<version>1.5</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>editor</artifactId>
-	<version>1.5-SNAPSHOT</version>
+	<version>1.5</version>
 	<name>ingenias editor</name>
 	<description>The INGENIAS Development Kit</description>
 	<url>http://ingenias.sf.net</url>
@@ -24,9 +23,9 @@
 
 
 	<scm>
-		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/editor</connection>
-		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/editor</developerConnection>
-		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/editor</url>
+		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.5/editor</connection>
+		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.5/editor</developerConnection>
+		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/tags/ingenias-1.5/editor</url>
 	</scm>
 
 	<developers>
@@ -77,7 +76,7 @@
 		<dependency>
 			<groupId>net.sf.ingenias</groupId>
 			<artifactId>codegen</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.6</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -100,7 +99,7 @@
 		<dependency>
 			<groupId>net.sf.ingenias</groupId>
 			<artifactId>ingeniasjgraphmod</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.5</version>
 		</dependency>
 		<dependency>
 			<groupId>batik</groupId>
@@ -354,8 +353,7 @@
 								</filter>
 							</filters>
 							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>ingenias.editor.IDE</mainClass>
 								</transformer>
 							</transformers>

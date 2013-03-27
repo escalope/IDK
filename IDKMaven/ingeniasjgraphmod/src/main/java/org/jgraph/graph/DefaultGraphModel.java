@@ -1493,24 +1493,27 @@ public class DefaultGraphModel extends UndoableEditSupport implements
 
 		public static final int FRONT = -1, BACK = -2;
 
-		protected Object changeSource;
+		private Object changeSource;
 
-		protected transient Object[] cells;
+		private transient Object[] cells;
 
-		protected transient int[] next, prev;
+		private transient int[] next, prev;
 
-		protected int layer;
+		private int layer;
 
 		// The cell that change are the parents, because they need to
 		// reload their childs for reordering!
-		protected Object[] changed;
+		private Object[] changed;
 
 		/**
 		 * Constructs a GraphModelEdit. This modifies the order of the cells in
 		 * the model.
 		 */
 		public GraphModelLayerEdit(Object[] cells, int layer) {
-			this.cells = cells;
+			// A copy is made to avoid changes in the original array affect this listener
+			this.cells = new Object[cells.length];
+			System.arraycopy(cells, 0, this.cells, 0, cells.length); 
+			
 			this.layer = layer;
 			next = new int[cells.length];
 			prev = new int[cells.length];
@@ -1643,7 +1646,7 @@ public class DefaultGraphModel extends UndoableEditSupport implements
 		 * @exception CannotRedoException
 		 *                if the change cannot be redone
 		 */
-		public void redo() throws CannotRedoException {
+		 public void redo() throws CannotRedoException {
 			super.redo();
 			updateNext();
 			execute();
@@ -1655,7 +1658,7 @@ public class DefaultGraphModel extends UndoableEditSupport implements
 		 * @exception CannotUndoException
 		 *                if the change cannot be undone
 		 */
-		public void undo() throws CannotUndoException {
+		 public void undo() throws CannotUndoException {
 			super.undo();
 			execute();
 		}
@@ -1664,7 +1667,7 @@ public class DefaultGraphModel extends UndoableEditSupport implements
 		 * Execute this edit such that the next invocation to this method will
 		 * invert the last execution.
 		 */
-		public void execute() {
+		 public void execute() {	
 			for (int i = 0; i < cells.length; i++) {
 				List list = getParentList(cells[i]);
 				if (list != null) {

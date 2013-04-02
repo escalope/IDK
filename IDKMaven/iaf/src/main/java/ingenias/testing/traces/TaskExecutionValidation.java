@@ -68,16 +68,18 @@ public class TaskExecutionValidation {
 				boolean result=true;			
 				Iterator<TaskTrace> taskSequence=possibleTrace.iterator();
 				long lastTimeStampOfFinalState=Long.MAX_VALUE;
+				int traceNumber=0;
 				while (result && taskSequence.hasNext()){
 					TaskTrace tt=taskSequence.next();
+					traceNumber++;
 					latestStateTimeStamp=Math.max(tt.getTimeStamp(),latestStateTimeStamp);
 					if (taskBelongsToAgent(tt.getAid(),tt.getTask().getType())){
 						result=ga.next(tt.getAid()+"-"+tt.getTask().getType());
 						if (!result)
-							counterExamples.add("Failed when processing transition "+tt.toString()+
+							counterExamples.add("Failed when processing transition "+traceNumber+":"+tt.toString()+
 									" because the task execution did not trigger any transition in the validation automata." +
 									"The current state of the automata is  "+ga.getCurrentStates()+"\n " +
-											"Full trace:\n"+Trace.getTraceVectorPrettyPrint(possibleTrace));
+											"Full trace of  "+men+" which is incompatible with the automata:\n"+Trace.getTraceVectorPrettyPrint(possibleTrace));
 						else {
 							if (ga.hasFinalStateBeenReachedInLastTransition()){
 								finalStatesTimeStamps.add(tt.getTimeStamp());
@@ -86,7 +88,7 @@ public class TaskExecutionValidation {
 								if (timeBetweenFinalStates>millisPerCycle){
 									// failure because the cycle took more than allowed millesPerCycle
 									result=false;
-									counterExamples.add("Failed at "+tt.toString()+" because the time between final states has exceeded the "+millisPerCycle+
+									counterExamples.add("Failed when processing  transition "+traceNumber+":"+tt.toString()+" because the time between final states has exceeded the "+millisPerCycle+
 											" millis limit .Current Time has been "+timeBetweenFinalStates+
 											" millis:\n"+Trace.getTraceVectorPrettyPrint(possibleTrace));
 

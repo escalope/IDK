@@ -471,4 +471,17 @@ public class EventSequenceCheckerListener implements AgentEventListener {
         
     }
 
+	@Override
+	public void addedNewEntityToMSFromApp(String agentid, String agentType,
+			Task t, MentalEntity entityType) {
+	
+		checker.notify(new Event(
+				agentid,agentType,
+				EventKind.AddedNewEntityToMS,
+				new Task[]{},new MentalEntity[]{entityType},
+				new StateGoal[]{},
+				new RuntimeConversation[]{},
+				null));
+	}
+
 }

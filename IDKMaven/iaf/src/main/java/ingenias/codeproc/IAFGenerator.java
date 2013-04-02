@@ -1021,7 +1021,8 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 					//if (doIGenerateComponentAndTaskCode()) {
 					String actualCode = codeComponent.getAttributeByName("Code").getSimpleValue();
 					if (actualCode.length() == 0) {
-						actualCode = "//REPLACE THIS COMMENT WITH YOUR CODE";
+						actualCode = "//REPLACE THIS COMMENT WITH YOUR CODE\n"+
+					"System.out.println(getAgentID()+\" executing -> \"+getID()+\":\"+getType());";
 					}
 					taskRepeat.add(new Var("code", actualCode, codeComponent.getID(), "Code"));
 					taskRepeat.add(new Var("codeid", codeComponent.getID()));

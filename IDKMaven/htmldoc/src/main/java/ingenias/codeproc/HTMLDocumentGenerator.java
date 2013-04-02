@@ -153,8 +153,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		p.addVar(new Var("output",
 				( (ProjectProperty)this.getProperty("htmldoc:output")).
 				value));
-		System.err.println("output:"+( (ProjectProperty)this.getProperty("htmldoc:output")).
-				value);
+
 		Hashtable pathtable = new Hashtable();
 		
 		Hashtable paths = new Hashtable();
@@ -234,7 +233,6 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			r.add(new Var("tipo", gs[k].getType()));
 			
 			try {
-				System.err.println("adding"+gs[k].getAttributeByName("Description").getSimpleValue());
 				r.add(new Var("description",
 						gs[k].getAttributeByName("Description").getSimpleValue()));
 			}
@@ -390,13 +388,9 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 				Properties props = jadegen.getBrowser().getState().prop;
 				new File(args[1]+"/dochtml").mkdirs();
 				jadegen.putProperty(new ProjectProperty("htmldoc","htmldoc:output","output",args[1]+"/dochtml","htmldoc"));  
-							
+					
 
-				for (Object key: props.keySet()){
-					System.err.println(((ProjectProperty)props.get(key.toString())).key+":"+
-							((ProjectProperty)props.get(key.toString())).value);
-				};
-
+				
 				jadegen.run();
 
 			} else {

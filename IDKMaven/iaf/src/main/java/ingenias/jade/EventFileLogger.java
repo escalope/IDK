@@ -424,4 +424,11 @@ public class EventFileLogger implements AgentEventListener{
            logMSM("Added lock to all entities of type "+type+".  Current locks:"+cannotBeDeleted.toString(),
 					aname);
     }
+
+	@Override
+	public void addedNewEntityToMSFromApp(String agentid, String agentType,
+			Task t, MentalEntity newEntity) {
+		logMSP("Produced entity "+newEntity.getId()+":"+newEntity.getType()+" from task "+t.getID()+":"+t.getType()+" from an application",agentid,t.getID(),t.getType());
+		
+	}
 }

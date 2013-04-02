@@ -181,6 +181,11 @@ public class AgentEventAdapter implements AgentEventListener{
 
 		
 	}
+	
+	@Override
+	public void addedNewEntityToMSFromApp(String agentid, String agentType,Task t,MentalEntity entityType ){
+		
+	}
 
 	@Override
 	public void addedNewEntityToMS(String agentid, String agentType, Task t,

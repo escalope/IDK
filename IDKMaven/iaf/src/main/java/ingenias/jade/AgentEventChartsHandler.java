@@ -286,4 +286,11 @@ public class AgentEventChartsHandler implements AgentEventListener {
       
     }
 
+	@Override
+	public void addedNewEntityToMSFromApp(String agentid, String agentType,
+			Task t, MentalEntity entityType) {
+
+		
+	}
+
 }

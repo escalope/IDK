@@ -70,6 +70,7 @@ public interface AgentEventListener {
 	
 	public void addedNewEntityToMS(String agentid, String agentType,MentalEntity entityType );
 	public void addedNewEntityToMS(String agentid, String agentType,Task t,MentalEntity entityType );
+	public void addedNewEntityToMSFromApp(String agentid, String agentType,Task t,MentalEntity entityType );
 
 	public void producedAConversation(String agentid, String agentType,Task task, RuntimeConversation conv );
 

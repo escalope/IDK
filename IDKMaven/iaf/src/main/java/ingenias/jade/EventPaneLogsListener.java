@@ -521,4 +521,16 @@ public class EventPaneLogsListener implements AgentEventListener {
 			}});
 	}
 
+
+	@Override
+	public void addedNewEntityToMSFromApp(final String agentid, String agentType,
+			final Task t, final MentalEntity entityType) {
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				logMSM("Added entity "+entityType+" from an application with a previous invocation of task "+t,
+						agentid);
+			}});
+		
+	}
+
 }

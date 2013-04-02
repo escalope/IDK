@@ -356,4 +356,13 @@ public class EventManager implements AgentEventListener{
 			}
     }
 
+	@Override
+	public void addedNewEntityToMSFromApp(String agentid, String agentType,
+			Task t, MentalEntity entityType) {
+		  for (AgentEventListener listener:listeners){
+				 listener.addedNewEntityToMSFromApp(agentid,agentType,t,entityType);
+				}
+		
+	}
+
 }

@@ -282,8 +282,10 @@ public class TestGenerator {
 				eventInjection.add(new Var("eventfreq",freq));
 				eventInjection.add(new Var("eventfinishingperiod",finishingperiod));
 				eventInjection.add(new Var("eventinitperiod",initperiod));
-				eventInjection.add(new Var("injectedagentid",aid));
-				eventInjection.add(new Var("injectedentity",newInfo.getID()));
+				eventInjection.add(new Var("injectedagentid",Utils
+						.replaceBadChars(aid)));
+				eventInjection.add(new Var("injectedentity",Utils
+						.replaceBadChars(newInfo.getID())));
 			}
 
 		}
@@ -360,9 +362,13 @@ public class TestGenerator {
 				wftest.add(initstateR);						
 				initstateR.add(new Var("firststate",currentStateID));						
 				initstateR.add(new Var("secondstate",nextStateId));
-				initstateR.add(new Var("transcondition",aid+"-"+task.getID()));
-				initstateR.add(new Var("wfagentid",aid));
-				initstateR.add(new Var("wftaskid",task.getID()));
+				initstateR.add(new Var("transcondition",Utils
+						.replaceBadChars(aid)+"-"+Utils
+						.replaceBadChars(task.getID())));
+				initstateR.add(new Var("wfagentid",Utils
+						.replaceBadChars(aid)));
+				initstateR.add(new Var("wftaskid",Utils
+						.replaceBadChars(task.getID())));
 			}
 		}
 
@@ -389,9 +395,13 @@ public class TestGenerator {
 						wftest.add(initstateR);						
 						initstateR.add(new Var("firststate",currentStateID));						
 						initstateR.add(new Var("secondstate",nextStateId));
-						initstateR.add(new Var("transcondition",aid+"-"+task.getID()));						
-						initstateR.add(new Var("wfagentid",aid));
-						initstateR.add(new Var("wftaskid",task.getID()));
+						initstateR.add(new Var("transcondition",Utils
+								.replaceBadChars(aid)+"-"+Utils
+								.replaceBadChars(task.getID())));						
+						initstateR.add(new Var("wfagentid",Utils
+								.replaceBadChars(aid)));
+						initstateR.add(new Var("wftaskid",Utils
+								.replaceBadChars(task.getID())));
 					}
 				}
 			}
@@ -418,9 +428,13 @@ public class TestGenerator {
 				wftest.add(initstateR);						
 				initstateR.add(new Var("firststate",currentStateID));						
 				initstateR.add(new Var("secondstate",nextStateId));
-				initstateR.add(new Var("transcondition",aid+"-"+task.getID()));
-				initstateR.add(new Var("wfagentid",aid));
-				initstateR.add(new Var("wftaskid",task.getID()));
+				initstateR.add(new Var("transcondition",Utils
+						.replaceBadChars(aid)+"-"+Utils
+						.replaceBadChars(task.getID())));
+				initstateR.add(new Var("wfagentid",Utils
+						.replaceBadChars(aid)));
+				initstateR.add(new Var("wftaskid",Utils
+						.replaceBadChars(task.getID())));
 			}
 		}
 

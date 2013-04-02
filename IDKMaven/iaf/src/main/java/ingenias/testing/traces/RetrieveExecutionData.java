@@ -19,7 +19,7 @@
     along with INGENIAS Agent Framework; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-*/
+ */
 package ingenias.testing.traces;
 
 import jade.lang.acl.ACLMessage;
@@ -37,31 +37,31 @@ import ingenias.jade.components.TaskOutput;
 
 public class RetrieveExecutionData extends AgentEventAdapter{
 
-		private Hashtable<MentalEntity, Trace> traces=new Hashtable<MentalEntity, Trace>();
+	private Hashtable<MentalEntity, Trace> traces=new Hashtable<MentalEntity, Trace>();
 
-		public Hashtable<MentalEntity, Trace> getTraces(){
-			return traces;
-		}
+	public Hashtable<MentalEntity, Trace> getTraces(){
+		return traces;
+	}
 
-		public Trace getTrace(MentalEntity me){
-			if (traces.containsKey(me))
-				return traces.get(me);
-			else
-				return Trace.emptyTrace();
-		}
-
-
-
-
-		private void putTrace(MentalEntity me, Trace ntrace) {
-			traces.put(me,ntrace);			
-		}
+	public Trace getTrace(MentalEntity me){
+		if (traces.containsKey(me))
+			return traces.get(me);
+		else
+			return Trace.emptyTrace();
+	}
 
 
 
-		private void removeTrace(MentalEntity me) {
-			traces.remove(me);
-		}
+
+	private void putTrace(MentalEntity me, Trace ntrace) {
+		traces.put(me,ntrace);			
+	}
+
+
+
+	private void removeTrace(MentalEntity me) {
+		traces.remove(me);
+	}
 
 
 
@@ -147,32 +147,52 @@ public class RetrieveExecutionData extends AgentEventAdapter{
 			}
 		}*/
 
-		@Override
-		public synchronized void taskExecutionFinished(String agentid, String agentType,
-				Task task) {
-			Vector<TaskOutput> outputs = task.getOutputs();
-			Vector<MentalEntity> inputs = task.getInputs();
-			HashSet<Trace> traces=new HashSet<Trace>();
-			for (MentalEntity me:inputs){
-				Trace currentTrace = getTrace(me);
-				if (!currentTrace.isEmpty())
-					traces.add(currentTrace);				
-			}
-
-			for (TaskOutput to:outputs){
-				HashSet<MentalEntity> consumedEntities = to.getConsumedEntities();
-				HashSet<MentalEntity> newEntities1 = to.getNewEntitiesMS();
-				newEntities1.addAll(to.getNewEntitiesWF());
-				for (MentalEntity me:newEntities1){		
-					Trace ntrace=Trace.createTrace(agentid,task,traces);
-					putTrace(me,ntrace);					
-				}
-				for (MentalEntity me:consumedEntities){
-					HashSet<Trace> metraces=new HashSet<Trace>();
-					metraces.add(getTrace(me));
-					Trace ntrace=Trace.createTrace(agentid,task,metraces);
-					putTrace(me,ntrace);								
-				}				
-			}	
+	@Override
+	public synchronized void taskExecutionFinished(String agentid, String agentType,
+			Task task) {
+		
+		Vector<TaskOutput> outputs = task.getOutputs();
+		Vector<MentalEntity> inputs = task.getInputs();
+		HashSet<Trace> traces=new HashSet<Trace>();
+		for (MentalEntity me:inputs){
+			Trace currentTrace = getTrace(me);
+			if (!currentTrace.isEmpty())
+				traces.add(currentTrace);				
 		}
+
+		for (TaskOutput to:outputs){
+			HashSet<MentalEntity> consumedEntities = to.getConsumedEntities();			
+			HashSet<MentalEntity> newEntities1 = to.getNewEntitiesMS();
+			newEntities1.addAll(to.getNewEntitiesWF());
+			for (MentalEntity me:newEntities1){		
+				Trace ntrace=Trace.createTrace(agentid,task,traces);
+				putTrace(me,ntrace);					
+			}
+			for (MentalEntity me:consumedEntities){
+				HashSet<Trace> metraces=new HashSet<Trace>();
+				metraces.add(getTrace(me));
+				Trace ntrace=Trace.createTrace(agentid,task,metraces);
+				putTrace(me,ntrace);								
+			}				
+		}	
+		
 	}
+	
+	@Override
+	public void addedNewEntityToMSFromApp(String agentid, String agentType,
+			Task task, MentalEntity entityType) {
+		Vector<TaskOutput> outputs = task.getOutputs();
+		Vector<MentalEntity> inputs = task.getInputs();
+		HashSet<Trace> traces=new HashSet<Trace>();
+		for (MentalEntity me:inputs){
+			Trace currentTrace = getTrace(me);
+			if (!currentTrace.isEmpty())
+				traces.add(currentTrace);				
+		}
+		Trace ntrace=Trace.createTrace(agentid,task,traces);
+		putTrace(entityType,ntrace);
+		
+	}
+
+
+}

@@ -34,12 +34,14 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 
 import org.jgraph.JGraph;
 import org.jgraph.graph.BasicMarqueeHandler;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.event.ContainerListener;
 
 class GraphImp
 extends AttributedElementImp
@@ -217,14 +219,59 @@ implements Graph {
 	}
 
 	public void generateImage(String filename) {
-		File target = new File(filename);
-		new File(target.getParent()).mkdirs();
+		final File target = new File(filename);
+		new File(target.getParent()).mkdirs();		
+		//final JPanel temp=new JPanel(new BorderLayout());
+		//final JGraph njg=this.mjg.cloneJGraph(ids); // the cloned jgraph works bad 
 
-		JPanel temp=new JPanel(new BorderLayout());
-		JGraph njg=this.mjg.cloneJGraph(ids);
-		temp.add(njg,BorderLayout.CENTER);
-		njg.setSelectionCells(new Object[0]);
-		ingenias.editor.export.Diagram2SVG.diagram2SVG(temp, target,"png");
+		//temp.add(mjg,BorderLayout.CENTER);
+		mjg.setSelectionCells(new Object[0]);
+		try {
+			SwingUtilities.invokeAndWait(new Runnable(){
+				@Override
+				public void run() {
+					mjg.getListenerContainer().setEnabled(true);					
+					mjg.getListenerContainer().graphChanged(null); // to refresh the container layout
+					mjg.getListenerContainer().setToFrontVisibleChildren();				
+				}
+
+			});
+			
+			SwingUtilities.invokeAndWait(new Runnable(){
+				@Override
+				public void run() {
+
+					//((ModelJGraph)mjg).createListeners();
+					//((ModelJGraph)mjg).enableAllListeners();
+					//((ModelJGraph)mjg).getListenerContainer().setEnabled(true);	
+					JPanel temp=new JPanel(new BorderLayout());
+					Container parent = mjg.getParent();
+					if (parent!=null)
+						parent.remove(mjg);
+					temp.add(mjg);	
+					temp.invalidate();
+					temp.repaint();					
+					//((ModelJGraph)mjg).getListenerContainer().refreshContainer();
+					//((ModelJGraph)mjg).getListenerContainer().refreshContainer();
+					//((ModelJGraph)mjg).getListenerContainer().setToFrontVisibleChildren();
+					ingenias.editor.export.Diagram2SVG.diagram2SVG(temp, target,"png");
+					temp.remove(mjg);
+					if (parent!=null){
+						parent.add(mjg);
+						parent.repaint();
+					}
+				}
+
+			});
+
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 
 	}

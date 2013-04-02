@@ -36,6 +36,7 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 import ingenias.exception.InvalidEntity;
 import ingenias.exception.NotFound;
 import ingenias.jade.comm.StateBehavior;
+import ingenias.jade.components.Task;
 import ingenias.jade.graphics.AgentModelPanelIAF;
 import ingenias.jade.mental.Agent_data;
 import ingenias.testing.DebugUtils;
@@ -733,6 +734,33 @@ MentalStateUpdater {
 		this.setModified();
 
 	}
+	
+	public synchronized void addMentalEntityFromApp(MentalEntity me, Task t)
+			throws ingenias.exception.InvalidEntity {
+				checkLockChanges();
+				try {
+					try {
+						if (me instanceof RuntimeConversation)
+							me.getPrefs(null).setView(ViewType.UML);
+						this.findEntity(me.getId());
+						// There cannot be two entities with the same id
+						throw new InvalidEntity("Entity " + me.getId() + " of type "
+								+ me.getType() + " could not be inserted "
+								+ "because there was another with the same id");
+					} catch (NotFound e) {
+
+						this.insert(me);
+						EventManager.getInstance().addedNewEntityToMSFromApp(
+								agentName, "", t, me);
+					}
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				}
+				this.setModified();
+
+			}
 
 	private void addMentalEntityPrivate(MentalEntity me)
 	throws InvalidEntity {

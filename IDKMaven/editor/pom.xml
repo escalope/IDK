@@ -23,9 +23,9 @@
 
 
 	<scm>
-		<connection>scm:svn:http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/editor</connection>
-		<developerConnection>scm:svn:https://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/editor</developerConnection>
-		<url>http://ingenias.svn.sourceforge.net/svnroot/ingenias/trunk/IDKMaven/editor</url>
+		<connection>svn://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/editor</connection>
+		<developerConnection>svn://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/editor</developerConnection>
+		<url>http://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/editor/</url>
 	</scm>
 
 	<developers>

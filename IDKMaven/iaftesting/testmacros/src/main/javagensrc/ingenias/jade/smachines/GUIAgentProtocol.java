@@ -154,24 +154,6 @@ public GUIAgentProtocol(){};
                  String cardinality="";
                  
 					DFAgentDescription[] agents=null;		 			
-		 			agents=yp.getAgents("Role2");
-                   if (agents==null || agents.length<=0)
-                      throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role Role2");
-                   if (cardinality.equals("1") || cardinality.equals(""))
-                    cols.add(new AgentExternalDescription(agents[0].getName(),"Role2"));
-                    else
-                	   if (cardinality.equals("1__*"))
-						   for (int k=0;k<agents.length;k++)
-                			  cols.add(new AgentExternalDescription(agents[k].getName(),"Role2"));
-                 } catch (FIPAException fe){
-                   fe.printStackTrace();
-                   throw new NoAgentsFound();
-                 }
-                 
-                 try {
-                 String cardinality="";
-                 
-					DFAgentDescription[] agents=null;		 			
 		 			agents=yp.getAgents("Role1");
                    if (agents==null || agents.length<=0)
                       throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role Role1");
@@ -181,6 +163,24 @@ public GUIAgentProtocol(){};
                 	   if (cardinality.equals("1__*"))
 						   for (int k=0;k<agents.length;k++)
                 			  cols.add(new AgentExternalDescription(agents[k].getName(),"Role1"));
+                 } catch (FIPAException fe){
+                   fe.printStackTrace();
+                   throw new NoAgentsFound();
+                 }
+                 
+                 try {
+                 String cardinality="";
+                 
+					DFAgentDescription[] agents=null;		 			
+		 			agents=yp.getAgents("Role2");
+                   if (agents==null || agents.length<=0)
+                      throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role Role2");
+                   if (cardinality.equals("1") || cardinality.equals(""))
+                    cols.add(new AgentExternalDescription(agents[0].getName(),"Role2"));
+                    else
+                	   if (cardinality.equals("1__*"))
+						   for (int k=0;k<agents.length;k++)
+                			  cols.add(new AgentExternalDescription(agents[k].getName(),"Role2"));
                  } catch (FIPAException fe){
                    fe.printStackTrace();
                    throw new NoAgentsFound();
@@ -225,9 +225,9 @@ public GUIAgentProtocol(){};
             Vector<String> toVerify=new Vector<String>();
             HashSet<String> rolesFound=new HashSet<String>();
             
-         	toVerify.add("Role2");
-         	
          	toVerify.add("Role1");
+         	
+         	toVerify.add("Role2");
          	
         	if (actors.length<toVerify.size())
         		return false;

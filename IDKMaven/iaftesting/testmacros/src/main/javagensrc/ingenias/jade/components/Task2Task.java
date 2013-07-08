@@ -45,6 +45,8 @@ public class Task2Task extends Task{
  public void execute() throws TaskException{
 
 
+        fake_Task3_output_for_task_Task2  eifake_Task3_output_for_task_Task2=(fake_Task3_output_for_task_Task2)this.getFirstInputOfType("fake_Task3_output_for_task_Task2");             
+
         AnotherGlobalFact  eiAnotherGlobalFact=(AnotherGlobalFact)this.getFirstInputOfType("AnotherGlobalFact");             
 
 
@@ -64,6 +66,10 @@ public class Task2Task extends Task{
   																			outputs);
   		
 		
+		
+		fake_Task2_output_for_task_Task4 outputsdefaultfake_Task2_output_for_task_Task4=
+			(fake_Task2_output_for_task_Task4)
+				outputsdefault.getEntityByType("fake_Task2_output_for_task_Task4");								
 		
 		FinalFact outputsdefaultFinalFact=
 			(FinalFact)

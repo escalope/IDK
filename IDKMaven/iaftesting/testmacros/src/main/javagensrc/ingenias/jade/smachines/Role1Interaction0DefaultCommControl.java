@@ -56,6 +56,8 @@ import ingenias.exception.NotFound;
      
      lw.addDeletionLockExpectedType("AnotherGlobalFact");
      
+     lw.addDeletionLockExpectedType("fake_Task3_output_for_task_Task2");
+     
      
     }
     
@@ -67,6 +69,8 @@ import ingenias.exception.NotFound;
     // Facts that cannot be removed because they must be sent
      
      locks.add("AnotherGlobalFact");
+     
+     locks.add("fake_Task3_output_for_task_Task2");
      
      
     return locks;
@@ -118,6 +122,8 @@ import ingenias.exception.NotFound;
          
 		 
 		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"AnotherGlobalFact").isEmpty();
+		 
+		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"fake_Task3_output_for_task_Task2").isEmpty();
 		   
          if (allexist && true){
            sb.clearContentNextMessage();
@@ -130,6 +136,15 @@ import ingenias.exception.NotFound;
 	       getLR().removeDeletionLockType("AnotherGlobalFact");
 	       lockProcessed("AnotherGlobalFact");
            //MainInteractionManager.log("Removing lock AnotherGlobalFact",this.getAgent().getLocalName()+"-"+sb.getConversationID());
+            
+           
+           
+	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"fake_Task3_output_for_task_Task2");
+	   	   for (MentalEntity me:mfcontent)             
+             sb.addContentForNextMessage(me);    
+	       getLR().removeDeletionLockType("fake_Task3_output_for_task_Task2");
+	       lockProcessed("fake_Task3_output_for_task_Task2");
+           //MainInteractionManager.log("Removing lock fake_Task3_output_for_task_Task2",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             
              
            

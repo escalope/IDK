@@ -95,6 +95,17 @@ public class Agent1JADEAgent
 			to=new TaskOutput("default");
   
 		
+		expectedInput=this.getMSM().getMentalEntityByType("fake_Task2_output_for_task_Task4");
+		if (this.getLM().canBeDeleted(expectedInput)){             
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("fake_Task2_output_for_task_Task4");
+			 } else {
+			    addExpectedInputs(tobject, "fake_Task2_output_for_task_Task4","1",expectedInput);
+             	addConsumedInput(to,"fake_Task2_output_for_task_Task4",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
+		} 
+	      
 		expectedInput=this.getMSM().getMentalEntityByType("FinalFact");
 		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
@@ -143,6 +154,17 @@ public class Agent1JADEAgent
 			tobject.setConversationContext(conversation);
   
 		
+		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"fake_Task2_output_for_task_Task4");
+		if (this.getLM().canBeDeleted(expectedInput)){                          
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("fake_Task2_output_for_task_Task4");
+			 } else {
+			    addExpectedInputs(tobject, "fake_Task2_output_for_task_Task4","1",expectedInput);
+             	addConsumedInput(to,"fake_Task2_output_for_task_Task4",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
+		} 
+	      
 		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"FinalFact");
 		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
@@ -211,6 +233,15 @@ public class Agent1JADEAgent
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"fake_Task3_output_for_task_Task2");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("fake_Task3_output_for_task_Task2");
+			else {
+			    addExpectedInputs(tobject, "fake_Task3_output_for_task_Task2","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
 		
 	      expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
              tobject.addApplication("YellowPages",expectedApp);
@@ -220,6 +251,11 @@ public class Agent1JADEAgent
 	     boolean alreadyExists=true;
 	 
 	     
+	     
+		    {fake_Task2_output_for_task_Task4 expectedOutputfake_Task2_output_for_task_Task4=		    
+		     new fake_Task2_output_for_task_Task4(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputfake_Task2_output_for_task_Task4,TaskOperations.CreateWF));
+            }
 	     
 		    {FinalFact expectedOutputFinalFact=		    
 		     new FinalFact(MentalStateManager.generateMentalEntityID());			

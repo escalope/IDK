@@ -106,6 +106,17 @@ public class Agent0JADEAgent
              allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
 		} 
 	      
+		expectedInput=this.getMSM().getMentalEntityByType("fake_Task3_output_for_task_Task2");
+		if (this.getLM().canBeDeleted(expectedInput)){             
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("fake_Task3_output_for_task_Task2");
+			 } else {
+			    addExpectedInputs(tobject, "fake_Task3_output_for_task_Task2","1",expectedInput);
+             	addConsumedInput(to,"fake_Task3_output_for_task_Task2",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
+		} 
+	      
 		 tobject.addOutput(to);
      		   	
 	      initialised= allEntitiesExist;
@@ -150,6 +161,17 @@ public class Agent0JADEAgent
 			 } else {
 			    addExpectedInputs(tobject, "AnotherGlobalFact","1",expectedInput);
              	addConsumedInput(to,"AnotherGlobalFact",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
+		} 
+	      
+		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"fake_Task3_output_for_task_Task2");
+		if (this.getLM().canBeDeleted(expectedInput)){                          
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("fake_Task3_output_for_task_Task2");
+			 } else {
+			    addExpectedInputs(tobject, "fake_Task3_output_for_task_Task2","1",expectedInput);
+             	addConsumedInput(to,"fake_Task3_output_for_task_Task2",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
 		} 
@@ -211,6 +233,15 @@ public class Agent0JADEAgent
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"fake_Task0_output_for_task_Task1");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("fake_Task0_output_for_task_Task1");
+			else {
+			    addExpectedInputs(tobject, "fake_Task0_output_for_task_Task1","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
 		
 	      expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
              tobject.addApplication("YellowPages",expectedApp);
@@ -224,6 +255,11 @@ public class Agent0JADEAgent
 		    {GlobalFact expectedOutputGlobalFact=		    
 		     new GlobalFact(MentalStateManager.generateMentalEntityID());			
              to.add(new OutputEntity(expectedOutputGlobalFact,TaskOperations.CreateWF));
+            }
+	     
+		    {fake_Task1_output_for_task_Task3 expectedOutputfake_Task1_output_for_task_Task3=		    
+		     new fake_Task1_output_for_task_Task3(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputfake_Task1_output_for_task_Task3,TaskOperations.CreateWF));
             }
 	     
      
@@ -283,6 +319,15 @@ public class Agent0JADEAgent
 	     
             
 		
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"fake_Task1_output_for_task_Task3");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("fake_Task1_output_for_task_Task3");
+			else {
+			    addExpectedInputs(tobject, "fake_Task1_output_for_task_Task3","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"GlobalFact");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("GlobalFact");
@@ -305,6 +350,11 @@ public class Agent0JADEAgent
 		    {AnotherGlobalFact expectedOutputAnotherGlobalFact=		    
 		     new AnotherGlobalFact(MentalStateManager.generateMentalEntityID());			
              to.add(new OutputEntity(expectedOutputAnotherGlobalFact,TaskOperations.CreateWF));
+            }
+	     
+		    {fake_Task3_output_for_task_Task2 expectedOutputfake_Task3_output_for_task_Task2=		    
+		     new fake_Task3_output_for_task_Task2(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputfake_Task3_output_for_task_Task2,TaskOperations.CreateWF));
             }
 	     
      

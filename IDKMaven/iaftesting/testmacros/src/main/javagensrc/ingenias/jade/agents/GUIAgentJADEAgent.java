@@ -95,6 +95,17 @@ public class GUIAgentJADEAgent
 			to=new TaskOutput("default");
   
 		
+		expectedInput=this.getMSM().getMentalEntityByType("fake_Task0_output_for_task_Task1");
+		if (this.getLM().canBeDeleted(expectedInput)){             
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("fake_Task0_output_for_task_Task1");
+			 } else {
+			    addExpectedInputs(tobject, "fake_Task0_output_for_task_Task1","1",expectedInput);
+             	addConsumedInput(to,"fake_Task0_output_for_task_Task1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
+		} 
+	      
 		expectedInput=this.getMSM().getMentalEntityByType("AnotherFact");
 		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
@@ -150,6 +161,9 @@ public class GUIAgentJADEAgent
 	      
 	      
 	     
+	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("GUI");
+             tobject.addApplication("GUI",expectedApp);
+	      
 	      
 	     // Default application for all tasks executed within a conversation
 	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
@@ -162,6 +176,11 @@ public class GUIAgentJADEAgent
 	      
  
 	     
+	     
+		    {fake_ProcessAGUIEvent_output_for_task_Task0 expectedOutputfake_ProcessAGUIEvent_output_for_task_Task0=		    
+		     new fake_ProcessAGUIEvent_output_for_task_Task0(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputfake_ProcessAGUIEvent_output_for_task_Task0,TaskOperations.CreateWF));
+            }
 	     
 		    {MyFrameFact expectedOutputMyFrameFact=		    
 		     new MyFrameFact(MentalStateManager.generateMentalEntityID());			
@@ -208,6 +227,17 @@ public class GUIAgentJADEAgent
 				nonExistingInputs.add("MyFrameFact");
 			 } else {
 			    addExpectedInputs(tobject, "MyFrameFact","1",expectedInput);
+             	addConsumedInput(to,"1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+
+	      
+		
+             expectedInput=this.getMSM().getMentalEntityByType("fake_ProcessAGUIEvent_output_for_task_Task0");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("fake_ProcessAGUIEvent_output_for_task_Task0");
+			 } else {
+			    addExpectedInputs(tobject, "fake_ProcessAGUIEvent_output_for_task_Task0","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -264,6 +294,11 @@ public class GUIAgentJADEAgent
             }
 	     
 	     
+		    {fake_Task0_output_for_task_Task1 expectedOutputfake_Task0_output_for_task_Task1=		    
+		     new fake_Task0_output_for_task_Task1(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputfake_Task0_output_for_task_Task1,TaskOperations.CreateWF));
+            }
+	     
 		    {AnotherFact expectedOutputAnotherFact=		    
 		     new AnotherFact(MentalStateManager.generateMentalEntityID());			
              to.add(new OutputEntity(expectedOutputAnotherFact,TaskOperations.CreateWF));
@@ -309,6 +344,17 @@ public class GUIAgentJADEAgent
 			tobject.setConversationContext(conversation);
   
 		
+		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"fake_Task0_output_for_task_Task1");
+		if (this.getLM().canBeDeleted(expectedInput)){                          
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("fake_Task0_output_for_task_Task1");
+			 } else {
+			    addExpectedInputs(tobject, "fake_Task0_output_for_task_Task1","1",expectedInput);
+             	addConsumedInput(to,"fake_Task0_output_for_task_Task1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
+		} 
+	      
 		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"AnotherFact");
 		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
@@ -368,6 +414,15 @@ public class GUIAgentJADEAgent
 	     
             
 		
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"fake_Task2_output_for_task_Task4");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("fake_Task2_output_for_task_Task4");
+			else {
+			    addExpectedInputs(tobject, "fake_Task2_output_for_task_Task4","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"FinalFact");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("FinalFact");

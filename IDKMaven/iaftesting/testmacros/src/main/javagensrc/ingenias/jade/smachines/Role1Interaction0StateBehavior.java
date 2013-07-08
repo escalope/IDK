@@ -145,8 +145,7 @@ private MentalStateReader msr=null;
           cardinality=receivers.size();          
           } catch (NoAgentsFound ex) {
                     ex.printStackTrace();
-                }   
-       
+                }          
       }
       
       if (allexist && true){     

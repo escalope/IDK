@@ -51,6 +51,8 @@ public class ProcessAGUIEventTask extends Task{
 
 
 
+			
+        GUIApp eaGUI=(GUIApp)this.getApplication("GUI");
 
 
 
@@ -64,6 +66,10 @@ public class ProcessAGUIEventTask extends Task{
   																			outputs);
   		
 		
+		
+		fake_ProcessAGUIEvent_output_for_task_Task0 outputsdefaultfake_ProcessAGUIEvent_output_for_task_Task0=
+			(fake_ProcessAGUIEvent_output_for_task_Task0)
+				outputsdefault.getEntityByType("fake_ProcessAGUIEvent_output_for_task_Task0");								
 		
 		MyFrameFact outputsdefaultMyFrameFact=
 			(MyFrameFact)

@@ -47,6 +47,8 @@ public class Task3Task extends Task{
 
         GlobalFact  eiGlobalFact=(GlobalFact)this.getFirstInputOfType("GlobalFact");             
 
+        fake_Task1_output_for_task_Task3  eifake_Task1_output_for_task_Task3=(fake_Task1_output_for_task_Task3)this.getFirstInputOfType("fake_Task1_output_for_task_Task3");             
+
 
 
 
@@ -68,6 +70,10 @@ public class Task3Task extends Task{
 		AnotherGlobalFact outputsdefaultAnotherGlobalFact=
 			(AnotherGlobalFact)
 				outputsdefault.getEntityByType("AnotherGlobalFact");								
+		
+		fake_Task3_output_for_task_Task2 outputsdefaultfake_Task3_output_for_task_Task2=
+			(fake_Task3_output_for_task_Task2)
+				outputsdefault.getEntityByType("fake_Task3_output_for_task_Task2");								
 		
 		
 		

@@ -47,6 +47,8 @@ public class Task0Task extends Task{
 
         MyFrameFact  eiMyFrameFact=(MyFrameFact)this.getFirstInputOfType("MyFrameFact");             
 
+        fake_ProcessAGUIEvent_output_for_task_Task0  eifake_ProcessAGUIEvent_output_for_task_Task0=(fake_ProcessAGUIEvent_output_for_task_Task0)this.getFirstInputOfType("fake_ProcessAGUIEvent_output_for_task_Task0");             
+
 
 
 
@@ -71,6 +73,10 @@ public class Task0Task extends Task{
 		
 		
 		
+		fake_Task0_output_for_task_Task1 outputsdefaultfake_Task0_output_for_task_Task1=
+			(fake_Task0_output_for_task_Task1)
+				outputsdefault.getEntityByType("fake_Task0_output_for_task_Task1");								
+		
 		AnotherFact outputsdefaultAnotherFact=
 			(AnotherFact)
 				outputsdefault.getEntityByType("AnotherFact");								
@@ -89,11 +95,11 @@ public class Task0Task extends Task{
         yp=(YellowPages)this.getApplication("YellowPages");
 
         //  Uncomment the following and write down a proper local id of the agent
-        // Find an agent playing the role "Role2"
+        // Find an agent playing the role "Role1"
       	//eoInteraction0.addCollaborators("Local ID of the collaborator");
        	
         //  Uncomment the following and write down a proper local id of the agent
-        // Find an agent playing the role "Role1"
+        // Find an agent playing the role "Role2"
       	//eoInteraction0.addCollaborators("Local ID of the collaborator");
        	
 
@@ -107,11 +113,11 @@ public class Task0Task extends Task{
         yp=(YellowPages)this.getApplication("YellowPages");
 
         //  Uncomment the following and write down a proper local id of the agent
-        // Find an agent playing the role "Role2"
+        // Find an agent playing the role "Role1"
       	//eoInteraction0.addCollaborators("Local ID of the collaborator");
        	
         //  Uncomment the following and write down a proper local id of the agent
-        // Find an agent playing the role "Role1"
+        // Find an agent playing the role "Role2"
       	//eoInteraction0.addCollaborators("Local ID of the collaborator");
        	
 

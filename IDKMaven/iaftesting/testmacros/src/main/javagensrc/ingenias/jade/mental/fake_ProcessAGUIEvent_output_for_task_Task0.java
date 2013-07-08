@@ -24,60 +24,42 @@
 */
 
 
-package ingenias.jade.components;
+package ingenias.jade.mental;
 
 import java.util.*;
-import ingenias.jade.exception.*;
-import ingenias.jade.comm.*;
-import ingenias.jade.mental.*;
+import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
+import ingenias.editor.entities.ViewPreferences.ViewType;
 
+public class fake_ProcessAGUIEvent_output_for_task_Task0 extends ingenias.editor.entities.RuntimeFact{
+    
+   
+  public fake_ProcessAGUIEvent_output_for_task_Task0 (String id){
+   super(id);
+   this.getPrefs(null).setView(ViewType.UML);
+   this.type="fake_ProcessAGUIEvent_output_for_task_Task0";
+  }
+  
 
-
-public class Task4Task extends Task{
-
- public Task4Task(String id){
-  super(id,"Task4");
- }
-
-
-
- public void execute() throws TaskException{
-
-
-        fake_Task2_output_for_task_Task4  eifake_Task2_output_for_task_Task4=(fake_Task2_output_for_task_Task4)this.getFirstInputOfType("fake_Task2_output_for_task_Task4");             
-
-        FinalFact  eiFinalFact=(FinalFact)this.getFirstInputOfType("FinalFact");             
-
-
-
-
-
-
-
-
-
-
-  		Vector<TaskOutput> outputs = this.getOutputs();
-  		TaskOutput defaultOutput= outputs.firstElement();
-  		
-  		  	
-  		TaskOutput	outputsdefault=findOutputAlternative("default",
-  																			outputs);
-  		
-		
-		
-		
-		
-        YellowPages yp=null; // only available for initiators of interactions
-	
-
-//#start_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS	
-System.out.println("task4");
-//#end_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS
-
- }
- 
+  public fake_ProcessAGUIEvent_output_for_task_Task0 (){
+   super(ingenias.jade.MentalStateManager.generateMentalEntityID());
+   this.getPrefs(null).setView(ViewType.UML);
+  }
+  
+  public String toString(){
+   return this.getId()+":"+this.getType();
+  }
+  
+  public String getType(){
+   return "fake_ProcessAGUIEvent_output_for_task_Task0";
+  }
+  
+  public String getParentType(){
+   return "RuntimeFact";
+  }
+  
+     
+    
 }
 
  

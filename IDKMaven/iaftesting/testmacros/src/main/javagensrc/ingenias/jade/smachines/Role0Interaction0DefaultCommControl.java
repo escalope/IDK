@@ -54,6 +54,8 @@ import ingenias.exception.NotFound;
     
     // Facts that cannot be removed because they must be sent
      
+     lw.addDeletionLockExpectedType("fake_Task0_output_for_task_Task1");
+     
      lw.addDeletionLockExpectedType("AnotherFact");
      
      
@@ -65,6 +67,8 @@ import ingenias.exception.NotFound;
        // Facts that cannot be removed because they are part of guards
     
     // Facts that cannot be removed because they must be sent
+     
+     locks.add("fake_Task0_output_for_task_Task1");
      
      locks.add("AnotherFact");
      
@@ -117,11 +121,22 @@ import ingenias.exception.NotFound;
          Vector<MentalEntity> mfcontent=null;
          
 		 
+		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"fake_Task0_output_for_task_Task1").isEmpty();
+		 
 		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"AnotherFact").isEmpty();
 		   
          if (allexist && true){
            sb.clearContentNextMessage();
            sb.removeState("InteractionUnit0");
+           
+           
+	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"fake_Task0_output_for_task_Task1");
+	   	   for (MentalEntity me:mfcontent)             
+             sb.addContentForNextMessage(me);    
+	       getLR().removeDeletionLockType("fake_Task0_output_for_task_Task1");
+	       lockProcessed("fake_Task0_output_for_task_Task1");
+           //MainInteractionManager.log("Removing lock fake_Task0_output_for_task_Task1",this.getAgent().getLocalName()+"-"+sb.getConversationID());
+            
            
            
 	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"AnotherFact");

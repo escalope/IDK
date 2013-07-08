@@ -110,8 +110,8 @@ public class TestPartOfTheWFTestInTryingSimpleWFDeploymentAndExecution extends T
 		long step=100;
 		long currentTime=0;
 		long finishedTime=0;
-		long duration=1000;
-		long maxtimepercycle=1000;
+		long duration=3000;
+		long maxtimepercycle=3000;
 		
 		finishedTime=Math.max(finishedTime,2000);
 		 

@@ -122,8 +122,8 @@ public class WFTestCompleteWFTestInTryingSimpleWFDeploymentAndExecution extends 
 		long step=100;
 		long currentTime=0;
 		long finishedTime=0;
-		long duration=2000;
-		long maxtimepercycle=2000;
+		long duration=4000;
+		long maxtimepercycle=4000;
 		
 		finishedTime=Math.max(finishedTime,2000);
 		 

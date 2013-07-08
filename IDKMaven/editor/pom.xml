@@ -23,8 +23,8 @@
 
 
 	<scm>
-		<connection>svn://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/editor</connection>
-		<developerConnection>svn://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/editor</developerConnection>
+		<connection>scm:svn:http://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/editor</connection>
+		<developerConnection>scm:svn://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/editor</developerConnection>
 		<url>http://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/editor/</url>
 	</scm>
 

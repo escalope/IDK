@@ -10,7 +10,7 @@
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>testmacros</artifactId>
 	<version>1.6-SNAPSHOT</version>
-	<name>An agent that processes events from a GUI. The GUI is simulated by the platform through an interface that produces the events</name>
+	<name>Testing macros for the realization of workflows as interactions</name>
 	<url>http://maven.apache.org</url>
 	<packaging>jar</packaging>
 	

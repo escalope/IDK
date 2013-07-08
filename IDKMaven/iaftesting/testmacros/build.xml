@@ -13,6 +13,29 @@
 	  <maven basedir="${pom.dir}" goal="compile" resultproperty="maven.build.result" options="-e -Dbuild.for.prod=false -Djavac.debug=true -Djavac.optimize=false"/>
          </target>
 
+
+	<target name="cleangeneratedcode" depends="getclasspathfrommaven">
+		  <input
+		    message="All generated sources are going to be deleted from src/main/javagensrc, src/main/javapermsrc, src/test/javagensrc, and src/test/javapermsrc continue (y/n)?"
+		    validargs="y,n"
+		    addproperty="do.delete"
+  />
+  <condition property="do.continue">
+    <or>
+     <equals arg1="y" arg2="${do.delete}"/>
+     <equals arg1="yes" arg2="${do.delete}"/>
+   </or>
+  </condition>
+  <fail unless="do.continue">Build aborted by user.</fail>
+  <delete includeEmptyDirs="true">
+    <fileset dir="src/main/javagensrc" includes="**/*"/>
+    <fileset dir="src/main/javapermsrc" includes="**/*"/>
+    <fileset dir="src/test/javapermsrc" includes="**/*"/>
+    <fileset dir="src/test/javagensrc" includes="**/*"/>
+  </delete>
+  
+	</target>
+
 	<target name="edit" depends="getclasspathfrommaven">
 		<java fork="true" failonerror="true" maxmemory="512m"
     classname="ingenias.editor.IDE">

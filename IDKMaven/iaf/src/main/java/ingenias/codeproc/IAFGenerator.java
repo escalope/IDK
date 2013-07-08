@@ -319,7 +319,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		p.addVar(new Var("jadeproject",
 				this.getProperty("jadeproject").value));
 
-		processMacros();	
+		processMacros();
 
 		Hashtable components;
 		try {
@@ -357,9 +357,11 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 		} catch (NotFound | NullEntity | NotInitialised e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return p;
 	}
@@ -369,8 +371,10 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 	private void processMacros(){
 
 		try {
+			// it is important this macro is launched before MacroWorkflowsToInteractions
+			new MacroTaskPConnects(browser).apply(); 
 			new MacroWorkflowsToInteractions(browser).apply();
-			new MacroTaskPConnects(browser).apply();
+			
 		} catch (TransformationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1014,223 +1018,225 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 						"link this task with a goal with a GTSatisfies relationship", "", task.getID());
 			} else {
 
-
-				if (codeComponent == null) {
+				String actualCode = "";
+				if (codeComponent != null) {
+					actualCode = codeComponent.getAttributeByName("Code").getSimpleValue();							
+				}  else
 					Log.getInstance().logWARNING("Task " + task.getID() + " has no associated code components", "", task.getID());
+				if (actualCode==null || actualCode.length() == 0) 		{	
+					Log.getInstance().logWARNING("Task " + task.getID() + " has no registered code. Adding a default one where the task name is printed.", "", task.getID());
+					actualCode = "//REPLACE THIS COMMENT WITH YOUR CODE\n"+
+							"System.out.println(getAgentID()+\" executing -> \"+getID()+\":\"+getType());";
+					taskRepeat.add(new Var("codeid", ""));
+					taskRepeat.add(new Var("code", actualCode, "", "Code"));
 				} else {
-					//if (doIGenerateComponentAndTaskCode()) {
-					String actualCode = codeComponent.getAttributeByName("Code").getSimpleValue();
-					if (actualCode.length() == 0) {
-						actualCode = "//REPLACE THIS COMMENT WITH YOUR CODE\n"+
-					"System.out.println(getAgentID()+\" executing -> \"+getID()+\":\"+getType());";
-					}
-					taskRepeat.add(new Var("code", actualCode, codeComponent.getID(), "Code"));
 					taskRepeat.add(new Var("codeid", codeComponent.getID()));
-					//	}
-				}
+					taskRepeat.add(new Var("code", actualCode, codeComponent.getID(), "Code"));	
+				}				
+			}
 
-				Set<GraphRole> inputs = new HashSet(this.getNonConsumableInput(task)); // To remove repeated items
-				Vector<GraphEntity> cancelledConversations = Utils.getRelatedElementsVector(task,
-						"WFCancels",
-						"WFCancelstarget");
-				Vector<GraphRole> consumedInput = this.getInputsToRemoveAfterRead(task);
-				for (GraphEntity conv : cancelledConversations) {
-					Repeat cancelledConv = new Repeat("cancelconversation");
-					GraphEntity interaction = conv.getAttributeByName("Interaction").getEntityValue();
-					Var conversation = new Var("interid", Utils.replaceBadChars(interaction.getID()));
-					cancelledConv.add(conversation);
-					taskRepeat.add(cancelledConv);
-				}
+			Set<GraphRole> inputs = new HashSet(this.getNonConsumableInput(task)); // To remove repeated items
+			Vector<GraphEntity> cancelledConversations = Utils.getRelatedElementsVector(task,
+					"WFCancels",
+					"WFCancelstarget");
+			Vector<GraphRole> consumedInput = this.getInputsToRemoveAfterRead(task);
+			for (GraphEntity conv : cancelledConversations) {
+				Repeat cancelledConv = new Repeat("cancelconversation");
+				GraphEntity interaction = conv.getAttributeByName("Interaction").getEntityValue();
+				Var conversation = new Var("interid", Utils.replaceBadChars(interaction.getID()));
+				cancelledConv.add(conversation);
+				taskRepeat.add(cancelledConv);
+			}
 
-				if (inputs.size() == 0 && consumedInput.size() == 0) {
-					Log.getInstance().logERROR("Task " + task.getID() + " has no inputs. This is not allowed, please connect this entity with others with WFConsumes or WFModifies", "", task.getID());
-					this.fatalError();
-				} else {
-
-
-					//					inputs.removeAll(consumedInput);
-
-					Iterator<GraphRole> iterator = inputs.iterator();
-					if (!this.getError()) {
-						while (iterator.hasNext()) {
-							Repeat expectedInput = new Repeat("expectedInput");
-							GraphRole role = iterator.next();
-							GraphEntity fact = role.getPlayer();
-							if (fact.getType().equalsIgnoreCase("conversation")) {
-								expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getAttributeByName("Interaction").getEntityValue().getID())));
-								expectedInput.add(new Var("mentalenttype", "RuntimeConversation"));
-							} else {
-								expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getID())));
-
-								expectedInput.add(new Var("mentalenttype", Utils.replaceBadChars(fact.getID())));
-							}
-
-							String cardinality = "1";
-							String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
-
-							if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("*")) {
-								cardinality = "n";
-							}else{
-								if ( cardString.equals("0..*") ) {
-									cardinality="0..n";
-								}
-							}
+			if (inputs.size() == 0 && consumedInput.size() == 0) {
+				Log.getInstance().logERROR("Task " + task.getID() + " has no inputs. This is not allowed, please connect this entity with others with WFConsumes or WFModifies", "", task.getID());
+				this.fatalError();
+			} else {
 
 
+				//					inputs.removeAll(consumedInput);
 
-							expectedInput.add(new Var("mentalentitycardinality", cardinality));
-							//this.generateFactSlots(expectedInput, fact);
-							taskRepeat.add(expectedInput);
-						}
-					}
-
-					iterator = new HashSet(consumedInput).iterator(); // To remove repeated items
-					if (!this.getError()) {
-						while (iterator.hasNext()) {
-							Repeat expectedInput = new Repeat("consumedInput");
-							GraphRole role = iterator.next();
-							GraphEntity fact = role.getPlayer();
-
+				Iterator<GraphRole> iterator = inputs.iterator();
+				if (!this.getError()) {
+					while (iterator.hasNext()) {
+						Repeat expectedInput = new Repeat("expectedInput");
+						GraphRole role = iterator.next();
+						GraphEntity fact = role.getPlayer();
+						if (fact.getType().equalsIgnoreCase("conversation")) {
+							expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getAttributeByName("Interaction").getEntityValue().getID())));
+							expectedInput.add(new Var("mentalenttype", "RuntimeConversation"));
+						} else {
 							expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getID())));
+
 							expectedInput.add(new Var("mentalenttype", Utils.replaceBadChars(fact.getID())));
-
-							String cardinality = "1";
-							String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
-							if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("*")) {
-								cardinality = "n";
-							}else{
-								if ( cardString.equals("0..*") ) {
-									cardinality="0..n";
-								}
-							}
-							expectedInput.add(new Var("mentalentitycardinality", cardinality));
-							this.generateFactSlots(expectedInput, fact);
-							taskRepeat.add(expectedInput);
 						}
-					}
 
+						String cardinality = "1";
+						String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
 
-
-					if (!this.getError()) {
-						for (GraphRole role : consumedInput) {
-
-							GraphEntity fact = role.getPlayer();
-							String cardinality = "1";
-							String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
-							Repeat expectedInput = null;
-
-							if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("0..*") || cardString.equals("*")) {
-								cardinality = "n";
-								expectedInput = new Repeat("taskinputcardn");
-							} else {
-								if ( cardString.equals("0..*") ) {
-									cardinality="0..n";
-									expectedInput = new Repeat("taskinputcard0n");
-								} else
-									expectedInput = new Repeat("taskinputcard1");
+						if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("*")) {
+							cardinality = "n";
+						}else{
+							if ( cardString.equals("0..*") ) {
+								cardinality="0..n";
 							}
+						}
 
 
+
+						expectedInput.add(new Var("mentalentitycardinality", cardinality));
+						//this.generateFactSlots(expectedInput, fact);
+						taskRepeat.add(expectedInput);
+					}
+				}
+
+				iterator = new HashSet(consumedInput).iterator(); // To remove repeated items
+				if (!this.getError()) {
+					while (iterator.hasNext()) {
+						Repeat expectedInput = new Repeat("consumedInput");
+						GraphRole role = iterator.next();
+						GraphEntity fact = role.getPlayer();
+
+						expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getID())));
+						expectedInput.add(new Var("mentalenttype", Utils.replaceBadChars(fact.getID())));
+
+						String cardinality = "1";
+						String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
+						if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("*")) {
+							cardinality = "n";
+						}else{
+							if ( cardString.equals("0..*") ) {
+								cardinality="0..n";
+							}
+						}
+						expectedInput.add(new Var("mentalentitycardinality", cardinality));
+						this.generateFactSlots(expectedInput, fact);
+						taskRepeat.add(expectedInput);
+					}
+				}
+
+
+
+				if (!this.getError()) {
+					for (GraphRole role : consumedInput) {
+
+						GraphEntity fact = role.getPlayer();
+						String cardinality = "1";
+						String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
+						Repeat expectedInput = null;
+
+						if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("0..*") || cardString.equals("*")) {
+							cardinality = "n";
+							expectedInput = new Repeat("taskinputcardn");
+						} else {
+							if ( cardString.equals("0..*") ) {
+								cardinality="0..n";
+								expectedInput = new Repeat("taskinputcard0n");
+							} else
+								expectedInput = new Repeat("taskinputcard1");
+						}
+
+
+						expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getID())));
+						if (!fact.getType().equalsIgnoreCase("conversation")) {
+							expectedInput.add(new Var("mentalenttype", Utils.replaceBadChars(fact.getID())));
+						} else {
+							expectedInput.add(new Var("mentalenttype", "RuntimeConversation"));
+						}
+
+						expectedInput.add(new Var("mentalentitycardinality", cardinality));
+						taskRepeat.add(expectedInput);
+					}
+					Vector<GraphRole> inputsNC = this.getNonConsumableInput(task);
+					for (GraphRole role : inputsNC) {
+
+
+						GraphEntity fact = role.getPlayer();
+						String cardinality = "1";
+						String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
+						Repeat expectedInput = null;
+
+						if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("0..*") || cardString.equals("*")) {
+							cardinality = "n";
+							expectedInput = new Repeat("taskinputcardn");
+						} else {
+							if ( cardString.equals("0..*") ) {
+								cardinality="0..n";
+								expectedInput = new Repeat("taskinputcard0n");
+							} else
+								expectedInput = new Repeat("taskinputcard1");
+						}
+
+						if (fact.getType().equalsIgnoreCase("conversation")) {
+							expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getAttributeByName("Interaction").getEntityValue().getID())));
+							expectedInput.add(new Var("mentalenttype", "RuntimeConversation"));
+						} else {
 							expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getID())));
-							if (!fact.getType().equalsIgnoreCase("conversation")) {
-								expectedInput.add(new Var("mentalenttype", Utils.replaceBadChars(fact.getID())));
-							} else {
-								expectedInput.add(new Var("mentalenttype", "RuntimeConversation"));
-							}
 
-							expectedInput.add(new Var("mentalentitycardinality", cardinality));
-							taskRepeat.add(expectedInput);
+							expectedInput.add(new Var("mentalenttype", Utils.replaceBadChars(fact.getID())));
 						}
-						Vector<GraphRole> inputsNC = this.getNonConsumableInput(task);
-						for (GraphRole role : inputsNC) {
 
-
-							GraphEntity fact = role.getPlayer();
-							String cardinality = "1";
-							String cardString = role.getAttributeByName("Cardinality").getSimpleValue();
-							Repeat expectedInput = null;
-
-							if (cardString.equals("1..*") || cardString.equals("n") || cardString.equals("0..*") || cardString.equals("*")) {
-								cardinality = "n";
-								expectedInput = new Repeat("taskinputcardn");
-							} else {
-								if ( cardString.equals("0..*") ) {
-									cardinality="0..n";
-									expectedInput = new Repeat("taskinputcard0n");
-								} else
-									expectedInput = new Repeat("taskinputcard1");
-							}
-
-							if (fact.getType().equalsIgnoreCase("conversation")) {
-								expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getAttributeByName("Interaction").getEntityValue().getID())));
-								expectedInput.add(new Var("mentalenttype", "RuntimeConversation"));
-							} else {
-								expectedInput.add(new Var("mentalentname", Utils.replaceBadChars(fact.getID())));
-
-								expectedInput.add(new Var("mentalenttype", Utils.replaceBadChars(fact.getID())));
-							}
-
-							expectedInput.add(new Var("mentalentitycardinality", cardinality));
-							taskRepeat.add(expectedInput);
-						}
+						expectedInput.add(new Var("mentalentitycardinality", cardinality));
+						taskRepeat.add(expectedInput);
 					}
+				}
 
 
 
-					Vector outputs = this.getExpectedOutputCreated(task);
-					iterator = new HashSet(outputs).iterator(); // To remove repeated items
-					if (!this.getError()) {
-						while (iterator.hasNext()) {
-							GraphEntity fact = (GraphEntity) iterator.next();
-							if (fact.getType().equalsIgnoreCase("Conversation")){
-								Repeat interactions=new Repeat("interactions");
-								try {
-									GraphEntity interaction=fact.getAttributeByName("Interaction").getEntityValue();
-									Var conversation=new Var("interid",Utils.replaceBadChars(interaction.getID()));
-									interactions.add(conversation);
-									taskRepeat.add(interactions);
-									generateColaborators(interaction, interactions);
-								} catch (NullEntity ne){
-									Log.getInstance().logERROR("Conversation entity has not defined the \"Interaction\" attribute. Please, edit the conversation and choose an interaction","",fact.getID());
-									this.fatalError();
-								}
+				Vector outputs = this.getExpectedOutputCreated(task);
+				iterator = new HashSet(outputs).iterator(); // To remove repeated items
+				if (!this.getError()) {
+					while (iterator.hasNext()) {
+						GraphEntity fact = (GraphEntity) iterator.next();
+						if (fact.getType().equalsIgnoreCase("Conversation")){
+							Repeat interactions=new Repeat("interactions");
+							try {
+								GraphEntity interaction=fact.getAttributeByName("Interaction").getEntityValue();
+								Var conversation=new Var("interid",Utils.replaceBadChars(interaction.getID()));
+								interactions.add(conversation);
+								taskRepeat.add(interactions);
+								generateColaborators(interaction, interactions);
+							} catch (NullEntity ne){
+								Log.getInstance().logERROR("Conversation entity has not defined the \"Interaction\" attribute. Please, edit the conversation and choose an interaction","",fact.getID());
+								this.fatalError();
 							}
-							/*if (fact.getType().equalsIgnoreCase("FrameFact")){
+						}
+						/*if (fact.getType().equalsIgnoreCase("FrameFact")){
 								Repeat expectedOutput = new Repeat("expectedOutput");
 								expectedOutput.add(new Var("factName", Utils.replaceBadChars(fact.getID())));
 								taskRepeat.add(expectedOutput);
 								this.generateFactSlots(expectedOutput,fact);
 							}*/
-						}
 					}
+				}
 
-					Vector expectedApps = this.getExpectedApps(task);
-					iterator = new HashSet(expectedApps).iterator();
-					if (!this.getError()) {
-						while (iterator.hasNext()) {
-							Repeat expectedApp = new Repeat("expectedApplication");
-							GraphEntity app = (GraphEntity) iterator.next();
-							expectedApp.add(new Var("appName", Utils.replaceBadChars(app.getID())));
-							taskRepeat.add(expectedApp);
-						}
+				Vector expectedApps = this.getExpectedApps(task);
+				iterator = new HashSet(expectedApps).iterator();
+				if (!this.getError()) {
+					while (iterator.hasNext()) {
+						Repeat expectedApp = new Repeat("expectedApplication");
+						GraphEntity app = (GraphEntity) iterator.next();
+						expectedApp.add(new Var("appName", Utils.replaceBadChars(app.getID())));
+						taskRepeat.add(expectedApp);
 					}
+				}
 
-					Vector<GraphEntity> context = locateInteraction(task);
-					if (context != null) {
-						for (GraphEntity intcontext : context) {
-							Repeat interactioncontext = new Repeat("interactioncontext");
-							// It is enought to add the repeat to enable the conversation context
-							Var conversation = new Var("interid", Utils.replaceBadChars(intcontext.getID()));
-							interactioncontext.add(conversation);
-							taskRepeat.add(interactioncontext);
+				Vector<GraphEntity> context = locateInteraction(task);
+				if (context != null) {
+					for (GraphEntity intcontext : context) {
+						Repeat interactioncontext = new Repeat("interactioncontext");
+						// It is enought to add the repeat to enable the conversation context
+						Var conversation = new Var("interid", Utils.replaceBadChars(intcontext.getID()));
+						interactioncontext.add(conversation);
+						taskRepeat.add(interactioncontext);
 
 
-						}
 					}
 				}
 			}
-
 		}
+
+
 
 	}
 
@@ -1251,7 +1257,7 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 						Repeat expectedOutput = new Repeat("expectedOutputWF");
 						expectedOutput.add(new Var("outputtype", Utils.replaceBadChars(fact.getID())));
 						expectedOutput.add(new Var("outputid", Utils.replaceBadChars(fact.getID())));
-						
+
 
 						expectedoutputalternatives.add(expectedOutput);
 					} else {
@@ -1278,34 +1284,34 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 							interactions.add(conversation);
 							expectedOutput.add(conversation);
 							generateColaborators(interaction, interactions);
-						
-								Vector<GraphEntity> orgconstraints = Utils.getRelatedElementsVector(interaction, "OHasWF", "OHasWFsource");
-								if (orgconstraints.size()>1){
-									Log.getInstance().logERROR("Interaction "+interaction.getID()+" is associated to more than one organizatoin or group"+
-											"Registered associations are "+orgconstraints
-											+". Please, do associate with only one group or organization","",interaction.getID());
-									this.fatalError();
-								} else {
-									if (!orgconstraints.isEmpty()){
-										GraphEntity orgentity=orgconstraints.firstElement();
-										if (orgentity.getType().equalsIgnoreCase("Organization")){
-											// organization constraint
-											Repeat organizationalconstraints = new Repeat("setorganizationalconstraints");
-											expectedOutput.add(organizationalconstraints);
-											organizationalconstraints.add(new Var("orginstancename",""));
-											organizationalconstraints.add(new Var("orgtype",orgentity.getID()));
-										} else
-											if (orgentity.getType().equalsIgnoreCase("OrganizationGroup")){
-												//group constraint
-												Repeat groupconstraints = new Repeat("setgroupconstraints");
-												groupconstraints.add(new Var("groupinstancename",""));
-												groupconstraints.add(new Var("grouptype",orgentity.getID()));
-												expectedOutput.add(groupconstraints);
-											}
 
-									}
+							Vector<GraphEntity> orgconstraints = Utils.getRelatedElementsVector(interaction, "OHasWF", "OHasWFsource");
+							if (orgconstraints.size()>1){
+								Log.getInstance().logERROR("Interaction "+interaction.getID()+" is associated to more than one organizatoin or group"+
+										"Registered associations are "+orgconstraints
+										+". Please, do associate with only one group or organization","",interaction.getID());
+								this.fatalError();
+							} else {
+								if (!orgconstraints.isEmpty()){
+									GraphEntity orgentity=orgconstraints.firstElement();
+									if (orgentity.getType().equalsIgnoreCase("Organization")){
+										// organization constraint
+										Repeat organizationalconstraints = new Repeat("setorganizationalconstraints");
+										expectedOutput.add(organizationalconstraints);
+										organizationalconstraints.add(new Var("orginstancename",""));
+										organizationalconstraints.add(new Var("orgtype",orgentity.getID()));
+									} else
+										if (orgentity.getType().equalsIgnoreCase("OrganizationGroup")){
+											//group constraint
+											Repeat groupconstraints = new Repeat("setgroupconstraints");
+											groupconstraints.add(new Var("groupinstancename",""));
+											groupconstraints.add(new Var("grouptype",orgentity.getID()));
+											expectedOutput.add(groupconstraints);
+										}
+
 								}
-							
+							}
+
 
 
 						} catch (NullEntity ne) {
@@ -2348,62 +2354,74 @@ extends ingenias.editor.extension.BasicCodeGeneratorImp {
 			System.err.println("The first argument (mandatory) has to be the specification file and the second (optional) " +
 					"the project folder");
 		} else {
-			boolean therearenoSources=new File("src/main/javagensrc/ingenias/jade/Main.java").exists();
-			if (!new File(args[0]).exists())
-				throw new FileNotFoundException("File not found "+new File(args[0]).getAbsolutePath());
-			StringBuffer sb =  FileUtils.readFile(args[0]);			
-			byte[] checksum =getCheckSum(sb.toString());		
-			if (args.length>=4  &&
-					(!java.util.Arrays.equals(getLastCheckSum(new File(args[0]).getAbsolutePath()),checksum)
-							// to force code generation if -Dforceiafgen=true parameter is given
-							|| (args.length>=5 && args[4]!=null && args[4].equalsIgnoreCase("true")))
-							|| !therearenoSources){ 
+			try {
+				boolean therearenoSources=new File("src/main/javagensrc/ingenias/jade/Main.java").exists();
+				if (!new File(args[0]).exists())
+					throw new FileNotFoundException("File not found "+new File(args[0]).getAbsolutePath());
+				StringBuffer sb =  FileUtils.readFile(args[0]);			
+				byte[] checksum =getCheckSum(sb.toString());		
+				if (args.length>=4  &&
+						(!java.util.Arrays.equals(getLastCheckSum(new File(args[0]).getAbsolutePath()),checksum)
+								// to force code generation if -Dforceiafgen=true parameter is given
+								|| (args.length>=5 && args[4]!=null && args[4].equalsIgnoreCase("true")))
+								|| !therearenoSources){ 
 
-				storeChecksum(new File(args[0]).getAbsolutePath(),checksum);
-				ingenias.editor.Log.initInstance(new PrintWriter(System.out));
-				ModelJGraph.disableAllListeners(); // this disable layout listeners that slow down code generation
-				// it is a bug of the platform which will be addressed in the future
+					storeChecksum(new File(args[0]).getAbsolutePath(),checksum);
+					ingenias.editor.Log.initInstance(new PrintWriter(System.out));
+					ModelJGraph.disableAllListeners(); // this disable layout listeners that slow down code generation
+					// it is a bug of the platform which will be addressed in the future
 
-				IAFGenerator jadegen = new IAFGenerator(args[0]);
-				Properties props = jadegen.getBrowser().getState().prop;
-
-
-				if (args.length>=2){
-					jadegen.setProperty("jadeproject", args[1]);        		
-				} 
-
-				if (args.length>=3){
-					jadegen.setProperty("jadeout", args[2]);  
-				} 
-
-				if (args.length>=4){
-					jadegen.setProperty("jadeperm", args[3]);  
-				}
+					IAFGenerator jadegen = new IAFGenerator(args[0]);
+					Properties props = jadegen.getBrowser().getState().prop;
 
 
-			/*	for (Object key: props.keySet()){
+					if (args.length>=2){
+						jadegen.setProperty("jadeproject", args[1]);        		
+					} 
+
+					if (args.length>=3){
+						jadegen.setProperty("jadeout", args[2]);  
+					} 
+
+					if (args.length>=4){
+						jadegen.setProperty("jadeperm", args[3]);  
+					}
+
+
+					/*	for (Object key: props.keySet()){
 					System.err.println(((ProjectProperty)props.get(key.toString())).key+":"+
 							((ProjectProperty)props.get(key.toString())).value);
 				};*/
 
-				jadegen.run();
-				
-				if (jadegen.isError() || Log.getInstance().areThereErrors()){
-					for (Frame f:Frame.getFrames()){
-						f.dispose();
+					jadegen.run();
+					System.err.println("finished1");
+					if (jadegen.isError() || Log.getInstance().areThereErrors()){
+						for (Frame f:Frame.getFrames()){
+							f.dispose();
 
+						}
+						throw new RuntimeException("There are the following code generation errors: "+Log.getInstance().getErrors());		
 					}
-					throw new RuntimeException("There are the following code generation errors: "+Log.getInstance().getErrors());		
+
+
+				} else {
+					System.err.println("The first argument (mandatory) has to be the specification file and the second (optional) " +
+							"the project folder");
 				}
-
-			} else {
-				System.err.println("The first argument (mandatory) has to be the specification file and the second (optional) " +
-						"the project folder");
+			} catch (Throwable t){
+				// this has to be done or the program will never finish in 
+				// case an exception is triggered
+				t.printStackTrace();
+				for (Frame f:Frame.getFrames()){ 
+					f.dispose();
+				}
+				// instead of doing a System.exit, a runtimeException is created
+				// this permits to return an error code. System.exit simply aborts the
+				// running JVM and disturbs the original execution
+				throw new RuntimeException(t); 				
 			}
-
-			for (Frame f:Frame.getFrames()){
+			for (Frame f:Frame.getFrames()){ 
 				f.dispose();
-
 			}
 		}
 

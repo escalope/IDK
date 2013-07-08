@@ -187,8 +187,8 @@ private MentalStateReader msr=null;
       options.toArray(optionsA);
       boolean allexist=true;
       @@@repeat id="condfacts"@@@
-      MentalEntity @@@v@@@label@@@/v@@@=msr.getMentalEntity("@@@v@@@type@@@/v@@@");
-      allexist=allexist && (@@@v@@@label@@@/v@@@ !=null);
+      Vector<MentalEntity> @@@v@@@label@@@/v@@@=msr.getMentalEntityByType("@@@v@@@type@@@/v@@@");
+      allexist=allexist && (!@@@v@@@label@@@/v@@@.isEmpty());
       @@@/repeat@@@
       int cardinality=1;
       if ("@@@v@@@cardinality@@@/v@@@".equals("n")){
@@ -197,8 +197,7 @@ private MentalStateReader msr=null;
           cardinality=receivers.size();          
           } catch (NoAgentsFound ex) {
                     ex.printStackTrace();
-                }   
-       
+                }          
       }
       
       if (allexist && @@@v@@@condition@@@/v@@@){     

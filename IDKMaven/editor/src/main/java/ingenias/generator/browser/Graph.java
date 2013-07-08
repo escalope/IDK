@@ -48,5 +48,7 @@ public interface Graph extends AttributedElement {
  // It returns a JPanel which can be used in a GUI to show what
  // this diagram contains
  public ingenias.editor.ModelJGraph getGraph();
+ 
+ public GraphEntity findEntity(String sourceTaskID);
 
 }

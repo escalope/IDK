@@ -65,6 +65,24 @@ implements Graph {
 	public String getName() {
 		return mjg.getID();
 	}
+	
+	 public GraphEntity findEntity(String sourceTaskID) {
+		 GraphEntity[] entities;
+		try {
+			entities = getEntities();
+			 GraphEntity found=null;
+			 for (GraphEntity ge:entities){
+				 if (ge.getID().equalsIgnoreCase(sourceTaskID))
+					 found=ge;
+			 }
+			 return found;
+		} catch (NullEntity e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 	
+		return null;
+		
+	 }
 
 	public String getType() {
 		String name = mjg.getClass().getName();

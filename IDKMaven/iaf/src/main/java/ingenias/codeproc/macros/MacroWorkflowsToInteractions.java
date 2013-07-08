@@ -49,6 +49,15 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 
+/**
+ * 
+ * @author ingenias
+ * 
+ * It converts a workflow of tasks into a sequence of information exchange messages and creates an interaction
+ * accordingly. This macro has to be launched after MacroTaskPConnects to convert properly new WFProduces and WFConsumes
+ * relationships into information transferred through InteractionUnits
+ *
+ */
 public class MacroWorkflowsToInteractions extends Macro{
 
 	public MacroWorkflowsToInteractions(Browser browser) {
@@ -364,6 +373,9 @@ public class MacroWorkflowsToInteractions extends Macro{
 			GraphEntity mentalEntity=taskinput.getAttributeByName("AffectedElement").getEntityValue(); // a Mental entity
 			transferredInfo.add(mentalEntity);
 		}
+		String fakeFactID="fake_"+workflowTask.getID()+"_output_for_task_"+connectedTask.getPlayer().getID(); // rel id is used to ensure the uniqueness of the fact id
+		GraphEntity synchroFact=browser.findEntity(fakeFactID);
+		transferredInfo.add(synchroFact);
 		if (!transferredInfo.isEmpty()){
 			GraphCollection transferrredInfoColAttr = gaf.createCollection(transferredInfo, interactionmacrosgraph);
 			GraphAttribute transferrredInfoAttr=gaf.createAttribute("TransferredInfo", transferrredInfoColAttr, interactionmacrosgraph);

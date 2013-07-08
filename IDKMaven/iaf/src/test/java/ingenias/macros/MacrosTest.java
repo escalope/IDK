@@ -74,11 +74,17 @@ public class MacrosTest {
 				getCollectionValue().getElementAt(0).getAttributeByName("AffectedElement").getEntityValue().
 				getID().equalsIgnoreCase("MyFrameFact"));
 		assertTrue(browser.findEntity("Task0").getAllRelationships("WFConsumes")!=null);
-		assertTrue("There should be a WFConsumes relationship and there are "+
+		assertTrue("There should be two WFConsumes relationship and there are "+
 					browser.findEntity("Task0").getAllRelationships("WFConsumes").size(),
-					browser.findEntity("Task0").getAllRelationships("WFConsumes").size()==1);
-		assertTrue(browser.findEntity("Task0").getAllRelationships("WFConsumes").get(0).
-				getRoles("WFConsumestarget")[0].getPlayer().getID().equalsIgnoreCase("MyFrameFact"));
+					browser.findEntity("Task0").getAllRelationships("WFConsumes").size()==2);
+		assertTrue((browser.findEntity("Task0").getAllRelationships("WFConsumes").get(0).
+				getRoles("WFConsumestarget")[0].getPlayer().getID().equalsIgnoreCase("MyFrameFact")||
+				browser.findEntity("Task0").getAllRelationships("WFConsumes").get(1).
+				getRoles("WFConsumestarget")[0].getPlayer().getID().equalsIgnoreCase("MyFrameFact")));
+		assertTrue((browser.findEntity("Task0").getAllRelationships("WFConsumes").get(0).
+				getRoles("WFConsumestarget")[0].getPlayer().getID().toLowerCase().startsWith("fake")||
+				browser.findEntity("Task0").getAllRelationships("WFConsumes").get(1).
+				getRoles("WFConsumestarget")[0].getPlayer().getID().toLowerCase().startsWith("fake")));
 		PersistenceManager pm=new PersistenceManager();
 		pm.save(new File("target/transformed_testpconnects.xml"), browser.getState());
 	}
@@ -87,7 +93,9 @@ public class MacrosTest {
 	public void testWorkflow() throws UnknowFormat, DamagedFormat, CannotLoad, IOException, TransformationException{
 		Log.initInstance(new PrintWriter(System.out));
 		Browser browser=BrowserImp.initialise("src/test/resources/macrostest/testpconnectsworkflow.xml");
-		Vector<String> errors=new MacroWorkflowsToInteractions(browser).apply();
+		
+		Vector<String> errors=new MacroTaskPConnects(browser).apply();// workflow macro depends on this one to be applied first.
+		errors=new MacroWorkflowsToInteractions(browser).apply();		
 		PersistenceManager pm=new PersistenceManager();
 		pm.save(new File("target/transformed_testpconnectsworkflow.xml"), browser.getState());
 	}
@@ -96,7 +104,8 @@ public class MacrosTest {
 	public void testWorkflowOutsideReferences() throws UnknowFormat, DamagedFormat, CannotLoad, IOException, TransformationException{
 		Log.initInstance(new PrintWriter(System.out));
 		Browser browser=BrowserImp.initialise("src/test/resources/macrostest/testpconnectsworkflow_outsidereferences.xml");
-		Vector<String> errors=new MacroWorkflowsToInteractions(browser).apply();
+		Vector<String> errors=new MacroTaskPConnects(browser).apply();// workflow macro depends on this one to be applied first.
+		errors=new MacroWorkflowsToInteractions(browser).apply();		
 		PersistenceManager pm=new PersistenceManager();
 		pm.save(new File("target/transformed_testpconnectsworkflow.xml"), browser.getState());
 	}

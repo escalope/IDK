@@ -432,6 +432,20 @@ public class Utils {
 		}
 		return toGRArray(related.toArray());
 	}
+	
+	public static GraphRelationship[] getRelatedElementsRels(GraphEntity element,
+			String relationshipname) {
+		Vector rels = element.getAllRelationships();
+		Enumeration enumeration = rels.elements();
+		Vector related = new Vector();
+		while (enumeration.hasMoreElements()) {
+			GraphRelationship gr = (GraphRelationship) enumeration.nextElement();
+			if (gr.getType().toLowerCase().equals(relationshipname.toLowerCase())) {
+				related.add(gr);				
+			}
+		}
+		return toGRArray(related.toArray());
+	}
 
 	/**
 	 * It obtains the entities in the graph "g" whose type is the same as "typeName".
@@ -450,6 +464,18 @@ public class Utils {
 			}
 		}
 		return result;
+	}
+
+	public static Vector<GraphRole> getRolesFromRelationship(
+			GraphRelationship rel, String role) {
+		Vector<GraphRole> related = new Vector<GraphRole>();		
+			GraphRole[] roles = rel.getRoles();
+			for (int k = 0; k < roles.length; k++) {
+				if (roles[k].getName().toLowerCase().equals(role.toLowerCase())) {
+					related.add(roles[k]);
+				}
+			}
+		return related;
 	}
 
 }

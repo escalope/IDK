@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>ingenias</artifactId>
-		<version>1.6</version>
+		<version>1.7-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>applinker</artifactId>
-	<version>1.6</version>
+	<version>1.7-SNAPSHOT</version>
 	<name>ingenias app linker</name>
 	<description>An utility to upload APIs of Java files to the specification</description>
 	<url>http://ingenias.sf.net</url>
@@ -22,9 +22,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:svn:http://svn.code.sf.net/p/ingenias/code/tags/ingenias-1.6/applinker</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/ingenias/code/tags/ingenias-1.6/applinker</developerConnection>
-		<url>http://svn.code.sf.net/p/ingenias/code/tags/ingenias-1.6/applinker</url>		
+		<connection>scm:svn:http://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/applinker</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/applinker</developerConnection>
+		<url>http://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/applinker</url>		
 	</scm>
 	<developers>
 		<developer>
@@ -73,13 +73,13 @@
 		<dependency>
 			<groupId>net.sf.ingenias</groupId>
 			<artifactId>codegen</artifactId>
-			<version>1.7</version>
+			<version>1.8-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.ingenias</groupId>
 			<artifactId>editor</artifactId>
-			<version>1.6</version>
+			<version>1.7-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -105,7 +105,7 @@
 		<dependency>
 			<groupId>net.sf.ingenias</groupId>
 			<artifactId>ingeniasjgraphmod</artifactId>
-			<version>1.6</version>
+			<version>1.7-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

@@ -9,7 +9,7 @@
     <groupId>net.sf.ingenias</groupId>
     <artifactId>ingenias</artifactId>
     <packaging>pom</packaging>
-    <version>1.6</version>
+    <version>1.7-SNAPSHOT</version>
     <name>ingenias</name>
     <description>The INGENIAS Development Kit</description>
     <url>http://ingenias.sf.net</url>
@@ -21,9 +21,9 @@
     </license>
   </licenses>
 	<scm>
-		<connection>scm:svn:http://svn.code.sf.net/p/ingenias/code/tags/ingenias-1.6</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/ingenias/code/tags/ingenias-1.6</developerConnection>
-		<url>http://svn.code.sf.net/p/ingenias/code/tags/ingenias-1.6</url>		
+		<connection>scm:svn:http://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven</developerConnection>
+		<url>http://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven</url>		
 	</scm>
 
 <developers>

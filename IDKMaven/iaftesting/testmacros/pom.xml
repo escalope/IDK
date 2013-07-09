@@ -3,13 +3,13 @@
 <parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>iaftesting</artifactId>
-		<version>1.6</version>
+		<version>1.7-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>testmacros</artifactId>
-	<version>1.6</version>
+	<version>1.7-SNAPSHOT</version>
 	<name>Testing macros for the realization of workflows as interactions</name>
 	<url>http://maven.apache.org</url>
 	<packaging>jar</packaging>

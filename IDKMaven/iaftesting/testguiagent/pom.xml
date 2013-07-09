@@ -3,13 +3,13 @@
 <parent>
 		<groupId>net.sf.ingenias</groupId>
 		<artifactId>iaftesting</artifactId>
-		<version>1.6</version>
+		<version>1.7-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>testguiagent</artifactId>
-	<version>1.6</version>
+	<version>1.7-SNAPSHOT</version>
 	<name>An agent that processes events from a GUI. The GUI is simulated by the platform through an interface that produces the events</name>
 	<url>http://maven.apache.org</url>
 	<packaging>jar</packaging>

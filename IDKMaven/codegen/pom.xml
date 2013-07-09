@@ -3,12 +3,12 @@
   <parent>
     <groupId>net.sf.ingenias</groupId>
     <artifactId>ingenias</artifactId>
-    <version>1.6</version>
+    <version>1.7-SNAPSHOT</version>
   </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.ingenias</groupId>
 	<artifactId>codegen</artifactId>
-	<version>1.7</version>
+	<version>1.8-SNAPSHOT</version>
 	<name>codegen</name>
     <description>The INGENIAS Development Kit</description>
     <url>http://ingenias.sf.net</url>
@@ -20,9 +20,9 @@
     </license>
   </licenses>
 	<scm>
-		<connection>scm:svn:http://svn.code.sf.net/p/ingenias/code/tags/ingenias-1.6/codegen</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/ingenias/code/tags/ingenias-1.6/codegen</developerConnection>
-		<url>http://svn.code.sf.net/p/ingenias/code/tags/ingenias-1.6/codegen</url>		
+		<connection>scm:svn:http://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/codegen</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/codegen</developerConnection>
+		<url>http://svn.code.sf.net/p/ingenias/code/trunk/IDKMaven/codegen</url>		
 	</scm>
 
 <developers>
@@ -78,7 +78,7 @@
 		<dependency>
 			<groupId>net.sf.ingenias</groupId>
 			<artifactId>ingeniasjgraphmod</artifactId>
-			<version>1.6</version>
+			<version>1.7-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<build>		
